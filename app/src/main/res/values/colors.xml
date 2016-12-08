@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+
+    <color name="colorTheme">#ffce3d3a</color>
+    <!--页面背景的颜色-->
+    <color name="colorPageBg">#F0F3F4</color>
+
+    <color name="colorWhite">#ffffffff</color>
+    <!--分割线-->
+    <color name="colorLine">#EBEBEB</color>
+    <!--首页分割线-->
+    <color name="colorHomeLine">#D4D4D4</color>
+
+    <color name="colorLineDeep">#BBBBBB</color>
+    <!--tab标签栏文字的颜色-->
+    <color name="colorTabText">#585858</color>
+    <!--正文文字颜色-->
+    <color name="colorContent">#ff333333</color>
+    <!--水波纹或5.0以下选择器颜色-->
+    <color name="tabBackground">#777D7D7D</color>
+    <!--item的水波纹颜色-->
+    <color name="itemBackground">#DD7D7D7D</color>
+    <!--透明色-->
+    <color name="colorTransparent">#00000000</color>
+    <!--半透明-->
+    <color name="colorBanTransparent">#11000000</color>
+    <!--首页item文字颜色-->
+    <color name="colorSubtitle">#999</color>
+
+    <color name="colorTitle">#666</color>
+    <!--谈红色  用于首页调整点击变色-->
+    <color name="colorSmallRed">#faebeb</color>
+
+
+</resources>

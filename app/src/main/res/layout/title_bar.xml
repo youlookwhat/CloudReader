@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <RelativeLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/title_bar"
+        android:layout_width="match_parent"
+        android:layout_height="56dp">
+
+        <!--<LinearLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:background="@color/colorTheme"-->
+        <!--android:orientation="horizontal"-->
+        <!--android:layout_alignParentTop="true"-->
+        <!--android:layout_alignParentStart="true">-->
+
+        <!--<ImageView-->
+        <!--android:id="@+id/iv_titlebar_back"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:src="@drawable/icon_back"-->
+        <!--android:background="@color/colorAccent" />-->
+
+        <!--<TextView-->
+        <!--android:id="@+id/tv_titlebar_title"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_gravity="center_vertical"-->
+        <!--android:layout_marginLeft="20dp"-->
+        <!--android:text="标题"-->
+        <!--android:textColor="@color/colorWhite" />-->
+
+        <!--</LinearLayout>-->
+
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/title_tool_bar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/colorTheme"
+            app:contentInsetStart="0.0dp"
+            app:layout_collapseMode="pin"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+            app:theme="@style/ToolbarStyle">
+
+
+            <TextView
+                android:id="@+id/tv_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorWhite"
+                android:textSize="18sp" />
+
+        </android.support.v7.widget.Toolbar>
+
+
+        <!--<android.support.v7.widget.Toolbar-->
+        <!--android:id="@+id/tool_bar"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="?actionBarSize"-->
+        <!--android:background="@color/colorTheme"-->
+        <!--app:contentInsetStart="0.0dp"-->
+        <!--app:layout_scrollFlags="enterAlways|scroll">-->
+        <!--app:theme="@style/ToolbarStyle"-->
+
+        <!--<RelativeLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:gravity="center_vertical">-->
+
+        <!--<LinearLayout-->
+        <!--android:id="@+id/search_horizon_layout"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:layout_centerVertical="true"-->
+        <!--android:gravity="center_vertical"-->
+        <!--android:orientation="horizontal">-->
+
+
+        <!--</LinearLayout>-->
+
+        <!--<ImageView-->
+        <!--android:id="@+id/bar_search"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:layout_alignParentEnd="true"-->
+        <!--android:layout_centerVertical="true"-->
+        <!--android:background="?android:attr/selectableItemBackground"-->
+        <!--android:src="@drawable/titlebar_search"/>-->
+
+
+        <!--</RelativeLayout>-->
+        <!--</android.support.v7.widget.Toolbar>-->
+
+
+    </RelativeLayout>
+</layout>

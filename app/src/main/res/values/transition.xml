@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="transition_movie_img">transition_movie_img</string>
+    <string name="transition_news_img">transition_news_img</string>
+
+</resources>

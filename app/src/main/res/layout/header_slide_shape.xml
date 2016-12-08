@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <!--调用静态方法-->
+        <import type="com.example.jingbin.yunyue.utils.StringFormatUtil" />
+        <!--引用bean-->
+        <variable
+            name="subjectsBean"
+            type="com.example.jingbin.yunyue.bean.moviechild.SubjectsBean" />
+
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent">
+
+        <!--高度为下面布局的高度+titlebar(56dp)的高度-->
+        <ImageView
+            android:id="@+id/img_item_bg"
+            android:layout_width="match_parent"
+            android:layout_height="310dp"
+            android:fitsSystemWindows="true"
+            android:scaleType="fitXY"
+            android:showImgBg='@{subjectsBean.images.large}' />
+
+        <!--paddingTop要加上titlebar(56dp)的高度-->
+        <LinearLayout
+            android:id="@+id/ll_one_item"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:orientation="vertical"
+            android:paddingBottom="35dp"
+            android:paddingLeft="30dp"
+            android:paddingTop="91dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <!--transitionName 5.0之前无转场效果-->
+                <!--imgload:showImg 使用BindingAdapter属性-->
+                <ImageView
+                    android:id="@+id/iv_one_photo"
+                    android:layout_width="100dp"
+                    android:layout_height="132dp"
+                    android:layout_marginRight="12dp"
+                    android:scaleType="fitXY"
+                    android:showImg='@{subjectsBean.images.large}'
+                    android:transitionName="@string/transition_movie_img"
+                    app:layout_collapseMode="parallax"
+                    app:layout_collapseParallaxMultiplier="0.7" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginRight="12dp"
+                    android:orientation="vertical">
+
+                    <!--电影名-->
+                    <TextView
+                        android:id="@+id/tv_one_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="end"
+                        android:gravity="center"
+                        android:maxLines="1"
+                        android:text="@{subjectsBean.title}"
+                        android:textColor="@color/colorWhite"
+                        android:textSize="17sp"
+                        android:textStyle="bold" />
+
+                    <!--导演-->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="2dp"
+                        android:layout_marginTop="2dp"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:layout_width="43dp"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="导演："
+                                android:textColor="@color/colorWhite" />
+
+                            <View
+                                android:layout_width="28dp"
+                                android:layout_height="2dp"
+                                android:layout_marginTop="2dp"
+                                android:background="@color/colorTheme" />
+
+                        </LinearLayout>
+
+                        <TextView
+                            android:id="@+id/tv_one_directors"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:ellipsize="end"
+                            android:text="@{StringFormatUtil.formatName(subjectsBean.directors)}"
+                            android:textColor="@color/colorWhite" />
+                    </LinearLayout>
+
+                    <!--主演-->
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="主演："
+                            android:textColor="@color/colorWhite" />
+
+                        <TextView
+                            android:id="@+id/tv_one_casts"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:ellipsize="end"
+                            android:text="@{StringFormatUtil.formatName(subjectsBean.casts)}"
+                            android:textColor="@color/colorWhite" />
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/tv_one_genres"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="2dp"
+                        android:layout_marginTop="2dp"
+                        android:ellipsize="end"
+                        android:text='@{"类型："+StringFormatUtil.formatGenres(subjectsBean.genres)}'
+                        android:textColor="@color/colorWhite" />
+
+                    <TextView
+                        android:id="@+id/tv_one_rating_rate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="end"
+                        android:text='@{"评分："+subjectsBean.rating.average}'
+                        android:textColor="@color/colorWhite" />
+                </LinearLayout>
+
+            </LinearLayout>
+        </LinearLayout>
+    </RelativeLayout>
+</layout>
