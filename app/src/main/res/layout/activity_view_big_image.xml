@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:background="#000000">
 
-    <com.example.jingbin.yunyue.view.viewbigimage.HackyViewPager
+    <com.example.jingbin.cloudreader.view.viewbigimage.HackyViewPager
         android:id="@+id/very_image_viewpager"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />

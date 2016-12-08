@@ -5,7 +5,7 @@
 
         <variable
             name="subjectsBean"
-            type="com.example.jingbin.yunyue.bean.moviechild.SubjectsBean" />
+            type="com.example.jingbin.cloudreader.bean.moviechild.SubjectsBean" />
     </data>
 
     <LinearLayout

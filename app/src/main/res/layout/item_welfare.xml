@@ -5,7 +5,7 @@
 
         <variable
             name="bean"
-            type="com.example.jingbin.yunyue.bean.GankIoDataBean.ResultsBean" />
+            type="com.example.jingbin.cloudreader.bean.GankIoDataBean.ResultsBean" />
 
     </data>
 

@@ -6,7 +6,7 @@
         android:id="@+id/activity_splash"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context="com.example.jingbin.yunyue.SplashActivity">
+        tools:context="com.example.jingbin.cloudreader.SplashActivity">
 
         <com.youth.banner.Banner
             android:id="@+id/banner_splash"

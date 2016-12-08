@@ -6,9 +6,9 @@
         android:id="@+id/activity_slide"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context="com.example.jingbin.yunyue.ui.one.SlideActivity">
+        tools:context="com.example.jingbin.cloudreader.ui.one.SlideActivity">
 
-        <com.example.jingbin.yunyue.view.DiscoverScrollView
+        <com.example.jingbin.cloudreader.view.DiscoverScrollView
             android:id="@+id/scrollView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -19,7 +19,7 @@
                 android:layout_height="wrap_content"
                 android:background="@color/colorWhite"
                 android:orientation="vertical"
-                tools:context="com.example.jingbin.yunyue.ui.one.MovieDetailActivity">
+                tools:context="com.example.jingbin.cloudreader.ui.one.MovieDetailActivity">
 
 
                 <!--高度为下面布局的高度+titlebar(56dp)的高度-->
@@ -57,7 +57,7 @@
             </LinearLayout>
 
 
-        </com.example.jingbin.yunyue.view.DiscoverScrollView>
+        </com.example.jingbin.cloudreader.view.DiscoverScrollView>
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/title_tool_bar"
