@@ -3,6 +3,7 @@ package com.example.jingbin.cloudreader.adapter;
 import android.app.Activity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.OvershootInterpolator;
 
 import com.example.jingbin.cloudreader.R;
 import com.example.jingbin.cloudreader.base.baseadapter.BaseRecyclerViewAdapter;
@@ -15,6 +16,8 @@ import com.example.jingbin.cloudreader.utils.CommonUtils;
 import com.example.jingbin.cloudreader.utils.ImgLoadUtil;
 import com.example.jingbin.cloudreader.utils.PerfectClickListener;
 import com.example.jingbin.cloudreader.utils.StringFormatUtil;
+import com.nineoldandroids.view.ViewHelper;
+import com.nineoldandroids.view.ViewPropertyAnimator;
 
 /**
  * Created by jingbin on 2016/11/25.
@@ -55,6 +58,12 @@ public class OneAdapter extends BaseRecyclerViewAdapter<SubjectsBean> {
                 binding.tvOneRatingRate.setText("评分：" + String.valueOf(positionData.getRating().getAverage()));
                 // 分割线颜色
                 binding.viewColor.setBackgroundColor(CommonUtils.randomColor());
+
+//                ViewHelper.setScaleX(itemView,0.6f);
+                ViewHelper.setScaleX(itemView,0.8f);
+                ViewHelper.setScaleY(itemView,0.8f);
+                ViewPropertyAnimator.animate(itemView).scaleX(1).setDuration(350).setInterpolator(new OvershootInterpolator()).start();
+                ViewPropertyAnimator.animate(itemView).scaleY(1).setDuration(350).setInterpolator(new OvershootInterpolator()).start();
 
                 binding.llOneItem.setOnClickListener(new PerfectClickListener() {
                     @Override
