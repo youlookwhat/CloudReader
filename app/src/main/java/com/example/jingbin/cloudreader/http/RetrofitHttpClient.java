@@ -4,6 +4,7 @@ import com.example.jingbin.cloudreader.bean.FrontpageBean;
 import com.example.jingbin.cloudreader.bean.GankIoDataBean;
 import com.example.jingbin.cloudreader.bean.GankIoDayBean;
 import com.example.jingbin.cloudreader.bean.HotMovieBean;
+import com.example.jingbin.cloudreader.bean.MovieDetailBean;
 
 import retrofit.http.GET;
 import retrofit.http.Path;
@@ -66,5 +67,13 @@ public interface RetrofitHttpClient {
      */
     @GET("/frontpage/frontpage")
     Observable<FrontpageBean> getFrontpage();
+
+    /**
+     * 获取电影详情
+     *
+     * @param id
+     */
+    @GET("/v2/movie/subject/{id}")
+    Observable<MovieDetailBean> getMovieDetail(@Path("id") String id);
 
 }

@@ -9,6 +9,11 @@
             name="subjectsBean"
             type="com.example.jingbin.cloudreader.bean.moviechild.SubjectsBean" />
 
+        <!--引用bean-->
+        <variable
+            name="movieDetailBean"
+            type="com.example.jingbin.cloudreader.bean.MovieDetailBean" />
+
     </data>
 
 
@@ -20,6 +25,7 @@
             android:id="@+id/nsv_scrollview"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="@color/colorPageBg"
             android:scrollbarSize="4dp"
             android:scrollbarThumbVertical="@color/tabBackground"
             android:scrollbars="vertical">
@@ -48,28 +54,100 @@
                     android:layout_height="match_parent"
                     android:orientation="vertical">
 
-                    <TextView
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/new_home_header_size"
-                        android:text="有fffff头的activity" />
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:paddingTop="10dp">
+
+                        <View
+                            android:layout_width="2dp"
+                            android:layout_height="18dp"
+                            android:background="@color/colorTheme" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:text="另称"
+                            android:textColor="@color/colorContent"
+                            android:textSize="17sp" />
+
+                    </LinearLayout>
+
+                    <!--又名-->
+                    <TextView
+                        android:id="@+id/tv_one_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="12dp"
+                        android:text='@{StringFormatUtil.formatGenres(movieDetailBean.aka)}'
+                        android:textColor="@color/colorTitle" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:paddingBottom="5dp"
+                        android:paddingTop="5dp">
+
+                        <View
+                            android:layout_width="2dp"
+                            android:layout_height="18dp"
+                            android:background="@color/colorTheme" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:text="剧情简介"
+                            android:textColor="@color/colorContent"
+                            android:textSize="17sp" />
+                    </LinearLayout>
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:paddingBottom="190dp"
-                        android:text="有头的activity" />
+                        android:lineSpacingExtra="7dp"
+                        android:padding="12dp"
+                        android:text="@{movieDetailBean.summary}"
+                        android:textColor="@color/colorTitle"
+                        android:textSize="16sp" />
 
-                    <TextView
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:paddingBottom="190dp"
-                        android:text="有头的activity" />
+                        android:layout_marginLeft="5dp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:paddingBottom="5dp"
+                        android:paddingTop="10dp">
 
-                    <TextView
+                        <View
+                            android:layout_width="2dp"
+                            android:layout_height="18dp"
+                            android:background="@color/colorTheme" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:text="导演 &amp; 演员"
+                            android:textColor="@color/colorContent"
+                            android:textSize="17sp" />
+
+                    </LinearLayout>
+
+                    <!--导演&演员-->
+                    <com.example.xrecyclerview.XRecyclerView
+                        android:id="@+id/xrv_cast"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:paddingBottom="190dp"
-                        android:text="有头的activity" />
+                        android:visibility="gone" />
 
                 </LinearLayout>
 

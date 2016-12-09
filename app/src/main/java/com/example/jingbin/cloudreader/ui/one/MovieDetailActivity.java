@@ -25,8 +25,10 @@ import com.bumptech.glide.load.resource.drawable.GlideDrawable;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 import com.example.jingbin.cloudreader.R;
+import com.example.jingbin.cloudreader.bean.MovieDetailBean;
 import com.example.jingbin.cloudreader.bean.moviechild.SubjectsBean;
 import com.example.jingbin.cloudreader.databinding.ActivityMovieDetailBinding;
+import com.example.jingbin.cloudreader.http.HttpUtils;
 import com.example.jingbin.cloudreader.utils.CommonUtils;
 import com.example.jingbin.cloudreader.utils.DebugUtil;
 import com.example.jingbin.cloudreader.utils.StringFormatUtil;
@@ -35,6 +37,10 @@ import com.example.jingbin.cloudreader.view.statusbar.StatusBarUtil;
 import com.example.jingbin.cloudreader.view.test.StatusBarUtils;
 
 import jp.wasabeef.glide.transformations.BlurTransformation;
+import rx.Observer;
+import rx.Subscription;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 import static com.example.jingbin.cloudreader.view.statusbar.StatusBarUtil.getStatusBarHeight;
 
@@ -67,6 +73,33 @@ public class MovieDetailActivity extends AppCompatActivity {
         // 数据配置
         setTitleBar();
         setHeaderData(subjectsBean);
+
+        loadMovieDetail();
+
+    }
+
+    private void loadMovieDetail() {
+        Subscription get = HttpUtils.getInstance().getDouBanServer().getMovieDetail(subjectsBean.getId())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<MovieDetailBean>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onNext(MovieDetailBean movieDetailBean) {
+                        binding.include.setMovieDetailBean(movieDetailBean);
+                        binding.setMovieDetailBean(movieDetailBean);
+                    }
+                });
+
     }
 
 
@@ -81,7 +114,7 @@ public class MovieDetailActivity extends AppCompatActivity {
     }
 
     /**
-     * actionbar设置
+     * toolbar设置
      */
     private void setTitleBar() {
         setSupportActionBar(binding.titleToolBar);
@@ -92,6 +125,7 @@ public class MovieDetailActivity extends AppCompatActivity {
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setHomeAsUpIndicator(R.drawable.icon_back);
         }
+        // 手动设置才有效果
         binding.titleToolBar.setTitleTextAppearance(this, R.style.ToolBar_Title);
         binding.titleToolBar.setSubtitleTextAppearance(this, R.style.Toolbar_SubTitle);
 

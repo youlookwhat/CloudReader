@@ -34,5 +34,9 @@
     <!--谈红色  用于首页调整点击变色-->
     <color name="colorSmallRed">#faebeb</color>
 
+    <!--电影评分-->
+    <color name="colorRateRed">#FB5B81</color>
+
+
 
 </resources>

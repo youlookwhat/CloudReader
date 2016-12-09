@@ -12,6 +12,10 @@
             name="subjectsBean"
             type="com.example.jingbin.cloudreader.bean.moviechild.SubjectsBean" />
 
+        <!--引用bean-->
+        <variable
+            name="movieDetailBean"
+            type="com.example.jingbin.cloudreader.bean.MovieDetailBean" />
     </data>
 
     <RelativeLayout
@@ -23,7 +27,7 @@
         <ImageView
             android:id="@+id/img_item_bg"
             android:layout_width="match_parent"
-            android:layout_height="310dp"
+            android:layout_height="330dp"
             android:fitsSystemWindows="true"
             android:scaleType="fitXY"
             android:showImgBg='@{subjectsBean.images.large}' />
@@ -36,9 +40,9 @@
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
             android:orientation="vertical"
-            android:paddingBottom="35dp"
-            android:paddingLeft="30dp"
-            android:paddingTop="91dp">
+            android:paddingBottom="40dp"
+            android:paddingLeft="20dp"
+            android:paddingTop="95dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -50,8 +54,8 @@
                 <ImageView
                     android:id="@+id/iv_one_photo"
                     android:layout_width="120dp"
-                    android:layout_height="160dp"
-                    android:layout_marginRight="12dp"
+                    android:layout_height="165dp"
+                    android:layout_marginRight="15dp"
                     android:scaleType="fitXY"
                     android:showImg='@{subjectsBean.images.large}'
                     android:transitionName="@string/transition_movie_img"
@@ -65,18 +69,31 @@
                     android:layout_marginRight="12dp"
                     android:orientation="vertical">
 
-                    <!--电影名-->
-                    <TextView
-                        android:id="@+id/tv_one_title"
+
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:ellipsize="end"
-                        android:gravity="center"
-                        android:maxLines="1"
-                        android:text="@{subjectsBean.title}"
-                        android:textColor="@color/colorWhite"
-                        android:textSize="17sp"
-                        android:textStyle="bold" />
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/tv_one_rating_rate"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:ellipsize="end"
+                            android:text='@{"评分："+subjectsBean.rating.average}'
+                            android:textColor="@color/colorRateRed" />
+
+                        <TextView
+                            android:id="@+id/tv_one_rating_number"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:ellipsize="end"
+                            android:lines="1"
+                            android:text='@{subjectsBean.collect_count+"人评分"}'
+                            android:textColor="@color/colorWhite" />
+
+                    </LinearLayout>
 
                     <!--导演-->
                     <LinearLayout
@@ -145,13 +162,29 @@
                         android:text='@{"类型："+StringFormatUtil.formatGenres(subjectsBean.genres)}'
                         android:textColor="@color/colorWhite" />
 
+
+                    <!--制片国家/地区-->
                     <TextView
-                        android:id="@+id/tv_one_rating_rate"
+                        android:id="@+id/tv_one_city"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginBottom="2dp"
+                        android:layout_marginTop="2dp"
                         android:ellipsize="end"
-                        android:text='@{"评分："+subjectsBean.rating.average}'
+                        android:text='@{"制片国家/地区："+StringFormatUtil.formatGenres(movieDetailBean.countries)}'
                         android:textColor="@color/colorWhite" />
+
+                    <!--上映日期-->
+                    <TextView
+                        android:id="@+id/tv_one_day"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="2dp"
+                        android:layout_marginTop="2dp"
+                        android:ellipsize="end"
+                        android:text='@{"上映日期："+movieDetailBean.year}'
+                        android:textColor="@color/colorWhite" />
+
                 </LinearLayout>
 
             </LinearLayout>
