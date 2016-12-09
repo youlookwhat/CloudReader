@@ -11,6 +11,7 @@ import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
@@ -25,6 +26,7 @@ import com.bumptech.glide.load.resource.drawable.GlideDrawable;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 import com.example.jingbin.cloudreader.R;
+import com.example.jingbin.cloudreader.adapter.MovieDetailAdapter;
 import com.example.jingbin.cloudreader.bean.MovieDetailBean;
 import com.example.jingbin.cloudreader.bean.moviechild.SubjectsBean;
 import com.example.jingbin.cloudreader.databinding.ActivityMovieDetailBinding;
@@ -79,6 +81,10 @@ public class MovieDetailActivity extends AppCompatActivity {
     }
 
     private void loadMovieDetail() {
+        // 初始化...
+//        binding.include.tvOneCity.setText("制片国家/地区：");
+//        binding.include.tvOneDay.setText("上映日期：");
+//        binding.tvOneTitle.setText("");
         Subscription get = HttpUtils.getInstance().getDouBanServer().getMovieDetail(subjectsBean.getId())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -94,12 +100,62 @@ public class MovieDetailActivity extends AppCompatActivity {
                     }
 
                     @Override
-                    public void onNext(MovieDetailBean movieDetailBean) {
+                    public void onNext(final MovieDetailBean movieDetailBean) {
+                        // 上映日期
+                        binding.include.tvOneDay.setText("上映日期：" + movieDetailBean.getYear());
+                        // 制片国家
+                        binding.include.tvOneCity.setText("制片国家/地区：" + StringFormatUtil.formatGenres(movieDetailBean.getCountries()));
                         binding.include.setMovieDetailBean(movieDetailBean);
                         binding.setMovieDetailBean(movieDetailBean);
+
+                        transformData(movieDetailBean);
                     }
                 });
 
+    }
+
+    /**
+     * 异步线程转换数据
+     */
+    private void transformData(final MovieDetailBean movieDetailBean) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                for (int i = 0; i < movieDetailBean.getDirectors().size(); i++) {
+                    movieDetailBean.getDirectors().get(i).setType("导演");
+                }
+                for (int i = 0; i < movieDetailBean.getCasts().size(); i++) {
+                    movieDetailBean.getCasts().get(i).setType("演员");
+                }
+
+                MovieDetailActivity.this.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        setAdapter(movieDetailBean);
+                    }
+                });
+            }
+        }).start();
+    }
+
+    /**
+     * 设置导演&演员adapter
+     */
+    private void setAdapter(MovieDetailBean movieDetailBean) {
+        binding.xrvCast.setVisibility(View.VISIBLE);
+        LinearLayoutManager mLayoutManager = new LinearLayoutManager(MovieDetailActivity.this);
+        mLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        binding.xrvCast.setLayoutManager(mLayoutManager);
+        binding.xrvCast.setPullRefreshEnabled(false);
+        binding.xrvCast.setLoadingMoreEnabled(false);
+        // 需加，不然滑动不流畅
+        binding.xrvCast.setNestedScrollingEnabled(false);
+        binding.xrvCast.setHasFixedSize(false);
+
+        MovieDetailAdapter mAdapter = new MovieDetailAdapter();
+        mAdapter.addAll(movieDetailBean.getDirectors());
+        mAdapter.addAll(movieDetailBean.getCasts());
+        binding.xrvCast.setAdapter(mAdapter);
     }
 
 

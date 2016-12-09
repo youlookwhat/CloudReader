@@ -162,6 +162,16 @@
                         android:text='@{"类型："+StringFormatUtil.formatGenres(subjectsBean.genres)}'
                         android:textColor="@color/colorWhite" />
 
+                    <!--上映日期-->
+                    <TextView
+                        android:id="@+id/tv_one_day"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="2dp"
+                        android:layout_marginTop="2dp"
+                        android:ellipsize="end"
+                        android:text="上映日期："
+                        android:textColor="@color/colorWhite" />
 
                     <!--制片国家/地区-->
                     <TextView
@@ -171,18 +181,7 @@
                         android:layout_marginBottom="2dp"
                         android:layout_marginTop="2dp"
                         android:ellipsize="end"
-                        android:text='@{"制片国家/地区："+StringFormatUtil.formatGenres(movieDetailBean.countries)}'
-                        android:textColor="@color/colorWhite" />
-
-                    <!--上映日期-->
-                    <TextView
-                        android:id="@+id/tv_one_day"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="2dp"
-                        android:layout_marginTop="2dp"
-                        android:ellipsize="end"
-                        android:text='@{"上映日期："+movieDetailBean.year}'
+                        android:text="制片国家/地区："
                         android:textColor="@color/colorWhite" />
 
                 </LinearLayout>
