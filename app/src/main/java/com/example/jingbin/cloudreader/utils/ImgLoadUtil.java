@@ -143,7 +143,8 @@ public class ImgLoadUtil {
     }
 
     /**
-     * 妹子图或电影图
+     * 妹子图或电影列表图
+     * 默认图区别
      */
     public static void displayEspImage(String url, ImageView imageView, int type) {
         Glide.with(imageView.getContext())
@@ -180,10 +181,15 @@ public class ImgLoadUtil {
 
     /**
      * 电影详情页显示电影图片
+     * 没有加载中的图
      */
     @BindingAdapter("android:showImg")
     public static void showImg(ImageView imageView, String url) {
-        displayEspImage(url, imageView, 0);
+        Glide.with(imageView.getContext())
+                .load(url)
+                .crossFade(500)
+                .error(getDefaultPic(0))
+                .into(imageView);
     }
 
     /**

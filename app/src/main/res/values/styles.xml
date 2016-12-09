@@ -45,13 +45,13 @@
     </style>
 
     <style name="ToolBar.Title" parent="@style/TextAppearance.Widget.AppCompat.Toolbar.Title">
-        <item name="android:textSize">17.0sp</item>
+        <item name="android:textSize">18.0sp</item>
         <item name="android:textColor">@color/colorWhite</item>
     </style>
 
     <style name="Toolbar.SubTitle" parent="@style/TextAppearance.Widget.AppCompat.Toolbar.Subtitle">
-        <item name="android:textSize">8.0sp</item>
-        <item name="android:textColor">#ff928e91</item>
+        <item name="android:textSize">9.0sp</item>
+        <item name="android:textColor">#99ffffff</item>
     </style>
 
 

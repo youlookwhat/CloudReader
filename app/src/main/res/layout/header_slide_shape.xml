@@ -49,8 +49,8 @@
                 <!--imgload:showImg 使用BindingAdapter属性-->
                 <ImageView
                     android:id="@+id/iv_one_photo"
-                    android:layout_width="100dp"
-                    android:layout_height="132dp"
+                    android:layout_width="120dp"
+                    android:layout_height="160dp"
                     android:layout_marginRight="12dp"
                     android:scaleType="fitXY"
                     android:showImg='@{subjectsBean.images.large}'

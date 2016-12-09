@@ -8,8 +8,10 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.ActivityOptionsCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -24,7 +26,7 @@ import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 import com.example.jingbin.cloudreader.R;
 import com.example.jingbin.cloudreader.bean.moviechild.SubjectsBean;
-import com.example.jingbin.cloudreader.databinding.ActivitySlideShadeViewBinding;
+import com.example.jingbin.cloudreader.databinding.ActivityMovieDetailBinding;
 import com.example.jingbin.cloudreader.utils.CommonUtils;
 import com.example.jingbin.cloudreader.utils.DebugUtil;
 import com.example.jingbin.cloudreader.utils.StringFormatUtil;
@@ -43,23 +45,89 @@ import static com.example.jingbin.cloudreader.view.statusbar.StatusBarUtil.getSt
  * 3、上移，通过scrollview拿到上移的高度，同时（在背景图的高度内） 调整titlebar的颜色使透明变为不透明，调整背景图的颜色，是不透明变为透明
  * 4、下拉，使上面反过来即可
  */
-public class SlideShadeViewActivity extends AppCompatActivity {
+public class MovieDetailActivity extends AppCompatActivity {
 
     private int slidingDistance;
     private SubjectsBean subjectsBean;
-    private ActivitySlideShadeViewBinding binding;
-    private String TAG = "---SlideShadeView:";
+    private ActivityMovieDetailBinding binding;
+    private String TAG = "---MovieDetailActivity:";
     // 这个是高斯图背景的高度
     private int imageBgHeight;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_slide_shade_view);
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_movie_detail);
         if (getIntent() != null) {
             subjectsBean = (SubjectsBean) getIntent().getSerializableExtra("bean");
         }
-        setData();
+
+        initSlideShapeTheme();
+
+        // 数据配置
+        setTitleBar();
+        setHeaderData(subjectsBean);
+    }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.movie_detail, menu);
+        return true;
+    }
+
+    private void setHeaderData(SubjectsBean positionData) {
+        binding.include.setSubjectsBean(positionData);
+    }
+
+    /**
+     * actionbar设置
+     */
+    private void setTitleBar() {
+        setSupportActionBar(binding.titleToolBar);
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            //去除默认Title显示
+            actionBar.setDisplayShowTitleEnabled(false);
+            actionBar.setDisplayHomeAsUpEnabled(true);
+            actionBar.setHomeAsUpIndicator(R.drawable.icon_back);
+        }
+        binding.titleToolBar.setTitleTextAppearance(this, R.style.ToolBar_Title);
+        binding.titleToolBar.setSubtitleTextAppearance(this, R.style.Toolbar_SubTitle);
+
+        binding.titleToolBar.setTitle(subjectsBean.getTitle());
+        binding.titleToolBar.setSubtitle(String.format("主演：%s", StringFormatUtil.formatName(subjectsBean.getCasts())));
+
+        binding.titleToolBar.inflateMenu(R.menu.movie_detail);
+        binding.titleToolBar.setOverflowIcon(ContextCompat.getDrawable(this, R.drawable.actionbar_more));
+        binding.titleToolBar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
+
+        binding.titleToolBar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.actionbar_more:// 更多信息
+                        Toast.makeText(MovieDetailActivity.this, "更多信息", Toast.LENGTH_SHORT).show();
+                        break;
+                }
+                return false;
+            }
+        });
+
+
+    }
+
+
+    /**
+     * 初始化滑动渐变
+     */
+    private void initSlideShapeTheme() {
+        setImgHeaderBg();
 
         // toolbar 的高
         int toolbarHeight = binding.titleToolBar.getLayoutParams().height;
@@ -86,10 +154,6 @@ public class SlideShadeViewActivity extends AppCompatActivity {
         // 获得高斯图背景的高度
         imageBgHeight = imgItemBgparams.height;
 
-        // 数据配置
-        setTitleBar();
-        setHeaderData(subjectsBean);
-
         // 变色
         initScrollViewListener();
 
@@ -100,7 +164,7 @@ public class SlideShadeViewActivity extends AppCompatActivity {
     /**
      * 加载titlebar背景
      */
-    private void setData() {
+    private void setImgHeaderBg() {
         if (subjectsBean != null) {
 
             // 高斯模糊背景 原来 参数：12,5  23,4
@@ -124,34 +188,6 @@ public class SlideShadeViewActivity extends AppCompatActivity {
     }
 
 
-    private void setHeaderData(SubjectsBean positionData) {
-        binding.include.setSubjectsBean(positionData);
-    }
-
-    private void setTitleBar() {
-        setSupportActionBar(binding.titleToolBar);
-        ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
-            //去除默认Title显示
-            actionBar.setDisplayShowTitleEnabled(false);
-            actionBar.setDisplayHomeAsUpEnabled(true);
-            actionBar.setHomeAsUpIndicator(R.drawable.icon_back);
-        }
-
-        // title
-        binding.tvTitle.setText(subjectsBean.getTitle());
-        // 副标题
-        binding.tvSubtitle.setText("主演：" + StringFormatUtil.formatName(subjectsBean.getCasts()));
-
-        binding.titleToolBar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onBackPressed();
-            }
-        });
-    }
-
-    //
     private void initScrollViewListener() {
         // 为了兼容23以下
         binding.nsvScrollview.setOnScrollChangeListener(new MyNestedScrollView.ScrollInterface() {
@@ -193,31 +229,13 @@ public class SlideShadeViewActivity extends AppCompatActivity {
         }
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.slide, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.action_search:
-                Toast.makeText(this, "搜索", Toast.LENGTH_SHORT).show();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
-
-
     /**
      * @param context      activity
      * @param positionData bean
      * @param imageView    imageView
      */
     public static void start(Activity context, SubjectsBean positionData, ImageView imageView) {
-        Intent intent = new Intent(context, SlideShadeViewActivity.class);
+        Intent intent = new Intent(context, MovieDetailActivity.class);
         intent.putExtra("bean", positionData);
         ActivityOptionsCompat options =
                 ActivityOptionsCompat.makeSceneTransitionAnimation(context,

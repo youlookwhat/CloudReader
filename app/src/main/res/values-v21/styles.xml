@@ -21,18 +21,20 @@
         <item name="actionBarItemBackground">@drawable/toolbarItemBackground</item>
         <item name="selectableItemBackground">@drawable/toolbarItemBackground</item>
         <item name="titleTextAppearance">@style/ToolBar.Title</item>
-        <item name="subtitleTextAppearance">@style/Toolbar.SubTitle</item>
+        <item name="subtitleTextStyle">@style/Toolbar.SubTitle</item>
         <item name="android:windowNoTitle">true</item>
     </style>
 
+    <!--代码设置可以，样式配置没效？-->
     <style name="ToolBar.Title" parent="@style/TextAppearance.Widget.AppCompat.Toolbar.Title">
-        <item name="android:textSize">17.0sp</item>
+        <item name="android:textSize">18.0sp</item>
         <item name="android:textColor">@color/colorWhite</item>
     </style>
 
+    <!--代码设置可以，样式配置没效？-->
     <style name="Toolbar.SubTitle" parent="@style/TextAppearance.Widget.AppCompat.Toolbar.Subtitle">
-        <item name="android:textSize">8.0sp</item>
-        <item name="android:textColor">#ff928e91</item>
+        <item name="android:textSize">9.0sp</item>
+        <item name="android:textColor">#99ffffff</item>
     </style>
 
 </resources>
