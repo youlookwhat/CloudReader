@@ -83,18 +83,6 @@ public class SlideScrollViewActivity extends AppCompatActivity {
 
     private void setHeaderData(SubjectsBean positionData) {
         binding.include.setSubjectsBean(positionData);
-        // 图片
-//        ImgLoadUtil.getInstance().displayEspImage(this, positionData.getImages().getLarge(), binding.include.ivOnePhoto);
-        // 导演
-//        binding.include.tvOneDirectors.setText(StringFormatUtil.formatName(positionData.getDirectors()));
-        // 主演
-//        binding.include.tvOneCasts.setText(StringFormatUtil.formatName(positionData.getCasts()));
-        // 类型
-//        binding.include.tvOneGenres.setText("类型：" + StringFormatUtil.formatGenres(positionData.getGenres()));
-        // 评分
-//        binding.include.tvOneRatingRate.setText("评分：" + String.valueOf(positionData.getRating().getAverage()));
-        // 高斯模糊背景
-//        ImgLoadUtil.getInstance().displayGaussian(this, subjectsBean.getImages().getLarge(), binding.include.imgItemBg);
     }
 
     private void setTitleBar() {

@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.jingbin.cloudreader.MainActivity;
 import com.example.jingbin.cloudreader.R;
 import com.example.jingbin.cloudreader.base.baseadapter.BaseRecyclerViewAdapter;
 import com.example.jingbin.cloudreader.base.baseadapter.BaseRecyclerViewHolder;
@@ -25,7 +24,7 @@ public class OneAdapter extends BaseRecyclerViewAdapter<SubjectsBean> {
 
     private Activity activity;
 
-    public OneAdapter(MainActivity activity) {
+    public OneAdapter(Activity activity) {
         this.activity = activity;
     }
 
