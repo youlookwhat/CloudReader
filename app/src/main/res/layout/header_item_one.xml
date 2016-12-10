@@ -3,16 +3,50 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/colorPageBg"
-    android:gravity="bottom">
+    android:gravity="bottom"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/ll_movie_top"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorWhite"
+        android:orientation="horizontal"
+        android:padding="10dp">
+
+        <ImageView
+            android:id="@+id/tv_img"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/home_meizi" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20dp"
+            android:layout_toRightOf="@+id/tv_img"
+            android:text="豆瓣电影Top250"
+            android:textSize="19sp" />
+
+        <ImageView
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/home_arrow_right" />
+
+    </RelativeLayout>
+
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="5dp"
-        android:paddingTop="10dp"
         android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:paddingBottom="5dp">
+        android:paddingBottom="5dp"
+        android:paddingTop="10dp">
 
         <View
             android:layout_width="2dp"

@@ -60,7 +60,6 @@
             android:name=".ui.one.SlideShadeViewActivity"
             android:screenOrientation="portrait"
             android:theme="@style/MyScollPage" />
-
         <activity
             android:name=".ui.one.MovieDetailActivity"
             android:screenOrientation="portrait"
@@ -69,9 +68,11 @@
             android:name=".view.viewbigimage.ViewBigImageActivity"
             android:screenOrientation="portrait"
             android:theme="@style/ViewBigPicTheme" />
-
         <activity
             android:name=".view.webview.WebViewActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.one.DouBanTopActivity"
             android:screenOrientation="portrait" />
     </application>
 

@@ -16,6 +16,7 @@ import com.example.jingbin.cloudreader.databinding.FragmentOneBinding;
 import com.example.jingbin.cloudreader.http.HttpUtils;
 import com.example.jingbin.cloudreader.http.cache.ACache;
 import com.example.jingbin.cloudreader.utils.DebugUtil;
+import com.example.jingbin.cloudreader.utils.PerfectClickListener;
 import com.example.jingbin.cloudreader.utils.SPUtils;
 import com.example.jingbin.cloudreader.utils.TimeUtil;
 
@@ -157,6 +158,13 @@ public class OneFragment extends BaseFragment<FragmentOneBinding> {
 
         if (mHeaderView == null) {
             mHeaderView = View.inflate(getContext(), R.layout.header_item_one, null);
+            View llMovieTop = mHeaderView.findViewById(R.id.ll_movie_top);
+            llMovieTop.setOnClickListener(new PerfectClickListener() {
+                @Override
+                protected void onNoDoubleClick(View v) {
+                    DouBanTopActivity.start(v.getContext());
+                }
+            });
             bindingView.listOne.addHeaderView(mHeaderView);
         }
         OneAdapter oneAdapter = new OneAdapter(activity);

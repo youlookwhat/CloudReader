@@ -29,8 +29,6 @@
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
             app:theme="@style/ToolbarStyle" />
 
-
-        <!--app:titleTextAppearance="@style/ToolBar.WebViewTitle"-->
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
