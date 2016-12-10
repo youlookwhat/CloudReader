@@ -16,7 +16,6 @@
 
     </data>
 
-
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -36,7 +35,7 @@
                 <LinearLayout
                     android:id="@+id/ll_Header_view"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/new_home_header_size"
+                    android:layout_height="wrap_content"
                     android:orientation="vertical">
 
                     <include

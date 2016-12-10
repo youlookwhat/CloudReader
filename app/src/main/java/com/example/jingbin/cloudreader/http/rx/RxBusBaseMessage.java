@@ -1,7 +1,7 @@
 package com.example.jingbin.cloudreader.http.rx;
 
 /**
- * Created by xiaguangcheng on 16/5/17.
+ * Created by jingbin on 16/5/17.
  */
 public class RxBusBaseMessage {
     private int code;

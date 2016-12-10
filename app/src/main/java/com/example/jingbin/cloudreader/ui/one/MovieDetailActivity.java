@@ -234,7 +234,7 @@ public class MovieDetailActivity extends AppCompatActivity {
         binding.ivTitleHeadBg.setImageAlpha(0);
         StatusBarUtils.setTranslucentImageHeader(this, 0, binding.titleToolBar);
 
-        // 上移背景图片，使空白状态栏消失
+        // 上移背景图片，使空白状态栏消失(这样下方就空了状态栏的高度)
         if (binding.include.imgItemBg != null) {
             ViewGroup.MarginLayoutParams layoutParams = (ViewGroup.MarginLayoutParams) binding.include.imgItemBg.getLayoutParams();
             layoutParams.setMargins(0, -StatusBarUtil.getStatusBarHeight(this), 0, 0);
