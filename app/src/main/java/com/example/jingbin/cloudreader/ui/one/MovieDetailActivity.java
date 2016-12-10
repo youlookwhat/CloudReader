@@ -19,7 +19,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.drawable.GlideDrawable;
@@ -37,6 +36,7 @@ import com.example.jingbin.cloudreader.utils.StringFormatUtil;
 import com.example.jingbin.cloudreader.view.MyNestedScrollView;
 import com.example.jingbin.cloudreader.view.statusbar.StatusBarUtil;
 import com.example.jingbin.cloudreader.view.test.StatusBarUtils;
+import com.example.jingbin.cloudreader.view.webview.WebViewActivity;
 
 import jp.wasabeef.glide.transformations.BlurTransformation;
 import rx.Observer;
@@ -61,6 +61,10 @@ public class MovieDetailActivity extends AppCompatActivity {
     private String TAG = "---MovieDetailActivity:";
     // 这个是高斯图背景的高度
     private int imageBgHeight;
+    // 更多信息url
+    private String mMoreUrl;
+    // 影片name
+    private String mMovieName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -107,6 +111,9 @@ public class MovieDetailActivity extends AppCompatActivity {
                         binding.include.tvOneCity.setText("制片国家/地区：" + StringFormatUtil.formatGenres(movieDetailBean.getCountries()));
                         binding.include.setMovieDetailBean(movieDetailBean);
                         binding.setMovieDetailBean(movieDetailBean);
+
+                        mMoreUrl = movieDetailBean.getAlt();
+                        mMovieName = movieDetailBean.getTitle();
 
                         transformData(movieDetailBean);
                     }
@@ -202,14 +209,12 @@ public class MovieDetailActivity extends AppCompatActivity {
             public boolean onMenuItemClick(MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.actionbar_more:// 更多信息
-                        Toast.makeText(MovieDetailActivity.this, "更多信息", Toast.LENGTH_SHORT).show();
+                        WebViewActivity.loadUrl(MovieDetailActivity.this,mMoreUrl,mMovieName);
                         break;
                 }
                 return false;
             }
         });
-
-
     }
 
 

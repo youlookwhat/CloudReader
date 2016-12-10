@@ -9,6 +9,7 @@ import com.example.jingbin.cloudreader.base.baseadapter.BaseRecyclerViewHolder;
 import com.example.jingbin.cloudreader.bean.moviechild.PersonBean;
 import com.example.jingbin.cloudreader.databinding.ItemMovieDetailPersonBinding;
 import com.example.jingbin.cloudreader.utils.PerfectClickListener;
+import com.example.jingbin.cloudreader.view.webview.WebViewActivity;
 
 /**
  * Created by jingbin on 2016/12/10.
@@ -27,12 +28,12 @@ public class MovieDetailAdapter extends BaseRecyclerViewAdapter<PersonBean> {
         }
 
         @Override
-        public void onBindViewHolder(PersonBean bean, int position) {
+        public void onBindViewHolder(final PersonBean bean, int position) {
             binding.setPersonBean(bean);
             binding.llItem.setOnClickListener(new PerfectClickListener() {
                 @Override
                 protected void onNoDoubleClick(View v) {
-
+                    WebViewActivity.loadUrl(v.getContext(),bean.getAlt(),bean.getName());
                 }
             });
         }

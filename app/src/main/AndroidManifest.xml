@@ -69,6 +69,10 @@
             android:name=".view.viewbigimage.ViewBigImageActivity"
             android:screenOrientation="portrait"
             android:theme="@style/ViewBigPicTheme" />
+
+        <activity
+            android:name=".view.webview.WebViewActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>
