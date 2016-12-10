@@ -34,6 +34,12 @@ import retrofit.converter.GsonConverter;
 /**
  * Created by czh on 2015/6/24.
  * 网络请求工具类
+ * <p>
+ * 豆瓣api:
+ * 问题：API限制为每分钟40次，一不小心就超了，马上KEY就被封,用不带KEY的API，每分钟只有可怜的10次。
+ * 返回：code:112（rate_limit_exceeded2 IP 访问速度限制）
+ * 解决：1.使用每分钟访问次数限制（客户端）2.更换ip (更换wifi)
+ * 豆瓣开发者服务使用条款: https://developers.douban.com/wiki/?title=terms
  */
 public class HttpUtils {
 
@@ -47,11 +53,11 @@ public class HttpUtils {
     private RestAdapter douBanRestAdapter;
     private RestAdapter dongTingRestAdapter;
     private Gson gson;
-    private static HttpUtils httpUtils;
     private Context context;
-    private static RetrofitHttpClient gankioRetrofitHttpClient;
-    private static RetrofitHttpClient douBanRetrofitHttpClient;
-    private static RetrofitHttpClient dongTingRetrofitHttpClient;
+    private static HttpUtils sHttpUtils;
+    private static RetrofitHttpClient sGankioClient;
+    private static RetrofitHttpClient sDouBanClient;
+    private static RetrofitHttpClient sDongTingClient;
     /**
      * 分页数据，每页的数量
      */
@@ -64,31 +70,31 @@ public class HttpUtils {
     }
 
     public static HttpUtils getInstance() {
-        if (httpUtils == null) {
-            httpUtils = new HttpUtils();
+        if (sHttpUtils == null) {
+            sHttpUtils = new HttpUtils();
         }
-        return httpUtils;
+        return sHttpUtils;
     }
 
     public RetrofitHttpClient getGankIOServer() {
-        if (gankioRetrofitHttpClient == null) {
-            gankioRetrofitHttpClient = getGankIOAdapter().create(RetrofitHttpClient.class);
+        if (sGankioClient == null) {
+            sGankioClient = getGankIOAdapter().create(RetrofitHttpClient.class);
         }
-        return gankioRetrofitHttpClient;
+        return sGankioClient;
     }
 
     public RetrofitHttpClient getDouBanServer() {
-        if (douBanRetrofitHttpClient == null) {
-            douBanRetrofitHttpClient = getDouBanAdapter().create(RetrofitHttpClient.class);
+        if (sDouBanClient == null) {
+            sDouBanClient = getDouBanAdapter().create(RetrofitHttpClient.class);
         }
-        return douBanRetrofitHttpClient;
+        return sDouBanClient;
     }
 
     public RetrofitHttpClient getDongTingServer() {
-        if (dongTingRetrofitHttpClient == null) {
-            dongTingRetrofitHttpClient = getDongTingAdapter().create(RetrofitHttpClient.class);
+        if (sDongTingClient == null) {
+            sDongTingClient = getDongTingAdapter().create(RetrofitHttpClient.class);
         }
-        return dongTingRetrofitHttpClient;
+        return sDongTingClient;
     }
 
     private RestAdapter getGankIOAdapter() {
@@ -142,6 +148,10 @@ public class HttpUtils {
             File cacheFile = new File(context.getApplicationContext().getCacheDir().getAbsolutePath(), "HttpCache");
             int cacheSize = 10 * 1024 * 1024;
             Cache cache = new Cache(cacheFile, cacheSize);
+//            httpGet.setHeader(
+//                    "User-Agent",
+//                    "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.71 Safari/537.36");
+
             OkHttpClient.Builder okBuilder = new OkHttpClient.Builder();
             okBuilder.cache(cache);
             okBuilder.readTimeout(20, TimeUnit.SECONDS);
