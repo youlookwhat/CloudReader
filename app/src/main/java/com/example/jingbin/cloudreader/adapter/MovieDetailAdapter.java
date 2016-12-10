@@ -1,5 +1,6 @@
 package com.example.jingbin.cloudreader.adapter;
 
+import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -33,7 +34,9 @@ public class MovieDetailAdapter extends BaseRecyclerViewAdapter<PersonBean> {
             binding.llItem.setOnClickListener(new PerfectClickListener() {
                 @Override
                 protected void onNoDoubleClick(View v) {
-                    WebViewActivity.loadUrl(v.getContext(),bean.getAlt(),bean.getName());
+                    if (bean != null && !TextUtils.isEmpty(bean.getAlt())) {
+                        WebViewActivity.loadUrl(v.getContext(), bean.getAlt(), bean.getName());
+                    }
                 }
             });
         }

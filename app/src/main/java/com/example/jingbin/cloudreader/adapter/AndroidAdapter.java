@@ -9,6 +9,7 @@ import com.example.jingbin.cloudreader.base.baseadapter.BaseRecyclerViewAdapter;
 import com.example.jingbin.cloudreader.base.baseadapter.BaseRecyclerViewHolder;
 import com.example.jingbin.cloudreader.bean.GankIoDataBean;
 import com.example.jingbin.cloudreader.databinding.ItemAndroidBinding;
+import com.example.jingbin.cloudreader.view.webview.WebViewActivity;
 
 /**
  * Created by jingbin on 2016/12/2.
@@ -28,7 +29,7 @@ public class AndroidAdapter extends BaseRecyclerViewAdapter<GankIoDataBean.Resul
         }
 
         @Override
-        public void onBindViewHolder(GankIoDataBean.ResultsBean object, int position) {
+        public void onBindViewHolder(final GankIoDataBean.ResultsBean object, int position) {
 
             if (object.getImages() != null
                     && object.getImages().size() > 0
@@ -49,7 +50,7 @@ public class AndroidAdapter extends BaseRecyclerViewAdapter<GankIoDataBean.Resul
             binding.llAll.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
+                    WebViewActivity.loadUrl(v.getContext(), object.getUrl(), "详情");
                 }
             });
         }

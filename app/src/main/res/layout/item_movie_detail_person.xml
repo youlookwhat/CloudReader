@@ -28,8 +28,8 @@
             <ImageView
                 android:id="@+id/iv_avatar"
                 android:layout_width="70dp"
-                android:layout_height="90dp"
-                android:scaleType="fitXY"
+                android:layout_height="70dp"
+                android:scaleType="centerCrop"
                 android:showImg='@{personBean.avatars.large}' />
 
             <LinearLayout
