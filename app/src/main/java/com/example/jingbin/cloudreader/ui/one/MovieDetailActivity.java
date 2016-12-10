@@ -174,6 +174,8 @@ public class MovieDetailActivity extends AppCompatActivity {
 
     private void setHeaderData(SubjectsBean positionData) {
         binding.include.setSubjectsBean(positionData);
+        // 立即改变UI，防止闪屏
+        binding.include.executePendingBindings();
     }
 
     /**

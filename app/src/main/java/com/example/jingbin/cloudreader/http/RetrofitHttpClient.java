@@ -8,6 +8,7 @@ import com.example.jingbin.cloudreader.bean.MovieDetailBean;
 
 import retrofit.http.GET;
 import retrofit.http.Path;
+import retrofit.http.Query;
 import rx.Observable;
 
 /**
@@ -38,6 +39,11 @@ public interface RetrofitHttpClient {
 //                                           ("image_ids[]") List<Integer>
 //                                           image_ids, Callback<ErrorBean> response);
 
+    /**
+     * 首页轮播图
+     */
+    @GET("/frontpage/frontpage")
+    Observable<FrontpageBean> getFrontpage();
 
     /**
      * 分类数据: http://gank.io/api/data/数据类型/请求个数/第几页
@@ -63,17 +69,17 @@ public interface RetrofitHttpClient {
     Observable<HotMovieBean> getHotMovie();
 
     /**
-     * 首页轮播图
-     */
-    @GET("/frontpage/frontpage")
-    Observable<FrontpageBean> getFrontpage();
-
-    /**
      * 获取电影详情
      *
      * @param id
      */
     @GET("/v2/movie/subject/{id}")
     Observable<MovieDetailBean> getMovieDetail(@Path("id") String id);
+
+    /**
+     * 获取豆瓣电影top250
+     */
+    @GET("/v2/movie/top250")
+    Observable<HotMovieBean> getMovieTop250(@Query("start") int start, @Query("count") int count);
 
 }

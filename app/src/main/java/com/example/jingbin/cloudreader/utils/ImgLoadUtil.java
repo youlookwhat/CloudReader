@@ -180,6 +180,16 @@ public class ImgLoadUtil {
     }
 
     /**
+     * 妹子图或电影列表图
+     *
+     * @param type 妹子：1 电影：0
+     */
+    @BindingAdapter("android:displayFadeImage")
+    public static void displayFadeImage(ImageView imageView, String url) {
+        displayEspImage(url, imageView, 0);
+    }
+
+    /**
      * 电影详情页显示电影图片
      * 没有加载中的图
      */

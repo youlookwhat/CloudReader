@@ -23,6 +23,9 @@ import rx.subscriptions.CompositeSubscription;
 
 import static com.example.jingbin.cloudreader.R.layout.activity_base;
 
+/**
+ * Created by jingbin on 16/12/10.
+ */
 public class BaseActivity<SV extends ViewDataBinding> extends AppCompatActivity {
 
     // 布局view
