@@ -21,8 +21,6 @@ import com.example.jingbin.cloudreader.utils.PerfectClickListener;
 import rx.Subscription;
 import rx.subscriptions.CompositeSubscription;
 
-import static com.example.jingbin.cloudreader.R.layout.activity_base;
-
 /**
  * Created by jingbin on 16/12/10.
  */
@@ -48,7 +46,7 @@ public class BaseActivity<SV extends ViewDataBinding> extends AppCompatActivity 
     @Override
     public void setContentView(@LayoutRes int layoutResID) {
 
-        mBaseBinding = DataBindingUtil.inflate(LayoutInflater.from(this), activity_base, null, false);
+        mBaseBinding = DataBindingUtil.inflate(LayoutInflater.from(this), R.layout.activity_base, null, false);
         bindingView = DataBindingUtil.inflate(getLayoutInflater(), layoutResID, null, false);
 
         // content

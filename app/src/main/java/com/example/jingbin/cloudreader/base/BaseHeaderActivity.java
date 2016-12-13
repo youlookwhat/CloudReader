@@ -3,6 +3,7 @@ package com.example.jingbin.cloudreader.base;
 import android.databinding.DataBindingUtil;
 import android.databinding.ViewDataBinding;
 import android.graphics.Color;
+import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
@@ -11,7 +12,6 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -33,6 +33,8 @@ import com.example.jingbin.cloudreader.view.statusbar.StatusBarUtil;
 import com.example.jingbin.cloudreader.view.test.StatusBarUtils;
 
 import jp.wasabeef.glide.transformations.BlurTransformation;
+import rx.Subscription;
+import rx.subscriptions.CompositeSubscription;
 
 
 /**
@@ -53,10 +55,12 @@ public abstract class BaseHeaderActivity<HV extends ViewDataBinding, SV extends 
     private LinearLayout llProgressBar;
     private View refresh;
     protected View ll;
+    // 滑动多少距离后标题不透明
     private int slidingDistance;
     // 这个是高斯图背景的高度
     private int imageBgHeight;
-    private String TAG = "--BaseHeaderActivity";
+    private AnimationDrawable mAnimationDrawable;
+    private CompositeSubscription mCompositeSubscription;
 
     protected <T extends View> T getView(int id) {
         return (T) findViewById(id);
@@ -108,6 +112,14 @@ public abstract class BaseHeaderActivity<HV extends ViewDataBinding, SV extends 
         // 设置toolbar
         setToolBar();
 
+        ImageView img = getView(R.id.img_progress);
+
+        // 加载动画
+        mAnimationDrawable = (AnimationDrawable) img.getDrawable();
+        // 默认进入页面就开启动画
+        if (!mAnimationDrawable.isRunning()) {
+            mAnimationDrawable.start();
+        }
         // 点击加载失败布局
         refresh.setOnClickListener(new PerfectClickListener() {
             @Override
@@ -209,9 +221,7 @@ public abstract class BaseHeaderActivity<HV extends ViewDataBinding, SV extends 
 
         // toolbar 的高
         int toolbarHeight = bindingTitleView.tbBaseTitle.getLayoutParams().height;
-        Log.i(TAG, "toolbar height:" + toolbarHeight);
         final int headerBgHeight = toolbarHeight + StatusBarUtil.getStatusBarHeight(this);
-        Log.i(TAG, "headerBgHeight:" + headerBgHeight);
 
         // 使背景图向上移动到图片的最低端，保留（titlebar+statusbar）的高度
         ViewGroup.LayoutParams params = bindingTitleView.ivBaseTitlebarBg.getLayoutParams();
@@ -306,6 +316,10 @@ public abstract class BaseHeaderActivity<HV extends ViewDataBinding, SV extends 
         if (llProgressBar.getVisibility() != View.VISIBLE) {
             llProgressBar.setVisibility(View.VISIBLE);
         }
+        // 开始动画
+        if (!mAnimationDrawable.isRunning()) {
+            mAnimationDrawable.start();
+        }
         if (bindingContentView.getRoot().getVisibility() != View.GONE) {
             bindingContentView.getRoot().setVisibility(View.GONE);
         }
@@ -317,6 +331,10 @@ public abstract class BaseHeaderActivity<HV extends ViewDataBinding, SV extends 
     protected void showContentView() {
         if (llProgressBar.getVisibility() != View.GONE) {
             llProgressBar.setVisibility(View.GONE);
+        }
+        // 停止动画
+        if (mAnimationDrawable.isRunning()) {
+            mAnimationDrawable.stop();
         }
         if (refresh.getVisibility() != View.GONE) {
             refresh.setVisibility(View.GONE);
@@ -330,6 +348,10 @@ public abstract class BaseHeaderActivity<HV extends ViewDataBinding, SV extends 
         if (llProgressBar.getVisibility() != View.GONE) {
             llProgressBar.setVisibility(View.GONE);
         }
+        // 停止动画
+        if (mAnimationDrawable.isRunning()) {
+            mAnimationDrawable.stop();
+        }
         if (refresh.getVisibility() != View.VISIBLE) {
             refresh.setVisibility(View.VISIBLE);
         }
@@ -338,7 +360,31 @@ public abstract class BaseHeaderActivity<HV extends ViewDataBinding, SV extends 
         }
     }
 
+    /**
+     * 失败后点击刷新
+     */
     protected void onRefresh() {
 
+    }
+
+    public void addSubscription(Subscription s) {
+        if (this.mCompositeSubscription == null) {
+            this.mCompositeSubscription = new CompositeSubscription();
+        }
+        this.mCompositeSubscription.add(s);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (this.mCompositeSubscription != null && mCompositeSubscription.hasSubscriptions()) {
+            this.mCompositeSubscription.unsubscribe();
+        }
+    }
+
+    public void removeSubscription() {
+        if (this.mCompositeSubscription != null && mCompositeSubscription.hasSubscriptions()) {
+            this.mCompositeSubscription.unsubscribe();
+        }
     }
 }

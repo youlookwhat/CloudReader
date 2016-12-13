@@ -94,9 +94,9 @@ public class OneMovieDetailActivity extends BaseHeaderActivity<HeaderSlideShapeB
                     @Override
                     public void onNext(final MovieDetailBean movieDetailBean) {
                         // 上映日期
-                        bindingHeaderView.tvOneDay.setText("上映日期：" + movieDetailBean.getYear());
+                        bindingHeaderView.tvOneDay.setText(String.format("上映日期：%s", movieDetailBean.getYear()));
                         // 制片国家
-                        bindingHeaderView.tvOneCity.setText("制片国家/地区：" + StringFormatUtil.formatGenres(movieDetailBean.getCountries()));
+                        bindingHeaderView.tvOneCity.setText(String.format("制片国家/地区：%s", StringFormatUtil.formatGenres(movieDetailBean.getCountries())));
                         bindingHeaderView.setMovieDetailBean(movieDetailBean);
                         bindingContentView.setBean(movieDetailBean);
 
@@ -106,7 +106,7 @@ public class OneMovieDetailActivity extends BaseHeaderActivity<HeaderSlideShapeB
                         transformData(movieDetailBean);
                     }
                 });
-
+        addSubscription(get);
 
     }
 

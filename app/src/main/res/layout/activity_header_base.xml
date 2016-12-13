@@ -60,12 +60,11 @@
                         android:layout_marginTop="50dp"
                         android:gravity="center_vertical">
 
-                        <ProgressBar
-                            android:id="@+id/progress_bar"
-                            style="@style/common_mProgress_circle"
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
-                            android:visibility="visible" />
+                        <ImageView
+                            android:id="@+id/img_progress"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/kaws_anim" />
 
                         <TextView
                             android:layout_width="wrap_content"
