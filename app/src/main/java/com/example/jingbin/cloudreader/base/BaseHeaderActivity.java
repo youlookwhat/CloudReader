@@ -54,7 +54,6 @@ public abstract class BaseHeaderActivity<HV extends ViewDataBinding, SV extends 
     protected SV bindingContentView;
     private LinearLayout llProgressBar;
     private View refresh;
-    protected View ll;
     // 滑动多少距离后标题不透明
     private int slidingDistance;
     // 这个是高斯图背景的高度
@@ -73,7 +72,7 @@ public abstract class BaseHeaderActivity<HV extends ViewDataBinding, SV extends 
 
     @Override
     public void setContentView(@LayoutRes int layoutResID) {
-        ll = getLayoutInflater().inflate(R.layout.activity_header_base, null);
+        View ll = getLayoutInflater().inflate(R.layout.activity_header_base, null);
 
         // 内容
         bindingContentView = DataBindingUtil.inflate(getLayoutInflater(), layoutResID, null, false);

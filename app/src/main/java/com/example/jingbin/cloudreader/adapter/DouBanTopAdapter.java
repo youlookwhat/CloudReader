@@ -12,7 +12,7 @@ import com.example.jingbin.cloudreader.base.baseadapter.BaseRecyclerViewAdapter;
 import com.example.jingbin.cloudreader.base.baseadapter.BaseRecyclerViewHolder;
 import com.example.jingbin.cloudreader.bean.moviechild.SubjectsBean;
 import com.example.jingbin.cloudreader.databinding.ItemDoubanTopBinding;
-import com.example.jingbin.cloudreader.ui.one.MovieDetailActivity;
+import com.example.jingbin.cloudreader.ui.one.OneMovieDetailActivity;
 import com.example.jingbin.cloudreader.utils.PerfectClickListener;
 
 /**
@@ -48,8 +48,8 @@ public class DouBanTopAdapter extends BaseRecyclerViewAdapter<SubjectsBean> {
             binding.executePendingBindings();
             binding.llItemTop.setOnClickListener(new PerfectClickListener() {
                 @Override
-                protected void onNoDoubleClick(View v) {
-                    MovieDetailActivity.start(activity, bean, binding.ivTopPhoto);
+              protected void onNoDoubleClick(View v) {
+                    OneMovieDetailActivity.start(activity, bean, binding.ivTopPhoto);
                 }
             });
             binding.llItemTop.setOnLongClickListener(new View.OnLongClickListener() {
@@ -63,7 +63,7 @@ public class DouBanTopAdapter extends BaseRecyclerViewAdapter<SubjectsBean> {
                     builder.setPositiveButton("查看详情", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            MovieDetailActivity.start(activity, bean, binding.ivTopPhoto);
+                            OneMovieDetailActivity.start(activity, bean, binding.ivTopPhoto);
                         }
                     });
                     builder.show();

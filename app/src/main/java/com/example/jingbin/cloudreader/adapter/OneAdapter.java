@@ -10,7 +10,6 @@ import com.example.jingbin.cloudreader.base.baseadapter.BaseRecyclerViewAdapter;
 import com.example.jingbin.cloudreader.base.baseadapter.BaseRecyclerViewHolder;
 import com.example.jingbin.cloudreader.bean.moviechild.SubjectsBean;
 import com.example.jingbin.cloudreader.databinding.ItemOneBinding;
-import com.example.jingbin.cloudreader.ui.one.MovieDetailActivity;
 import com.example.jingbin.cloudreader.ui.one.OneMovieDetailActivity;
 import com.example.jingbin.cloudreader.utils.CommonUtils;
 import com.example.jingbin.cloudreader.utils.ImgLoadUtil;
@@ -72,8 +71,8 @@ public class OneAdapter extends BaseRecyclerViewAdapter<SubjectsBean> {
 
 //                            SlideScrollViewActivity.start(activity, positionData, binding.ivOnePhoto);
 
-                            MovieDetailActivity.start(activity, positionData, binding.ivOnePhoto);
-//                            OneMovieDetailActivity.start(activity, positionData, binding.ivOnePhoto);
+//                            MovieDetailActivity.start(activity, positionData, binding.ivOnePhoto);
+                            OneMovieDetailActivity.start(activity, positionData, binding.ivOnePhoto);
 
 //                            TestActivity.start(activity, positionData, binding.ivOnePhoto);
 //                            activity.overridePendingTransition(R.anim.push_fade_out, R.anim.push_fade_in);
