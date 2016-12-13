@@ -9,7 +9,8 @@
         <com.example.jingbin.cloudreader.view.MyNestedScrollView
             android:id="@+id/mns_base"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:background="@color/colorPageBg">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -81,37 +82,10 @@
         </com.example.jingbin.cloudreader.view.MyNestedScrollView>
 
         <!--标题-->
-        <!--<RelativeLayout-->
-        <!--android:id="@+id/title_container"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content" />-->
-
-        <RelativeLayout xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/rl_base_titlebar"
+        <RelativeLayout
+            android:id="@+id/title_container"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@android:color/transparent">
-
-            <ImageView
-                android:id="@+id/iv_base_titlebar_bg"
-                android:layout_width="match_parent"
-                android:layout_height="310dp"
-                android:scaleType="fitXY" />
-
-            <android.support.v7.widget.Toolbar
-                android:id="@+id/tb_base_title"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                android:background="@color/colorTransparent"
-                app:contentInsetStart="0.0dp"
-                app:layout_collapseMode="pin"
-                app:layout_scrollFlags="enterAlways|scroll"
-                app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-                app:theme="@style/ToolbarStyle">
-
-            </android.support.v7.widget.Toolbar>
-
-        </RelativeLayout>
+            android:layout_height="wrap_content" />
 
     </FrameLayout>
 </layout>

@@ -6,10 +6,6 @@
 
         <!--调用静态方法-->
         <import type="com.example.jingbin.cloudreader.utils.StringFormatUtil" />
-        <!--引用bean-->
-        <!--<variable-->
-            <!--name="subjectsBean"-->
-            <!--type="com.example.jingbin.cloudreader.bean.moviechild.SubjectsBean" />-->
 
         <!--引用bean-->
         <variable

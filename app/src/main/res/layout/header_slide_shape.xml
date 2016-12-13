@@ -23,7 +23,6 @@
         android:layout_height="wrap_content"
         android:background="@android:color/transparent">
 
-        <!--高度为下面布局的高度+titlebar(56dp)的高度-->
         <ImageView
             android:id="@+id/img_item_bg"
             android:layout_width="match_parent"
@@ -32,7 +31,6 @@
             android:scaleType="fitXY"
             android:showImgBg='@{subjectsBean.images.large}' />
 
-        <!--paddingTop要加上titlebar(56dp)的高度-->
         <LinearLayout
             android:id="@+id/ll_one_item"
             android:layout_width="match_parent"
@@ -49,8 +47,6 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
-                <!--transitionName 5.0之前无转场效果-->
-                <!--imgload:showImg 使用BindingAdapter属性-->
                 <ImageView
                     android:id="@+id/iv_one_photo"
                     android:layout_width="120dp"
@@ -62,6 +58,7 @@
                     app:layout_collapseMode="parallax"
                     app:layout_collapseParallaxMultiplier="0.7" />
 
+                <!--评分-->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -152,6 +149,7 @@
 
                     </LinearLayout>
 
+                    <!--类型-->
                     <TextView
                         android:id="@+id/tv_one_genres"
                         android:layout_width="wrap_content"
@@ -181,6 +179,7 @@
                         android:layout_marginBottom="2dp"
                         android:layout_marginTop="2dp"
                         android:ellipsize="end"
+                        android:lines="2"
                         android:text="制片国家/地区："
                         android:textColor="@color/colorWhite" />
 

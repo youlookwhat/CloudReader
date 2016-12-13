@@ -26,7 +26,9 @@ import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
-
+/**
+ * 继承基类而写的电影详情页 2016-12-13
+ */
 public class OneMovieDetailActivity extends BaseHeaderActivity<HeaderSlideShapeBinding, ActivityOneMovieDetailBinding> {
 
     private SubjectsBean subjectsBean;
@@ -71,16 +73,10 @@ public class OneMovieDetailActivity extends BaseHeaderActivity<HeaderSlideShapeB
 
     @Override
     protected ImageView setHeaderImageView() {
-        if (bindingHeaderView == null)
-            return new ImageView(this);
         return bindingHeaderView.imgItemBg;
     }
 
     private void loadMovieDetail() {
-        // 初始化...
-//        binding.include.tvOneCity.setText("制片国家/地区：");
-//        binding.include.tvOneDay.setText("上映日期：");
-//        binding.tvOneTitle.setText("");
         Subscription get = HttpUtils.getInstance().getDouBanServer().getMovieDetail(subjectsBean.getId())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -110,6 +106,7 @@ public class OneMovieDetailActivity extends BaseHeaderActivity<HeaderSlideShapeB
                         transformData(movieDetailBean);
                     }
                 });
+
 
     }
 
@@ -156,7 +153,6 @@ public class OneMovieDetailActivity extends BaseHeaderActivity<HeaderSlideShapeB
         mAdapter.addAll(movieDetailBean.getCasts());
         bindingContentView.xrvCast.setAdapter(mAdapter);
     }
-
 
     /**
      * @param context      activity
