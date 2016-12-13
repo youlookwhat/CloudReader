@@ -46,7 +46,6 @@ public class DouBanTopAdapter extends BaseRecyclerViewAdapter<SubjectsBean> {
              * 当数据改变时，binding会在下一帧去改变数据，如果我们需要立即改变，就去调用executePendingBindings方法。
              */
             binding.executePendingBindings();
-//            ImgLoadUtil.displayEspImage(bean.getImages().getLarge(), binding.ivTopPhoto, 0);
             binding.llItemTop.setOnClickListener(new PerfectClickListener() {
                 @Override
                 protected void onNoDoubleClick(View v) {

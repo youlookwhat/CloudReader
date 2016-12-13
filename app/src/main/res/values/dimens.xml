@@ -8,6 +8,8 @@
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="titlebar_height">56dp</dimen>
 
+    <!--渐变时还没到布局全部就已经不透明了，距离50dp-->
+    <dimen name="base_header_activity_slide_more">58dp</dimen>
 
     <dimen name="home_header_size">291dp</dimen>
 

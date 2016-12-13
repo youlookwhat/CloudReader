@@ -104,8 +104,8 @@ public class WelfareFragment extends BaseFragment<FragmentWelfareBinding> {
 //                                mWelfareAdapter = new WelfareAdapter();
 //                                mWelfareAdapter.addAll(gankIoDataBean.getResults());
 //                                //构造器中，第一个参数表示列数或者行数，第二个参数表示滑动方向,瀑布流
-//                                bindingView.xrvWelfare.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
-//                                bindingView.xrvWelfare.setAdapter(mWelfareAdapter);
+//                                bindingContentView.xrvWelfare.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
+//                                bindingContentView.xrvWelfare.setAdapter(mWelfareAdapter);
 //                                mWelfareAdapter.notifyDataSetChanged();
 
                                 imgList.clear();

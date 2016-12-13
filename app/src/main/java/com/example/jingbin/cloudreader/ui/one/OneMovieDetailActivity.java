@@ -1,0 +1,175 @@
+package com.example.jingbin.cloudreader.ui.one;
+
+import android.app.Activity;
+import android.content.Intent;
+import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.ActivityOptionsCompat;
+import android.support.v7.widget.LinearLayoutManager;
+import android.view.View;
+import android.widget.ImageView;
+
+import com.example.jingbin.cloudreader.R;
+import com.example.jingbin.cloudreader.adapter.MovieDetailAdapter;
+import com.example.jingbin.cloudreader.base.BaseHeaderActivity;
+import com.example.jingbin.cloudreader.bean.MovieDetailBean;
+import com.example.jingbin.cloudreader.bean.moviechild.SubjectsBean;
+import com.example.jingbin.cloudreader.databinding.ActivityOneMovieDetailBinding;
+import com.example.jingbin.cloudreader.databinding.HeaderSlideShapeBinding;
+import com.example.jingbin.cloudreader.http.HttpUtils;
+import com.example.jingbin.cloudreader.utils.CommonUtils;
+import com.example.jingbin.cloudreader.utils.StringFormatUtil;
+import com.example.jingbin.cloudreader.view.webview.WebViewActivity;
+
+import rx.Observer;
+import rx.Subscription;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
+
+
+public class OneMovieDetailActivity extends BaseHeaderActivity<HeaderSlideShapeBinding, ActivityOneMovieDetailBinding> {
+
+    private SubjectsBean subjectsBean;
+    private String mMoreUrl;
+    private String mMovieName;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_one_movie_detail);
+        if (getIntent() != null) {
+            subjectsBean = (SubjectsBean) getIntent().getSerializableExtra("bean");
+        }
+
+        initSlideShapeTheme(setHeaderImgUrl(), setHeaderImageView());
+
+        setTitle(subjectsBean.getTitle());
+        setSubTitle(String.format("主演：%s", StringFormatUtil.formatName(subjectsBean.getCasts())));
+        bindingHeaderView.setSubjectsBean(subjectsBean);
+        bindingHeaderView.executePendingBindings();
+
+        loadMovieDetail();
+    }
+
+    @Override
+    protected void setTitleClickMore() {
+        WebViewActivity.loadUrl(OneMovieDetailActivity.this, mMoreUrl, mMovieName);
+    }
+
+    @Override
+    protected int setHeaderLayout() {
+        return R.layout.header_slide_shape;
+    }
+
+    @Override
+    protected String setHeaderImgUrl() {
+        if (subjectsBean == null) {
+            return "";
+        }
+        return subjectsBean.getImages().getLarge();
+    }
+
+    @Override
+    protected ImageView setHeaderImageView() {
+        if (bindingHeaderView == null)
+            return new ImageView(this);
+        return bindingHeaderView.imgItemBg;
+    }
+
+    private void loadMovieDetail() {
+        // 初始化...
+//        binding.include.tvOneCity.setText("制片国家/地区：");
+//        binding.include.tvOneDay.setText("上映日期：");
+//        binding.tvOneTitle.setText("");
+        Subscription get = HttpUtils.getInstance().getDouBanServer().getMovieDetail(subjectsBean.getId())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<MovieDetailBean>() {
+                    @Override
+                    public void onCompleted() {
+                        showContentView();
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        showError();
+                    }
+
+                    @Override
+                    public void onNext(final MovieDetailBean movieDetailBean) {
+                        // 上映日期
+                        bindingHeaderView.tvOneDay.setText("上映日期：" + movieDetailBean.getYear());
+                        // 制片国家
+                        bindingHeaderView.tvOneCity.setText("制片国家/地区：" + StringFormatUtil.formatGenres(movieDetailBean.getCountries()));
+                        bindingHeaderView.setMovieDetailBean(movieDetailBean);
+                        bindingContentView.setBean(movieDetailBean);
+
+                        mMoreUrl = movieDetailBean.getAlt();
+                        mMovieName = movieDetailBean.getTitle();
+
+                        transformData(movieDetailBean);
+                    }
+                });
+
+    }
+
+    /**
+     * 异步线程转换数据
+     */
+    private void transformData(final MovieDetailBean movieDetailBean) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                for (int i = 0; i < movieDetailBean.getDirectors().size(); i++) {
+                    movieDetailBean.getDirectors().get(i).setType("导演");
+                }
+                for (int i = 0; i < movieDetailBean.getCasts().size(); i++) {
+                    movieDetailBean.getCasts().get(i).setType("演员");
+                }
+
+                OneMovieDetailActivity.this.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        setAdapter(movieDetailBean);
+                    }
+                });
+            }
+        }).start();
+    }
+
+    /**
+     * 设置导演&演员adapter
+     */
+    private void setAdapter(MovieDetailBean movieDetailBean) {
+        bindingContentView.xrvCast.setVisibility(View.VISIBLE);
+        LinearLayoutManager mLayoutManager = new LinearLayoutManager(OneMovieDetailActivity.this);
+        mLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        bindingContentView.xrvCast.setLayoutManager(mLayoutManager);
+        bindingContentView.xrvCast.setPullRefreshEnabled(false);
+        bindingContentView.xrvCast.setLoadingMoreEnabled(false);
+        // 需加，不然滑动不流畅
+        bindingContentView.xrvCast.setNestedScrollingEnabled(false);
+        bindingContentView.xrvCast.setHasFixedSize(false);
+
+        MovieDetailAdapter mAdapter = new MovieDetailAdapter();
+        mAdapter.addAll(movieDetailBean.getDirectors());
+        mAdapter.addAll(movieDetailBean.getCasts());
+        bindingContentView.xrvCast.setAdapter(mAdapter);
+    }
+
+
+    /**
+     * @param context      activity
+     * @param positionData bean
+     * @param imageView    imageView
+     */
+    public static void start(Activity context, SubjectsBean positionData, ImageView imageView) {
+        Intent intent = new Intent(context, OneMovieDetailActivity.class);
+        intent.putExtra("bean", positionData);
+        ActivityOptionsCompat options =
+                ActivityOptionsCompat.makeSceneTransitionAnimation(context,
+                        imageView, CommonUtils.getString(R.string.transition_movie_img));//与xml文件对应
+        ActivityCompat.startActivity(context, intent, options.toBundle());
+    }
+
+}

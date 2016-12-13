@@ -15,6 +15,7 @@ import com.example.jingbin.cloudreader.http.HttpUtils;
 import com.example.xrecyclerview.XRecyclerView;
 
 import rx.Observer;
+import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
@@ -48,7 +49,7 @@ public class DouBanTopActivity extends BaseActivity<ActivityDoubanTopBinding> {
     }
 
     private void loadDouBanTop250() {
-        HttpUtils.getInstance().getDouBanServer().getMovieTop250(mStart, mCount)
+        Subscription get = HttpUtils.getInstance().getDouBanServer().getMovieTop250(mStart, mCount)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<HotMovieBean>() {
@@ -93,6 +94,7 @@ public class DouBanTopActivity extends BaseActivity<ActivityDoubanTopBinding> {
 
                     }
                 });
+        addSubscription(get);
     }
 
     @Override

@@ -2,30 +2,64 @@ package com.example.jingbin.cloudreader.base;
 
 import android.databinding.DataBindingUtil;
 import android.databinding.ViewDataBinding;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.drawable.GlideDrawable;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.Target;
 import com.example.jingbin.cloudreader.R;
-import com.example.jingbin.cloudreader.databinding.TitleBarBinding;
+import com.example.jingbin.cloudreader.databinding.ActivityHeaderBaseBinding;
+import com.example.jingbin.cloudreader.utils.CommonUtils;
+import com.example.jingbin.cloudreader.utils.DebugUtil;
 import com.example.jingbin.cloudreader.utils.PerfectClickListener;
+import com.example.jingbin.cloudreader.view.MyNestedScrollView;
+import com.example.jingbin.cloudreader.view.statusbar.StatusBarUtil;
+import com.example.jingbin.cloudreader.view.test.StatusBarUtils;
 
-public abstract class BaseHeaderActivity<HV extends ViewDataBinding,SV extends ViewDataBinding> extends AppCompatActivity {
+import jp.wasabeef.glide.transformations.BlurTransformation;
+
+
+/**
+ * Created by jingbin on 16/12/12.
+ * 电影
+ * 书籍
+ * 音乐等详情页
+ */
+public abstract class BaseHeaderActivity<HV extends ViewDataBinding, SV extends ViewDataBinding> extends AppCompatActivity {
 
     // 标题
-    protected TitleBarBinding bindingTitleView;
+//    protected BaseHeaderTitleBarBinding bindingTitleView;
+
+    protected ActivityHeaderBaseBinding mBaseBinding;
     // 内容布局头部
     protected HV bindingHeaderView;
-    // 布局view
-    protected SV bindingView;
+    // 内容布局view
+    protected SV bindingContentView;
     private LinearLayout llProgressBar;
     private View refresh;
     protected View ll;
+    private int slidingDistance;
+    // 这个是高斯图背景的高度
+    private int imageBgHeight;
+    private String TAG = "--BaseHeaderActivity";
 
     protected <T extends View> T getView(int id) {
         return (T) findViewById(id);
@@ -38,18 +72,23 @@ public abstract class BaseHeaderActivity<HV extends ViewDataBinding,SV extends V
 
     @Override
     public void setContentView(@LayoutRes int layoutResID) {
-        ll = getLayoutInflater().inflate(R.layout.activity_header_base, null);
-
-        bindingView = DataBindingUtil.inflate(getLayoutInflater(), layoutResID, null, false);
+//        mBaseBinding = DataBindingUtil.setContentView(this, R.layout.activity_header_base, null);
+        mBaseBinding =  DataBindingUtil.inflate(LayoutInflater.from(this),R.layout.activity_header_base,null,false);
+//        ll = getLayoutInflater().inflate(activity_header_base, null);
+        ll = mBaseBinding.getRoot();
+        // 内容
+        bindingContentView = DataBindingUtil.inflate(getLayoutInflater(), layoutResID, null, false);
+        // 头部
         bindingHeaderView = DataBindingUtil.inflate(getLayoutInflater(), setHeaderLayout(), null, false);
-        bindingTitleView = DataBindingUtil.inflate(getLayoutInflater(), R.layout.title_bar, null, false);
+        // 标题
+//        bindingTitleView = DataBindingUtil.inflate(getLayoutInflater(), R.layout.base_header_title_bar, null, false);
 
         // title
-        RelativeLayout.LayoutParams titleParams = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        bindingTitleView.getRoot().setLayoutParams(titleParams);
-        RelativeLayout mTitleContainer = (RelativeLayout) ll.findViewById(R.id.title_container);
-        mTitleContainer.addView(bindingTitleView.getRoot());
-        getWindow().setContentView(ll);
+//        RelativeLayout.LayoutParams titleParams = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+//        bindingTitleView.getRoot().setLayoutParams(titleParams);
+//        RelativeLayout mTitleContainer = (RelativeLayout) ll.findViewById(R.id.title_container);
+//        mTitleContainer.addView(bindingTitleView.getRoot());
+//        getWindow().setContentView(ll);
 
         // header
         RelativeLayout.LayoutParams headerParams = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
@@ -60,34 +99,20 @@ public abstract class BaseHeaderActivity<HV extends ViewDataBinding,SV extends V
 
         // content
         RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
-        bindingView.getRoot().setLayoutParams(params);
+        bindingContentView.getRoot().setLayoutParams(params);
         RelativeLayout mContainer = (RelativeLayout) ll.findViewById(R.id.container);
-        mContainer.addView(bindingView.getRoot());
+        mContainer.addView(bindingContentView.getRoot());
         getWindow().setContentView(ll);
 
         llProgressBar = getView(R.id.ll_progress_bar);
         refresh = getView(R.id.ll_error_refresh);
 
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-//            StatusBarUtil.setColor(this, CommonUtils.getColor(R.color.colorTheme),0);
-//            StatusBarUtil.setTranslucent(this);
-//        }
-//         设置titlebar
-        setSupportActionBar(bindingTitleView.titleToolBar);
-        ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
-            //去除默认Title显示
-            actionBar.setDisplayShowTitleEnabled(false);
-            actionBar.setDisplayHomeAsUpEnabled(true);
-            actionBar.setHomeAsUpIndicator(R.drawable.icon_back);
-        }
-//        bindingTitleView.titleToolBar.setBackgroundColor(CommonUtils.getColor(R.color.colorTheme));
-        bindingTitleView.titleToolBar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onBackPressed();
-            }
-        });
+
+        // 初始化滑动渐变
+        initSlideShapeTheme(setHeaderImgUrl(), setHeaderImageView());
+
+        // 设置toolbar
+        setToolBar();
 
         // 点击加载失败布局
         refresh.setOnClickListener(new PerfectClickListener() {
@@ -97,22 +122,205 @@ public abstract class BaseHeaderActivity<HV extends ViewDataBinding,SV extends V
                 onRefresh();
             }
         });
-        bindingView.getRoot().setVisibility(View.GONE);
+        bindingContentView.getRoot().setVisibility(View.GONE);
 
     }
 
+
+    /**
+     * a. 布局高斯透明图 header布局
+     */
     protected abstract int setHeaderLayout();
 
+    /**
+     * b. 设置头部header高斯背景 imgUrl
+     */
+    protected abstract String setHeaderImgUrl();
+
+    /**
+     * c. 设置头部header布局 高斯背景ImageView控件
+     */
+    protected abstract ImageView setHeaderImageView();
+
+    /**
+     * 1. 标题
+     */
     public void setTitle(CharSequence text) {
-        bindingTitleView.tvTitle.setText(text);
+        mBaseBinding.tbBaseTitle.setTitle(text);
+    }
+
+    /**
+     * 2. 副标题
+     */
+    protected void setSubTitle(CharSequence text) {
+        mBaseBinding.tbBaseTitle.setSubtitle(text);
+    }
+
+    /**
+     * 3. toolbar 单击"更多信息"
+     */
+    protected void setTitleClickMore() {
+    }
+
+    /**
+     * 设置toolbar
+     */
+    protected void setToolBar() {
+        setSupportActionBar(mBaseBinding.tbBaseTitle);
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            //去除默认Title显示
+            actionBar.setDisplayShowTitleEnabled(false);
+            actionBar.setDisplayHomeAsUpEnabled(true);
+            actionBar.setHomeAsUpIndicator(R.drawable.icon_back);
+        }
+        // 手动设置才有效果
+        mBaseBinding.tbBaseTitle.setTitleTextAppearance(this, R.style.ToolBar_Title);
+        mBaseBinding.tbBaseTitle.setSubtitleTextAppearance(this, R.style.Toolbar_SubTitle);
+        mBaseBinding.tbBaseTitle.inflateMenu(R.menu.base_header_menu);
+        mBaseBinding.tbBaseTitle.setOverflowIcon(ContextCompat.getDrawable(this, R.drawable.actionbar_more));
+        mBaseBinding.tbBaseTitle.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
+        mBaseBinding.tbBaseTitle.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.actionbar_more:// 更多信息
+                        setTitleClickMore();
+                        break;
+                }
+                return false;
+            }
+        });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.base_header_menu, menu);
+        return true;
+    }
+
+    /**
+     * *** 初始化滑动渐变 一定要实现 ******
+     *
+     * @param imgUrl    header头部的高斯背景imageUrl
+     * @param mHeaderBg header头部高斯背景ImageView控件
+     */
+    protected void initSlideShapeTheme(String imgUrl, ImageView mHeaderBg) {
+        setImgHeaderBg(imgUrl);
+
+        // toolbar 的高
+        int toolbarHeight = mBaseBinding.tbBaseTitle.getLayoutParams().height;
+        Log.i(TAG, "toolbar height:" + toolbarHeight);
+        final int headerBgHeight = toolbarHeight + StatusBarUtil.getStatusBarHeight(this);
+        Log.i(TAG, "headerBgHeight:" + headerBgHeight);
+
+        // 使背景图向上移动到图片的最低端，保留（titlebar+statusbar）的高度
+        ViewGroup.LayoutParams params = mBaseBinding.ivBaseTitlebarBg.getLayoutParams();
+        ViewGroup.MarginLayoutParams ivTitleHeadBgParams = (ViewGroup.MarginLayoutParams) mBaseBinding.ivBaseTitlebarBg.getLayoutParams();
+        int marginTop = params.height - headerBgHeight;
+        ivTitleHeadBgParams.setMargins(0, -marginTop, 0, 0);
+
+        mBaseBinding.ivBaseTitlebarBg.setImageAlpha(0);
+        StatusBarUtils.setTranslucentImageHeader(this, 0, mBaseBinding.tbBaseTitle);
+
+        DebugUtil.error("---- mHeaderBg == null: " + (mHeaderBg == null));
+        // 上移背景图片，使空白状态栏消失(这样下方就空了状态栏的高度)
+        if (mHeaderBg != null) {
+            ViewGroup.MarginLayoutParams layoutParams = (ViewGroup.MarginLayoutParams) mHeaderBg.getLayoutParams();
+            layoutParams.setMargins(0, -StatusBarUtil.getStatusBarHeight(this), 0, 0);
+
+            ViewGroup.LayoutParams imgItemBgparams = mHeaderBg.getLayoutParams();
+            // 获得高斯图背景的高度
+            imageBgHeight = imgItemBgparams.height;
+        }
+
+        // 变色
+        initScrollViewListener();
+
+        initNewSlidingParams();
+    }
+
+
+    /**
+     * 加载titlebar背景
+     */
+    private void setImgHeaderBg(String imgUrl) {
+        if (!TextUtils.isEmpty(imgUrl)) {
+
+            // 高斯模糊背景 原来 参数：12,5  23,4
+            Glide.with(this).load(imgUrl)
+                    .error(R.drawable.stackblur_default)
+                    .bitmapTransform(new BlurTransformation(this, 23, 4)).listener(new RequestListener<String, GlideDrawable>() {
+                @Override
+                public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
+                    return false;
+                }
+
+                @Override
+                public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
+                    mBaseBinding.tbBaseTitle.setBackgroundColor(Color.TRANSPARENT);
+                    mBaseBinding.ivBaseTitlebarBg.setImageAlpha(0);
+                    mBaseBinding.ivBaseTitlebarBg.setVisibility(View.VISIBLE);
+                    return false;
+                }
+            }).into(mBaseBinding.ivBaseTitlebarBg);
+        }
+    }
+
+
+    private void initScrollViewListener() {
+        // 为了兼容23以下
+        ((MyNestedScrollView) findViewById(R.id.mns_base)).setOnScrollChangeListener(new MyNestedScrollView.ScrollInterface() {
+            @Override
+            public void onScrollChange(int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
+                scrollChangeHeader(scrollY);
+            }
+        });
+    }
+
+    private void initNewSlidingParams() {
+        int titleBarAndStatusHeight = (int) (CommonUtils.getDimens(R.dimen.nav_bar_height) + StatusBarUtil.getStatusBarHeight(this));
+        // 减掉后，没到顶部就不透明了
+        slidingDistance = imageBgHeight - titleBarAndStatusHeight - (int) (CommonUtils.getDimens(R.dimen.base_header_activity_slide_more));
+    }
+
+    /**
+     * 根据页面滑动距离改变Header方法
+     */
+    private void scrollChangeHeader(int scrolledY) {
+
+        DebugUtil.error("---scrolledY:  " + scrolledY);
+        DebugUtil.error("-----slidingDistance: " + slidingDistance);
+
+        if (scrolledY < 0) {
+            scrolledY = 0;
+        }
+        float alpha = Math.abs(scrolledY) * 1.0f / (slidingDistance);
+
+        DebugUtil.error("----alpha:  " + alpha);
+        Drawable drawable = mBaseBinding.ivBaseTitlebarBg.getDrawable();
+
+        if (scrolledY <= slidingDistance) {
+            // title部分的渐变
+            drawable.mutate().setAlpha((int) (alpha * 255));
+            mBaseBinding.ivBaseTitlebarBg.setImageDrawable(drawable);
+        } else {
+            drawable.mutate().setAlpha(255);
+            mBaseBinding.ivBaseTitlebarBg.setImageDrawable(drawable);
+        }
     }
 
     protected void showLoading() {
         if (llProgressBar.getVisibility() != View.VISIBLE) {
             llProgressBar.setVisibility(View.VISIBLE);
         }
-        if (bindingView.getRoot().getVisibility() != View.GONE) {
-            bindingView.getRoot().setVisibility(View.GONE);
+        if (bindingContentView.getRoot().getVisibility() != View.GONE) {
+            bindingContentView.getRoot().setVisibility(View.GONE);
         }
         if (refresh.getVisibility() != View.GONE) {
             refresh.setVisibility(View.GONE);
@@ -126,8 +334,8 @@ public abstract class BaseHeaderActivity<HV extends ViewDataBinding,SV extends V
         if (refresh.getVisibility() != View.GONE) {
             refresh.setVisibility(View.GONE);
         }
-        if (bindingView.getRoot().getVisibility() != View.VISIBLE) {
-            bindingView.getRoot().setVisibility(View.VISIBLE);
+        if (bindingContentView.getRoot().getVisibility() != View.VISIBLE) {
+            bindingContentView.getRoot().setVisibility(View.VISIBLE);
         }
     }
 
@@ -138,8 +346,8 @@ public abstract class BaseHeaderActivity<HV extends ViewDataBinding,SV extends V
         if (refresh.getVisibility() != View.VISIBLE) {
             refresh.setVisibility(View.VISIBLE);
         }
-        if (bindingView.getRoot().getVisibility() != View.GONE) {
-            bindingView.getRoot().setVisibility(View.GONE);
+        if (bindingContentView.getRoot().getVisibility() != View.GONE) {
+            bindingContentView.getRoot().setVisibility(View.GONE);
         }
     }
 

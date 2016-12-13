@@ -115,7 +115,7 @@ public class OneFragment extends BaseFragment<FragmentOneBinding> {
                         }
 
 
-//                        bindingView.listOne.setLayoutManager(new GridLayoutManager(getActivity(), 1));
+//                        bindingContentView.listOne.setLayoutManager(new GridLayoutManager(getActivity(), 1));
 //                        SpacesItemDecoration spacesItemDecoration=new SpacesItemDecoration(ScreenUtils.dipToPx(getActivity(),10),ScreenUtils.dipToPx(getActivity(),10),ScreenUtils.dipToPx(getActivity(),10),0);
 //                        recyclerview.addItemDecoration(spacesItemDecoration);
 //                        recyclerview.setAdapter(filmLiveAdapter);
@@ -124,20 +124,20 @@ public class OneFragment extends BaseFragment<FragmentOneBinding> {
 //                        LinearLayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
                         //2 为RecyclerView创建布局管理器，这里使用的是LinearLayoutManager，表示里面的Item排列是线性排列
 //                        mLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-//                        bindingView.listOne.setLayoutManager(mLayoutManager);
+//                        bindingContentView.listOne.setLayoutManager(mLayoutManager);
 
                         //构造器中，第一个参数表示列数或者行数，第二个参数表示滑动方向,瀑布流
-//                        bindingView.listOne.setLayoutManager(new StaggeredGridLayoutManager(4,StaggeredGridLayoutManager.VERTICAL));
+//                        bindingContentView.listOne.setLayoutManager(new StaggeredGridLayoutManager(4,StaggeredGridLayoutManager.VERTICAL));
 
                         // GridView
-//                        bindingView.listOne.setLayoutManager(new GridLayoutManager(getActivity(), 2));
+//                        bindingContentView.listOne.setLayoutManager(new GridLayoutManager(getActivity(), 2));
 
 //                        LinearLayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
 //                        mLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-//                        bindingView.listOne.setLayoutManager(mLayoutManager);
+//                        bindingContentView.listOne.setLayoutManager(mLayoutManager);
 //                        OneAdapter oneAdapter = new OneAdapter();
 //                        oneAdapter.addAll(mHotMovieBean.getSubjects());
-//                        bindingView.listOne.setAdapter(oneAdapter);
+//                        bindingContentView.listOne.setAdapter(oneAdapter);
 
 //                        oneAdapter.notifyItemInserted(0);addheader
                     }

@@ -74,6 +74,10 @@
         <activity
             android:name=".ui.one.DouBanTopActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.one.OneMovieDetailActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/MyScollPage" />
     </application>
 
 </manifest>

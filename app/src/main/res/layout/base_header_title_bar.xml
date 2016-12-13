@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <RelativeLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/rl_base_titlebar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent">
+
+        <ImageView
+            android:id="@+id/iv_base_titlebar_bg"
+            android:layout_width="match_parent"
+            android:layout_height="310dp"
+            android:scaleType="fitXY" />
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/tb_base_title"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/colorTransparent"
+            app:contentInsetStart="0.0dp"
+            app:layout_collapseMode="pin"
+            app:layout_scrollFlags="enterAlways|scroll"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+            app:theme="@style/ToolbarStyle">
+
+        </android.support.v7.widget.Toolbar>
+
+    </RelativeLayout>
+</layout>
