@@ -82,4 +82,27 @@ public interface RetrofitHttpClient {
     @GET("/v2/movie/top250")
     Observable<HotMovieBean> getMovieTop250(@Query("start") int start, @Query("count") int count);
 
+    /**
+     * 根据tag获取图书
+     * @param tag
+     * @return
+     */
+
+//    @GET("v2/book/search")
+//    Observable<BookRoot> searchBookByTag(@Query("tag")String tag);
+
+//    @GET("v2/book/{id}")
+//    Observable<Books> getBookDetail(@Path("id") String id);
+
+    /**
+     * 根据tag获取music
+     * @param tag
+     * @return
+     */
+
+//    @GET("v2/music/search")
+//    Observable<MusicRoot> searchMusicByTag(@Query("tag")String tag);
+
+//    @GET("v2/music/{id}")
+//    Observable<Musics> getMusicDetail(@Path("id") String id);
 }
