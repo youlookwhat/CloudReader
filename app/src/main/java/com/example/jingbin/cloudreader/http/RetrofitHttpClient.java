@@ -12,7 +12,7 @@ import retrofit.http.Query;
 import rx.Observable;
 
 /**
- * Created by hsl on 2015/6/24.
+ * Created by jingbin on 16/11/21.
  * 网络请求类（一个接口一个方法）
  */
 public interface RetrofitHttpClient {

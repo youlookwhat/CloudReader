@@ -11,6 +11,8 @@ public class Constants {
     public static String GANK_ALL = "gank_all";
     // 安卓数据
     public static String GANK_ANDROID = "gank_android";
+    // 订制数据
+    public static String GANK_CUSTOM = "gank_custom";
     // 热映缓存
     public static String ONE_HOT_MOVIE = "one_hot_movie";
     // 保存每日推荐轮播图url
