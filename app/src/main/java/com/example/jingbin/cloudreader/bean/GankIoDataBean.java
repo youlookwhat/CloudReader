@@ -30,8 +30,6 @@ public class GankIoDataBean implements Serializable {
 
     public static class ResultsBean implements Serializable {
 
-
-
         @ParamNames("_id")
         private String _id;
         @ParamNames("createdAt")

@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <data>
+
+        <import type="android.text.TextUtils" />
+
+        <import type="com.example.jingbin.cloudreader.utils.TimeUtil" />
+
+        <variable
+            name="resultsBean"
+            type="com.example.jingbin.cloudreader.bean.GankIoDataBean.ResultsBean" />
+
+    </data>
+
     <LinearLayout
         android:id="@+id/ll_all"
         android:layout_width="match_parent"
@@ -28,18 +40,33 @@
                     android:id="@+id/tv_android_des"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="付电费是撒旦法"
+                    android:text="@{resultsBean.desc}"
                     android:textColor="@color/colorContent"
                     android:textSize="16sp" />
 
-                <TextView
-                    android:id="@+id/tv_android_who"
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:text="发生的发生"
-                    android:textColor="@color/colorSubtitle"
-                    android:textSize="12sp" />
+                    android:layout_marginTop="8dp">
+
+                    <TextView
+                        android:id="@+id/tv_android_who"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text='@{TextUtils.isEmpty(resultsBean.who)?"佚名":resultsBean.who}'
+                        android:textColor="@color/colorSubtitle"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/tv_android_time"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:text='@{TimeUtil.getTranslateTime(resultsBean.publishedAt)}'
+                        android:textColor="@color/colorSubtitle"
+                        android:textSize="12sp" />
+
+                </RelativeLayout>
 
             </LinearLayout>
 
@@ -49,9 +76,9 @@
                 android:layout_height="80dp"
                 android:layout_gravity="center_vertical"
                 android:background="@color/colorTheme"
-                android:scaleType="fitXY" />
+                android:scaleType="fitXY"
+                android:visibility="gone" />
         </LinearLayout>
-
 
         <View
             android:layout_width="match_parent"

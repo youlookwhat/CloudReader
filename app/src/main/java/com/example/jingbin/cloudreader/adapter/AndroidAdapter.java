@@ -31,6 +31,10 @@ public class AndroidAdapter extends BaseRecyclerViewAdapter<GankIoDataBean.Resul
         @Override
         public void onBindViewHolder(final GankIoDataBean.ResultsBean object, int position) {
 
+            binding.setResultsBean(object);
+            binding.executePendingBindings();
+
+            // 显示图片会很耗内存
             if (object.getImages() != null
                     && object.getImages().size() > 0
                     && !TextUtils.isEmpty(object.getImages().get(0))) {
@@ -41,12 +45,6 @@ public class AndroidAdapter extends BaseRecyclerViewAdapter<GankIoDataBean.Resul
                 binding.ivAndroidPic.setVisibility(View.GONE);
             }
 
-            binding.tvAndroidDes.setText(object.getDesc());
-            if (!TextUtils.isEmpty(object.getWho())) {
-                binding.tvAndroidWho.setText(object.getWho());
-            } else {
-                binding.tvAndroidWho.setText("佚名");
-            }
             binding.llAll.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
