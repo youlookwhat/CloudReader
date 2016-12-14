@@ -42,6 +42,7 @@ dependencies {
     })
     compile project(':xrecyclerview')//加上这个
     // 设置状态栏透明色
+    compile project(path: ':zoomlibrary')
     compile 'com.android.support:appcompat-v7:24.2.1'
     compile 'com.android.support:design:24.2.1'
     compile 'com.jaeger.statusbaruitl:library:1.2.7'
@@ -52,8 +53,7 @@ dependencies {
     compile 'com.github.bumptech.glide:glide:3.7.0'
     compile 'jp.wasabeef:glide-transformations:2.0.1'
     compile 'com.youth.banner:banner:1.4.2'
-    testCompile 'junit:junit:4.12'
-    compile project(path: ':zoomlibrary')
     compile 'com.daimajia.slider:library:1.1.5@aar'
     compile 'com.cocosw:bottomsheet:1.+@aar'
+    testCompile 'junit:junit:4.12'
 }

@@ -9,6 +9,7 @@
             android:id="@+id/xrv_android"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:scrollbarFadeDuration="1"
             android:scrollbarSize="4dp"
             android:scrollbarThumbVertical="@color/tabBackground"
             android:scrollbars="vertical" />

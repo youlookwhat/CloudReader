@@ -21,7 +21,7 @@ import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
 /**
- * 安卓社区和ios的fragment
+ * 大安卓 fragment
  */
 public class AndroidFragment extends BaseFragment<FragmentAndroidBinding> {
 
@@ -121,7 +121,7 @@ public class AndroidFragment extends BaseFragment<FragmentAndroidBinding> {
 
                                 mACache.remove(Constants.GANK_ANDROID);
                                 // 缓存50分钟
-                                mACache.put(Constants.GANK_ANDROID, gankIoDataBean, 3);
+                                mACache.put(Constants.GANK_ANDROID, gankIoDataBean, 30000);
                             }
                         } else {
                             if (gankIoDataBean != null && gankIoDataBean.getResults() != null && gankIoDataBean.getResults().size() > 0) {

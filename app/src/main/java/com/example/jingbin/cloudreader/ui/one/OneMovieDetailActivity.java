@@ -154,6 +154,11 @@ public class OneMovieDetailActivity extends BaseHeaderActivity<HeaderSlideShapeB
         bindingContentView.xrvCast.setAdapter(mAdapter);
     }
 
+    @Override
+    protected void onRefresh() {
+        loadMovieDetail();
+    }
+
     /**
      * @param context      activity
      * @param positionData bean

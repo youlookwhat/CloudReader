@@ -22,8 +22,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.jingbin.cloudreader.databinding.ActivityMainBinding;
+import com.example.jingbin.cloudreader.ui.book.BookFragment;
 import com.example.jingbin.cloudreader.ui.gank.GankFragment;
-import com.example.jingbin.cloudreader.ui.gank.child.AndroidFragment;
 import com.example.jingbin.cloudreader.ui.one.OneFragment;
 import com.example.jingbin.cloudreader.utils.CommonUtils;
 import com.example.jingbin.cloudreader.view.MyFragmentPagerAdapter;
@@ -94,7 +94,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         ArrayList<Fragment> mFragmentList = new ArrayList<>();
         mFragmentList.add(new GankFragment());
         mFragmentList.add(new OneFragment());
-        mFragmentList.add(new AndroidFragment());
+        mFragmentList.add(new BookFragment());
         // 注意使用的是：getSupportFragmentManager
         MyFragmentPagerAdapter adapter = new MyFragmentPagerAdapter(getSupportFragmentManager(), mFragmentList);
         vpContent.setAdapter(adapter);
