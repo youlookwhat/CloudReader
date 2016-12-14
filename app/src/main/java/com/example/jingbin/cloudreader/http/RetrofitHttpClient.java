@@ -5,6 +5,7 @@ import com.example.jingbin.cloudreader.bean.GankIoDataBean;
 import com.example.jingbin.cloudreader.bean.GankIoDayBean;
 import com.example.jingbin.cloudreader.bean.HotMovieBean;
 import com.example.jingbin.cloudreader.bean.MovieDetailBean;
+import com.example.jingbin.cloudreader.bean.book.BookBean;
 
 import retrofit.http.GET;
 import retrofit.http.Path;
@@ -24,10 +25,6 @@ public interface RetrofitHttpClient {
 //                            @Field("diseased_state_id") String diseased_state_id,
 //                            @Field("mobile") String mobile, @Field("apply_place") String apply_place, @Field("reason") String reason, Callback<String> response);
 
-
-//    /*抗癌广场-获取分类标签*/
-//    @GET("/tags")
-//    void getCommunityTags(@Header("a") String a, Callback<List<TagBean>> reponse);
 
 
     /*修改我的病历本的"其他资料"的详情*/
@@ -71,27 +68,31 @@ public interface RetrofitHttpClient {
     /**
      * 获取电影详情
      *
-     * @param id
+     * @param id 电影bean里的id
      */
     @GET("/v2/movie/subject/{id}")
     Observable<MovieDetailBean> getMovieDetail(@Path("id") String id);
 
     /**
      * 获取豆瓣电影top250
+     *
+     * @param start 从多少开始，如从"0"开始
+     * @param count 一次请求的数目，如"10"条，最多100
      */
     @GET("/v2/movie/top250")
     Observable<HotMovieBean> getMovieTop250(@Query("start") int start, @Query("count") int count);
 
     /**
      * 根据tag获取图书
-     * @param tag
-     * @return
+     *
+     * @param tag   搜索关键字
+     * @param count 一次请求的数目 最多100
      */
 
-//    @GET("v2/book/search")
-//    Observable<BookRoot> searchBookByTag(@Query("tag")String tag);
+    @GET("/v2/book/search")
+    Observable<BookBean> getBook(@Query("tag") String tag, @Query("start") int start, @Query("count") int count);
 
-//    @GET("v2/book/{id}")
+//    @GET("/v2/book/{id}")
 //    Observable<Books> getBookDetail(@Path("id") String id);
 
     /**
@@ -100,9 +101,9 @@ public interface RetrofitHttpClient {
      * @return
      */
 
-//    @GET("v2/music/search")
+//    @GET("/v2/music/search")
 //    Observable<MusicRoot> searchMusicByTag(@Query("tag")String tag);
 
-//    @GET("v2/music/{id}")
+//    @GET("/v2/music/{id}")
 //    Observable<Musics> getMusicDetail(@Path("id") String id);
 }
