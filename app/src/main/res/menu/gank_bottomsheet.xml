@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/gank_all"
+        android:icon="@drawable/home_all"
+        android:title="全部" />
+    <item
+        android:id="@+id/gank_ios"
+        android:icon="@drawable/home_ios"
+        android:title="IOS" />
+    <item
+        android:id="@+id/gank_qian"
+        android:icon="@drawable/home_qian"
+        android:title="前端" />
+    <item
+        android:id="@+id/gank_movie"
+        android:icon="@drawable/home_movie"
+        android:title="休息视频" />
+    <item
+        android:id="@+id/gank_resouce"
+        android:icon="@drawable/home_source"
+        android:title="拓展资源" />
+</menu>
