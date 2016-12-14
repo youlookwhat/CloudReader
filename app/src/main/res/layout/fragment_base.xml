@@ -41,7 +41,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="15dp"
                     android:text="加载失败,点击重试"
-                    android:textSize="16sp" />
+                    android:textSize="15sp" />
             </LinearLayout>
 
             <!--加载中..-->
@@ -64,7 +64,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:text="努力加载中..."
-                    android:textColor="@color/colorContent"
+                    android:textColor="@color/colorTabText"
                     android:textSize="14sp" />
 
             </LinearLayout>

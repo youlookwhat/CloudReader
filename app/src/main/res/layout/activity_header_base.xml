@@ -35,6 +35,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:gravity="center"
+                        android:layout_marginTop="140dp"
                         android:orientation="vertical"
                         android:visibility="gone">
 
@@ -49,7 +50,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="15dp"
                             android:text="加载失败,点击重试"
-                            android:textSize="16sp" />
+                            android:textSize="15sp" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -71,7 +72,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="10dp"
                             android:text="努力加载中..."
-                            android:textColor="@color/colorContent"
+                            android:textColor="@color/colorTabText"
                             android:textSize="14sp" />
 
                     </LinearLayout>
