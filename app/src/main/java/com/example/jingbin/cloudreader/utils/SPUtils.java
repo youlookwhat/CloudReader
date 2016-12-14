@@ -3,7 +3,7 @@ package com.example.jingbin.cloudreader.utils;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import com.example.jingbin.cloudreader.app.YunyueApplication;
+import com.example.jingbin.cloudreader.app.CloudReaderApplication;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +22,7 @@ public class SPUtils {
      * @param fileName
      */
     private static SharedPreferences getSharedPreference(String fileName) {
-        return YunyueApplication.getInstance().getSharedPreferences(fileName, Context.MODE_PRIVATE);
+        return CloudReaderApplication.getInstance().getSharedPreferences(fileName, Context.MODE_PRIVATE);
     }
 
     /**

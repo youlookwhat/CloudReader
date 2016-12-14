@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import android.view.ViewParent;
 import android.view.WindowManager;
 
-import com.example.jingbin.cloudreader.app.YunyueApplication;
+import com.example.jingbin.cloudreader.app.CloudReaderApplication;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -56,7 +56,7 @@ public class CommonUtils {
     }
 
 //	public static void RunOnUiThread(Runnable r) {
-//		YunyueApplication.getInstance().getMainLooper().post(r);
+//		CloudReaderApplication.getInstance().getMainLooper().post(r);
 //	}
 
     public static Drawable getDrawable(int resid) {
@@ -68,7 +68,7 @@ public class CommonUtils {
     }
 
     public static Resources getResoure() {
-        return YunyueApplication.getInstance().getResources();
+        return CloudReaderApplication.getInstance().getResources();
     }
 
     public static String[] getStringArray(int resid) {

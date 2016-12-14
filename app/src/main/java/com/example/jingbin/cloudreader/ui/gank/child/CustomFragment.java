@@ -6,7 +6,6 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.cocosw.bottomsheet.BottomSheet;
 import com.example.jingbin.cloudreader.R;
@@ -19,6 +18,7 @@ import com.example.jingbin.cloudreader.http.HttpUtils;
 import com.example.jingbin.cloudreader.http.cache.ACache;
 import com.example.jingbin.cloudreader.utils.DebugUtil;
 import com.example.jingbin.cloudreader.utils.SPUtils;
+import com.example.jingbin.cloudreader.utils.ToastUtil;
 import com.example.xrecyclerview.XRecyclerView;
 
 import rx.Observer;
@@ -150,7 +150,6 @@ public class CustomFragment extends BaseFragment<FragmentCustomBinding> {
         final TextView txName = (TextView) mHeaderView.findViewById(R.id.tx_name);
         String gankCala = SPUtils.getString("gank_cala", "全部");
         txName.setText(gankCala);
-//        setTypeName(txName);
         View view = mHeaderView.findViewById(R.id.ll_choose_catalogue);
         view.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -160,7 +159,7 @@ public class CustomFragment extends BaseFragment<FragmentCustomBinding> {
                     public void onClick(DialogInterface dialog, int which) {
                         switch (which) {
                             case R.id.gank_all:
-                                if (isOtherType(v, "全部")) {
+                                if (isOtherType("全部")) {
                                     txName.setText("全部");
                                     mType = "all";// 全部传 all
                                     SPUtils.putString("gank_cala", "全部");
@@ -169,7 +168,7 @@ public class CustomFragment extends BaseFragment<FragmentCustomBinding> {
                                 }
                                 break;
                             case R.id.gank_ios:
-                                if (isOtherType(v, "IOS")) {
+                                if (isOtherType("IOS")) {
                                     txName.setText("IOS");
                                     mType = "iOS";// 这里有严格大小写
                                     SPUtils.putString("gank_cala", "IOS");
@@ -178,17 +177,17 @@ public class CustomFragment extends BaseFragment<FragmentCustomBinding> {
                                 }
                                 break;
                             case R.id.gank_qian:
-                                if (isOtherType(v, "前端")) {
+                                if (isOtherType("前端")) {
                                     changeContent(txName, "前端");
                                 }
                                 break;
                             case R.id.gank_movie:
-                                if (isOtherType(v, "休息视频")) {
+                                if (isOtherType("休息视频")) {
                                     changeContent(txName, "休息视频");
                                 }
                                 break;
                             case R.id.gank_resouce:
-                                if (isOtherType(v, "拓展资源")) {
+                                if (isOtherType("拓展资源")) {
                                     changeContent(txName, "拓展资源");
                                 }
                                 break;
@@ -208,37 +207,13 @@ public class CustomFragment extends BaseFragment<FragmentCustomBinding> {
         loadCustomData();
     }
 
-    private boolean isOtherType(View view, String selectType) {
+    private boolean isOtherType(String selectType) {
         String clickText = SPUtils.getString("gank_cala", "全部");
         if (clickText.equals(selectType)) {
-//            Snackbar.make(view, "当前已经是" + selectType + "分类", Snackbar.LENGTH_SHORT).show();
-            Toast.makeText(view.getContext(), "当前已经是" + selectType + "分类", Toast.LENGTH_LONG).show();
+            ToastUtil.showToast("当前已经是" + selectType + "分类");
             return false;
         } else {
             return true;
-        }
-    }
-
-    private void setTypeName(TextView txName) {
-        String gankCala = SPUtils.getString("gank_cala", "全部");
-        txName.setText(gankCala);
-        switch (gankCala) {
-            case "全部":
-                txName.setText("全部");
-                break;
-            case "IOS":
-                txName.setText("IOS");
-                break;
-            case "前端":
-                txName.setText("前端");
-                break;
-            case "休息视频":
-                txName.setText("休息视频");
-                break;
-            case "拓展资源":
-                txName.setText("拓展资源");
-                break;
-
         }
     }
 
