@@ -17,6 +17,8 @@ import android.widget.FrameLayout;
 import android.widget.ProgressBar;
 
 import com.example.jingbin.cloudreader.R;
+import com.example.jingbin.cloudreader.utils.CommonUtils;
+import com.example.jingbin.cloudreader.view.statusbar.StatusBarUtil;
 import com.example.jingbin.cloudreader.view.webview.config.FullscreenHolder;
 import com.example.jingbin.cloudreader.view.webview.config.IWebPageView;
 import com.example.jingbin.cloudreader.view.webview.config.ImageClickInterface;
@@ -60,6 +62,7 @@ public class WebViewActivity extends AppCompatActivity implements IWebPageView {
     }
 
     private void initTitle() {
+        StatusBarUtil.setColor(this, CommonUtils.getColor(R.color.colorTheme),0);
         mProgressBar = (ProgressBar) findViewById(R.id.pb_progress);
         webView = (WebView) findViewById(R.id.webview_detail);
         videoFullView = (FrameLayout) findViewById(R.id.video_fullView);

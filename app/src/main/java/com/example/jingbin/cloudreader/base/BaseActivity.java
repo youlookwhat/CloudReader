@@ -16,7 +16,9 @@ import android.widget.RelativeLayout;
 
 import com.example.jingbin.cloudreader.R;
 import com.example.jingbin.cloudreader.databinding.ActivityBaseBinding;
+import com.example.jingbin.cloudreader.utils.CommonUtils;
 import com.example.jingbin.cloudreader.utils.PerfectClickListener;
+import com.example.jingbin.cloudreader.view.statusbar.StatusBarUtil;
 
 import rx.Subscription;
 import rx.subscriptions.CompositeSubscription;
@@ -56,6 +58,8 @@ public class BaseActivity<SV extends ViewDataBinding> extends AppCompatActivity 
         mContainer.addView(bindingView.getRoot());
         getWindow().setContentView(mBaseBinding.getRoot());
 
+        // 设置透明状态栏
+        StatusBarUtil.setColor(this, CommonUtils.getColor(R.color.colorTheme),0);
         llProgressBar = getView(R.id.ll_progress_bar);
         refresh = getView(R.id.ll_error_refresh);
         ImageView img = getView(R.id.img_progress);
