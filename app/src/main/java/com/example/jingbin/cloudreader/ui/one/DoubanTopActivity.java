@@ -22,7 +22,7 @@ import rx.schedulers.Schedulers;
 /**
  * Created by jingbin on 16/12/10.
  */
-public class DouBanTopActivity extends BaseActivity<ActivityDoubanTopBinding> {
+public class DoubanTopActivity extends BaseActivity<ActivityDoubanTopBinding> {
 
     private DouBanTopAdapter mDouBanTopAdapter;
     private int mStart = 0;
@@ -71,7 +71,7 @@ public class DouBanTopActivity extends BaseActivity<ActivityDoubanTopBinding> {
                         if (mStart == 0) {
                             if (hotMovieBean != null && hotMovieBean.getSubjects() != null && hotMovieBean.getSubjects().size() > 0) {
 
-                                mDouBanTopAdapter = new DouBanTopAdapter(DouBanTopActivity.this);
+                                mDouBanTopAdapter = new DouBanTopAdapter(DoubanTopActivity.this);
                                 mDouBanTopAdapter.addAll(hotMovieBean.getSubjects());
                                 //构造器中，第一个参数表示列数或者行数，第二个参数表示滑动方向,瀑布流
                                 bindingView.xrvTop.setLayoutManager(new StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL));
@@ -103,7 +103,7 @@ public class DouBanTopActivity extends BaseActivity<ActivityDoubanTopBinding> {
     }
 
     public static void start(Context mContext) {
-        Intent intent = new Intent(mContext, DouBanTopActivity.class);
+        Intent intent = new Intent(mContext, DoubanTopActivity.class);
         mContext.startActivity(intent);
     }
 }

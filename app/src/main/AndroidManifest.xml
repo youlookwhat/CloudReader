@@ -72,7 +72,7 @@
             android:name=".view.webview.WebViewActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.one.DouBanTopActivity"
+            android:name=".ui.one.DoubanTopActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".ui.one.OneMovieDetailActivity"

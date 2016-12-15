@@ -176,7 +176,7 @@ public class OneFragment extends BaseFragment<FragmentOneBinding> {
             llMovieTop.setOnClickListener(new PerfectClickListener() {
                 @Override
                 protected void onNoDoubleClick(View v) {
-                    DouBanTopActivity.start(v.getContext());
+                    DoubanTopActivity.start(v.getContext());
                 }
             });
             bindingView.listOne.addHeaderView(mHeaderView);
