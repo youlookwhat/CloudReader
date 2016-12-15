@@ -75,15 +75,9 @@ public class OneFragment extends BaseFragment<FragmentOneBinding> {
         String oneData = SPUtils.getString("one_data", "2016-11-26");
         if (!oneData.equals(TimeUtil.getData()) && !mIsLoading) {
             mIsLoading = true;
-//            loadHotMovie();
             /**延迟执行防止卡顿*/
             showLoading();
-            bindingView.listOne.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    loadHotMovie();
-                }
-            }, 1000);
+            postDelayLoad();
             return;
         }
 
@@ -93,12 +87,7 @@ public class OneFragment extends BaseFragment<FragmentOneBinding> {
 
         showLoading();
         if (mHotMovieBean == null) {
-            bindingView.listOne.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    loadHotMovie();
-                }
-            }, 1000);
+            postDelayLoad();
         } else {
             bindingView.listOne.postDelayed(new Runnable() {
                 @Override
@@ -198,6 +187,19 @@ public class OneFragment extends BaseFragment<FragmentOneBinding> {
 
         isFirst = false;
     }
+
+    /**
+     * 延迟执行，避免卡顿
+     */
+    private void postDelayLoad() {
+        bindingView.listOne.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                loadHotMovie();
+            }
+        }, 1000);
+    }
+
 
     @Override
     protected void onRefresh() {
