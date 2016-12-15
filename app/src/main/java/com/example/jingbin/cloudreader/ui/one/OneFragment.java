@@ -31,6 +31,8 @@ public class OneFragment extends BaseFragment<FragmentOneBinding> {
     private boolean isPrepared = false;
     // 第一次显示时加载数据，第二次不显示
     private boolean isFirst = true;
+    // 是否正在刷新（用于刷新数据时返回页面不再刷新）
+    private boolean mIsLoading = false;
     private ACache aCache;
     private MainActivity activity;
     private HotMovieBean mHotMovieBean;
@@ -69,9 +71,10 @@ public class OneFragment extends BaseFragment<FragmentOneBinding> {
             return;
         }
 
-        // 显示，准备完毕，不是当天，则请求数据
+        // 显示，准备完毕，不是当天，则请求数据（正在请求时避免再次请求）
         String oneData = SPUtils.getString("one_data", "2016-11-26");
-        if (!oneData.equals(TimeUtil.getData())) {
+        if (!oneData.equals(TimeUtil.getData()) && !mIsLoading) {
+            mIsLoading = true;
             loadHotMovie();
             return;
         }
@@ -112,6 +115,8 @@ public class OneFragment extends BaseFragment<FragmentOneBinding> {
                             setAdapter(hotMovieBean);
                             // 保存请求的日期
                             SPUtils.putString("one_data", TimeUtil.getData());
+                            // 刷新结束
+                            mIsLoading = false;
                         }
 
 

@@ -43,6 +43,8 @@ public class EverydayFragment extends BaseFragment<FragmentEverydayBinding> {
     private boolean mIsFirst = true;
     private HeaderItemEverydayBinding mHeaderBinding;
     private FooterItemEverydayBinding mFooterBinding;
+    // 是否正在刷新（避免重复刷新）
+    private boolean mIsLoading = false;
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
@@ -99,7 +101,8 @@ public class EverydayFragment extends BaseFragment<FragmentEverydayBinding> {
 
         // 显示，准备完毕，不是当天，则请求所有数据
         String oneData = SPUtils.getString("everyday_data", "2016-11-26");
-        if (!oneData.equals(TimeUtil.getData())) {
+        if (!oneData.equals(TimeUtil.getData()) && !mIsLoading) {
+            mIsLoading = true;
             showLoading();
             loadBannerPicture();
             showContentData();
@@ -173,6 +176,7 @@ public class EverydayFragment extends BaseFragment<FragmentEverydayBinding> {
         SPUtils.putString("everyday_data", TimeUtil.getData());
 
         mIsFirst = false;
+        mIsLoading = false;
 
     }
 

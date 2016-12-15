@@ -26,7 +26,7 @@ public class DouBanTopActivity extends BaseActivity<ActivityDoubanTopBinding> {
 
     private DouBanTopAdapter mDouBanTopAdapter;
     private int mStart = 0;
-    private int mCount = 18;
+    private int mCount = 21;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
