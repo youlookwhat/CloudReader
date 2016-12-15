@@ -162,6 +162,7 @@ public class CustomFragment extends BaseFragment<FragmentCustomBinding> {
                                 if (isOtherType("全部")) {
                                     txName.setText("全部");
                                     mType = "all";// 全部传 all
+                                    mPage = 1;
                                     SPUtils.putString("gank_cala", "全部");
                                     showLoading();
                                     loadCustomData();
@@ -171,6 +172,7 @@ public class CustomFragment extends BaseFragment<FragmentCustomBinding> {
                                 if (isOtherType("IOS")) {
                                     txName.setText("IOS");
                                     mType = "iOS";// 这里有严格大小写
+                                    mPage = 1;
                                     SPUtils.putString("gank_cala", "IOS");
                                     showLoading();
                                     loadCustomData();
@@ -202,6 +204,7 @@ public class CustomFragment extends BaseFragment<FragmentCustomBinding> {
     private void changeContent(TextView textView, String content) {
         textView.setText(content);
         mType = content;
+        mPage = 1;
         SPUtils.putString("gank_cala", content);
         showLoading();
         loadCustomData();

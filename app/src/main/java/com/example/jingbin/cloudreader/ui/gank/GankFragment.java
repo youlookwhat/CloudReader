@@ -79,11 +79,11 @@ public class GankFragment extends BaseFragment<FragmentGankBinding> {
                     @Override
                     public void call(Integer integer) {
                         if (integer == 0) {
-                            bindingView.vpGank.setCurrentItem(2);
+                            bindingView.vpGank.setCurrentItem(3);
                         } else if (integer == 1) {
                             bindingView.vpGank.setCurrentItem(1);
                         } else if (integer == 2) {
-                            bindingView.vpGank.setCurrentItem(3);
+                            bindingView.vpGank.setCurrentItem(2);
                         }
                     }
                 });
