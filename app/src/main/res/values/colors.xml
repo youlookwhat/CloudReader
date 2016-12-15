@@ -15,6 +15,8 @@
     <color name="colorHomeLine">#D4D4D4</color>
 
     <color name="colorLineDeep">#BBBBBB</color>
+
+    <color name="colorLineMovieDetail">#FFDDDDDD</color>
     <!--tab标签栏文字的颜色-->
     <color name="colorTabText">#585858</color>
     <!--正文文字颜色-->
@@ -33,6 +35,15 @@
     <color name="colorTitle">#666</color>
     <!--谈红色  用于首页调整点击变色-->
     <color name="colorSmallRed">#faebeb</color>
+
+    <!--电影评分-->
+    <color name="colorRateRed">#FB5B81</color>
+
+    <!--没有水波纹效果的颜色选择器-->
+    <color name="colorItemBackground">#d9d9d9</color>
+
+    <!--选择分类按下颜色-->
+    <color name="colorChoosePress">#DDD</color>
 
 
 </resources>

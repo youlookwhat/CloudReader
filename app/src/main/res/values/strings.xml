@@ -10,5 +10,6 @@
     <string name="hello_blank_fragment">Hello blank mFragment</string>
     <string name="title_activity_base">BaseActivity</string>
     <string name="actionbar_search">搜索</string>
+    <string name="actionbar_more">更多信息</string>
 
 </resources>

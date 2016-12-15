@@ -4,7 +4,7 @@
 
         <variable
             name="gankBean"
-            type="com.example.jingbin.yunyue.bean.GankIoDataBean" />
+            type="com.example.jingbin.cloudreader.bean.GankIoDataBean" />
     </data>
 
     <!--<android.support.v4.widget.NestedScrollView xmlns:app="http://schemas.android.com/apk/res-auto"-->

@@ -3,7 +3,7 @@
     <FrameLayout xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context="com.example.jingbin.yunyue.ui.gank.child.WelfareFragment">
+        tools:context="com.example.jingbin.cloudreader.ui.gank.child.WelfareFragment">
 
         <com.example.xrecyclerview.XRecyclerView
             android:id="@+id/xrv_welfare"

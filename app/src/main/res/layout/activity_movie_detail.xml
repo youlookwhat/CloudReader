@@ -1,0 +1,184 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <!--调用静态方法-->
+        <import type="com.example.jingbin.cloudreader.utils.StringFormatUtil" />
+        <!--引用bean-->
+        <variable
+            name="subjectsBean"
+            type="com.example.jingbin.cloudreader.bean.moviechild.SubjectsBean" />
+
+        <!--引用bean-->
+        <variable
+            name="movieDetailBean"
+            type="com.example.jingbin.cloudreader.bean.MovieDetailBean" />
+
+    </data>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.example.jingbin.cloudreader.view.MyNestedScrollView
+            android:id="@+id/nsv_scrollview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorPageBg"
+            android:scrollbars="none">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/ll_Header_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <include
+                        android:id="@+id/include"
+                        layout="@layout/header_slide_shape" />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:paddingTop="10dp">
+
+                        <View
+                            android:layout_width="2dp"
+                            android:layout_height="18dp"
+                            android:background="@color/colorTheme" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:text="另称"
+                            android:textColor="@color/colorContent"
+                            android:textSize="17sp" />
+
+                    </LinearLayout>
+
+                    <!--又名-->
+                    <TextView
+                        android:id="@+id/tv_one_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="12dp"
+                        android:text='@{StringFormatUtil.formatGenres(movieDetailBean.aka)}'
+                        android:textColor="@color/colorTitle" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:paddingBottom="5dp"
+                        android:paddingTop="5dp">
+
+                        <View
+                            android:layout_width="2dp"
+                            android:layout_height="18dp"
+                            android:background="@color/colorTheme" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:text="剧情简介"
+                            android:textColor="@color/colorContent"
+                            android:textSize="17sp" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:lineSpacingExtra="7dp"
+                        android:padding="12dp"
+                        android:text="@{movieDetailBean.summary}"
+                        android:textColor="@color/colorTitle"
+                        android:textSize="16sp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:paddingBottom="5dp"
+                        android:paddingTop="10dp">
+
+                        <View
+                            android:layout_width="2dp"
+                            android:layout_height="18dp"
+                            android:background="@color/colorTheme" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:text="导演 &amp; 演员"
+                            android:textColor="@color/colorContent"
+                            android:textSize="17sp" />
+
+                    </LinearLayout>
+
+                    <!--导演&演员-->
+                    <com.example.xrecyclerview.XRecyclerView
+                        android:id="@+id/xrv_cast"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </com.example.jingbin.cloudreader.view.MyNestedScrollView>
+
+
+        <RelativeLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/rl_title_head"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent">
+
+            <ImageView
+                android:id="@+id/iv_title_head_bg"
+                android:layout_width="match_parent"
+                android:layout_height="310dp"
+                android:scaleType="fitXY" />
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/title_tool_bar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="@color/colorTransparent"
+                app:contentInsetStart="0.0dp"
+                app:layout_collapseMode="pin"
+                app:layout_scrollFlags="enterAlways|scroll"
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+                app:theme="@style/ToolbarStyle">
+
+            </android.support.v7.widget.Toolbar>
+
+        </RelativeLayout>
+
+    </FrameLayout>
+
+</layout>

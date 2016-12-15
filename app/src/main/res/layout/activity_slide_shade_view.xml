@@ -3,11 +3,11 @@
     <data>
 
         <!--调用静态方法-->
-        <import type="com.example.jingbin.yunyue.utils.StringFormatUtil" />
+        <import type="com.example.jingbin.cloudreader.utils.StringFormatUtil" />
         <!--引用bean-->
         <variable
             name="subjectsBean"
-            type="com.example.jingbin.yunyue.bean.moviechild.SubjectsBean" />
+            type="com.example.jingbin.cloudreader.bean.moviechild.SubjectsBean" />
 
     </data>
 
@@ -17,7 +17,7 @@
         android:layout_height="match_parent">
 
         <!--<android.support.v4.widget.NestedScrollView-->
-        <com.example.jingbin.yunyue.view.MyNestedScrollView
+        <com.example.jingbin.cloudreader.view.MyNestedScrollView
             android:id="@+id/nsv_scrollview"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -78,7 +78,7 @@
             </LinearLayout>
 
 
-        </com.example.jingbin.yunyue.view.MyNestedScrollView>
+        </com.example.jingbin.cloudreader.view.MyNestedScrollView>
 
 
         <RelativeLayout xmlns:app="http://schemas.android.com/apk/res-auto"

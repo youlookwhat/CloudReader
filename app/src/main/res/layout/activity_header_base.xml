@@ -1,100 +1,91 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/rl_root"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
-    android:background="@color/colorPageBg">
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <ScrollView
+    <FrameLayout
+        android:id="@+id/rl_root"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:fillViewport="true">
+        android:layout_height="match_parent">
 
-        <LinearLayout
+        <com.example.jingbin.cloudreader.view.MyNestedScrollView
+            android:id="@+id/mns_base"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_height="match_parent"
+            android:background="@color/colorPageBg">
 
-            <!--内容布局头-->
-            <RelativeLayout
-                android:id="@+id/header_container"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
-            <!--内容-->
-            <RelativeLayout
-                android:id="@+id/container"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1">
-
-                <!--webview的进度条  等会移出去-->
-                <ProgressBar
-                    android:id="@+id/pb_webview"
-                    style="?android:attr/progressBarStyleHorizontal"
+                <!--内容布局头-->
+                <RelativeLayout
+                    android:id="@+id/header_container"
                     android:layout_width="match_parent"
-                    android:layout_height="3dp"
-                    android:layout_alignParentTop="true"
-                    android:max="1000"
-                    android:progress="0"
-                    android:progressDrawable="@drawable/process_bg_webview"
-                    android:visibility="gone" />
+                    android:layout_height="wrap_content" />
 
-                <LinearLayout
-                    android:id="@+id/ll_error_refresh"
+                <!--内容-->
+                <RelativeLayout
+                    android:id="@+id/container"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:orientation="vertical"
-                    android:visibility="visible">
+                    android:layout_height="0dp"
+                    android:layout_weight="1">
 
-                    <ImageView
-                        android:id="@+id/img_err"
+                    <LinearLayout
+                        android:id="@+id/ll_error_refresh"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:layout_marginTop="140dp"
+                        android:orientation="vertical"
+                        android:visibility="gone">
+
+                        <ImageView
+                            android:id="@+id/img_err"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/load_err" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="15dp"
+                            android:text="加载失败,点击重试"
+                            android:textSize="15sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll_progress_bar"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/load_err" />
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="50dp"
+                        android:gravity="center_vertical">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="15dp"
-                        android:text="加载失败,点击重试"
-                        android:textSize="16sp" />
-                </LinearLayout>
+                        <ImageView
+                            android:id="@+id/img_progress"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/kaws_anim" />
 
-                <LinearLayout
-                    android:id="@+id/ll_progress_bar"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="50dp"
-                    android:gravity="center_vertical">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:text="努力加载中..."
+                            android:textColor="@color/colorTabText"
+                            android:textSize="14sp" />
 
-                    <ProgressBar
-                        android:id="@+id/progress_bar"
-                        style="@style/common_mProgress_circle"
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:visibility="visible" />
+                    </LinearLayout>
+                </RelativeLayout>
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:text="努力加载中..."
-                        android:textColor="@color/colorContent"
-                        android:textSize="14sp" />
+            </LinearLayout>
+        </com.example.jingbin.cloudreader.view.MyNestedScrollView>
 
-                </LinearLayout>
-            </RelativeLayout>
+        <!--标题-->
+        <RelativeLayout
+            android:id="@+id/title_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
-        </LinearLayout>
-    </ScrollView>
-
-    <!--标题-->
-    <RelativeLayout
-        android:id="@+id/title_container"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize" />
-</FrameLayout>
+    </FrameLayout>
+</layout>

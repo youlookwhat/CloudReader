@@ -8,7 +8,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <com.example.jingbin.yunyue.view.DiscoverScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            <com.example.jingbin.cloudreader.view.DiscoverScrollView xmlns:android="http://schemas.android.com/apk/res/android"
                 android:id="@+id/discoverScrollView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -45,7 +45,7 @@
                 </LinearLayout>
 
 
-            </com.example.jingbin.yunyue.view.DiscoverScrollView>
+            </com.example.jingbin.cloudreader.view.DiscoverScrollView>
         </RelativeLayout>
 
         <RelativeLayout
