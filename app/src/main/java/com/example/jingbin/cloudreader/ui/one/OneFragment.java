@@ -75,7 +75,15 @@ public class OneFragment extends BaseFragment<FragmentOneBinding> {
         String oneData = SPUtils.getString("one_data", "2016-11-26");
         if (!oneData.equals(TimeUtil.getData()) && !mIsLoading) {
             mIsLoading = true;
-            loadHotMovie();
+//            loadHotMovie();
+            /**延迟执行防止卡顿*/
+            showLoading();
+            bindingView.listOne.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    loadHotMovie();
+                }
+            }, 1000);
             return;
         }
 
@@ -83,11 +91,22 @@ public class OneFragment extends BaseFragment<FragmentOneBinding> {
             return;
         }
 
+        showLoading();
         if (mHotMovieBean == null) {
-            loadHotMovie();
+            bindingView.listOne.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    loadHotMovie();
+                }
+            }, 1000);
         } else {
-            showContentView();
-            setAdapter(mHotMovieBean);
+            bindingView.listOne.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    setAdapter(mHotMovieBean);
+                    showContentView();
+                }
+            }, 1000);
             DebugUtil.error("----缓存: " + oneData);
         }
     }
