@@ -1,10 +1,15 @@
 package com.example.jingbin.cloudreader.ui.book.child;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.view.View;
 
+import com.example.jingbin.cloudreader.MainActivity;
 import com.example.jingbin.cloudreader.R;
+import com.example.jingbin.cloudreader.adapter.BookAdapter;
 import com.example.jingbin.cloudreader.base.BaseFragment;
 import com.example.jingbin.cloudreader.bean.book.BookBean;
 import com.example.jingbin.cloudreader.databinding.FragmentBookCustomBinding;
@@ -23,10 +28,22 @@ public class BookCustomFragment extends BaseFragment<FragmentBookCustomBinding> 
     private String mType = "综合";
     private boolean mIsPrepared;
     private boolean mIsFirst = true;
+    // 开始请求的角标
+    private int mStart = 0;
+    // 一次请求的数量
+    private int mCount = 9;
+    private MainActivity activity;
+    private BookAdapter mBookAdapter;
 
     @Override
     public int setContent() {
         return R.layout.fragment_book_custom;
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        activity = (MainActivity) context;
     }
 
     public static BookCustomFragment newInstance(String param1) {
@@ -67,16 +84,23 @@ public class BookCustomFragment extends BaseFragment<FragmentBookCustomBinding> 
 //                        }
 //                    }
 //                }, 2000);
+                mStart = 0;
                 loadCustomData();
             }
         });
 
         // 准备就绪
         mIsPrepared = true;
+        /**
+         * 因为启动时先走loadData()再走onActivityCreated，
+         * 所以此处要额外调用load(),不然最初不会加载内容
+         */
+        loadData();
     }
 
     @Override
     protected void loadData() {
+        DebugUtil.error("-----loadData");
         if (!mIsPrepared || !mIsVisible || !mIsFirst) {
             return;
         }
@@ -98,7 +122,7 @@ public class BookCustomFragment extends BaseFragment<FragmentBookCustomBinding> 
 
     private void loadCustomData() {
 
-        Subscription get = HttpUtils.getInstance().getDouBanServer().getBook("韩寒", 0, 9)
+        Subscription get = HttpUtils.getInstance().getDouBanServer().getBook("韩寒", mStart, mCount)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<BookBean>() {
@@ -112,36 +136,37 @@ public class BookCustomFragment extends BaseFragment<FragmentBookCustomBinding> 
                         swipeRefreshFinish();
                         bindingView.xrvBook.refreshComplete();
                         showError();
-//                        if (mStart == 0) {
-//                            showError();
-//                        }
+                        if (mStart == 0) {
+                            showError();
+                        }
                     }
 
                     @Override
                     public void onNext(BookBean bookBean) {
-//                        if (mStart == 0) {
-//                            if (hotMovieBean != null && hotMovieBean.getSubjects() != null && hotMovieBean.getSubjects().size() > 0) {
-//
-//                                mDouBanTopAdapter = new DouBanTopAdapter(DouBanTopActivity.this);
-//                                mDouBanTopAdapter.addAll(hotMovieBean.getSubjects());
-//                                //构造器中，第一个参数表示列数或者行数，第二个参数表示滑动方向,瀑布流
-//                                bindingView.xrvTop.setLayoutManager(new StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL));
-//                                bindingView.xrvTop.setAdapter(mDouBanTopAdapter);
-//                                bindingView.xrvTop.setPullRefreshEnabled(false);
-//                                bindingView.xrvTop.setLoadingMoreEnabled(true);
-//                                mDouBanTopAdapter.notifyDataSetChanged();
-//                            } else {
-//                                bindingView.xrvTop.setVisibility(View.GONE);
-//                            }
-//                        } else {
-//                            if (hotMovieBean != null && hotMovieBean.getSubjects() != null && hotMovieBean.getSubjects().size() > 0) {
-//                                bindingView.xrvTop.refreshComplete();
-//                                mDouBanTopAdapter.addAll(hotMovieBean.getSubjects());
-//                                mDouBanTopAdapter.notifyDataSetChanged();
-//                            } else {
-//                                bindingView.xrvTop.noMoreLoading();
-//                            }
-//                        }
+                        if (mStart == 0) {
+                            if (bookBean != null && bookBean.getBooks() != null && bookBean.getBooks().size() > 0) {
+
+                                mBookAdapter = new BookAdapter(activity);
+                                mBookAdapter.addAll(bookBean.getBooks());
+                                //构造器中，第一个参数表示列数或者行数，第二个参数表示滑动方向,瀑布流
+                                bindingView.xrvBook.setLayoutManager(new StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL));
+                                bindingView.xrvBook.setAdapter(mBookAdapter);
+                                bindingView.xrvBook.setPullRefreshEnabled(false);
+                                bindingView.xrvBook.setLoadingMoreEnabled(true);
+                                mBookAdapter.notifyDataSetChanged();
+                            } else {
+                                bindingView.xrvBook.setVisibility(View.GONE);
+                            }
+                            mIsFirst = false;
+                        } else {
+                            if (bookBean != null && bookBean.getBooks() != null && bookBean.getBooks().size() > 0) {
+                                bindingView.xrvBook.refreshComplete();
+                                mBookAdapter.addAll(bookBean.getBooks());
+                                mBookAdapter.notifyDataSetChanged();
+                            } else {
+                                bindingView.xrvBook.noMoreLoading();
+                            }
+                        }
 
                     }
                 });
