@@ -74,18 +74,15 @@ public class BookCustomFragment extends BaseFragment<FragmentBookCustomBinding> 
 //                listTag= Arrays.asList(BookApiUtils.getApiTag(position));
 //                String tag=BookApiUtils.getRandomTAG(listTag);
 //                doubanBookPresenter.searchBookByTag(BookReadingFragment.this,tag,false);
-//                bindingView.srlBook.postDelayed(new Runnable() {
-//
-//                    @Override
-//                    public void run() {
-//                        if (bindingView.srlBook != null) {
-//                            bindingView.srlBook.setRefreshing(false);
-//                            DebugUtil.error("-----run");
-//                        }
-//                    }
-//                }, 2000);
-                mStart = 0;
-                loadCustomData();
+                bindingView.srlBook.postDelayed(new Runnable() {
+
+                    @Override
+                    public void run() {
+                        mStart = 0;
+                        loadCustomData();
+                    }
+                }, 1000);
+
             }
         });
 
@@ -106,7 +103,13 @@ public class BookCustomFragment extends BaseFragment<FragmentBookCustomBinding> 
         }
 
         bindingView.srlBook.setRefreshing(true);
-        loadCustomData();
+        bindingView.srlBook.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                loadCustomData();
+            }
+        }, 1000);
+//        loadCustomData();
         DebugUtil.error("-----setRefreshing");
 //        mIsFirst = false;
 
@@ -128,12 +131,16 @@ public class BookCustomFragment extends BaseFragment<FragmentBookCustomBinding> 
                 .subscribe(new Observer<BookBean>() {
                     @Override
                     public void onCompleted() {
-                        swipeRefreshFinish();
+                        if (bindingView.srlBook.isRefreshing()) {
+                            bindingView.srlBook.setRefreshing(false);
+                        }
                     }
 
                     @Override
                     public void onError(Throwable e) {
-                        swipeRefreshFinish();
+                        if (bindingView.srlBook.isRefreshing()) {
+                            bindingView.srlBook.setRefreshing(false);
+                        }
                         bindingView.xrvBook.refreshComplete();
                         showError();
                         if (mStart == 0) {
@@ -171,20 +178,6 @@ public class BookCustomFragment extends BaseFragment<FragmentBookCustomBinding> 
                     }
                 });
         addSubscription(get);
-    }
-
-    private void swipeRefreshFinish() {
-        bindingView.srlBook.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                if (bindingView.srlBook != null) {
-                    if (bindingView.srlBook.isRefreshing()) {
-                        bindingView.srlBook.setRefreshing(false);
-                    }
-                    DebugUtil.error("-----run");
-                }
-            }
-        }, 1500);
     }
 
     @Override

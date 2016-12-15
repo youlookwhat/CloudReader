@@ -62,6 +62,7 @@ public class OneFragment extends BaseFragment<FragmentOneBinding> {
 
     /**
      * 懒加载
+     * 从此页面新开activity界面返回此页面 不会走这里
      */
     @Override
     protected void loadData() {
@@ -210,5 +211,14 @@ public class OneFragment extends BaseFragment<FragmentOneBinding> {
     public void onDestroy() {
         super.onDestroy();
         DebugUtil.error("--OneFragment   ----onDestroy");
+    }
+
+    /**
+     * 从此页面新开activity界面返回此页面 走这里
+     */
+    @Override
+    public void onResume() {
+        super.onResume();
+        DebugUtil.error("--OneFragment   ----onResume");
     }
 }
