@@ -5,8 +5,8 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.StaggeredGridLayoutManager;
 
 import com.example.jingbin.cloudreader.MainActivity;
 import com.example.jingbin.cloudreader.R;
@@ -35,7 +35,7 @@ public class BookCustomFragment extends BaseFragment<FragmentBookCustomBinding> 
     private int mCount = 9;
     private MainActivity activity;
     private BookAdapter mBookAdapter;
-    private StaggeredGridLayoutManager mLayoutManager;
+    private GridLayoutManager mLayoutManager;
 
     @Override
     public int setContent() {
@@ -89,9 +89,10 @@ public class BookCustomFragment extends BaseFragment<FragmentBookCustomBinding> 
         });
 
         mBookAdapter = new BookAdapter(getActivity());
-        mLayoutManager = new StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL);
 
-//        mLayoutManager = new GridLayoutManager(getActivity(), 3);
+//        mLayoutManager = new StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL);
+
+        mLayoutManager = new GridLayoutManager(getActivity(), 3);
         bindingView.xrvBook.setLayoutManager(mLayoutManager);
         bindingView.xrvBook.setAdapter(mBookAdapter);
 
@@ -203,10 +204,11 @@ public class BookCustomFragment extends BaseFragment<FragmentBookCustomBinding> 
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
                 if (newState == RecyclerView.SCROLL_STATE_IDLE) {
-//                    lastVisibleItem = mLayoutManager.findLastVisibleItemPosition();
+                    lastVisibleItem = mLayoutManager.findLastVisibleItemPosition();
 
-                    int[] into = new int[(mLayoutManager).getSpanCount()];
-                    lastVisibleItem = findMax(mLayoutManager.findLastVisibleItemPositions(into));
+                    /**StaggeredGridLayoutManager*/
+//                    int[] into = new int[(mLayoutManager).getSpanCount()];
+//                    lastVisibleItem = findMax(mLayoutManager.findLastVisibleItemPositions(into));
 
                     if (mLayoutManager.getItemCount() == 1) {
                         if (mBookAdapter != null) {
@@ -239,10 +241,11 @@ public class BookCustomFragment extends BaseFragment<FragmentBookCustomBinding> 
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
-//                lastVisibleItem = mLayoutManager.findLastVisibleItemPosition();
+                lastVisibleItem = mLayoutManager.findLastVisibleItemPosition();
 
-                int[] into = new int[(mLayoutManager).getSpanCount()];
-                lastVisibleItem = findMax(mLayoutManager.findLastVisibleItemPositions(into));
+                 /**StaggeredGridLayoutManager*/
+//                int[] into = new int[(mLayoutManager).getSpanCount()];
+//                lastVisibleItem = findMax(mLayoutManager.findLastVisibleItemPositions(into));
             }
         });
     }
