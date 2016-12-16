@@ -132,6 +132,9 @@ public class EverydayFragment extends BaseFragment<FragmentEverydayBinding> {
         mEverydayModel.showRecyclerViewData(new EverydayModel.HomeImpl() {
             @Override
             public void loadSuccess(Object object) {
+                if (mLists != null) {
+                    mLists.clear();
+                }
                 mLists = (ArrayList<List<AndroidBean>>) object;
                 setAdapter(mLists);
             }
@@ -156,9 +159,9 @@ public class EverydayFragment extends BaseFragment<FragmentEverydayBinding> {
         bindingView.xrvEveryday.addHeaderView(mHeaderBinding.getRoot());
         if (mFooterBinding == null) {
             mFooterBinding = DataBindingUtil.inflate(LayoutInflater.from(getContext()), R.layout.footer_item_everyday, null, false);
-            bindingView.xrvEveryday.addFootView(mFooterBinding.getRoot(), true);
-            bindingView.xrvEveryday.noMoreLoading();
         }
+        bindingView.xrvEveryday.addFootView(mFooterBinding.getRoot(), true);
+        bindingView.xrvEveryday.noMoreLoading();
 
         final EverydayAdapter everydayAdapter = new EverydayAdapter();
         everydayAdapter.addAll(lists);
@@ -215,7 +218,11 @@ public class EverydayFragment extends BaseFragment<FragmentEverydayBinding> {
             @Override
             public void loadSuccess(Object object) {
                 showContentView();
-                mBannerImages = new ArrayList<String>();
+                if (mBannerImages == null) {
+                    mBannerImages = new ArrayList<String>();
+                } else {
+                    mBannerImages.clear();
+                }
                 FrontpageBean frontpageBean = (FrontpageBean) object;
                 List<FrontpageBean.DataBeanX.DataBean> data = null;
                 if (frontpageBean != null
