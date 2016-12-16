@@ -2,10 +2,11 @@ package com.example.jingbin.cloudreader.ui.book.child;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
-import android.view.View;
 
 import com.example.jingbin.cloudreader.MainActivity;
 import com.example.jingbin.cloudreader.R;
@@ -34,6 +35,7 @@ public class BookCustomFragment extends BaseFragment<FragmentBookCustomBinding> 
     private int mCount = 9;
     private MainActivity activity;
     private BookAdapter mBookAdapter;
+    private StaggeredGridLayoutManager mLayoutManager;
 
     @Override
     public int setContent() {
@@ -85,6 +87,15 @@ public class BookCustomFragment extends BaseFragment<FragmentBookCustomBinding> 
 
             }
         });
+
+        mBookAdapter = new BookAdapter(getActivity());
+        mLayoutManager = new StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL);
+
+//        mLayoutManager = new GridLayoutManager(getActivity(), 3);
+        bindingView.xrvBook.setLayoutManager(mLayoutManager);
+        bindingView.xrvBook.setAdapter(mBookAdapter);
+
+        scrollRecycleView();
 
         // 准备就绪
         mIsPrepared = true;
@@ -141,7 +152,6 @@ public class BookCustomFragment extends BaseFragment<FragmentBookCustomBinding> 
                         if (bindingView.srlBook.isRefreshing()) {
                             bindingView.srlBook.setRefreshing(false);
                         }
-                        bindingView.xrvBook.refreshComplete();
                         showError();
                         if (mStart == 0) {
                             showError();
@@ -153,32 +163,100 @@ public class BookCustomFragment extends BaseFragment<FragmentBookCustomBinding> 
                         if (mStart == 0) {
                             if (bookBean != null && bookBean.getBooks() != null && bookBean.getBooks().size() > 0) {
 
-                                mBookAdapter = new BookAdapter(activity);
-                                mBookAdapter.addAll(bookBean.getBooks());
-                                //构造器中，第一个参数表示列数或者行数，第二个参数表示滑动方向,瀑布流
-                                bindingView.xrvBook.setLayoutManager(new StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL));
-                                bindingView.xrvBook.setAdapter(mBookAdapter);
-                                bindingView.xrvBook.setPullRefreshEnabled(false);
-                                bindingView.xrvBook.setLoadingMoreEnabled(true);
+                                mBookAdapter.setList(bookBean.getBooks());
                                 mBookAdapter.notifyDataSetChanged();
-                            } else {
-                                bindingView.xrvBook.setVisibility(View.GONE);
+//                                mBookAdapter = new BookAdapter(activity);
+//                                mBookAdapter.addAll(bookBean.getBooks());
+//                                //构造器中，第一个参数表示列数或者行数，第二个参数表示滑动方向,瀑布流
+//                                bindingView.xrvBook.setLayoutManager(new StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL));
+//                                bindingView.xrvBook.setAdapter(mBookAdapter);
+//                                bindingView.xrvBook.setPullRefreshEnabled(false);
+//                                bindingView.xrvBook.setLoadingMoreEnabled(true);
+//                                mBookAdapter.notifyDataSetChanged();
+//                            } else {
+//                                bindingView.xrvBook.setVisibility(View.GONE);
                             }
                             mIsFirst = false;
                         } else {
-                            if (bookBean != null && bookBean.getBooks() != null && bookBean.getBooks().size() > 0) {
-                                bindingView.xrvBook.refreshComplete();
-                                mBookAdapter.addAll(bookBean.getBooks());
-                                mBookAdapter.notifyDataSetChanged();
-                            } else {
-                                bindingView.xrvBook.noMoreLoading();
-                            }
+                            mBookAdapter.addAll(bookBean.getBooks());
+                            mBookAdapter.notifyDataSetChanged();
+//                            if (bookBean != null && bookBean.getBooks() != null && bookBean.getBooks().size() > 0) {
+//                                bindingView.xrvBook.refreshComplete();
+//                                mBookAdapter.addAll(bookBean.getBooks());
+//                                mBookAdapter.notifyDataSetChanged();
+//                            } else {
+//                                bindingView.xrvBook.noMoreLoading();
+//                            }
                         }
 
                     }
                 });
         addSubscription(get);
     }
+
+
+    public void scrollRecycleView() {
+        bindingView.xrvBook.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            int lastVisibleItem;
+
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+                if (newState == RecyclerView.SCROLL_STATE_IDLE) {
+//                    lastVisibleItem = mLayoutManager.findLastVisibleItemPosition();
+
+                    int[] into = new int[(mLayoutManager).getSpanCount()];
+                    lastVisibleItem = findMax(mLayoutManager.findLastVisibleItemPositions(into));
+
+                    if (mLayoutManager.getItemCount() == 1) {
+                        if (mBookAdapter != null) {
+                            mBookAdapter.updateLoadStatus(BookAdapter.LOAD_NONE);
+                        }
+                        return;
+
+                    }
+                    if (lastVisibleItem + 1 == mLayoutManager.getItemCount()) {
+                        if (mBookAdapter != null) {
+                            mBookAdapter.updateLoadStatus(BookAdapter.LOAD_PULL_TO);
+                            // isLoadMore = true;
+                            mBookAdapter.updateLoadStatus(BookAdapter.LOAD_MORE);
+                        }
+                        //new Handler().postDelayed(() -> getBeforeNews(time), 1000);
+                        new Handler().postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+//                                String tag= BookApiUtils.getRandomTAG(listTag);
+
+//                                doubanBookPresenter.searchBookByTag(BookReadingFragment.this,tag,true);
+                                mStart += mCount;
+                                loadCustomData();
+                            }
+                        }, 1000);
+                    }
+                }
+            }
+
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+//                lastVisibleItem = mLayoutManager.findLastVisibleItemPosition();
+
+                int[] into = new int[(mLayoutManager).getSpanCount()];
+                lastVisibleItem = findMax(mLayoutManager.findLastVisibleItemPositions(into));
+            }
+        });
+    }
+
+    private int findMax(int[] lastPositions) {
+        int max = lastPositions[0];
+        for (int value : lastPositions) {
+            if (value > max) {
+                max = value;
+            }
+        }
+        return max;
+    }
+
 
     @Override
     protected void onRefresh() {
