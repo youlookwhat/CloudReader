@@ -100,7 +100,7 @@ public class CustomFragment extends BaseFragment<FragmentCustomBinding> {
                     @Override
                     public void onError(Throwable e) {
                         bindingView.xrvCustom.refreshComplete();
-                        if (mPage == 1) {
+                        if (mAndroidAdapter.getItemCount() == 1) {
                             showError();
                         }
                     }

@@ -61,7 +61,7 @@ public class DoubanTopActivity extends BaseActivity<ActivityDoubanTopBinding> {
                     @Override
                     public void onError(Throwable e) {
                         bindingView.xrvTop.refreshComplete();
-                        if (mStart == 0) {
+                        if (mDouBanTopAdapter.getItemCount() == 0) {
                             showError();
                         }
                     }

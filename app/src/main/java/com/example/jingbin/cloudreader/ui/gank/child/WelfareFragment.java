@@ -93,7 +93,7 @@ public class WelfareFragment extends BaseFragment<FragmentWelfareBinding> {
                     @Override
                     public void onError(Throwable e) {
                         bindingView.xrvWelfare.refreshComplete();
-                        if (mPage == 1) {
+                        if (mWelfareAdapter.getItemCount() == 1) {
                             showError();
                         }
                     }
