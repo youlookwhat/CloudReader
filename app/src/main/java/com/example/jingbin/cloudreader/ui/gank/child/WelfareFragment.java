@@ -45,6 +45,7 @@ public class WelfareFragment extends BaseFragment<FragmentWelfareBinding> {
         aCache = ACache.get(getContext());
         meiziBean = (GankIoDataBean) aCache.getAsObject(Constants.GANK_MEIZI);
         bindingView.xrvWelfare.setPullRefreshEnabled(false);
+        bindingView.xrvWelfare.clearHeader();
         bindingView.xrvWelfare.setLoadingListener(new XRecyclerView.LoadingListener() {
             @Override
             public void onRefresh() {

@@ -63,6 +63,7 @@ public class AndroidFragment extends BaseFragment<FragmentAndroidBinding> {
         mAndroidBean = (GankIoDataBean) mACache.getAsObject(Constants.GANK_ANDROID);
         DebugUtil.error("--AndroidFragment   ----onActivityCreated");
         bindingView.xrvAndroid.setPullRefreshEnabled(false);
+        bindingView.xrvAndroid.clearHeader();
         bindingView.xrvAndroid.setLoadingListener(new XRecyclerView.LoadingListener() {
             @Override
             public void onRefresh() {

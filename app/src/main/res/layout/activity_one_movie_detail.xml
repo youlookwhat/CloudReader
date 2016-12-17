@@ -55,7 +55,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="12dp"
-                android:textIsSelectable="true"
                 android:text='@{StringFormatUtil.formatGenres(bean.aka)}'
                 android:textColor="@color/colorTitle" />
 
@@ -87,7 +86,6 @@
                 android:layout_height="wrap_content"
                 android:lineSpacingExtra="7dp"
                 android:padding="12dp"
-                android:textIsSelectable="true"
                 android:text="@{bean.summary}"
                 android:textColor="@color/colorTitle"
                 android:textSize="16sp" />

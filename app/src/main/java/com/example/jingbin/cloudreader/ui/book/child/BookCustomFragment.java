@@ -32,7 +32,7 @@ public class BookCustomFragment extends BaseFragment<FragmentBookCustomBinding> 
     // 开始请求的角标
     private int mStart = 0;
     // 一次请求的数量
-    private int mCount = 9;
+    private int mCount = 12;
     private MainActivity activity;
     private BookAdapter mBookAdapter;
     private GridLayoutManager mLayoutManager;

@@ -12,6 +12,7 @@ import android.util.AttributeSet;
 import android.util.SparseArray;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 
 /**
  * Created by 杨才 on 2016/1/28.
@@ -57,14 +58,31 @@ public class XRecyclerView extends RecyclerView {
     }
 
     /**
-     * 改为私有，供外添加view使用,使用标识
-     * 注意：使用后不能使用下拉刷新，否则添加无效
+     * 改为公有。供外添加view使用,使用标识
+     * 注意：使用后不能使用 上拉刷新，否则添加无效
      * 使用时 isOther 传入 true，然后调用 noMoreLoading即可。
      */
     public void addFootView(final View view, boolean isOther) {
         mFootViews.clear();
         mFootViews.put(0, view);
         this.isOther = isOther;
+    }
+
+    /**
+     * 相当于加一个空白头布局：
+     * 只有一个目的：为了滚动条显示在最顶端
+     * 因为默认加了刷新头布局，不处理滚动条会下移。
+     * 和 setPullRefreshEnabled(false) 一块儿使用
+     * 使用下拉头时，此方法不应被使用！
+     */
+    public void clearHeader() {
+        mHeaderViews.clear();
+        final float scale = getContext().getResources().getDisplayMetrics().density;
+        int height = (int) (1.0f * scale + 0.5f);
+        ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, height);
+        View view = new View(getContext());
+        view.setLayoutParams(params);
+        mHeaderViews.put(0, view);
     }
 
     public void addHeaderView(View view) {

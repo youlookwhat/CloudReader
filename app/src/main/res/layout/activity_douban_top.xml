@@ -4,6 +4,9 @@
     <com.example.xrecyclerview.XRecyclerView
         android:id="@+id/xrv_top"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:scrollbarSize="4dp"
+        android:scrollbarThumbVertical="@color/tabBackground"
+        android:scrollbars="vertical" />
 
 </layout>
