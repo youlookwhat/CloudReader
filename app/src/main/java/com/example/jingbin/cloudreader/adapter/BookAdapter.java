@@ -71,16 +71,6 @@ public class BookAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 ItemBookBinding mBindBook = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), R.layout.item_book, parent, false);
                 return new BookViewHolder(mBindBook.getRoot());
         }
-//        if (viewType == TYPE_HEADER_BOOK) {
-//            HeaderItemBookBinding mBindHeader = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), R.layout.header_item_book, parent, false);
-//            return new HeaderViewHolder(mBindHeader.getRoot());
-//        } else if (viewType == TYPE_FOOTER_BOOK) {
-//            FooterItemBookBinding mBindFooter = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), R.layout.footer_item_book, parent, false);
-//            return new FooterViewHolder(mBindFooter.getRoot());
-//        } else {
-//            ItemBookBinding mBindBook = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), R.layout.item_book, parent, false);
-//            return new BookViewHolder(mBindBook.getRoot());
-//        }
     }
 
     @Override
