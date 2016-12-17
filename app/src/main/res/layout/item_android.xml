@@ -9,7 +9,7 @@
 
         <variable
             name="resultsBean"
-            type="com.example.jingbin.cloudreader.bean.GankIoDataBean.ResultsBean" />
+            type="com.example.jingbin.cloudreader.bean.GankIoDataBean.ResultBean" />
 
     </data>
 

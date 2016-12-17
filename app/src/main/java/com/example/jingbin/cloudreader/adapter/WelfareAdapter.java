@@ -15,14 +15,14 @@ import com.example.jingbin.cloudreader.utils.ImgLoadUtil;
  * Created by jingbin on 2016/12/1.
  */
 
-public class WelfareAdapter extends BaseRecyclerViewAdapter<GankIoDataBean.ResultsBean> {
+public class WelfareAdapter extends BaseRecyclerViewAdapter<GankIoDataBean.ResultBean> {
     @Override
     public BaseRecyclerViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         return new ViewHolder(parent, R.layout.item_welfare);
     }
 
 
-    private class ViewHolder extends BaseRecyclerViewHolder<GankIoDataBean.ResultsBean, ItemWelfareBinding> {
+    private class ViewHolder extends BaseRecyclerViewHolder<GankIoDataBean.ResultBean, ItemWelfareBinding> {
 
 
         ViewHolder(ViewGroup viewGroup, int layoutId) {
@@ -30,7 +30,7 @@ public class WelfareAdapter extends BaseRecyclerViewAdapter<GankIoDataBean.Resul
         }
 
         @Override
-        public void onBindViewHolder(final GankIoDataBean.ResultsBean resultsBean, final int position) {
+        public void onBindViewHolder(final GankIoDataBean.ResultBean resultsBean, final int position) {
 
 //            binding.setBean(resultsBean);
             ImgLoadUtil.displayEspImage(resultsBean.getUrl(), binding.ivWelfare, 1);

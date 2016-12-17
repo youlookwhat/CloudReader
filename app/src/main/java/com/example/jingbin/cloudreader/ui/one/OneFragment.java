@@ -96,7 +96,7 @@ public class OneFragment extends BaseFragment<FragmentOneBinding> {
                     setAdapter(mHotMovieBean);
                     showContentView();
                 }
-            }, 1000);
+            }, 300);
             DebugUtil.error("----缓存: " + oneData);
         }
     }
@@ -198,7 +198,7 @@ public class OneFragment extends BaseFragment<FragmentOneBinding> {
             public void run() {
                 loadHotMovie();
             }
-        }, 1000);
+        }, 300);
     }
 
 

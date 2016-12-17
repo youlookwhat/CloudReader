@@ -151,9 +151,9 @@ public class WelfareFragment extends BaseFragment<FragmentWelfareBinding> {
         mWelfareAdapter.notifyDataSetChanged();
 
 
-        mWelfareAdapter.setOnItemClickListener(new OnItemClickListener<GankIoDataBean.ResultsBean>() {
+        mWelfareAdapter.setOnItemClickListener(new OnItemClickListener<GankIoDataBean.ResultBean>() {
             @Override
-            public void onClick(GankIoDataBean.ResultsBean resultsBean, int position) {
+            public void onClick(GankIoDataBean.ResultBean resultsBean, int position) {
                 DebugUtil.error("-----" + imgList.toString());
                 DebugUtil.error("----imgList.size():  " + imgList.size());
                 Bundle bundle = new Bundle();
