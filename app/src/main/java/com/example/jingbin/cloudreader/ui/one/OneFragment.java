@@ -88,13 +88,17 @@ public class OneFragment extends BaseFragment<FragmentOneBinding> {
 
         showLoading();
         if (mHotMovieBean == null) {
-            postDelayLoad();
+            synchronized (this) {
+                postDelayLoad();
+            }
         } else {
             bindingView.listOne.postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    setAdapter(mHotMovieBean);
-                    showContentView();
+                    synchronized (this) {
+                        setAdapter(mHotMovieBean);
+                        showContentView();
+                    }
                 }
             }, 150);
             DebugUtil.error("----缓存: " + oneData);

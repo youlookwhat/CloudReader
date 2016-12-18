@@ -22,11 +22,11 @@
             android:name=".MainActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            <!--<intent-filter>-->
+                <!--<action android:name="android.intent.action.MAIN" />-->
+<!---->
+                <!--<category android:name="android.intent.category.LAUNCHER" />-->
+            <!--</intent-filter>-->
         </activity>
         <activity
             android:name=".SplashActivity"
@@ -78,6 +78,17 @@
             android:name=".ui.one.OneMovieDetailActivity"
             android:screenOrientation="portrait"
             android:theme="@style/MyScollPage" />
+        <activity
+            android:name=".ui.TransitionActivity"
+            android:theme="@style/ViewBigPicTheme"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+        </activity>
     </application>
 
 </manifest>
