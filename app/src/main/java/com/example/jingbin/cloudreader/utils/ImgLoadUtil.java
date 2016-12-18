@@ -143,7 +143,7 @@ public class ImgLoadUtil {
     }
 
     /**
-     * 妹子图或电影列表图
+     * 书籍、妹子图、电影列表图
      * 默认图区别
      */
     public static void displayEspImage(String url, ImageView imageView, int type) {
@@ -161,6 +161,8 @@ public class ImgLoadUtil {
                 return R.drawable.img_default_movie;
             case 1:// 妹子
                 return R.drawable.img_default_meizi;
+            case 2:// 书籍
+                return R.drawable.img_default_book;
         }
         return R.drawable.img_default_meizi;
     }
@@ -182,7 +184,7 @@ public class ImgLoadUtil {
     /**
      * 妹子，电影列表图
      *
-     * @param defaultPicType 妹子：1 电影：0
+     * @param defaultPicType 电影：0；妹子：1； 书籍：2
      */
     @BindingAdapter({"android:displayFadeImage","android:defaultPicType"})
     public static void displayFadeImage(ImageView imageView, String url,int defaultPicType) {
