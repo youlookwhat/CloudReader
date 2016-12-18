@@ -65,7 +65,7 @@
                             android:id="@+id/img_progress"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:src="@drawable/kaws_anim" />
+                            android:src="@drawable/yun_anim" />
 
                         <TextView
                             android:layout_width="wrap_content"

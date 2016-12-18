@@ -62,11 +62,13 @@ public class AndroidFragment extends BaseFragment<FragmentAndroidBinding> {
         mACache = ACache.get(getContext());
         mAndroidBean = (GankIoDataBean) mACache.getAsObject(Constants.GANK_ANDROID);
         DebugUtil.error("--AndroidFragment   ----onActivityCreated");
-        bindingView.xrvAndroid.setPullRefreshEnabled(false);
+//        bindingView.xrvAndroid.setPullRefreshEnabled(false);
+//        bindingView.xrvAndroid.clearHeader();
         bindingView.xrvAndroid.setLoadingListener(new XRecyclerView.LoadingListener() {
             @Override
             public void onRefresh() {
-
+                mPage = 1;
+                loadAndroidData();
             }
 
             @Override
@@ -108,8 +110,12 @@ public class AndroidFragment extends BaseFragment<FragmentAndroidBinding> {
                     @Override
                     public void onError(Throwable e) {
                         bindingView.xrvAndroid.refreshComplete();
-                        if (mPage == 1) {
+                        // 注意：这里不能写成 mPage == 1，否则会一直显示错误页面
+                        if (mAndroidAdapter.getItemCount() == 0) {
                             showError();
+                        }
+                        if (mPage > 1) {
+                            mPage--;
                         }
                     }
 
@@ -141,11 +147,15 @@ public class AndroidFragment extends BaseFragment<FragmentAndroidBinding> {
      * 设置adapter
      */
     private void setAdapter(GankIoDataBean mAndroidBean) {
-        mAndroidAdapter = new AndroidAdapter();
+        if (mAndroidAdapter == null) {
+            mAndroidAdapter = new AndroidAdapter();
+        }
+        mAndroidAdapter.clear();
         mAndroidAdapter.addAll(mAndroidBean.getResults());
         bindingView.xrvAndroid.setLayoutManager(new LinearLayoutManager(getActivity()));
         bindingView.xrvAndroid.setAdapter(mAndroidAdapter);
         mAndroidAdapter.notifyDataSetChanged();
+        bindingView.xrvAndroid.refreshComplete();
 
         mIsFirst = false;
     }

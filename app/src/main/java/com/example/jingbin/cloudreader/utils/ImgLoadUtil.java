@@ -180,13 +180,13 @@ public class ImgLoadUtil {
     }
 
     /**
-     * 妹子图或电影列表图
+     * 妹子，电影列表图
      *
-     * @param type 妹子：1 电影：0
+     * @param defaultPicType 妹子：1 电影：0
      */
-    @BindingAdapter("android:displayFadeImage")
-    public static void displayFadeImage(ImageView imageView, String url) {
-        displayEspImage(url, imageView, 0);
+    @BindingAdapter({"android:displayFadeImage","android:defaultPicType"})
+    public static void displayFadeImage(ImageView imageView, String url,int defaultPicType) {
+        displayEspImage(url, imageView, defaultPicType);
     }
 
     /**

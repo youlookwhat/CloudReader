@@ -3,9 +3,11 @@
 
     <data>
 
+        <import type="android.view.View" />
+
         <variable
             name="bean"
-            type="com.example.jingbin.cloudreader.bean.GankIoDataBean.ResultsBean" />
+            type="com.example.jingbin.cloudreader.bean.GankIoDataBean.ResultBean" />
 
     </data>
 
@@ -13,5 +15,7 @@
         android:id="@+id/iv_welfare"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:defaultPicType="@{1}"
+        android:displayFadeImage="@{bean.url}"
         android:scaleType="centerCrop" />
 </layout>

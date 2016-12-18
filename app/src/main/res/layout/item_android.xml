@@ -9,7 +9,7 @@
 
         <variable
             name="resultsBean"
-            type="com.example.jingbin.cloudreader.bean.GankIoDataBean.ResultsBean" />
+            type="com.example.jingbin.cloudreader.bean.GankIoDataBean.ResultBean" />
 
     </data>
 
@@ -19,13 +19,13 @@
         android:layout_height="wrap_content"
         android:background="@drawable/ripple_one_item_bg"
         android:orientation="vertical"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
         android:paddingTop="12dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
             android:orientation="horizontal">
 
             <LinearLayout

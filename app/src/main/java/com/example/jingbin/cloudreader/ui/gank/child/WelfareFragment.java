@@ -45,6 +45,7 @@ public class WelfareFragment extends BaseFragment<FragmentWelfareBinding> {
         aCache = ACache.get(getContext());
         meiziBean = (GankIoDataBean) aCache.getAsObject(Constants.GANK_MEIZI);
         bindingView.xrvWelfare.setPullRefreshEnabled(false);
+        bindingView.xrvWelfare.clearHeader();
         bindingView.xrvWelfare.setLoadingListener(new XRecyclerView.LoadingListener() {
             @Override
             public void onRefresh() {
@@ -92,7 +93,7 @@ public class WelfareFragment extends BaseFragment<FragmentWelfareBinding> {
                     @Override
                     public void onError(Throwable e) {
                         bindingView.xrvWelfare.refreshComplete();
-                        if (mPage == 1) {
+                        if (mWelfareAdapter.getItemCount() == 1) {
                             showError();
                         }
                     }
@@ -150,9 +151,9 @@ public class WelfareFragment extends BaseFragment<FragmentWelfareBinding> {
         mWelfareAdapter.notifyDataSetChanged();
 
 
-        mWelfareAdapter.setOnItemClickListener(new OnItemClickListener<GankIoDataBean.ResultsBean>() {
+        mWelfareAdapter.setOnItemClickListener(new OnItemClickListener<GankIoDataBean.ResultBean>() {
             @Override
-            public void onClick(GankIoDataBean.ResultsBean resultsBean, int position) {
+            public void onClick(GankIoDataBean.ResultBean resultsBean, int position) {
                 DebugUtil.error("-----" + imgList.toString());
                 DebugUtil.error("----imgList.size():  " + imgList.size());
                 Bundle bundle = new Bundle();

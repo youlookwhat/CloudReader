@@ -15,21 +15,21 @@ import com.example.jingbin.cloudreader.view.webview.WebViewActivity;
  * Created by jingbin on 2016/12/2.
  */
 
-public class AndroidAdapter extends BaseRecyclerViewAdapter<GankIoDataBean.ResultsBean> {
+public class AndroidAdapter extends BaseRecyclerViewAdapter<GankIoDataBean.ResultBean> {
     @Override
     public BaseRecyclerViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         return new ViewHolder(parent, R.layout.item_android);
     }
 
 
-    private class ViewHolder extends BaseRecyclerViewHolder<GankIoDataBean.ResultsBean, ItemAndroidBinding> {
+    private class ViewHolder extends BaseRecyclerViewHolder<GankIoDataBean.ResultBean, ItemAndroidBinding> {
 
         ViewHolder(ViewGroup parent, int item_android) {
             super(parent, item_android);
         }
 
         @Override
-        public void onBindViewHolder(final GankIoDataBean.ResultsBean object, int position) {
+        public void onBindViewHolder(final GankIoDataBean.ResultBean object, int position) {
 
             binding.setResultsBean(object);
             binding.executePendingBindings();

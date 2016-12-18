@@ -25,6 +25,8 @@
     <color name="tabBackground">#777D7D7D</color>
     <!--item的水波纹颜色-->
     <color name="itemBackground">#DD7D7D7D</color>
+    <!--<color name="itemBackground">#d9d9d9</color>-->
+
     <!--透明色-->
     <color name="colorTransparent">#00000000</color>
     <!--半透明-->

@@ -46,7 +46,10 @@ public class CustomFragment extends BaseFragment<FragmentCustomBinding> {
         mACache = ACache.get(getContext());
         mAllBean = (GankIoDataBean) mACache.getAsObject(Constants.GANK_CUSTOM);
 
+        // 禁止下拉刷新
         bindingView.xrvCustom.setPullRefreshEnabled(false);
+        // 去掉刷新头
+        bindingView.xrvCustom.clearHeader();
         bindingView.xrvCustom.setLoadingListener(new XRecyclerView.LoadingListener() {
             @Override
             public void onRefresh() {
@@ -97,7 +100,7 @@ public class CustomFragment extends BaseFragment<FragmentCustomBinding> {
                     @Override
                     public void onError(Throwable e) {
                         bindingView.xrvCustom.refreshComplete();
-                        if (mPage == 1) {
+                        if (mAndroidAdapter.getItemCount() == 1) {
                             showError();
                         }
                     }

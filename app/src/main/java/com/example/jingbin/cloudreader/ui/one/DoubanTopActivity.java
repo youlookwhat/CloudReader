@@ -61,7 +61,7 @@ public class DoubanTopActivity extends BaseActivity<ActivityDoubanTopBinding> {
                     @Override
                     public void onError(Throwable e) {
                         bindingView.xrvTop.refreshComplete();
-                        if (mStart == 0) {
+                        if (mDouBanTopAdapter.getItemCount() == 0) {
                             showError();
                         }
                     }
@@ -77,6 +77,7 @@ public class DoubanTopActivity extends BaseActivity<ActivityDoubanTopBinding> {
                                 bindingView.xrvTop.setLayoutManager(new StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL));
                                 bindingView.xrvTop.setAdapter(mDouBanTopAdapter);
                                 bindingView.xrvTop.setPullRefreshEnabled(false);
+                                bindingView.xrvTop.clearHeader();
                                 bindingView.xrvTop.setLoadingMoreEnabled(true);
                                 mDouBanTopAdapter.notifyDataSetChanged();
                             } else {

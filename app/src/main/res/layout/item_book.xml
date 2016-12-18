@@ -22,6 +22,7 @@
             android:layout_width="match_parent"
             android:layout_height="135dp"
             android:background="@color/colorPageBg"
+            android:defaultPicType='@{0}'
             android:displayFadeImage='@{bean.images.large}'
             android:scaleType="fitXY"
             android:transitionName="@string/transition_movie_img"
@@ -36,7 +37,6 @@
             android:ellipsize="marquee"
             android:focusable="true"
             android:focusableInTouchMode="true"
-            android:maxLines="1"
             android:text="@{bean.title}"
             android:textColor="@color/colorTitle"
             android:textSize="12sp" />

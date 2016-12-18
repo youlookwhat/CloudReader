@@ -26,9 +26,9 @@ public class GankIoDataBean implements Serializable {
      */
 
     @ParamNames("results")
-    private List<ResultsBean> results;
+    private List<ResultBean> results;
 
-    public static class ResultsBean implements Serializable {
+    public static class ResultBean implements Serializable {
 
         @ParamNames("_id")
         private String _id;
@@ -111,7 +111,7 @@ public class GankIoDataBean implements Serializable {
         return error;
     }
 
-    public List<ResultsBean> getResults() {
+    public List<ResultBean> getResults() {
         return results;
     }
 
