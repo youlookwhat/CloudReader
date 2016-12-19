@@ -99,6 +99,7 @@ public class OneMovieDetailActivity extends BaseHeaderActivity<HeaderSlideShapeB
                         bindingHeaderView.tvOneCity.setText(String.format("制片国家/地区：%s", StringFormatUtil.formatGenres(movieDetailBean.getCountries())));
                         bindingHeaderView.setMovieDetailBean(movieDetailBean);
                         bindingContentView.setBean(movieDetailBean);
+                        bindingContentView.executePendingBindings();
 
                         mMoreUrl = movieDetailBean.getAlt();
                         mMovieName = movieDetailBean.getTitle();
