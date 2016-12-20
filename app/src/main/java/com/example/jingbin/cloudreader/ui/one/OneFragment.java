@@ -74,12 +74,14 @@ public class OneFragment extends BaseFragment<FragmentOneBinding> {
 
         // 显示，准备完毕，不是当天，则请求数据（正在请求时避免再次请求）
         String oneData = SPUtils.getString("one_data", "2016-11-26");
-        if (!oneData.equals(TimeUtil.getData()) && !mIsLoading) {
-            mIsLoading = true;
-            /**延迟执行防止卡顿*/
-            showLoading();
-            postDelayLoad();
-            return;
+        synchronized (this) {
+            if (!oneData.equals(TimeUtil.getData()) && !mIsLoading) {
+                mIsLoading = true;
+                /**延迟执行防止卡顿*/
+                showLoading();
+                postDelayLoad();
+                return;
+            }
         }
 
         if (!isFirst) {
@@ -88,15 +90,19 @@ public class OneFragment extends BaseFragment<FragmentOneBinding> {
 
         showLoading();
         if (mHotMovieBean == null) {
-            postDelayLoad();
+            synchronized (this) {
+                postDelayLoad();
+            }
         } else {
             bindingView.listOne.postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    setAdapter(mHotMovieBean);
-                    showContentView();
+                    synchronized (this) {
+                        setAdapter(mHotMovieBean);
+                        showContentView();
+                    }
                 }
-            }, 300);
+            }, 150);
             DebugUtil.error("----缓存: " + oneData);
         }
     }
@@ -198,7 +204,7 @@ public class OneFragment extends BaseFragment<FragmentOneBinding> {
             public void run() {
                 loadHotMovie();
             }
-        }, 300);
+        }, 150);
     }
 
 

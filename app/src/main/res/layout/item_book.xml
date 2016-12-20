@@ -22,7 +22,7 @@
             android:layout_width="match_parent"
             android:layout_height="135dp"
             android:background="@color/colorPageBg"
-            android:defaultPicType='@{0}'
+            android:defaultPicType='@{2}'
             android:displayFadeImage='@{bean.images.large}'
             android:scaleType="fitXY"
             android:transitionName="@string/transition_movie_img"

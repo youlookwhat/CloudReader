@@ -28,7 +28,8 @@
                 android:layout_marginLeft="10dp"
                 android:layout_toRightOf="@+id/progress"
                 android:text="加载更多..."
-                android:textSize="12sp" />
+                android:textColor="@color/colorTitle"
+                android:textSize="13sp" />
 
         </RelativeLayout>
     </RelativeLayout>

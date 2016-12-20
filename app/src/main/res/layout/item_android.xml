@@ -84,7 +84,9 @@
             android:layout_width="match_parent"
             android:layout_height="1px"
             android:layout_marginTop="11dp"
-            android:background="@color/colorLineDeep" />
+            android:background="@color/colorLineMovieDetail" />
+
+        <!--android:background="@color/colorLineDeep"-->
     </LinearLayout>
 
 </layout>
