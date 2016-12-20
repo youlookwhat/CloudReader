@@ -83,9 +83,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         fab.setOnClickListener(this);
     }
 
+    /**
+     * inflateHeaderView 进来的布局要宽一些
+     */
     private void initDrawerLayout() {
-        ImageView viewById = (ImageView) navView.getHeaderView(0).findViewById(R.id.iv_avatar);
-        TextView tv_about = (TextView) navView.getHeaderView(0).findViewById(R.id.tv_about);
+        navView.inflateHeaderView(R.layout.nav_header_main);
+        View headerView = navView.getHeaderView(0);
+        ImageView viewById = (ImageView) headerView.findViewById(R.id.iv_avatar);
+        TextView tv_about = (TextView) headerView.findViewById(R.id.tv_about);
         viewById.setImageDrawable(CommonUtils.getDrawable(R.drawable.titlebar_discover_normal));
         tv_about.setText("联系我");
     }
