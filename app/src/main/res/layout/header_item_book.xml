@@ -14,19 +14,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 
-            <!--<ProgressBar-->
-                <!--android:id="@+id/progress"-->
-                <!--android:layout_width="20dp"-->
-                <!--android:layout_height="20dp"-->
-                <!--android:layout_gravity="center" />-->
-
             <TextView
                 android:id="@+id/tv_load_prompt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:layout_marginLeft="10dp"
-                android:layout_toRightOf="@+id/progress"
                 android:text="头布局"
                 android:textSize="12sp" />
 
