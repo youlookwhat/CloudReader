@@ -10,7 +10,7 @@
     </item>
     <item android:state_pressed="true">
         <shape>
-            <solid android:color="@color/tabBackground" />
+            <solid android:color="@color/itemLowBackground" />
         </shape>
     </item>
     <item android:state_pressed="false">
