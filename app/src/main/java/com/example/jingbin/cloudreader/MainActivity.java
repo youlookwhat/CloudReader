@@ -27,6 +27,7 @@ import com.example.jingbin.cloudreader.ui.book.BookFragment;
 import com.example.jingbin.cloudreader.ui.gank.GankFragment;
 import com.example.jingbin.cloudreader.ui.one.OneFragment;
 import com.example.jingbin.cloudreader.utils.CommonUtils;
+import com.example.jingbin.cloudreader.utils.ImgLoadUtil;
 import com.example.jingbin.cloudreader.view.MyFragmentPagerAdapter;
 import com.jaeger.library.StatusBarUtil;
 
@@ -92,9 +93,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         View headerView = navView.getHeaderView(0);
         LinearLayout viewById1 = (LinearLayout) headerView.findViewById(R.id.ll_header_bg);
 //        viewById1.setBackground();
-        ImageView viewById = (ImageView) headerView.findViewById(R.id.iv_avatar);
+        ImageView ivAvatar = (ImageView) headerView.findViewById(R.id.iv_avatar);
+        ImgLoadUtil.displayCircle(ivAvatar,R.drawable.ic_avatar);
+
         TextView tv_about = (TextView) headerView.findViewById(R.id.tv_about);
-        viewById.setImageDrawable(CommonUtils.getDrawable(R.drawable.home_six_two));
         tv_about.setText("联系我");
     }
 

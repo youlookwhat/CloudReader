@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorPageBg"
     android:orientation="vertical">
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -29,8 +30,7 @@
                 android:id="@+id/iv_avatar"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
-                android:scaleType="centerCrop"
-                android:src="@drawable/dahuaxiyou" />
+                android:scaleType="centerCrop" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -42,7 +42,7 @@
                     android:id="@+id/tv_username"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="一林秀于风景之中"
+                    android:text="用户已注销"
                     android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                     android:textColor="@color/colorWhite"
                     android:textSize="17sp" />
@@ -54,7 +54,7 @@
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="6dp"
                     android:background="@drawable/shape_bg_level"
-                    android:text="Lv.8"
+                    android:text="Lv.10"
                     android:textColor="@color/colorWhite"
                     android:textSize="10sp"
                     android:textStyle="italic|bold" />
@@ -66,8 +66,8 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="44dp"
-        android:layout_marginTop="6dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="8dp"
         android:background="@drawable/ripple_one_item_bg"
         android:clickable="true"
         android:gravity="center_vertical"
@@ -93,7 +93,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="44dp"
+        android:layout_height="48dp"
         android:background="@drawable/ripple_one_item_bg"
         android:clickable="true"
         android:gravity="center_vertical"
@@ -102,15 +102,15 @@
         android:paddingRight="16dp">
 
         <ImageView
-            android:layout_width="17dp"
-            android:layout_height="17dp"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
             android:src="@drawable/ic_nav_scan" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
-            android:text="扫一扫"
+            android:text="扫码下载"
             android:textColor="@color/colorContent"
             android:textSize="15sp" />
 
@@ -118,7 +118,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="44dp"
+        android:layout_height="48dp"
         android:background="@drawable/ripple_one_item_bg"
         android:clickable="true"
         android:gravity="center_vertical"
@@ -143,7 +143,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="44dp"
+        android:layout_height="48dp"
         android:background="@drawable/ripple_one_item_bg"
         android:clickable="true"
         android:gravity="center_vertical"

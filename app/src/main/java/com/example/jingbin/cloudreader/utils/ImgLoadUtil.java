@@ -182,12 +182,22 @@ public class ImgLoadUtil {
     }
 
     /**
+     * 加载圆角图
+     */
+    public static void displayCircle(ImageView imageView, int imageUrl) {
+        Glide.with(imageView.getContext())
+                .load(imageUrl)
+                .transform(new GlideCircleTransform(imageView.getContext()))
+                .into(imageView);
+    }
+
+    /**
      * 妹子，电影列表图
      *
      * @param defaultPicType 电影：0；妹子：1； 书籍：2
      */
-    @BindingAdapter({"android:displayFadeImage","android:defaultPicType"})
-    public static void displayFadeImage(ImageView imageView, String url,int defaultPicType) {
+    @BindingAdapter({"android:displayFadeImage", "android:defaultPicType"})
+    public static void displayFadeImage(ImageView imageView, String url, int defaultPicType) {
         displayEspImage(url, imageView, defaultPicType);
     }
 
