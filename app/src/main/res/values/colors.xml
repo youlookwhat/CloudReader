@@ -16,7 +16,9 @@
 
     <color name="colorLineDeep">#BBBBBB</color>
 
-    <color name="colorLineMovieDetail">#FFDDDDDD</color>
+    <!--item的分割线-->
+    <color name="colorLineItem">#FFDDDDDD</color>
+
     <!--tab标签栏文字的颜色-->
     <color name="colorTabText">#585858</color>
     <!--正文文字颜色-->
@@ -47,6 +49,11 @@
 
     <!--选择分类按下颜色-->
     <color name="colorChoosePress">#DDD</color>
+
+    <!--暂时用于反馈文字-->
+    <color name="text_common">#191919</color>
+
+    <color name="text_deed_bg">#f6f6f6</color>
 
 
 </resources>

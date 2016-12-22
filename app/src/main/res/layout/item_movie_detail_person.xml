@@ -61,6 +61,6 @@
             android:layout_width="match_parent"
             android:layout_height="1px"
             android:layout_below="@+id/ll_item"
-            android:background="@color/colorLineMovieDetail" />
+            android:background="@color/colorLineItem" />
     </RelativeLayout>
 </layout>
