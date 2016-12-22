@@ -35,6 +35,7 @@ import rx.Subscription;
  */
 public class EverydayFragment extends BaseFragment<FragmentEverydayBinding> {
 
+    private static final String TAG = "EverydayFragment";
     private ACache maCache;
     private ArrayList<List<AndroidBean>> mLists;
     private ArrayList<String> mBannerImages;
@@ -266,4 +267,5 @@ public class EverydayFragment extends BaseFragment<FragmentEverydayBinding> {
         super.onDestroy();
         DebugUtil.error("--EverydayFragment   ----onDestroy");
     }
+
 }
