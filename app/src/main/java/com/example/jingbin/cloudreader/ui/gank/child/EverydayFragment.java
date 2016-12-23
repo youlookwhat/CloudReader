@@ -19,11 +19,16 @@ import com.example.jingbin.cloudreader.databinding.FooterItemEverydayBinding;
 import com.example.jingbin.cloudreader.databinding.FragmentEverydayBinding;
 import com.example.jingbin.cloudreader.databinding.HeaderItemEverydayBinding;
 import com.example.jingbin.cloudreader.http.cache.ACache;
+import com.example.jingbin.cloudreader.http.rx.RxBus;
+import com.example.jingbin.cloudreader.http.rx.RxBusBaseMessage;
+import com.example.jingbin.cloudreader.http.rx.RxCodeConstants;
 import com.example.jingbin.cloudreader.model.EverydayModel;
 import com.example.jingbin.cloudreader.utils.DebugUtil;
 import com.example.jingbin.cloudreader.utils.GlideImageLoader;
+import com.example.jingbin.cloudreader.utils.PerfectClickListener;
 import com.example.jingbin.cloudreader.utils.SPUtils;
 import com.example.jingbin.cloudreader.utils.TimeUtil;
+import com.example.jingbin.cloudreader.view.webview.WebViewActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,14 +40,18 @@ import rx.Subscription;
  */
 public class EverydayFragment extends BaseFragment<FragmentEverydayBinding> {
 
+    private static final String TAG = "EverydayFragment";
     private ACache maCache;
     private ArrayList<List<AndroidBean>> mLists;
     private ArrayList<String> mBannerImages;
     private EverydayModel mEverydayModel;
-    private boolean mIsPrepared = false;
-    private boolean mIsFirst = true;
     private HeaderItemEverydayBinding mHeaderBinding;
     private FooterItemEverydayBinding mFooterBinding;
+    private View mHeaderView;
+    private View mFooterView;
+    private EverydayAdapter mEverydayAdapter;
+    private boolean mIsPrepared = false;
+    private boolean mIsFirst = true;
     // 是否正在刷新（避免重复刷新）
     private boolean mIsLoading = false;
 
@@ -85,6 +94,18 @@ public class EverydayFragment extends BaseFragment<FragmentEverydayBinding> {
 //        DebugUtil.error("" + year + month + day);
         // 显示日期
         mHeaderBinding.includeEveryday.tvDailyText.setText(day);
+        mHeaderBinding.includeEveryday.ibXiandu.setOnClickListener(new PerfectClickListener() {
+            @Override
+            protected void onNoDoubleClick(View v) {
+                WebViewActivity.loadUrl(v.getContext(), "https://gank.io/xiandu", "加载中...");
+            }
+        });
+        mHeaderBinding.includeEveryday.ibMovieHot.setOnClickListener(new PerfectClickListener() {
+            @Override
+            protected void onNoDoubleClick(View v) {
+                RxBus.getDefault().post(RxCodeConstants.JUMP_TYPE_TO_ONE, new RxBusBaseMessage());
+            }
+        });
     }
 
     @Override
@@ -156,22 +177,30 @@ public class EverydayFragment extends BaseFragment<FragmentEverydayBinding> {
         bindingView.xrvEveryday.setVisibility(View.VISIBLE);
         bindingView.xrvEveryday.setPullRefreshEnabled(false);
         bindingView.xrvEveryday.setLoadingMoreEnabled(false);
-        bindingView.xrvEveryday.addHeaderView(mHeaderBinding.getRoot());
-        if (mFooterBinding == null) {
-            mFooterBinding = DataBindingUtil.inflate(LayoutInflater.from(getContext()), R.layout.footer_item_everyday, null, false);
+        if (mHeaderView == null) {
+            mHeaderView = mHeaderBinding.getRoot();
+            bindingView.xrvEveryday.addHeaderView(mHeaderView);
         }
-        bindingView.xrvEveryday.addFootView(mFooterBinding.getRoot(), true);
-        bindingView.xrvEveryday.noMoreLoading();
+        if (mFooterView == null) {
+            mFooterBinding = DataBindingUtil.inflate(LayoutInflater.from(getContext()), R.layout.footer_item_everyday, null, false);
+            mFooterView = mFooterBinding.getRoot();
+            bindingView.xrvEveryday.addFootView(mFooterView, true);
+            bindingView.xrvEveryday.noMoreLoading();
+        }
 
-        final EverydayAdapter everydayAdapter = new EverydayAdapter();
-        everydayAdapter.addAll(lists);
+        if (mEverydayAdapter == null) {
+            mEverydayAdapter = new EverydayAdapter();
+        } else {
+            mEverydayAdapter.clear();
+        }
+        mEverydayAdapter.addAll(lists);
         bindingView.xrvEveryday.setLayoutManager(new LinearLayoutManager(getContext()));
         // 需加，不然滑动不流畅
         bindingView.xrvEveryday.setNestedScrollingEnabled(false);
         bindingView.xrvEveryday.setHasFixedSize(false);
         bindingView.xrvEveryday.setItemAnimator(new DefaultItemAnimator());
-        bindingView.xrvEveryday.setAdapter(everydayAdapter);
-        everydayAdapter.notifyDataSetChanged();
+        bindingView.xrvEveryday.setAdapter(mEverydayAdapter);
+        mEverydayAdapter.notifyDataSetChanged();
 
         maCache.remove(Constants.EVERYDAY_CONTENT);
         maCache.put(Constants.EVERYDAY_CONTENT, lists, 43200);
@@ -266,4 +295,5 @@ public class EverydayFragment extends BaseFragment<FragmentEverydayBinding> {
         super.onDestroy();
         DebugUtil.error("--EverydayFragment   ----onDestroy");
     }
+
 }

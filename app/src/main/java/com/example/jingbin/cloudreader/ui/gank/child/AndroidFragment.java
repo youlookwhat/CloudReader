@@ -25,6 +25,7 @@ import rx.schedulers.Schedulers;
  */
 public class AndroidFragment extends BaseFragment<FragmentAndroidBinding> {
 
+    private static final String TAG = "AndroidFragment";
     private static final String TYPE = "mType";
     private String mType = "Android";
     private int mPage = 1;
@@ -61,7 +62,7 @@ public class AndroidFragment extends BaseFragment<FragmentAndroidBinding> {
 
         mACache = ACache.get(getContext());
         mAndroidBean = (GankIoDataBean) mACache.getAsObject(Constants.GANK_ANDROID);
-        DebugUtil.error("--AndroidFragment   ----onActivityCreated");
+        DebugUtil.error(TAG + "----onActivityCreated");
 //        bindingView.xrvAndroid.setPullRefreshEnabled(false);
 //        bindingView.xrvAndroid.clearHeader();
         bindingView.xrvAndroid.setLoadingListener(new XRecyclerView.LoadingListener() {
@@ -148,7 +149,7 @@ public class AndroidFragment extends BaseFragment<FragmentAndroidBinding> {
      */
     private void setAdapter(GankIoDataBean mAndroidBean) {
         if (mAndroidAdapter == null) {
-            mAndroidAdapter = new AndroidAdapter();
+            mAndroidAdapter = new AndroidAdapter(false);
         }
         mAndroidAdapter.clear();
         mAndroidAdapter.addAll(mAndroidBean.getResults());
@@ -171,6 +172,12 @@ public class AndroidFragment extends BaseFragment<FragmentAndroidBinding> {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        DebugUtil.error("--AndroidFragment   ----onDestroy");
+        DebugUtil.error(TAG + "   ----onDestroy");
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        DebugUtil.error(TAG + "   ----onResume");
     }
 }

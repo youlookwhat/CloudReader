@@ -16,6 +16,13 @@ import com.example.jingbin.cloudreader.view.webview.WebViewActivity;
  */
 
 public class AndroidAdapter extends BaseRecyclerViewAdapter<GankIoDataBean.ResultBean> {
+
+    private boolean isAll = false;
+
+    public AndroidAdapter(boolean isAll) {
+        this.isAll = isAll;
+    }
+
     @Override
     public BaseRecyclerViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         return new ViewHolder(parent, R.layout.item_android);
@@ -31,6 +38,12 @@ public class AndroidAdapter extends BaseRecyclerViewAdapter<GankIoDataBean.Resul
         @Override
         public void onBindViewHolder(final GankIoDataBean.ResultBean object, int position) {
 
+            if (isAll) {
+                binding.tvContentType.setVisibility(View.VISIBLE);
+                binding.tvContentType.setText(" · " + object.getType());
+            } else {
+                binding.tvContentType.setVisibility(View.GONE);
+            }
             binding.setResultsBean(object);
             binding.executePendingBindings();
 

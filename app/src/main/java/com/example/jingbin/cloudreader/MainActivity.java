@@ -9,7 +9,6 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
@@ -18,18 +17,26 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
+import android.widget.LinearLayout;
 
 import com.example.jingbin.cloudreader.databinding.ActivityMainBinding;
+import com.example.jingbin.cloudreader.http.rx.RxBus;
+import com.example.jingbin.cloudreader.http.rx.RxBusBaseMessage;
+import com.example.jingbin.cloudreader.http.rx.RxCodeConstants;
 import com.example.jingbin.cloudreader.ui.book.BookFragment;
 import com.example.jingbin.cloudreader.ui.gank.GankFragment;
+import com.example.jingbin.cloudreader.ui.menu.NavAboutActivity;
+import com.example.jingbin.cloudreader.ui.menu.NavDeedBackActivity;
+import com.example.jingbin.cloudreader.ui.menu.NavHomePageActivity;
 import com.example.jingbin.cloudreader.ui.one.OneFragment;
 import com.example.jingbin.cloudreader.utils.CommonUtils;
+import com.example.jingbin.cloudreader.utils.ImgLoadUtil;
 import com.example.jingbin.cloudreader.view.MyFragmentPagerAdapter;
 import com.jaeger.library.StatusBarUtil;
 
 import java.util.ArrayList;
+
+import rx.functions.Action1;
 
 
 /**
@@ -55,6 +62,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_main);
         initId();
+        initRxBus();
         StatusBarUtil.setColorNoTranslucentForDrawerLayout(MainActivity.this, drawerLayout, CommonUtils.getColor(R.color.colorTheme));
         initContentFragment();
         initDrawerLayout();
@@ -83,11 +91,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         fab.setOnClickListener(this);
     }
 
+    /**
+     * inflateHeaderView 进来的布局要宽一些
+     */
     private void initDrawerLayout() {
-        ImageView viewById = (ImageView) navView.getHeaderView(0).findViewById(R.id.iv_avatar);
-        TextView tv_about = (TextView) navView.getHeaderView(0).findViewById(R.id.tv_about);
-        viewById.setImageDrawable(CommonUtils.getDrawable(R.drawable.titlebar_discover_normal));
-        tv_about.setText("联系我");
+        navView.inflateHeaderView(R.layout.nav_header_main);
+        View headerView = navView.getHeaderView(0);
+//        LinearLayout viewById1 = (LinearLayout) headerView.findViewById(R.id.ll_header_bg);
+//        viewById1.setBackground();
+        ImageView ivAvatar = (ImageView) headerView.findViewById(R.id.iv_avatar);
+        ImgLoadUtil.displayCircle(ivAvatar, R.drawable.ic_avatar);
+        LinearLayout llNavHomepage = (LinearLayout) headerView.findViewById(R.id.ll_nav_homepage);
+        LinearLayout llNavScanDownload = (LinearLayout) headerView.findViewById(R.id.ll_nav_scan_download);
+        LinearLayout llNavDeedback = (LinearLayout) headerView.findViewById(R.id.ll_nav_deedback);
+        LinearLayout llNavAbout = (LinearLayout) headerView.findViewById(R.id.ll_nav_about);
+        llNavHomepage.setOnClickListener(this);
+        llNavScanDownload.setOnClickListener(this);
+        llNavDeedback.setOnClickListener(this);
+        llNavAbout.setOnClickListener(this);
     }
 
     private void initContentFragment() {
@@ -115,21 +136,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.ll_title_menu:
+            case R.id.ll_title_menu:// 开启菜单
                 drawerLayout.openDrawer(GravityCompat.START);
                 // 关闭
 //                drawerLayout.closeDrawer(GravityCompat.START);
                 break;
-            case R.id.iv_title_gank:
+            case R.id.iv_title_gank:// 干货栏
                 if (vpContent.getCurrentItem() != 0) {//不然cpu会有损耗
                     llTitleGank.setSelected(true);
                     llTitleOne.setSelected(false);
                     llTitleDou.setSelected(false);
-
                     vpContent.setCurrentItem(0);
                 }
                 break;
-            case R.id.iv_title_one:
+            case R.id.iv_title_one:// 电影栏
                 if (vpContent.getCurrentItem() != 1) {
                     llTitleOne.setSelected(true);
                     llTitleGank.setSelected(false);
@@ -137,7 +157,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     vpContent.setCurrentItem(1);
                 }
                 break;
-            case R.id.iv_title_dou:
+            case R.id.iv_title_dou:// 书籍栏
                 if (vpContent.getCurrentItem() != 2) {
                     llTitleDou.setSelected(true);
                     llTitleOne.setSelected(false);
@@ -145,16 +165,37 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     vpContent.setCurrentItem(2);
                 }
                 break;
-            case R.id.fab:
-//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
+            case R.id.ll_nav_homepage:// 主页
+                mBinding.drawerLayout.closeDrawer(GravityCompat.START);
+                mBinding.drawerLayout.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        NavHomePageActivity.startHome(MainActivity.this);
+//                        String url = "https://github.com/youlookwhat/CloudReader/blob/master/README.md";
+//                        WebViewActivity.loadUrl(MainActivity.this, url, "加载中...");
+                    }
+                }, 360);
 
-                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-                builder.setTitle("Dialog");
-                builder.setMessage("少数派客户端");
-                builder.setPositiveButton("OK", null);
-                builder.setNegativeButton("Cancel", null);
-                builder.show();
+                break;
+            case R.id.ll_nav_scan_download://扫码下载
+                break;
+            case R.id.ll_nav_deedback:// 问题反馈
+                mBinding.drawerLayout.closeDrawer(GravityCompat.START);
+                mBinding.drawerLayout.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        NavDeedBackActivity.start(MainActivity.this);
+                    }
+                }, 360);
+                break;
+            case R.id.ll_nav_about:// 关于云阅
+                mBinding.drawerLayout.closeDrawer(GravityCompat.START);
+                mBinding.drawerLayout.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        NavAboutActivity.start(MainActivity.this);
+                    }
+                }, 360);
                 break;
             default:
                 break;
@@ -172,7 +213,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_search:
-                Toast.makeText(this, "搜索", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(this, "搜索", Toast.LENGTH_SHORT).show();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -228,5 +269,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             return true;
         }
         return super.onKeyDown(keyCode, event);
+    }
+
+    /**
+     * 每日推荐点击"新电影热映榜"跳转
+     */
+    private void initRxBus() {
+        RxBus.getDefault().toObservable(RxCodeConstants.JUMP_TYPE_TO_ONE, RxBusBaseMessage.class)
+                .subscribe(new Action1<RxBusBaseMessage>() {
+                    @Override
+                    public void call(RxBusBaseMessage integer) {
+                        mBinding.include.vpContent.setCurrentItem(1);
+                    }
+                });
     }
 }

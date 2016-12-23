@@ -37,6 +37,7 @@ public class OneFragment extends BaseFragment<FragmentOneBinding> {
     private MainActivity activity;
     private HotMovieBean mHotMovieBean;
     private View mHeaderView = null;
+    private OneAdapter oneAdapter;
 
     @Override
     public int setContent() {
@@ -117,7 +118,9 @@ public class OneFragment extends BaseFragment<FragmentOneBinding> {
 
                     @Override
                     public void onError(Throwable e) {
-                        showError();
+                        if (oneAdapter.getItemCount() == 1) {
+                            showError();
+                        }
                     }
 
                     @Override
@@ -187,7 +190,11 @@ public class OneFragment extends BaseFragment<FragmentOneBinding> {
             });
             bindingView.listOne.addHeaderView(mHeaderView);
         }
-        OneAdapter oneAdapter = new OneAdapter(activity);
+        if (oneAdapter == null) {
+            oneAdapter = new OneAdapter(activity);
+        } else {
+            oneAdapter.clear();
+        }
         oneAdapter.addAll(hotMovieBean.getSubjects());
         bindingView.listOne.setAdapter(oneAdapter);
         oneAdapter.notifyDataSetChanged();

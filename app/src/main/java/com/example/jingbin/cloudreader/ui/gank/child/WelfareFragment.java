@@ -30,6 +30,7 @@ import rx.schedulers.Schedulers;
  */
 public class WelfareFragment extends BaseFragment<FragmentWelfareBinding> {
 
+    private static final String TAG = "WelfareFragment";
     private int mPage = 1;
     private WelfareAdapter mWelfareAdapter;
     private boolean isPrepared = false;
@@ -185,5 +186,11 @@ public class WelfareFragment extends BaseFragment<FragmentWelfareBinding> {
     public void onDestroy() {
         super.onDestroy();
         DebugUtil.error("--WelfareFragment   ----onDestroy");
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        DebugUtil.error(TAG + "   ----onResume");
     }
 }

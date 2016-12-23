@@ -28,7 +28,7 @@
                         android:orientation="vertical">
 
                         <ImageButton
-                            android:id="@+id/imageButton"
+                            android:id="@+id/ib_xiandu"
                             android:layout_width="53dp"
                             android:layout_height="53dp"
                             android:background="@drawable/home_middle_fm" />
@@ -38,7 +38,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_horizontal"
                             android:layout_marginTop="8dp"
-                            android:text="私人订制"
+                            android:text="闲读"
                             android:textColor="@color/colorContent"
                             android:textSize="12sp" />
                     </LinearLayout>
@@ -56,6 +56,7 @@
                         android:orientation="vertical">
 
                         <FrameLayout
+                            android:id="@+id/fl_everyday"
                             android:layout_width="53dp"
                             android:layout_height="53dp">
 
@@ -103,7 +104,7 @@
                         android:orientation="vertical">
 
                         <ImageButton
-                            android:id="@+id/imageButton2"
+                            android:id="@+id/ib_movie_hot"
                             android:layout_width="53dp"
                             android:layout_height="53dp"
                             android:layout_gravity="center"
