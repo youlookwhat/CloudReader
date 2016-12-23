@@ -20,6 +20,9 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.example.jingbin.cloudreader.databinding.ActivityMainBinding;
+import com.example.jingbin.cloudreader.http.rx.RxBus;
+import com.example.jingbin.cloudreader.http.rx.RxBusBaseMessage;
+import com.example.jingbin.cloudreader.http.rx.RxCodeConstants;
 import com.example.jingbin.cloudreader.ui.book.BookFragment;
 import com.example.jingbin.cloudreader.ui.gank.GankFragment;
 import com.example.jingbin.cloudreader.ui.menu.NavAboutActivity;
@@ -32,6 +35,8 @@ import com.example.jingbin.cloudreader.view.MyFragmentPagerAdapter;
 import com.jaeger.library.StatusBarUtil;
 
 import java.util.ArrayList;
+
+import rx.functions.Action1;
 
 
 /**
@@ -57,6 +62,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_main);
         initId();
+        initRxBus();
         StatusBarUtil.setColorNoTranslucentForDrawerLayout(MainActivity.this, drawerLayout, CommonUtils.getColor(R.color.colorTheme));
         initContentFragment();
         initDrawerLayout();
@@ -263,5 +269,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             return true;
         }
         return super.onKeyDown(keyCode, event);
+    }
+
+    /**
+     * 每日推荐点击"新电影热映榜"跳转
+     */
+    private void initRxBus() {
+        RxBus.getDefault().toObservable(RxCodeConstants.JUMP_TYPE_TO_ONE, RxBusBaseMessage.class)
+                .subscribe(new Action1<RxBusBaseMessage>() {
+                    @Override
+                    public void call(RxBusBaseMessage integer) {
+                        mBinding.include.vpContent.setCurrentItem(1);
+                    }
+                });
     }
 }
