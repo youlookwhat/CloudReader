@@ -11,5 +11,13 @@
         android:paddingTop="@dimen/activity_vertical_margin"
         tools:context="com.example.jingbin.cloudreader.ui.menu.NavHomePageActivity">
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:lineSpacingExtra="3dp"
+            android:text="@string/string_about"
+            android:textColor="@color/colorTitle"
+            android:textSize="15sp" />
+
     </RelativeLayout>
 </layout>

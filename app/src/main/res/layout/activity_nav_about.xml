@@ -5,19 +5,151 @@
         android:id="@+id/activity_nav_about"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/colorPageBg"
+        android:orientation="horizontal"
         android:paddingBottom="@dimen/activity_vertical_margin"
-        android:paddingLeft="@dimen/activity_horizontal_margin"
-        android:paddingRight="@dimen/activity_horizontal_margin"
-        android:paddingTop="@dimen/activity_vertical_margin"
         tools:context="com.example.jingbin.cloudreader.ui.menu.NavAboutActivity">
 
 
-        <TextView
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:id="@+id/ll_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:lineSpacingExtra="3dp"
-            android:text="@string/string_about"
-            android:textColor="@color/colorTitle"
-            android:textSize="15sp" />
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="66dp"
+                android:layout_height="66dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="50dp"
+                android:src="@drawable/ic_cloudreader" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="10dp"
+                android:text="当前版本  V1.0 "
+                android:textColor="@color/colorSubtitle"
+                android:textSize="13sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:background="@color/colorWhite"
+                android:orientation="vertical">
+
+
+                <TextView
+                    android:id="@+id/tv_new_version"
+                    style="@style/menuItem"
+                    android:clickable="true"
+                    android:text="最新版本" />
+
+                <View
+                    style="@style/horizontalLine"
+                    android:layout_marginLeft="10dp" />
+
+                <TextView
+                    android:id="@+id/tv_function"
+                    style="@style/menuItem"
+                    android:clickable="true"
+                    android:text="版本功能" />
+
+                <View
+                    style="@style/horizontalLine"
+                    android:layout_marginLeft="10dp" />
+
+                <TextView
+                    android:id="@+id/tv_about_star"
+                    style="@style/menuItem"
+                    android:clickable="true"
+                    android:text="给个Star吧" />
+
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="20dp"
+                android:gravity="center_horizontal"
+                android:lineSpacingExtra="2dp"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:text="很高兴您能使用，如感到满意请Star一下吧，我们将继续迭代，增加更多功能，O(∩_∩)O ~"
+                android:textColor="@color/colorSubtitle"
+                android:textSize="14sp" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="《"
+                    android:textColor="@color/colorContent"
+                    android:textSize="13sp" />
+
+                <TextView
+                    android:id="@+id/tv_gankio"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="代码家 · 干货集中营"
+                    android:textColor="@color/colorContent"
+                    android:textSize="13sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="》"
+                    android:textColor="@color/colorContent"
+                    android:textSize="13sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="《"
+                    android:textColor="@color/colorContent"
+                    android:textSize="13sp" />
+
+                <TextView
+                    android:id="@+id/tv_douban"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="豆瓣开发者服务使用条款"
+                    android:textColor="@color/colorContent"
+                    android:textSize="13sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="》"
+                    android:textColor="@color/colorContent"
+                    android:textSize="13sp" />
+            </LinearLayout>
+
+        </LinearLayout>
     </RelativeLayout>
 </layout>

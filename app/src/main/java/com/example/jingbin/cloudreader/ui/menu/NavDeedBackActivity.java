@@ -33,6 +33,7 @@ public class NavDeedBackActivity extends BaseActivity<ActivityNavDeedBackBinding
             switch (v.getId()) {
                 case R.id.tv_issues:
                     String issuesUrl = "https://github.com/youlookwhat/CloudReader/issues";
+//                    String issuesUrl = "http://jingbin.me/2017/11/23/%E5%BC%80%E5%8F%91%E4%B8%AD%E6%89%80%E9%81%87%E9%97%AE%E9%A2%98%E5%BD%92%E7%BA%B3/";
                     WebViewActivity.loadUrl(NavDeedBackActivity.this, issuesUrl, "加载中...");
                     break;
                 case R.id.tv_qq:
@@ -45,9 +46,12 @@ public class NavDeedBackActivity extends BaseActivity<ActivityNavDeedBackBinding
                     startActivity(data);
                     break;
                 case R.id.tv_jianshu:
-                    Uri uri = Uri.parse("http://www.jianshu.com/users/e43c6e979831/latest_articles");
-                    Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-                    startActivity(intent);
+                    String jianshuUrl = "http://www.jianshu.com/users/e43c6e979831/latest_articles";
+                    WebViewActivity.loadUrl(NavDeedBackActivity.this, jianshuUrl, "加载中...");
+
+//                    Uri uri = Uri.parse("http://www.jianshu.com/users/e43c6e979831/latest_articles");
+//                    Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+//                    startActivity(intent);
                     break;
             }
         }

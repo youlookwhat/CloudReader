@@ -18,11 +18,11 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 
 import com.example.jingbin.cloudreader.databinding.ActivityMainBinding;
 import com.example.jingbin.cloudreader.ui.book.BookFragment;
 import com.example.jingbin.cloudreader.ui.gank.GankFragment;
+import com.example.jingbin.cloudreader.ui.menu.NavAboutActivity;
 import com.example.jingbin.cloudreader.ui.menu.NavDeedBackActivity;
 import com.example.jingbin.cloudreader.ui.one.OneFragment;
 import com.example.jingbin.cloudreader.utils.CommonUtils;
@@ -183,6 +183,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }, 400);
                 break;
             case R.id.ll_nav_about:// 关于云阅
+                mBinding.drawerLayout.closeDrawer(GravityCompat.START);
+                mBinding.drawerLayout.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        NavAboutActivity.start(MainActivity.this);
+                    }
+                }, 400);
                 break;
             default:
                 break;
@@ -200,7 +207,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_search:
-                Toast.makeText(this, "搜索", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(this, "搜索", Toast.LENGTH_SHORT).show();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
