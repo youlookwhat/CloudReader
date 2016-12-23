@@ -12,5 +12,9 @@
     <string name="actionbar_search">搜索</string>
     <string name="actionbar_more">更多信息</string>
     <string name="github_issues">您好，很希望得到您的意见，由于没有线上反馈系统，您可以在GitHub的Issues处说明问题原因，也可以通过以下方式联系我，我将根据情况尽量处理哦 ~</string>
+    <string name="string_about">云阅是基于网易云音乐UI，使用Gank.Io及豆瓣api开发的基本符合Google Material Design阅读类的App。
+        \n\n 项目采取的是Retrofit + RxJava + MVVM-DataBinding架构开发，现主要包括：干货区、电影区和书籍区三个子模块。
+        \n\n UI：如使用网易云音乐相似的界面导致侵权请及时通知我修改或删除。
+        \n数据：大部分使用的是Gank.io和豆瓣api，一切数据解释权都归Gank.io和豆瓣所有。</string>
 
 </resources>

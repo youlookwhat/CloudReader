@@ -95,6 +95,9 @@
         <activity
             android:name=".ui.menu.NavDeedBackActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.menu.NavAboutActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>
