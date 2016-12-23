@@ -18,11 +18,12 @@
             android:orientation="vertical">
 
             <ImageView
+                android:id="@+id/iv_icon"
                 android:layout_width="66dp"
                 android:layout_height="66dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="50dp"
-                android:src="@drawable/ic_cloudreader" />
+                android:scaleType="centerCrop" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -40,12 +41,26 @@
                 android:background="@color/colorWhite"
                 android:orientation="vertical">
 
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp">
 
-                <TextView
-                    android:id="@+id/tv_new_version"
-                    style="@style/menuItem"
-                    android:clickable="true"
-                    android:text="最新版本" />
+                    <TextView
+                        android:id="@+id/tv_new_version"
+                        style="@style/menuItem"
+                        android:clickable="true"
+                        android:text="最新版本" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="15dp"
+                        android:text="1.0"
+                        android:textColor="@color/colorSubtitle"
+                        android:textSize="13sp" />
+                </RelativeLayout>
 
                 <View
                     style="@style/horizontalLine"
@@ -55,7 +70,7 @@
                     android:id="@+id/tv_function"
                     style="@style/menuItem"
                     android:clickable="true"
-                    android:text="版本功能" />
+                    android:text="更新日志" />
 
                 <View
                     style="@style/horizontalLine"

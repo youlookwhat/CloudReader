@@ -15,6 +15,6 @@
     <string name="string_about">云阅是基于网易云音乐UI，使用Gank.Io及豆瓣api开发的基本符合Google Material Design阅读类的App。
         \n\n 项目采取的是Retrofit + RxJava + MVVM-DataBinding架构开发，现主要包括：干货区、电影区和书籍区三个子模块。
         \n\n UI：如使用网易云音乐相似的界面导致侵权请及时通知我修改或删除。
-        \n数据：大部分使用的是Gank.io和豆瓣api，一切数据解释权都归Gank.io和豆瓣所有。</string>
+        \n数据：大部分使用的是代码家的gank.io和豆瓣api，一切数据解释权都归Gank.io和豆瓣所有。</string>
 
 </resources>

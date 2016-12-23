@@ -24,11 +24,11 @@ import com.example.jingbin.cloudreader.ui.book.BookFragment;
 import com.example.jingbin.cloudreader.ui.gank.GankFragment;
 import com.example.jingbin.cloudreader.ui.menu.NavAboutActivity;
 import com.example.jingbin.cloudreader.ui.menu.NavDeedBackActivity;
+import com.example.jingbin.cloudreader.ui.menu.NavHomePageActivity;
 import com.example.jingbin.cloudreader.ui.one.OneFragment;
 import com.example.jingbin.cloudreader.utils.CommonUtils;
 import com.example.jingbin.cloudreader.utils.ImgLoadUtil;
 import com.example.jingbin.cloudreader.view.MyFragmentPagerAdapter;
-import com.example.jingbin.cloudreader.view.webview.WebViewActivity;
 import com.jaeger.library.StatusBarUtil;
 
 import java.util.ArrayList;
@@ -164,11 +164,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 mBinding.drawerLayout.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-//                        NavHomePageActivity.startHome(MainActivity.this);
-                        String url = "https://github.com/youlookwhat/CloudReader/blob/master/README.md";
-                        WebViewActivity.loadUrl(MainActivity.this, url, "加载中...");
+                        NavHomePageActivity.startHome(MainActivity.this);
+//                        String url = "https://github.com/youlookwhat/CloudReader/blob/master/README.md";
+//                        WebViewActivity.loadUrl(MainActivity.this, url, "加载中...");
                     }
-                }, 400);
+                }, 360);
 
                 break;
             case R.id.ll_nav_scan_download://扫码下载
@@ -180,7 +180,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     public void run() {
                         NavDeedBackActivity.start(MainActivity.this);
                     }
-                }, 400);
+                }, 360);
                 break;
             case R.id.ll_nav_about:// 关于云阅
                 mBinding.drawerLayout.closeDrawer(GravityCompat.START);
@@ -189,7 +189,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     public void run() {
                         NavAboutActivity.start(MainActivity.this);
                     }
-                }, 400);
+                }, 360);
                 break;
             default:
                 break;

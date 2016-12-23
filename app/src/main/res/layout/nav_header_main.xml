@@ -165,7 +165,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="16dp"
-                android:text="关于页面"
+                android:text="关于云阅"
                 android:textColor="@color/colorContent"
                 android:textSize="15sp" />
 
