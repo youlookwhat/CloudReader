@@ -6,6 +6,7 @@ import com.example.jingbin.cloudreader.bean.GankIoDayBean;
 import com.example.jingbin.cloudreader.bean.HotMovieBean;
 import com.example.jingbin.cloudreader.bean.MovieDetailBean;
 import com.example.jingbin.cloudreader.bean.book.BookBean;
+import com.example.jingbin.cloudreader.bean.book.BookDetailBean;
 
 import retrofit.http.GET;
 import retrofit.http.Path;
@@ -92,8 +93,8 @@ public interface RetrofitHttpClient {
     @GET("/v2/book/search")
     Observable<BookBean> getBook(@Query("tag") String tag, @Query("start") int start, @Query("count") int count);
 
-//    @GET("/v2/book/{id}")
-//    Observable<Books> getBookDetail(@Path("id") String id);
+    @GET("/v2/book/{id}")
+    Observable<BookDetailBean> getBookDetail(@Path("id") String id);
 
     /**
      * 根据tag获取music

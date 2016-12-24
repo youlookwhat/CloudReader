@@ -56,6 +56,7 @@ public class OneFragment extends BaseFragment<FragmentOneBinding> {
 
         showContentView();
         aCache = ACache.get(getActivity());
+        oneAdapter = new OneAdapter(activity);
         mHotMovieBean = (HotMovieBean) aCache.getAsObject(Constants.ONE_HOT_MOVIE);
         isPrepared = true;
         DebugUtil.error("---OneFragment   --onActivityCreated");
@@ -83,6 +84,10 @@ public class OneFragment extends BaseFragment<FragmentOneBinding> {
             postDelayLoad();
 
         } else {
+            // 为了正在刷新时不执行这部分
+            if (mIsLoading) {
+                return;
+            }
             if (!isFirst) {
                 return;
             }
@@ -105,7 +110,6 @@ public class OneFragment extends BaseFragment<FragmentOneBinding> {
                 DebugUtil.error("----缓存: " + oneData);
             }
         }
-
 
     }
 
@@ -191,11 +195,7 @@ public class OneFragment extends BaseFragment<FragmentOneBinding> {
             });
             bindingView.listOne.addHeaderView(mHeaderView);
         }
-        if (oneAdapter == null) {
-            oneAdapter = new OneAdapter(activity);
-        } else {
-            oneAdapter.clear();
-        }
+        oneAdapter.clear();
         oneAdapter.addAll(hotMovieBean.getSubjects());
         bindingView.listOne.setAdapter(oneAdapter);
         oneAdapter.notifyDataSetChanged();

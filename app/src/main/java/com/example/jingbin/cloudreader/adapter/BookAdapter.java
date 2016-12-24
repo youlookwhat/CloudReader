@@ -10,12 +10,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.jingbin.cloudreader.MainActivity;
 import com.example.jingbin.cloudreader.R;
 import com.example.jingbin.cloudreader.bean.book.BooksBean;
 import com.example.jingbin.cloudreader.databinding.FooterItemBookBinding;
 import com.example.jingbin.cloudreader.databinding.HeaderItemBookBinding;
 import com.example.jingbin.cloudreader.databinding.ItemBookBinding;
+import com.example.jingbin.cloudreader.ui.book.child.BookDetailActivity;
 import com.example.jingbin.cloudreader.utils.DebugUtil;
+import com.example.jingbin.cloudreader.utils.PerfectClickListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +29,7 @@ import java.util.List;
 
 public class BookAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    private Context context;
+    private MainActivity context;
 
     private int status = 1;
     public static final int LOAD_MORE = 0;
@@ -41,7 +44,7 @@ public class BookAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private List<BooksBean> list;
 
     public BookAdapter(Context context) {
-        this.context = context;
+        this.context = (MainActivity) context;
         list = new ArrayList<>();
 
     }
@@ -216,9 +219,17 @@ public class BookAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             mBindBook = DataBindingUtil.getBinding(view);
         }
 
-        private void bindItem(BooksBean book, int position) {
+        private void bindItem(final BooksBean book, int position) {
             mBindBook.setBean(book);
             mBindBook.executePendingBindings();
+
+            mBindBook.llItemTop.setOnClickListener(new PerfectClickListener() {
+                @Override
+                protected void onNoDoubleClick(View v) {
+                    BookDetailActivity.start(context,book,mBindBook.ivTopPhoto);
+                }
+            });
+
 //            ViewGroup.LayoutParams params=iVFilm.getLayoutParams();
 //            int width= ScreenUtils.getScreenWidthDp(context);
 //            int ivWidth=(width-ScreenUtils.dipToPx(context,80))/3;

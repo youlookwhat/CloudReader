@@ -4,6 +4,7 @@ import android.databinding.BaseObservable;
 import android.databinding.Bindable;
 
 import com.example.jingbin.cloudreader.BR;
+import com.example.jingbin.cloudreader.bean.moviechild.ImagesBean;
 import com.example.jingbin.cloudreader.http.ParamNames;
 
 import java.io.Serializable;
@@ -13,7 +14,7 @@ import java.util.List;
  * Created by jingbin on 2016/12/15.
  */
 
-public class BooksBean extends BaseObservable {
+public class BooksBean extends BaseObservable implements Serializable{
 
     /**
      * rating : {"max":10,"numRaters":116375,"average":"7.9","min":0}
@@ -149,49 +150,6 @@ public class BooksBean extends BaseObservable {
         }
     }
 
-    public static class ImagesBean extends BaseObservable implements Serializable{
-        /**
-         * small : https://img5.doubanio.com/spic/s4477716.jpg
-         * large : https://img5.doubanio.com/lpic/s4477716.jpg
-         * medium : https://img5.doubanio.com/mpic/s4477716.jpg
-         */
-        @ParamNames("small")
-        private String small;
-        @ParamNames("large")
-        private String large;
-        @ParamNames("medium")
-        private String medium;
-
-        @Bindable
-        public String getSmall() {
-            return small;
-        }
-
-        public void setSmall(String small) {
-            this.small = small;
-            notifyPropertyChanged(BR.small);
-        }
-
-        @Bindable
-        public String getLarge() {
-            return large;
-        }
-
-        public void setLarge(String large) {
-            this.large = large;
-            notifyPropertyChanged(BR.large);
-        }
-
-        @Bindable
-        public String getMedium() {
-            return medium;
-        }
-
-        public void setMedium(String medium) {
-            this.medium = medium;
-            notifyPropertyChanged(BR.medium);
-        }
-    }
 
     public static class TagsBean extends BaseObservable implements Serializable{
         /**
