@@ -20,7 +20,7 @@
             android:layout_below="@+id/line"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="15dp"
-            android:text="现在可以根据个人喜好，自由调整首页项目顺序啦~"
+            android:text="现在暂不可以根据个人喜好，自由调整首页项目顺序~"
             android:textColor="#7D7D7D"
             android:textSize="10sp" />
 

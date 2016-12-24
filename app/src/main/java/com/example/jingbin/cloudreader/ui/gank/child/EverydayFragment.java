@@ -265,7 +265,8 @@ public class EverydayFragment extends BaseFragment<FragmentEverydayBinding> {
         mEverydayAdapter.notifyDataSetChanged();
 
         maCache.remove(Constants.EVERYDAY_CONTENT);
-        maCache.put(Constants.EVERYDAY_CONTENT, lists, 43200);
+        // 缓存三天，这样就可以取到缓存了！
+        maCache.put(Constants.EVERYDAY_CONTENT, lists, 259200);
         // 保存请求的日期
         SPUtils.putString("everyday_data", TimeUtil.getData());
 
@@ -330,7 +331,7 @@ public class EverydayFragment extends BaseFragment<FragmentEverydayBinding> {
                     }
                     mHeaderBinding.banner.setImages(mBannerImages).setImageLoader(new GlideImageLoader()).start();
                     maCache.remove(Constants.BANNER_PIC);
-                    maCache.put(Constants.BANNER_PIC, mBannerImages, 3000);
+                    maCache.put(Constants.BANNER_PIC, mBannerImages, 30000);
                 }
             }
 

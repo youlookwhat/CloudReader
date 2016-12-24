@@ -61,7 +61,7 @@ public class AndroidAdapter extends BaseRecyclerViewAdapter<GankIoDataBean.Resul
             binding.llAll.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    WebViewActivity.loadUrl(v.getContext(), object.getUrl(), "详情");
+                    WebViewActivity.loadUrl(v.getContext(), object.getUrl(), "加载中...");
                 }
             });
         }
