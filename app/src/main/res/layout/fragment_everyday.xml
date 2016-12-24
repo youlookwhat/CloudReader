@@ -7,90 +7,10 @@
             type="com.example.jingbin.cloudreader.bean.GankIoDataBean" />
     </data>
 
-    <!--<android.support.v4.widget.NestedScrollView xmlns:app="http://schemas.android.com/apk/res-auto"-->
-        <!--xmlns:tools="http://schemas.android.com/tools"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent"-->
-        <!--android:fillViewport="true"-->
-        <!--android:orientation="vertical"-->
-        <!--android:scrollbarSize="4dp"-->
-        <!--android:scrollbarThumbVertical="@color/tabBackground"-->
-        <!--android:scrollbars="vertical"-->
-        <!--tools:context="com.example.jingbin.yunyue.ui.gank.child.EverydayFragment">-->
+    <com.example.xrecyclerview.XRecyclerView
+        android:id="@+id/xrv_everyday"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="visible" />
 
-        <!--<LinearLayout-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:orientation="vertical">-->
-
-            <!--<com.youth.banner.Banner-->
-                <!--android:id="@+id/banner"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="133dp"-->
-                <!--android:background="@drawable/img_two_bi_one"-->
-                <!--app:image_scale_type="fit_xy"-->
-                <!--app:indicator_drawable_selected="@drawable/banner_red"-->
-                <!--app:indicator_drawable_unselected="@drawable/banner_grey"-->
-                <!--app:indicator_height="9dp"-->
-                <!--app:indicator_margin="3dp"-->
-                <!--app:indicator_width="9dp"-->
-                <!--app:is_auto_play="true" />-->
-
-
-            <!--<include-->
-                <!--android:id="@+id/include_everyday"-->
-                <!--layout="@layout/home_middle_layout" />-->
-
-            <com.example.xrecyclerview.XRecyclerView
-                android:id="@+id/xrv_everyday"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:visibility="visible" />
-
-            <!--<LinearLayout-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:orientation="vertical">-->
-
-                <!--<View-->
-                    <!--android:id="@+id/layout_line"-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="0.3dp"-->
-                    <!--android:layout_marginTop="20dp"-->
-                    <!--android:background="#E0E0E0" />-->
-
-                <!--<TextView-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:layout_gravity="center_horizontal"-->
-                    <!--android:layout_marginTop="15dp"-->
-                    <!--android:text="现在可以根据个人喜好，自由调整首页项目顺序啦~"-->
-                    <!--android:textColor="#7D7D7D"-->
-                    <!--android:textSize="10sp" />-->
-
-                <!--<LinearLayout-->
-                    <!--android:id="@+id/item_change"-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:layout_gravity="center_horizontal"-->
-                    <!--android:layout_marginBottom="50dp"-->
-                    <!--android:layout_marginTop="10dp"-->
-                    <!--android:background="@drawable/home_adjust_background"-->
-                    <!--android:clickable="true"-->
-                    <!--android:orientation="horizontal">-->
-
-                    <!--<TextView-->
-                        <!--android:id="@+id/change_item_position"-->
-                        <!--android:layout_width="wrap_content"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:clickable="false"-->
-                        <!--android:text="调整栏目顺序"-->
-                        <!--android:textColor="@color/colorTheme"-->
-                        <!--android:textSize="12sp" />-->
-                <!--</LinearLayout>-->
-            <!--</LinearLayout>-->
-
-        <!--</LinearLayout>-->
-
-    <!--</android.support.v4.widget.NestedScrollView>-->
 </layout>

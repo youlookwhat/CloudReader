@@ -3,6 +3,7 @@ package com.example.jingbin.cloudreader.ui.menu;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Paint;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 
@@ -39,7 +40,15 @@ public class NavAboutActivity extends BaseActivity<ActivityNavAboutBinding> {
     private void initListener() {
         bindingView.tvGankio.setOnClickListener(listener);
         bindingView.tvDouban.setOnClickListener(listener);
-        bindingView.tvAboutStar.setOnClickListener(listener);
+//        bindingView.tvAboutStar.setOnClickListener(listener);
+        bindingView.tvAboutStar.setOnClickListener(new PerfectClickListener() {
+            @Override
+            protected void onNoDoubleClick(View v) {
+                Uri issuesUrl = Uri.parse("https://github.com/youlookwhat/CloudReader");
+                Intent intent = new Intent(Intent.ACTION_VIEW, issuesUrl);
+                startActivity(intent);
+            }
+        });
         bindingView.tvFunction.setOnClickListener(listener);
         bindingView.tvNewVersion.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -54,7 +54,7 @@ public class OneFragment extends BaseFragment<FragmentOneBinding> {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        showLoading();
+        showContentView();
         aCache = ACache.get(getActivity());
         mHotMovieBean = (HotMovieBean) aCache.getAsObject(Constants.ONE_HOT_MOVIE);
         isPrepared = true;

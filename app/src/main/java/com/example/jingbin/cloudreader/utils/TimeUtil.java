@@ -1,7 +1,11 @@
 package com.example.jingbin.cloudreader.utils;
 
+import android.text.format.Time;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 
 public class TimeUtil {
@@ -277,6 +281,37 @@ public class TimeUtil {
         SimpleDateFormat sDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         String date = sDateFormat.format(new Date());
         return date;
+    }
+
+    /**
+     * 获取当前时间是否大于12：30
+     */
+    public static boolean isRightTime() {
+        Time t = new Time(); // or Time t=new Time("GMT+8"); 加上Time Zone资料。
+        t.setToNow(); // 取得系统时间。
+        int hour = t.hour; // 0-23
+        int minute = t.minute;
+        return hour + 1 > 12 || hour + 1 == 12 && minute >= 30;
+    }
+
+    /**
+     * 得到上一天的时间
+     */
+    public static ArrayList<Integer> getLastTime(int year, int month, int day) {
+        Calendar ca = Calendar.getInstance();//得到一个Calendar的实例
+        ca.set(year, month, day);//月份是从0开始的，所以11表示12月
+
+        //使用roll方法进行向前回滚
+        //cl.roll(Calendar.DATE, -1);
+        //使用set方法直接进行设置
+        int inDay = ca.get(Calendar.DATE);
+        ca.set(Calendar.DATE, inDay - 1);
+
+        ArrayList<Integer> list = new ArrayList<>();
+        list.add(ca.get(Calendar.YEAR));
+        list.add(ca.get(Calendar.MONTH) + 1);
+        list.add(ca.get(Calendar.DATE));
+        return list;
     }
 
 
