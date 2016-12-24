@@ -348,7 +348,7 @@ public class EverydayFragment extends BaseFragment<FragmentEverydayBinding> {
 
     @Override
     protected void onRefresh() {
-        loadBannerPicture();
+        loadData();
     }
 
     @Override

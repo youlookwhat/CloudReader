@@ -53,6 +53,7 @@ public class CustomFragment extends BaseFragment<FragmentCustomBinding> {
         bindingView.xrvCustom.setPullRefreshEnabled(false);
         // 去掉刷新头
         bindingView.xrvCustom.clearHeader();
+        mAndroidAdapter = new AndroidAdapter();
         bindingView.xrvCustom.setLoadingListener(new XRecyclerView.LoadingListener() {
             @Override
             public void onRefresh() {
@@ -103,7 +104,7 @@ public class CustomFragment extends BaseFragment<FragmentCustomBinding> {
                     @Override
                     public void onError(Throwable e) {
                         bindingView.xrvCustom.refreshComplete();
-                        if (mAndroidAdapter.getItemCount() == 1) {
+                        if (mAndroidAdapter.getItemCount() == 0) {
                             showError();
                         }
                     }
@@ -144,7 +145,7 @@ public class CustomFragment extends BaseFragment<FragmentCustomBinding> {
         }
 
         isAll = SPUtils.getString("gank_cala", "全部").equals("全部");
-        mAndroidAdapter = new AndroidAdapter(isAll);
+        mAndroidAdapter.setAll(isAll);
         mAndroidAdapter.addAll(mCustomBean.getResults());
         bindingView.xrvCustom.setLayoutManager(new LinearLayoutManager(getActivity()));
         bindingView.xrvCustom.setAdapter(mAndroidAdapter);

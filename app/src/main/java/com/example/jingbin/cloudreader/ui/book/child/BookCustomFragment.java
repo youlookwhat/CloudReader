@@ -210,7 +210,7 @@ public class BookCustomFragment extends BaseFragment<FragmentBookCustomBinding> 
 //                    int[] into = new int[(mLayoutManager).getSpanCount()];
 //                    lastVisibleItem = findMax(mLayoutManager.findLastVisibleItemPositions(into));
 
-                    if (mLayoutManager.getItemCount() == 1) {
+                    if (mLayoutManager.getItemCount() == 0) {
                         if (mBookAdapter != null) {
                             mBookAdapter.updateLoadStatus(BookAdapter.LOAD_NONE);
                         }

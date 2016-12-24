@@ -19,7 +19,7 @@ public class AndroidAdapter extends BaseRecyclerViewAdapter<GankIoDataBean.Resul
 
     private boolean isAll = false;
 
-    public AndroidAdapter(boolean isAll) {
+    public void setAll(boolean isAll){
         this.isAll = isAll;
     }
 
