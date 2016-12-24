@@ -38,8 +38,6 @@ public class CustomFragment extends BaseFragment<FragmentCustomBinding> {
     private ACache mACache;
     private GankIoDataBean mAllBean;
     private View mHeaderView;
-    // 是否选择"全部"，默认选择的是"全部"
-    private boolean isAll = true;
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
@@ -103,9 +101,13 @@ public class CustomFragment extends BaseFragment<FragmentCustomBinding> {
 
                     @Override
                     public void onError(Throwable e) {
+                        showContentView();
                         bindingView.xrvCustom.refreshComplete();
                         if (mAndroidAdapter.getItemCount() == 0) {
                             showError();
+                        }
+                        if (mPage > 1) {
+                            mPage--;
                         }
                     }
 
@@ -137,15 +139,15 @@ public class CustomFragment extends BaseFragment<FragmentCustomBinding> {
      * 设置adapter
      */
     private void setAdapter(GankIoDataBean mCustomBean) {
-
         if (mHeaderView == null) {
             mHeaderView = View.inflate(getContext(), R.layout.header_item_gank_custom, null);
-            initHeader(mHeaderView);
             bindingView.xrvCustom.addHeaderView(mHeaderView);
         }
+        initHeader(mHeaderView);
 
-        isAll = SPUtils.getString("gank_cala", "全部").equals("全部");
-        mAndroidAdapter.setAll(isAll);
+        boolean isAll = SPUtils.getString("gank_cala", "全部").equals("全部");
+        mAndroidAdapter.clear();
+        mAndroidAdapter.setAllType(isAll);
         mAndroidAdapter.addAll(mCustomBean.getResults());
         bindingView.xrvCustom.setLayoutManager(new LinearLayoutManager(getActivity()));
         bindingView.xrvCustom.setAdapter(mAndroidAdapter);
@@ -171,9 +173,9 @@ public class CustomFragment extends BaseFragment<FragmentCustomBinding> {
                                     txName.setText("全部");
                                     mType = "all";// 全部传 all
                                     mPage = 1;
+                                    mAndroidAdapter.clear();
                                     SPUtils.putString("gank_cala", "全部");
                                     showLoading();
-                                    isAll = true;
                                     loadCustomData();
                                 }
                                 break;
@@ -182,9 +184,9 @@ public class CustomFragment extends BaseFragment<FragmentCustomBinding> {
                                     txName.setText("IOS");
                                     mType = "iOS";// 这里有严格大小写
                                     mPage = 1;
+                                    mAndroidAdapter.clear();
                                     SPUtils.putString("gank_cala", "IOS");
                                     showLoading();
-                                    isAll = false;
                                     loadCustomData();
                                 }
                                 break;
@@ -215,7 +217,7 @@ public class CustomFragment extends BaseFragment<FragmentCustomBinding> {
         textView.setText(content);
         mType = content;
         mPage = 1;
-        isAll = false;
+        mAndroidAdapter.clear();
         SPUtils.putString("gank_cala", content);
         showLoading();
         loadCustomData();
@@ -245,6 +247,7 @@ public class CustomFragment extends BaseFragment<FragmentCustomBinding> {
         super.onDestroy();
         DebugUtil.error("--CustomFragment   ----onDestroy");
     }
+
     @Override
     public void onResume() {
         super.onResume();

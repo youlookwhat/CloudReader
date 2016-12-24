@@ -99,6 +99,9 @@ public class WelfareFragment extends BaseFragment<FragmentWelfareBinding> {
                         if (mWelfareAdapter.getItemCount() == 0) {
                             showError();
                         }
+                        if (mPage > 1) {
+                            mPage--;
+                        }
                     }
 
                     @Override
