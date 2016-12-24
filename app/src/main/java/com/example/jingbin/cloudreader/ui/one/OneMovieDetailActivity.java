@@ -47,6 +47,7 @@ public class OneMovieDetailActivity extends BaseHeaderActivity<HeaderSlideShapeB
 
         setTitle(subjectsBean.getTitle());
         setSubTitle(String.format("主演：%s", StringFormatUtil.formatName(subjectsBean.getCasts())));
+//        ImgLoadUtil.showImg(bindingHeaderView.ivOnePhoto,subjectsBean.getImages().getLarge());
         bindingHeaderView.setSubjectsBean(subjectsBean);
         bindingHeaderView.executePendingBindings();
 

@@ -4,7 +4,7 @@
     <RelativeLayout
         android:id="@+id/rl_more"
         android:layout_width="match_parent"
-        android:layout_height="45dp"
+        android:layout_height="1dp"
         android:background="@color/colorPageBg"
         android:gravity="center"
         android:orientation="vertical">

@@ -47,6 +47,11 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
+                <!--android:showImg='@{subjectsBean.images.large}'-->
+                <!--声明 它是可以折叠的-->
+                <!--app:layout_collapseMode="parallax"-->
+                <!--视差因子) - 设置视差滚动因子，值为：0~1。-->
+                <!--app:layout_collapseParallaxMultiplier="0.7"-->
                 <ImageView
                     android:id="@+id/iv_one_photo"
                     android:layout_width="120dp"
@@ -54,9 +59,7 @@
                     android:layout_marginRight="15dp"
                     android:scaleType="fitXY"
                     android:showImg='@{subjectsBean.images.large}'
-                    android:transitionName="@string/transition_movie_img"
-                    app:layout_collapseMode="parallax"
-                    app:layout_collapseParallaxMultiplier="0.7" />
+                    android:transitionName="@string/transition_movie_img" />
 
                 <!--评分-->
                 <LinearLayout

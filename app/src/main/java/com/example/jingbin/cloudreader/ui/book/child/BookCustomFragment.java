@@ -32,7 +32,7 @@ public class BookCustomFragment extends BaseFragment<FragmentBookCustomBinding> 
     // 开始请求的角标
     private int mStart = 0;
     // 一次请求的数量
-    private int mCount = 12;
+    private int mCount = 18;
     private MainActivity activity;
     private BookAdapter mBookAdapter;
     private GridLayoutManager mLayoutManager;
@@ -88,13 +88,14 @@ public class BookCustomFragment extends BaseFragment<FragmentBookCustomBinding> 
             }
         });
 
-        mBookAdapter = new BookAdapter(getActivity());
+//        mBookAdapter = new BookAdapter(getActivity());
 
 //        mLayoutManager = new StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL);
 
         mLayoutManager = new GridLayoutManager(getActivity(), 3);
         bindingView.xrvBook.setLayoutManager(mLayoutManager);
-        bindingView.xrvBook.setAdapter(mBookAdapter);
+
+//        bindingView.xrvBook.setAdapter(mBookAdapter);
 
         scrollRecycleView();
 
@@ -120,7 +121,7 @@ public class BookCustomFragment extends BaseFragment<FragmentBookCustomBinding> 
             public void run() {
                 loadCustomData();
             }
-        }, 1000);
+        }, 500);
 //        loadCustomData();
         DebugUtil.error("-----setRefreshing");
 //        mIsFirst = false;
@@ -137,7 +138,7 @@ public class BookCustomFragment extends BaseFragment<FragmentBookCustomBinding> 
 
     private void loadCustomData() {
 
-        Subscription get = HttpUtils.getInstance().getDouBanServer().getBook("韩寒", mStart, mCount)
+        Subscription get = HttpUtils.getInstance().getDouBanServer().getBook(mType, mStart, mCount)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<BookBean>() {
@@ -164,8 +165,14 @@ public class BookCustomFragment extends BaseFragment<FragmentBookCustomBinding> 
                         if (mStart == 0) {
                             if (bookBean != null && bookBean.getBooks() != null && bookBean.getBooks().size() > 0) {
 
+                                if (mBookAdapter==null) {
+                                    mBookAdapter = new BookAdapter(getActivity());
+                                }
                                 mBookAdapter.setList(bookBean.getBooks());
                                 mBookAdapter.notifyDataSetChanged();
+                                bindingView.xrvBook.setAdapter(mBookAdapter);
+
+
 //                                mBookAdapter = new BookAdapter(activity);
 //                                mBookAdapter.addAll(bookBean.getBooks());
 //                                //构造器中，第一个参数表示列数或者行数，第二个参数表示滑动方向,瀑布流

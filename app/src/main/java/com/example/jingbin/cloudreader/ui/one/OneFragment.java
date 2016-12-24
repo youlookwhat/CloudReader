@@ -119,7 +119,9 @@ public class OneFragment extends BaseFragment<FragmentOneBinding> {
 
                     @Override
                     public void onError(Throwable e) {
-                        showError();
+                        if (oneAdapter != null && oneAdapter.getItemCount() == 0) {
+                            showError();
+                        }
                     }
 
                     @Override
