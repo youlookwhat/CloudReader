@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:padding="12dp"
-        android:text="developed by Jingbin"
+        android:text="豆瓣api请求限制 40次/分"
         android:textColor="@color/colorContent"
         android:textSize="12sp" />
 
@@ -19,7 +19,9 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:padding="2dp"
-        android:text="本项目由景彬开发"
+        android:text="给您带来的不便深感抱歉"
         android:textColor="@color/colorContent"
-        android:textSize="14sp" />
+        android:textSize="12sp" />
+
+    <!--本项目由景彬开发-->
 </LinearLayout>

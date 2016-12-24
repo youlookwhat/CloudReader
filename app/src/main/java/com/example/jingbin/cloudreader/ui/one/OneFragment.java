@@ -178,7 +178,11 @@ public class OneFragment extends BaseFragment<FragmentOneBinding> {
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
         mLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         bindingView.listOne.setLayoutManager(mLayoutManager);
+
+        // 加上这两行代码，下拉出提示才不会产生出现刷新头的bug，不加拉不下来
         bindingView.listOne.setPullRefreshEnabled(false);
+        bindingView.listOne.clearHeader();
+
         bindingView.listOne.setLoadingMoreEnabled(false);
         // 需加，不然滑动不流畅
         bindingView.listOne.setNestedScrollingEnabled(false);

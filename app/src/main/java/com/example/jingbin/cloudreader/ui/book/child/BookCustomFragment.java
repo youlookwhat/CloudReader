@@ -144,6 +144,7 @@ public class BookCustomFragment extends BaseFragment<FragmentBookCustomBinding> 
                 .subscribe(new Observer<BookBean>() {
                     @Override
                     public void onCompleted() {
+                        showContentView();
                         if (bindingView.srlBook.isRefreshing()) {
                             bindingView.srlBook.setRefreshing(false);
                         }
@@ -151,10 +152,10 @@ public class BookCustomFragment extends BaseFragment<FragmentBookCustomBinding> 
 
                     @Override
                     public void onError(Throwable e) {
+                        showContentView();
                         if (bindingView.srlBook.isRefreshing()) {
                             bindingView.srlBook.setRefreshing(false);
                         }
-                        showError();
                         if (mStart == 0) {
                             showError();
                         }
