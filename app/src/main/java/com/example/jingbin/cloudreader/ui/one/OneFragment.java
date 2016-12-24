@@ -75,37 +75,38 @@ public class OneFragment extends BaseFragment<FragmentOneBinding> {
 
         // 显示，准备完毕，不是当天，则请求数据（正在请求时避免再次请求）
         String oneData = SPUtils.getString("one_data", "2016-11-26");
-        synchronized (this) {
-            if (!oneData.equals(TimeUtil.getData()) && !mIsLoading) {
-                mIsLoading = true;
-                /**延迟执行防止卡顿*/
-                showLoading();
-                postDelayLoad();
+
+        if (!oneData.equals(TimeUtil.getData()) && !mIsLoading) {
+            mIsLoading = true;
+            /**延迟执行防止卡顿*/
+            showLoading();
+            postDelayLoad();
+
+        } else {
+            if (!isFirst) {
                 return;
             }
-        }
 
-        if (!isFirst) {
-            return;
-        }
-
-        showLoading();
-        if (mHotMovieBean == null) {
-            synchronized (this) {
-                postDelayLoad();
-            }
-        } else {
-            bindingView.listOne.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    synchronized (this) {
-                        setAdapter(mHotMovieBean);
-                        showContentView();
-                    }
+            showLoading();
+            if (mHotMovieBean == null) {
+                synchronized (this) {
+                    postDelayLoad();
                 }
-            }, 150);
-            DebugUtil.error("----缓存: " + oneData);
+            } else {
+                bindingView.listOne.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        synchronized (this) {
+                            setAdapter(mHotMovieBean);
+                            showContentView();
+                        }
+                    }
+                }, 150);
+                DebugUtil.error("----缓存: " + oneData);
+            }
         }
+
+
     }
 
     private void loadHotMovie() {
