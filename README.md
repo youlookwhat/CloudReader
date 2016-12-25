@@ -2,16 +2,18 @@
 
 > Netease cloud music Ui && Retrofit + RxJava + Mvvm-databinding && GankIo、Douban Api 
 
-一款基于网易云音乐UI，使用GankIo及豆瓣api开发的符合Google Material Desgin阅读类的App。项目采取的是Retrofit + RxJava + MVVM-DataBinding架构开发，现主要包括：干货区、电影区和书籍区三个模块。
+##### 云阅是一款基于网易云音乐UI，使用GankIo及豆瓣api开发的符合Google Material Desgin阅读类的开源项目。
+
+## 项目
+
+项目采取的是Retrofit + RxJava + MVVM-DataBinding架构开发。其中现主要包括：干货区、电影区和书籍区三个模块。
 
 
 
 ## 模块分析
 ### 干货区（gankio）
- - 每日推荐
- - 福利
- - 干货订制
- - 大安卓
+ - 内容：其中包括：每日推荐、福利、干货订制、大安卓。API使用的是动听（轮播图）和代码家的Gank.Io。
+ - 说明：
 
 ### 电影区（豆瓣）
  - 热映榜（每日更新）
