@@ -197,8 +197,8 @@ public class OneFragment extends BaseFragment<FragmentOneBinding> {
                     DoubanTopActivity.start(v.getContext());
                 }
             });
-            bindingView.listOne.addHeaderView(mHeaderView);
         }
+        bindingView.listOne.addHeaderView(mHeaderView);
         oneAdapter.clear();
         oneAdapter.addAll(hotMovieBean.getSubjects());
         bindingView.listOne.setAdapter(oneAdapter);

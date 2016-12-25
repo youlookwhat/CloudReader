@@ -69,7 +69,7 @@ public class OneMovieDetailActivity extends BaseHeaderActivity<HeaderSlideShapeB
         if (subjectsBean == null) {
             return "";
         }
-        return subjectsBean.getImages().getLarge();
+        return subjectsBean.getImages().getMedium();
     }
 
     @Override

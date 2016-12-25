@@ -29,7 +29,7 @@
             android:layout_height="330dp"
             android:fitsSystemWindows="true"
             android:scaleType="fitXY"
-            android:showImgBg='@{subjectsBean.images.large}' />
+            android:showImgBg='@{subjectsBean.images.medium}' />
 
         <LinearLayout
             android:id="@+id/ll_one_item"

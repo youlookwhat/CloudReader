@@ -69,8 +69,6 @@ public class BookDetailActivity extends BaseHeaderActivity<HeaderBookDetailBindi
 
                     @Override
                     public void onNext(final BookDetailBean bookDetailBean) {
-//                        bindingContentView.setBookDetailBean(bookDetailBean);
-//                        bindingContentView.executePendingBindings();
 
                         mBookDetailUrl = bookDetailBean.getAlt();
                         mBookDetailName = bookDetailBean.getTitle();
