@@ -29,29 +29,53 @@
                 android:textSize="15sp" />
 
 
-            <TextView
+            <LinearLayout
+                android:layout_marginTop="35dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="50dp"
                 android:background="@color/colorWhite"
-                android:padding="10dp"
-                android:text="Issues"
-                android:textColor="@color/colorTabText"
-                android:textSize="13sp" />
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorWhite"
+                    android:padding="10dp"
+                    android:text="Issues"
+                    android:textColor="@color/colorTabText"
+                    android:textSize="13sp" />
 
 
-            <TextView
-                android:id="@+id/tv_issues"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:background="@drawable/ripple_item_white_bg"
-                android:clickable="true"
-                android:gravity="center_vertical"
-                android:paddingLeft="10dp"
-                android:paddingRight="12dp"
-                android:text="CloudReader"
-                android:textColor="@color/text_common"
-                android:textSize="17sp" />
+                <TextView
+                    android:id="@+id/tv_issues"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@drawable/ripple_item_white_bg"
+                    android:clickable="true"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="12dp"
+                    android:text="CloudReader"
+                    android:textColor="@color/text_common"
+                    android:textSize="17sp" />
+
+                <View
+                    style="@style/horizontalLine"
+                    android:layout_marginLeft="10dp" />
+
+                <TextView
+                    android:id="@+id/tv_faq"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@drawable/ripple_item_white_bg"
+                    android:clickable="true"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="12dp"
+                    android:text="常见问题归纳"
+                    android:textColor="@color/text_common"
+                    android:textSize="17sp" />
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -84,8 +108,7 @@
 
                 <View
                     style="@style/horizontalLine"
-                    android:layout_marginLeft="10dp"
-                    android:paddingLeft="10dp" />
+                    android:layout_marginLeft="10dp" />
 
                 <TextView
                     android:id="@+id/tv_email"

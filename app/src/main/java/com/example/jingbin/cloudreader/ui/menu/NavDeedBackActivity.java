@@ -24,6 +24,7 @@ public class NavDeedBackActivity extends BaseActivity<ActivityNavDeedBackBinding
         bindingView.tvJianshu.setOnClickListener(listener);
         bindingView.tvQq.setOnClickListener(listener);
         bindingView.tvEmail.setOnClickListener(listener);
+        bindingView.tvFaq.setOnClickListener(listener);
     }
 
     private PerfectClickListener listener = new PerfectClickListener() {
@@ -53,6 +54,11 @@ public class NavDeedBackActivity extends BaseActivity<ActivityNavDeedBackBinding
                     Uri uri = Uri.parse("http://www.jianshu.com/users/e43c6e979831/latest_articles");
                     Intent intent = new Intent(Intent.ACTION_VIEW, uri);
                     startActivity(intent);
+                    break;
+                case R.id.tv_faq:
+                    Uri uri2 = Uri.parse("http://jingbin.me/2016/12/25/%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98-%E4%BA%91%E9%98%85/");
+                    Intent intent3 = new Intent(Intent.ACTION_VIEW, uri2);
+                    startActivity(intent3);
                     break;
             }
         }
