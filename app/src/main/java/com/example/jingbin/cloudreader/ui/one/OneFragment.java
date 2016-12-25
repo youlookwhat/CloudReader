@@ -123,6 +123,7 @@ public class OneFragment extends BaseFragment<FragmentOneBinding> {
 
                     @Override
                     public void onError(Throwable e) {
+                        showContentView();
                         if (oneAdapter != null && oneAdapter.getItemCount() == 0) {
                             showError();
                         }
