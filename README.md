@@ -45,12 +45,17 @@
  - 参考项目：[ImitateNetEasyCloud](https://github.com/GiitSmile/ImitateNetEasyCloud)、[banya](https://github.com/forezp/banya)；主要数据来源：[Gank.Io](https://gank.io/api)、[豆瓣Api](https://developers.douban.com/wiki/?title=terms)
 
  - 使用到的开源库：[glide](https://github.com/bumptech/glide)、[bottomsheet](https://github.com/Flipboard/bottomsheet)、[nineoldandroids](https://github.com/JakeWharton/NineOldAndroids)、[rxandroid](https://github.com/ReactiveX/RxAndroid)等等。
+
+ - 感谢[代码家](https://github.com/daimajia)、[张鸿洋](https://github.com/hongyangAndroid)、[drakeet](https://github.com/drakeet)、[yang747046912](https://github.com/yang747046912)、[GiitSmile](https://github.com/GiitSmile)、[forezp](https://github.com/forezp/banya)等众多开发者贡献的开源项目，让我从中学到了很多!
  
- - 最后，如果你觉得不错，对你有帮助，可以帮忙分享给你更多的朋友，这是给我们最大的动力与支持，也可以请我喝杯咖啡（支付宝：770413277@qq.com），也就是所谓的打赏O(∩_∩)O~。同时希望你多多fork，star，follow，我将贡献更多的开源项目。开源使生活更美好！
+ 
+## End
+最后，如果你觉得不错，对你有帮助，可以帮忙分享给你更多的朋友，这是给我们最大的动力与支持，也可以请我喝杯咖啡（支付宝：770413277@qq.com），也就是所谓的打赏O(∩_∩)O~。同时希望你多多fork，star，follow，我将贡献更多的开源项目。开源使生活更美好！
 
 ## About me
  - **QQ：**770413277
  - **简书：**[肖子理](http://www.jianshu.com/users/e43c6e979831/latest_articles)
+ - **Email：**770413277@qq.com | jingbin127@gmail.com
  - **Blog：**[http://jingbin.me](http://jingbin.me)
  - **GitHub：**[https://github.com/youlookwhat](https://github.com/youlookwhat)
 
