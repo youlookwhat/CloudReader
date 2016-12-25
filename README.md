@@ -1,12 +1,12 @@
 # CloudReader
 
-> Netease cloud music Ui && Retrofit + RxJava + Mvvm-databinding && GankIo、Douban Api 
+> Netease cloud music Ui && Retrofit + RxJava + MVVM-databinding && GankIo、Douban Api 
 
 #### 云阅是一款基于网易云音乐UI，使用GankIo及豆瓣api开发的符合Google Material Desgin阅读类的开源项目。
 
 ## 项目
 
-项目采取的是Retrofit + RxJava + MVVM-DataBinding架构开发。其中现主要包括：干货区、电影区和书籍区三个模块。
+项目采取的是Retrofit + RxJava + MVVM-DataBinding架构开发。全项目使用的是DataBinding，包括RecyclerView的BaseHolder等，代码结构清晰，使用方便简洁。
 
 ## 效果图
 
@@ -37,6 +37,22 @@
 
  - 功能：使用的是``SwipeRefreshLayout``刷新控件结合``RecyclerView``的方式，支持一般的列表、GridView和瀑布流的上拉加载的使用。书籍详情页类似电影详情页。
 
+## 特别鸣谢
+ - 我几乎看过了所有关于Android仿网易云音乐的项目与文章，发现大部分做的都不够细致，也没有比较好的内容填充，于是决心自己着手做一个，才有了这个开源项目。这里列出主要参考的内容。
+ 
+ - 感谢[iconfont](http://www.iconfont.cn/plus)提供图片资源，项目中的大部分图片皆出于此。
+
+ - 参考项目：[ImitateNetEasyCloud](https://github.com/GiitSmile/ImitateNetEasyCloud)、[banya](https://github.com/forezp/banya)；主要数据来源：[Gank.Io](https://gank.io/api)、[豆瓣Api](https://developers.douban.com/wiki/?title=terms)
+
+ - 使用到的开源库：[glide](https://github.com/bumptech/glide)、[bottomsheet](https://github.com/Flipboard/bottomsheet)、[nineoldandroids](https://github.com/JakeWharton/NineOldAndroids)、[rxandroid](https://github.com/ReactiveX/RxAndroid)等等。
+ 
+ - 最后，如果你觉得不错，对你有帮助，可以帮忙分享给你更多的朋友，这是给我们最大的动力与支持，也可以请我喝杯咖啡（支付宝：770413277@qq.com），也就是所谓的打赏O(∩_∩)O~。同时希望你多多fork，star，follow，我将贡献更多的开源项目。开源使生活更美好！
+
+## About me
+ - **QQ：**770413277
+ - **简书：**[肖子理](http://www.jianshu.com/users/e43c6e979831/latest_articles)
+ - **Blog：**[http://jingbin.me](http://jingbin.me)
+ - **GitHub：**[https://github.com/youlookwhat](https://github.com/youlookwhat)
 
 ## License
 ```
