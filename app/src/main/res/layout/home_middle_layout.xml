@@ -38,7 +38,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_horizontal"
                             android:layout_marginTop="8dp"
-                            android:text="闲读"
+                            android:text="干货闲读"
                             android:textColor="@color/colorContent"
                             android:textSize="12sp" />
                     </LinearLayout>
