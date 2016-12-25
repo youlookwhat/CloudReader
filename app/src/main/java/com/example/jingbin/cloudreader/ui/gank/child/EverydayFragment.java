@@ -10,6 +10,7 @@ import android.view.View;
 
 import com.bumptech.glide.Glide;
 import com.example.jingbin.cloudreader.R;
+import com.example.jingbin.cloudreader.adapter.EmptyAdapter;
 import com.example.jingbin.cloudreader.adapter.EverydayAdapter;
 import com.example.jingbin.cloudreader.app.Constants;
 import com.example.jingbin.cloudreader.base.BaseFragment;
@@ -23,6 +24,7 @@ import com.example.jingbin.cloudreader.http.rx.RxBus;
 import com.example.jingbin.cloudreader.http.rx.RxBusBaseMessage;
 import com.example.jingbin.cloudreader.http.rx.RxCodeConstants;
 import com.example.jingbin.cloudreader.model.EverydayModel;
+import com.example.jingbin.cloudreader.utils.CommonUtils;
 import com.example.jingbin.cloudreader.utils.DebugUtil;
 import com.example.jingbin.cloudreader.utils.GlideImageLoader;
 import com.example.jingbin.cloudreader.utils.PerfectClickListener;
@@ -37,6 +39,13 @@ import rx.Subscription;
 
 /**
  * 每日推荐
+ * 更新逻辑：判断是否是第二天(相对于2016-11-26)
+ * 是：判断是否是大于12：30
+ * *****     |是：刷新当天数据
+ * *****     |否：使用缓存：|无：请求前一天数据
+ * **********             |有：使用缓存
+ * 否：使用缓存 ： |无：请求今天数据
+ * **********    |有：使用缓存
  */
 public class EverydayFragment extends BaseFragment<FragmentEverydayBinding> {
 
@@ -56,12 +65,18 @@ public class EverydayFragment extends BaseFragment<FragmentEverydayBinding> {
     private boolean mIsLoading = false;
 
     @Override
+    public int setContent() {
+        return R.layout.fragment_everyday;
+    }
+
+
+    @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
         showLoading();
         maCache = ACache.get(getContext());
-
+        mEverydayModel = new EverydayModel();
         mBannerImages = (ArrayList<String>) maCache.getAsObject(Constants.BANNER_PIC);
         mLists = (ArrayList<List<AndroidBean>>) maCache.getAsObject(Constants.EVERYDAY_CONTENT);
         DebugUtil.error("----mBannerImages: " + (mBannerImages == null));
@@ -70,6 +85,7 @@ public class EverydayFragment extends BaseFragment<FragmentEverydayBinding> {
         mHeaderBinding = DataBindingUtil.inflate(LayoutInflater.from(getContext()), R.layout.header_item_everyday, null, false);
         // 设置本地数据点击事件等
         initLocalSetting();
+        initRecyclerView();
 
         mIsPrepared = true;
         /**
@@ -79,21 +95,27 @@ public class EverydayFragment extends BaseFragment<FragmentEverydayBinding> {
         loadData();
     }
 
-    @Override
-    public int setContent() {
-        return R.layout.fragment_everyday;
-    }
-
-    private void initLocalSetting() {
+    /**
+     * 获取当天日期
+     */
+    private ArrayList<String> getTodayTime() {
         String data = TimeUtil.getData();
         String[] split = data.split("-");
         String year = split[0];
         String month = split[1];
         String day = split[2];
-        mEverydayModel = new EverydayModel(year, month, day);
+        ArrayList<String> list = new ArrayList<>();
+        list.add(year);
+        list.add(month);
+        list.add(day);
+        return list;
+    }
+
+    private void initLocalSetting() {
+        mEverydayModel.setData(getTodayTime().get(0), getTodayTime().get(1), getTodayTime().get(2));
 //        DebugUtil.error("" + year + month + day);
         // 显示日期
-        mHeaderBinding.includeEveryday.tvDailyText.setText(day);
+        mHeaderBinding.includeEveryday.tvDailyText.setText(getTodayTime().get(2));
         mHeaderBinding.includeEveryday.ibXiandu.setOnClickListener(new PerfectClickListener() {
             @Override
             protected void onNoDoubleClick(View v) {
@@ -120,15 +142,30 @@ public class EverydayFragment extends BaseFragment<FragmentEverydayBinding> {
             return;
         }
 
-        // 显示，准备完毕，不是当天，则请求所有数据
         String oneData = SPUtils.getString("everyday_data", "2016-11-26");
-        if (!oneData.equals(TimeUtil.getData()) && !mIsLoading) {
-            mIsLoading = true;
-            showLoading();
-            loadBannerPicture();
-            showContentData();
-            return;
+        if (!oneData.equals(TimeUtil.getData())) {// 是第二天
+            if (TimeUtil.isRightTime()) {//大于12：30,请求
+                showLoading();
+                loadBannerPicture();
+                showContentData();
+            } else {// 小于，取缓存没有请求前一天
+                ArrayList<Integer> lastTime = TimeUtil.getLastTime(Integer.valueOf(getTodayTime().get(0)),
+                        Integer.valueOf(getTodayTime().get(1)),
+                        Integer.valueOf(getTodayTime().get(2)));
+                mEverydayModel.setData(String.valueOf(lastTime.get(0)),
+                        String.valueOf(lastTime.get(1)),
+                        String.valueOf(lastTime.get(2)));
+                getAcacheData();
+            }
+        } else {// 当天，取缓存没有请求当天
+            getAcacheData();
         }
+    }
+
+    /**
+     * 取缓存
+     */
+    private void getAcacheData() {
 
         if (!mIsFirst) {
             return;
@@ -146,6 +183,7 @@ public class EverydayFragment extends BaseFragment<FragmentEverydayBinding> {
         }
     }
 
+
     /**
      * 加载正文内容
      */
@@ -157,7 +195,14 @@ public class EverydayFragment extends BaseFragment<FragmentEverydayBinding> {
                     mLists.clear();
                 }
                 mLists = (ArrayList<List<AndroidBean>>) object;
-                setAdapter(mLists);
+                if (mLists.size() > 0 && mLists.get(0).size() > 0) {
+                    setAdapter(mLists);
+                } else {
+                    if (mEverydayAdapter != null) {
+                        mEverydayAdapter = null;
+                    }
+                    setEmptyAdapter();
+                }
             }
 
             @Override
@@ -172,8 +217,21 @@ public class EverydayFragment extends BaseFragment<FragmentEverydayBinding> {
         });
     }
 
-    private void setAdapter(ArrayList<List<AndroidBean>> lists) {
+    private void setEmptyAdapter() {
         showContentView();
+        EmptyAdapter emptyAdapter = new EmptyAdapter();
+        ArrayList<String> list = new ArrayList<>();
+        list.add(CommonUtils.getString(R.string.string_everyday_empty));
+        emptyAdapter.addAll(list);
+        bindingView.xrvEveryday.setAdapter(emptyAdapter);
+
+        // 保存请求的日期
+        SPUtils.putString("everyday_data", TimeUtil.getData());
+        mIsFirst = false;
+        mIsLoading = false;
+    }
+
+    private void initRecyclerView() {
         bindingView.xrvEveryday.setVisibility(View.VISIBLE);
         bindingView.xrvEveryday.setPullRefreshEnabled(false);
         bindingView.xrvEveryday.setLoadingMoreEnabled(false);
@@ -187,6 +245,15 @@ public class EverydayFragment extends BaseFragment<FragmentEverydayBinding> {
             bindingView.xrvEveryday.addFootView(mFooterView, true);
             bindingView.xrvEveryday.noMoreLoading();
         }
+        bindingView.xrvEveryday.setLayoutManager(new LinearLayoutManager(getContext()));
+        // 需加，不然滑动不流畅
+        bindingView.xrvEveryday.setNestedScrollingEnabled(false);
+        bindingView.xrvEveryday.setHasFixedSize(false);
+        bindingView.xrvEveryday.setItemAnimator(new DefaultItemAnimator());
+    }
+
+    private void setAdapter(ArrayList<List<AndroidBean>> lists) {
+        showContentView();
 
         if (mEverydayAdapter == null) {
             mEverydayAdapter = new EverydayAdapter();
@@ -194,16 +261,12 @@ public class EverydayFragment extends BaseFragment<FragmentEverydayBinding> {
             mEverydayAdapter.clear();
         }
         mEverydayAdapter.addAll(lists);
-        bindingView.xrvEveryday.setLayoutManager(new LinearLayoutManager(getContext()));
-        // 需加，不然滑动不流畅
-        bindingView.xrvEveryday.setNestedScrollingEnabled(false);
-        bindingView.xrvEveryday.setHasFixedSize(false);
-        bindingView.xrvEveryday.setItemAnimator(new DefaultItemAnimator());
         bindingView.xrvEveryday.setAdapter(mEverydayAdapter);
         mEverydayAdapter.notifyDataSetChanged();
 
         maCache.remove(Constants.EVERYDAY_CONTENT);
-        maCache.put(Constants.EVERYDAY_CONTENT, lists, 43200);
+        // 缓存三天，这样就可以取到缓存了！
+        maCache.put(Constants.EVERYDAY_CONTENT, lists, 259200);
         // 保存请求的日期
         SPUtils.putString("everyday_data", TimeUtil.getData());
 
@@ -246,7 +309,6 @@ public class EverydayFragment extends BaseFragment<FragmentEverydayBinding> {
         mEverydayModel.showBanncerPage(new EverydayModel.HomeImpl() {
             @Override
             public void loadSuccess(Object object) {
-                showContentView();
                 if (mBannerImages == null) {
                     mBannerImages = new ArrayList<String>();
                 } else {
@@ -269,7 +331,7 @@ public class EverydayFragment extends BaseFragment<FragmentEverydayBinding> {
                     }
                     mHeaderBinding.banner.setImages(mBannerImages).setImageLoader(new GlideImageLoader()).start();
                     maCache.remove(Constants.BANNER_PIC);
-                    maCache.put(Constants.BANNER_PIC, mBannerImages, 3000);
+                    maCache.put(Constants.BANNER_PIC, mBannerImages, 30000);
                 }
             }
 
@@ -287,7 +349,7 @@ public class EverydayFragment extends BaseFragment<FragmentEverydayBinding> {
 
     @Override
     protected void onRefresh() {
-        loadBannerPicture();
+        loadData();
     }
 
     @Override

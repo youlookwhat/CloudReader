@@ -63,8 +63,7 @@ public class AndroidFragment extends BaseFragment<FragmentAndroidBinding> {
         mACache = ACache.get(getContext());
         mAndroidBean = (GankIoDataBean) mACache.getAsObject(Constants.GANK_ANDROID);
         DebugUtil.error(TAG + "----onActivityCreated");
-//        bindingView.xrvAndroid.setPullRefreshEnabled(false);
-//        bindingView.xrvAndroid.clearHeader();
+        mAndroidAdapter = new AndroidAdapter();
         bindingView.xrvAndroid.setLoadingListener(new XRecyclerView.LoadingListener() {
             @Override
             public void onRefresh() {
@@ -148,9 +147,6 @@ public class AndroidFragment extends BaseFragment<FragmentAndroidBinding> {
      * 设置adapter
      */
     private void setAdapter(GankIoDataBean mAndroidBean) {
-        if (mAndroidAdapter == null) {
-            mAndroidAdapter = new AndroidAdapter(false);
-        }
         mAndroidAdapter.clear();
         mAndroidAdapter.addAll(mAndroidBean.getResults());
         bindingView.xrvAndroid.setLayoutManager(new LinearLayoutManager(getActivity()));

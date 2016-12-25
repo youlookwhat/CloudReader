@@ -1,117 +1,145 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <LinearLayout xmlns:tools="http://schemas.android.com/tools"
-        android:id="@+id/activity_nav_deed_back"
+    <android.support.v4.widget.NestedScrollView xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/colorPageBg"
-        android:orientation="vertical"
-        tools:context="com.example.jingbin.cloudreader.ui.menu.NavDeedBackActivity">
-
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="12dp"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
-            android:layout_marginTop="12dp"
-            android:background="@drawable/shape_notclickbg"
-            android:lineSpacingExtra="2dp"
-            android:padding="12dp"
-            android:text="@string/github_issues"
-            android:textColor="#666666"
-            android:textSize="15sp" />
-
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
-            android:background="@color/colorWhite"
-            android:padding="10dp"
-            android:text="Issues"
-            android:textColor="@color/colorTabText"
-            android:textSize="13sp" />
-
-
-        <TextView
-            android:id="@+id/tv_issues"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:background="@drawable/ripple_item_white_bg"
-            android:clickable="true"
-            android:gravity="center_vertical"
-            android:paddingLeft="10dp"
-            android:paddingRight="12dp"
-            android:text="CloudReader"
-            android:textColor="@color/text_common"
-            android:textSize="17sp" />
+        android:layout_height="wrap_content">
 
         <LinearLayout
+            android:id="@+id/activity_nav_deed_back"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:background="@color/colorWhite"
-            android:orientation="vertical">
+            android:layout_height="match_parent"
+            android:background="@color/colorPageBg"
+            android:orientation="vertical"
+            tools:context="com.example.jingbin.cloudreader.ui.menu.NavDeedBackActivity">
+
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/shape_notclickbg"
+                android:lineSpacingExtra="2dp"
+                android:padding="12dp"
+                android:text="@string/github_issues"
+                android:textColor="#666666"
+                android:textSize="15sp" />
+
+
+            <LinearLayout
+                android:layout_marginTop="35dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:background="@color/colorWhite"
-                android:padding="10dp"
-                android:text="联系我"
-                android:textColor="@color/colorTabText"
-                android:textSize="13sp" />
+                android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/tv_qq"
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorWhite"
+                    android:padding="10dp"
+                    android:text="Issues"
+                    android:textColor="@color/colorTabText"
+                    android:textSize="13sp" />
+
+
+                <TextView
+                    android:id="@+id/tv_issues"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@drawable/ripple_item_white_bg"
+                    android:clickable="true"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="12dp"
+                    android:text="CloudReader"
+                    android:textColor="@color/text_common"
+                    android:textSize="17sp" />
+
+                <View
+                    style="@style/horizontalLine"
+                    android:layout_marginLeft="10dp" />
+
+                <TextView
+                    android:id="@+id/tv_faq"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@drawable/ripple_item_white_bg"
+                    android:clickable="true"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="12dp"
+                    android:text="常见问题归纳"
+                    android:textColor="@color/text_common"
+                    android:textSize="17sp" />
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:background="@drawable/ripple_item_white_bg"
-                android:clickable="true"
-                android:gravity="center_vertical"
-                android:paddingLeft="10dp"
-                android:paddingRight="12dp"
-                android:text="QQ"
-                android:textColor="@color/text_common"
-                android:textSize="17sp" />
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@color/colorWhite"
+                android:orientation="vertical">
 
-            <View
-                style="@style/horizontalLine"
-                android:layout_marginLeft="10dp"
-                android:paddingLeft="10dp" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorWhite"
+                    android:padding="10dp"
+                    android:text="联系我"
+                    android:textColor="@color/colorTabText"
+                    android:textSize="13sp" />
 
-            <TextView
-                android:id="@+id/tv_email"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:background="@drawable/ripple_item_white_bg"
-                android:clickable="true"
-                android:gravity="center_vertical"
-                android:paddingLeft="10dp"
-                android:paddingRight="12dp"
-                android:text="Email"
-                android:textColor="@color/text_common"
-                android:textSize="17sp" />
+                <TextView
+                    android:id="@+id/tv_qq"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@drawable/ripple_item_white_bg"
+                    android:clickable="true"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="12dp"
+                    android:text="QQ"
+                    android:textColor="@color/text_common"
+                    android:textSize="17sp" />
 
-            <View
-                style="@style/horizontalLine"
-                android:layout_marginLeft="10dp" />
+                <View
+                    style="@style/horizontalLine"
+                    android:layout_marginLeft="10dp" />
 
-            <TextView
-                android:id="@+id/tv_jianshu"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:background="@drawable/ripple_item_white_bg"
-                android:clickable="true"
-                android:gravity="center_vertical"
-                android:paddingLeft="10dp"
-                android:paddingRight="12dp"
-                android:text="简书"
-                android:textColor="@color/text_common"
-                android:textSize="17sp" />
+                <TextView
+                    android:id="@+id/tv_email"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@drawable/ripple_item_white_bg"
+                    android:clickable="true"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="12dp"
+                    android:text="Email"
+                    android:textColor="@color/text_common"
+                    android:textSize="17sp" />
+
+                <View
+                    style="@style/horizontalLine"
+                    android:layout_marginLeft="10dp" />
+
+                <TextView
+                    android:id="@+id/tv_jianshu"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@drawable/ripple_item_white_bg"
+                    android:clickable="true"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="12dp"
+                    android:text="简书"
+                    android:textColor="@color/text_common"
+                    android:textSize="17sp" />
+            </LinearLayout>
         </LinearLayout>
-    </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
 </layout>

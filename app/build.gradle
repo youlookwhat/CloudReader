@@ -40,8 +40,7 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile project(':xrecyclerview')//加上这个
-    // 设置状态栏透明色
+    compile project(':xrecyclerview')
     compile project(path: ':zoomlibrary')
     compile 'com.android.support:appcompat-v7:24.2.1'
     compile 'com.android.support:design:24.2.1'

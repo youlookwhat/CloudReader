@@ -33,6 +33,7 @@ public class DoubanTopActivity extends BaseActivity<ActivityDoubanTopBinding> {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_douban_top);
         setTitle("豆瓣电影Top250");
+        mDouBanTopAdapter = new DouBanTopAdapter(DoubanTopActivity.this);
         loadDouBanTop250();
         bindingView.xrvTop.setLoadingListener(new XRecyclerView.LoadingListener() {
             @Override
@@ -71,7 +72,7 @@ public class DoubanTopActivity extends BaseActivity<ActivityDoubanTopBinding> {
                         if (mStart == 0) {
                             if (hotMovieBean != null && hotMovieBean.getSubjects() != null && hotMovieBean.getSubjects().size() > 0) {
 
-                                mDouBanTopAdapter = new DouBanTopAdapter(DoubanTopActivity.this);
+                                mDouBanTopAdapter.clear();
                                 mDouBanTopAdapter.addAll(hotMovieBean.getSubjects());
                                 //构造器中，第一个参数表示列数或者行数，第二个参数表示滑动方向,瀑布流
                                 bindingView.xrvTop.setLayoutManager(new StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL));

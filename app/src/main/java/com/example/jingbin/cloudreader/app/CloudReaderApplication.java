@@ -15,7 +15,7 @@ public class CloudReaderApplication extends Application {
     public static CloudReaderApplication getInstance() {
         if (cloudReaderApplication == null) {
             synchronized (CloudReaderApplication.class) {
-                if (cloudReaderApplication != null) {
+                if (cloudReaderApplication == null) {
                     cloudReaderApplication = new CloudReaderApplication();
                 }
             }

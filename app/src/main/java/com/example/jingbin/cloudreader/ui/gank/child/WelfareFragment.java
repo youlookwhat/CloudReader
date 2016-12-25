@@ -47,6 +47,8 @@ public class WelfareFragment extends BaseFragment<FragmentWelfareBinding> {
         meiziBean = (GankIoDataBean) aCache.getAsObject(Constants.GANK_MEIZI);
         bindingView.xrvWelfare.setPullRefreshEnabled(false);
         bindingView.xrvWelfare.clearHeader();
+        mWelfareAdapter = new WelfareAdapter();
+
         bindingView.xrvWelfare.setLoadingListener(new XRecyclerView.LoadingListener() {
             @Override
             public void onRefresh() {
@@ -94,8 +96,11 @@ public class WelfareFragment extends BaseFragment<FragmentWelfareBinding> {
                     @Override
                     public void onError(Throwable e) {
                         bindingView.xrvWelfare.refreshComplete();
-                        if (mWelfareAdapter.getItemCount() == 1) {
+                        if (mWelfareAdapter.getItemCount() == 0) {
                             showError();
+                        }
+                        if (mPage > 1) {
+                            mPage--;
                         }
                     }
 
@@ -144,7 +149,7 @@ public class WelfareFragment extends BaseFragment<FragmentWelfareBinding> {
     ArrayList<String> imgList = new ArrayList<>();
 
     private void setAdapter(GankIoDataBean gankIoDataBean) {
-        mWelfareAdapter = new WelfareAdapter();
+//        mWelfareAdapter = new WelfareAdapter();
         mWelfareAdapter.addAll(gankIoDataBean.getResults());
         //构造器中，第一个参数表示列数或者行数，第二个参数表示滑动方向,瀑布流
         bindingView.xrvWelfare.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));

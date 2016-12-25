@@ -26,6 +26,7 @@ import com.bumptech.glide.request.FutureTarget;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 import com.example.jingbin.cloudreader.R;
+import com.example.jingbin.cloudreader.utils.ToastUtil;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -92,7 +93,7 @@ public class ViewBigImageActivity extends FragmentActivity implements OnPageChan
      */
     public static void saveImageToGallery(Context context, Bitmap bmp) {
         // 首先保存图片
-        File appDir = new File(Environment.getExternalStorageDirectory(), "云阅");
+        File appDir = new File(Environment.getExternalStorageDirectory(), "云阅相册");
         if (!appDir.exists()) {
             appDir.mkdir();
         }
@@ -150,11 +151,13 @@ public class ViewBigImageActivity extends FragmentActivity implements OnPageChan
             @Override
             public void onClick(View view) {
 
+                ToastUtil.showToast("开始下载图片");
                 if (isApp) {// 本地图片
                     Bitmap bitmap = BitmapFactory.decodeResource(getResources(), imageId);
                     if (bitmap != null) {
                         saveImageToGallery(ViewBigImageActivity.this, bitmap);
-                        Toast.makeText(ViewBigImageActivity.this, "保存成功", Toast.LENGTH_SHORT).show();
+                        ToastUtil.showToast("保存成功");
+//                        Toast.makeText(ViewBigImageActivity.this, "保存成功", Toast.LENGTH_SHORT).show();
                     }
 
                 } else {// 网络图片
@@ -172,7 +175,9 @@ public class ViewBigImageActivity extends FragmentActivity implements OnPageChan
                                         Bitmap bitmap = BitmapFactory.decodeFile(imagePath, bmOptions);
                                         if (bitmap != null) {
                                             saveImageToGallery(ViewBigImageActivity.this, bitmap);
-                                            Toast.makeText(ViewBigImageActivity.this, "保存成功", Toast.LENGTH_SHORT).show();
+//                                            ToastUtil.showToast("保存成功");
+                                            ToastUtil.showToast("已保存至"+Environment.getExternalStorageDirectory().getAbsolutePath()+"云阅相册");
+//                                            Toast.makeText(ViewBigImageActivity.this, "保存成功", Toast.LENGTH_SHORT).show();
                                         }
                                     }
                                 }

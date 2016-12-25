@@ -26,7 +26,14 @@ public class EverydayModel {
     private String month = "11";
     private String day = "24";
 
-    public EverydayModel(String year, String month, String day) {
+//    public EverydayModel(String year, String month, String day) {
+//        this.year = year;
+//        this.month = month;
+//        this.day = day;
+//    }
+
+
+    public void setData(String year, String month, String day){
         this.year = year;
         this.month = month;
         this.day = day;
@@ -144,7 +151,7 @@ public class EverydayModel {
             }
         };
 
-        Subscription subscription = HttpUtils.getInstance().getGankIOServer().getGankIoDay("2016", "11", "24")
+        Subscription subscription = HttpUtils.getInstance().getGankIOServer().getGankIoDay(year, month, day)
                 .subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
                 .flatMap(func1)
                 .subscribe(observer);

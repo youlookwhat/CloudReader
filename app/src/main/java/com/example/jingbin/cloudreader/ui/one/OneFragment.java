@@ -54,8 +54,9 @@ public class OneFragment extends BaseFragment<FragmentOneBinding> {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        showLoading();
+        showContentView();
         aCache = ACache.get(getActivity());
+        oneAdapter = new OneAdapter(activity);
         mHotMovieBean = (HotMovieBean) aCache.getAsObject(Constants.ONE_HOT_MOVIE);
         isPrepared = true;
         DebugUtil.error("---OneFragment   --onActivityCreated");
@@ -75,37 +76,41 @@ public class OneFragment extends BaseFragment<FragmentOneBinding> {
 
         // 显示，准备完毕，不是当天，则请求数据（正在请求时避免再次请求）
         String oneData = SPUtils.getString("one_data", "2016-11-26");
-        synchronized (this) {
-            if (!oneData.equals(TimeUtil.getData()) && !mIsLoading) {
-                mIsLoading = true;
-                /**延迟执行防止卡顿*/
-                showLoading();
-                postDelayLoad();
+
+        if (!oneData.equals(TimeUtil.getData()) && !mIsLoading) {
+            mIsLoading = true;
+            /**延迟执行防止卡顿*/
+            showLoading();
+            postDelayLoad();
+
+        } else {
+            // 为了正在刷新时不执行这部分
+            if (mIsLoading) {
                 return;
             }
-        }
-
-        if (!isFirst) {
-            return;
-        }
-
-        showLoading();
-        if (mHotMovieBean == null) {
-            synchronized (this) {
-                postDelayLoad();
+            if (!isFirst) {
+                return;
             }
-        } else {
-            bindingView.listOne.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    synchronized (this) {
-                        setAdapter(mHotMovieBean);
-                        showContentView();
-                    }
+
+            showLoading();
+            if (mHotMovieBean == null) {
+                synchronized (this) {
+                    postDelayLoad();
                 }
-            }, 150);
-            DebugUtil.error("----缓存: " + oneData);
+            } else {
+                bindingView.listOne.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        synchronized (this) {
+                            setAdapter(mHotMovieBean);
+                            showContentView();
+                        }
+                    }
+                }, 150);
+                DebugUtil.error("----缓存: " + oneData);
+            }
         }
+
     }
 
     private void loadHotMovie() {
@@ -118,7 +123,7 @@ public class OneFragment extends BaseFragment<FragmentOneBinding> {
 
                     @Override
                     public void onError(Throwable e) {
-                        if (oneAdapter.getItemCount() == 1) {
+                        if (oneAdapter != null && oneAdapter.getItemCount() == 0) {
                             showError();
                         }
                     }
@@ -173,7 +178,11 @@ public class OneFragment extends BaseFragment<FragmentOneBinding> {
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
         mLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         bindingView.listOne.setLayoutManager(mLayoutManager);
+
+        // 加上这两行代码，下拉出提示才不会产生出现刷新头的bug，不加拉不下来
         bindingView.listOne.setPullRefreshEnabled(false);
+        bindingView.listOne.clearHeader();
+
         bindingView.listOne.setLoadingMoreEnabled(false);
         // 需加，不然滑动不流畅
         bindingView.listOne.setNestedScrollingEnabled(false);
@@ -188,13 +197,9 @@ public class OneFragment extends BaseFragment<FragmentOneBinding> {
                     DoubanTopActivity.start(v.getContext());
                 }
             });
-            bindingView.listOne.addHeaderView(mHeaderView);
         }
-        if (oneAdapter == null) {
-            oneAdapter = new OneAdapter(activity);
-        } else {
-            oneAdapter.clear();
-        }
+        bindingView.listOne.addHeaderView(mHeaderView);
+        oneAdapter.clear();
         oneAdapter.addAll(hotMovieBean.getSubjects());
         bindingView.listOne.setAdapter(oneAdapter);
         oneAdapter.notifyDataSetChanged();
