@@ -9,6 +9,7 @@ import com.example.jingbin.cloudreader.base.baseadapter.BaseRecyclerViewAdapter;
 import com.example.jingbin.cloudreader.base.baseadapter.BaseRecyclerViewHolder;
 import com.example.jingbin.cloudreader.bean.GankIoDataBean;
 import com.example.jingbin.cloudreader.databinding.ItemAndroidBinding;
+import com.example.jingbin.cloudreader.utils.ImgLoadUtil;
 import com.example.jingbin.cloudreader.view.webview.WebViewActivity;
 
 /**
@@ -19,7 +20,7 @@ public class AndroidAdapter extends BaseRecyclerViewAdapter<GankIoDataBean.Resul
 
     private boolean isAll = false;
 
-    public void setAllType(boolean isAll){
+    public void setAllType(boolean isAll) {
         this.isAll = isAll;
     }
 
@@ -38,11 +39,21 @@ public class AndroidAdapter extends BaseRecyclerViewAdapter<GankIoDataBean.Resul
         @Override
         public void onBindViewHolder(final GankIoDataBean.ResultBean object, int position) {
 
+            if (isAll && "福利".equals(object.getType())) {
+                binding.ivAllWelfare.setVisibility(View.VISIBLE);
+                binding.tvAndroidDes.setVisibility(View.GONE);
+                ImgLoadUtil.displayEspImage(object.getUrl(), binding.ivAllWelfare, 1);
+            } else {
+                binding.ivAllWelfare.setVisibility(View.GONE);
+                binding.tvAndroidDes.setVisibility(View.VISIBLE);
+            }
+
             if (isAll) {
                 binding.tvContentType.setVisibility(View.VISIBLE);
                 binding.tvContentType.setText(" · " + object.getType());
             } else {
                 binding.tvContentType.setVisibility(View.GONE);
+
             }
             binding.setResultsBean(object);
             binding.executePendingBindings();

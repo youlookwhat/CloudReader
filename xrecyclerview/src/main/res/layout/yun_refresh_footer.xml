@@ -12,12 +12,6 @@
         android:paddingBottom="10dp"
         android:paddingTop="10dp">
 
-        <!--<ProgressBar-->
-            <!--android:id="@+id/progressBar"-->
-            <!--style="@style/common_mProgress_circle"-->
-            <!--android:layout_width="20dp"-->
-            <!--android:layout_height="20dp" />-->
-
         <ImageView
             android:id="@+id/iv_progress"
             android:layout_width="wrap_content"
@@ -29,6 +23,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
-            android:text="@string/listview_loading" />
+            android:text="@string/listview_loading"
+            android:textColor="#333333" />
     </LinearLayout>
 </LinearLayout>

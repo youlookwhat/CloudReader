@@ -20,7 +20,6 @@
                 android:layout_height="?attr/actionBarSize"
                 android:background="@color/colorTheme"
                 app:contentInsetStart="0.0dp"
-                app:layout_collapseMode="pin"
                 app:layout_scrollFlags="enterAlways|scroll"
                 app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
                 app:theme="@style/ToolbarStyle" />
