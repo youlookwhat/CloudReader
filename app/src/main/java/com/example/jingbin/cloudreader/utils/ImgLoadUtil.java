@@ -35,7 +35,7 @@ public class ImgLoadUtil {
             , R.drawable.home_two_five, R.drawable.home_two_six, R.drawable.home_two_eleven, R.drawable.home_two_eight};
 
     // 一张图的随机图
-    private static int[] homeOne = {R.drawable.home_one_one, R.drawable.home_one_two};
+    private static int[] homeOne = {R.drawable.home_one_one, R.drawable.home_one_two, R.drawable.home_one_three};
 
     private ImgLoadUtil() {
     }

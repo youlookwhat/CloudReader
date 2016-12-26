@@ -219,6 +219,7 @@ public class EverydayFragment extends BaseFragment<FragmentEverydayBinding> {
 
     private void setEmptyAdapter() {
         showContentView();
+        bindingView.xrvEveryday.setVisibility(View.VISIBLE);
         EmptyAdapter emptyAdapter = new EmptyAdapter();
         ArrayList<String> list = new ArrayList<>();
         list.add(CommonUtils.getString(R.string.string_everyday_empty));
@@ -232,7 +233,6 @@ public class EverydayFragment extends BaseFragment<FragmentEverydayBinding> {
     }
 
     private void initRecyclerView() {
-        bindingView.xrvEveryday.setVisibility(View.VISIBLE);
         bindingView.xrvEveryday.setPullRefreshEnabled(false);
         bindingView.xrvEveryday.setLoadingMoreEnabled(false);
         if (mHeaderView == null) {
@@ -254,7 +254,7 @@ public class EverydayFragment extends BaseFragment<FragmentEverydayBinding> {
 
     private void setAdapter(ArrayList<List<AndroidBean>> lists) {
         showContentView();
-
+        bindingView.xrvEveryday.setVisibility(View.VISIBLE);
         if (mEverydayAdapter == null) {
             mEverydayAdapter = new EverydayAdapter();
         } else {

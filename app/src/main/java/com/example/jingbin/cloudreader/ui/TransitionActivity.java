@@ -3,16 +3,18 @@ package com.example.jingbin.cloudreader.ui;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 
+import com.bumptech.glide.Glide;
 import com.example.jingbin.cloudreader.MainActivity;
 import com.example.jingbin.cloudreader.R;
 import com.example.jingbin.cloudreader.databinding.ActivityTransitionBinding;
-import com.example.jingbin.cloudreader.utils.CommonUtils;
 import com.example.jingbin.cloudreader.utils.PerfectClickListener;
+
+import java.util.Random;
 
 public class TransitionActivity extends AppCompatActivity {
 
@@ -25,10 +27,19 @@ public class TransitionActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_transition);
 
-        mBinding.ivPic.setImageDrawable(CommonUtils.getDrawable(mDrawables[2]));
-        Animation animation = AnimationUtils.loadAnimation(this, R.anim.transition_anim);
-        animation.setAnimationListener(animationListener);
-        mBinding.ivPic.startAnimation(animation);
+        int i = new Random().nextInt(mDrawables.length);
+        Glide.with(this).load(mDrawables[i]).into(mBinding.ivPic);
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                toMainActivity();
+            }
+        }, 2000);
+
+//        Animation animation = AnimationUtils.loadAnimation(this, R.anim.transition_anim);
+//        animation.setAnimationListener(animationListener);
+//        mBinding.ivPic.startAnimation(animation);
 
         mBinding.tvJump.setOnClickListener(new PerfectClickListener() {
             @Override
@@ -70,7 +81,7 @@ public class TransitionActivity extends AppCompatActivity {
     private void toMainActivity() {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
-        overridePendingTransition(R.anim.screen_down_in, R.anim.screen_up_out);
+        overridePendingTransition(R.anim.screen_zoom_in, R.anim.screen_zoom_out);
         finish();
     }
 }
