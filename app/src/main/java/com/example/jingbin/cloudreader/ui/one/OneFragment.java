@@ -78,11 +78,14 @@ public class OneFragment extends BaseFragment<FragmentOneBinding> {
         String oneData = SPUtils.getString("one_data", "2016-11-26");
 
         if (!oneData.equals(TimeUtil.getData()) && !mIsLoading) {
-            mIsLoading = true;
-            /**延迟执行防止卡顿*/
-            showLoading();
-            postDelayLoad();
-
+            synchronized (this) {
+                if (!mIsLoading) {
+                    mIsLoading = true;
+                    /**延迟执行防止卡顿*/
+                    showLoading();
+                    postDelayLoad();
+                }
+            }
         } else {
             // 为了正在刷新时不执行这部分
             if (mIsLoading) {

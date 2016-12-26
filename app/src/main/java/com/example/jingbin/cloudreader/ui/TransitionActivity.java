@@ -20,7 +20,7 @@ public class TransitionActivity extends AppCompatActivity {
 
     private ActivityTransitionBinding mBinding;
     private boolean animationEnd;
-    private int[] mDrawables = new int[]{R.drawable.b_1, R.drawable.b_2, R.drawable.b_3, R.drawable.b_4};
+    private int[] mDrawables = new int[]{R.drawable.b_1, R.drawable.b_2, R.drawable.b_3, R.drawable.b_4,R.drawable.b_5};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
