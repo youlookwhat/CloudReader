@@ -96,9 +96,11 @@ public class OneFragment extends BaseFragment<FragmentOneBinding> {
             }
 
             showLoading();
-            if (mHotMovieBean == null) {
+            if (mHotMovieBean == null && !mIsLoading) {
                 synchronized (this) {
-                    postDelayLoad();
+                    if (!mIsLoading) {
+                        postDelayLoad();
+                    }
                 }
             } else {
                 bindingView.listOne.postDelayed(new Runnable() {

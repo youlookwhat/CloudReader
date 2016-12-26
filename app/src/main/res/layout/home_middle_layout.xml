@@ -58,13 +58,14 @@
                         <FrameLayout
                             android:id="@+id/fl_everyday"
                             android:layout_width="53dp"
-                            android:layout_height="53dp">
+                            android:layout_height="53dp"
+                            android:clickable="true">
 
-                            <ImageButton
+                            <ImageView
                                 android:id="@+id/daily_btn"
                                 android:layout_width="53dp"
                                 android:layout_height="53dp"
-                                android:background="@drawable/home_icon_day" />
+                                android:background="@drawable/home_middle_day" />
 
                             <TextView
                                 android:id="@+id/tv_daily_text"
@@ -72,9 +73,8 @@
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
                                 android:text="xx"
-                                android:textColor="@color/colorTheme"
+                                android:textColor="@color/select_gank_day"
                                 android:textSize="25sp" />
-
 
                         </FrameLayout>
 
