@@ -12,9 +12,7 @@ import com.example.jingbin.cloudreader.bean.moviechild.SubjectsBean;
 import com.example.jingbin.cloudreader.databinding.ItemOneBinding;
 import com.example.jingbin.cloudreader.ui.one.OneMovieDetailActivity;
 import com.example.jingbin.cloudreader.utils.CommonUtils;
-import com.example.jingbin.cloudreader.utils.ImgLoadUtil;
 import com.example.jingbin.cloudreader.utils.PerfectClickListener;
-import com.example.jingbin.cloudreader.utils.StringFormatUtil;
 import com.nineoldandroids.view.ViewHelper;
 import com.nineoldandroids.view.ViewPropertyAnimator;
 
@@ -46,15 +44,15 @@ public class OneAdapter extends BaseRecyclerViewAdapter<SubjectsBean> {
             if (positionData != null) {
                 binding.setSubjectsBean(positionData);
                 // 图片
-                ImgLoadUtil.displayEspImage(positionData.getImages().getLarge(), binding.ivOnePhoto,0);
+//                ImgLoadUtil.displayEspImage(positionData.getImages().getLarge(), binding.ivOnePhoto,0);
                 // 导演
-                binding.tvOneDirectors.setText(StringFormatUtil.formatName(positionData.getDirectors()));
+//                binding.tvOneDirectors.setText(StringFormatUtil.formatName(positionData.getDirectors()));
                 // 主演
-                binding.tvOneCasts.setText(StringFormatUtil.formatName(positionData.getCasts()));
+//                binding.tvOneCasts.setText(StringFormatUtil.formatName(positionData.getCasts()));
                 // 类型
-                binding.tvOneGenres.setText("类型：" + StringFormatUtil.formatGenres(positionData.getGenres()));
+//                binding.tvOneGenres.setText("类型：" + StringFormatUtil.formatGenres(positionData.getGenres()));
                 // 评分
-                binding.tvOneRatingRate.setText("评分：" + String.valueOf(positionData.getRating().getAverage()));
+//                binding.tvOneRatingRate.setText("评分：" + String.valueOf(positionData.getRating().getAverage()));
                 // 分割线颜色
                 binding.viewColor.setBackgroundColor(CommonUtils.randomColor());
 

@@ -54,7 +54,7 @@
                 <!--app:layout_collapseParallaxMultiplier="0.7"-->
                 <ImageView
                     android:id="@+id/iv_one_photo"
-                    android:layout_width="120dp"
+                    android:layout_width="125dp"
                     android:layout_height="165dp"
                     android:layout_marginRight="15dp"
                     android:scaleType="fitXY"

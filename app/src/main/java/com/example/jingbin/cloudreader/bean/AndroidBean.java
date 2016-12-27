@@ -12,6 +12,10 @@ import java.util.List;
 
 public class AndroidBean implements Serializable {
 
+    // 存储单独设置的值，用来显示title
+    @ParamNames("type_title")
+    private String type_title;
+
     @ParamNames("_id")
     private String _id;
     @ParamNames("createdAt")
@@ -71,5 +75,13 @@ public class AndroidBean implements Serializable {
 
     public List<String> getImages() {
         return images;
+    }
+
+    public String getType_title() {
+        return type_title;
+    }
+
+    public void setType_title(String type_title) {
+        this.type_title = type_title;
     }
 }
