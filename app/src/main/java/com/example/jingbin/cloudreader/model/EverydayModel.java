@@ -89,56 +89,19 @@ public class EverydayModel {
                 if (results.getRestMovie() != null && results.getRestMovie().size() > 0) {
                     addList(results.getRestMovie(), "休息视频");
                 }
+                if (results.getResource() != null && results.getResource().size() > 0) {
+                    addList(results.getResource(), "拓展资源");
+                }
+                if (results.getRecommend() != null && results.getRecommend().size() > 0) {
+                    addList(results.getRecommend(), "瞎推荐");
+                }
+                if (results.getFront() != null && results.getFront().size() > 0) {
+                    addList(results.getFront(), "前端");
+                }
+                if (results.getApp() != null && results.getApp().size() > 0) {
+                    addList(results.getApp(), "App");
+                }
 
-
-                // Android
-//                if (results.getAndroid() != null && results.getAndroid().size() > 0) {
-//                    lists.add(results.getAndroid());
-//                } else {
-//                    lists.add(new ArrayList<AndroidBean>());
-//                }
-//                // 福利
-//                if (results.getWelfare() != null && results.getWelfare().size() > 0) {
-//                    lists.add(results.getWelfare());
-//                } else {
-//                    lists.add(new ArrayList<AndroidBean>());
-//                }
-//                // ios
-//                if (results.getiOS() != null && results.getiOS().size() > 0) {
-//                    lists.add(results.getiOS());
-//                } else {
-//                    lists.add(new ArrayList<AndroidBean>());
-//                }
-                // 拓展资源
-//                if (results.getResource() != null && results.getResource().size() > 0) {
-//                    lists.add(results.getResource());
-//                } else {
-//                    lists.add(new ArrayList<AndroidBean>());
-//                }
-                // 瞎推荐
-//                if (results.getRecommend() != null && results.getRecommend().size() > 0) {
-//                    lists.add(results.getRecommend());
-//                } else {
-//                    lists.add(new ArrayList<AndroidBean>());
-//                }
-                // 休息视频
-//                if (results.getRestMovie() != null && results.getRestMovie().size() > 0) {
-//                    lists.add(results.getRestMovie());
-//                } else {
-//                    lists.add(new ArrayList<AndroidBean>());
-//                }
-                // 前端
-//                if (results.getFront() != null && results.getFront().size() > 0) {
-//                    lists.add(results.getFront());
-//                } else {
-//                    lists.add(new ArrayList<AndroidBean>());
-//                }
-                // App
-//                if (results.getApp() != null && results.getApp().size() > 0) {
-//                    lists.add(results.getApp());
-//                } else {
-//                    lists.add(new ArrayList<AndroidBean>());
-//                }
                 return Observable.just(lists);
             }
         };

@@ -85,6 +85,18 @@ public class EverydayAdapter extends BaseRecyclerViewAdapter<List<AndroidBean>> 
             } else if ("休息视频".equals(title)) {
                 binding.ivTitleType.setImageDrawable(CommonUtils.getDrawable(R.drawable.home_movie));
                 index = 2;
+            } else if ("拓展资源".equals(title)) {
+                binding.ivTitleType.setImageDrawable(CommonUtils.getDrawable(R.drawable.home_source));
+                index = 2;
+            } else if ("瞎推荐".equals(title)) {
+                binding.ivTitleType.setImageDrawable(CommonUtils.getDrawable(R.drawable.home_xia));
+                index = 2;
+            } else if ("前端".equals(title)) {
+                binding.ivTitleType.setImageDrawable(CommonUtils.getDrawable(R.drawable.home_qian));
+                index = 2;
+            } else if ("App".equals(title)) {
+                binding.ivTitleType.setImageDrawable(CommonUtils.getDrawable(R.drawable.home_app));
+                index = 2;
             }
 
             final int finalIndex = index;
