@@ -18,6 +18,8 @@ import com.example.jingbin.cloudreader.http.rx.RxBus;
 import com.example.jingbin.cloudreader.http.rx.RxCodeConstants;
 import com.example.jingbin.cloudreader.utils.CommonUtils;
 import com.example.jingbin.cloudreader.utils.ImgLoadUtil;
+import com.example.jingbin.cloudreader.utils.PerfectClickListener;
+import com.example.jingbin.cloudreader.view.webview.WebViewActivity;
 
 import java.util.List;
 
@@ -27,10 +29,10 @@ import java.util.List;
 
 public class EverydayAdapter extends BaseRecyclerViewAdapter<List<AndroidBean>> {
 
-    private static final int TYPE_TITLE = 1;
-    private static final int TYPE_ONE = 2;
-    private static final int TYPE_TWO = 3;
-    private static final int TYPE_THREE = 4;
+    private static final int TYPE_TITLE = 1; // title
+    private static final int TYPE_ONE = 2;// 一张图
+    private static final int TYPE_TWO = 3;// 二张图
+    private static final int TYPE_THREE = 4;// 三张图
 
     @Override
     public int getItemViewType(int position) {
@@ -116,7 +118,7 @@ public class EverydayAdapter extends BaseRecyclerViewAdapter<List<AndroidBean>> 
         }
 
         @Override
-        public void onBindViewHolder(List<AndroidBean> object, int position) {
+        public void onBindViewHolder(final List<AndroidBean> object, int position) {
             if ("福利".equals(object.get(0).getType())) {
                 binding.tvOnePhotoTitle.setVisibility(View.GONE);
             } else {
@@ -124,6 +126,12 @@ public class EverydayAdapter extends BaseRecyclerViewAdapter<List<AndroidBean>> 
                 setDes(object, 0, binding.tvOnePhotoTitle);
             }
             displayRandomImg(1, 0, position, binding.ivOnePhoto);
+            binding.llOnePhoto.setOnClickListener(new PerfectClickListener() {
+                @Override
+                protected void onNoDoubleClick(View v) {
+                    WebViewActivity.loadUrl(v.getContext(),object.get(0).getUrl(),"加载中...");
+                }
+            });
         }
     }
 

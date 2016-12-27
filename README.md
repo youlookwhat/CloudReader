@@ -1,12 +1,15 @@
 # CloudReader
 
+[![Apache License 2.0][1]][2] 
+[![API][3]][4]
+
 > Netease cloud music Ui && Retrofit + RxJava + MVVM-databinding && GankIo、Douban Api 
 
-#### 一款基于网易云音乐UI，使用GankIo及豆瓣api开发的符合Google Material Desgin阅读类的开源项目。现主要包括：干货区、电影区和书籍区。App内主要图片来源于iconfont。
+#### 一款基于网易云音乐UI，使用GankIo及豆瓣api开发的符合Google Material Desgin阅读类的开源项目。现主要包括：干货区、电影区和书籍区。App内图片主要来源于iconfont。
 
 ## 项目
 
-项目采取的是Retrofit + RxJava + MVVM-DataBinding架构开发。全项目使用的是DataBinding，包括RecyclerView的BaseHolder、页面布局等，使用方便简洁，代码结构清晰。开发中所遇到的各种问题已总结在[这里](http://jingbin.me/2017/11/23/%E5%BC%80%E5%8F%91%E4%B8%AD%E6%89%80%E9%81%87%E9%97%AE%E9%A2%98%E5%BD%92%E7%BA%B3/)。
+项目采取的是Retrofit + RxJava + MVVM-DataBinding架构开发。全项目使用的是DataBinding，包括RecyclerView的BaseHolder、页面布局等，使用方便简洁，代码结构清晰。开发中所遇到的各种问题已总结在[这里][5]。
 
 ## 效果图
 
@@ -40,13 +43,13 @@
 ## 特别鸣谢
  - 我几乎看过了所有关于Android仿网易云音乐的项目与文章，发现大部分做的都不够细致，也没有比较好的内容填充，于是决心自己着手做一个，才有了这个开源项目。这里列出主要参考的内容。
  
- - 感谢[iconfont](http://www.iconfont.cn/plus)提供图片资源，项目中的大部分图片皆出于此。
+ - 感谢[iconfont][6]提供图片资源，项目中的大部分图片皆出于此。
 
- - 参考项目：[ImitateNetEasyCloud](https://github.com/GiitSmile/ImitateNetEasyCloud)、[banya](https://github.com/forezp/banya)；主要数据来源：[Gank.Io](https://gank.io/api)、[豆瓣Api](https://developers.douban.com/wiki/?title=terms)
+ - 参考项目：[ImitateNetEasyCloud][7]、[banya][8]；主要数据来源：[Gank.Io][9]、[豆瓣Api][10]。
 
- - 使用到的开源库：[glide](https://github.com/bumptech/glide)、[bottomsheet](https://github.com/Flipboard/bottomsheet)、[nineoldandroids](https://github.com/JakeWharton/NineOldAndroids)、[rxandroid](https://github.com/ReactiveX/RxAndroid)等等。
+ - 使用到的开源库：[glide][11]、[bottomsheet][12]、[nineoldandroids][13]、[rxandroid][14]等等。
 
- - 感谢[代码家](https://github.com/daimajia)、[张鸿洋](https://github.com/hongyangAndroid)、[drakeet](https://github.com/drakeet)、[yang747046912](https://github.com/yang747046912)、[GiitSmile](https://github.com/GiitSmile)、[forezp](https://github.com/forezp/banya)等众多开发者贡献的开源项目，让我从中学到了很多!
+ - 感谢[代码家][15]、[张鸿洋][16]、[drakeet][17]、[yang747046912][18]、[GiitSmile][19]、[forezp][20]等众多开发者贡献的开源项目，让我从中学到了很多!
  
  
 ## End
@@ -75,3 +78,25 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 ```
+
+[1]:https://img.shields.io/github/license/HeinrichReimer/material-intro.svg
+[2]:https://www.apache.org/licenses/LICENSE-2.0.html
+[3]:https://img.shields.io/badge/API-19%2B-blue.svg?style=flat
+[4]:https://android-arsenal.com/api?level=19
+
+[5]:http://jingbin.me/2017/11/23/%E5%BC%80%E5%8F%91%E4%B8%AD%E6%89%80%E9%81%87%E9%97%AE%E9%A2%98%E5%BD%92%E7%BA%B3/
+[6]:http://www.iconfont.cn/plus
+[7]:https://github.com/GiitSmile/ImitateNetEasyCloud
+[8]:https://github.com/forezp/banya
+[9]:https://gank.io/api
+[10]:https://developers.douban.com/wiki/?title=terms
+[11]:https://github.com/bumptech/glide
+[12]:https://github.com/Flipboard/bottomsheet
+[13]:https://github.com/JakeWharton/NineOldAndroids
+[14]:https://github.com/ReactiveX/RxAndroid
+[15]:https://github.com/daimajia
+[16]:https://github.com/hongyangAndroid
+[17]:https://github.com/drakeet
+[18]:https://github.com/yang747046912
+[19]:https://github.com/GiitSmile
+[20]:https://github.com/forezp/banya
