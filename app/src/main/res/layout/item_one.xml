@@ -3,6 +3,9 @@
 
     <data>
 
+        <!--调用静态方法-->
+        <import type="com.example.jingbin.cloudreader.utils.StringFormatUtil" />
+
         <variable
             name="subjectsBean"
             type="com.example.jingbin.cloudreader.bean.moviechild.SubjectsBean" />
@@ -28,6 +31,8 @@
                 android:layout_height="132dp"
                 android:layout_marginRight="12dp"
                 android:background="@color/colorPageBg"
+                android:defaultPicType="@{0}"
+                android:displayFadeImage="@{subjectsBean.images.large}"
                 android:scaleType="fitXY" />
 
             <LinearLayout
@@ -82,7 +87,7 @@
                         android:layout_height="wrap_content"
                         android:ellipsize="end"
                         android:maxLines="1"
-                        android:text="导演" />
+                        android:text="@{StringFormatUtil.formatName(subjectsBean.directors)}" />
                 </LinearLayout>
 
                 <!--主演-->
@@ -102,7 +107,7 @@
                         android:layout_height="wrap_content"
                         android:ellipsize="end"
                         android:maxLines="2"
-                        android:text="范冰冰" />
+                        android:text="@{StringFormatUtil.formatName(subjectsBean.casts)}" />
 
                 </LinearLayout>
 
@@ -114,7 +119,7 @@
                     android:layout_marginTop="2dp"
                     android:ellipsize="end"
                     android:maxLines="1"
-                    android:text="类型：" />
+                    android:text='@{"类型："+StringFormatUtil.formatGenres(subjectsBean.genres)}' />
 
                 <TextView
                     android:id="@+id/tv_one_rating_rate"
@@ -122,7 +127,7 @@
                     android:layout_height="wrap_content"
                     android:ellipsize="end"
                     android:maxLines="1"
-                    android:text="评分：" />
+                    android:text='@{"评分："+subjectsBean.rating.average}' />
             </LinearLayout>
 
         </LinearLayout>
