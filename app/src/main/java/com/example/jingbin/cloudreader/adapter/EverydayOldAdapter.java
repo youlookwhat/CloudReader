@@ -9,7 +9,7 @@ import com.example.jingbin.cloudreader.R;
 import com.example.jingbin.cloudreader.base.baseadapter.BaseRecyclerViewAdapter;
 import com.example.jingbin.cloudreader.base.baseadapter.BaseRecyclerViewHolder;
 import com.example.jingbin.cloudreader.bean.AndroidBean;
-import com.example.jingbin.cloudreader.databinding.ItemEverydayBinding;
+import com.example.jingbin.cloudreader.databinding.ItemEverydayOldBinding;
 import com.example.jingbin.cloudreader.http.rx.RxBus;
 import com.example.jingbin.cloudreader.http.rx.RxCodeConstants;
 import com.example.jingbin.cloudreader.utils.CommonUtils;
@@ -23,16 +23,16 @@ import java.util.List;
  * Created by jingbin on 2016/11/30.
  */
 
-public class EverydayAdapter extends BaseRecyclerViewAdapter<List<AndroidBean>> {
+public class EverydayOldAdapter extends BaseRecyclerViewAdapter<List<AndroidBean>> {
 
     private List<AndroidBean> positionTempData;
 
     @Override
     public BaseRecyclerViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new ViewHolder(parent, R.layout.item_everyday);
+        return new ViewHolder(parent, R.layout.item_everyday_old);
     }
 
-    private class ViewHolder extends BaseRecyclerViewHolder<List<AndroidBean>, ItemEverydayBinding> {
+    private class ViewHolder extends BaseRecyclerViewHolder<List<AndroidBean>, ItemEverydayOldBinding> {
 
         ViewHolder(ViewGroup parent, int layoutId) {
             super(parent, layoutId);

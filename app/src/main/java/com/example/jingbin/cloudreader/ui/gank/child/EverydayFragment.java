@@ -11,7 +11,7 @@ import android.view.View;
 import com.bumptech.glide.Glide;
 import com.example.jingbin.cloudreader.R;
 import com.example.jingbin.cloudreader.adapter.EmptyAdapter;
-import com.example.jingbin.cloudreader.adapter.EverydayAdapter;
+import com.example.jingbin.cloudreader.adapter.EverydayOldAdapter;
 import com.example.jingbin.cloudreader.app.Constants;
 import com.example.jingbin.cloudreader.base.BaseFragment;
 import com.example.jingbin.cloudreader.bean.AndroidBean;
@@ -58,7 +58,7 @@ public class EverydayFragment extends BaseFragment<FragmentEverydayBinding> {
     private FooterItemEverydayBinding mFooterBinding;
     private View mHeaderView;
     private View mFooterView;
-    private EverydayAdapter mEverydayAdapter;
+    private EverydayOldAdapter mEverydayOldAdapter;
     private boolean mIsPrepared = false;
     private boolean mIsFirst = true;
     // 是否正在刷新（避免重复刷新）
@@ -205,8 +205,8 @@ public class EverydayFragment extends BaseFragment<FragmentEverydayBinding> {
                 if (mLists.size() > 0 && mLists.get(0).size() > 0) {
                     setAdapter(mLists);
                 } else {
-                    if (mEverydayAdapter != null) {
-                        mEverydayAdapter = null;
+                    if (mEverydayOldAdapter != null) {
+                        mEverydayOldAdapter = null;
                     }
                     setEmptyAdapter();
                 }
@@ -262,14 +262,14 @@ public class EverydayFragment extends BaseFragment<FragmentEverydayBinding> {
     private void setAdapter(ArrayList<List<AndroidBean>> lists) {
         showContentView();
         bindingView.xrvEveryday.setVisibility(View.VISIBLE);
-        if (mEverydayAdapter == null) {
-            mEverydayAdapter = new EverydayAdapter();
+        if (mEverydayOldAdapter == null) {
+            mEverydayOldAdapter = new EverydayOldAdapter();
         } else {
-            mEverydayAdapter.clear();
+            mEverydayOldAdapter.clear();
         }
-        mEverydayAdapter.addAll(lists);
-        bindingView.xrvEveryday.setAdapter(mEverydayAdapter);
-        mEverydayAdapter.notifyDataSetChanged();
+        mEverydayOldAdapter.addAll(lists);
+        bindingView.xrvEveryday.setAdapter(mEverydayOldAdapter);
+        mEverydayOldAdapter.notifyDataSetChanged();
 
         maCache.remove(Constants.EVERYDAY_CONTENT);
         // 缓存三天，这样就可以取到缓存了！

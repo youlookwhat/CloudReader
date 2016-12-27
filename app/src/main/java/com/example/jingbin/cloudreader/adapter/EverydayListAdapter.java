@@ -11,7 +11,7 @@ import com.example.jingbin.cloudreader.base.list.BaseDataBindingHolder;
 import com.example.jingbin.cloudreader.base.list.BaseHolder;
 import com.example.jingbin.cloudreader.base.list.BaseListAdapter;
 import com.example.jingbin.cloudreader.bean.AndroidBean;
-import com.example.jingbin.cloudreader.databinding.ItemEverydayBinding;
+import com.example.jingbin.cloudreader.databinding.ItemEverydayOldBinding;
 import com.example.jingbin.cloudreader.utils.CommonUtils;
 import com.example.jingbin.cloudreader.utils.DebugUtil;
 import com.example.jingbin.cloudreader.utils.ImgLoadUtil;
@@ -28,10 +28,10 @@ public class EverydayListAdapter extends BaseListAdapter<List<AndroidBean>> {
 
     @Override
     protected BaseHolder creatHolder(ViewGroup parent, int position) {
-        return new ViewHodler(parent.getContext(), R.layout.item_everyday);
+        return new ViewHodler(parent.getContext(), R.layout.item_everyday_old);
     }
 
-    class ViewHodler extends BaseDataBindingHolder<List<AndroidBean>, ItemEverydayBinding>{
+    class ViewHodler extends BaseDataBindingHolder<List<AndroidBean>, ItemEverydayOldBinding>{
 
         public ViewHodler(Context context, int layoutID) {
             super(context, layoutID);
