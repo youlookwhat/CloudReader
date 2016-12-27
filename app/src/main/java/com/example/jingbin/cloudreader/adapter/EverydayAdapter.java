@@ -121,15 +121,17 @@ public class EverydayAdapter extends BaseRecyclerViewAdapter<List<AndroidBean>> 
         public void onBindViewHolder(final List<AndroidBean> object, int position) {
             if ("福利".equals(object.get(0).getType())) {
                 binding.tvOnePhotoTitle.setVisibility(View.GONE);
+                binding.ivOnePhoto.setScaleType(ImageView.ScaleType.CENTER_CROP);
+                ImgLoadUtil.displayEspImage(object.get(0).getUrl(), binding.ivOnePhoto, 1);
             } else {
                 binding.tvOnePhotoTitle.setVisibility(View.VISIBLE);
                 setDes(object, 0, binding.tvOnePhotoTitle);
+                displayRandomImg(1, 0, position, binding.ivOnePhoto);
             }
-            displayRandomImg(1, 0, position, binding.ivOnePhoto);
             binding.llOnePhoto.setOnClickListener(new PerfectClickListener() {
                 @Override
                 protected void onNoDoubleClick(View v) {
-                    WebViewActivity.loadUrl(v.getContext(),object.get(0).getUrl(),"加载中...");
+                    WebViewActivity.loadUrl(v.getContext(), object.get(0).getUrl(), "加载中...");
                 }
             });
         }
@@ -173,12 +175,5 @@ public class EverydayAdapter extends BaseRecyclerViewAdapter<List<AndroidBean>> 
 
     private void displayRandomImg(int imgNumber, int position, int itemPosition, ImageView imageView) {
         ImgLoadUtil.displayRandom(imgNumber, position, itemPosition, imageView);
-//        Glide.with(imageView.getContext())
-//                .load(R.drawable.home_six_three)
-//                .placeholder(R.drawable.home_six_three)
-//                .error(R.drawable.home_six_three)
-//                .crossFade(1500)
-//                .into(imageView);
-
     }
 }
