@@ -297,9 +297,9 @@ public class TimeUtil {
     /**
      * 得到上一天的时间
      */
-    public static ArrayList<Integer> getLastTime(int year, int month, int day) {
+    public static ArrayList<String> getLastTime(String year, String month, String day) {
         Calendar ca = Calendar.getInstance();//得到一个Calendar的实例
-        ca.set(year, month, day);//月份是从0开始的，所以11表示12月
+        ca.set(Integer.valueOf(year), Integer.valueOf(month)-1, Integer.valueOf(day));//月份是从0开始的，所以11表示12月
 
         //使用roll方法进行向前回滚
         //cl.roll(Calendar.DATE, -1);
@@ -307,10 +307,10 @@ public class TimeUtil {
         int inDay = ca.get(Calendar.DATE);
         ca.set(Calendar.DATE, inDay - 1);
 
-        ArrayList<Integer> list = new ArrayList<>();
-        list.add(ca.get(Calendar.YEAR));
-        list.add(ca.get(Calendar.MONTH) + 1);
-        list.add(ca.get(Calendar.DATE));
+        ArrayList<String> list = new ArrayList<>();
+        list.add(String.valueOf(ca.get(Calendar.YEAR)));
+        list.add(String.valueOf(ca.get(Calendar.MONTH)+1));
+        list.add(String.valueOf(ca.get(Calendar.DATE)));
         return list;
     }
 

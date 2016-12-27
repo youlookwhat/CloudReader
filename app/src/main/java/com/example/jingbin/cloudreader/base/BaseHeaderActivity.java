@@ -12,6 +12,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -31,6 +32,8 @@ import com.example.jingbin.cloudreader.utils.PerfectClickListener;
 import com.example.jingbin.cloudreader.view.MyNestedScrollView;
 import com.example.jingbin.cloudreader.view.statusbar.StatusBarUtil;
 import com.example.jingbin.cloudreader.view.test.StatusBarUtils;
+
+import java.lang.reflect.Method;
 
 import jp.wasabeef.glide.transformations.BlurTransformation;
 import rx.Subscription;
@@ -210,6 +213,26 @@ public abstract class BaseHeaderActivity<HV extends ViewDataBinding, SV extends 
     }
 
     /**
+     * 显示popu内的图片
+     */
+    @Override
+    protected boolean onPrepareOptionsPanel(View view, Menu menu) {
+        if (menu != null) {
+            if (menu.getClass().getSimpleName().equals("MenuBuilder")) {
+                try {
+                    Method m = menu.getClass().getDeclaredMethod(
+                            "setOptionalIconsVisible", Boolean.TYPE);
+                    m.setAccessible(true);
+                    m.invoke(menu, true);
+                } catch (Exception e) {
+                    Log.e(getClass().getSimpleName(), "onMenuOpened...unable to set icons for overflow menu", e);
+                }
+            }
+        }
+        return super.onPrepareOptionsPanel(view, menu);
+    }
+
+    /**
      * *** 初始化滑动渐变 一定要实现 ******
      *
      * @param imgUrl    header头部的高斯背景imageUrl
@@ -301,6 +324,9 @@ public abstract class BaseHeaderActivity<HV extends ViewDataBinding, SV extends 
 
         Drawable drawable = bindingTitleView.ivBaseTitlebarBg.getDrawable();
 
+        if (drawable == null) {
+            return;
+        }
         if (scrolledY <= slidingDistance) {
             // title部分的渐变
             drawable.mutate().setAlpha((int) (alpha * 255));

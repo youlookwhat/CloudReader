@@ -3,9 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <!--orderInCategory 优先级-->
+    <!--android:icon="@drawable/actionbar_more"-->
     <item
         android:id="@+id/actionbar_more"
-        android:icon="@drawable/actionbar_more"
         android:orderInCategory="100"
         android:title="@string/actionbar_more"
         app:showAsAction="never" />

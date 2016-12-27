@@ -15,6 +15,7 @@ import com.example.jingbin.cloudreader.http.rx.RxCodeConstants;
 import com.example.jingbin.cloudreader.utils.CommonUtils;
 import com.example.jingbin.cloudreader.utils.DebugUtil;
 import com.example.jingbin.cloudreader.utils.ImgLoadUtil;
+import com.example.jingbin.cloudreader.utils.PerfectClickListener;
 
 import java.util.List;
 
@@ -28,18 +29,26 @@ public class EverydayAdapter extends BaseRecyclerViewAdapter<List<AndroidBean>> 
 
     @Override
     public BaseRecyclerViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new ViewHodler(parent, R.layout.item_everyday);
+        return new ViewHolder(parent, R.layout.item_everyday);
     }
 
-    private class ViewHodler extends BaseRecyclerViewHolder<List<AndroidBean>, ItemEverydayBinding> {
+    private class ViewHolder extends BaseRecyclerViewHolder<List<AndroidBean>, ItemEverydayBinding> {
 
-        ViewHodler(ViewGroup parent, int layoutId) {
+        ViewHolder(ViewGroup parent, int layoutId) {
             super(parent, layoutId);
         }
 
         @Override
-        public void onBindViewHolder(List<AndroidBean> positionData, int position) {
+        public void onBindViewHolder(final List<AndroidBean> positionData, int position) {
             if (positionData.size() > 0) {
+
+                itemView.setOnClickListener(new PerfectClickListener() {
+                    @Override
+                    protected void onNoDoubleClick(View v) {
+//                        WebViewActivity.loadUrl(v.getContext(),positionData.);
+                    }
+                });
+
                 binding.llAll.setVisibility(View.VISIBLE);
                 setAllHide();
                 DebugUtil.error("---position: " + position + "--positionData.size():" + positionData.size());

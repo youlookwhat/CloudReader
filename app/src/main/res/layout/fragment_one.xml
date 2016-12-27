@@ -1,30 +1,30 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <com.example.jingbin.cloudreader.view.sliding.SlidingLayout xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/slidingLayout"
+    <!--<com.example.jingbin.cloudreader.view.sliding.SlidingLayout xmlns:app="http://schemas.android.com/apk/res-auto"-->
+    <!--android:id="@+id/slidingLayout"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--app:background_view="@layout/sliding_view_bg"-->
+    <!--app:sliding_mode="top"-->
+    <!--app:top_max="200dp">-->
+    <!--app:sliding_mode="both" 上下均显示-->
+    <!--app:sliding_pointer_mode="more"-->
+
+    <!--为了出现下拉阴影效果（加了上面的控件后就没有了）-->
+    <FrameLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/frameLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:background_view="@layout/sliding_view_bg"
-        app:sliding_mode="top"
-        app:top_max="200dp">
-        <!--app:sliding_mode="both" 上下均显示-->
-        <!--app:sliding_pointer_mode="more"-->
-
-        <!--为了出现下拉阴影效果（加了上面的控件后就没有了）-->
-        <!--<FrameLayout xmlns:app="http://schemas.android.com/apk/res-auto"-->
-        <!--android:id="@+id/frameLayout"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent"-->
-        <!--android:scrollbarSize="4dp"-->
-        <!--android:scrollbarThumbVertical="@color/tabBackground"-->
-        <!--android:scrollbars="vertical"-->
-        <!--app:layout_behavior="@string/appbar_scrolling_view_behavior">-->
+        android:scrollbarSize="4dp"
+        android:scrollbarThumbVertical="@color/tabBackground"
+        android:scrollbars="vertical"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <com.example.xrecyclerview.XRecyclerView
             android:id="@+id/list_one"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical" />
-        <!--</FrameLayout>-->
-    </com.example.jingbin.cloudreader.view.sliding.SlidingLayout>
+    </FrameLayout>
+    <!--</com.example.jingbin.cloudreader.view.sliding.SlidingLayout>-->
 </layout>

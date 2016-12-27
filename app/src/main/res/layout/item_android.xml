@@ -44,6 +44,14 @@
                     android:textColor="@color/colorContent"
                     android:textSize="16sp" />
 
+                <!--全部标签时显示福利图-->
+                <ImageView
+                    android:id="@+id/iv_all_welfare"
+                    android:layout_width="match_parent"
+                    android:layout_height="140dp"
+                    android:scaleType="centerCrop"
+                    android:visibility="gone" />
+
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
