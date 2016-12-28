@@ -209,7 +209,8 @@ public class EverydayAdapter extends BaseRecyclerViewAdapter<List<AndroidBean>> 
                 View view = View.inflate(v.getContext(), R.layout.title_douban_top, null);
                 TextView titleTop = (TextView) view.findViewById(R.id.title_top);
                 titleTop.setTextSize(14);
-                titleTop.setText(bean.getType() + "：  " + bean.getDesc());
+                String title = TextUtils.isEmpty(bean.getType()) ? bean.getDesc() : bean.getType() + "：  " + bean.getDesc();
+                titleTop.setText(title);
                 builder.setCustomTitle(view);
                 builder.setPositiveButton("查看详情", new DialogInterface.OnClickListener() {
                     @Override
