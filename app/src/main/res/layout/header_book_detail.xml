@@ -29,7 +29,6 @@
             android:id="@+id/img_item_bg"
             android:layout_width="match_parent"
             android:layout_height="330dp"
-            android:fitsSystemWindows="true"
             android:scaleType="fitXY"
             android:showImgBg='@{booksBean.images.medium}' />
 

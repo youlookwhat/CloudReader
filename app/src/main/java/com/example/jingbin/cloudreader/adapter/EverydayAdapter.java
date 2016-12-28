@@ -1,5 +1,7 @@
 package com.example.jingbin.cloudreader.adapter;
 
+import android.content.DialogInterface;
+import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
@@ -7,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.jingbin.cloudreader.R;
 import com.example.jingbin.cloudreader.base.baseadapter.BaseRecyclerViewAdapter;
 import com.example.jingbin.cloudreader.base.baseadapter.BaseRecyclerViewHolder;
@@ -123,7 +126,14 @@ public class EverydayAdapter extends BaseRecyclerViewAdapter<List<AndroidBean>> 
             if ("福利".equals(object.get(0).getType())) {
                 binding.tvOnePhotoTitle.setVisibility(View.GONE);
                 binding.ivOnePhoto.setScaleType(ImageView.ScaleType.CENTER_CROP);
-                ImgLoadUtil.displayEspImage(object.get(0).getUrl(), binding.ivOnePhoto, 1);
+//                ImgLoadUtil.displayEspImage(object.get(0).getUrl(), binding.ivOnePhoto, 1);
+                Glide.with(binding.ivOnePhoto.getContext())
+                        .load(object.get(0).getUrl())
+                        .crossFade(1500)
+                        .placeholder(R.drawable.img_two_bi_one)
+                        .error(R.drawable.img_two_bi_one)
+                        .into(binding.ivOnePhoto);
+
             } else {
                 binding.tvOnePhotoTitle.setVisibility(View.VISIBLE);
                 setDes(object, 0, binding.tvOnePhotoTitle);
@@ -184,12 +194,33 @@ public class EverydayAdapter extends BaseRecyclerViewAdapter<List<AndroidBean>> 
     }
 
 
-    private void setOnClick(LinearLayout linearLayout, final AndroidBean bean) {
+    private void setOnClick(final LinearLayout linearLayout, final AndroidBean bean) {
         linearLayout.setOnClickListener(new PerfectClickListener() {
             @Override
             protected void onNoDoubleClick(View v) {
                 WebViewActivity.loadUrl(v.getContext(), bean.getUrl(), "加载中...");
             }
         });
+
+        linearLayout.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
+                View view = View.inflate(v.getContext(), R.layout.title_douban_top, null);
+                TextView titleTop = (TextView) view.findViewById(R.id.title_top);
+                titleTop.setTextSize(14);
+                titleTop.setText(bean.getType() + "：  " + bean.getDesc());
+                builder.setCustomTitle(view);
+                builder.setPositiveButton("查看详情", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        WebViewActivity.loadUrl(linearLayout.getContext(), bean.getUrl(), "加载中...");
+                    }
+                });
+                builder.show();
+                return false;
+            }
+        });
+
     }
 }
