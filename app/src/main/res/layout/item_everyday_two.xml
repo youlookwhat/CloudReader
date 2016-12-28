@@ -5,6 +5,8 @@
         android:id="@+id/ll_two_one"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
         android:visibility="visible">
 
         <LinearLayout
@@ -18,8 +20,9 @@
                 android:id="@+id/iv_two_one_one"
                 android:layout_width="match_parent"
                 android:layout_height="92dp"
-                android:background="@drawable/img_two_bi_one"
                 android:scaleType="fitXY" />
+
+            <!--android:background="@drawable/img_two_bi_one"-->
 
             <TextView
                 android:id="@+id/tv_two_one_one_title"
@@ -49,7 +52,6 @@
                 android:id="@+id/iv_two_one_two"
                 android:layout_width="match_parent"
                 android:layout_height="92dp"
-                android:background="@drawable/img_two_bi_one"
                 android:scaleType="fitXY" />
 
             <TextView
