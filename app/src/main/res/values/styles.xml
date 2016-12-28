@@ -116,4 +116,11 @@
         <item name="android:textSize">17sp</item>
     </style>
 
+    <!--用于项目主页-->
+    <style name="CollapsingToolbarTitleStyle" parent="@android:style/TextAppearance">
+        <item name="android:textSize">18.0sp</item>
+        <item name="android:textColor">@android:color/transparent</item>
+    </style>
+
+
 </resources>

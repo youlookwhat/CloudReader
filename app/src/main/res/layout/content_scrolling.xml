@@ -8,10 +8,31 @@
     tools:context=".ui.menu.NavHomePageActivity"
     tools:showIn="@layout/activity_nav_home_page">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="15dp"
-        android:text="@string/string_about" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="15dp"
+            android:text="介绍"
+            android:textColor="@color/colorTitle"
+            android:textSize="15sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:background="@drawable/shape_notclickbg"
+            android:padding="7dp"
+            android:text="@string/string_about"
+            android:textColor="@color/colorTitle" />
+    </LinearLayout>
 
 </android.support.v4.widget.NestedScrollView>

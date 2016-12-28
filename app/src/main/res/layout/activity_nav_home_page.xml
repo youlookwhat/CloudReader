@@ -21,19 +21,20 @@
                 android:id="@+id/toolbar_layout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/homepage_header"
                 android:fitsSystemWindows="true"
                 app:contentScrim="?attr/colorPrimary"
-                app:expandedTitleTextAppearance="@style/ToolBar.Title"
+                app:expandedTitleTextAppearance="@style/CollapsingToolbarTitleStyle"
                 app:layout_scrollFlags="scroll|exitUntilCollapsed"
                 app:title="@string/app_name">
 
 
+                <!--隐藏此处设置上面控件背景，状态栏透明-->
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:background="@drawable/homepage_header"
                     android:scaleType="fitXY"
-                    android:visibility="gone" />
+                    android:visibility="visible" />
 
                 <android.support.v7.widget.Toolbar
                     android:id="@+id/toolbar"
@@ -49,12 +50,12 @@
         <include layout="@layout/content_scrolling" />
 
         <android.support.design.widget.FloatingActionButton
-            android:id="@+id/fab"
+            android:id="@+id/fab_share"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/fab_margin"
-            android:src="@android:drawable/ic_dialog_email"
-            android:visibility="gone"
+            android:src="@drawable/actionbar_share"
+            android:visibility="visible"
             app:layout_anchor="@id/app_bar"
             app:layout_anchorGravity="bottom|end" />
 
