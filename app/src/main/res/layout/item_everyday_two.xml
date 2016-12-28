@@ -60,6 +60,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
                 android:ellipsize="end"
+                android:lineSpacingExtra="2dp"
                 android:maxLines="2"
                 android:text=""
                 android:textColor="@color/colorContent"
