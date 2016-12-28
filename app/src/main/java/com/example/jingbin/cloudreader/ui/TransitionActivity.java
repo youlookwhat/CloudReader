@@ -21,6 +21,7 @@ public class TransitionActivity extends AppCompatActivity {
     private ActivityTransitionBinding mBinding;
     private boolean animationEnd;
     private int[] mDrawables = new int[]{R.drawable.b_1, R.drawable.b_2, R.drawable.b_3, R.drawable.b_4,R.drawable.b_5};
+    private boolean isIn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +45,8 @@ public class TransitionActivity extends AppCompatActivity {
         mBinding.tvJump.setOnClickListener(new PerfectClickListener() {
             @Override
             protected void onNoDoubleClick(View v) {
-                animationEnd();
+                toMainActivity();
+//                animationEnd();
             }
         });
     }
@@ -79,9 +81,13 @@ public class TransitionActivity extends AppCompatActivity {
     }
 
     private void toMainActivity() {
+        if (isIn) {
+            return;
+        }
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
         overridePendingTransition(R.anim.screen_zoom_in, R.anim.screen_zoom_out);
         finish();
+        isIn = true;
     }
 }

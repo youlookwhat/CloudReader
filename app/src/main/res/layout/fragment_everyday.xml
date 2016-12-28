@@ -7,10 +7,48 @@
             type="com.example.jingbin.cloudreader.bean.GankIoDataBean" />
     </data>
 
-    <com.example.xrecyclerview.XRecyclerView
-        android:id="@+id/xrv_everyday"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:visibility="gone" />
+        android:layout_height="wrap_content">
+
+        <com.example.xrecyclerview.XRecyclerView
+            android:id="@+id/xrv_everyday"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone" />
+
+        <LinearLayout
+            android:id="@+id/ll_loading"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="90dp"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/iv_loading"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/loading_everyday" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="正在为您开启干货推荐.."
+                android:textColor="@color/colorTitle"
+                android:textSize="14sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="7dp"
+                android:text="看的越多，推荐还这样"
+                android:textColor="@color/colorSubtitle"
+                android:textSize="12sp" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
 
 </layout>

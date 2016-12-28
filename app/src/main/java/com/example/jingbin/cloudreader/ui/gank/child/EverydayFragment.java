@@ -7,6 +7,9 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.LinearInterpolator;
+import android.view.animation.RotateAnimation;
 
 import com.bumptech.glide.Glide;
 import com.example.jingbin.cloudreader.R;
@@ -63,6 +66,9 @@ public class EverydayFragment extends BaseFragment<FragmentEverydayBinding> {
     private boolean mIsFirst = true;
     // 是否正在刷新（避免重复刷新）
     private boolean mIsLoading = false;
+    // 是否是上一天的请求
+    private boolean isOldDayRequest;
+    private RotateAnimation animation;
 
     @Override
     public int setContent() {
@@ -74,7 +80,16 @@ public class EverydayFragment extends BaseFragment<FragmentEverydayBinding> {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        showLoading();
+//        showLoading();
+        showContentView();
+        bindingView.llLoading.setVisibility(View.VISIBLE);
+        animation = new RotateAnimation(0f, 360f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
+        animation.setDuration(3000);//设置动画持续时间
+        animation.setInterpolator(new LinearInterpolator());//不停顿
+        animation.setRepeatCount(10);
+        bindingView.ivLoading.setAnimation(animation);
+        animation.startNow();
+
         maCache = ACache.get(getContext());
         mEverydayModel = new EverydayModel();
         mBannerImages = (ArrayList<String>) maCache.getAsObject(Constants.BANNER_PIC);
@@ -156,15 +171,19 @@ public class EverydayFragment extends BaseFragment<FragmentEverydayBinding> {
         String oneData = SPUtils.getString("everyday_data", "2016-11-26");
         if (!oneData.equals(TimeUtil.getData())) {// 是第二天
             if (TimeUtil.isRightTime()) {//大于12：30,请求
-                showLoading();
+//                showLoading();
+
+                showRotaLoading(true);
                 loadBannerPicture();
                 showContentData();
             } else {// 小于，取缓存没有请求前一天
                 ArrayList<String> lastTime = TimeUtil.getLastTime(getTodayTime().get(0), getTodayTime().get(1), getTodayTime().get(2));
                 mEverydayModel.setData(lastTime.get(0), lastTime.get(1), lastTime.get(2));
+                isOldDayRequest = true;
                 getAcacheData();
             }
         } else {// 当天，取缓存没有请求当天
+            isOldDayRequest = false;
             getAcacheData();
         }
     }
@@ -186,6 +205,7 @@ public class EverydayFragment extends BaseFragment<FragmentEverydayBinding> {
         if (mLists != null && mLists.size() > 0) {
             setAdapter(mLists);
         } else {
+            showRotaLoading(true);
             showContentData();
         }
     }
@@ -225,8 +245,8 @@ public class EverydayFragment extends BaseFragment<FragmentEverydayBinding> {
     }
 
     private void setEmptyAdapter() {
-        showContentView();
-        bindingView.xrvEveryday.setVisibility(View.VISIBLE);
+        showRotaLoading(false);
+
         EmptyAdapter emptyAdapter = new EmptyAdapter();
         ArrayList<String> list = new ArrayList<>();
         list.add(CommonUtils.getString(R.string.string_everyday_empty));
@@ -260,8 +280,7 @@ public class EverydayFragment extends BaseFragment<FragmentEverydayBinding> {
     }
 
     private void setAdapter(ArrayList<List<AndroidBean>> lists) {
-        showContentView();
-        bindingView.xrvEveryday.setVisibility(View.VISIBLE);
+        showRotaLoading(false);
         if (mEverydayAdapter == null) {
             mEverydayAdapter = new EverydayAdapter();
         } else {
@@ -274,8 +293,13 @@ public class EverydayFragment extends BaseFragment<FragmentEverydayBinding> {
         maCache.remove(Constants.EVERYDAY_CONTENT);
         // 缓存三天，这样就可以取到缓存了！
         maCache.put(Constants.EVERYDAY_CONTENT, lists, 259200);
-        // 保存请求的日期
-        SPUtils.putString("everyday_data", TimeUtil.getData());
+        if (isOldDayRequest) {
+            ArrayList<String> lastTime = TimeUtil.getLastTime(getTodayTime().get(0), getTodayTime().get(1), getTodayTime().get(2));
+            SPUtils.putString("everyday_data", lastTime.get(0) + "-" + lastTime.get(1) + "-" + lastTime.get(2));
+        } else {
+            // 保存请求的日期
+            SPUtils.putString("everyday_data", TimeUtil.getData());
+        }
 
         mIsFirst = false;
         mIsLoading = false;
@@ -352,6 +376,18 @@ public class EverydayFragment extends BaseFragment<FragmentEverydayBinding> {
                 EverydayFragment.this.addSubscription(subscription);
             }
         });
+    }
+
+    private void showRotaLoading(boolean isLoading) {
+        if (isLoading) {
+            bindingView.llLoading.setVisibility(View.VISIBLE);
+            bindingView.xrvEveryday.setVisibility(View.GONE);
+            animation.startNow();
+        } else {
+            bindingView.llLoading.setVisibility(View.GONE);
+            bindingView.xrvEveryday.setVisibility(View.VISIBLE);
+            animation.cancel();
+        }
     }
 
     @Override
