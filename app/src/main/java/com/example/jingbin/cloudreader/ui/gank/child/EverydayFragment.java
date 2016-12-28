@@ -63,6 +63,8 @@ public class EverydayFragment extends BaseFragment<FragmentEverydayBinding> {
     private boolean mIsFirst = true;
     // 是否正在刷新（避免重复刷新）
     private boolean mIsLoading = false;
+    // 是否是上一天的请求
+    private boolean isOldDayRequest;
 
     @Override
     public int setContent() {
@@ -162,9 +164,11 @@ public class EverydayFragment extends BaseFragment<FragmentEverydayBinding> {
             } else {// 小于，取缓存没有请求前一天
                 ArrayList<String> lastTime = TimeUtil.getLastTime(getTodayTime().get(0), getTodayTime().get(1), getTodayTime().get(2));
                 mEverydayModel.setData(lastTime.get(0), lastTime.get(1), lastTime.get(2));
+                isOldDayRequest = true;
                 getAcacheData();
             }
         } else {// 当天，取缓存没有请求当天
+            isOldDayRequest = false;
             getAcacheData();
         }
     }
@@ -274,8 +278,13 @@ public class EverydayFragment extends BaseFragment<FragmentEverydayBinding> {
         maCache.remove(Constants.EVERYDAY_CONTENT);
         // 缓存三天，这样就可以取到缓存了！
         maCache.put(Constants.EVERYDAY_CONTENT, lists, 259200);
-        // 保存请求的日期
-        SPUtils.putString("everyday_data", TimeUtil.getData());
+        if (isOldDayRequest) {
+            ArrayList<String> lastTime = TimeUtil.getLastTime(getTodayTime().get(0), getTodayTime().get(1), getTodayTime().get(2));
+            SPUtils.putString("everyday_data", lastTime.get(0) + "-" + lastTime.get(1) + "-" + lastTime.get(2));
+        } else {
+            // 保存请求的日期
+            SPUtils.putString("everyday_data", TimeUtil.getData());
+        }
 
         mIsFirst = false;
         mIsLoading = false;

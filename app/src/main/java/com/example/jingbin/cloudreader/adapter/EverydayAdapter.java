@@ -4,6 +4,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.jingbin.cloudreader.R;
@@ -149,6 +150,8 @@ public class EverydayAdapter extends BaseRecyclerViewAdapter<List<AndroidBean>> 
             displayRandomImg(4, 1, position, binding.ivTwoOneTwo);
             setDes(object, 0, binding.tvTwoOneOneTitle);
             setDes(object, 1, binding.tvTwoOneTwoTitle);
+            setOnClick(binding.llTwoOneOne, object.get(0));
+            setOnClick(binding.llTwoOneTwo, object.get(1));
         }
     }
 
@@ -163,6 +166,9 @@ public class EverydayAdapter extends BaseRecyclerViewAdapter<List<AndroidBean>> 
             displayRandomImg(6, 0, position, binding.ivThreeOneOne);
             displayRandomImg(6, 1, position, binding.ivThreeOneTwo);
             displayRandomImg(6, 2, position, binding.ivThreeOneThree);
+            setOnClick(binding.llThreeOneOne, object.get(0));
+            setOnClick(binding.llThreeOneTwo, object.get(1));
+            setOnClick(binding.llThreeOneThree, object.get(2));
             setDes(object, 0, binding.tvThreeOneOneTitle);
             setDes(object, 1, binding.tvThreeOneTwoTitle);
             setDes(object, 2, binding.tvThreeOneThreeTitle);
@@ -175,5 +181,15 @@ public class EverydayAdapter extends BaseRecyclerViewAdapter<List<AndroidBean>> 
 
     private void displayRandomImg(int imgNumber, int position, int itemPosition, ImageView imageView) {
         ImgLoadUtil.displayRandom(imgNumber, position, itemPosition, imageView);
+    }
+
+
+    private void setOnClick(LinearLayout linearLayout, final AndroidBean bean) {
+        linearLayout.setOnClickListener(new PerfectClickListener() {
+            @Override
+            protected void onNoDoubleClick(View v) {
+                WebViewActivity.loadUrl(v.getContext(), bean.getUrl(), "加载中...");
+            }
+        });
     }
 }
