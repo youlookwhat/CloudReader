@@ -19,7 +19,7 @@
             <ImageView
                 android:id="@+id/iv_two_one_one"
                 android:layout_width="match_parent"
-                android:layout_height="92dp"
+                android:layout_height="95dp"
                 android:scaleType="fitXY" />
 
             <!--android:background="@drawable/img_two_bi_one"-->
@@ -51,7 +51,7 @@
             <ImageView
                 android:id="@+id/iv_two_one_two"
                 android:layout_width="match_parent"
-                android:layout_height="92dp"
+                android:layout_height="95dp"
                 android:scaleType="fitXY" />
 
             <TextView
