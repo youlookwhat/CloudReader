@@ -17,15 +17,15 @@
             android:id="@+id/tv_jump"
             android:layout_width="70dp"
             android:layout_height="30dp"
+            android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
-            android:layout_marginRight="20dp"
-            android:layout_marginTop="30dp"
+            android:layout_marginBottom="50dp"
+            android:layout_marginRight="50dp"
+            android:background="@drawable/shape_jump"
             android:gravity="center"
             android:text="跳过"
-            android:visibility="gone"
-            android:textColor="#dddddd"
+            android:textColor="#fff"
             android:textSize="16sp" />
 
-        <!--android:background="@drawable/shapejump"-->
     </RelativeLayout>
 </layout>
