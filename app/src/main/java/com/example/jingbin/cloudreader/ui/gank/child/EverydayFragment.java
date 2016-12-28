@@ -168,18 +168,18 @@ public class EverydayFragment extends BaseFragment<FragmentEverydayBinding> {
                 ArrayList<String> lastTime = TimeUtil.getLastTime(getTodayTime().get(0), getTodayTime().get(1), getTodayTime().get(2));
                 mEverydayModel.setData(lastTime.get(0), lastTime.get(1), lastTime.get(2));
                 isOldDayRequest = true;
-                getAcacheData();
+                getACacheData();
             }
         } else {// 当天，取缓存没有请求当天
             isOldDayRequest = false;
-            getAcacheData();
+            getACacheData();
         }
     }
 
     /**
      * 取缓存
      */
-    private void getAcacheData() {
+    private void getACacheData() {
 
         if (!mIsFirst) {
             return;

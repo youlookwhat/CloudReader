@@ -16,7 +16,7 @@
         <item name="android:statusBarColor">@android:color/transparent</item>
     </style>
 
-    <!--titlebar样式-->
+    <!--titleBar样式-->
     <style name="ToolbarStyle" parent="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
         <item name="actionBarItemBackground">@drawable/toolbarItemBackground</item>
         <item name="selectableItemBackground">@drawable/toolbarItemBackground</item>
