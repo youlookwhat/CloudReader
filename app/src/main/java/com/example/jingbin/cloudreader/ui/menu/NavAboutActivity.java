@@ -23,8 +23,6 @@ public class NavAboutActivity extends BaseActivity<ActivityNavAboutBinding> {
         setContentView(R.layout.activity_nav_about);
         showContentView();
         setTitle("关于云阅");
-//        bindingView.tvGankio.setText("《"+Html.fromHtml("<u>"+"代码家 · 干货集中营"+"</u>")+"》");
-//        bindingView.tvDouban.setText("《"+Html.fromHtml("<u>"+"豆瓣开发者服务使用条款"+"</u>")+"》");
 
 
         // 直接写在布局文件里会很耗内存

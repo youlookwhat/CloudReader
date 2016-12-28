@@ -5,17 +5,24 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="action_settings">Settings</string>
+    <string name="action_share">分享</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank mFragment</string>
     <string name="title_activity_base">BaseActivity</string>
     <string name="actionbar_search">搜索</string>
     <string name="actionbar_more">更多信息</string>
+    <string name="actionbar_share">分享给朋友\(^o^)/~</string>
     <string name="github_issues">您好，很希望得到您的意见，由于没有线上反馈系统，您可以在GitHub的Issues处说明问题原因，也可以通过以下方式联系我，我将根据情况尽量处理哦 ~</string>
-    <string name="string_about">云阅是基于网易云音乐UI，使用Gank.Io及豆瓣api开发的基本符合Google Material Design阅读类的App。
-        \n\n 项目采取的是Retrofit + RxJava + MVVM-DataBinding架构开发，现主要包括：干货区、电影区和书籍区三个子模块。
-        \n\n UI：如使用网易云音乐相似的界面导致侵权请及时通知我修改或删除。
+    <string name="string_about">云阅是一款基于网易云音乐UI，使用Gank.Io及豆瓣api开发的基本符合Google Material Design阅读类的App。
+        \n\n 项目内容主要分为三部分：
+        \n &amp; &amp;- 干货区：数据来源于代码家的http://gank.io ：每天一个妹子图、相关Android、IOS等其他干货内容；可点击查看详情。
+        \n &amp; &amp;- 电影区：数据来源于豆瓣，每天更新最新的电影排行榜，也提供了豆瓣电影Top250的内容，点击可查看电影详情，电影资讯掌在手，哈哈&amp;\(^o^)/~
+        \n &amp; &amp;- 书籍区：书籍仍来源于豆瓣，推荐各类的书籍，挑选自己感兴趣的书更加容易啦，后期会完善更过分类内容~
+        \n\n UI：如使用网易云音乐部分图片和相似界面导致侵权请及时通知我修改或删除。
         \n数据：大部分使用的是代码家的gank.io和豆瓣api，一切数据解释权都归gank.io和豆瓣所有。</string>
     <string name="string_everyday_empty">暂时没有更新内容，去看看其他信息吧~</string>
+    <string name="string_share_text">发现了一个高仿网易云音乐的App，里面内容有大量IT干货，每天提供安卓，IOS等最新资讯，还有最新电影热映榜和大量书籍信息，大力推荐哦~：</string>
+
 
 </resources>

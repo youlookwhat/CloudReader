@@ -17,7 +17,7 @@
 
 
     <!--电影详情页-->
-    <style name="MyScollPage" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="MyScrollPage" parent="Theme.AppCompat.Light.NoActionBar">
         <!--选中状态icon的颜色和字体颜色-->
         <item name="colorPrimary">@color/colorTheme</item>
         <item name="colorPrimaryDark">@color/colorTheme</item>
@@ -34,7 +34,7 @@
     </style>
 
 
-    <!--titlebar样式-->
+    <!--titleBar样式-->
     <style name="ToolbarStyle" parent="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
         <item name="actionBarItemBackground">@drawable/toolbarItemBackground</item>
         <item name="selectableItemBackground">@drawable/toolbarItemBackground</item>
@@ -55,6 +55,8 @@
         <item name="android:textSize">9.0sp</item>
         <item name="android:textColor">#99ffffff</item>
     </style>
+
+
 
     <style name="BottomSheet.StyleDialog" parent="BottomSheet.Dialog">
         <item name="android:backgroundDimAmount">0.5</item>
@@ -113,5 +115,12 @@
         <item name="android:textColor">@color/text_common</item>
         <item name="android:textSize">17sp</item>
     </style>
+
+    <!--用于项目主页-->
+    <style name="CollapsingToolbarTitleStyle" parent="@android:style/TextAppearance">
+        <item name="android:textSize">18.0sp</item>
+        <item name="android:textColor">@android:color/transparent</item>
+    </style>
+
 
 </resources>

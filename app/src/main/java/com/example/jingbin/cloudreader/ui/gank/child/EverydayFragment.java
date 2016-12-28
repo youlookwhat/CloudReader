@@ -157,21 +157,9 @@ public class EverydayFragment extends BaseFragment<FragmentEverydayBinding> {
             return;
         }
 
-
-//        DebugUtil.error("年：" + getTodayTime().get(0));
-//        DebugUtil.error("月：" + getTodayTime().get(1));
-//        DebugUtil.error("日：" + getTodayTime().get(2));
-
-//        ArrayList<String> lastTime2 = TimeUtil.getLastTime(getTodayTime().get(0), getTodayTime().get(1), getTodayTime().get(2));
-
-//        DebugUtil.error("--年：" + lastTime2.get(0));
-//        DebugUtil.error("--月：" + lastTime2.get(1));
-//        DebugUtil.error("--日：" + lastTime2.get(2));
-
         String oneData = SPUtils.getString("everyday_data", "2016-11-26");
         if (!oneData.equals(TimeUtil.getData())) {// 是第二天
             if (TimeUtil.isRightTime()) {//大于12：30,请求
-//                showLoading();
 
                 showRotaLoading(true);
                 loadBannerPicture();
@@ -180,18 +168,18 @@ public class EverydayFragment extends BaseFragment<FragmentEverydayBinding> {
                 ArrayList<String> lastTime = TimeUtil.getLastTime(getTodayTime().get(0), getTodayTime().get(1), getTodayTime().get(2));
                 mEverydayModel.setData(lastTime.get(0), lastTime.get(1), lastTime.get(2));
                 isOldDayRequest = true;
-                getAcacheData();
+                getACacheData();
             }
         } else {// 当天，取缓存没有请求当天
             isOldDayRequest = false;
-            getAcacheData();
+            getACacheData();
         }
     }
 
     /**
      * 取缓存
      */
-    private void getAcacheData() {
+    private void getACacheData() {
 
         if (!mIsFirst) {
             return;
@@ -392,7 +380,11 @@ public class EverydayFragment extends BaseFragment<FragmentEverydayBinding> {
 
     @Override
     protected void onRefresh() {
-        loadData();
+        showContentView();
+        showRotaLoading(true);
+//        loadData();
+        loadBannerPicture();
+        showContentData();
     }
 
     @Override

@@ -53,7 +53,6 @@ public class OneFragment extends BaseFragment<FragmentOneBinding> {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
         showContentView();
         aCache = ACache.get(getActivity());
         oneAdapter = new OneAdapter(activity);
@@ -78,14 +77,9 @@ public class OneFragment extends BaseFragment<FragmentOneBinding> {
         String oneData = SPUtils.getString("one_data", "2016-11-26");
 
         if (!oneData.equals(TimeUtil.getData()) && !mIsLoading) {
-            synchronized (this) {
-                if (!mIsLoading) {
-                    mIsLoading = true;
-                    /**延迟执行防止卡顿*/
-                    showLoading();
-                    postDelayLoad();
-                }
-            }
+            showLoading();
+            /**延迟执行防止卡顿*/
+            postDelayLoad();
         } else {
             // 为了正在刷新时不执行这部分
             if (mIsLoading) {
@@ -97,11 +91,7 @@ public class OneFragment extends BaseFragment<FragmentOneBinding> {
 
             showLoading();
             if (mHotMovieBean == null && !mIsLoading) {
-                synchronized (this) {
-                    if (!mIsLoading) {
-                        postDelayLoad();
-                    }
-                }
+                postDelayLoad();
             } else {
                 bindingView.listOne.postDelayed(new Runnable() {
                     @Override
@@ -136,7 +126,6 @@ public class OneFragment extends BaseFragment<FragmentOneBinding> {
 
                     @Override
                     public void onNext(HotMovieBean hotMovieBean) {
-
                         if (hotMovieBean != null) {
                             aCache.remove(Constants.ONE_HOT_MOVIE);
                             // 保存12个小时
@@ -148,32 +137,10 @@ public class OneFragment extends BaseFragment<FragmentOneBinding> {
                             mIsLoading = false;
                         }
 
-
-//                        bindingContentView.listOne.setLayoutManager(new GridLayoutManager(getActivity(), 1));
-//                        SpacesItemDecoration spacesItemDecoration=new SpacesItemDecoration(ScreenUtils.dipToPx(getActivity(),10),ScreenUtils.dipToPx(getActivity(),10),ScreenUtils.dipToPx(getActivity(),10),0);
-//                        recyclerview.addItemDecoration(spacesItemDecoration);
-//                        recyclerview.setAdapter(filmLiveAdapter);
-
-                        //1 实例化RecyclerView
-//                        LinearLayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
-                        //2 为RecyclerView创建布局管理器，这里使用的是LinearLayoutManager，表示里面的Item排列是线性排列
-//                        mLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-//                        bindingContentView.listOne.setLayoutManager(mLayoutManager);
-
                         //构造器中，第一个参数表示列数或者行数，第二个参数表示滑动方向,瀑布流
 //                        bindingContentView.listOne.setLayoutManager(new StaggeredGridLayoutManager(4,StaggeredGridLayoutManager.VERTICAL));
-
                         // GridView
 //                        bindingContentView.listOne.setLayoutManager(new GridLayoutManager(getActivity(), 2));
-
-//                        LinearLayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
-//                        mLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-//                        bindingContentView.listOne.setLayoutManager(mLayoutManager);
-//                        OneAdapter oneAdapter = new OneAdapter();
-//                        oneAdapter.addAll(mHotMovieBean.getSubjects());
-//                        bindingContentView.listOne.setAdapter(oneAdapter);
-
-//                        oneAdapter.notifyItemInserted(0);addheader
                     }
                 });
         addSubscription(subscription);
@@ -215,14 +182,20 @@ public class OneFragment extends BaseFragment<FragmentOneBinding> {
 
     /**
      * 延迟执行，避免卡顿
+     * 加同步锁，避免重复加载
      */
     private void postDelayLoad() {
-        bindingView.listOne.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                loadHotMovie();
+        synchronized (this) {
+            if (!mIsLoading) {
+                mIsLoading = true;
+                bindingView.listOne.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        loadHotMovie();
+                    }
+                }, 150);
             }
-        }, 150);
+        }
     }
 
 

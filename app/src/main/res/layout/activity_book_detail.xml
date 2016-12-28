@@ -45,6 +45,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="12dp"
+            android:lineSpacingExtra="5dp"
             android:text="@{bookDetailBean.summary}"
             android:textColor="@color/colorTitle" />
 

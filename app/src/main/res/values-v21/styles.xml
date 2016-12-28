@@ -16,7 +16,7 @@
         <item name="android:statusBarColor">@android:color/transparent</item>
     </style>
 
-    <!--titlebar样式-->
+    <!--titleBar样式-->
     <style name="ToolbarStyle" parent="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
         <item name="actionBarItemBackground">@drawable/toolbarItemBackground</item>
         <item name="selectableItemBackground">@drawable/toolbarItemBackground</item>
@@ -35,6 +35,12 @@
     <style name="Toolbar.SubTitle" parent="@style/TextAppearance.Widget.AppCompat.Toolbar.Subtitle">
         <item name="android:textSize">9.0sp</item>
         <item name="android:textColor">#99ffffff</item>
+    </style>
+
+    <!--用于项目主页-->
+    <style name="CollapsingToolbarTitleStyle" parent="@android:style/TextAppearance">
+        <item name="android:textSize">18.0sp</item>
+        <item name="android:textColor">@android:color/transparent</item>
     </style>
 
 </resources>

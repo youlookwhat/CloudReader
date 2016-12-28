@@ -176,7 +176,7 @@ public class ImgLoadUtil {
                 .load(url)
                 .error(R.drawable.stackblur_default)
                 .placeholder(R.drawable.stackblur_default)
-                .crossFade(1000)
+                .crossFade(500)
                 .bitmapTransform(new BlurTransformation(context, 23, 4))
                 .into(imageView);
     }
