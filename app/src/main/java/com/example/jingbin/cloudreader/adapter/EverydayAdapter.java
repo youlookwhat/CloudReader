@@ -40,7 +40,6 @@ public class EverydayAdapter extends BaseRecyclerViewAdapter<List<AndroidBean>> 
 
     @Override
     public int getItemViewType(int position) {
-
         if (!TextUtils.isEmpty(getData().get(position).get(0).getType_title())) {
             return TYPE_TITLE;
         } else if (getData().get(position).size() == 1) {
@@ -105,6 +104,12 @@ public class EverydayAdapter extends BaseRecyclerViewAdapter<List<AndroidBean>> 
                 index = 2;
             }
 
+            if (position != 0) {
+                binding.viewLine.setVisibility(View.VISIBLE);
+            } else {
+                binding.viewLine.setVisibility(View.GONE);
+            }
+
             final int finalIndex = index;
             binding.llTitleMore.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -139,12 +144,13 @@ public class EverydayAdapter extends BaseRecyclerViewAdapter<List<AndroidBean>> 
                 setDes(object, 0, binding.tvOnePhotoTitle);
                 displayRandomImg(1, 0, position, binding.ivOnePhoto);
             }
-            binding.llOnePhoto.setOnClickListener(new PerfectClickListener() {
-                @Override
-                protected void onNoDoubleClick(View v) {
-                    WebViewActivity.loadUrl(v.getContext(), object.get(0).getUrl(), "加载中...");
-                }
-            });
+            setOnClick(binding.llOnePhoto, object.get(0));
+//            binding.llOnePhoto.setOnClickListener(new PerfectClickListener() {
+//                @Override
+//                protected void onNoDoubleClick(View v) {
+//                    WebViewActivity.loadUrl(v.getContext(), object.get(0).getUrl(), "加载中...");
+//                }
+//            });
         }
     }
 

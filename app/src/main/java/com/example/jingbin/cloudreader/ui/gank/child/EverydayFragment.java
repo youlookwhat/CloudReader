@@ -356,7 +356,7 @@ public class EverydayFragment extends BaseFragment<FragmentEverydayBinding> {
 
             @Override
             public void loadFailed() {
-                showError();
+//                showError();
             }
 
             @Override

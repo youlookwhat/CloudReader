@@ -33,7 +33,7 @@
                 android:maxLines="2"
                 android:text=""
                 android:textColor="@color/colorContent"
-                android:textSize="13sp" />
+                android:textSize="12sp" />
 
         </LinearLayout>
 
@@ -65,7 +65,7 @@
                 android:maxLines="2"
                 android:text=""
                 android:textColor="@color/colorContent"
-                android:textSize="13sp" />
+                android:textSize="12sp" />
 
         </LinearLayout>
 
@@ -97,7 +97,7 @@
                 android:maxLines="2"
                 android:text=""
                 android:textColor="@color/colorContent"
-                android:textSize="13sp" />
+                android:textSize="12sp" />
 
         </LinearLayout>
 

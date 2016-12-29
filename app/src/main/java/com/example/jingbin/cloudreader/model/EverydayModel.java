@@ -146,7 +146,7 @@ public class EverydayModel {
             if (androidSize > 6) {
                 lists.add(arrayList.subList(3, 6));
             } else {
-                lists.add(arrayList.subList(3, androidSize - 1));
+                lists.add(arrayList.subList(3, androidSize));
             }
         }
     }
