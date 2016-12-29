@@ -17,14 +17,15 @@
         android:orientation="vertical"
         android:padding="8dp">
 
+        <!--android:defaultPicType='@{0}'-->
+        <!--android:displayFadeImage='@{bean.images.large}'-->
         <ImageView
             android:id="@+id/iv_top_photo"
             android:layout_width="match_parent"
             android:layout_height="135dp"
             android:background="@color/colorPageBg"
-            android:defaultPicType='@{0}'
-            android:displayFadeImage='@{bean.images.large}'
             android:scaleType="fitXY"
+            android:showMovieImg='@{bean.images.large}'
             android:transitionName="@string/transition_movie_img"
             app:layout_collapseMode="parallax"
             app:layout_collapseParallaxMultiplier="0.7" />

@@ -50,11 +50,11 @@
 
                 <ImageView
                     android:id="@+id/iv_one_photo"
-                    android:layout_width="120dp"
-                    android:layout_height="165dp"
+                    android:layout_width="@dimen/book_detail_width"
+                    android:layout_height="@dimen/book_detail_height"
                     android:layout_marginRight="15dp"
                     android:scaleType="fitXY"
-                    android:showImg='@{booksBean.images.large}'
+                    android:showBookImg='@{booksBean.images.large}'
                     android:transitionName="@string/transition_book_img" />
 
                 <!--评分-->

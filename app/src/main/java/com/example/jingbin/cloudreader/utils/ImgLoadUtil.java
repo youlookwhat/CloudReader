@@ -5,8 +5,6 @@ import android.databinding.BindingAdapter;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.bumptech.glide.request.target.GlideDrawableImageViewTarget;
 import com.example.jingbin.cloudreader.R;
 
 import java.util.Random;
@@ -129,17 +127,19 @@ public class ImgLoadUtil {
 
 
     /**
-     * 用于首页加载每日推荐图
+     * 用于干货item，将gif图转换为静态图
      */
-    public static void display(String url, ImageView imageView) {
+    public static void displayGif(String url, ImageView imageView) {
 
         Glide.with(imageView.getContext()).load(url)
+                .asBitmap()
                 .placeholder(R.drawable.img_four_bi_three)
                 .error(R.drawable.test)
-                .skipMemoryCache(true) //跳过内存缓存
-                .diskCacheStrategy(DiskCacheStrategy.SOURCE)// 缓存图片源文件（解决加载gif内存溢出问题）
-                .crossFade(1000)
-                .into(new GlideDrawableImageViewTarget(imageView, 1));
+//                .skipMemoryCache(true) //跳过内存缓存
+//                .diskCacheStrategy(DiskCacheStrategy.SOURCE)// 缓存图片源文件（解决加载gif内存溢出问题）
+//                .crossFade(1000)
+//                .into(new GlideDrawableImageViewTarget(imageView, 1));
+                .into(imageView);
     }
 
     /**
@@ -202,7 +202,7 @@ public class ImgLoadUtil {
     }
 
     /**
-     * 电影详情页显示电影图片
+     * 电影详情页显示电影图片(等待被替换)（测试的还在，已可以弃用）
      * 没有加载中的图
      */
     @BindingAdapter("android:showImg")
@@ -211,6 +211,34 @@ public class ImgLoadUtil {
                 .load(url)
                 .crossFade(500)
                 .error(getDefaultPic(0))
+                .into(imageView);
+    }
+
+    /**
+     * 电影列表图片
+     */
+    @BindingAdapter("android:showMovieImg")
+    public static void showMovieImg(ImageView imageView, String url) {
+        Glide.with(imageView.getContext())
+                .load(url)
+                .crossFade(500)
+                .override((int) CommonUtils.getDimens(R.dimen.movie_detail_width), (int) CommonUtils.getDimens(R.dimen.movie_detail_height))
+                .placeholder(getDefaultPic(0))
+                .error(getDefaultPic(0))
+                .into(imageView);
+    }
+
+    /**
+     * 书籍列表图片
+     */
+    @BindingAdapter("android:showBookImg")
+    public static void showBookImg(ImageView imageView, String url) {
+        Glide.with(imageView.getContext())
+                .load(url)
+                .crossFade(500)
+                .override((int) CommonUtils.getDimens(R.dimen.book_detail_width), (int) CommonUtils.getDimens(R.dimen.book_detail_height))
+                .placeholder(getDefaultPic(2))
+                .error(getDefaultPic(2))
                 .into(imageView);
     }
 

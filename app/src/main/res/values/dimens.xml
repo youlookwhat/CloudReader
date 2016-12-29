@@ -22,5 +22,11 @@
 
     <dimen name="slide_shape_title_ng">310dp</dimen>
 
+    <!--电影详情图片的宽高-->
+    <dimen name="movie_detail_width">125dp</dimen>
+    <dimen name="movie_detail_height">165dp</dimen>
+    <!--书籍详情图片的宽高-->
+    <dimen name="book_detail_width">120dp</dimen>
+    <dimen name="book_detail_height">165dp</dimen>
 
 </resources>

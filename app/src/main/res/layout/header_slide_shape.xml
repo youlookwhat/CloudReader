@@ -53,11 +53,11 @@
                 <!--app:layout_collapseParallaxMultiplier="0.7"-->
                 <ImageView
                     android:id="@+id/iv_one_photo"
-                    android:layout_width="125dp"
-                    android:layout_height="165dp"
+                    android:layout_width="@dimen/movie_detail_width"
+                    android:layout_height="@dimen/movie_detail_height"
                     android:layout_marginRight="15dp"
                     android:scaleType="fitXY"
-                    android:showImg='@{subjectsBean.images.large}'
+                    android:showMovieImg='@{subjectsBean.images.large}'
                     android:transitionName="@string/transition_movie_img" />
 
                 <!--评分-->

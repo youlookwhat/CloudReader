@@ -129,8 +129,9 @@ public class EverydayFragment extends BaseFragment<FragmentEverydayBinding> {
     private void initLocalSetting() {
         mEverydayModel.setData(getTodayTime().get(0), getTodayTime().get(1), getTodayTime().get(2));
 //        DebugUtil.error("" + year + month + day);
-        // 显示日期
-        mHeaderBinding.includeEveryday.tvDailyText.setText(getTodayTime().get(2));
+        // 显示日期,去掉第一位的"0"
+        mHeaderBinding.includeEveryday.tvDailyText.setText(getTodayTime().get(2).indexOf("0") == 0 ?
+                getTodayTime().get(2).replace("0", "") : getTodayTime().get(2));
         mHeaderBinding.includeEveryday.ibXiandu.setOnClickListener(new PerfectClickListener() {
             @Override
             protected void onNoDoubleClick(View v) {
@@ -356,7 +357,7 @@ public class EverydayFragment extends BaseFragment<FragmentEverydayBinding> {
 
             @Override
             public void loadFailed() {
-                showError();
+//                showError();
             }
 
             @Override

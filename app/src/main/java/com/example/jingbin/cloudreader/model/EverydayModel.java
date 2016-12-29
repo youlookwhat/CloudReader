@@ -130,6 +130,7 @@ public class EverydayModel {
     }
 
 
+    // subList没有实现序列化！缓存时会出错！
     private void addList(List<AndroidBean> arrayList, String typeTitle) {
         // title
         AndroidBean bean = new AndroidBean();
@@ -142,12 +143,26 @@ public class EverydayModel {
         if (androidSize > 0 && androidSize < 4) {
             lists.add(arrayList);
         } else if (androidSize >= 4) {
-            lists.add(arrayList.subList(0, 3));
-            if (androidSize > 6) {
-                lists.add(arrayList.subList(3, 6));
-            } else {
-                lists.add(arrayList.subList(3, androidSize - 1));
+
+            ArrayList<AndroidBean> list1 = new ArrayList<>();
+            ArrayList<AndroidBean> list2 = new ArrayList<>();
+            for (int i = 0; i < androidSize; i++) {
+                if (i < 3) {
+                    list1.add(arrayList.get(i));
+                } else if (i < 6) {
+                    list2.add(arrayList.get(i));
+                }
             }
+            lists.add(list1);
+            lists.add(list2);
+
+
+//            lists.add(arrayList.subList(0, 3));
+//            if (androidSize > 6) {
+//                lists.add(arrayList.subList(3, 6));
+//            } else {
+//                lists.add(arrayList.subList(3, androidSize));
+//            }
         }
     }
 }

@@ -31,9 +31,10 @@
                 android:layout_height="132dp"
                 android:layout_marginRight="12dp"
                 android:background="@color/colorPageBg"
-                android:defaultPicType="@{0}"
-                android:displayFadeImage="@{subjectsBean.images.large}"
+                android:showMovieImg="@{subjectsBean.images.large}"
                 android:scaleType="fitXY" />
+            <!--android:defaultPicType="@{0}"-->
+            <!--android:displayFadeImage="@{subjectsBean.images.large}"-->
 
             <LinearLayout
                 android:layout_width="match_parent"

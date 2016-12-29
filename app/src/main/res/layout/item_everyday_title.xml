@@ -4,10 +4,17 @@
     <LinearLayout
         android:id="@+id/ll"
         android:layout_width="match_parent"
-        android:layout_height="27dp"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
         android:gravity="center_vertical"
         android:orientation="vertical">
+
+        <View
+            android:id="@+id/view_line"
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:background="@color/colorPageBg"
+            android:visibility="gone" />
 
         <RelativeLayout
             android:id="@+id/rl_title"
