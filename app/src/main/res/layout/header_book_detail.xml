@@ -54,7 +54,8 @@
                     android:layout_height="165dp"
                     android:layout_marginRight="15dp"
                     android:scaleType="fitXY"
-                    android:showImg='@{booksBean.images.large}'
+                    android:showImgDetail='@{booksBean.images.large}'
+                    android:showImgDetailType="@{2}"
                     android:transitionName="@string/transition_book_img" />
 
                 <!--评分-->

@@ -5,8 +5,6 @@ import android.databinding.BindingAdapter;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.bumptech.glide.request.target.GlideDrawableImageViewTarget;
 import com.example.jingbin.cloudreader.R;
 
 import java.util.Random;
@@ -129,17 +127,19 @@ public class ImgLoadUtil {
 
 
     /**
-     * 用于首页加载每日推荐图
+     * 用于干货item，将gif图转换为静态图
      */
-    public static void display(String url, ImageView imageView) {
+    public static void displayGif(String url, ImageView imageView) {
 
         Glide.with(imageView.getContext()).load(url)
+                .asBitmap()
                 .placeholder(R.drawable.img_four_bi_three)
                 .error(R.drawable.test)
-                .skipMemoryCache(true) //跳过内存缓存
-                .diskCacheStrategy(DiskCacheStrategy.SOURCE)// 缓存图片源文件（解决加载gif内存溢出问题）
-                .crossFade(1000)
-                .into(new GlideDrawableImageViewTarget(imageView, 1));
+//                .skipMemoryCache(true) //跳过内存缓存
+//                .diskCacheStrategy(DiskCacheStrategy.SOURCE)// 缓存图片源文件（解决加载gif内存溢出问题）
+//                .crossFade(1000)
+//                .into(new GlideDrawableImageViewTarget(imageView, 1));
+                .into(imageView);
     }
 
     /**
@@ -202,7 +202,7 @@ public class ImgLoadUtil {
     }
 
     /**
-     * 电影详情页显示电影图片
+     * 电影详情页显示电影图片(等待被替换)
      * 没有加载中的图
      */
     @BindingAdapter("android:showImg")
@@ -220,5 +220,20 @@ public class ImgLoadUtil {
     @BindingAdapter("android:showImgBg")
     public static void showImgBg(ImageView imageView, String url) {
         displayGaussian(imageView.getContext(), url, imageView);
+    }
+
+    /**
+     * 电影、书籍 详情页显示图片（最新）
+     * 没有加载中的图
+     *
+     * @param showImgDetailType 电影：0；妹子：1； 书籍：2
+     */
+    @BindingAdapter({"android:showImgDetail", "android:showImgDetailType"})
+    public static void showImgDetail(ImageView imageView, String url, int showImgDetailType) {
+        Glide.with(imageView.getContext())
+                .load(url)
+                .crossFade(500)
+                .error(getDefaultPic(showImgDetailType))
+                .into(imageView);
     }
 }
