@@ -202,7 +202,7 @@ public class ImgLoadUtil {
     }
 
     /**
-     * 电影详情页显示电影图片(等待被替换)
+     * 电影详情页显示电影图片(等待被替换)（测试的还在，已可以弃用）
      * 没有加载中的图
      */
     @BindingAdapter("android:showImg")
@@ -215,25 +215,38 @@ public class ImgLoadUtil {
     }
 
     /**
+     * 电影列表图片
+     */
+    @BindingAdapter("android:showMovieImg")
+    public static void showMovieImg(ImageView imageView, String url) {
+        Glide.with(imageView.getContext())
+                .load(url)
+                .crossFade(500)
+                .override((int) CommonUtils.getDimens(R.dimen.movie_detail_width), (int) CommonUtils.getDimens(R.dimen.movie_detail_height))
+                .placeholder(getDefaultPic(0))
+                .error(getDefaultPic(0))
+                .into(imageView);
+    }
+
+    /**
+     * 书籍列表图片
+     */
+    @BindingAdapter("android:showBookImg")
+    public static void showBookImg(ImageView imageView, String url) {
+        Glide.with(imageView.getContext())
+                .load(url)
+                .crossFade(500)
+                .override((int) CommonUtils.getDimens(R.dimen.book_detail_width), (int) CommonUtils.getDimens(R.dimen.book_detail_height))
+                .placeholder(getDefaultPic(2))
+                .error(getDefaultPic(2))
+                .into(imageView);
+    }
+
+    /**
      * 电影详情页显示高斯背景图
      */
     @BindingAdapter("android:showImgBg")
     public static void showImgBg(ImageView imageView, String url) {
         displayGaussian(imageView.getContext(), url, imageView);
-    }
-
-    /**
-     * 电影、书籍 详情页显示图片（最新）
-     * 没有加载中的图
-     *
-     * @param showImgDetailType 电影：0；妹子：1； 书籍：2
-     */
-    @BindingAdapter({"android:showImgDetail", "android:showImgDetailType"})
-    public static void showImgDetail(ImageView imageView, String url, int showImgDetailType) {
-        Glide.with(imageView.getContext())
-                .load(url)
-                .crossFade(500)
-                .error(getDefaultPic(showImgDetailType))
-                .into(imageView);
     }
 }
