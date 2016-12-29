@@ -33,8 +33,9 @@ public class AndroidBean implements Serializable {
     @ParamNames("who")
     private String who;
 
-
+    @ParamNames("source")
     private String source;
+    @ParamNames("images")
     private List<String> images;
 
     public String get_id() {
