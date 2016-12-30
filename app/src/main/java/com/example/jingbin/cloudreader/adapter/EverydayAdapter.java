@@ -145,12 +145,6 @@ public class EverydayAdapter extends BaseRecyclerViewAdapter<List<AndroidBean>> 
                 displayRandomImg(1, 0, position, binding.ivOnePhoto);
             }
             setOnClick(binding.llOnePhoto, object.get(0));
-//            binding.llOnePhoto.setOnClickListener(new PerfectClickListener() {
-//                @Override
-//                protected void onNoDoubleClick(View v) {
-//                    WebViewActivity.loadUrl(v.getContext(), object.get(0).getUrl(), "加载中...");
-//                }
-//            });
         }
     }
 
@@ -162,8 +156,8 @@ public class EverydayAdapter extends BaseRecyclerViewAdapter<List<AndroidBean>> 
 
         @Override
         public void onBindViewHolder(List<AndroidBean> object, int position) {
-            displayRandomImg(4, 0, position, binding.ivTwoOneOne);
-            displayRandomImg(4, 1, position, binding.ivTwoOneTwo);
+            displayRandomImg(2, 0, position, binding.ivTwoOneOne);
+            displayRandomImg(2, 1, position, binding.ivTwoOneTwo);
             setDes(object, 0, binding.tvTwoOneOneTitle);
             setDes(object, 1, binding.tvTwoOneTwoTitle);
             setOnClick(binding.llTwoOneOne, object.get(0));
@@ -179,9 +173,9 @@ public class EverydayAdapter extends BaseRecyclerViewAdapter<List<AndroidBean>> 
 
         @Override
         public void onBindViewHolder(List<AndroidBean> object, int position) {
-            displayRandomImg(6, 0, position, binding.ivThreeOneOne);
-            displayRandomImg(6, 1, position, binding.ivThreeOneTwo);
-            displayRandomImg(6, 2, position, binding.ivThreeOneThree);
+            displayRandomImg(3, 0, position, binding.ivThreeOneOne);
+            displayRandomImg(3, 1, position, binding.ivThreeOneTwo);
+            displayRandomImg(3, 2, position, binding.ivThreeOneThree);
             setOnClick(binding.llThreeOneOne, object.get(0));
             setOnClick(binding.llThreeOneTwo, object.get(1));
             setOnClick(binding.llThreeOneThree, object.get(2));
