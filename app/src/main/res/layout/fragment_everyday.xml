@@ -45,7 +45,8 @@
                 android:layout_marginTop="7dp"
                 android:text="看的越多，推荐还这样"
                 android:textColor="@color/colorSubtitle"
-                android:textSize="12sp" />
+                android:textSize="12sp"
+                android:visibility="gone" />
 
         </LinearLayout>
 
