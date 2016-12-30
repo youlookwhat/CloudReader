@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <LinearLayout xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/activity_nav_download"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorPageBg"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        tools:context="com.example.jingbin.cloudreader.ui.menu.NavDownloadActivity">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/shape_notclickbg"
+            android:lineSpacingExtra="2dp"
+            android:padding="12dp"
+            android:text="好用请推荐给你的小伙伴吧，使用微信、qq等扫描二维码，即可下载安装~"
+            android:textColor="#666666"
+            android:textSize="15sp" />
+
+        <ImageView
+            android:id="@+id/iv_erweima"
+            android:layout_width="220dp"
+            android:layout_height="220dp"
+            android:layout_marginTop="40dp"
+            android:background="@color/colorWhite" />
+
+
+        <TextView
+            android:id="@+id/tv_share"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/ripple_item_white_bg"
+            android:clickable="true"
+            android:gravity="center_vertical"
+            android:paddingLeft="10dp"
+            android:paddingRight="12dp"
+            android:text="分享云阅开源客户端"
+            android:textColor="@color/text_common"
+            android:textSize="17sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="20dp"
+            android:gravity="center_horizontal"
+            android:lineSpacingExtra="2dp"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:text="如感到满意请Star一下吧，我们将继续迭代，增加更多功能，O(∩_∩)O ~"
+            android:textColor="@color/colorSubtitle"
+            android:textSize="14sp" />
+    </LinearLayout>
+</layout>

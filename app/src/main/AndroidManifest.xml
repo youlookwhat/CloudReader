@@ -26,6 +26,7 @@
             android:name=".SplashActivity"
             android:screenOrientation="portrait"
             android:theme="@style/ViewBigPicTheme">
+
             <!-- <intent-filter> -->
             <!-- <action android:name="android.intent.action.MAIN" /> -->
             <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
@@ -37,6 +38,7 @@
             android:theme="@style/ViewBigPicTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -81,7 +83,6 @@
         <activity
             android:name=".ui.menu.NavHomePageActivity"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".ui.menu.NavDeedBackActivity"
             android:screenOrientation="portrait" />
@@ -91,6 +92,7 @@
         <activity
             android:name=".ui.book.child.BookDetailActivity"
             android:screenOrientation="portrait" />
+        <activity android:name=".ui.menu.NavDownloadActivity"></activity>
     </application>
 
 </manifest>

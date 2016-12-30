@@ -55,4 +55,5 @@ dependencies {
     compile 'com.daimajia.slider:library:1.1.5@aar'
     compile 'com.cocosw:bottomsheet:1.+@aar'
     testCompile 'junit:junit:4.12'
+    compile 'com.google.zxing:core:3.2.1'
 }

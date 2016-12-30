@@ -14,7 +14,7 @@
         <com.example.xrecyclerview.XRecyclerView
             android:id="@+id/xrv_everyday"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:visibility="gone" />
 
         <LinearLayout
@@ -43,10 +43,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="7dp"
-                android:text="看的越多，推荐还这样"
+                android:text="看的越多，推荐越准"
                 android:textColor="@color/colorSubtitle"
                 android:textSize="12sp"
-                android:visibility="gone" />
+                android:visibility="visible" />
 
         </LinearLayout>
 
