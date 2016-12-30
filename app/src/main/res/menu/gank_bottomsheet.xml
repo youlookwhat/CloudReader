@@ -3,22 +3,22 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/gank_all"
-        android:icon="@drawable/home_all"
+        android:icon="@drawable/home_title_all"
         android:title="全部" />
     <item
         android:id="@+id/gank_ios"
-        android:icon="@drawable/home_ios"
+        android:icon="@drawable/home_title_ios"
         android:title="IOS" />
     <item
         android:id="@+id/gank_qian"
-        android:icon="@drawable/home_qian"
+        android:icon="@drawable/home_title_qian"
         android:title="前端" />
     <item
         android:id="@+id/gank_movie"
-        android:icon="@drawable/home_movie"
+        android:icon="@drawable/home_title_movie"
         android:title="休息视频" />
     <item
         android:id="@+id/gank_resouce"
-        android:icon="@drawable/home_source"
+        android:icon="@drawable/home_title_source"
         android:title="拓展资源" />
 </menu>

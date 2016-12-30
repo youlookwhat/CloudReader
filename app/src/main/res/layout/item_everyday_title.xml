@@ -34,7 +34,7 @@
                     android:id="@+id/iv_title_type"
                     android:layout_width="22dp"
                     android:layout_height="22dp"
-                    android:src="@drawable/home_android" />
+                    android:src="@drawable/home_title_android" />
 
                 <TextView
                     android:id="@+id/tv_title_type"
