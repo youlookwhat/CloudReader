@@ -3,12 +3,12 @@
 [![Apache License 2.0][1]][2] 
 [![API][3]][4]
 
-> Netease cloud music Ui && Retrofit + MVVM-databinding && GankIo、Douban Api 
+> Netease cloud music Ui && Retrofit + RxJava + MVVM-databinding && GankIo、Douban Api 
 
 #### 一款基于网易云音乐UI，使用GankIo及豆瓣api开发的符合Google Material Desgin阅读类的开源项目。现主要包括：干货区、电影区和书籍区。App内图片主要来源于iconfont，一部分来源于网易云音乐。
 
 ## 项目
-项目采取的是Retrofit + MVVM-DataBinding架构开发。全项目使用的是DataBinding，包括RecyclerView的BaseHolder、页面布局等，使用方便简洁，代码结构清晰。开发中所遇到的各种问题已总结在[这里][5]。
+项目采取的是Retrofit + RxJava + MVVM-DataBinding架构开发。全项目使用的是DataBinding，包括RecyclerView的BaseHolder、页面布局等，使用方便简洁，代码结构清晰。开发中所遇到的各种问题已总结在[这里][5]。
 
 ## 效果图
 

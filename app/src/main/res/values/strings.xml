@@ -22,7 +22,7 @@
         \n\n UI：如使用网易云音乐部分图片和相似界面导致侵权请及时通知我修改或删除。
         \n数据：大部分使用的是代码家的gank.io和豆瓣api，一切数据解释权都归gank.io和豆瓣所有。</string>
     <string name="string_everyday_empty">暂时没有更新内容，去看看其他信息吧~</string>
-    <string name="string_share_text">发现了一个高仿网易云音乐的App，里面内容有大量IT干货，每天提供安卓，IOS等最新资讯，还有最新电影热映榜和大量书籍信息，大力推荐哦~：</string>
+    <string name="string_share_text">发现了一个高仿网易云音乐的App，里面有大量IT干货，每天提供安卓，IOS等最新资讯，还有最新电影热映榜和大量书籍信息，大力推荐哦~：</string>
 
 
 </resources>
