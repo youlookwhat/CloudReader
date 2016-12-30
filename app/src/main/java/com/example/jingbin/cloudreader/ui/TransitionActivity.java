@@ -8,10 +8,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.animation.Animation;
 
-import com.bumptech.glide.Glide;
 import com.example.jingbin.cloudreader.MainActivity;
 import com.example.jingbin.cloudreader.R;
 import com.example.jingbin.cloudreader.databinding.ActivityTransitionBinding;
+import com.example.jingbin.cloudreader.utils.CommonUtils;
 import com.example.jingbin.cloudreader.utils.PerfectClickListener;
 
 import java.util.Random;
@@ -20,7 +20,7 @@ public class TransitionActivity extends AppCompatActivity {
 
     private ActivityTransitionBinding mBinding;
     private boolean animationEnd;
-    private int[] mDrawables = new int[]{R.drawable.b_1, R.drawable.b_2, R.drawable.b_3, R.drawable.b_4,R.drawable.b_5};
+    private int[] mDrawables = new int[]{R.drawable.b_1, R.drawable.b_2, R.drawable.b_3, R.drawable.b_4, R.drawable.b_5};
     private boolean isIn;
 
     @Override
@@ -29,7 +29,9 @@ public class TransitionActivity extends AppCompatActivity {
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_transition);
 
         int i = new Random().nextInt(mDrawables.length);
-        Glide.with(this).load(mDrawables[i]).into(mBinding.ivPic);
+//        Glide.with(this).load(mDrawables[i]).into(mBinding.ivPic);
+
+        mBinding.ivPic.setImageDrawable(CommonUtils.getDrawable(mDrawables[i]));
 
         new Handler().postDelayed(new Runnable() {
             @Override
