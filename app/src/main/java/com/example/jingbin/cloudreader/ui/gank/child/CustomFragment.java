@@ -195,6 +195,11 @@ public class CustomFragment extends BaseFragment<FragmentCustomBinding> {
                                     changeContent(txName, "前端");
                                 }
                                 break;
+                            case R.id.gank_app:
+                                if (isOtherType("App")) {
+                                    changeContent(txName, "App");
+                                }
+                                break;
                             case R.id.gank_movie:
                                 if (isOtherType("休息视频")) {
                                     changeContent(txName, "休息视频");

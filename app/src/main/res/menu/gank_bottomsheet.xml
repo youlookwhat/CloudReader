@@ -10,6 +10,10 @@
         android:icon="@drawable/home_title_ios"
         android:title="IOS" />
     <item
+        android:id="@+id/gank_app"
+        android:icon="@drawable/home_title_app"
+        android:title="App" />
+    <item
         android:id="@+id/gank_qian"
         android:icon="@drawable/home_title_qian"
         android:title="前端" />
