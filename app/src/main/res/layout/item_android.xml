@@ -55,8 +55,7 @@
                 android:layout_height="80dp"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="5dp"
-                android:background="@color/colorTheme"
-                android:scaleType="fitXY"
+                android:scaleType="centerCrop"
                 android:visibility="visible" />
 
         </LinearLayout>
