@@ -49,7 +49,7 @@
                         android:id="@+id/tv_new_version"
                         style="@style/menuItem"
                         android:clickable="true"
-                        android:text="最新版本" />
+                        android:text="检查更新" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -58,6 +58,7 @@
                         android:layout_centerVertical="true"
                         android:layout_marginRight="15dp"
                         android:text="1.0"
+                        android:visibility="gone"
                         android:textColor="@color/colorSubtitle"
                         android:textSize="13sp" />
                 </RelativeLayout>
