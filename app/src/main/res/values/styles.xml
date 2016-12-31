@@ -113,7 +113,7 @@
         <item name="android:paddingLeft">10dp</item>
         <item name="android:paddingRight">12dp</item>
         <item name="android:textColor">@color/text_common</item>
-        <item name="android:textSize">17sp</item>
+        <item name="android:textSize">16sp</item>
     </style>
 
     <!--用于项目主页-->

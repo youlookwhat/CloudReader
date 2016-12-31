@@ -103,11 +103,11 @@ public class ImgLoadUtil {
 
         Glide.with(imageView.getContext()).load(url)
                 .asBitmap()
-                .placeholder(R.drawable.img_four_bi_three)
+                .placeholder(R.drawable.img_one_bi_one)
                 .error(R.drawable.test)
 //                .skipMemoryCache(true) //跳过内存缓存
-//                .diskCacheStrategy(DiskCacheStrategy.SOURCE)// 缓存图片源文件（解决加载gif内存溢出问题）
 //                .crossFade(1000)
+//                .diskCacheStrategy(DiskCacheStrategy.SOURCE)// 缓存图片源文件（解决加载gif内存溢出问题）
 //                .into(new GlideDrawableImageViewTarget(imageView, 1));
                 .into(imageView);
     }

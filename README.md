@@ -59,16 +59,18 @@
 
 ## 功能特性
  - 高仿网易云音乐UI，追求细节，执着于1dp与1px的差距。
- - Material Desgin控件的综合使用，如``CoordinatorLayout``、``AppBarLayout``、``Toolbar``、``FloatingActionButton``、``TabLayout``、水波纹点击效果，等等。
+ - 整体采用Material Desgin设计风格，尽量遵循其设计规范。
  - 项目``BaseActivity``和``BaseFragment``皆基于``DataBinding``，且使用``fragment``懒加载模式，节省内存资源，代码结构清晰。
  - 加载动画和缓存策略都仿网易云音乐，不可以说一模一样但基本是这个套路。列表使用的是``RecyclerView``基于``DataBinding``的``BaseHolder``,使用方便，高效，简洁。
  - 电影详情页是仿网易云音乐的歌单详情页做的，并封装成基类，方便使用。效果有转场动画，透明状态栏，滑动title渐变色等，几乎和歌单详情页一模一样。
- - 书籍类数据展示使用的是``SwipeRefreshLayout``刷新控件结合``RecyclerView``的方式，支持一般的列表、GridView和瀑布流的上拉加载的使用。书籍详情页类似电影详情页。
+ - 书籍类数据展示使用的是``SwipeRefreshLayout``刷新控件结合``RecyclerView``的方式，支持一般的列表、GridView和瀑布流的上拉加载的使用。
 
 ## 特别鸣谢
  - 我几乎看过了所有关于Android仿网易云音乐的项目与文章，发现大部分做的都不够细致，也没有比较好的内容填充，于是决心自己着手做一个，才有了这个开源项目。这里列出主要参考的内容。
  
- - 感谢[iconfont][6]提供图片资源，项目中的大部分图片皆出于此。
+ - 感谢[iconfont][6]提供图片资源，项目中的大部分图片皆出于此，一部分来自网易云音乐。
+
+ - 感谢我们的UI工程师[Sandawang](https://github.com/Sandawang)，图标等部分图片皆由他设计。 
 
  - 参考项目：[ImitateNetEasyCloud][7]、[banya][8]；主要数据来源：[Gank.Io][9]、[豆瓣Api][10]。
 
