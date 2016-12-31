@@ -6,20 +6,30 @@
 > Netease cloud music Ui && Retrofit + RxJava + MVVM-databinding && GankIo、Douban Api 
 
 
-## 项目介绍
+## Introduce
 一款基于网易云音乐UI，使用GankIo及豆瓣api开发的符合Google Material Desgin阅读类的开源项目。项目采取的是Retrofit + RxJava + MVVM-DataBinding架构开发。全项目使用的是DataBinding，包括RecyclerView的BaseHolder、页面布局等，使用方便简洁，代码结构清晰。现主要包括：干货区、电影区和书籍区。开发中所遇到的各种问题已总结在[这里][5]。
 
-## 效果图
+## Screenshot
+- **干货区**
 
 <img width="160" height=“274” src="https://github.com/youlookwhat/CloudReader/blob/master/screenshot/page_gank_00.png"></img>
 <img width="160" height=“274” src="https://github.com/youlookwhat/CloudReader/blob/master/screenshot/page_gank_01.png"></img>
 <img width="160" height=“274” src="https://github.com/youlookwhat/CloudReader/blob/master/screenshot/page_gank_02.png"></img>
 <img width="160" height=“274” src="https://github.com/youlookwhat/CloudReader/blob/master/screenshot/page_gank_03.png"></img>
 <img width="160" height=“274” src="https://github.com/youlookwhat/CloudReader/blob/master/screenshot/page_gank_04.png"></img>
+
+- **电影区**
+
 <img width="160" height=“274” src="https://github.com/youlookwhat/CloudReader/blob/master/screenshot/page_movie_01.png"></img>
 <img width="160" height=“274” src="https://github.com/youlookwhat/CloudReader/blob/master/screenshot/page_movie_02.png"></img>
 <img width="160" height=“274” src="https://github.com/youlookwhat/CloudReader/blob/master/screenshot/page_movie_03.png"></img>
+
+- **书籍区**
+
 <img width="160" height=“274” src="https://github.com/youlookwhat/CloudReader/blob/master/screenshot/page_book_01.png"></img>
+
+- **抽屉界面**
+
 <img width="160" height=“274” src="https://github.com/youlookwhat/CloudReader/blob/master/screenshot/page_menu_01.png"></img>
 
 ## 模块分析
@@ -28,7 +38,7 @@
 
 - **每日推荐：** 干货集中营推送的每日内容，包括每天一个妹子图，相关Android、IOS等其他干货。每天第12：30之后更新，因为双休不更新所以内容缓存三天网络取不到就取缓存。
 
-- **福利：** 图片使用的是Glide加载，可以点击查看大图，支持双指缩放，一下可查看列表的所有图片，再也不用逐个点击每张图啦。
+- **福利：** Glide加载图片，点击查看大图，支持双指缩放，一下可查看列表的所有图片，再也不用逐个点击每张图啦。
 
 - **干货订制：** 可以筛选自己喜欢干货的类别，有全部、IOS、App、前端、休息视频和拓展资源。
 
@@ -65,7 +75,7 @@
  - 电影详情页是仿网易云音乐的歌单详情页做的，并封装成基类，方便使用。效果有转场动画，透明状态栏，滑动title渐变色等，几乎和歌单详情页一模一样。
  - 书籍类数据展示使用的是``SwipeRefreshLayout``刷新控件结合``RecyclerView``的方式，支持一般的列表、GridView和瀑布流的上拉加载的使用。
 
-## 特别鸣谢
+## Thanks
  - 我几乎看过了所有关于Android仿网易云音乐的项目与文章，发现大部分做的都不够细致，也没有比较好的内容填充，于是决心自己着手做一个，才有了这个开源项目。这里列出主要参考的内容。
  
  - 感谢[iconfont][6]提供图片资源，项目中的大部分图片皆出于此，一部分来自网易云音乐。
