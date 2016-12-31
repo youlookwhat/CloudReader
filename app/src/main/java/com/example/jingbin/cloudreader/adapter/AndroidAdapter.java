@@ -41,11 +41,11 @@ public class AndroidAdapter extends BaseRecyclerViewAdapter<GankIoDataBean.Resul
 
             if (isAll && "福利".equals(object.getType())) {
                 binding.ivAllWelfare.setVisibility(View.VISIBLE);
-                binding.tvAndroidDes.setVisibility(View.GONE);
+                binding.llWelfareOther.setVisibility(View.GONE);
                 ImgLoadUtil.displayEspImage(object.getUrl(), binding.ivAllWelfare, 1);
             } else {
                 binding.ivAllWelfare.setVisibility(View.GONE);
-                binding.tvAndroidDes.setVisibility(View.VISIBLE);
+                binding.llWelfareOther.setVisibility(View.VISIBLE);
             }
 
             if (isAll) {
@@ -62,9 +62,9 @@ public class AndroidAdapter extends BaseRecyclerViewAdapter<GankIoDataBean.Resul
             if (object.getImages() != null
                     && object.getImages().size() > 0
                     && !TextUtils.isEmpty(object.getImages().get(0))) {
-                binding.ivAndroidPic.setVisibility(View.GONE);
-//                binding.ivAndroidPic.setVisibility(View.VISIBLE);
-//                ImgLoadUtil.displayGif(object.getImages().get(0), binding.ivAndroidPic);
+//                binding.ivAndroidPic.setVisibility(View.GONE);
+                binding.ivAndroidPic.setVisibility(View.VISIBLE);
+                ImgLoadUtil.displayGif(object.getImages().get(0), binding.ivAndroidPic);
             } else {
                 binding.ivAndroidPic.setVisibility(View.GONE);
             }

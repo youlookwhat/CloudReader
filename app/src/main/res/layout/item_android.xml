@@ -21,87 +21,86 @@
         android:orientation="vertical"
         android:paddingTop="12dp">
 
+        <!--全部标签时显示福利图-->
+        <ImageView
+            android:id="@+id/iv_all_welfare"
+            android:layout_width="match_parent"
+            android:layout_height="140dp"
+            android:scaleType="centerCrop"
+            android:visibility="gone" />
+
+
         <LinearLayout
+            android:id="@+id/ll_welfare_other"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:orientation="horizontal">
 
-            <LinearLayout
+            <TextView
+                android:id="@+id/tv_android_des"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_weight="1"
-                android:orientation="vertical">
-
-
-                <TextView
-                    android:id="@+id/tv_android_des"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@{resultsBean.desc}"
-                    android:textColor="@color/colorContent"
-                    android:textSize="16sp" />
-
-                <!--全部标签时显示福利图-->
-                <ImageView
-                    android:id="@+id/iv_all_welfare"
-                    android:layout_width="match_parent"
-                    android:layout_height="140dp"
-                    android:scaleType="centerCrop"
-                    android:visibility="gone" />
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp">
-
-                    <TextView
-                        android:id="@+id/tv_android_who"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text='@{TextUtils.isEmpty(resultsBean.who)?"佚名":resultsBean.who}'
-                        android:textColor="@color/colorSubtitle"
-                        android:textSize="12sp" />
-
-                    <TextView
-                        android:id="@+id/tv_content_type"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_toRightOf="@+id/tv_android_who"
-                        android:text=""
-                        android:textColor="@color/colorSubtitle"
-                        android:textSize="12sp"
-                        android:visibility="gone" />
-
-                    <TextView
-                        android:id="@+id/tv_android_time"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true"
-                        android:text='@{TimeUtil.getTranslateTime(resultsBean.publishedAt)}'
-                        android:textColor="@color/colorSubtitle"
-                        android:textSize="12sp" />
-
-                </RelativeLayout>
-
-            </LinearLayout>
+                android:lineSpacingExtra="4dp"
+                android:text="@{resultsBean.desc}"
+                android:textColor="@color/colorContent"
+                android:textSize="16sp" />
 
             <ImageView
                 android:id="@+id/iv_android_pic"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:layout_gravity="center_vertical"
+                android:layout_marginLeft="5dp"
                 android:background="@color/colorTheme"
                 android:scaleType="fitXY"
-                android:visibility="gone" />
+                android:visibility="visible" />
+
         </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:paddingLeft="12dp"
+            android:paddingRight="12dp">
+
+            <TextView
+                android:id="@+id/tv_android_who"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text='@{TextUtils.isEmpty(resultsBean.who)?"佚名":resultsBean.who}'
+                android:textColor="@color/colorSubtitle"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/tv_content_type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/tv_android_who"
+                android:text=""
+                android:textColor="@color/colorSubtitle"
+                android:textSize="12sp"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/tv_android_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:text='@{TimeUtil.getTranslateTime(resultsBean.publishedAt)}'
+                android:textColor="@color/colorSubtitle"
+                android:textSize="12sp" />
+
+        </RelativeLayout>
 
         <View
             android:layout_width="match_parent"
             android:layout_height="1px"
-            android:layout_marginTop="11dp"
+            android:layout_marginTop="6dp"
             android:background="@color/colorLineItem" />
 
         <!--android:background="@color/colorLineDeep"-->
