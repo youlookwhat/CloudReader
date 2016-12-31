@@ -20,10 +20,9 @@ public class TransitionActivity extends AppCompatActivity {
 
     private ActivityTransitionBinding mBinding;
     private boolean animationEnd;
-    private int[] mDrawables = new int[]{R.drawable.b_1, R.drawable.b_2, R.drawable.b_3, R.drawable.b_4, R.drawable.b_5,
-            R.drawable.b_6,
-//            R.drawable.b_7, R.drawable.b_8,
-            R.drawable.b_9};
+    private int[] mDrawables = new int[]{R.drawable.b_1, R.drawable.b_2,
+            R.drawable.b_3, R.drawable.b_4, R.drawable.b_5, R.drawable.b_6,
+    };
     private boolean isIn;
 
     @Override
