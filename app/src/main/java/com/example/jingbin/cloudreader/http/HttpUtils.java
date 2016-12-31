@@ -43,7 +43,7 @@ import retrofit.converter.GsonConverter;
  */
 public class HttpUtils {
 
-    private static final RestAdapter.LogLevel logLevel = RestAdapter.LogLevel.FULL;
+    private static final RestAdapter.LogLevel logLevel = RestAdapter.LogLevel.NONE;
     // gankio、豆瓣、动听（轮播图）
     private final static String API_GANKIO = "http://gank.io/api";
     private final static String API_DOUBAN = "https://api.douban.com";
