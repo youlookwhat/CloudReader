@@ -20,19 +20,68 @@
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
             android:layout_marginTop="15dp"
-            android:text="介绍"
-            android:textColor="@color/colorTitle"
-            android:textSize="15sp" />
+            android:text="介绍与帮助"
+            android:textColor="@color/colorContent"
+            android:textSize="16sp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
-            android:background="@drawable/shape_notclickbg"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="10dp"
+            android:autoLink="web"
+            android:background="@color/colorWhite"
+            android:lineSpacingExtra="3dp"
             android:padding="7dp"
             android:text="@string/string_about"
-            android:textColor="@color/colorTitle" />
+            android:textColor="@color/colorTitle"
+            android:textIsSelectable="true" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="15dp"
+            android:text="联系我"
+            android:textColor="@color/colorContent"
+            android:textSize="16sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="10dp"
+            android:autoLink="web"
+            android:background="@color/colorWhite"
+            android:lineSpacingExtra="7dp"
+            android:padding="7dp"
+            android:text="@string/string_about_me"
+            android:textColor="@color/colorTitle"
+            android:textIsSelectable="true" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="15dp"
+            android:text="用到的开源库"
+            android:textColor="@color/colorContent"
+            android:textSize="16sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="10dp"
+            android:background="@color/colorWhite"
+            android:padding="7dp"
+            android:text="@string/string_lib"
+            android:textColor="@color/colorTitle"
+            android:textIsSelectable="true" />
     </LinearLayout>
 
 </android.support.v4.widget.NestedScrollView>

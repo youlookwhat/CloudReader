@@ -47,7 +47,16 @@ public class NavAboutActivity extends BaseActivity<ActivityNavAboutBinding> {
                 startActivity(intent);
             }
         });
-        bindingView.tvFunction.setOnClickListener(listener);
+        bindingView.tvFunction.setOnClickListener(new PerfectClickListener() {
+            @Override
+            protected void onNoDoubleClick(View v) {
+                Uri issuesUrl = Uri.parse("http://jingbin.me/2016/12/30/%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97-%E4%BA%91%E9%98%85/");
+                Intent intent = new Intent(Intent.ACTION_VIEW, issuesUrl);
+                startActivity(intent);
+            }
+        });
+
+//        bindingView.tvFunction.setOnClickListener(listener);
         bindingView.tvNewVersion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -71,7 +80,7 @@ public class NavAboutActivity extends BaseActivity<ActivityNavAboutBinding> {
                     url = "https://github.com/youlookwhat/CloudReader";
                     break;
                 case R.id.tv_function:// 更新日志
-                    url = "";
+                    url = "http://jingbin.me/2016/12/30/%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97-%E4%BA%91%E9%98%85/";
                     break;
             }
             WebViewActivity.loadUrl(v.getContext(), url, "加载中...");
