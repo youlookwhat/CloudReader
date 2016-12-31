@@ -12,7 +12,6 @@ import com.example.jingbin.cloudreader.R;
 import com.example.jingbin.cloudreader.base.BaseActivity;
 import com.example.jingbin.cloudreader.databinding.ActivityNavAboutBinding;
 import com.example.jingbin.cloudreader.utils.PerfectClickListener;
-import com.example.jingbin.cloudreader.utils.ToastUtil;
 import com.example.jingbin.cloudreader.view.webview.WebViewActivity;
 
 public class NavAboutActivity extends BaseActivity<ActivityNavAboutBinding> {
@@ -60,7 +59,10 @@ public class NavAboutActivity extends BaseActivity<ActivityNavAboutBinding> {
         bindingView.tvNewVersion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ToastUtil.showToast("已是最新版本~");
+//                ToastUtil.showToast("已是最新版本~");
+                Uri issuesUrl = Uri.parse("https://fir.im/cloudreader");
+                Intent intent = new Intent(Intent.ACTION_VIEW, issuesUrl);
+                startActivity(intent);
             }
         });
     }
