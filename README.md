@@ -9,32 +9,32 @@
 ## Introduce
 一款基于网易云音乐UI，使用GankIo及豆瓣api开发的符合Google Material Desgin阅读类的开源项目。项目采取的是Retrofit + RxJava + MVVM-DataBinding架构开发。全项目使用的是DataBinding，包括RecyclerView的BaseHolder、页面布局等，使用方便简洁，代码结构清晰。现主要包括：干货区、电影区和书籍区。开发中所遇到的各种问题已总结在[这里][5]。
 
-## Screenshot
-- **干货区**
+## 效果图
+- **干货**
 
-<img width="160" height=“274” src="https://github.com/youlookwhat/CloudReader/blob/master/screenshot/page_gank_00.png"></img>
-<img width="160" height=“274” src="https://github.com/youlookwhat/CloudReader/blob/master/screenshot/page_gank_01.png"></img>
-<img width="160" height=“274” src="https://github.com/youlookwhat/CloudReader/blob/master/screenshot/page_gank_02.png"></img>
-<img width="160" height=“274” src="https://github.com/youlookwhat/CloudReader/blob/master/screenshot/page_gank_03.png"></img>
-<img width="160" height=“274” src="https://github.com/youlookwhat/CloudReader/blob/master/screenshot/page_gank_04.png"></img>
+<img width="160" height=“274” src="https://github.com/youlookwhat/CloudReader/blob/master/file/page_gank_00.png"></img>
+<img width="160" height=“274” src="https://github.com/youlookwhat/CloudReader/blob/master/file/page_gank_01.png"></img>
+<img width="160" height=“274” src="https://github.com/youlookwhat/CloudReader/blob/master/file/page_gank_02.png"></img>
+<img width="160" height=“274” src="https://github.com/youlookwhat/CloudReader/blob/master/file/page_gank_03.png"></img>
+<img width="160" height=“274” src="https://github.com/youlookwhat/CloudReader/blob/master/file/page_gank_04.png"></img>
 
-- **电影区**
+- **电影**
 
-<img width="160" height=“274” src="https://github.com/youlookwhat/CloudReader/blob/master/screenshot/page_movie_01.png"></img>
-<img width="160" height=“274” src="https://github.com/youlookwhat/CloudReader/blob/master/screenshot/page_movie_02.png"></img>
-<img width="160" height=“274” src="https://github.com/youlookwhat/CloudReader/blob/master/screenshot/page_movie_03.png"></img>
+<img width="160" height=“274” src="https://github.com/youlookwhat/CloudReader/blob/master/file/page_movie_01.png"></img>
+<img width="160" height=“274” src="https://github.com/youlookwhat/CloudReader/blob/master/file/page_movie_02.png"></img>
+<img width="160" height=“274” src="https://github.com/youlookwhat/CloudReader/blob/master/file/page_movie_03.png"></img>
 
-- **书籍区**
+- **书籍**
 
-<img width="160" height=“274” src="https://github.com/youlookwhat/CloudReader/blob/master/screenshot/page_book_01.png"></img>
-<img width="160" height=“274” src="https://github.com/youlookwhat/CloudReader/blob/master/screenshot/page_book_02.png"></img>
-<img width="160" height=“274” src="https://github.com/youlookwhat/CloudReader/blob/master/screenshot/page_book_03.png"></img>
+<img width="160" height=“274” src="https://github.com/youlookwhat/CloudReader/blob/master/file/page_book_01.png"></img>
+<img width="160" height=“274” src="https://github.com/youlookwhat/CloudReader/blob/master/file/page_book_02.png"></img>
+<img width="160" height=“274” src="https://github.com/youlookwhat/CloudReader/blob/master/file/page_book_03.png"></img>
 
 - **抽屉界面**
 
-<img width="160" height=“274” src="https://github.com/youlookwhat/CloudReader/blob/master/screenshot/page_menu_01.png"></img>
-<img width="160" height=“274” src="https://github.com/youlookwhat/CloudReader/blob/master/screenshot/page_menu_02.png"></img>
-<img width="160" height=“274” src="https://github.com/youlookwhat/CloudReader/blob/master/screenshot/page_menu_03.png"></img>
+<img width="160" height=“274” src="https://github.com/youlookwhat/CloudReader/blob/master/file/page_menu_01.png"></img>
+<img width="160" height=“274” src="https://github.com/youlookwhat/CloudReader/blob/master/file/page_menu_02.png"></img>
+<img width="160" height=“274” src="https://github.com/youlookwhat/CloudReader/blob/master/file/page_menu_03.png"></img>
 
 ## 模块分析
 ### 干货区（gank.io）
@@ -78,6 +78,10 @@
  - 加载动画和缓存策略都仿网易云音乐，不可以说一模一样但基本是这个套路。列表使用的是``RecyclerView``基于``DataBinding``的``BaseHolder``,使用方便，高效，简洁。
  - 电影详情页是仿网易云音乐的歌单详情页做的，并封装成基类，方便使用。效果有转场动画，透明状态栏，滑动title渐变色等，几乎和歌单详情页一模一样。
  - 书籍类数据展示使用的是``SwipeRefreshLayout``刷新控件结合``RecyclerView``的方式，支持一般的列表、GridView和瀑布流的上拉加载的使用。
+
+
+## See Detail
+> [戳这里查看详情]()。
 
 ## Thanks
  - 我几乎看过了所有关于Android仿网易云音乐的项目与文章，发现大部分做的都不够细致，也没有比较好的内容填充，于是决心自己着手做一个，才有了这个开源项目。这里列出主要参考的内容。
