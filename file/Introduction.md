@@ -3,6 +3,33 @@
 ## Detail Introduction
 　　网易云音乐于2013年4月23日正式发布，是一款主打发现和分享，带有浓厚社交基因的网络音乐产品。相信用过的人都知道它给人的体验是极好的，“听得越多，推荐越准”
 　　
+## 效果图
+- **干货**
+
+<img width="160" height=“274” src="https://github.com/youlookwhat/CloudReader/blob/master/file/page_gank_00.png"></img>
+<img width="160" height=“274” src="https://github.com/youlookwhat/CloudReader/blob/master/file/page_gank_01.png"></img>
+<img width="160" height=“274” src="https://github.com/youlookwhat/CloudReader/blob/master/file/page_gank_02.png"></img>
+<img width="160" height=“274” src="https://github.com/youlookwhat/CloudReader/blob/master/file/page_gank_03.png"></img>
+<img width="160" height=“274” src="https://github.com/youlookwhat/CloudReader/blob/master/file/page_gank_04.png"></img>
+
+- **电影**
+
+<img width="160" height=“274” src="https://github.com/youlookwhat/CloudReader/blob/master/file/page_movie_01.png"></img>
+<img width="160" height=“274” src="https://github.com/youlookwhat/CloudReader/blob/master/file/page_movie_02.png"></img>
+<img width="160" height=“274” src="https://github.com/youlookwhat/CloudReader/blob/master/file/page_movie_03.png"></img>
+
+- **书籍**
+
+<img width="160" height=“274” src="https://github.com/youlookwhat/CloudReader/blob/master/file/page_book_01.png"></img>
+<img width="160" height=“274” src="https://github.com/youlookwhat/CloudReader/blob/master/file/page_book_02.png"></img>
+<img width="160" height=“274” src="https://github.com/youlookwhat/CloudReader/blob/master/file/page_book_03.png"></img>
+
+- **抽屉界面**
+
+<img width="160" height=“274” src="https://github.com/youlookwhat/CloudReader/blob/master/file/page_menu_01.png"></img>
+<img width="160" height=“274” src="https://github.com/youlookwhat/CloudReader/blob/master/file/page_menu_02.png"></img>
+<img width="160" height=“274” src="https://github.com/youlookwhat/CloudReader/blob/master/file/page_menu_03.png"></img>
+　　
 　　
 ## 模块分析
 ### 干货区（gank.io）

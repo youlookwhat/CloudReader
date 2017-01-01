@@ -10,33 +10,15 @@
 一款基于网易云音乐UI，使用GankIo及豆瓣api开发的符合Google Material Desgin阅读类的开源项目。项目采取的是Retrofit + RxJava + MVVM-DataBinding架构开发。全项目使用的是DataBinding，包括RecyclerView的BaseHolder、页面布局等，使用方便简洁，代码结构清晰。开发中所遇到的各种问题已总结在[这里][5]。
 
 ## 效果图
-- **干货**
+- **部分效果图**
 
 <img width="160" height=“274” src="https://github.com/youlookwhat/CloudReader/blob/master/file/page_gank_00.png"></img>
-<img width="160" height=“274” src="https://github.com/youlookwhat/CloudReader/blob/master/file/page_gank_01.png"></img>
-<img width="160" height=“274” src="https://github.com/youlookwhat/CloudReader/blob/master/file/page_gank_02.png"></img>
-<img width="160" height=“274” src="https://github.com/youlookwhat/CloudReader/blob/master/file/page_gank_03.png"></img>
-<img width="160" height=“274” src="https://github.com/youlookwhat/CloudReader/blob/master/file/page_gank_04.png"></img>
-
-- **电影**
-
 <img width="160" height=“274” src="https://github.com/youlookwhat/CloudReader/blob/master/file/page_movie_01.png"></img>
-<img width="160" height=“274” src="https://github.com/youlookwhat/CloudReader/blob/master/file/page_movie_02.png"></img>
 <img width="160" height=“274” src="https://github.com/youlookwhat/CloudReader/blob/master/file/page_movie_03.png"></img>
-
-- **书籍**
-
 <img width="160" height=“274” src="https://github.com/youlookwhat/CloudReader/blob/master/file/page_book_01.png"></img>
-<img width="160" height=“274” src="https://github.com/youlookwhat/CloudReader/blob/master/file/page_book_02.png"></img>
-<img width="160" height=“274” src="https://github.com/youlookwhat/CloudReader/blob/master/file/page_book_03.png"></img>
-
-- **抽屉界面**
-
 <img width="160" height=“274” src="https://github.com/youlookwhat/CloudReader/blob/master/file/page_menu_01.png"></img>
-<img width="160" height=“274” src="https://github.com/youlookwhat/CloudReader/blob/master/file/page_menu_02.png"></img>
-<img width="160" height=“274” src="https://github.com/youlookwhat/CloudReader/blob/master/file/page_menu_03.png"></img>
 
-- gif演示
+- **gif演示**
 
 <img src="https://github.com/youlookwhat/CloudReader/blob/master/file/cloudreader.gif"></img>
 
@@ -89,6 +71,8 @@ NestedScrollView nested RecyclerView for specific use.
 ## See Detail
 > [戳这里查看详情](https://github.com/youlookwhat/CloudReader/blob/master/file/Introduction.md)
 
+#### download
+
 ## Thanks
  - 我几乎看过了所有关于Android仿网易云音乐的项目与文章，发现大部分做的都不够细致，也没有比较好的内容填充，于是决心自己着手做一个，才有了这个开源项目。这里列出主要参考的内容。
  
@@ -112,9 +96,8 @@ NestedScrollView nested RecyclerView for specific use.
 ## About me
  - **QQ：**770413277
  - **简书：**[肖子理](http://www.jianshu.com/users/e43c6e979831/latest_articles)
- - **Email：**770413277@qq.com | jingbin127@gmail.com
  - **Blog：**[http://jingbin.me](http://jingbin.me)
- - **GitHub：**[https://github.com/youlookwhat](https://github.com/youlookwhat)
+ - **Email：**jingbin127@163.com
 
 ## License
 ```
