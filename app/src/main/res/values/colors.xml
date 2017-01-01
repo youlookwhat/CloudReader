@@ -6,7 +6,7 @@
 
     <color name="colorTheme">#ffce3d3a</color>
     <!--页面背景的颜色-->
-    <color name="colorPageBg">#F0F2F4</color>
+    <color name="colorPageBg">#f2f4f5</color>
 
     <color name="colorWhite">#ffffffff</color>
     <!--分割线-->
