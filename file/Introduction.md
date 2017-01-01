@@ -1,34 +1,42 @@
-<div align=center><img src="https://github.com/youlookwhat/CloudReader/blob/master/file/title.png""/></div>
+<div align=center><img width="600" height=“200” src="https://github.com/youlookwhat/CloudReader/blob/master/file/title.png""/></div>
 
 ## Detail Introduction
-　　网易云音乐于2013年4月23日正式发布，是一款主打发现和分享，带有浓厚社交基因的网络音乐产品。相信用过的人都知道它给人的体验是极好的，“听得越多，推荐越准”
+　　网易云音乐于2013年4月23日正式发布，是一款主打发现和分享，带有浓厚社交基因的网络音乐产品。相信用过的人都知道它给人的体验是极好的，我看过了很多仿写的案例，但基本UI都不够细致，用户体验太差，于是决定自己动手写一个，顺便练习DataBing和Material Desgin风格控件的使用。
 　　
 ## 效果图
 - **干货**
 
-<img width="160" height=“274” src="https://github.com/youlookwhat/CloudReader/blob/master/file/page_gank_00.png"></img>
+<img src="https://github.com/youlookwhat/CloudReader/blob/master/file/pic_gank.png"></img>
+
+<!--<img width="160" height=“274” src="https://github.com/youlookwhat/CloudReader/blob/master/file/page_gank_00.png"></img>
 <img width="160" height=“274” src="https://github.com/youlookwhat/CloudReader/blob/master/file/page_gank_01.png"></img>
 <img width="160" height=“274” src="https://github.com/youlookwhat/CloudReader/blob/master/file/page_gank_02.png"></img>
 <img width="160" height=“274” src="https://github.com/youlookwhat/CloudReader/blob/master/file/page_gank_03.png"></img>
-<img width="160" height=“274” src="https://github.com/youlookwhat/CloudReader/blob/master/file/page_gank_04.png"></img>
+<img width="160" height=“274” src="https://github.com/youlookwhat/CloudReader/blob/master/file/page_gank_04.png"></img>-->
 
 - **电影**
 
-<img width="160" height=“274” src="https://github.com/youlookwhat/CloudReader/blob/master/file/page_movie_01.png"></img>
+<img src="https://github.com/youlookwhat/CloudReader/blob/master/file/pic_movie.png"></img>
+
+<!--<img width="160" height=“274” src="https://github.com/youlookwhat/CloudReader/blob/master/file/page_movie_01.png"></img>
 <img width="160" height=“274” src="https://github.com/youlookwhat/CloudReader/blob/master/file/page_movie_02.png"></img>
-<img width="160" height=“274” src="https://github.com/youlookwhat/CloudReader/blob/master/file/page_movie_03.png"></img>
+<img width="160" height=“274” src="https://github.com/youlookwhat/CloudReader/blob/master/file/page_movie_03.png"></img>-->
 
 - **书籍**
 
-<img width="160" height=“274” src="https://github.com/youlookwhat/CloudReader/blob/master/file/page_book_01.png"></img>
+<img src="https://github.com/youlookwhat/CloudReader/blob/master/file/pic_book.png"></img>
+
+<!--<img width="160" height=“274” src="https://github.com/youlookwhat/CloudReader/blob/master/file/page_book_01.png"></img>
 <img width="160" height=“274” src="https://github.com/youlookwhat/CloudReader/blob/master/file/page_book_02.png"></img>
-<img width="160" height=“274” src="https://github.com/youlookwhat/CloudReader/blob/master/file/page_book_03.png"></img>
+<img width="160" height=“274” src="https://github.com/youlookwhat/CloudReader/blob/master/file/page_book_03.png"></img>-->
 
 - **抽屉界面**
 
-<img width="160" height=“274” src="https://github.com/youlookwhat/CloudReader/blob/master/file/page_menu_01.png"></img>
+<img src="https://github.com/youlookwhat/CloudReader/blob/master/file/pic_menu.png"></img>
+
+<!--<img width="160" height=“274” src="https://github.com/youlookwhat/CloudReader/blob/master/file/page_menu_01.png"></img>
 <img width="160" height=“274” src="https://github.com/youlookwhat/CloudReader/blob/master/file/page_menu_02.png"></img>
-<img width="160" height=“274” src="https://github.com/youlookwhat/CloudReader/blob/master/file/page_menu_03.png"></img>
+<img width="160" height=“274” src="https://github.com/youlookwhat/CloudReader/blob/master/file/page_menu_03.png"></img>-->
 　　
 　　
 ## 模块分析

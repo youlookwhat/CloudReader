@@ -25,7 +25,7 @@ A netease cloud music based UI, using GankIo and douban API development accord w
 <img width="320" height=“590” src="https://github.com/youlookwhat/CloudReader/blob/master/file/cloudreader.gif"></img>
 
 ## Issues 宝贵意见
-如果有任何问题，请到github的[issue处](21)写上你不明白的地方，也可以通过下面提供的方式联系我，我会及时给予帮助。另外常见的问题已总结在[这里](22)。
+如果有任何问题，请到github的[issue处][21]写上你不明白的地方，也可以通过下面提供的方式联系我，我会及时给予帮助。另外常见的问题已总结在[这里][22]。
 
 If you have any questions, please write to [the issue][21] of making you don't understand of place, also can contact me through here, I will help them in time.Another common problem is summarized [here][22].
 
