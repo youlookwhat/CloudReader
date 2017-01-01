@@ -38,7 +38,7 @@
 
 - gif演示
 
-<img width="180" height=“300” src="https://github.com/youlookwhat/CloudReader/blob/master/file/cloudreader.gif"></img>
+<img src="https://github.com/youlookwhat/CloudReader/blob/master/file/cloudreader.gif"></img>
 
 
 ## Features 特性
