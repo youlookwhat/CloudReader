@@ -43,24 +43,40 @@
 
 ## Features 特性
 * 1、基本遵循Google Material Design设计风格。                                    
-Basic follow Google Material Design Design style.       
-* 2、``NavigationView``搭配``DrawerLayout``的具体使用。                                   
-NavigationView collocation DrawerLayout specific use.  
-* 3、沉浸式状态栏使用与版本适配。
-Mmersive status bar with version adapter.
-* 4、MvvM-DataBing的项目应用。
-* 5、RxBus代替EventBus进行组件之间通讯。
-* 6、``ToolBar``的使用姿势。
-* 7、``Glide``加载监听，获取缓存，圆角图片，高斯模糊。
-* 8、水波纹点击效果详细使用与适配。
-* 9、``RecyclerView``下拉刷新上拉加载。
-* 10、基于``DataBinding``的``Viewolder``。
-* 11、基于``DataBinding``的``BaseActivity``和``BaseFragment``。
-* 12、``Fragment``懒加载模式。
-* 13、高仿网易云音乐歌单详情页。
-* 14、``SwipeRefreshLayout``结合``RecyclerView``下拉刷新上拉加载。
-* 15、``CoordinatorLayout + Behavior``实现标题栏渐变。
-* 16、干货集中营内容与豆瓣电影书籍内容。
+Basic follow Google Material Design style. 
+* 2、干货集中营内容与豆瓣电影书籍内容。                                    
+The Content of gank.io and Douban movie,books. 
+* 3、高仿网易云音乐歌单详情页。                                    
+High imitation netease cloud music playlist page for details. 
+* 4、``NavigationView``搭配``DrawerLayout``的具体使用。                                    
+NavigationView collocation DrawerLayout specific use.
+* 5、沉浸式状态栏使用与版本适配。                                    
+Immersive status bar with version adapter.
+* 6、MvvM-DataBing的项目应用。                                    
+The MvvM-DataBing project application.
+* 7、RxBus代替EventBus进行组件之间通讯。                                    
+RxBus replace EventBus for communication between components.
+* 8、``ToolBar``的全方面使用。                                    
+All aspects of the ToolBar.
+* 9、``Glide``加载监听，获取缓存，圆角图片，高斯模糊。                                    
+Glide load monitoring, access to the cache, the rounded pictures, gaussian blur.
+* 10、水波纹点击效果详细使用与适配。                                    
+Click the water ripple effect use and adaptation in detail.
+* 11、``RecyclerView``下拉刷新，上拉加载。                                    
+RecyclerView drop-down refresh and tensile loading.
+* 12、基于``DataBinding``的``Viewolder``。                                    
+Based on the DataBinding Viewolder.
+* 13、基于``DataBinding``的``BaseActivity``和``BaseFragment``。                                    
+Based on the DataBinding BaseActivity and BaseFragment.
+* 14、``Fragment``懒加载模式。                                    
+Fragments lazy loading mode.
+* 15、``SwipeRefreshLayout``结合``RecyclerView``下拉刷新上拉加载。                                    
+SwipeRefreshLayout combining RecyclerView drop-down refresh and on load.
+* 16、``CoordinatorLayout``+``Behavior``实现标题栏渐变。                                    
+CoordinatorLayout add behaviors to achieve the title bar gradient.
+* 17、``NestedScrollView ``嵌套``RecyclerView ``的使用。                                    
+NestedScrollView nested RecyclerView for specific use.
+
 
 ## TODO
  - 每日推荐可设置是否显示图片及查看具体某一天的干货信息。
