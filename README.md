@@ -24,6 +24,10 @@ A netease cloud music based UI, using GankIo and douban API development accord w
 
 <img width="320" height=“590” src="https://github.com/youlookwhat/CloudReader/blob/master/file/cloudreader.gif"></img>
 
+## Issues 宝贵意见
+如果有任何问题，请到github的[issue处](21)写上你不明白的地方，也可以通过下面提供的方式联系我，我会及时给予帮助。另外常见的问题已总结在[这里](22)。
+
+If you have any questions, please write to the issue of making you don't understand of place, also can contact me through here, I will help them in time.Another common problem is summarized here.
 
 ## Features 特性
 * 1、基本遵循Google Material Design设计风格。                                    
@@ -63,10 +67,14 @@ NestedScrollView nested RecyclerView for specific use.
 
 
 ## TODO
- - 每日推荐可设置是否显示图片及查看具体某一天的干货信息。
- - 每日推荐可调整栏目顺序。
- - 书籍部分增加更多内容并可自由定制。
- - 增加干货、电影及内容的搜索。
+* 每日推荐可设置是否显示图片及查看具体某一天的干货信息。                                    
+Recommended daily can set whether to display images and view specific one day dry cargo information.
+* 每日推荐可调整栏目顺序。                                    
+Recommended daily can adjust the column order.
+* 书籍部分增加更多内容并可自由定制。                                    
+And can customize free books section to add more content.
+* 增加搜索功能。                                    
+Increase the search function.
 
 
 ## See Detail
@@ -89,7 +97,7 @@ NestedScrollView nested RecyclerView for specific use.
 
  - 感谢[代码家][15]、[张鸿洋][16]、[drakeet][17]、[yang747046912][18]、[GiitSmile][19]、[forezp][20]等众多开发者贡献的开源项目，让我从中学到了很多!
  
-## Statement 声明
+### Statement
 感谢[网易云音乐App](https://play.google.com/store/apps/details?id=com.netease.cloudmusic)提供参考，本人是网易云音乐的粉丝，使用了其中的部分素材，并非攻击，如构成侵权请及时通知我修改或删除。大部分数据来自于干货集中营和豆瓣APIV2.0，一切数据解释权都归代码家和豆瓣所有。
  
 ## End
@@ -139,3 +147,6 @@ limitations under the License.
 [18]:https://github.com/yang747046912
 [19]:https://github.com/GiitSmile
 [20]:https://github.com/forezp
+
+[21]:https://github.com/youlookwhat/CloudReader/issues
+[22]:http://jingbin.me/2016/12/25/%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98-%E4%BA%91%E9%98%85/
