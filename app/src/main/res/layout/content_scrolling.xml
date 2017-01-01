@@ -25,10 +25,10 @@
             android:textSize="16sp" />
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
-            android:layout_marginRight="10dp"
+            android:layout_marginRight="8dp"
             android:autoLink="web"
             android:background="@color/colorWhite"
             android:lineSpacingExtra="3dp"
@@ -49,10 +49,10 @@
             android:textSize="16sp" />
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
-            android:layout_marginRight="10dp"
+            android:layout_marginRight="8dp"
             android:autoLink="web"
             android:background="@color/colorWhite"
             android:lineSpacingExtra="7dp"
@@ -73,10 +73,10 @@
             android:textSize="16sp" />
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
-            android:layout_marginRight="10dp"
+            android:layout_marginRight="8dp"
             android:background="@color/colorWhite"
             android:padding="7dp"
             android:layout_marginBottom="15dp"
