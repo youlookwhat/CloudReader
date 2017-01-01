@@ -1,6 +1,8 @@
 # CloudReader
 
 [![Apache License 2.0][1]][2] 
+[![Release Version][30]][31]
+[![PRs Welcome][32]][33]
 [![API][3]][4]
 
 > Netease cloud music Ui && Retrofit + RxJava + MVVM-databinding && GankIo、Douban Api 
@@ -126,10 +128,14 @@ See the License for the specific language governing permissions and
 limitations under the License.
 ```
 
-[1]:https://img.shields.io/github/license/HeinrichReimer/material-intro.svg
+[1]:https://img.shields.io/:license-apache-blue.svg
 [2]:https://www.apache.org/licenses/LICENSE-2.0.html
-[3]:https://img.shields.io/badge/API-19%2B-blue.svg?style=flat
+[3]:https://img.shields.io/badge/API-19%2B-red.svg?style=flat
 [4]:https://android-arsenal.com/api?level=19
+[30]:https://img.shields.io/badge/release-1.0-red.svg
+[31]:https://github.com/youlookwhat/CloudReader/releases
+[32]:https://img.shields.io/badge/PRs-welcome-brightgreen.svg
+[33]:https://github.com/youlookwhat/CloudReader/pulls
 
 [5]:http://jingbin.me/2017/11/23/%E5%BC%80%E5%8F%91%E4%B8%AD%E6%89%80%E9%81%87%E9%97%AE%E9%A2%98%E5%BD%92%E7%BA%B3/
 [6]:http://www.iconfont.cn/plus
