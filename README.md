@@ -71,7 +71,8 @@ NestedScrollView nested RecyclerView for specific use.
 ## See Detail
 > [戳这里查看详情](https://github.com/youlookwhat/CloudReader/blob/master/file/Introduction.md)
 
-#### download
+### Download
+　　<img width="200" height=“200” src="https://github.com/youlookwhat/CloudReader/blob/master/file/page_menu_01.png"></img> 
 
 ## Thanks
  - 我几乎看过了所有关于Android仿网易云音乐的项目与文章，发现大部分做的都不够细致，也没有比较好的内容填充，于是决心自己着手做一个，才有了这个开源项目。这里列出主要参考的内容。
