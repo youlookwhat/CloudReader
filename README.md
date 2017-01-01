@@ -41,10 +41,9 @@
 <img width="180" height=“300” src="https://github.com/youlookwhat/CloudReader/blob/master/file/cloudreader.gif"></img>
 
 
-## 特性 Features
- 
+## Features 特性
 - 1、基本遵循Google Material Design设计风格。
- 　　Basic follow Google Material Design Design style.
+　　Basic follow Google Material Design Design style.
 - 2、``NavigationView``搭配``DrawerLayout``的具体使用。
  　NavigationView collocation DrawerLayout specific use.
 - 3、沉浸式状态栏使用与版本适配。
@@ -64,16 +63,11 @@
 - 16、干货集中营内容与豆瓣电影书籍内容。
 
 ## TODO
- - [ ]每日推荐可设置是否显示图片及查看具体某一天的干货信息。
- - [x]每日推荐可调整栏目顺序。
+ - 每日推荐可设置是否显示图片及查看具体某一天的干货信息。
+ - 每日推荐可调整栏目顺序。
  - 书籍部分增加更多内容并可自由定制。
  - 增加干货、电影及内容的搜索。
  - 查找播放本地音乐。
-
-## statement 声明
-感谢网易云音乐App提供参考，本人是网易云音乐的粉丝，使用了其中的部分素材，并非攻击，如构成侵权请及时通知我修改或删除。大部分数据来自于干货集中营和豆瓣APIV2.0，一切数据解释权都归代码家和豆瓣所有。
-本项目仅供学习使用，禁止用于商业！
-
 
 
 ## See Detail
@@ -92,7 +86,9 @@
 
  - 感谢[代码家][15]、[张鸿洋][16]、[drakeet][17]、[yang747046912][18]、[GiitSmile][19]、[forezp][20]等众多开发者贡献的开源项目，让我从中学到了很多!
  
- 
+## statement
+感谢网易云音乐App提供参考，本人是网易云音乐的粉丝，使用了其中的部分素材，并非攻击，如构成侵权请及时通知我修改或删除。大部分数据来自于干货集中营和豆瓣APIV2.0，一切数据解释权都归代码家和豆瓣所有。
+本项目仅供学习使用，禁止用于商业！
  
 ## End
 最后，如果你觉得不错，对你有帮助，可以帮忙分享给你更多的朋友，这是给我们最大的动力与支持，也可以请我喝杯咖啡（支付宝：770413277@qq.com），也就是所谓的打赏O(∩_∩)O~。同时希望你多多fork，star，follow，我将贡献更多的开源项目。开源使生活更美好！
