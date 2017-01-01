@@ -7,9 +7,9 @@
 
 
 ## Introduce
-一款基于网易云音乐UI，使用GankIo及豆瓣api开发的符合Google Material Desgin阅读类的开源项目。项目采取的是Retrofit + RxJava + MVVM-DataBinding架构开发。。开发中所遇到的各种问题已总结在[这里][5]。
+一款基于网易云音乐UI，使用GankIo及豆瓣api开发的符合Google Material Desgin阅读类的开源项目。项目采取的是Retrofit + RxJava + MVVM-DataBinding架构开发。开发中所遇到的各种问题已总结在[这里][5]。
 
-A netease cloud music based UI, using GankIo and douban API development accord with Google Material Desgin reading class open source projects.Project's Retrofit + RxJava + MVVM - DataBinding architecture development.Various problems encountered in the development of has been [summed up here][5].
+A netease cloud music based UI, using GankIo and douban API development accord with Google Material Desgin reading class open source projects.Various problems encountered in the development of has been [summed up here][5].
 
 ## 效果图
 - **部分效果图**
@@ -73,8 +73,9 @@ NestedScrollView nested RecyclerView for specific use.
 > [戳这里查看详情](https://github.com/youlookwhat/CloudReader/blob/master/file/Introduction.md)
 
 ### Download
-　　<img width="200" height=“200” src="https://github.com/youlookwhat/CloudReader/blob/master/file/download.png"></img> [火速跳转](https://fir.im/cloudreader)
-
+　　[火速跳转](https://fir.im/cloudreader)                                    
+　　<img width="200" height=“200” src="https://github.com/youlookwhat/CloudReader/blob/master/file/download.png"></img>
+　　
 ## Thanks
  - 我几乎看过了所有关于Android仿网易云音乐的项目与文章，发现大部分做的都不够细致，也没有比较好的内容填充，于是决心自己着手做一个，才有了这个开源项目。这里列出主要参考的内容。
  
