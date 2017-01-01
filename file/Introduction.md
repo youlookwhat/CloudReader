@@ -3,7 +3,7 @@
 ## Detail Introduction
 　　网易云音乐于2013年4月23日正式发布，是一款主打发现和分享，带有浓厚社交基因的网络音乐产品。相信用过的人都知道它给人的体验是极好的，我看过了绝大多数仿写的案例，基本UI都不够细致，于是决定自己动手写一个，起初也不知道具体它是怎么布局的，后来使用SDK提供的工具``uiautomatorviewer``慢慢分析后再逐渐完善的，争取效果一致~ 
 　　
-## 效果图
+<!--## 效果图
 - **干货**
 
 <img src="https://github.com/youlookwhat/CloudReader/blob/master/file/pic_gank.png"></img>
@@ -19,9 +19,9 @@
 - **抽屉界面**
 
 <img src="https://github.com/youlookwhat/CloudReader/blob/master/file/pic_menu.png"></img>
+　　-->
 　　
-　　
-## 模块分析
+## Module analysis
 ### 干货区（gank.io）
 > API使用的是动听（轮播图）和代码家的Gank.Io。
 
