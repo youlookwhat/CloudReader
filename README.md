@@ -7,7 +7,7 @@
 
 
 ## Introduce
-一款基于网易云音乐UI，使用GankIo及豆瓣api开发的符合Google Material Desgin阅读类的开源项目。项目采取的是Retrofit + RxJava + MVVM-DataBinding架构开发。开发中所遇到的各种问题已总结在[这里][5]。
+一款基于网易云音乐UI，使用GankIo及豆瓣api开发的符合Google Material Desgin阅读类的开源项目。项目采取的是Retrofit + RxJava + MVVM-DataBinding架构开发。开发中所遇到的各种问题已归纳在[这里][5]。
 
 A netease cloud music based UI, using GankIo and douban API development accord with Google Material Desgin reading class open source projects.Various problems encountered in the development of has been [summed up here][5].
 

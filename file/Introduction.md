@@ -1,7 +1,8 @@
-<div align=center><img width="600" height=“200” src="https://github.com/youlookwhat/CloudReader/blob/master/file/title.png""/></div>
+<div align=center><img width="900" height=“200” src="https://github.com/youlookwhat/CloudReader/blob/master/file/title.png""/></div>
 
 ## Detail Introduction
-　　网易云音乐于2013年4月23日正式发布，是一款主打发现和分享，带有浓厚社交基因的网络音乐产品。相信用过的人都知道它给人的体验是极好的，我看过了很多仿写的案例，但基本UI都不够细致，用户体验太差，于是决定自己动手写一个，顺便练习DataBing和Material Desgin风格控件的使用。
+　　网易云音乐于2013年4月23日正式发布，是一款主打发现和分享，带有浓厚社交基因的网络音乐产品。相信用过的人都知道它给人的体验是极好的，我看过了绝大多数仿写的案例，基本UI都不够细致，于是决定自己动手写一个，起初也不知道它是怎么布局的，后来使用SDK提供的工具``uiautomatorviewer``慢慢分析后再逐渐完善的，争取效果一致~ 
+　　另外练习DataBing和Material Desgin风格控件的使用。
 　　
 ## 效果图
 - **干货**
@@ -74,10 +75,28 @@
  - **关于云阅：**更新日志在这里可见，主人是利用工作外时间做的，周期较长，满意的小伙伴给个Star吧，这将是我继续迭代的动力，谢谢~
 
 
-## 功能特性
- - 高仿网易云音乐UI，追求细节，执着于1dp与1px的差距。
- - 整体采用Material Desgin设计风格，尽量遵循其设计规范。
- - 项目``BaseActivity``和``BaseFragment``皆基于``DataBinding``，且使用``fragment``懒加载模式，节省内存资源，代码结构清晰。
- - 加载动画和缓存策略都仿网易云音乐，不可以说一模一样但基本是这个套路。列表使用的是``RecyclerView``基于``DataBinding``的``BaseHolder``,使用方便，高效，简洁。
- - 电影详情页是仿网易云音乐的歌单详情页做的，并封装成基类，方便使用。效果有转场动画，透明状态栏，滑动title渐变色等，几乎和歌单详情页一模一样。
- - 书籍类数据展示使用的是``SwipeRefreshLayout``刷新控件结合``RecyclerView``的方式，支持一般的列表、GridView和瀑布流的上拉加载的使用。
+## What can be learned about this project 
+从本项目中你能学到哪些知识呢？
+
+- 1、干货集中营内容与豆瓣电影书籍内容。
+- 2、``NavigationView``搭配``DrawerLayout``的具体使用。
+- 3、沉浸式状态栏使用与版本适配。
+- 4、MvvM-DataBing的项目应用。
+- 5、RxBus代替EventBus进行组件之间通讯。
+- 6、``ToolBar``的使用姿势。
+- 7、``Glide``加载监听，获取缓存，圆角图片，高斯模糊。
+- 8、水波纹点击效果详细使用与适配。
+- 9、``RecyclerView``下拉刷新上拉加载。
+- 10、基于``DataBinding``的``Viewolder``。
+- 11、基于``DataBinding``的``BaseActivity``和``BaseFragment``。
+- 12、``Fragment``懒加载模式。
+- 13、高仿网易云音乐歌单详情页。
+- 14、``SwipeRefreshLayout``结合``RecyclerView``下拉刷新上拉加载。
+- 15、``CoordinatorLayout + Behavior``实现标题栏渐变。
+- 16、``NestedScrollView``嵌套``RecyclerView``的使用。
+
+## End
+　　希望本项目对你有所帮助，同时有什么问题可以随时反馈哦~
+　　２０１７元旦快乐～
+
+
