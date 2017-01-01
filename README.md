@@ -73,7 +73,7 @@ NestedScrollView nested RecyclerView for specific use.
 > [戳这里查看详情](https://github.com/youlookwhat/CloudReader/blob/master/file/Introduction.md)
 
 ### Download
-　　[火速跳转](https://fir.im/cloudreader)                                    
+　[火速跳转](https://fir.im/cloudreader)                                    
 　　<img width="200" height=“200” src="https://github.com/youlookwhat/CloudReader/blob/master/file/download.png"></img>
 　　
 ## Thanks
@@ -89,9 +89,8 @@ NestedScrollView nested RecyclerView for specific use.
 
  - 感谢[代码家][15]、[张鸿洋][16]、[drakeet][17]、[yang747046912][18]、[GiitSmile][19]、[forezp][20]等众多开发者贡献的开源项目，让我从中学到了很多!
  
-## statement
-感谢网易云音乐App提供参考，本人是网易云音乐的粉丝，使用了其中的部分素材，并非攻击，如构成侵权请及时通知我修改或删除。大部分数据来自于干货集中营和豆瓣APIV2.0，一切数据解释权都归代码家和豆瓣所有。
-本项目仅供学习使用，禁止用于商业！
+## Statement 声明
+感谢[网易云音乐App](https://play.google.com/store/apps/details?id=com.netease.cloudmusic)提供参考，本人是网易云音乐的粉丝，使用了其中的部分素材，并非攻击，如构成侵权请及时通知我修改或删除。大部分数据来自于干货集中营和豆瓣APIV2.0，一切数据解释权都归代码家和豆瓣所有。
  
 ## End
 最后，如果你觉得不错，对你有帮助，可以帮忙分享给你更多的朋友，这是给我们最大的动力与支持，也可以请我喝杯咖啡（支付宝：770413277@qq.com），也就是所谓的打赏O(∩_∩)O~。同时希望你多多fork，star，follow，我将贡献更多的开源项目。开源使生活更美好！
