@@ -68,7 +68,7 @@
 - 7、``Glide``加载监听，获取缓存，圆角图片，高斯模糊。
 - 8、水波纹点击效果详细使用与适配。
 - 9、``RecyclerView``下拉刷新上拉加载。
-- 10、基于``DataBinding``的``Viewolder``。
+- 10、基于``DataBinding``的``ViewHolder``。
 - 11、基于``DataBinding``的``BaseActivity``和``BaseFragment``。
 - 12、``Fragment``懒加载模式。
 - 13、高仿网易云音乐歌单详情页。
