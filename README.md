@@ -54,8 +54,8 @@ Glide load monitoring, access to the cache, the rounded pictures, gaussian blur.
 Click the water ripple effect use and adaptation in detail.
 * 11、``RecyclerView``下拉刷新，上拉加载。                                    
 RecyclerView drop-down refresh and tensile loading.
-* 12、基于``DataBinding``的``Viewolder``。                                    
-Based on the DataBinding Viewolder.
+* 12、基于``DataBinding``的``ViewHolder``。                                    
+Based on the DataBinding ViewHolder.
 * 13、基于``DataBinding``的``BaseActivity``和``BaseFragment``。                                    
 Based on the DataBinding BaseActivity and BaseFragment.
 * 14、``Fragment``懒加载模式。                                    
