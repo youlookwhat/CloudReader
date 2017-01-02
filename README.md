@@ -77,10 +77,12 @@ Recommended daily can adjust the column order.
 And can customize free books section to add more content.
 * 增加搜索功能。                                    
 Increase the search function.
+* 网页增加分享功能。                                    
+WebView increase share function.
 
 
 ## See Detail
-> [戳这里查看详情](https://github.com/youlookwhat/CloudReader/blob/master/file/Introduction.md)
+> [项目介绍详情](https://github.com/youlookwhat/CloudReader/blob/master/file/Introduction.md) | [细节优化详情](https://github.com/youlookwhat/CloudReader/wiki)
 
 ### Download
 　[火速跳转](https://fir.im/cloudreader)                                    
