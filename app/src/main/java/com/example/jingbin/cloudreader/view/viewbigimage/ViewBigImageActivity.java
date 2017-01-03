@@ -175,8 +175,7 @@ public class ViewBigImageActivity extends FragmentActivity implements OnPageChan
                                         Bitmap bitmap = BitmapFactory.decodeFile(imagePath, bmOptions);
                                         if (bitmap != null) {
                                             saveImageToGallery(ViewBigImageActivity.this, bitmap);
-//                                            ToastUtil.showToast("保存成功");
-                                            ToastUtil.showToast("已保存至"+Environment.getExternalStorageDirectory().getAbsolutePath()+"云阅相册");
+                                            ToastUtil.showToast("已保存至"+Environment.getExternalStorageDirectory().getAbsolutePath()+"/云阅相册");
 //                                            Toast.makeText(ViewBigImageActivity.this, "保存成功", Toast.LENGTH_SHORT).show();
                                         }
                                     }
