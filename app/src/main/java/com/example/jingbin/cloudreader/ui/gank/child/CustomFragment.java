@@ -45,7 +45,7 @@ public class CustomFragment extends BaseFragment<FragmentCustomBinding> {
         DebugUtil.error("--CustomFragment   ----onActivityCreated");
 
         mACache = ACache.get(getContext());
-        mAllBean = (GankIoDataBean) mACache.getAsObject(Constants.GANK_CUSTOM);
+//        mAllBean = (GankIoDataBean) mACache.getAsObject(Constants.GANK_CUSTOM);
 
         // 禁止下拉刷新
         bindingView.xrvCustom.setPullRefreshEnabled(false);
@@ -83,6 +83,7 @@ public class CustomFragment extends BaseFragment<FragmentCustomBinding> {
                 && mAllBean.getResults() != null
                 && mAllBean.getResults().size() > 0) {
             showContentView();
+            mAllBean = (GankIoDataBean) mACache.getAsObject(Constants.GANK_CUSTOM);
             setAdapter(mAllBean);
         } else {
             loadCustomData();

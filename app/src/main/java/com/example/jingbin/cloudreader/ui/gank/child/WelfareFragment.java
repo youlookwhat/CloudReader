@@ -44,7 +44,7 @@ public class WelfareFragment extends BaseFragment<FragmentWelfareBinding> {
 
         DebugUtil.error("--WelfareFragment   ----onActivityCreated");
         aCache = ACache.get(getContext());
-        meiziBean = (GankIoDataBean) aCache.getAsObject(Constants.GANK_MEIZI);
+//        meiziBean = (GankIoDataBean) aCache.getAsObject(Constants.GANK_MEIZI);
         bindingView.xrvWelfare.setPullRefreshEnabled(false);
         bindingView.xrvWelfare.clearHeader();
         mWelfareAdapter = new WelfareAdapter();
@@ -76,7 +76,7 @@ public class WelfareFragment extends BaseFragment<FragmentWelfareBinding> {
             for (int i = 0; i < meiziBean.getResults().size(); i++) {
                 imgList.add(meiziBean.getResults().get(i).getUrl());
             }
-
+            meiziBean = (GankIoDataBean) aCache.getAsObject(Constants.GANK_MEIZI);
             setAdapter(meiziBean);
         } else {
             loadWelfareData();

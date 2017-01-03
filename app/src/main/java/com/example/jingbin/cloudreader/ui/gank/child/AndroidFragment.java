@@ -61,7 +61,7 @@ public class AndroidFragment extends BaseFragment<FragmentAndroidBinding> {
         super.onActivityCreated(savedInstanceState);
 
         mACache = ACache.get(getContext());
-        mAndroidBean = (GankIoDataBean) mACache.getAsObject(Constants.GANK_ANDROID);
+//        mAndroidBean = (GankIoDataBean) mACache.getAsObject(Constants.GANK_ANDROID);
         DebugUtil.error(TAG + "----onActivityCreated");
         mAndroidAdapter = new AndroidAdapter();
         bindingView.xrvAndroid.setLoadingListener(new XRecyclerView.LoadingListener() {
@@ -91,6 +91,7 @@ public class AndroidFragment extends BaseFragment<FragmentAndroidBinding> {
                 && mAndroidBean.getResults() != null
                 && mAndroidBean.getResults().size() > 0) {
             showContentView();
+            mAndroidBean = (GankIoDataBean) mACache.getAsObject(Constants.GANK_ANDROID);
             setAdapter(mAndroidBean);
         } else {
             loadAndroidData();
