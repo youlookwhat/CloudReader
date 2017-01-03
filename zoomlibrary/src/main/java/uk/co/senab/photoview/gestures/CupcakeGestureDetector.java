@@ -37,8 +37,7 @@ public class CupcakeGestureDetector implements GestureDetector {
     }
 
     public CupcakeGestureDetector(Context context) {
-        final ViewConfiguration configuration = ViewConfiguration
-                .get(context);
+        final ViewConfiguration configuration = ViewConfiguration.get(context);
         mMinimumVelocity = configuration.getScaledMinimumFlingVelocity();
         mTouchSlop = configuration.getScaledTouchSlop();
     }
