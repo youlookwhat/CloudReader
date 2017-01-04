@@ -120,7 +120,7 @@
                     android:layout_marginTop="2dp"
                     android:ellipsize="end"
                     android:maxLines="1"
-                    android:text='@{"类型："+StringFormatUtil.formatGenres(subjectsBean.genres)}' />
+                    android:text='@{@string/string_type+StringFormatUtil.formatGenres(subjectsBean.genres)}' />
 
                 <TextView
                     android:id="@+id/tv_one_rating_rate"
@@ -128,7 +128,7 @@
                     android:layout_height="wrap_content"
                     android:ellipsize="end"
                     android:maxLines="1"
-                    android:text='@{"评分："+subjectsBean.rating.average}' />
+                    android:text='@{@string/string_rating+subjectsBean.rating.average}' />
             </LinearLayout>
 
         </LinearLayout>

@@ -49,7 +49,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:text='@{"评分："+bean.rating.average}'
+            android:text='@{@string/string_rating+bean.rating.average}'
             android:textSize="10sp" />
 
     </LinearLayout>

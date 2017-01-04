@@ -142,7 +142,7 @@
                         android:layout_marginBottom="2dp"
                         android:layout_marginTop="2dp"
                         android:ellipsize="end"
-                        android:text='@{"类型："+StringFormatUtil.formatGenres(subjectsBean.genres)}'
+                        android:text='@{@string/string_type+StringFormatUtil.formatGenres(subjectsBean.genres)}'
                         android:textColor="@color/colorWhite" />
 
                     <TextView
@@ -150,7 +150,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:ellipsize="end"
-                        android:text='@{"评分："+subjectsBean.rating.average}'
+                        android:text='@{@string/string_rating+subjectsBean.rating.average}'
                         android:textColor="@color/colorWhite" />
                 </LinearLayout>
 

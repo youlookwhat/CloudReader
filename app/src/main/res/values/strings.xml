@@ -47,5 +47,10 @@
     <string name="string_everyday_empty">暂时没有更新内容，去看看其他信息吧~</string>
     <string name="string_share_text">发现了一个高仿网易云音乐的App，里面有大量IT干货，每天提供安卓，IOS等最新资讯，还有最新电影热映榜和大量书籍信息，大力推荐哦~：https://fir.im/cloudreader</string>
 
+    <string name="no_name">佚名</string>
+    <string name="string_rating">评分：</string>
+    <string name="string_rating_num">人评分</string>
+    <string name="string_type">类型：</string>
+    <string name="string_publisher">出版社：</string>
 
 </resources>

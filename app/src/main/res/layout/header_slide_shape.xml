@@ -79,7 +79,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:ellipsize="end"
-                            android:text='@{"评分："+subjectsBean.rating.average}'
+                            android:text='@{@string/string_rating+subjectsBean.rating.average}'
                             android:textColor="@color/colorRateRed" />
 
                         <TextView
@@ -89,7 +89,7 @@
                             android:layout_marginLeft="5dp"
                             android:ellipsize="end"
                             android:lines="1"
-                            android:text='@{subjectsBean.collect_count+"人评分"}'
+                            android:text='@{subjectsBean.collect_count+@string/string_rating_num}'
                             android:textColor="@color/colorWhite" />
 
                     </LinearLayout>
@@ -159,7 +159,7 @@
                         android:layout_marginBottom="2dp"
                         android:layout_marginTop="2dp"
                         android:ellipsize="end"
-                        android:text='@{"类型："+StringFormatUtil.formatGenres(subjectsBean.genres)}'
+                        android:text='@{@string/string_type+StringFormatUtil.formatGenres(subjectsBean.genres)}'
                         android:textColor="@color/colorWhite" />
 
                     <!--上映日期-->

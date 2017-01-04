@@ -23,11 +23,11 @@
 
         <!--全部标签时显示福利图-->
         <ImageView
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
             android:id="@+id/iv_all_welfare"
             android:layout_width="match_parent"
             android:layout_height="140dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
             android:scaleType="centerCrop"
             android:visibility="gone" />
 
@@ -73,7 +73,7 @@
                 android:id="@+id/tv_android_who"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text='@{TextUtils.isEmpty(resultsBean.who)?"佚名":resultsBean.who}'
+                android:text='@{TextUtils.isEmpty(resultsBean.who)?@string/no_name:resultsBean.who}'
                 android:textColor="@color/colorSubtitle"
                 android:textSize="12sp" />
 
