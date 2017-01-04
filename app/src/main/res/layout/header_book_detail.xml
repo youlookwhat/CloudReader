@@ -125,7 +125,7 @@
                             android:layout_marginLeft="5dp"
                             android:ellipsize="end"
                             android:lines="1"
-                            android:text='@{booksBean.rating.numRaters+"人评分"}'
+                            android:text='@{booksBean.rating.numRaters+@string/string_rating_num}'
                             android:textColor="@color/colorWhite" />
 
                     </LinearLayout>
