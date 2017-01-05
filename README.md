@@ -109,7 +109,7 @@ WebView increase share function.
 
 ## About me
  - **QQ：**770413277
- - **简书：**[肖子理](http://www.jianshu.com/users/e43c6e979831/latest_articles)
+ - **简书：**[Jingbin_](http://www.jianshu.com/users/e43c6e979831/latest_articles)
  - **Blog：**[http://jingbin.me](http://jingbin.me)
  - **Email：**jingbin127@163.com
 
