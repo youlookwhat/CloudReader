@@ -172,8 +172,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     @Override
                     public void run() {
                         NavHomePageActivity.startHome(MainActivity.this);
-//                        String url = "https://github.com/youlookwhat/CloudReader/blob/master/README.md";
-//                        WebViewActivity.loadUrl(MainActivity.this, url, "加载中...");
                     }
                 }, 360);
 

@@ -58,7 +58,7 @@ public class AndroidAdapter extends BaseRecyclerViewAdapter<GankIoDataBean.Resul
             binding.setResultsBean(object);
             binding.executePendingBindings();
 
-            // 显示图片会很耗内存
+            // 显示gif图片会很耗内存
             if (object.getImages() != null
                     && object.getImages().size() > 0
                     && !TextUtils.isEmpty(object.getImages().get(0))) {

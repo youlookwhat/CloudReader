@@ -9,6 +9,9 @@ import com.example.jingbin.cloudreader.utils.GlideImageLoader;
 
 import java.util.ArrayList;
 
+/**
+ * 引导图，正在完成中
+ */
 public class SplashActivity extends AppCompatActivity {
 
     private ActivitySplashBinding mDataBing;

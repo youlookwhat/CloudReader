@@ -93,7 +93,7 @@ public class EverydayFragment extends BaseFragment<FragmentEverydayBinding> {
         maCache = ACache.get(getContext());
         mEverydayModel = new EverydayModel();
         mBannerImages = (ArrayList<String>) maCache.getAsObject(Constants.BANNER_PIC);
-        mLists = (ArrayList<List<AndroidBean>>) maCache.getAsObject(Constants.EVERYDAY_CONTENT);
+//        mLists = (ArrayList<List<AndroidBean>>) maCache.getAsObject(Constants.EVERYDAY_CONTENT);
         DebugUtil.error("----mBannerImages: " + (mBannerImages == null));
         DebugUtil.error("----mLists: " + (mLists == null));
 
@@ -191,6 +191,7 @@ public class EverydayFragment extends BaseFragment<FragmentEverydayBinding> {
         } else {
             loadBannerPicture();
         }
+        mLists = (ArrayList<List<AndroidBean>>) maCache.getAsObject(Constants.EVERYDAY_CONTENT);
         if (mLists != null && mLists.size() > 0) {
             setAdapter(mLists);
         } else {
