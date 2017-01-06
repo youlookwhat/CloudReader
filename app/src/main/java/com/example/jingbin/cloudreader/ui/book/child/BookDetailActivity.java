@@ -27,6 +27,7 @@ public class BookDetailActivity extends BaseHeaderActivity<HeaderBookDetailBindi
     private BooksBean booksBean;
     private String mBookDetailUrl;
     private String mBookDetailName;
+    public final static String EXTRA_PARAM = "bookBean";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +35,7 @@ public class BookDetailActivity extends BaseHeaderActivity<HeaderBookDetailBindi
         setContentView(R.layout.activity_book_detail);
 
         if (getIntent() != null) {
-            booksBean = (BooksBean) getIntent().getSerializableExtra("bookBean");
+            booksBean = (BooksBean) getIntent().getSerializableExtra(EXTRA_PARAM);
         }
 
         initSlideShapeTheme(setHeaderImgUrl(), setHeaderImageView());
@@ -109,7 +110,7 @@ public class BookDetailActivity extends BaseHeaderActivity<HeaderBookDetailBindi
      */
     public static void start(Activity context, BooksBean positionData, ImageView imageView) {
         Intent intent = new Intent(context, BookDetailActivity.class);
-        intent.putExtra("bookBean", positionData);
+        intent.putExtra(EXTRA_PARAM, positionData);
         ActivityOptionsCompat options =
                 ActivityOptionsCompat.makeSceneTransitionAnimation(context,
                         imageView, CommonUtils.getString(R.string.transition_book_img));//与xml文件对应
