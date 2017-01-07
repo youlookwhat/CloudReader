@@ -91,9 +91,7 @@ WebView increase share function.
 ## Thanks
  - 我几乎看过了所有关于Android仿网易云音乐的项目与文章，发现大部分做的都不够细致，也没有比较好的内容填充，于是决心自己着手做一个，才有了这个开源项目。这里列出主要参考的内容。
  
- - 感谢[iconfont][6]提供图片资源，项目中的大部分图片皆出于此，一部分来自网易云音乐。
-
- - 感谢我们的UI工程师[Sandawang](https://github.com/Sandawang)，图标等部分图片皆由他设计。 
+ - 图片来源：[iconfont][6]、UI工程师[Sandawang](https://github.com/Sandawang)和网易云音乐App。
 
  - 参考项目：[ImitateNetEasyCloud][7]、[banya][8]；主要数据来源：[Gank.Io][9]、[豆瓣Api][10]。
 
@@ -105,7 +103,7 @@ WebView increase share function.
 感谢[网易云音乐App](https://play.google.com/store/apps/details?id=com.netease.cloudmusic)提供参考，附上[《网易云音乐Android 3.0视觉设计规范文档》](http://www.25xt.com/appdesign/12385.html)。本人是网易云音乐的粉丝，使用了其中的部分素材，并非攻击，如构成侵权请及时通知我修改或删除。大部分数据来自于干货集中营和豆瓣APIV2.0，一切数据解释权都归代码家和豆瓣所有。
  
 ## End
-> 注意：此开源项目仅做学习交流使用，如用到实际项目还需多考虑其他因素如并发等，请多多斟酌。此框架是依照自己理解而写，有疑问可以看[这里](https://github.com/youlookwhat/ProjectPatternStudy)。如果你觉得不错，对你有帮助，欢迎你点个fork，star，follow，也可以帮忙分享给你更多的朋友，这是给我们最大的动力与支持，我将贡献更多的开源项目。开源使生活更美好！
+> 注意：此开源项目仅做学习交流使用，如用到实际项目还需多考虑其他因素如并发等，请多多斟酌。此MvvM-databinding框架是依照自己理解而写，有疑问可以看[这里](https://github.com/youlookwhat/ProjectPatternStudy)。如果你觉得不错，对你有帮助，欢迎点个fork，star，follow，也可以帮忙分享给你更多的朋友，这是给我们最大的动力与支持，我将贡献更多的开源项目。开源使生活更美好！
 
 ## About me
  - **QQ：**770413277
