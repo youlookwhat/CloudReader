@@ -32,7 +32,7 @@ import retrofit.client.Client;
 import retrofit.converter.GsonConverter;
 
 /**
- * Created by czh on 2015/6/24.
+ * Created by jingbin on 2015/6/24.
  * 网络请求工具类
  * <p>
  * 豆瓣api:

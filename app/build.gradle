@@ -49,7 +49,7 @@ dependencies {
     compile 'com.jakewharton.retrofit:retrofit1-okhttp3-client:1.1.0'
     compile 'io.reactivex:rxandroid:1.2.0'
     compile 'com.nineoldandroids:library:2.4.0'
-    compile 'com.github.bumptech.glide:glide:3.7.0'
+//    compile 'com.github.bumptech.glide:glide:3.7.0'
     compile 'jp.wasabeef:glide-transformations:2.0.1'
     compile 'com.youth.banner:banner:1.4.2'
     compile 'com.daimajia.slider:library:1.1.5@aar'
