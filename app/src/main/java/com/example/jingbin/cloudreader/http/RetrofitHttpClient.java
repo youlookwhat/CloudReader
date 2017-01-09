@@ -19,24 +19,6 @@ import rx.Observable;
  */
 public interface RetrofitHttpClient {
 
-//    @FormUrlEncoded
-//    @POST("/services/application")
-//    void submitServicesForm(@Header("a") String a, @Field("item_pk") String item_pk, @Field("type") Integer type, @Field("userkey") String userkey,
-//                            @Field("real_name") String real_name, @Field("sex") String sex, @Field("age") Integer age, @Field("place") String place,
-//                            @Field("diseased_state_id") String diseased_state_id,
-//                            @Field("mobile") String mobile, @Field("apply_place") String apply_place, @Field("reason") String reason, Callback<String> response);
-
-
-
-    /*修改我的病历本的"其他资料"的详情*/
-//    @FormUrlEncoded
-//    @PUT("/p/medical_records/{m_r_id}/items/{id}")
-//    void modifyIllNoteOthersDetail(@Header("a") String a, @Path("id") int id, @Field("userkey")
-//            String userkey, @Path("m_r_id") String medical_record_item_id, @Field("record_date") String
-//                                           record_date, @Field("content") String content, @Field
-//                                           ("image_ids[]") List<Integer>
-//                                           image_ids, Callback<ErrorBean> response);
-
     /**
      * 首页轮播图
      */
