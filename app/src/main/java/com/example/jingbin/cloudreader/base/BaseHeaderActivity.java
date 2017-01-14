@@ -5,6 +5,7 @@ import android.databinding.ViewDataBinding;
 import android.graphics.Color;
 import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
 import android.support.v4.content.ContextCompat;
@@ -12,11 +13,14 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
+import android.transition.ArcMotion;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
+import android.view.animation.Interpolator;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -29,6 +33,7 @@ import com.example.jingbin.cloudreader.R;
 import com.example.jingbin.cloudreader.databinding.BaseHeaderTitleBarBinding;
 import com.example.jingbin.cloudreader.utils.CommonUtils;
 import com.example.jingbin.cloudreader.utils.PerfectClickListener;
+import com.example.jingbin.cloudreader.view.CustomChangeBounds;
 import com.example.jingbin.cloudreader.view.MyNestedScrollView;
 import com.example.jingbin.cloudreader.view.statusbar.StatusBarUtil;
 import com.example.jingbin.cloudreader.view.test.StatusBarUtils;
@@ -108,6 +113,9 @@ public abstract class BaseHeaderActivity<HV extends ViewDataBinding, SV extends 
         llProgressBar = getView(R.id.ll_progress_bar);
         refresh = getView(R.id.ll_error_refresh);
 
+        // 设置自定义元素共享切换动画
+        setMotion(setHeaderPicView(),false);
+
         // 初始化滑动渐变
         initSlideShapeTheme(setHeaderImgUrl(), setHeaderImageView());
 
@@ -151,6 +159,13 @@ public abstract class BaseHeaderActivity<HV extends ViewDataBinding, SV extends 
     protected abstract ImageView setHeaderImageView();
 
     /**
+     * 设置头部header布局 左侧的图片(需要设置曲线路径切换动画时重写)
+     */
+    protected ImageView setHeaderPicView() {
+        return new ImageView(this);
+    }
+
+    /**
      * 1. 标题
      */
     public void setTitle(CharSequence text) {
@@ -168,6 +183,37 @@ public abstract class BaseHeaderActivity<HV extends ViewDataBinding, SV extends 
      * 3. toolbar 单击"更多信息"
      */
     protected void setTitleClickMore() {
+    }
+
+    /**
+     * 设置自定义 Shared Element切换动画
+     * 默认不开启曲线路径切换动画，
+     * 开启需要重写setHeaderPicView()，和调用此方法并将isShow值设为true
+     *
+     * @param imageView 共享的图片
+     * @param isShow    是否显示曲线动画
+     */
+    protected void setMotion(ImageView imageView, boolean isShow) {
+        if (!isShow) {
+            return;
+        }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            //定义ArcMotion
+            ArcMotion arcMotion = new ArcMotion();
+            arcMotion.setMinimumHorizontalAngle(50f);
+            arcMotion.setMinimumVerticalAngle(50f);
+            //插值器，控制速度
+            Interpolator interpolator = AnimationUtils.loadInterpolator(this, android.R.interpolator.fast_out_slow_in);
+
+            //实例化自定义的ChangeBounds
+            CustomChangeBounds changeBounds = new CustomChangeBounds();
+            changeBounds.setPathMotion(arcMotion);
+            changeBounds.setInterpolator(interpolator);
+            changeBounds.addTarget(imageView);
+            //将切换动画应用到当前的Activity的进入和返回
+            getWindow().setSharedElementEnterTransition(changeBounds);
+            getWindow().setSharedElementReturnTransition(changeBounds);
+        }
     }
 
     /**

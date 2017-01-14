@@ -92,7 +92,9 @@
         <activity
             android:name=".ui.book.child.BookDetailActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".ui.menu.NavDownloadActivity"></activity>
+        <activity
+            android:name=".ui.menu.NavDownloadActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

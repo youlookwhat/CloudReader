@@ -13,14 +13,6 @@ public class CloudReaderApplication extends Application {
     private static CloudReaderApplication cloudReaderApplication;
 
     public static CloudReaderApplication getInstance() {
-        // if语句下是不会走的，Application本身已单例
-        if (cloudReaderApplication == null) {
-            synchronized (CloudReaderApplication.class) {
-                if (cloudReaderApplication == null) {
-                    cloudReaderApplication = new CloudReaderApplication();
-                }
-            }
-        }
         return cloudReaderApplication;
     }
 

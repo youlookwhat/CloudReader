@@ -38,6 +38,7 @@ public class BookDetailActivity extends BaseHeaderActivity<HeaderBookDetailBindi
             booksBean = (BooksBean) getIntent().getSerializableExtra(EXTRA_PARAM);
         }
 
+        setMotion(setHeaderPicView(),true);
         initSlideShapeTheme(setHeaderImgUrl(), setHeaderImageView());
 
         setTitle(booksBean.getTitle());
@@ -96,6 +97,11 @@ public class BookDetailActivity extends BaseHeaderActivity<HeaderBookDetailBindi
     @Override
     protected ImageView setHeaderImageView() {
         return bindingHeaderView.imgItemBg;
+    }
+
+    @Override
+    protected ImageView setHeaderPicView() {
+        return bindingHeaderView.ivOnePhoto;
     }
 
     @Override
