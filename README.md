@@ -1,9 +1,10 @@
 # CloudReader
 
-[![Apache License 2.0][1]][2] 
+[![Apache License 2.0][1]][2]
+[![fir.im][34]][35] 
 [![Release Version][30]][31]
-[![PRs Welcome][32]][33]
 [![API][3]][4]
+[![PRs Welcome][32]][33]
 
 > Netease cloud music Ui && Retrofit + RxJava + MVVM-databinding && GankIo、Douban Api 
 
@@ -136,6 +137,8 @@ limitations under the License.
 [31]:https://github.com/youlookwhat/CloudReader/releases
 [32]:https://img.shields.io/badge/PRs-welcome-brightgreen.svg
 [33]:https://github.com/youlookwhat/CloudReader/pulls
+[34]:https://img.shields.io/badge/download-fir.im-blue.svg
+[35]:https://fir.im/cloudreader
 
 [5]:http://jingbin.me/2017/11/23/%E5%BC%80%E5%8F%91%E4%B8%AD%E6%89%80%E9%81%87%E9%97%AE%E9%A2%98%E5%BD%92%E7%BA%B3/
 [6]:http://www.iconfont.cn/plus
