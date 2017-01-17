@@ -22,6 +22,7 @@ import com.example.jingbin.cloudreader.bean.FrontpageBean;
 import com.example.jingbin.cloudreader.databinding.FooterItemEverydayBinding;
 import com.example.jingbin.cloudreader.databinding.FragmentEverydayBinding;
 import com.example.jingbin.cloudreader.databinding.HeaderItemEverydayBinding;
+import com.example.jingbin.cloudreader.http.RequestImpl;
 import com.example.jingbin.cloudreader.http.cache.ACache;
 import com.example.jingbin.cloudreader.http.rx.RxBus;
 import com.example.jingbin.cloudreader.http.rx.RxBusBaseMessage;
@@ -205,7 +206,7 @@ public class EverydayFragment extends BaseFragment<FragmentEverydayBinding> {
      * 加载正文内容
      */
     private void showContentData() {
-        mEverydayModel.showRecyclerViewData(new EverydayModel.HomeImpl() {
+        mEverydayModel.showRecyclerViewData(new RequestImpl() {
             @Override
             public void loadSuccess(Object object) {
                 if (mLists != null) {
@@ -310,7 +311,7 @@ public class EverydayFragment extends BaseFragment<FragmentEverydayBinding> {
     @Override
     public void onResume() {
         super.onResume();
-        // 失去焦点，否则recyclerview第一个item会回到顶部
+        // 失去焦点，否则RecyclerView第一个item会回到顶部
         bindingView.xrvEveryday.setFocusable(false);
         DebugUtil.error("-----EverydayFragment----onResume()");
         // 开始图片请求
@@ -330,7 +331,7 @@ public class EverydayFragment extends BaseFragment<FragmentEverydayBinding> {
      * 轮播图
      */
     private void loadBannerPicture() {
-        mEverydayModel.showBanncerPage(new EverydayModel.HomeImpl() {
+        mEverydayModel.showBanncerPage(new RequestImpl() {
             @Override
             public void loadSuccess(Object object) {
                 if (mBannerImages == null) {

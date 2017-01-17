@@ -112,7 +112,7 @@
                 android:layout_marginTop="6dp"
                 android:background="@color/colorTransparent" />
 
-            <!--若不适用CardView则使用此分割线-->
+            <!--若不使用CardView则使用此分割线-->
             <!--android:background="@color/colorLineItem"-->
         </LinearLayout>
     </android.support.v7.widget.CardView>

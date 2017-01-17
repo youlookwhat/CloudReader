@@ -11,14 +11,13 @@ import com.example.jingbin.cloudreader.base.BaseFragment;
 import com.example.jingbin.cloudreader.bean.GankIoDataBean;
 import com.example.jingbin.cloudreader.databinding.FragmentAndroidBinding;
 import com.example.jingbin.cloudreader.http.HttpUtils;
+import com.example.jingbin.cloudreader.http.RequestImpl;
 import com.example.jingbin.cloudreader.http.cache.ACache;
+import com.example.jingbin.cloudreader.model.GankOtherModel;
 import com.example.jingbin.cloudreader.utils.DebugUtil;
 import com.example.xrecyclerview.XRecyclerView;
 
-import rx.Observer;
 import rx.Subscription;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
 
 /**
  * 大安卓 fragment
@@ -34,6 +33,7 @@ public class AndroidFragment extends BaseFragment<FragmentAndroidBinding> {
     private AndroidAdapter mAndroidAdapter;
     private ACache mACache;
     private GankIoDataBean mAndroidBean;
+    private GankOtherModel model;
 
     public static AndroidFragment newInstance(String type) {
         AndroidFragment fragment = new AndroidFragment();
@@ -61,6 +61,7 @@ public class AndroidFragment extends BaseFragment<FragmentAndroidBinding> {
         super.onActivityCreated(savedInstanceState);
 
         mACache = ACache.get(getContext());
+        model = new GankOtherModel();
 //        mAndroidBean = (GankIoDataBean) mACache.getAsObject(Constants.GANK_ANDROID);
         DebugUtil.error(TAG + "----onActivityCreated");
         mAndroidAdapter = new AndroidAdapter();
@@ -99,49 +100,48 @@ public class AndroidFragment extends BaseFragment<FragmentAndroidBinding> {
     }
 
     private void loadAndroidData() {
-        Subscription subscribe = HttpUtils.getInstance().getGankIOServer().getGankIoData(mType, mPage, HttpUtils.per_page_more)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<GankIoDataBean>() {
-                    @Override
-                    public void onCompleted() {
-                        showContentView();
-                    }
+        model.setData(mType, mPage, HttpUtils.per_page_more);
+        model.getGankIoData(new RequestImpl() {
+            @Override
+            public void loadSuccess(Object object) {
+                showContentView();
+                GankIoDataBean gankIoDataBean = (GankIoDataBean) object;
+                if (mPage == 1) {
+                    if (gankIoDataBean != null && gankIoDataBean.getResults() != null && gankIoDataBean.getResults().size() > 0) {
+                        setAdapter(gankIoDataBean);
 
-                    @Override
-                    public void onError(Throwable e) {
+                        mACache.remove(Constants.GANK_ANDROID);
+                        // 缓存50分钟
+                        mACache.put(Constants.GANK_ANDROID, gankIoDataBean, 30000);
+                    }
+                } else {
+                    if (gankIoDataBean != null && gankIoDataBean.getResults() != null && gankIoDataBean.getResults().size() > 0) {
                         bindingView.xrvAndroid.refreshComplete();
-                        // 注意：这里不能写成 mPage == 1，否则会一直显示错误页面
-                        if (mAndroidAdapter.getItemCount() == 0) {
-                            showError();
-                        }
-                        if (mPage > 1) {
-                            mPage--;
-                        }
+                        mAndroidAdapter.addAll(gankIoDataBean.getResults());
+                        mAndroidAdapter.notifyDataSetChanged();
+                    } else {
+                        bindingView.xrvAndroid.noMoreLoading();
                     }
+                }
+            }
 
-                    @Override
-                    public void onNext(GankIoDataBean gankIoDataBean) {
-                        if (mPage == 1) {
-                            if (gankIoDataBean != null && gankIoDataBean.getResults() != null && gankIoDataBean.getResults().size() > 0) {
-                                setAdapter(gankIoDataBean);
+            @Override
+            public void loadFailed() {
+                bindingView.xrvAndroid.refreshComplete();
+                // 注意：这里不能写成 mPage == 1，否则会一直显示错误页面
+                if (mAndroidAdapter.getItemCount() == 0) {
+                    showError();
+                }
+                if (mPage > 1) {
+                    mPage--;
+                }
+            }
 
-                                mACache.remove(Constants.GANK_ANDROID);
-                                // 缓存50分钟
-                                mACache.put(Constants.GANK_ANDROID, gankIoDataBean, 30000);
-                            }
-                        } else {
-                            if (gankIoDataBean != null && gankIoDataBean.getResults() != null && gankIoDataBean.getResults().size() > 0) {
-                                bindingView.xrvAndroid.refreshComplete();
-                                mAndroidAdapter.addAll(gankIoDataBean.getResults());
-                                mAndroidAdapter.notifyDataSetChanged();
-                            } else {
-                                bindingView.xrvAndroid.noMoreLoading();
-                            }
-                        }
-                    }
-                });
-        addSubscription(subscribe);
+            @Override
+            public void addSubscription(Subscription subscription) {
+                AndroidFragment.this.addSubscription(subscription);
+            }
+        });
     }
 
     /**

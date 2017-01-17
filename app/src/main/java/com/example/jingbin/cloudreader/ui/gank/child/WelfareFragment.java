@@ -13,17 +13,16 @@ import com.example.jingbin.cloudreader.base.baseadapter.OnItemClickListener;
 import com.example.jingbin.cloudreader.bean.GankIoDataBean;
 import com.example.jingbin.cloudreader.databinding.FragmentWelfareBinding;
 import com.example.jingbin.cloudreader.http.HttpUtils;
+import com.example.jingbin.cloudreader.http.RequestImpl;
 import com.example.jingbin.cloudreader.http.cache.ACache;
+import com.example.jingbin.cloudreader.model.GankOtherModel;
 import com.example.jingbin.cloudreader.utils.DebugUtil;
 import com.example.jingbin.cloudreader.view.viewbigimage.ViewBigImageActivity;
 import com.example.xrecyclerview.XRecyclerView;
 
 import java.util.ArrayList;
 
-import rx.Observer;
 import rx.Subscription;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
 
 /**
  * 福利
@@ -37,14 +36,17 @@ public class WelfareFragment extends BaseFragment<FragmentWelfareBinding> {
     private boolean isFirst = true;
     private ACache aCache;
     private GankIoDataBean meiziBean;
+    private GankOtherModel model;
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
         DebugUtil.error("--WelfareFragment   ----onActivityCreated");
+        model = new GankOtherModel();
         aCache = ACache.get(getContext());
 //        meiziBean = (GankIoDataBean) aCache.getAsObject(Constants.GANK_MEIZI);
+
         bindingView.xrvWelfare.setPullRefreshEnabled(false);
         bindingView.xrvWelfare.clearHeader();
         mWelfareAdapter = new WelfareAdapter();
@@ -84,65 +86,56 @@ public class WelfareFragment extends BaseFragment<FragmentWelfareBinding> {
     }
 
     private void loadWelfareData() {
-        Subscription subscribe = HttpUtils.getInstance().getGankIOServer().getGankIoData("福利", mPage, HttpUtils.per_page_more)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<GankIoDataBean>() {
-                    @Override
-                    public void onCompleted() {
-                        showContentView();
-                    }
+        model.setData("福利", mPage, HttpUtils.per_page_more);
+        model.getGankIoData(new RequestImpl() {
+            @Override
+            public void loadSuccess(Object object) {
+                showContentView();
+                GankIoDataBean gankIoDataBean = (GankIoDataBean) object;
+                if (mPage == 1) {
+                    if (gankIoDataBean != null && gankIoDataBean.getResults() != null && gankIoDataBean.getResults().size() > 0) {
+                        imgList.clear();
+                        for (int i = 0; i < gankIoDataBean.getResults().size(); i++) {
+                            imgList.add(gankIoDataBean.getResults().get(i).getUrl());
+                        }
 
-                    @Override
-                    public void onError(Throwable e) {
+                        setAdapter(gankIoDataBean);
+                        aCache.remove(Constants.GANK_MEIZI);
+                        aCache.put(Constants.GANK_MEIZI, gankIoDataBean, 30000);
+
+                    }
+                } else {
+                    if (gankIoDataBean != null && gankIoDataBean.getResults() != null && gankIoDataBean.getResults().size() > 0) {
                         bindingView.xrvWelfare.refreshComplete();
-                        if (mWelfareAdapter.getItemCount() == 0) {
-                            showError();
+                        mWelfareAdapter.addAll(gankIoDataBean.getResults());
+                        mWelfareAdapter.notifyDataSetChanged();
+
+                        for (int i = 0; i < gankIoDataBean.getResults().size(); i++) {
+                            imgList.add(gankIoDataBean.getResults().get(i).getUrl());
                         }
-                        if (mPage > 1) {
-                            mPage--;
-                        }
+
+                    } else {
+                        bindingView.xrvWelfare.noMoreLoading();
                     }
+                }
+            }
 
-                    @Override
-                    public void onNext(GankIoDataBean gankIoDataBean) {
-                        if (mPage == 1) {
-                            if (gankIoDataBean != null && gankIoDataBean.getResults() != null && gankIoDataBean.getResults().size() > 0) {
-//                                mWelfareAdapter = new WelfareAdapter();
-//                                mWelfareAdapter.addAll(gankIoDataBean.getResults());
-//                                //构造器中，第一个参数表示列数或者行数，第二个参数表示滑动方向,瀑布流
-//                                bindingContentView.xrvWelfare.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
-//                                bindingContentView.xrvWelfare.setAdapter(mWelfareAdapter);
-//                                mWelfareAdapter.notifyDataSetChanged();
+            @Override
+            public void loadFailed() {
+                bindingView.xrvWelfare.refreshComplete();
+                if (mWelfareAdapter.getItemCount() == 0) {
+                    showError();
+                }
+                if (mPage > 1) {
+                    mPage--;
+                }
+            }
 
-                                imgList.clear();
-                                for (int i = 0; i < gankIoDataBean.getResults().size(); i++) {
-                                    imgList.add(gankIoDataBean.getResults().get(i).getUrl());
-                                }
-
-                                setAdapter(gankIoDataBean);
-                                aCache.remove(Constants.GANK_MEIZI);
-                                aCache.put(Constants.GANK_MEIZI, gankIoDataBean, 30000);
-
-                            }
-                        } else {
-                            if (gankIoDataBean != null && gankIoDataBean.getResults() != null && gankIoDataBean.getResults().size() > 0) {
-                                bindingView.xrvWelfare.refreshComplete();
-                                mWelfareAdapter.addAll(gankIoDataBean.getResults());
-                                mWelfareAdapter.notifyDataSetChanged();
-
-                                for (int i = 0; i < gankIoDataBean.getResults().size(); i++) {
-                                    imgList.add(gankIoDataBean.getResults().get(i).getUrl());
-                                }
-
-                            } else {
-                                bindingView.xrvWelfare.noMoreLoading();
-                            }
-                        }
-
-                    }
-                });
-        addSubscription(subscribe);
+            @Override
+            public void addSubscription(Subscription subscription) {
+                WelfareFragment.this.addSubscription(subscription);
+            }
+        });
     }
 
 

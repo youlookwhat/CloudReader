@@ -4,6 +4,7 @@ import com.example.jingbin.cloudreader.bean.AndroidBean;
 import com.example.jingbin.cloudreader.bean.FrontpageBean;
 import com.example.jingbin.cloudreader.bean.GankIoDayBean;
 import com.example.jingbin.cloudreader.http.HttpUtils;
+import com.example.jingbin.cloudreader.http.RequestImpl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,18 +33,10 @@ public class EverydayModel {
         this.day = day;
     }
 
-    public interface HomeImpl {
-        void loadSuccess(Object object);
-
-        void loadFailed();
-
-        void addSubscription(Subscription subscription);
-    }
-
     /**
      * 轮播图
      */
-    public void showBanncerPage(final HomeImpl listener) {
+    public void showBanncerPage(final RequestImpl listener) {
         Subscription subscription = HttpUtils.getInstance().getDongTingServer().getFrontpage()
                 .observeOn(AndroidSchedulers.mainThread()).subscribeOn(Schedulers.io())
                 .subscribe(new Observer<FrontpageBean>() {
@@ -69,7 +62,7 @@ public class EverydayModel {
     /**
      * 显示RecyclerView数据
      */
-    public void showRecyclerViewData(final HomeImpl listener) {
+    public void showRecyclerViewData(final RequestImpl listener) {
         Func1<GankIoDayBean, Observable<List<List<AndroidBean>>>> func1 = new Func1<GankIoDayBean, Observable<List<List<AndroidBean>>>>() {
             @Override
             public Observable<List<List<AndroidBean>>> call(GankIoDayBean gankIoDayBean) {
