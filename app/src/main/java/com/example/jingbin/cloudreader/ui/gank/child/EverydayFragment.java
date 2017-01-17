@@ -161,7 +161,7 @@ public class EverydayFragment extends BaseFragment<FragmentEverydayBinding> {
 
         String oneData = SPUtils.getString("everyday_data", "2016-11-26");
         if (!oneData.equals(TimeUtil.getData())) {// 是第二天
-            if (TimeUtil.isRightTime()) {//大于12：30,请求(加载时会出现error，正在调试)
+            if (TimeUtil.isRightTime()) {//大于12：30,请求
 
                 showRotaLoading(true);
                 loadBannerPicture();
@@ -389,7 +389,7 @@ public class EverydayFragment extends BaseFragment<FragmentEverydayBinding> {
         showContentView();
         showRotaLoading(true);
 //        loadData();
-//        loadBannerPicture();
+        loadBannerPicture();
         showContentData();
     }
 

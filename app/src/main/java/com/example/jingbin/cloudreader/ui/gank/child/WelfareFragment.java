@@ -36,14 +36,14 @@ public class WelfareFragment extends BaseFragment<FragmentWelfareBinding> {
     private boolean isFirst = true;
     private ACache aCache;
     private GankIoDataBean meiziBean;
-    private GankOtherModel model;
+    private GankOtherModel mModel;
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
         DebugUtil.error("--WelfareFragment   ----onActivityCreated");
-        model = new GankOtherModel();
+        mModel = new GankOtherModel();
         aCache = ACache.get(getContext());
 //        meiziBean = (GankIoDataBean) aCache.getAsObject(Constants.GANK_MEIZI);
 
@@ -86,8 +86,8 @@ public class WelfareFragment extends BaseFragment<FragmentWelfareBinding> {
     }
 
     private void loadWelfareData() {
-        model.setData("福利", mPage, HttpUtils.per_page_more);
-        model.getGankIoData(new RequestImpl() {
+        mModel.setData("福利", mPage, HttpUtils.per_page_more);
+        mModel.getGankIoData(new RequestImpl() {
             @Override
             public void loadSuccess(Object object) {
                 showContentView();

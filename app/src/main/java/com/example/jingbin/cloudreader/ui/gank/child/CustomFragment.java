@@ -37,7 +37,7 @@ public class CustomFragment extends BaseFragment<FragmentCustomBinding> {
     private ACache mACache;
     private GankIoDataBean mAllBean;
     private View mHeaderView;
-    private GankOtherModel model;
+    private GankOtherModel mModel;
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
@@ -45,7 +45,7 @@ public class CustomFragment extends BaseFragment<FragmentCustomBinding> {
         DebugUtil.error("--CustomFragment   ----onActivityCreated");
 
         mACache = ACache.get(getContext());
-        model = new GankOtherModel();
+        mModel = new GankOtherModel();
 //        mAllBean = (GankIoDataBean) mACache.getAsObject(Constants.GANK_CUSTOM);
 
         // 禁止下拉刷新
@@ -92,8 +92,8 @@ public class CustomFragment extends BaseFragment<FragmentCustomBinding> {
     }
 
     private void loadCustomData() {
-        model.setData(mType, mPage, HttpUtils.per_page_more);
-        model.getGankIoData(new RequestImpl() {
+        mModel.setData(mType, mPage, HttpUtils.per_page_more);
+        mModel.getGankIoData(new RequestImpl() {
             @Override
             public void loadSuccess(Object object) {
                 showContentView();

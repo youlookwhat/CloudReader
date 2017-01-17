@@ -33,7 +33,7 @@ public class AndroidFragment extends BaseFragment<FragmentAndroidBinding> {
     private AndroidAdapter mAndroidAdapter;
     private ACache mACache;
     private GankIoDataBean mAndroidBean;
-    private GankOtherModel model;
+    private GankOtherModel mModel;
 
     public static AndroidFragment newInstance(String type) {
         AndroidFragment fragment = new AndroidFragment();
@@ -61,7 +61,7 @@ public class AndroidFragment extends BaseFragment<FragmentAndroidBinding> {
         super.onActivityCreated(savedInstanceState);
 
         mACache = ACache.get(getContext());
-        model = new GankOtherModel();
+        mModel = new GankOtherModel();
 //        mAndroidBean = (GankIoDataBean) mACache.getAsObject(Constants.GANK_ANDROID);
         DebugUtil.error(TAG + "----onActivityCreated");
         mAndroidAdapter = new AndroidAdapter();
@@ -100,8 +100,8 @@ public class AndroidFragment extends BaseFragment<FragmentAndroidBinding> {
     }
 
     private void loadAndroidData() {
-        model.setData(mType, mPage, HttpUtils.per_page_more);
-        model.getGankIoData(new RequestImpl() {
+        mModel.setData(mType, mPage, HttpUtils.per_page_more);
+        mModel.getGankIoData(new RequestImpl() {
             @Override
             public void loadSuccess(Object object) {
                 showContentView();
