@@ -110,9 +110,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="1px"
                 android:layout_marginTop="6dp"
-                android:background="@color/colorLineItem" />
+                android:background="@color/colorTransparent" />
 
-            <!--android:background="@color/colorLineDeep"-->
+            <!--若不适用CardView则使用此分割线-->
+            <!--android:background="@color/colorLineItem"-->
         </LinearLayout>
     </android.support.v7.widget.CardView>
 
