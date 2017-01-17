@@ -33,7 +33,7 @@ import com.example.jingbin.cloudreader.ui.one.OneFragment;
 import com.example.jingbin.cloudreader.utils.CommonUtils;
 import com.example.jingbin.cloudreader.utils.ImgLoadUtil;
 import com.example.jingbin.cloudreader.view.MyFragmentPagerAdapter;
-import com.jaeger.library.StatusBarUtil;
+import com.example.jingbin.cloudreader.view.statusbar.StatusBarUtil;
 
 import java.util.ArrayList;
 

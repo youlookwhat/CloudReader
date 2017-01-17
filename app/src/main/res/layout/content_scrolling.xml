@@ -24,18 +24,23 @@
             android:textColor="@color/colorContent"
             android:textSize="16sp" />
 
-        <TextView
+        <android.support.v7.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
-            android:autoLink="web"
-            android:background="@color/colorWhite"
-            android:lineSpacingExtra="3dp"
-            android:padding="7dp"
-            android:text="@string/string_about"
-            android:textColor="@color/colorTitle"
-            android:textIsSelectable="true" />
+            android:layout_marginRight="8dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:autoLink="web"
+                android:background="@color/colorWhite"
+                android:lineSpacingExtra="3dp"
+                android:padding="7dp"
+                android:text="@string/string_about"
+                android:textColor="@color/colorTitle"
+                android:textIsSelectable="true" />
+        </android.support.v7.widget.CardView>
 
         <TextView
             android:layout_width="match_parent"
@@ -48,18 +53,23 @@
             android:textColor="@color/colorContent"
             android:textSize="16sp" />
 
-        <TextView
+        <android.support.v7.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
-            android:autoLink="web"
-            android:background="@color/colorWhite"
-            android:lineSpacingExtra="7dp"
-            android:padding="7dp"
-            android:text="@string/string_about_me"
-            android:textColor="@color/colorTitle"
-            android:textIsSelectable="true" />
+            android:layout_marginRight="8dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:autoLink="web"
+                android:background="@color/colorWhite"
+                android:lineSpacingExtra="7dp"
+                android:padding="7dp"
+                android:text="@string/string_about_me"
+                android:textColor="@color/colorTitle"
+                android:textIsSelectable="true" />
+        </android.support.v7.widget.CardView>
 
         <TextView
             android:layout_width="match_parent"
@@ -72,17 +82,23 @@
             android:textColor="@color/colorContent"
             android:textSize="16sp" />
 
-        <TextView
+        <android.support.v7.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
             android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
-            android:background="@color/colorWhite"
-            android:padding="7dp"
-            android:layout_marginBottom="15dp"
-            android:text="@string/string_lib"
-            android:textColor="@color/colorTitle"
-            android:textIsSelectable="true" />
+            android:layout_marginRight="8dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="15dp"
+                android:background="@color/colorWhite"
+                android:padding="7dp"
+                android:text="@string/string_lib"
+                android:textColor="@color/colorTitle"
+                android:textIsSelectable="true" />
+        </android.support.v7.widget.CardView>
     </LinearLayout>
 
 </android.support.v4.widget.NestedScrollView>

@@ -32,11 +32,9 @@
         \n zoomlibrary
         \n com.android.support:appcompat-v7:24.2.1
         \n com.android.support:design:24.2.1
-        \n com.jaeger.statusbaruitl:library:1.2.7
         \n com.jakewharton.retrofit:retrofit1-okhttp3-client
         \n io.reactivex:rxandroid:1.2.0
         \n com.nineoldandroids:library:2.4.0
-        \n com.github.bumptech.glide:glide:3.7.0
         \n jp.wasabeef:glide-transformations:2.0.1
         \n com.youth.banner:banner:1.4.2
         \n com.daimajia.slider:library:1.1.5@aar
