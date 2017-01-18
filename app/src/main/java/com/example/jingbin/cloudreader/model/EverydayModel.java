@@ -57,8 +57,6 @@ public class EverydayModel {
         listener.addSubscription(subscription);
     }
 
-    private List<List<AndroidBean>> lists;
-
     /**
      * 显示RecyclerView数据
      */
@@ -67,32 +65,32 @@ public class EverydayModel {
             @Override
             public Observable<List<List<AndroidBean>>> call(GankIoDayBean gankIoDayBean) {
 
-                lists = new ArrayList<>();
+                List<List<AndroidBean>> lists = new ArrayList<>();
                 GankIoDayBean.ResultsBean results = gankIoDayBean.getResults();
 
                 if (results.getAndroid() != null && results.getAndroid().size() > 0) {
-                    addList(results.getAndroid(), "Android");
+                    addList(lists,results.getAndroid(), "Android");
                 }
                 if (results.getWelfare() != null && results.getWelfare().size() > 0) {
-                    addList(results.getWelfare(), "福利");
+                    addList(lists, results.getWelfare(), "福利");
                 }
                 if (results.getiOS() != null && results.getiOS().size() > 0) {
-                    addList(results.getiOS(), "IOS");
+                    addList(lists, results.getiOS(), "IOS");
                 }
                 if (results.getRestMovie() != null && results.getRestMovie().size() > 0) {
-                    addList(results.getRestMovie(), "休息视频");
+                    addList(lists, results.getRestMovie(), "休息视频");
                 }
                 if (results.getResource() != null && results.getResource().size() > 0) {
-                    addList(results.getResource(), "拓展资源");
+                    addList(lists, results.getResource(), "拓展资源");
                 }
                 if (results.getRecommend() != null && results.getRecommend().size() > 0) {
-                    addList(results.getRecommend(), "瞎推荐");
+                    addList(lists, results.getRecommend(), "瞎推荐");
                 }
                 if (results.getFront() != null && results.getFront().size() > 0) {
-                    addList(results.getFront(), "前端");
+                    addList(lists, results.getFront(), "前端");
                 }
                 if (results.getApp() != null && results.getApp().size() > 0) {
-                    addList(results.getApp(), "App");
+                    addList(lists, results.getApp(), "App");
                 }
 
                 return Observable.just(lists);
@@ -124,7 +122,7 @@ public class EverydayModel {
 
 
     // subList没有实现序列化！缓存时会出错！
-    private void addList(List<AndroidBean> arrayList, String typeTitle) {
+    private void addList(List<List<AndroidBean>> lists, List<AndroidBean> arrayList, String typeTitle) {
         // title
         AndroidBean bean = new AndroidBean();
         bean.setType_title(typeTitle);
