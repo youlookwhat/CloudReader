@@ -8,8 +8,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.animation.Animation;
 
+import com.bumptech.glide.Glide;
 import com.example.jingbin.cloudreader.MainActivity;
 import com.example.jingbin.cloudreader.R;
+import com.example.jingbin.cloudreader.app.ConstantsImagrUrl;
 import com.example.jingbin.cloudreader.databinding.ActivityTransitionBinding;
 import com.example.jingbin.cloudreader.utils.CommonUtils;
 import com.example.jingbin.cloudreader.utils.PerfectClickListener;
@@ -20,9 +22,6 @@ public class TransitionActivity extends AppCompatActivity {
 
     private ActivityTransitionBinding mBinding;
     private boolean animationEnd;
-    private int[] mDrawables = new int[]{R.drawable.b_1, R.drawable.b_2,
-            R.drawable.b_3, R.drawable.b_4, R.drawable.b_5, R.drawable.b_6,
-    };
     private boolean isIn;
 
     @Override
@@ -30,17 +29,27 @@ public class TransitionActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_transition);
 
-        int i = new Random().nextInt(mDrawables.length);
-//        Glide.with(this).load(mDrawables[i]).into(mBinding.ivPic);
+        int i = new Random().nextInt(ConstantsImagrUrl.TRANSITION_URLS.length);
+        // 先显示默认图
+        mBinding.ivDefultPic.setImageDrawable(CommonUtils.getDrawable(R.drawable.img_transition_default));
+        Glide.with(this)
+                .load(ConstantsImagrUrl.TRANSITION_URLS[i])
+                .error(R.drawable.img_transition_default)
+                .into(mBinding.ivPic);
 
-        mBinding.ivPic.setImageDrawable(CommonUtils.getDrawable(mDrawables[i]));
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                mBinding.ivDefultPic.setVisibility(View.GONE);
+            }
+        }, 1500);
 
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
                 toMainActivity();
             }
-        }, 2000);
+        }, 3000);
 
 //        Animation animation = AnimationUtils.loadAnimation(this, R.anim.transition_anim);
 //        animation.setAnimationListener(animationListener);

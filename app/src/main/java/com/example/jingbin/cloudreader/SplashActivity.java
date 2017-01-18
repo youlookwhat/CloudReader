@@ -5,9 +5,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
 import com.example.jingbin.cloudreader.databinding.ActivitySplashBinding;
-import com.example.jingbin.cloudreader.utils.GlideImageLoader;
-
-import java.util.ArrayList;
 
 /**
  * 引导图，正在完成中
@@ -15,7 +12,7 @@ import java.util.ArrayList;
 public class SplashActivity extends AppCompatActivity {
 
     private ActivitySplashBinding mDataBing;
-    private int[] mDrawables = new int[]{R.drawable.b_1, R.drawable.b_2, R.drawable.b_3, R.drawable.b_4};
+//    private int[] mDrawables = new int[]{R.drawable.b_1, R.drawable.b_2, R.drawable.b_3, R.drawable.b_4};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,12 +20,12 @@ public class SplashActivity extends AppCompatActivity {
 
         mDataBing = DataBindingUtil.setContentView(this, R.layout.activity_splash);
 
-        ArrayList<Integer> mDrawables = new ArrayList<>();
-        mDrawables.add(R.drawable.b_1);
-        mDrawables.add(R.drawable.b_2);
-        mDrawables.add(R.drawable.b_3);
-        mDrawables.add(R.drawable.b_4);
-        mDataBing.bannerSplash.setImages(mDrawables).setImageLoader(new GlideImageLoader()).start();
+//        ArrayList<Integer> mDrawables = new ArrayList<>();
+//        mDrawables.add(R.drawable.b_1);
+//        mDrawables.add(R.drawable.b_2);
+//        mDrawables.add(R.drawable.b_3);
+//        mDrawables.add(R.drawable.b_4);
+//        mDataBing.bannerSplash.setImages(mDrawables).setImageLoader(new GlideImageLoader()).start();
 
 
 //        int length = mDrawables.length;
