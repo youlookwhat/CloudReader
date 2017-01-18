@@ -11,7 +11,7 @@ import android.view.animation.Animation;
 import com.bumptech.glide.Glide;
 import com.example.jingbin.cloudreader.MainActivity;
 import com.example.jingbin.cloudreader.R;
-import com.example.jingbin.cloudreader.app.ConstantsImagrUrl;
+import com.example.jingbin.cloudreader.app.ConstantsImageUrl;
 import com.example.jingbin.cloudreader.databinding.ActivityTransitionBinding;
 import com.example.jingbin.cloudreader.utils.CommonUtils;
 import com.example.jingbin.cloudreader.utils.PerfectClickListener;
@@ -29,11 +29,11 @@ public class TransitionActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_transition);
 
-        int i = new Random().nextInt(ConstantsImagrUrl.TRANSITION_URLS.length);
+        int i = new Random().nextInt(ConstantsImageUrl.TRANSITION_URLS.length);
         // 先显示默认图
         mBinding.ivDefultPic.setImageDrawable(CommonUtils.getDrawable(R.drawable.img_transition_default));
         Glide.with(this)
-                .load(ConstantsImagrUrl.TRANSITION_URLS[i])
+                .load(ConstantsImageUrl.TRANSITION_URLS[i])
                 .error(R.drawable.img_transition_default)
                 .into(mBinding.ivPic);
 
