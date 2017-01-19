@@ -34,6 +34,7 @@ public class TransitionActivity extends AppCompatActivity {
         mBinding.ivDefultPic.setImageDrawable(CommonUtils.getDrawable(R.drawable.img_transition_default));
         Glide.with(this)
                 .load(ConstantsImageUrl.TRANSITION_URLS[i])
+                .placeholder(R.drawable.img_transition_default)
                 .error(R.drawable.img_transition_default)
                 .into(mBinding.ivPic);
 

@@ -48,7 +48,7 @@ public class ImgLoadUtil {
                 .into(imageView);
     }
 
-    private static int getDefaultPic(int imgNumber, int position) {
+    public static int getDefaultPic(int imgNumber, int position) {
         switch (imgNumber) {
             case 1:
                 return R.drawable.img_two_bi_one;

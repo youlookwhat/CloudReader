@@ -46,7 +46,7 @@ import rx.Subscription;
  * 更新逻辑：判断是否是第二天(相对于2016-11-26)
  * 是：判断是否是大于12：30
  * *****     |是：刷新当天数据
- * *****     |否：使用缓存：|无：请求前一天数据
+ * *****     |否：使用缓存：|无：请求前一天数据,直到请求到数据为止
  * **********             |有：使用缓存
  * 否：使用缓存 ： |无：请求今天数据
  * **********    |有：使用缓存
@@ -165,20 +165,30 @@ public class EverydayFragment extends BaseFragment<FragmentEverydayBinding> {
         if (!oneData.equals(TimeUtil.getData())) {// 是第二天
             if (TimeUtil.isRightTime()) {//大于12：30,请求
 
+                DebugUtil.error("-----大于12：30,请求");
+
+                isOldDayRequest = false;
+                mEverydayModel.setData(getTodayTime().get(0), getTodayTime().get(1), getTodayTime().get(2));
                 showRotaLoading(true);
                 loadBannerPicture();
                 showContentData();
             } else {// 小于，取缓存没有请求前一天
+
+                DebugUtil.error("-----小于，取缓存没有请求前一天");
+
                 ArrayList<String> lastTime = TimeUtil.getLastTime(getTodayTime().get(0), getTodayTime().get(1), getTodayTime().get(2));
                 mEverydayModel.setData(lastTime.get(0), lastTime.get(1), lastTime.get(2));
                 year = lastTime.get(0);
                 month = lastTime.get(1);
                 day = lastTime.get(2);
 
-                isOldDayRequest = true;
+                isOldDayRequest = true;// 是昨天
                 getACacheData();
             }
         } else {// 当天，取缓存没有请求当天
+
+            DebugUtil.error("-----当天，取缓存没有请求当天");
+
             isOldDayRequest = false;
             getACacheData();
         }
@@ -302,19 +312,26 @@ public class EverydayFragment extends BaseFragment<FragmentEverydayBinding> {
     }
 
     private void setAdapter(ArrayList<List<AndroidBean>> lists) {
+        DebugUtil.error("----lists.size():  " +lists.size());
         showRotaLoading(false);
+        DebugUtil.error("----111111 ");
         if (mEverydayAdapter == null) {
             mEverydayAdapter = new EverydayAdapter();
         } else {
             mEverydayAdapter.clear();
         }
+        DebugUtil.error("----aaaaaaaaa ");
         mEverydayAdapter.addAll(lists);
-        bindingView.xrvEveryday.setAdapter(mEverydayAdapter);
-        mEverydayAdapter.notifyDataSetChanged();
-
+        DebugUtil.error("----bbbbbbbbb ");
+//        bindingView.xrvEveryday.setAdapter(mEverydayAdapter);
+//        mEverydayAdapter.notifyDataSetChanged();
+        DebugUtil.error("----222222 ");
         maCache.remove(Constants.EVERYDAY_CONTENT);
         // 缓存三天，这样就可以取到缓存了！
         maCache.put(Constants.EVERYDAY_CONTENT, lists, 259200);
+        DebugUtil.error("----333333 ");
+        DebugUtil.error("---isOldDayRequest:  "+isOldDayRequest);
+
         if (isOldDayRequest) {
             ArrayList<String> lastTime = TimeUtil.getLastTime(getTodayTime().get(0), getTodayTime().get(1), getTodayTime().get(2));
             SPUtils.putString("everyday_data", lastTime.get(0) + "-" + lastTime.get(1) + "-" + lastTime.get(2));
@@ -322,8 +339,11 @@ public class EverydayFragment extends BaseFragment<FragmentEverydayBinding> {
             // 保存请求的日期
             SPUtils.putString("everyday_data", TimeUtil.getData());
         }
-
+        DebugUtil.error("---444444 ");
         mIsFirst = false;
+
+        bindingView.xrvEveryday.setAdapter(mEverydayAdapter);
+        mEverydayAdapter.notifyDataSetChanged();
 
     }
 
