@@ -6,7 +6,7 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.example.jingbin.cloudreader.R;
-import com.example.jingbin.cloudreader.app.ConstantsImagrUrl;
+import com.example.jingbin.cloudreader.app.ConstantsImageUrl;
 
 import java.util.Random;
 
@@ -65,16 +65,16 @@ public class ImgLoadUtil {
         int randomInt = 0;
         switch (imgNumber) {
             case 1:
-                randomInt = random.nextInt(ConstantsImagrUrl.HOME_ONE_URLS.length);
-                return ConstantsImagrUrl.HOME_ONE_URLS[randomInt];
+                randomInt = random.nextInt(ConstantsImageUrl.HOME_ONE_URLS.length);
+                return ConstantsImageUrl.HOME_ONE_URLS[randomInt];
             case 2:
-                randomInt = random.nextInt(ConstantsImagrUrl.HOME_TWO_URLS.length);
-                return ConstantsImagrUrl.HOME_TWO_URLS[randomInt];
+                randomInt = random.nextInt(ConstantsImageUrl.HOME_TWO_URLS.length);
+                return ConstantsImageUrl.HOME_TWO_URLS[randomInt];
             case 3:
-                randomInt = random.nextInt(ConstantsImagrUrl.HOME_SIX_URLS.length);
-                return ConstantsImagrUrl.HOME_SIX_URLS[randomInt];
+                randomInt = random.nextInt(ConstantsImageUrl.HOME_SIX_URLS.length);
+                return ConstantsImageUrl.HOME_SIX_URLS[randomInt];
         }
-        return ConstantsImagrUrl.HOME_TWO_URLS[randomInt];
+        return ConstantsImageUrl.HOME_TWO_URLS[randomInt];
     }
 
 //--------------------------------------
