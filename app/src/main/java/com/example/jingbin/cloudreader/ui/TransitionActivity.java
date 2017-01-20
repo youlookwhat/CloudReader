@@ -50,7 +50,7 @@ public class TransitionActivity extends AppCompatActivity {
             public void run() {
                 toMainActivity();
             }
-        }, 3000);
+        }, 3500);
 
 //        Animation animation = AnimationUtils.loadAnimation(this, R.anim.transition_anim);
 //        animation.setAnimationListener(animationListener);
