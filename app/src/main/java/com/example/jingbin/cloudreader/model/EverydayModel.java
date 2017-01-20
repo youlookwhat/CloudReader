@@ -8,7 +8,6 @@ import com.example.jingbin.cloudreader.bean.FrontpageBean;
 import com.example.jingbin.cloudreader.bean.GankIoDayBean;
 import com.example.jingbin.cloudreader.http.HttpUtils;
 import com.example.jingbin.cloudreader.http.RequestImpl;
-import com.example.jingbin.cloudreader.utils.DebugUtil;
 import com.example.jingbin.cloudreader.utils.SPUtils;
 
 import java.util.ArrayList;
@@ -132,43 +131,6 @@ public class EverydayModel {
         listener.addSubscription(subscription);
     }
 
-
-    // subList没有实现序列化！缓存时会出错！
-    private void addList(List<List<AndroidBean>> lists, List<AndroidBean> arrayList, String typeTitle) {
-        // title
-        AndroidBean bean = new AndroidBean();
-        bean.setType_title(typeTitle);
-        ArrayList<AndroidBean> androidBeen = new ArrayList<>();
-        androidBeen.add(bean);
-        lists.add(androidBeen);
-
-        int androidSize = arrayList.size();
-        if (androidSize > 0 && androidSize < 4) {
-            lists.add(arrayList);
-        } else if (androidSize >= 4) {
-
-            ArrayList<AndroidBean> list1 = new ArrayList<>();
-            ArrayList<AndroidBean> list2 = new ArrayList<>();
-            for (int i = 0; i < androidSize; i++) {
-                if (i < 3) {
-                    list1.add(arrayList.get(i));
-                } else if (i < 6) {
-                    list2.add(arrayList.get(i));
-                }
-            }
-            lists.add(list1);
-            lists.add(list2);
-
-
-//            lists.add(arrayList.subList(0, 3));
-//            if (androidSize > 6) {
-//                lists.add(arrayList.subList(3, 6));
-//            } else {
-//                lists.add(arrayList.subList(3, androidSize));
-//            }
-        }
-    }
-
     // subList没有实现序列化！缓存时会出错！
     private void addUrlList(List<List<AndroidBean>> lists, List<AndroidBean> arrayList, String typeTitle) {
         // title
@@ -233,7 +195,7 @@ public class EverydayModel {
             androidBean.setType(arrayList.get(i).getType());
             // 跳转链接
             androidBean.setUrl(arrayList.get(i).getUrl());
-            DebugUtil.error("---androidSize:  " + androidSize);
+//            DebugUtil.error("---androidSize:  " + androidSize);
             // 随机图的url
             if (androidSize == 1) {
                 androidBean.setImage_url(ConstantsImageUrl.HOME_ONE_URLS[getRandom(1)]);//一图
@@ -247,8 +209,10 @@ public class EverydayModel {
         return tempList;
     }
 
+    /**
+     * 取不同的随机图，在每次网络请求时重置
+     */
     private int getRandom(int type) {
-
         String saveWhere = null;
         int urlLength = 0;
         if (type == 1) {
