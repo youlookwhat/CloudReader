@@ -5,17 +5,20 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
+import android.widget.ImageView;
 
 import com.example.jingbin.cloudreader.MainActivity;
 import com.example.jingbin.cloudreader.R;
 import com.example.jingbin.cloudreader.adapter.OneAdapter;
 import com.example.jingbin.cloudreader.app.Constants;
+import com.example.jingbin.cloudreader.app.ConstantsImageUrl;
 import com.example.jingbin.cloudreader.base.BaseFragment;
 import com.example.jingbin.cloudreader.bean.HotMovieBean;
 import com.example.jingbin.cloudreader.databinding.FragmentOneBinding;
 import com.example.jingbin.cloudreader.http.HttpUtils;
 import com.example.jingbin.cloudreader.http.cache.ACache;
 import com.example.jingbin.cloudreader.utils.DebugUtil;
+import com.example.jingbin.cloudreader.utils.ImgLoadUtil;
 import com.example.jingbin.cloudreader.utils.PerfectClickListener;
 import com.example.jingbin.cloudreader.utils.SPUtils;
 import com.example.jingbin.cloudreader.utils.TimeUtil;
@@ -164,6 +167,8 @@ public class OneFragment extends BaseFragment<FragmentOneBinding> {
         if (mHeaderView == null) {
             mHeaderView = View.inflate(getContext(), R.layout.header_item_one, null);
             View llMovieTop = mHeaderView.findViewById(R.id.ll_movie_top);
+            ImageView ivImg = (ImageView) mHeaderView.findViewById(R.id.iv_img);
+            ImgLoadUtil.displayRandom(3, ConstantsImageUrl.ONE_URL_01,ivImg);
             llMovieTop.setOnClickListener(new PerfectClickListener() {
                 @Override
                 protected void onNoDoubleClick(View v) {
