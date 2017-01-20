@@ -21,7 +21,6 @@ import com.example.jingbin.cloudreader.databinding.ItemEverydayTwoBinding;
 import com.example.jingbin.cloudreader.http.rx.RxBus;
 import com.example.jingbin.cloudreader.http.rx.RxCodeConstants;
 import com.example.jingbin.cloudreader.utils.CommonUtils;
-import com.example.jingbin.cloudreader.utils.DebugUtil;
 import com.example.jingbin.cloudreader.utils.ImgLoadUtil;
 import com.example.jingbin.cloudreader.utils.PerfectClickListener;
 import com.example.jingbin.cloudreader.view.webview.WebViewActivity;
@@ -143,7 +142,7 @@ public class EverydayAdapter extends BaseRecyclerViewAdapter<List<AndroidBean>> 
             } else {
                 binding.tvOnePhotoTitle.setVisibility(View.VISIBLE);
                 setDes(object, 0, binding.tvOnePhotoTitle);
-                displayRandomImg(1, 0, position, binding.ivOnePhoto, object);
+                displayRandomImg(1, 0, binding.ivOnePhoto, object);
             }
             setOnClick(binding.llOnePhoto, object.get(0));
         }
@@ -157,8 +156,8 @@ public class EverydayAdapter extends BaseRecyclerViewAdapter<List<AndroidBean>> 
 
         @Override
         public void onBindViewHolder(List<AndroidBean> object, int position) {
-            displayRandomImg(2, 0, position, binding.ivTwoOneOne, object);
-            displayRandomImg(2, 1, position, binding.ivTwoOneTwo, object);
+            displayRandomImg(2, 0, binding.ivTwoOneOne, object);
+            displayRandomImg(2, 1, binding.ivTwoOneTwo, object);
             setDes(object, 0, binding.tvTwoOneOneTitle);
             setDes(object, 1, binding.tvTwoOneTwoTitle);
             setOnClick(binding.llTwoOneOne, object.get(0));
@@ -174,9 +173,9 @@ public class EverydayAdapter extends BaseRecyclerViewAdapter<List<AndroidBean>> 
 
         @Override
         public void onBindViewHolder(List<AndroidBean> object, int position) {
-            displayRandomImg(3, 0, position, binding.ivThreeOneOne,object);
-            displayRandomImg(3, 1, position, binding.ivThreeOneTwo, object);
-            displayRandomImg(3, 2, position, binding.ivThreeOneThree, object);
+            displayRandomImg(3, 0, binding.ivThreeOneOne, object);
+            displayRandomImg(3, 1, binding.ivThreeOneTwo, object);
+            displayRandomImg(3, 2, binding.ivThreeOneThree, object);
             setOnClick(binding.llThreeOneOne, object.get(0));
             setOnClick(binding.llThreeOneTwo, object.get(1));
             setOnClick(binding.llThreeOneThree, object.get(2));
@@ -190,17 +189,9 @@ public class EverydayAdapter extends BaseRecyclerViewAdapter<List<AndroidBean>> 
         textView.setText(object.get(position).getDesc());
     }
 
-    private void displayRandomImg(int imgNumber, int position, int itemPosition, ImageView imageView, List<AndroidBean> object) {
-//        ImgLoadUtil.displayRandom(imgNumber, position, itemPosition, imageView);
-
-        DebugUtil.error("-----Image_url: "+object.get(position).getImage_url());
-
-        Glide.with(imageView.getContext())
-                .load(object.get(position).getImage_url())
-                .placeholder(ImgLoadUtil.getDefaultPic(imgNumber, position))
-                .error(ImgLoadUtil.getDefaultPic(imgNumber, position))
-                .crossFade(1500)
-                .into(imageView);
+    private void displayRandomImg(int imgNumber, int position, ImageView imageView, List<AndroidBean> object) {
+//        DebugUtil.error("-----Image_url: "+object.get(position).getImage_url());
+        ImgLoadUtil.displayRandom(imgNumber, object.get(position).getImage_url(), imageView);
     }
 
 

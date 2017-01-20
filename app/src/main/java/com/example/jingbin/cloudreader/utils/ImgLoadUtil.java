@@ -6,9 +6,6 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.example.jingbin.cloudreader.R;
-import com.example.jingbin.cloudreader.app.ConstantsImageUrl;
-
-import java.util.Random;
 
 import jp.wasabeef.glide.transformations.BlurTransformation;
 
@@ -34,21 +31,20 @@ public class ImgLoadUtil {
     /**
      * 显示随机的图片(每日推荐)
      *
-     * @param imgNumber    有几张图片要显示
-     * @param position     第几张图片
-     * @param itemPosition 是第几个item，如android是第一个
-     * @param imageView    对应图片控件
+     * @param imgNumber 有几张图片要显示,对应默认图
+     * @param imageUrl  显示图片的url
+     * @param imageView 对应图片控件
      */
-    public static void displayRandom(int imgNumber, int position, int itemPosition, ImageView imageView) {
+    public static void displayRandom(int imgNumber, String imageUrl, ImageView imageView) {
         Glide.with(imageView.getContext())
-                .load(getRandomPic(imgNumber, position, itemPosition))
-                .placeholder(getDefaultPic(imgNumber, position))
-                .error(getDefaultPic(imgNumber, position))
+                .load(imageUrl)
+                .placeholder(getMusicDefaultPic(imgNumber))
+                .error(getMusicDefaultPic(imgNumber))
                 .crossFade(1500)
                 .into(imageView);
     }
 
-    public static int getDefaultPic(int imgNumber, int position) {
+    private static int getMusicDefaultPic(int imgNumber) {
         switch (imgNumber) {
             case 1:
                 return R.drawable.img_two_bi_one;
@@ -58,23 +54,6 @@ public class ImgLoadUtil {
                 return R.drawable.img_one_bi_one;
         }
         return R.drawable.img_four_bi_three;
-    }
-
-    private static String getRandomPic(int imgNumber, int position, int itemPosition) {
-        Random random = new Random();
-        int randomInt = 0;
-        switch (imgNumber) {
-            case 1:
-                randomInt = random.nextInt(ConstantsImageUrl.HOME_ONE_URLS.length);
-                return ConstantsImageUrl.HOME_ONE_URLS[randomInt];
-            case 2:
-                randomInt = random.nextInt(ConstantsImageUrl.HOME_TWO_URLS.length);
-                return ConstantsImageUrl.HOME_TWO_URLS[randomInt];
-            case 3:
-                randomInt = random.nextInt(ConstantsImageUrl.HOME_SIX_URLS.length);
-                return ConstantsImageUrl.HOME_SIX_URLS[randomInt];
-        }
-        return ConstantsImageUrl.HOME_TWO_URLS[randomInt];
     }
 
 //--------------------------------------

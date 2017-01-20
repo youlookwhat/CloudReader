@@ -291,7 +291,7 @@ public class TimeUtil {
         t.setToNow(); // 取得系统时间。
         int hour = t.hour; // 0-23
         int minute = t.minute;
-        return hour > 19 || (hour == 19 && minute >= 06);
+        return hour > 12 || (hour == 12 && minute >= 30);
     }
 
     /**

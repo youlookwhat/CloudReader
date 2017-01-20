@@ -129,6 +129,45 @@ public class EverydayFragment extends BaseFragment<FragmentEverydayBinding> {
         return list;
     }
 
+    @Override
+    protected void loadData() {
+        // 显示时轮播图滚动
+        if (mHeaderBinding != null && mHeaderBinding.banner != null) {
+            mHeaderBinding.banner.startAutoPlay();
+            mHeaderBinding.banner.setDelayTime(5000);
+        }
+
+        if (!mIsVisible || !mIsPrepared) {
+            return;
+        }
+
+        String oneData = SPUtils.getString("everyday_data", "2016-11-26");
+        if (!oneData.equals(TimeUtil.getData())) {// 是第二天
+            if (TimeUtil.isRightTime()) {//大于12：30,请求
+
+                isOldDayRequest = false;
+                mEverydayModel.setData(getTodayTime().get(0), getTodayTime().get(1), getTodayTime().get(2));
+                showRotaLoading(true);
+                loadBannerPicture();
+                showContentData();
+            } else {// 小于，取缓存没有请求前一天
+
+                ArrayList<String> lastTime = TimeUtil.getLastTime(getTodayTime().get(0), getTodayTime().get(1), getTodayTime().get(2));
+                mEverydayModel.setData(lastTime.get(0), lastTime.get(1), lastTime.get(2));
+                year = lastTime.get(0);
+                month = lastTime.get(1);
+                day = lastTime.get(2);
+
+                isOldDayRequest = true;// 是昨天
+                getACacheData();
+            }
+        } else {// 当天，取缓存没有请求当天
+
+            isOldDayRequest = false;
+            getACacheData();
+        }
+    }
+
     private void initLocalSetting() {
         mEverydayModel.setData(getTodayTime().get(0), getTodayTime().get(1), getTodayTime().get(2));
 //        DebugUtil.error("" + year + month + day);
@@ -147,51 +186,6 @@ public class EverydayFragment extends BaseFragment<FragmentEverydayBinding> {
                 RxBus.getDefault().post(RxCodeConstants.JUMP_TYPE_TO_ONE, new RxBusBaseMessage());
             }
         });
-    }
-
-    @Override
-    protected void loadData() {
-        // 显示时轮播图滚动
-        if (mHeaderBinding != null && mHeaderBinding.banner != null) {
-            mHeaderBinding.banner.startAutoPlay();
-            mHeaderBinding.banner.setDelayTime(5000);
-        }
-
-        if (!mIsVisible || !mIsPrepared) {
-            return;
-        }
-
-        String oneData = SPUtils.getString("everyday_data", "2016-11-26");
-        if (!oneData.equals(TimeUtil.getData())) {// 是第二天
-            if (TimeUtil.isRightTime()) {//大于12：30,请求
-
-                DebugUtil.error("-----大于12：30,请求");
-
-                isOldDayRequest = false;
-                mEverydayModel.setData(getTodayTime().get(0), getTodayTime().get(1), getTodayTime().get(2));
-                showRotaLoading(true);
-                loadBannerPicture();
-                showContentData();
-            } else {// 小于，取缓存没有请求前一天
-
-                DebugUtil.error("-----小于，取缓存没有请求前一天");
-
-                ArrayList<String> lastTime = TimeUtil.getLastTime(getTodayTime().get(0), getTodayTime().get(1), getTodayTime().get(2));
-                mEverydayModel.setData(lastTime.get(0), lastTime.get(1), lastTime.get(2));
-                year = lastTime.get(0);
-                month = lastTime.get(1);
-                day = lastTime.get(2);
-
-                isOldDayRequest = true;// 是昨天
-                getACacheData();
-            }
-        } else {// 当天，取缓存没有请求当天
-
-            DebugUtil.error("-----当天，取缓存没有请求当天");
-
-            isOldDayRequest = false;
-            getACacheData();
-        }
     }
 
     /**
@@ -273,7 +267,9 @@ public class EverydayFragment extends BaseFragment<FragmentEverydayBinding> {
         }
     }
 
-
+    /**
+     * 无数据返回时，暂时去掉
+     */
     private void setEmptyAdapter() {
         showRotaLoading(false);
 
@@ -311,26 +307,27 @@ public class EverydayFragment extends BaseFragment<FragmentEverydayBinding> {
         bindingView.xrvEveryday.setItemAnimator(new DefaultItemAnimator());
     }
 
+    /**
+     * 当第二天12：30之后请求走这里时，走到
+     * bindingView.xrvEveryday.setAdapter(mEverydayAdapter);
+     * 就停了！！暂时未找到什么原因！
+     */
     private void setAdapter(ArrayList<List<AndroidBean>> lists) {
-        DebugUtil.error("----lists.size():  " +lists.size());
+//        DebugUtil.error("----lists.size():  " + lists.size());
         showRotaLoading(false);
-        DebugUtil.error("----111111 ");
         if (mEverydayAdapter == null) {
             mEverydayAdapter = new EverydayAdapter();
         } else {
             mEverydayAdapter.clear();
         }
-        DebugUtil.error("----aaaaaaaaa ");
         mEverydayAdapter.addAll(lists);
-        DebugUtil.error("----bbbbbbbbb ");
+//        DebugUtil.error("----111111 ");
 //        bindingView.xrvEveryday.setAdapter(mEverydayAdapter);
 //        mEverydayAdapter.notifyDataSetChanged();
-        DebugUtil.error("----222222 ");
+//        DebugUtil.error("----222222 ");
         maCache.remove(Constants.EVERYDAY_CONTENT);
         // 缓存三天，这样就可以取到缓存了！
         maCache.put(Constants.EVERYDAY_CONTENT, lists, 259200);
-        DebugUtil.error("----333333 ");
-        DebugUtil.error("---isOldDayRequest:  "+isOldDayRequest);
 
         if (isOldDayRequest) {
             ArrayList<String> lastTime = TimeUtil.getLastTime(getTodayTime().get(0), getTodayTime().get(1), getTodayTime().get(2));
@@ -339,12 +336,10 @@ public class EverydayFragment extends BaseFragment<FragmentEverydayBinding> {
             // 保存请求的日期
             SPUtils.putString("everyday_data", TimeUtil.getData());
         }
-        DebugUtil.error("---444444 ");
         mIsFirst = false;
 
         bindingView.xrvEveryday.setAdapter(mEverydayAdapter);
         mEverydayAdapter.notifyDataSetChanged();
-
     }
 
     @Override
