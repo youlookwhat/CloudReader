@@ -114,11 +114,13 @@ public class ImgLoadUtil {
     }
 
     /**
-     * 加载圆角图
+     * 加载圆角图,暂时用到显示头像
      */
-    public static void displayCircle(ImageView imageView, int imageUrl) {
+    public static void displayCircle(ImageView imageView, String imageUrl) {
         Glide.with(imageView.getContext())
                 .load(imageUrl)
+                .crossFade(500)
+                .error(R.drawable.ic_avatar_default)
                 .transform(new GlideCircleTransform(imageView.getContext()))
                 .into(imageView);
     }

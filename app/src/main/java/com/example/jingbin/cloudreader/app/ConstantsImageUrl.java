@@ -15,6 +15,9 @@ public class ConstantsImageUrl {
     // 电影栏头部的图片
     public static final String ONE_URL_01 = "http://ojyz0c8un.bkt.clouddn.com/one_01.png";
 
+    // 头像
+    public static final String IC_AVATAR = "http://ojyz0c8un.bkt.clouddn.com/ic_avatar.png";
+
     // 过渡图的图片链接
     private static final String TRANSITION_URL_01 = "http://ojyz0c8un.bkt.clouddn.com/b_1.jpg";
     private static final String TRANSITION_URL_02 = "http://ojyz0c8un.bkt.clouddn.com/b_2.jpg";

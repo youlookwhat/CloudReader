@@ -19,6 +19,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import com.example.jingbin.cloudreader.app.ConstantsImageUrl;
 import com.example.jingbin.cloudreader.databinding.ActivityMainBinding;
 import com.example.jingbin.cloudreader.http.rx.RxBus;
 import com.example.jingbin.cloudreader.http.rx.RxBusBaseMessage;
@@ -103,7 +104,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //        LinearLayout viewById1 = (LinearLayout) headerView.findViewById(R.id.ll_header_bg);
 //        viewById1.setBackground();
         ImageView ivAvatar = (ImageView) headerView.findViewById(R.id.iv_avatar);
-        ImgLoadUtil.displayCircle(ivAvatar, R.drawable.ic_avatar);
+        ImgLoadUtil.displayCircle(ivAvatar, ConstantsImageUrl.IC_AVATAR);
         LinearLayout llNavHomepage = (LinearLayout) headerView.findViewById(R.id.ll_nav_homepage);
         LinearLayout llNavScanDownload = (LinearLayout) headerView.findViewById(R.id.ll_nav_scan_download);
         LinearLayout llNavDeedback = (LinearLayout) headerView.findViewById(R.id.ll_nav_deedback);
