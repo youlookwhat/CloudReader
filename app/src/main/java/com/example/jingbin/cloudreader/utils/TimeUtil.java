@@ -287,7 +287,8 @@ public class TimeUtil {
      * 获取当前时间是否大于12：30
      */
     public static boolean isRightTime() {
-        Time t = new Time(); // or Time t=new Time("GMT+8"); 加上Time Zone资料。
+        // or Time t=new Time("GMT+8"); 加上Time Zone资料。
+        Time t = new Time();
         t.setToNow(); // 取得系统时间。
         int hour = t.hour; // 0-23
         int minute = t.minute;

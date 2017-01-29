@@ -50,11 +50,11 @@ public class BookFragment extends BaseFragment<FragmentBookBinding> {
     }
 
     private void initFragmentList() {
-        mTitleList.add("综合");
         mTitleList.add("文学");
+        mTitleList.add("文化");
         mTitleList.add("生活");
-        mFragments.add(BookCustomFragment.newInstance("综合"));
         mFragments.add(BookCustomFragment.newInstance("文学"));
+        mFragments.add(BookCustomFragment.newInstance("文化"));
         mFragments.add(BookCustomFragment.newInstance("生活"));
     }
 }

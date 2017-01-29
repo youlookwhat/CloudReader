@@ -122,18 +122,7 @@ public class BookCustomFragment extends BaseFragment<FragmentBookCustomBinding> 
                 loadCustomData();
             }
         }, 500);
-//        loadCustomData();
         DebugUtil.error("-----setRefreshing");
-//        mIsFirst = false;
-
-//        if (mAndroidBean != null
-//                && mAndroidBean.getResults() != null
-//                && mAndroidBean.getResults().size() > 0) {
-//            showContentView();
-//            setAdapter(mAndroidBean);
-//        } else {
-//            loadAndroidData();
-//        }
     }
 
     private void loadCustomData() {

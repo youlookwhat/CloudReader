@@ -27,7 +27,7 @@
                     android:id="@+id/img_item_bg"
                     android:layout_width="match_parent"
                     android:layout_height="291dp"
-                    android:background="@drawable/test"
+                    android:background="@drawable/homepage_header"
                     android:fitsSystemWindows="true"
                     android:scaleType="fitXY" />
 

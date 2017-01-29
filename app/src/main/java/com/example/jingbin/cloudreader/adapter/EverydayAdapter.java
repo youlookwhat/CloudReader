@@ -142,7 +142,7 @@ public class EverydayAdapter extends BaseRecyclerViewAdapter<List<AndroidBean>> 
             } else {
                 binding.tvOnePhotoTitle.setVisibility(View.VISIBLE);
                 setDes(object, 0, binding.tvOnePhotoTitle);
-                displayRandomImg(1, 0, position, binding.ivOnePhoto);
+                displayRandomImg(1, 0, binding.ivOnePhoto, object);
             }
             setOnClick(binding.llOnePhoto, object.get(0));
         }
@@ -156,8 +156,8 @@ public class EverydayAdapter extends BaseRecyclerViewAdapter<List<AndroidBean>> 
 
         @Override
         public void onBindViewHolder(List<AndroidBean> object, int position) {
-            displayRandomImg(2, 0, position, binding.ivTwoOneOne);
-            displayRandomImg(2, 1, position, binding.ivTwoOneTwo);
+            displayRandomImg(2, 0, binding.ivTwoOneOne, object);
+            displayRandomImg(2, 1, binding.ivTwoOneTwo, object);
             setDes(object, 0, binding.tvTwoOneOneTitle);
             setDes(object, 1, binding.tvTwoOneTwoTitle);
             setOnClick(binding.llTwoOneOne, object.get(0));
@@ -173,9 +173,9 @@ public class EverydayAdapter extends BaseRecyclerViewAdapter<List<AndroidBean>> 
 
         @Override
         public void onBindViewHolder(List<AndroidBean> object, int position) {
-            displayRandomImg(3, 0, position, binding.ivThreeOneOne);
-            displayRandomImg(3, 1, position, binding.ivThreeOneTwo);
-            displayRandomImg(3, 2, position, binding.ivThreeOneThree);
+            displayRandomImg(3, 0, binding.ivThreeOneOne, object);
+            displayRandomImg(3, 1, binding.ivThreeOneTwo, object);
+            displayRandomImg(3, 2, binding.ivThreeOneThree, object);
             setOnClick(binding.llThreeOneOne, object.get(0));
             setOnClick(binding.llThreeOneTwo, object.get(1));
             setOnClick(binding.llThreeOneThree, object.get(2));
@@ -189,8 +189,9 @@ public class EverydayAdapter extends BaseRecyclerViewAdapter<List<AndroidBean>> 
         textView.setText(object.get(position).getDesc());
     }
 
-    private void displayRandomImg(int imgNumber, int position, int itemPosition, ImageView imageView) {
-        ImgLoadUtil.displayRandom(imgNumber, position, itemPosition, imageView);
+    private void displayRandomImg(int imgNumber, int position, ImageView imageView, List<AndroidBean> object) {
+//        DebugUtil.error("-----Image_url: "+object.get(position).getImage_url());
+        ImgLoadUtil.displayRandom(imgNumber, object.get(position).getImage_url(), imageView);
     }
 
 
