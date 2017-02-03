@@ -43,8 +43,8 @@ High imitation netease cloud music playlist page for details.
 NavigationView collocation DrawerLayout specific use.
 * 5、沉浸式状态栏使用与版本适配。                                    
 Immersive status bar with version adapter.
-* 6、MvvM-DataBing的项目应用。                                    
-The MvvM-DataBing project application.
+* 6、MvvM-DataBinding的项目应用。                                    
+The MvvM-DataBinding project application.
 * 7、RxBus代替EventBus进行组件之间通讯。                                    
 RxBus replace EventBus for communication between components.
 * 8、``ToolBar``的全方面使用。                                    
@@ -83,7 +83,7 @@ WebView increase share function.
 
 
 ## See Detail
-> [项目介绍详情](https://github.com/youlookwhat/CloudReader/blob/master/file/Introduction.md) | [细节优化详情](https://github.com/youlookwhat/CloudReader/wiki) | [**版本更新详情(V1.2)**](http://jingbin.me/2016/12/30/%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97-%E4%BA%91%E9%98%85/)
+> [项目介绍详情](https://github.com/youlookwhat/CloudReader/blob/master/file/Introduction.md) | [细节优化详情](https://github.com/youlookwhat/CloudReader/wiki) | [**版本更新详情(V1.5)**](http://jingbin.me/2016/12/30/%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97-%E4%BA%91%E9%98%85/)
 
 ### Download
 　[火速跳转](https://fir.im/cloudreader)                                    
@@ -133,7 +133,7 @@ limitations under the License.
 [2]:https://www.apache.org/licenses/LICENSE-2.0.html
 [3]:https://img.shields.io/badge/API-19%2B-red.svg?style=flat
 [4]:https://android-arsenal.com/api?level=19
-[30]:https://img.shields.io/badge/release-1.2-red.svg
+[30]:https://img.shields.io/badge/release-1.5-red.svg
 [31]:https://github.com/youlookwhat/CloudReader/releases
 [32]:https://img.shields.io/badge/PRs-welcome-brightgreen.svg
 [33]:https://github.com/youlookwhat/CloudReader/pulls
