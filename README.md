@@ -41,8 +41,8 @@ The Content of gank.io and Douban movie,books.
 High imitation netease cloud music playlist page for details. 
 * 4、``NavigationView``搭配``DrawerLayout``的具体使用。                                    
 NavigationView collocation DrawerLayout specific use.
-* 5、沉浸式状态栏使用与版本适配。                                    
-Immersive status bar with version adapter.
+* 5、透明状态栏使用与版本适配。                                    
+Transparent status bar with version adapter.
 * 6、MvvM-DataBinding的项目应用。                                    
 The MvvM-DataBinding project application.
 * 7、RxBus代替EventBus进行组件之间通讯。                                    
@@ -69,25 +69,36 @@ CoordinatorLayout add behaviors to achieve the title bar gradient.
 NestedScrollView nested RecyclerView for specific use.
 
 
-## TODO
-* 每日推荐可设置是否显示图片及查看具体某一天的干货信息。                                    
-Recommended daily can set whether to display images and view specific one day dry cargo information.
-* 每日推荐可调整栏目顺序。                                    
-Recommended daily can adjust the column order.
-* 书籍部分增加更多内容并可自由定制。                                    
-And can customize free books section to add more content.
-* 增加搜索功能。                                    
-Increase the search function.
-* 网页增加分享功能。                                    
-WebView increase share function.
-
-
 ## See Detail
-> [项目介绍详情](https://github.com/youlookwhat/CloudReader/blob/master/file/Introduction.md) | [细节优化详情](https://github.com/youlookwhat/CloudReader/wiki) | [**版本更新详情(V1.5)**](http://jingbin.me/2016/12/30/%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97-%E4%BA%91%E9%98%85/)
+> [项目介绍详情](https://github.com/youlookwhat/CloudReader/blob/master/file/Introduction.md) | [细节优化详情](https://github.com/youlookwhat/CloudReader/wiki) | [**版本更新详情(V1.5.0)**](http://jingbin.me/2016/12/30/%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97-%E4%BA%91%E9%98%85/)
 
 ### Download
 　[火速跳转](https://fir.im/cloudreader)                                    
 　　<img width="200" height=“200” src="https://github.com/youlookwhat/CloudReader/blob/master/file/download.png"></img>
+　　
+### Update
+##### 版本 V1.5（1-29）
+ - 1、**App体积大小从16M降到5.8M！**
+ - 2、将App里固定的图片以移动到七牛。
+ - 3、更改项目主页透明状态栏显示方式。
+ - 4、更改每日推荐图片显示规则，使其不重复显示。
+ - 5、更换过渡图图片。
+ - 6、代码优化；删除多余资源。
+
+---
+
+##### 版本 V1.2（1-18）
+ - 1、更改每日推荐逻辑，使其一定有数据
+ - 2、干货集中营的item改为CardView展示
+ - 3、代码优化
+
+---
+
+##### 版本 V1.1（1-15）
+
+ - 1.书籍详情页面增加自定义元素共享切换动画，并可简单添加需要支持的详情页
+ - 2.代码优化
+ - 3.其他
 　　
 ## Thanks
  - 我几乎看过了所有关于Android仿网易云音乐的项目与文章，发现大部分做的都不够细致，也没有比较好的内容填充，于是决心自己着手做一个，才有了这个开源项目。这里列出主要参考的内容。
@@ -133,7 +144,7 @@ limitations under the License.
 [2]:https://www.apache.org/licenses/LICENSE-2.0.html
 [3]:https://img.shields.io/badge/API-19%2B-red.svg?style=flat
 [4]:https://android-arsenal.com/api?level=19
-[30]:https://img.shields.io/badge/release-1.5-red.svg
+[30]:https://img.shields.io/badge/release-1.5.0-red.svg
 [31]:https://github.com/youlookwhat/CloudReader/releases
 [32]:https://img.shields.io/badge/PRs-welcome-brightgreen.svg
 [33]:https://github.com/youlookwhat/CloudReader/pulls
