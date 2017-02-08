@@ -76,7 +76,7 @@ NestedScrollView nested RecyclerView for specific use.
 　[火速跳转](https://fir.im/cloudreader)                                    
 　　<img width="200" height=“200” src="https://github.com/youlookwhat/CloudReader/blob/master/file/download.png"></img>
 　　
-### Update
+### Update log
 #### 版本 V1.5.0（1-29）
  - 1、**App体积大小从16M降到5.8M！**
  - 2、将App里固定的图片以移动到七牛。
@@ -90,12 +90,13 @@ NestedScrollView nested RecyclerView for specific use.
  - 2、干货集中营的item改为CardView展示
  - 3、代码优化
 
-##### 版本 V1.1.0（1-15）
+#### 版本 V1.1.0（1-15）
 
  - 1.书籍详情页面增加自定义元素共享切换动画，并可简单添加需要支持的详情页
  - 2.代码优化
  - 3.其他
 　　
+---
 
 ## Thanks
  - 我几乎看过了所有关于Android仿网易云音乐的项目与文章，发现大部分做的都不够细致，也没有比较好的内容填充，于是决心自己着手做一个，才有了这个开源项目。这里列出主要参考的内容。
