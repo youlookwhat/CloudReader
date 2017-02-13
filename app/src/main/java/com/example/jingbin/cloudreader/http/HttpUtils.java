@@ -50,8 +50,6 @@ public class HttpUtils {
     private final static String API_DONGTING = "http://api.dongting.com";
 
     private RestAdapter gankIoRestAdapter;
-    private RestAdapter douBanRestAdapter;
-    private RestAdapter dongTingRestAdapter;
     private Gson gson;
     private Context context;
     private static HttpUtils sHttpUtils;
@@ -78,27 +76,26 @@ public class HttpUtils {
 
     public RetrofitHttpClient getGankIOServer() {
         if (sGankioClient == null) {
-            sGankioClient = getGankIOAdapter().create(RetrofitHttpClient.class);
+            sGankioClient = getRestAdapterAdapter(API_GANKIO).create(RetrofitHttpClient.class);
         }
         return sGankioClient;
     }
 
     public RetrofitHttpClient getDouBanServer() {
         if (sDouBanClient == null) {
-            sDouBanClient = getDouBanAdapter().create(RetrofitHttpClient.class);
+            sDouBanClient = getRestAdapterAdapter(API_DOUBAN).create(RetrofitHttpClient.class);
         }
         return sDouBanClient;
     }
 
     public RetrofitHttpClient getDongTingServer() {
         if (sDongTingClient == null) {
-            sDongTingClient = getDongTingAdapter().create(RetrofitHttpClient.class);
+            sDongTingClient = getRestAdapterAdapter(API_DONGTING).create(RetrofitHttpClient.class);
         }
         return sDongTingClient;
     }
 
-    private RestAdapter getGankIOAdapter() {
-        if (gankIoRestAdapter == null) {
+    private RestAdapter getRestAdapterAdapter(String api) {
             File cacheFile = new File(context.getApplicationContext().getCacheDir().getAbsolutePath(), "HttpCache");
             int cacheSize = 10 * 1024 * 1024;
             Cache cache = new Cache(cacheFile, cacheSize);
@@ -111,7 +108,7 @@ public class HttpUtils {
 
             RestAdapter.Builder builder = new RestAdapter.Builder();
             builder.setClient(new Ok3Client(client));
-            builder.setEndpoint(API_GANKIO);//设置远程地址
+            builder.setEndpoint(api);//设置远程地址
             builder.setConverter(new GsonConverter(getGson()));
 //            builder.setErrorHandler(new ErrorHandler() {
 //                @Override
@@ -139,56 +136,7 @@ public class HttpUtils {
 //            });
             gankIoRestAdapter = builder.build();
             gankIoRestAdapter.setLogLevel(logLevel);
-        }
         return gankIoRestAdapter;
-    }
-
-    private RestAdapter getDouBanAdapter() {
-        if (douBanRestAdapter == null) {
-            File cacheFile = new File(context.getApplicationContext().getCacheDir().getAbsolutePath(), "HttpCache");
-            int cacheSize = 10 * 1024 * 1024;
-            Cache cache = new Cache(cacheFile, cacheSize);
-//            httpGet.setHeader(
-//                    "User-Agent",
-//                    "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.71 Safari/537.36");
-
-            OkHttpClient.Builder okBuilder = new OkHttpClient.Builder();
-            okBuilder.cache(cache);
-            okBuilder.readTimeout(20, TimeUnit.SECONDS);
-            okBuilder.connectTimeout(10, TimeUnit.SECONDS);
-            okBuilder.writeTimeout(20, TimeUnit.SECONDS);
-            OkHttpClient client = okBuilder.build();
-
-            RestAdapter.Builder builder = new RestAdapter.Builder();
-            builder.setClient(new Ok3Client(client));
-            builder.setEndpoint(API_DOUBAN);//设置远程地址
-            builder.setConverter(new GsonConverter(getGson()));
-            douBanRestAdapter = builder.build();
-            douBanRestAdapter.setLogLevel(logLevel);
-        }
-        return douBanRestAdapter;
-    }
-
-    private RestAdapter getDongTingAdapter() {
-        if (dongTingRestAdapter == null) {
-            File cacheFile = new File(context.getApplicationContext().getCacheDir().getAbsolutePath(), "HttpCache");
-            int cacheSize = 10 * 1024 * 1024;
-            Cache cache = new Cache(cacheFile, cacheSize);
-            OkHttpClient.Builder okBuilder = new OkHttpClient.Builder();
-            okBuilder.cache(cache);
-            okBuilder.readTimeout(20, TimeUnit.SECONDS);
-            okBuilder.connectTimeout(10, TimeUnit.SECONDS);
-            okBuilder.writeTimeout(20, TimeUnit.SECONDS);
-            OkHttpClient client = okBuilder.build();
-
-            RestAdapter.Builder builder = new RestAdapter.Builder();
-            builder.setClient(new Ok3Client(client));
-            builder.setEndpoint(API_DONGTING);//设置远程地址
-            builder.setConverter(new GsonConverter(getGson()));
-            dongTingRestAdapter = builder.build();
-            dongTingRestAdapter.setLogLevel(logLevel);
-        }
-        return dongTingRestAdapter;
     }
 
     private Gson getGson() {
