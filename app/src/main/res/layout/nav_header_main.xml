@@ -43,7 +43,7 @@
                         android:id="@+id/tv_username"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="用户已注销"
+                        android:text="夕阳无限好"
                         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                         android:textColor="@color/colorWhite"
                         android:textSize="17sp" />
@@ -170,6 +170,13 @@
                 android:textSize="15sp" />
 
         </LinearLayout>
+
+        <View
+            android:id="@+id/line"
+            android:layout_width="match_parent"
+            android:layout_height="0.3dp"
+            android:background="#E0E0E0" />
+
         <LinearLayout
             android:id="@+id/ll_nav_exit"
             android:layout_width="match_parent"
@@ -195,12 +202,6 @@
                 android:textSize="15sp" />
 
         </LinearLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1px"
-            android:background="#e0e0e0"
-            android:visibility="gone" />
 
     </LinearLayout>
 </layout>

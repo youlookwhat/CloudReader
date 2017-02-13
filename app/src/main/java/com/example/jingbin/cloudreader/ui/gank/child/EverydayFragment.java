@@ -259,11 +259,6 @@ public class EverydayFragment extends BaseFragment<FragmentEverydayBinding> {
             month = lastTime.get(1);
             day = lastTime.get(2);
             showContentData();
-
-//            if (mEverydayAdapter != null) {
-//                mEverydayAdapter = null;
-//            }
-//            setEmptyAdapter();
         }
     }
 
@@ -307,11 +302,6 @@ public class EverydayFragment extends BaseFragment<FragmentEverydayBinding> {
         bindingView.xrvEveryday.setItemAnimator(new DefaultItemAnimator());
     }
 
-    /**
-     * 当第二天12：30之后请求走这里时，走到
-     * bindingView.xrvEveryday.setAdapter(mEverydayAdapter);
-     * 就停了！！暂时未找到什么原因！
-     */
     private void setAdapter(ArrayList<List<AndroidBean>> lists) {
 //        DebugUtil.error("----lists.size():  " + lists.size());
         showRotaLoading(false);
@@ -431,8 +421,6 @@ public class EverydayFragment extends BaseFragment<FragmentEverydayBinding> {
         showContentView();
         showRotaLoading(true);
         loadData();
-//        loadBannerPicture();
-//        showContentData();
     }
 
     @Override

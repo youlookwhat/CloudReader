@@ -8,7 +8,6 @@ import com.example.jingbin.cloudreader.base.baseadapter.BaseRecyclerViewAdapter;
 import com.example.jingbin.cloudreader.base.baseadapter.BaseRecyclerViewHolder;
 import com.example.jingbin.cloudreader.bean.GankIoDataBean;
 import com.example.jingbin.cloudreader.databinding.ItemWelfareBinding;
-import com.example.jingbin.cloudreader.utils.DebugUtil;
 import com.example.jingbin.cloudreader.utils.DensityUtil;
 
 /**
@@ -54,7 +53,6 @@ public class WelfareAdapter extends BaseRecyclerViewAdapter<GankIoDataBean.Resul
                 }
             });
 
-            DebugUtil.error("------position:  " + position);
 //            binding.ivWelfare.setOnClickListener(new View.OnClickListener() {
 //                @Override
 //                public void onClick(View v) {
