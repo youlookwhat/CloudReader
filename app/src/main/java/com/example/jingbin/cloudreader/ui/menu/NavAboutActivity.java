@@ -11,6 +11,7 @@ import com.bumptech.glide.Glide;
 import com.example.jingbin.cloudreader.R;
 import com.example.jingbin.cloudreader.base.BaseActivity;
 import com.example.jingbin.cloudreader.databinding.ActivityNavAboutBinding;
+import com.example.jingbin.cloudreader.utils.BaseTools;
 import com.example.jingbin.cloudreader.utils.PerfectClickListener;
 import com.example.jingbin.cloudreader.view.webview.WebViewActivity;
 
@@ -22,6 +23,7 @@ public class NavAboutActivity extends BaseActivity<ActivityNavAboutBinding> {
         setContentView(R.layout.activity_nav_about);
         showContentView();
         setTitle("关于云阅");
+        bindingView.tvVersionName.setText("当前版本 V"+ BaseTools.getVersionName());
 
 
         // 直接写在布局文件里会很耗内存

@@ -128,8 +128,7 @@ public class SPUtils {
      * @param key     List<String>对应的key
      * @param strList 对应需要存储的List<String>
      */
-    public static void putStrListValue(String key,
-                                       List<String> strList) {
+    public static void putStrListValue(String key, List<String> strList) {
         if (null == strList) {
             return;
         }
