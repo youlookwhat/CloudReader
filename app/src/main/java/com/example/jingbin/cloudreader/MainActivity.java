@@ -109,10 +109,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         LinearLayout llNavScanDownload = (LinearLayout) headerView.findViewById(R.id.ll_nav_scan_download);
         LinearLayout llNavDeedback = (LinearLayout) headerView.findViewById(R.id.ll_nav_deedback);
         LinearLayout llNavAbout = (LinearLayout) headerView.findViewById(R.id.ll_nav_about);
+        LinearLayout llNavExit = (LinearLayout) headerView.findViewById(R.id.ll_nav_exit);
         llNavHomepage.setOnClickListener(this);
         llNavScanDownload.setOnClickListener(this);
         llNavDeedback.setOnClickListener(this);
         llNavAbout.setOnClickListener(this);
+        llNavExit.setOnClickListener(this);
     }
 
     private void initContentFragment() {
@@ -142,8 +144,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch (v.getId()) {
             case R.id.ll_title_menu:// 开启菜单
                 drawerLayout.openDrawer(GravityCompat.START);
-                // 关闭
-//                drawerLayout.closeDrawer(GravityCompat.START);
                 break;
             case R.id.iv_title_gank:// 干货栏
                 if (vpContent.getCurrentItem() != 0) {//不然cpu会有损耗
@@ -177,7 +177,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         NavHomePageActivity.startHome(MainActivity.this);
                     }
                 }, 360);
-
                 break;
 
             case R.id.ll_nav_scan_download://扫码下载
@@ -206,6 +205,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         NavAboutActivity.start(MainActivity.this);
                     }
                 }, 360);
+                break;
+            case R.id.ll_nav_exit:// 退出应用
+                finish();
                 break;
             default:
                 break;
