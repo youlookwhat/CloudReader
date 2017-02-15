@@ -28,9 +28,9 @@ A netease cloud music based UI, using GankIo and douban API development accord w
 <img width="320" height=“590” src="https://github.com/youlookwhat/CloudReader/blob/master/file/cloudreader.gif"></img>
 
 ## Issues 宝贵意见
-如果有任何问题，请到github的[issue处][21]写上你不明白的地方，也可以通过下面提供的方式联系我，我会及时给予帮助。另外常见的问题已总结在[这里][22]。
+如果有任何问题，请到github的[issue处][21]写上你不明白的地方，也可以通过下面提供的方式联系我，我会及时给予帮助。
 
-If you have any questions, please write to [the issue][21] of making you don't understand of place, also can contact me through here, I will help them in time.Another common problem is summarized [here][22].
+If you have any questions, please write to [the issue][21] of making you don't understand of place, also can contact me through here, I will help them in time.
 
 ## Features 特性
 * 1、基本遵循Google Material Design设计风格。                                    
@@ -76,7 +76,7 @@ NestedScrollView nested RecyclerView for specific use.
 　[火速跳转](https://fir.im/cloudreader)                                    
 　　<img width="200" height=“200” src="https://github.com/youlookwhat/CloudReader/blob/master/file/download.png"></img>
 　　
-#### Documents 
+### Documents 
  - [《云阅》一个仿网易云音乐UI，使用Gank.Io及豆瓣Api开发的开源项目][23]
  - [开发中所遇问题归纳（jar包的具体使用等）][24]
  - [App使用中的常见问题][25]
@@ -176,7 +176,6 @@ limitations under the License.
 [20]:https://github.com/forezp
 
 [21]:https://github.com/youlookwhat/CloudReader/issues
-[22]:http://jingbin.me/2016/12/25/%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98-%E4%BA%91%E9%98%85/
 
 [23]:http://www.jianshu.com/p/69a229fb6e1d
 [24]:http://jingbin.me/2017/11/23/%E5%BC%80%E5%8F%91%E4%B8%AD%E6%89%80%E9%81%87%E9%97%AE%E9%A2%98%E5%BD%92%E7%BA%B3/
