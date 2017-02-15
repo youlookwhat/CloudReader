@@ -104,7 +104,6 @@ NestedScrollView nested RecyclerView for specific use.
 　　
 
 
----
 
 ## Thanks
  - 我几乎看过了所有关于Android仿网易云音乐的项目与文章，发现大部分做的都不够细致，也没有比较好的内容填充，于是决心自己着手做一个，才有了这个开源项目。这里列出主要参考的内容。
