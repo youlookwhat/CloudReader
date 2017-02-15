@@ -19,6 +19,12 @@ import rx.Observable;
  */
 public interface RetrofitHttpClient {
 
+    class Builder {
+        public static RetrofitHttpClient getDouBanServer() {
+            return HttpUtil.getInstance().getDouBanServer(RetrofitHttpClient.class);
+        }
+    }
+
     /**
      * 首页轮播图
      */

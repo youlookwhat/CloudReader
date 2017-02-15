@@ -55,6 +55,7 @@ public class BookDetailActivity extends BaseHeaderActivity<HeaderBookDetailBindi
     }
 
     private void loadBookDetail() {
+//        Subscription get = RetrofitHttpClient.Builder.getDouBanServer().getBookDetail(booksBean.getId())
         Subscription get = HttpUtils.getInstance().getDouBanServer().getBookDetail(booksBean.getId())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
