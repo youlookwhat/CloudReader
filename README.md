@@ -15,7 +15,6 @@
 A netease cloud music based UI, using GankIo and douban API development accord with Google Material Desgin reading class open source projects.Various problems encountered in the development of has been [summed up here][5].
 
 ## Screenshots
-- **部分效果图**
 
 <img width="173" height=“274” src="https://github.com/youlookwhat/CloudReader/blob/master/file/page_gank_00.png"></img>
 <img width="173" height=“274” src="https://github.com/youlookwhat/CloudReader/blob/master/file/page_movie_01.png"></img>
@@ -23,7 +22,7 @@ A netease cloud music based UI, using GankIo and douban API development accord w
 <img width="173" height=“274” src="https://github.com/youlookwhat/CloudReader/blob/master/file/page_book_01.png"></img>
 <img width="173" height=“274” src="https://github.com/youlookwhat/CloudReader/blob/master/file/page_menu_01.png"></img>
 
-- **gif演示**
+#### Gif Preview
 
 <img width="320" height=“590” src="https://github.com/youlookwhat/CloudReader/blob/master/file/cloudreader.gif"></img>
 
