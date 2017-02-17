@@ -1,6 +1,8 @@
 package com.example.jingbin.cloudreader.app;
 
 import android.app.Application;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 
 import com.example.jingbin.cloudreader.http.HttpUtils;
 
@@ -22,5 +24,12 @@ public class CloudReaderApplication extends Application {
         super.onCreate();
         cloudReaderApplication = this;
         HttpUtils.getInstance().setContext(getApplicationContext());
+
+        // 使其系统更改字体大小无效
+        Resources res = getResources();
+        Configuration config=new Configuration();
+        config.setToDefaults();
+        res.updateConfiguration(config,res.getDisplayMetrics());
     }
+
 }
