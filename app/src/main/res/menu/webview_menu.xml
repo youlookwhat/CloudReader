@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/actionbar_share"
+        android:orderInCategory="100"
+        android:title="@string/actionbar_webview_share"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/actionbar_cope"
+        android:orderInCategory="100"
+        android:title="@string/actionbar_webview_cope"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/actionbar_open"
+        android:orderInCategory="100"
+        android:title="@string/actionbar_webview_open"
+        app:showAsAction="never" />
+</menu>

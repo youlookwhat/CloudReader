@@ -12,6 +12,9 @@
     <string name="title_activity_base">BaseActivity</string>
     <string name="actionbar_search">搜索</string>
     <string name="actionbar_more">更多信息</string>
+    <string name="actionbar_webview_share">分享到</string>
+    <string name="actionbar_webview_cope">复制链接</string>
+    <string name="actionbar_webview_open">打开链接</string>
     <string name="actionbar_share">分享给朋友\(^o^)/~</string>
     <string name="github_issues">您好，很希望得到您的意见，由于没有线上反馈系统，您可以在GitHub的Issues处说明问题原因，也可以通过以下方式联系我，我将根据情况尽量处理哦 ~</string>
     <string name="string_about">由于网易云音乐用了很久，特别喜爱它的界面风格，所以仿写了它的UI。如构成侵权请及时通知我修改或删除。

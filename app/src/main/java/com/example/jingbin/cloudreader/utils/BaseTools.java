@@ -1,9 +1,12 @@
 package com.example.jingbin.cloudreader.utils;
 
 import android.app.ActivityManager;
+import android.content.ClipboardManager;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.view.WindowManager;
@@ -136,5 +139,25 @@ public class BaseTools {
             e.printStackTrace();
             return "1.0";
         }
+    }
+
+    /**
+     * 实现文本复制功能
+     *
+     * @param content 复制的文本
+     */
+    public static void copy(String content) {
+        // 得到剪贴板管理器
+        ClipboardManager cmb = (ClipboardManager) CloudReaderApplication.getInstance().getSystemService(Context.CLIPBOARD_SERVICE);
+        cmb.setText(content.trim());
+    }
+
+    /**
+     * 使用浏览器打开链接
+     */
+    public static void openLink(Context context, String content) {
+        Uri issuesUrl = Uri.parse(content);
+        Intent intent = new Intent(Intent.ACTION_VIEW, issuesUrl);
+        context.startActivity(intent);
     }
 }
