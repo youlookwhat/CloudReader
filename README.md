@@ -33,39 +33,22 @@ If you have any questions, please write to [the issue][21] of making you don't u
 
 ## Features 特性
 * 1、基本遵循Google Material Design设计风格。                                    
-Basic follow Google Material Design style. 
 * 2、干货集中营内容与豆瓣电影书籍内容。                                    
-The Content of gank.io and Douban movie,books. 
 * 3、高仿网易云音乐歌单详情页。                                    
-High imitation netease cloud music playlist page for details. 
 * 4、``NavigationView``搭配``DrawerLayout``的具体使用。                                    
-NavigationView collocation DrawerLayout specific use.
 * 5、透明状态栏使用与版本适配。                                    
-Transparent status bar with version adapter.
 * 6、MvvM-DataBinding的项目应用。                                    
-The MvvM-DataBinding project application.
 * 7、RxBus代替EventBus进行组件之间通讯。                                    
-RxBus replace EventBus for communication between components.
 * 8、``ToolBar``的全方面使用。                                    
-All aspects of the ToolBar.
 * 9、``Glide``加载监听，获取缓存，圆角图片，高斯模糊。                                    
-Glide load monitoring, access to the cache, the rounded pictures, gaussian blur.
 * 10、水波纹点击效果详细使用与适配。                                    
-Click the water ripple effect use and adaptation in detail.
 * 11、``RecyclerView``下拉刷新，上拉加载。                                    
-RecyclerView drop-down refresh and tensile loading.
 * 12、基于``DataBinding``的``ViewHolder``。                                    
-Based on the DataBinding ViewHolder.
 * 13、基于``DataBinding``的``BaseActivity``和``BaseFragment``。                                    
-Based on the DataBinding BaseActivity and BaseFragment.
 * 14、``Fragment``懒加载模式。                                    
-Fragments lazy loading mode.
 * 15、``SwipeRefreshLayout``结合``RecyclerView``下拉刷新上拉加载。                                    
-SwipeRefreshLayout combining RecyclerView drop-down refresh and on load.
 * 16、``CoordinatorLayout``+``Behavior``实现标题栏渐变。                                    
-CoordinatorLayout add behaviors to achieve the title bar gradient.
 * 17、``NestedScrollView ``嵌套``RecyclerView ``的使用。                                    
-NestedScrollView nested RecyclerView for specific use.
 
 
 ## See Detail
