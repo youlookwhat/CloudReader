@@ -34,10 +34,10 @@ If you have any questions, please write to [the issue][21] of making you don't u
 ## Features 特性
 * 1、基本遵循Google Material Design设计风格。                                    
 * 2、干货集中营内容与豆瓣电影书籍内容。                                    
-* 3、高仿网易云音乐歌单详情页。                                    
+* 3、MvvM-DataBinding的项目应用。                                    
 * 4、``NavigationView``搭配``DrawerLayout``的具体使用。                                    
 * 5、透明状态栏使用与版本适配。                                    
-* 6、MvvM-DataBinding的项目应用。                                    
+* 6、高仿网易云音乐歌单详情页。                                    
 * 7、RxBus代替EventBus进行组件之间通讯。                                    
 * 8、``ToolBar``的全方面使用。                                    
 * 9、``Glide``加载监听，获取缓存，圆角图片，高斯模糊。                                    
