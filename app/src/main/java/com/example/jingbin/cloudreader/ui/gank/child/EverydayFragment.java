@@ -12,13 +12,14 @@ import android.view.animation.LinearInterpolator;
 import android.view.animation.RotateAnimation;
 
 import com.bumptech.glide.Glide;
+import com.example.http.HttpUtils;
 import com.example.jingbin.cloudreader.R;
 import com.example.jingbin.cloudreader.adapter.EmptyAdapter;
 import com.example.jingbin.cloudreader.adapter.EverydayAdapter;
 import com.example.jingbin.cloudreader.app.Constants;
 import com.example.jingbin.cloudreader.base.BaseFragment;
 import com.example.jingbin.cloudreader.bean.AndroidBean;
-import com.example.jingbin.cloudreader.bean.FrontpageBean;
+import com.example.jingbin.cloudreader.bean.GankIoDataBean;
 import com.example.jingbin.cloudreader.databinding.FooterItemEverydayBinding;
 import com.example.jingbin.cloudreader.databinding.FragmentEverydayBinding;
 import com.example.jingbin.cloudreader.databinding.HeaderItemEverydayBinding;
@@ -28,6 +29,7 @@ import com.example.jingbin.cloudreader.http.rx.RxBus;
 import com.example.jingbin.cloudreader.http.rx.RxBusBaseMessage;
 import com.example.jingbin.cloudreader.http.rx.RxCodeConstants;
 import com.example.jingbin.cloudreader.model.EverydayModel;
+import com.example.jingbin.cloudreader.model.GankOtherModel;
 import com.example.jingbin.cloudreader.utils.CommonUtils;
 import com.example.jingbin.cloudreader.utils.DebugUtil;
 import com.example.jingbin.cloudreader.utils.GlideImageLoader;
@@ -363,7 +365,9 @@ public class EverydayFragment extends BaseFragment<FragmentEverydayBinding> {
      * 轮播图
      */
     private void loadBannerPicture() {
-        mEverydayModel.showBanncerPage(new RequestImpl() {
+        GankOtherModel mModel = new GankOtherModel();
+        mModel.setData("福利", 1, HttpUtils.per_page);
+        mModel.getGankIoData(new RequestImpl() {
             @Override
             public void loadSuccess(Object object) {
                 if (mBannerImages == null) {
@@ -371,20 +375,12 @@ public class EverydayFragment extends BaseFragment<FragmentEverydayBinding> {
                 } else {
                     mBannerImages.clear();
                 }
-                FrontpageBean frontpageBean = (FrontpageBean) object;
-                List<FrontpageBean.DataBeanX.DataBean> data = null;
-                if (frontpageBean != null
-                        && frontpageBean.getData() != null
-                        && frontpageBean.getData().get(0) != null
-                        && frontpageBean.getData().get(0).getData() != null) {
-
-                    data = frontpageBean.getData().get(0).getData();
-                }
-                if (data != null && data.size() > 0) {
-                    for (int i = 0; i < data.size(); i++) {
+                GankIoDataBean gankIoDataBean = (GankIoDataBean) object;
+                List<GankIoDataBean.ResultBean> results = gankIoDataBean.getResults();
+                if (results != null && results.size() > 0) {
+                    for (int i = 0; i < results.size(); i++) {
                         //获取所有图片
-                        FrontpageBean.DataBeanX.DataBean bean = data.get(i);
-                        mBannerImages.add(bean.getPicUrl());
+                        mBannerImages.add(results.get(i).getUrl());
                     }
                     mHeaderBinding.banner.setImages(mBannerImages).setImageLoader(new GlideImageLoader()).start();
                     maCache.remove(Constants.BANNER_PIC);
@@ -394,7 +390,6 @@ public class EverydayFragment extends BaseFragment<FragmentEverydayBinding> {
 
             @Override
             public void loadFailed() {
-//                showError();
             }
 
             @Override
