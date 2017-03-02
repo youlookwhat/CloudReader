@@ -1,8 +1,8 @@
-package com.example.jingbin.cloudreader.http;
+package com.example.http;
 
 import android.content.Context;
 
-import com.example.jingbin.cloudreader.utils.CheckNetwork;
+import com.example.http.utils.CheckNetwork;
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.FieldNamingStrategy;
 import com.google.gson.Gson;
@@ -33,75 +33,83 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * Created by jingbin on 2017/2/14.
+ * 网络请求工具类
+ * <p>
+ * 豆瓣api:
+ * 问题：API限制为每分钟40次，一不小心就超了，马上KEY就被封,用不带KEY的API，每分钟只有可怜的10次。
+ * 返回：code:112（rate_limit_exceeded2 IP 访问速度限制）
+ * 解决：1.使用每分钟访问次数限制（客户端）2.更换ip (更换wifi)
+ * 豆瓣开发者服务使用条款: https://developers.douban.com/wiki/?title=terms
  */
 
-public class HttpUtil {
-    private static HttpUtil instance;
+public class HttpUtils {
+    private static HttpUtils instance;
     private Gson gson;
     private Context context;
-    private Object https;
-    private Object https2;
-    private Object https3;
-    private IpmlTokenGetrListener listener;
-    private String appUrl;
+    private Object gankHttps;
+    private Object doubanHttps;
+    private Object dongtingHttps;
+    private IpmlTokenGetListener listener;
     private boolean debug;
     // gankio、豆瓣、动听（轮播图）
-    private final static String API_GANKIO = "http://gank.io/api";
-    private final static String API_DOUBAN = "https://api.douban.com";
-    private final static String API_DONGTING = "http://api.dongting.com";
+    private final static String API_GANKIO = "http://gank.io/api/";
+    private final static String API_DOUBAN = "Https://api.douban.com/";
+    private final static String API_DONGTING = "http://api.dongting.com/";
+    /**
+     * 分页数据，每页的数量
+     */
+    public static int per_page = 10;
+    public static int per_page_more = 20;
 
-    public static HttpUtil getInstance() {
+    public static HttpUtils getInstance() {
         if (instance == null) {
-            synchronized (HttpUtil.class) {
+            synchronized (HttpUtils.class) {
                 if (instance == null) {
-                    instance = new HttpUtil();
+                    instance = new HttpUtils();
                 }
             }
         }
         return instance;
     }
 
-    public void init(Context context, String appUrl, boolean debug) {
+    public void init(Context context, boolean debug) {
         this.context = context;
-        this.appUrl = appUrl;
         this.debug = debug;
-//        HttpHead.init(context);
+        HttpHead.init(context);
     }
 
-    public <T> T getGankIOServer() {
-        if (https == null) {
-            synchronized (HttpUtil.class) {
-                if (https == null) {
-                    https = getBuilder(API_GANKIO).build().create(RetrofitHttpClient.class);
+    public <T> T getGankIOServer(Class<T> a) {
+        if (gankHttps == null) {
+            synchronized (HttpUtils.class) {
+                if (gankHttps == null) {
+                    gankHttps = getBuilder(API_GANKIO).build().create(a);
                 }
             }
         }
-        return (T) https;
+        return (T) gankHttps;
     }
 
     public <T> T getDouBanServer(Class<T> a) {
-        if (https2 == null) {
-            synchronized (HttpUtil.class) {
-                if (https2 == null) {
-                    https2 = getBuilder(API_DOUBAN).build().create(a);
+        if (doubanHttps == null) {
+            synchronized (HttpUtils.class) {
+                if (doubanHttps == null) {
+                    doubanHttps = getBuilder(API_DOUBAN).build().create(a);
                 }
             }
         }
-        return (T) https2;
+        return (T) doubanHttps;
     }
 
-    public <T> T getDongTingServer() {
-        if (https3 == null) {
-            synchronized (HttpUtil.class) {
-                if (https3 == null) {
-                    https3 = getBuilder(API_DONGTING).build().create(RetrofitHttpClient.class);
+    public <T> T getDongTingServer(Class<T> a) {
+        if (dongtingHttps == null) {
+            synchronized (HttpUtils.class) {
+                if (dongtingHttps == null) {
+                    dongtingHttps = getBuilder(API_DONGTING).build().create(a);
                 }
             }
         }
-        return (T) https3;
+        return (T) dongtingHttps;
     }
-
-
     private Retrofit.Builder getBuilder(String apiUrl) {
         Retrofit.Builder builder = new Retrofit.Builder();
         builder.client(getOkClient());
@@ -137,15 +145,15 @@ public class HttpUtil {
         try {
             final TrustManager[] trustAllCerts = new TrustManager[]{new X509TrustManager() {
                 @Override
-                public void checkClientTrusted(java.security.cert.X509Certificate[] chain, String authType) throws CertificateException {
+                public void checkClientTrusted(X509Certificate[] chain, String authType) throws CertificateException {
                 }
 
                 @Override
-                public void checkServerTrusted(java.security.cert.X509Certificate[] chain, String authType) throws CertificateException {
+                public void checkServerTrusted(X509Certificate[] chain, String authType) throws CertificateException {
                 }
 
                 @Override
-                public java.security.cert.X509Certificate[] getAcceptedIssuers() {
+                public X509Certificate[] getAcceptedIssuers() {
                     return new X509Certificate[]{};
                 }
             }};
@@ -182,7 +190,7 @@ public class HttpUtil {
         return client1;
     }
 
-    public void setTokenListener(IpmlTokenGetrListener listener) {
+    public void setTokenListener(IpmlTokenGetListener listener) {
         this.listener = listener;
     }
 
@@ -198,15 +206,14 @@ public class HttpUtil {
                 builder.addHeader("Cache-Control", "public, max-age=" + maxAge);
             } else {
                 int maxStale = 60 * 60 * 24 * 28;
-                builder.addHeader("Cache-Control", "pu" +
-                        "blic, only-if-cached, max-stale=" + maxStale);
+                builder.addHeader("Cache-Control", "public, only-if-cached, max-stale=" + maxStale);
             }
             // 可添加token
-            if (listener != null) {
-                builder.addHeader("token", listener.getToken());
-            }
+//            if (listener != null) {
+//                builder.addHeader("token", listener.getToken());
+//            }
             // 如有需要，添加请求头
-            builder.addHeader("a", HttpHead.getHeader(request.method()));
+//            builder.addHeader("a", HttpHead.getHeader(request.method()));
             return chain.proceed(builder.build());
         }
     }
@@ -214,9 +221,9 @@ public class HttpUtil {
     private HttpLoggingInterceptor getInterceptor() {
         HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
         if (debug) {
-            interceptor.setLevel(HttpLoggingInterceptor.Level.BODY); //开放使用
+            interceptor.setLevel(HttpLoggingInterceptor.Level.BODY); // 测试
         } else {
-            interceptor.setLevel(HttpLoggingInterceptor.Level.NONE); //线上
+            interceptor.setLevel(HttpLoggingInterceptor.Level.NONE); // 打包
         }
         return interceptor;
     }

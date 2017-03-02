@@ -6,7 +6,7 @@ import com.example.jingbin.cloudreader.app.ConstantsImageUrl;
 import com.example.jingbin.cloudreader.bean.AndroidBean;
 import com.example.jingbin.cloudreader.bean.FrontpageBean;
 import com.example.jingbin.cloudreader.bean.GankIoDayBean;
-import com.example.jingbin.cloudreader.http.HttpUtils;
+import com.example.jingbin.cloudreader.http.HttpClient;
 import com.example.jingbin.cloudreader.http.RequestImpl;
 import com.example.jingbin.cloudreader.utils.SPUtils;
 
@@ -45,7 +45,7 @@ public class EverydayModel {
      * 轮播图
      */
     public void showBanncerPage(final RequestImpl listener) {
-        Subscription subscription = HttpUtils.getInstance().getDongTingServer().getFrontpage()
+        Subscription subscription = HttpClient.Builder.getDongTingServer().getFrontpage()
                 .observeOn(AndroidSchedulers.mainThread()).subscribeOn(Schedulers.io())
                 .subscribe(new Observer<FrontpageBean>() {
                     @Override
@@ -124,7 +124,7 @@ public class EverydayModel {
             }
         };
 
-        Subscription subscription = HttpUtils.getInstance().getGankIOServer().getGankIoDay(year, month, day)
+        Subscription subscription = HttpClient.Builder.getGankIOServer().getGankIoDay(year, month, day)
                 .subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
                 .flatMap(func1)
                 .subscribe(observer);

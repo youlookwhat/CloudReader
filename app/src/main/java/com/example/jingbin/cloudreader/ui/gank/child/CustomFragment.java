@@ -8,13 +8,13 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.cocosw.bottomsheet.BottomSheet;
+import com.example.http.HttpUtils;
 import com.example.jingbin.cloudreader.R;
 import com.example.jingbin.cloudreader.adapter.AndroidAdapter;
 import com.example.jingbin.cloudreader.app.Constants;
 import com.example.jingbin.cloudreader.base.BaseFragment;
 import com.example.jingbin.cloudreader.bean.GankIoDataBean;
 import com.example.jingbin.cloudreader.databinding.FragmentCustomBinding;
-import com.example.jingbin.cloudreader.http.HttpUtils;
 import com.example.jingbin.cloudreader.http.RequestImpl;
 import com.example.jingbin.cloudreader.http.cache.ACache;
 import com.example.jingbin.cloudreader.model.GankOtherModel;

@@ -1,4 +1,4 @@
-package com.example.jingbin.cloudreader.http;
+package com.example.http;
 
 import java.io.IOException;
 import java.lang.annotation.Annotation;
@@ -9,7 +9,7 @@ import retrofit2.Converter;
 import retrofit2.Retrofit;
 
 /**
- * Created by yangcai on 16/11/29.
+ * Created by jingbin on 2017/2/14.
  */
 
 public class NullOnEmptyConverterFactory extends Converter.Factory {

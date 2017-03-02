@@ -1,4 +1,4 @@
-package com.example.jingbin.cloudreader.http;
+package com.example.http;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;

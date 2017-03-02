@@ -41,24 +41,13 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     compile project(':xrecyclerview')
+    compile project(':library:http')
     compile project(path: ':zoomlibrary')
     compile 'com.android.support:appcompat-v7:25.1.1'
     compile 'com.android.support:design:25.1.1'
     compile 'com.android.support:support-v4:25.1.1'
     compile 'com.android.support:cardview-v7:25.1.1'
-    // 网络请求
-    compile 'com.google.code.gson:gson:2.8.0'
-    compile('com.squareup.retrofit2:retrofit:2.1.0') {
-        exclude module: 'com.squareup.okhttp3:okhttp:3.4.1'
-        exclude module: 'com.squareup.okio:okio:1.9.0'
-    }
-    compile 'com.squareup.okhttp3:okhttp:3.4.2'
-//    compile 'com.squareup.okio:okio:1.11.0'
-    compile 'com.squareup.retrofit2:converter-gson:2.1.0'
-    compile 'com.squareup.okhttp3:logging-interceptor:3.4.1'
-    compile 'com.squareup.retrofit2:adapter-rxjava:2.1.0'
-
-    compile 'com.jakewharton.retrofit:retrofit1-okhttp3-client:1.1.0'
+//    compile 'com.jakewharton.retrofit:retrofit1-okhttp3-client:1.1.0'
     compile 'io.reactivex:rxandroid:1.2.0'
     compile 'com.nineoldandroids:library:2.4.0'
     compile 'jp.wasabeef:glide-transformations:2.0.1'

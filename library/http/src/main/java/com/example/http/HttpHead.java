@@ -1,4 +1,4 @@
-package com.example.jingbin.cloudreader.http;
+package com.example.http;
 
 import android.content.Context;
 import android.content.pm.PackageInfo;
@@ -8,15 +8,10 @@ import android.telephony.TelephonyManager;
 import java.util.UUID;
 
 /**
- * 项目名称：KawsDoctorversion
- * 类名称：HttpHead
- * 创建人：shilei
- * 修改人：shilei
- * 修改时间：2015/8/14 16:03
- * 修改备注：
+ * Created by jingbin on 2017/2/14.
  */
 
-public class HttpHead {
+class HttpHead {
     private static final String CLIENT_TYPE = "4";
 
     private static Context context;
@@ -28,25 +23,7 @@ public class HttpHead {
     public static String getHeader(String httpMethod) {
         long sen = System.currentTimeMillis() / 1000;
         String h = getUuid() + getdevice() + CLIENT_TYPE + httpMethod + "0" + getVersion() + sen;
-        byte[] hmacByte = new byte[0];
-//        try {
-//            hmacByte = Encryption.HmacSHA1Encrypt(h.getBytes("UTF-8"));
-//        } catch (UnsupportedEncodingException e) {
-//            e.printStackTrace();
-//        }
-        String result = "";
-
-        for (final byte element : hmacByte) {
-            result += Integer.toString((element & 0xff) + 0x100, 16).substring(1);
-        }
-        result = "d=" + result
-                + ";de=" + getdevice()
-                + ";u=" + getUuid()
-                + ";t=" + CLIENT_TYPE
-                + ";v=" + getVersion()
-                + ";k=0"
-                + ";ts=" + sen;
-        return result;
+        return h;
     }
 
     /**

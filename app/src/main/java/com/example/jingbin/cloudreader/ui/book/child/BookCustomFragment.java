@@ -14,7 +14,7 @@ import com.example.jingbin.cloudreader.adapter.BookAdapter;
 import com.example.jingbin.cloudreader.base.BaseFragment;
 import com.example.jingbin.cloudreader.bean.book.BookBean;
 import com.example.jingbin.cloudreader.databinding.FragmentBookCustomBinding;
-import com.example.jingbin.cloudreader.http.HttpUtils;
+import com.example.jingbin.cloudreader.http.HttpClient;
 import com.example.jingbin.cloudreader.utils.CommonUtils;
 import com.example.jingbin.cloudreader.utils.DebugUtil;
 
@@ -127,7 +127,7 @@ public class BookCustomFragment extends BaseFragment<FragmentBookCustomBinding> 
 
     private void loadCustomData() {
 
-        Subscription get = HttpUtils.getInstance().getDouBanServer().getBook(mType, mStart, mCount)
+        Subscription get = HttpClient.Builder.getDouBanService().getBook(mType, mStart, mCount)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<BookBean>() {

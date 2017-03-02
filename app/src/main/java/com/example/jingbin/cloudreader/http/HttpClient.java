@@ -1,5 +1,6 @@
 package com.example.jingbin.cloudreader.http;
 
+import com.example.http.HttpUtils;
 import com.example.jingbin.cloudreader.bean.FrontpageBean;
 import com.example.jingbin.cloudreader.bean.GankIoDataBean;
 import com.example.jingbin.cloudreader.bean.GankIoDayBean;
@@ -8,27 +9,33 @@ import com.example.jingbin.cloudreader.bean.MovieDetailBean;
 import com.example.jingbin.cloudreader.bean.book.BookBean;
 import com.example.jingbin.cloudreader.bean.book.BookDetailBean;
 
-import retrofit.http.GET;
-import retrofit.http.Path;
-import retrofit.http.Query;
+import retrofit2.http.GET;
+import retrofit2.http.Path;
+import retrofit2.http.Query;
 import rx.Observable;
 
 /**
  * Created by jingbin on 16/11/21.
  * 网络请求类（一个接口一个方法）
  */
-public interface RetrofitHttpClient {
+public interface HttpClient {
 
     class Builder {
-        public static RetrofitHttpClient getDouBanServer() {
-            return HttpUtil.getInstance().getDouBanServer(RetrofitHttpClient.class);
+        public static HttpClient getDouBanService() {
+            return HttpUtils.getInstance().getDouBanServer(HttpClient.class);
+        }
+        public static HttpClient getDongTingServer() {
+            return HttpUtils.getInstance().getDongTingServer(HttpClient.class);
+        }
+        public static HttpClient getGankIOServer() {
+            return HttpUtils.getInstance().getGankIOServer(HttpClient.class);
         }
     }
 
     /**
      * 首页轮播图
      */
-    @GET("/frontpage/frontpage")
+    @GET("frontpage/frontpage")
     Observable<FrontpageBean> getFrontpage();
 
     /**
@@ -38,7 +45,7 @@ public interface RetrofitHttpClient {
      * 第几页：数字，大于0
      * eg: http://gank.io/api/data/Android/10/1
      */
-    @GET("/data/{type}/{pre_page}/{page}")
+    @GET("data/{type}/{pre_page}/{page}")
     Observable<GankIoDataBean> getGankIoData(@Path("type") String id, @Path("page") int page, @Path("pre_page") int pre_page);
 
     /**
@@ -51,7 +58,7 @@ public interface RetrofitHttpClient {
     /**
      * 豆瓣热映电影，每日更新
      */
-    @GET("/v2/movie/in_theaters")
+    @GET("v2/movie/in_theaters")
     Observable<HotMovieBean> getHotMovie();
 
     /**
@@ -59,7 +66,7 @@ public interface RetrofitHttpClient {
      *
      * @param id 电影bean里的id
      */
-    @GET("/v2/movie/subject/{id}")
+    @GET("v2/movie/subject/{id}")
     Observable<MovieDetailBean> getMovieDetail(@Path("id") String id);
 
     /**
@@ -68,7 +75,7 @@ public interface RetrofitHttpClient {
      * @param start 从多少开始，如从"0"开始
      * @param count 一次请求的数目，如"10"条，最多100
      */
-    @GET("/v2/movie/top250")
+    @GET("v2/movie/top250")
     Observable<HotMovieBean> getMovieTop250(@Query("start") int start, @Query("count") int count);
 
     /**
@@ -78,10 +85,10 @@ public interface RetrofitHttpClient {
      * @param count 一次请求的数目 最多100
      */
 
-    @GET("/v2/book/search")
+    @GET("v2/book/search")
     Observable<BookBean> getBook(@Query("tag") String tag, @Query("start") int start, @Query("count") int count);
 
-    @GET("/v2/book/{id}")
+    @GET("v2/book/{id}")
     Observable<BookDetailBean> getBookDetail(@Path("id") String id);
 
     /**
@@ -90,9 +97,9 @@ public interface RetrofitHttpClient {
      * @return
      */
 
-//    @GET("/v2/music/search")
+//    @GET("v2/music/search")
 //    Observable<MusicRoot> searchMusicByTag(@Query("tag")String tag);
 
-//    @GET("/v2/music/{id}")
+//    @GET("v2/music/{id}")
 //    Observable<Musics> getMusicDetail(@Path("id") String id);
 }
