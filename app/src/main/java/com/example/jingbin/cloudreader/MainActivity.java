@@ -33,8 +33,10 @@ import com.example.jingbin.cloudreader.ui.menu.NavHomePageActivity;
 import com.example.jingbin.cloudreader.ui.one.OneFragment;
 import com.example.jingbin.cloudreader.utils.CommonUtils;
 import com.example.jingbin.cloudreader.utils.ImgLoadUtil;
+import com.example.jingbin.cloudreader.utils.PerfectClickListener;
 import com.example.jingbin.cloudreader.view.MyFragmentPagerAdapter;
 import com.example.jingbin.cloudreader.view.statusbar.StatusBarUtil;
+import com.example.jingbin.cloudreader.view.webview.WebViewActivity;
 
 import java.util.ArrayList;
 
@@ -101,16 +103,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void initDrawerLayout() {
         navView.inflateHeaderView(R.layout.nav_header_main);
         View headerView = navView.getHeaderView(0);
-//        LinearLayout viewById1 = (LinearLayout) headerView.findViewById(R.id.ll_header_bg);
-//        viewById1.setBackground();
-
         NavHeaderMainBinding bind = DataBindingUtil.bind(headerView);
         ImgLoadUtil.displayCircle(bind.ivAvatar, ConstantsImageUrl.IC_AVATAR);
-        bind.llNavHomepage.setOnClickListener(this);
-        bind.llNavScanDownload.setOnClickListener(this);
-        bind.llNavDeedback.setOnClickListener(this);
-        bind.llNavAbout.setOnClickListener(this);
         bind.llNavExit.setOnClickListener(this);
+
+        bind.llNavHomepage.setOnClickListener(listener);
+        bind.llNavScanDownload.setOnClickListener(listener);
+        bind.llNavDeedback.setOnClickListener(listener);
+        bind.llNavAbout.setOnClickListener(listener);
+        bind.llNavLogin.setOnClickListener(listener);
     }
 
     private void initContentFragment() {
@@ -134,6 +135,36 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             actionBar.setDisplayShowTitleEnabled(false);
         }
     }
+
+
+    private PerfectClickListener listener = new PerfectClickListener() {
+        @Override
+        protected void onNoDoubleClick(final View v) {
+            mBinding.drawerLayout.closeDrawer(GravityCompat.START);
+            mBinding.drawerLayout.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    switch (v.getId()) {
+                        case R.id.ll_nav_homepage:// 主页
+                            NavHomePageActivity.startHome(MainActivity.this);
+                            break;
+                        case R.id.ll_nav_scan_download://扫码下载
+                            NavDownloadActivity.start(MainActivity.this);
+                            break;
+                        case R.id.ll_nav_deedback:// 问题反馈
+                            NavDeedBackActivity.start(MainActivity.this);
+                            break;
+                        case R.id.ll_nav_about:// 关于云阅
+                            NavAboutActivity.start(MainActivity.this);
+                            break;
+                        case R.id.ll_nav_login:// 登录GitHub账号
+                            WebViewActivity.loadUrl(v.getContext(), "https://github.com/login", "登录GitHub账号");
+                            break;
+                    }
+                }
+            }, 360);
+        }
+    };
 
     @Override
     public void onClick(View v) {
@@ -164,43 +195,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     llTitleGank.setSelected(false);
                     vpContent.setCurrentItem(2);
                 }
-                break;
-            case R.id.ll_nav_homepage:// 主页
-                mBinding.drawerLayout.closeDrawer(GravityCompat.START);
-                mBinding.drawerLayout.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        NavHomePageActivity.startHome(MainActivity.this);
-                    }
-                }, 360);
-                break;
-
-            case R.id.ll_nav_scan_download://扫码下载
-                mBinding.drawerLayout.closeDrawer(GravityCompat.START);
-                mBinding.drawerLayout.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        NavDownloadActivity.start(MainActivity.this);
-                    }
-                }, 360);
-                break;
-            case R.id.ll_nav_deedback:// 问题反馈
-                mBinding.drawerLayout.closeDrawer(GravityCompat.START);
-                mBinding.drawerLayout.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        NavDeedBackActivity.start(MainActivity.this);
-                    }
-                }, 360);
-                break;
-            case R.id.ll_nav_about:// 关于云阅
-                mBinding.drawerLayout.closeDrawer(GravityCompat.START);
-                mBinding.drawerLayout.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        NavAboutActivity.start(MainActivity.this);
-                    }
-                }, 360);
                 break;
             case R.id.ll_nav_exit:// 退出应用
                 finish();
