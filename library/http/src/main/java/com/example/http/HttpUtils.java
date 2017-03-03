@@ -51,10 +51,10 @@ public class HttpUtils {
     private Object dongtingHttps;
     private IpmlTokenGetListener listener;
     private boolean debug;
-    // gankio、豆瓣、动听（轮播图）
+    // gankio、豆瓣、（轮播图）
     private final static String API_GANKIO = "http://gank.io/api/";
     private final static String API_DOUBAN = "Https://api.douban.com/";
-    private final static String API_DONGTING = "http://tingapi.ting.baidu.com/v1/restserver/";
+    private final static String API_TING = "http://tingapi.ting.baidu.com/v1/restserver/";
     /**
      * 分页数据，每页的数量
      */
@@ -100,11 +100,11 @@ public class HttpUtils {
         return (T) doubanHttps;
     }
 
-    public <T> T getDongTingServer(Class<T> a) {
+    public <T> T getTingServer(Class<T> a) {
         if (dongtingHttps == null) {
             synchronized (HttpUtils.class) {
                 if (dongtingHttps == null) {
-                    dongtingHttps = getBuilder(API_DONGTING).build().create(a);
+                    dongtingHttps = getBuilder(API_TING).build().create(a);
                 }
             }
         }

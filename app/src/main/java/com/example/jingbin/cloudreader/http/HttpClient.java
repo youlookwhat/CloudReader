@@ -24,8 +24,8 @@ public interface HttpClient {
         public static HttpClient getDouBanService() {
             return HttpUtils.getInstance().getDouBanServer(HttpClient.class);
         }
-        public static HttpClient getDongTingServer() {
-            return HttpUtils.getInstance().getDongTingServer(HttpClient.class);
+        public static HttpClient getTingServer() {
+            return HttpUtils.getInstance().getTingServer(HttpClient.class);
         }
         public static HttpClient getGankIOServer() {
             return HttpUtils.getInstance().getGankIOServer(HttpClient.class);

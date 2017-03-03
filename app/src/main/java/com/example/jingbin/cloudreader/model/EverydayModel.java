@@ -45,7 +45,7 @@ public class EverydayModel {
      * 轮播图
      */
     public void showBanncerPage(final RequestImpl listener) {
-        Subscription subscription = HttpClient.Builder.getDongTingServer().getFrontpage()
+        Subscription subscription = HttpClient.Builder.getTingServer().getFrontpage()
                 .observeOn(AndroidSchedulers.mainThread()).subscribeOn(Schedulers.io())
                 .subscribe(new Observer<FrontpageBean>() {
                     @Override

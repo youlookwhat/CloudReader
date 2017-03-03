@@ -368,16 +368,18 @@ public class EverydayFragment extends BaseFragment<FragmentEverydayBinding> {
                 } else {
                     mBannerImages.clear();
                 }
-                FrontpageBean gankIoDataBean = (FrontpageBean) object;
-                List<FrontpageBean.ResultBeanXXXXXXXXXXXXXX.FocusBean.ResultBeanX> result = gankIoDataBean.getResult().getFocus().getResult();
-                if (result != null && result.size() > 0) {
-                    for (int i = 0; i < result.size(); i++) {
-                        //获取所有图片
-                        mBannerImages.add(result.get(i).getRandpic());
+                FrontpageBean bean = (FrontpageBean) object;
+                if (bean != null && bean.getResult() != null && bean.getResult().getFocus() != null && bean.getResult().getFocus().getResult() != null) {
+                    List<FrontpageBean.ResultBeanXXXXXXXXXXXXXX.FocusBean.ResultBeanX> result = bean.getResult().getFocus().getResult();
+                    if (result != null && result.size() > 0) {
+                        for (int i = 0; i < result.size(); i++) {
+                            //获取所有图片
+                            mBannerImages.add(result.get(i).getRandpic());
+                        }
+                        mHeaderBinding.banner.setImages(mBannerImages).setImageLoader(new GlideImageLoader()).start();
+                        maCache.remove(Constants.BANNER_PIC);
+                        maCache.put(Constants.BANNER_PIC, mBannerImages, 30000);
                     }
-                    mHeaderBinding.banner.setImages(mBannerImages).setImageLoader(new GlideImageLoader()).start();
-                    maCache.remove(Constants.BANNER_PIC);
-                    maCache.put(Constants.BANNER_PIC, mBannerImages, 30000);
                 }
             }
 
@@ -392,46 +394,6 @@ public class EverydayFragment extends BaseFragment<FragmentEverydayBinding> {
             }
         });
     }
-
-
-
-    /**
-     * 轮播图
-     */
-//    private void loadBannerPicture() {
-//        GankOtherModel mModel = new GankOtherModel();
-//        mModel.setData("福利", 1, HttpUtils.per_page);
-//        mModel.getGankIoData(new RequestImpl() {
-//            @Override
-//            public void loadSuccess(Object object) {
-//                if (mBannerImages == null) {
-//                    mBannerImages = new ArrayList<String>();
-//                } else {
-//                    mBannerImages.clear();
-//                }
-//                GankIoDataBean gankIoDataBean = (GankIoDataBean) object;
-//                List<GankIoDataBean.ResultBean> results = gankIoDataBean.getResults();
-//                if (results != null && results.size() > 0) {
-//                    for (int i = 0; i < results.size(); i++) {
-//                        //获取所有图片
-//                        mBannerImages.add(results.get(i).getUrl());
-//                    }
-//                    mHeaderBinding.banner.setImages(mBannerImages).setImageLoader(new GlideImageLoader()).start();
-//                    maCache.remove(Constants.BANNER_PIC);
-//                    maCache.put(Constants.BANNER_PIC, mBannerImages, 30000);
-//                }
-//            }
-//
-//            @Override
-//            public void loadFailed() {
-//            }
-//
-//            @Override
-//            public void addSubscription(Subscription subscription) {
-//                EverydayFragment.this.addSubscription(subscription);
-//            }
-//        });
-//    }
 
     private void showRotaLoading(boolean isLoading) {
         if (isLoading) {
