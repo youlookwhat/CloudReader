@@ -35,7 +35,7 @@ public interface HttpClient {
     /**
      * 首页轮播图
      */
-    @GET("frontpage/frontpage")
+    @GET("ting?from=android&version=5.8.1.0&channel=ppzs&operator=3&method=baidu.ting.plaza.index&cuid=89CF1E1A06826F9AB95A34DC0F6AAA14")
     Observable<FrontpageBean> getFrontpage();
 
     /**

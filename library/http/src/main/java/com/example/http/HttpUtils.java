@@ -54,7 +54,7 @@ public class HttpUtils {
     // gankio、豆瓣、动听（轮播图）
     private final static String API_GANKIO = "http://gank.io/api/";
     private final static String API_DOUBAN = "Https://api.douban.com/";
-    private final static String API_DONGTING = "http://api.dongting.com/";
+    private final static String API_DONGTING = "http://tingapi.ting.baidu.com/v1/restserver/";
     /**
      * 分页数据，每页的数量
      */
