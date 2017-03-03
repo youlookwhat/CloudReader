@@ -182,7 +182,7 @@ public class MainActivity extends SkinCompatActivity implements View.OnClickList
                             break;
                     }
                 }
-            }, 360);
+            }, 260);
         }
     };
 
