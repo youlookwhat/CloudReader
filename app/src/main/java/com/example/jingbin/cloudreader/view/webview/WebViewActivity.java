@@ -5,10 +5,13 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebSettings;
@@ -17,7 +20,10 @@ import android.widget.FrameLayout;
 import android.widget.ProgressBar;
 
 import com.example.jingbin.cloudreader.R;
+import com.example.jingbin.cloudreader.utils.BaseTools;
 import com.example.jingbin.cloudreader.utils.CommonUtils;
+import com.example.jingbin.cloudreader.utils.ShareUtils;
+import com.example.jingbin.cloudreader.utils.ToastUtil;
 import com.example.jingbin.cloudreader.view.statusbar.StatusBarUtil;
 import com.example.jingbin.cloudreader.view.webview.config.FullscreenHolder;
 import com.example.jingbin.cloudreader.view.webview.config.IWebPageView;
@@ -62,7 +68,7 @@ public class WebViewActivity extends AppCompatActivity implements IWebPageView {
     }
 
     private void initTitle() {
-        StatusBarUtil.setColor(this, CommonUtils.getColor(R.color.colorTheme),0);
+        StatusBarUtil.setColor(this, CommonUtils.getColor(R.color.colorTheme), 0);
         mProgressBar = (ProgressBar) findViewById(R.id.pb_progress);
         webView = (WebView) findViewById(R.id.webview_detail);
         videoFullView = (FrameLayout) findViewById(R.id.video_fullView);
@@ -77,12 +83,38 @@ public class WebViewActivity extends AppCompatActivity implements IWebPageView {
             actionBar.setHomeAsUpIndicator(R.drawable.icon_back);
         }
         setTitle(mTitle);
+        mTitleToolBar.setOverflowIcon(ContextCompat.getDrawable(this, R.drawable.actionbar_more));
         mTitleToolBar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 onBackPressed();
             }
         });
+        mTitleToolBar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.actionbar_share:// 分享到
+                        String shareText = mWebChromeClient.getTitle() + mUrl + "（分享自云阅）";
+                        ShareUtils.share(WebViewActivity.this, shareText);
+                        break;
+                    case R.id.actionbar_cope:// 复制链接
+                        BaseTools.copy(mUrl);
+                        ToastUtil.showToast("复制成功");
+                        break;
+                    case R.id.actionbar_open:// 打开链接
+                        BaseTools.openLink(WebViewActivity.this, mUrl);
+                        break;
+                }
+                return false;
+            }
+        });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.webview_menu, menu);
+        return true;
     }
 
     private void getIntentData() {

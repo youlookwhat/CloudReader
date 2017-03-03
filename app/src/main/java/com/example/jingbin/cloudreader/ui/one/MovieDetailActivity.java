@@ -29,7 +29,7 @@ import com.example.jingbin.cloudreader.adapter.MovieDetailAdapter;
 import com.example.jingbin.cloudreader.bean.MovieDetailBean;
 import com.example.jingbin.cloudreader.bean.moviechild.SubjectsBean;
 import com.example.jingbin.cloudreader.databinding.ActivityMovieDetailBinding;
-import com.example.jingbin.cloudreader.http.HttpUtils;
+import com.example.jingbin.cloudreader.http.HttpClient;
 import com.example.jingbin.cloudreader.utils.CommonUtils;
 import com.example.jingbin.cloudreader.utils.DebugUtil;
 import com.example.jingbin.cloudreader.utils.StringFormatUtil;
@@ -90,7 +90,7 @@ public class MovieDetailActivity extends AppCompatActivity {
 //        binding.include.tvOneCity.setText("制片国家/地区：");
 //        binding.include.tvOneDay.setText("上映日期：");
 //        binding.tvOneTitle.setText("");
-        Subscription get = HttpUtils.getInstance().getDouBanServer().getMovieDetail(subjectsBean.getId())
+        Subscription get = HttpClient.Builder.getDouBanService().getMovieDetail(subjectsBean.getId())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<MovieDetailBean>() {

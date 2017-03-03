@@ -88,7 +88,7 @@ public class BookAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             BookViewHolder bookViewHolder = (BookViewHolder) holder;
             if (list != null && list.size() > 0) {
                 // 内容从"1"开始
-                DebugUtil.error("------position: "+position);
+//                DebugUtil.error("------position: "+position);
                 bookViewHolder.bindItem(list.get(position - 1), position-1);
             }
         }

@@ -21,7 +21,6 @@ public class NavDownloadActivity extends BaseActivity<ActivityNavDownloadBinding
         showContentView();
 
         setTitle("扫码下载");
-//        String url = "https://github.com/youlookwhat/CloudReader";
         String url = "https://fir.im/cloudreader";
         QRCodeUtil.showThreadImage(this, url, bindingView.ivErweima, R.drawable.ic_cloudreader_mip);
         bindingView.tvShare.setOnClickListener(new PerfectClickListener() {

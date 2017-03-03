@@ -134,7 +134,7 @@ public class EverydayFragment extends BaseFragment<FragmentEverydayBinding> {
         // 显示时轮播图滚动
         if (mHeaderBinding != null && mHeaderBinding.banner != null) {
             mHeaderBinding.banner.startAutoPlay();
-            mHeaderBinding.banner.setDelayTime(5000);
+            mHeaderBinding.banner.setDelayTime(4000);
         }
 
         if (!mIsVisible || !mIsPrepared) {
@@ -359,9 +359,6 @@ public class EverydayFragment extends BaseFragment<FragmentEverydayBinding> {
 
     }
 
-    /**
-     * 轮播图
-     */
     private void loadBannerPicture() {
         mEverydayModel.showBanncerPage(new RequestImpl() {
             @Override
@@ -371,30 +368,24 @@ public class EverydayFragment extends BaseFragment<FragmentEverydayBinding> {
                 } else {
                     mBannerImages.clear();
                 }
-                FrontpageBean frontpageBean = (FrontpageBean) object;
-                List<FrontpageBean.DataBeanX.DataBean> data = null;
-                if (frontpageBean != null
-                        && frontpageBean.getData() != null
-                        && frontpageBean.getData().get(0) != null
-                        && frontpageBean.getData().get(0).getData() != null) {
-
-                    data = frontpageBean.getData().get(0).getData();
-                }
-                if (data != null && data.size() > 0) {
-                    for (int i = 0; i < data.size(); i++) {
-                        //获取所有图片
-                        FrontpageBean.DataBeanX.DataBean bean = data.get(i);
-                        mBannerImages.add(bean.getPicUrl());
+                FrontpageBean bean = (FrontpageBean) object;
+                if (bean != null && bean.getResult() != null && bean.getResult().getFocus() != null && bean.getResult().getFocus().getResult() != null) {
+                    List<FrontpageBean.ResultBeanXXXXXXXXXXXXXX.FocusBean.ResultBeanX> result = bean.getResult().getFocus().getResult();
+                    if (result != null && result.size() > 0) {
+                        for (int i = 0; i < result.size(); i++) {
+                            //获取所有图片
+                            mBannerImages.add(result.get(i).getRandpic());
+                        }
+                        mHeaderBinding.banner.setImages(mBannerImages).setImageLoader(new GlideImageLoader()).start();
+                        maCache.remove(Constants.BANNER_PIC);
+                        maCache.put(Constants.BANNER_PIC, mBannerImages, 30000);
                     }
-                    mHeaderBinding.banner.setImages(mBannerImages).setImageLoader(new GlideImageLoader()).start();
-                    maCache.remove(Constants.BANNER_PIC);
-                    maCache.put(Constants.BANNER_PIC, mBannerImages, 30000);
                 }
             }
 
             @Override
             public void loadFailed() {
-//                showError();
+
             }
 
             @Override

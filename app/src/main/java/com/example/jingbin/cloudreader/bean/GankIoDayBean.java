@@ -1,6 +1,6 @@
 package com.example.jingbin.cloudreader.bean;
 
-import com.example.jingbin.cloudreader.http.ParamNames;
+import com.example.http.ParamNames;
 
 import java.io.Serializable;
 import java.util.List;

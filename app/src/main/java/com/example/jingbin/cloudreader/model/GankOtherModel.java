@@ -1,7 +1,7 @@
 package com.example.jingbin.cloudreader.model;
 
 import com.example.jingbin.cloudreader.bean.GankIoDataBean;
-import com.example.jingbin.cloudreader.http.HttpUtils;
+import com.example.jingbin.cloudreader.http.HttpClient;
 import com.example.jingbin.cloudreader.http.RequestImpl;
 
 import rx.Observer;
@@ -29,7 +29,7 @@ public class GankOtherModel {
     }
 
     public void getGankIoData(final RequestImpl listener) {
-        Subscription subscription = HttpUtils.getInstance().getGankIOServer().getGankIoData(id, page, per_page)
+        Subscription subscription = HttpClient.Builder.getGankIOServer().getGankIoData(id, page, per_page)
                 .subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<GankIoDataBean>() {
                     @Override

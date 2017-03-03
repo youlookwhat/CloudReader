@@ -15,7 +15,7 @@ import com.example.jingbin.cloudreader.app.ConstantsImageUrl;
 import com.example.jingbin.cloudreader.base.BaseFragment;
 import com.example.jingbin.cloudreader.bean.HotMovieBean;
 import com.example.jingbin.cloudreader.databinding.FragmentOneBinding;
-import com.example.jingbin.cloudreader.http.HttpUtils;
+import com.example.jingbin.cloudreader.http.HttpClient;
 import com.example.jingbin.cloudreader.http.cache.ACache;
 import com.example.jingbin.cloudreader.utils.DebugUtil;
 import com.example.jingbin.cloudreader.utils.ImgLoadUtil;
@@ -112,7 +112,7 @@ public class OneFragment extends BaseFragment<FragmentOneBinding> {
     }
 
     private void loadHotMovie() {
-        Subscription subscription = HttpUtils.getInstance().getDouBanServer().getHotMovie().subscribeOn(Schedulers.io())
+        Subscription subscription = HttpClient.Builder.getDouBanService().getHotMovie().subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread()).subscribe(new Observer<HotMovieBean>() {
                     @Override
                     public void onCompleted() {

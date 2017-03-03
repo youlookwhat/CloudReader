@@ -9,18 +9,19 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 
+import com.example.jingbin.cloudreader.app.Constants;
 import com.example.jingbin.cloudreader.app.ConstantsImageUrl;
 import com.example.jingbin.cloudreader.databinding.ActivityMainBinding;
+import com.example.jingbin.cloudreader.databinding.NavHeaderMainBinding;
 import com.example.jingbin.cloudreader.http.rx.RxBus;
 import com.example.jingbin.cloudreader.http.rx.RxBusBaseMessage;
 import com.example.jingbin.cloudreader.http.rx.RxCodeConstants;
@@ -33,12 +34,17 @@ import com.example.jingbin.cloudreader.ui.menu.NavHomePageActivity;
 import com.example.jingbin.cloudreader.ui.one.OneFragment;
 import com.example.jingbin.cloudreader.utils.CommonUtils;
 import com.example.jingbin.cloudreader.utils.ImgLoadUtil;
+import com.example.jingbin.cloudreader.utils.PerfectClickListener;
+import com.example.jingbin.cloudreader.utils.SPUtils;
 import com.example.jingbin.cloudreader.view.MyFragmentPagerAdapter;
 import com.example.jingbin.cloudreader.view.statusbar.StatusBarUtil;
+import com.example.jingbin.cloudreader.view.webview.WebViewActivity;
 
 import java.util.ArrayList;
 
 import rx.functions.Action1;
+import skin.support.SkinCompatManager;
+import skin.support.app.SkinCompatActivity;
 
 
 /**
@@ -46,7 +52,7 @@ import rx.functions.Action1;
  * Link to:https://github.com/youlookwhat/CloudReader
  * Contact me:http://www.jianshu.com/u/e43c6e979831
  */
-public class MainActivity extends AppCompatActivity implements View.OnClickListener, ViewPager.OnPageChangeListener {
+public class MainActivity extends SkinCompatActivity implements View.OnClickListener, ViewPager.OnPageChangeListener {
 
     private FrameLayout llTitleMenu;
     private Toolbar toolbar;
@@ -64,13 +70,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+//        getWindow().addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_main);
+
+        initStatusView();
         initId();
         initRxBus();
-        StatusBarUtil.setColorNoTranslucentForDrawerLayout(MainActivity.this, drawerLayout, CommonUtils.getColor(R.color.colorTheme));
+
+        StatusBarUtil.setColorNoTranslucentForDrawerLayout(MainActivity.this, drawerLayout,
+                CommonUtils.getColor(R.color.colorTheme));
         initContentFragment();
         initDrawerLayout();
         initListener();
+    }
+
+    private void initStatusView() {
+        ViewGroup.LayoutParams layoutParams = mBinding.include.viewStatus.getLayoutParams();
+        layoutParams.height = StatusBarUtil.getStatusBarHeight(this);
+        mBinding.include.viewStatus.setLayoutParams(layoutParams);
     }
 
     private void initId() {
@@ -95,26 +112,26 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         fab.setOnClickListener(this);
     }
 
+    NavHeaderMainBinding bind;
+
     /**
      * inflateHeaderView 进来的布局要宽一些
      */
     private void initDrawerLayout() {
         navView.inflateHeaderView(R.layout.nav_header_main);
         View headerView = navView.getHeaderView(0);
-//        LinearLayout viewById1 = (LinearLayout) headerView.findViewById(R.id.ll_header_bg);
-//        viewById1.setBackground();
-        ImageView ivAvatar = (ImageView) headerView.findViewById(R.id.iv_avatar);
-        ImgLoadUtil.displayCircle(ivAvatar, ConstantsImageUrl.IC_AVATAR);
-        LinearLayout llNavHomepage = (LinearLayout) headerView.findViewById(R.id.ll_nav_homepage);
-        LinearLayout llNavScanDownload = (LinearLayout) headerView.findViewById(R.id.ll_nav_scan_download);
-        LinearLayout llNavDeedback = (LinearLayout) headerView.findViewById(R.id.ll_nav_deedback);
-        LinearLayout llNavAbout = (LinearLayout) headerView.findViewById(R.id.ll_nav_about);
-        LinearLayout llNavExit = (LinearLayout) headerView.findViewById(R.id.ll_nav_exit);
-        llNavHomepage.setOnClickListener(this);
-        llNavScanDownload.setOnClickListener(this);
-        llNavDeedback.setOnClickListener(this);
-        llNavAbout.setOnClickListener(this);
-        llNavExit.setOnClickListener(this);
+        bind = DataBindingUtil.bind(headerView);
+        bind.setListener(this);
+        bind.dayNightSwitch.setChecked(SPUtils.getNightMode());
+
+        ImgLoadUtil.displayCircle(bind.ivAvatar, ConstantsImageUrl.IC_AVATAR);
+        bind.llNavExit.setOnClickListener(this);
+
+        bind.llNavHomepage.setOnClickListener(listener);
+        bind.llNavScanDownload.setOnClickListener(listener);
+        bind.llNavDeedback.setOnClickListener(listener);
+        bind.llNavAbout.setOnClickListener(listener);
+        bind.llNavLogin.setOnClickListener(listener);
     }
 
     private void initContentFragment() {
@@ -138,6 +155,36 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             actionBar.setDisplayShowTitleEnabled(false);
         }
     }
+
+
+    private PerfectClickListener listener = new PerfectClickListener() {
+        @Override
+        protected void onNoDoubleClick(final View v) {
+            mBinding.drawerLayout.closeDrawer(GravityCompat.START);
+            mBinding.drawerLayout.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    switch (v.getId()) {
+                        case R.id.ll_nav_homepage:// 主页
+                            NavHomePageActivity.startHome(MainActivity.this);
+                            break;
+                        case R.id.ll_nav_scan_download://扫码下载
+                            NavDownloadActivity.start(MainActivity.this);
+                            break;
+                        case R.id.ll_nav_deedback:// 问题反馈
+                            NavDeedBackActivity.start(MainActivity.this);
+                            break;
+                        case R.id.ll_nav_about:// 关于云阅
+                            NavAboutActivity.start(MainActivity.this);
+                            break;
+                        case R.id.ll_nav_login:// 登录GitHub账号
+                            WebViewActivity.loadUrl(v.getContext(), "https://github.com/login", "登录GitHub账号");
+                            break;
+                    }
+                }
+            }, 260);
+        }
+    };
 
     @Override
     public void onClick(View v) {
@@ -169,49 +216,30 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     vpContent.setCurrentItem(2);
                 }
                 break;
-            case R.id.ll_nav_homepage:// 主页
-                mBinding.drawerLayout.closeDrawer(GravityCompat.START);
-                mBinding.drawerLayout.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        NavHomePageActivity.startHome(MainActivity.this);
-                    }
-                }, 360);
-                break;
-
-            case R.id.ll_nav_scan_download://扫码下载
-                mBinding.drawerLayout.closeDrawer(GravityCompat.START);
-                mBinding.drawerLayout.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        NavDownloadActivity.start(MainActivity.this);
-                    }
-                }, 360);
-                break;
-            case R.id.ll_nav_deedback:// 问题反馈
-                mBinding.drawerLayout.closeDrawer(GravityCompat.START);
-                mBinding.drawerLayout.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        NavDeedBackActivity.start(MainActivity.this);
-                    }
-                }, 360);
-                break;
-            case R.id.ll_nav_about:// 关于云阅
-                mBinding.drawerLayout.closeDrawer(GravityCompat.START);
-                mBinding.drawerLayout.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        NavAboutActivity.start(MainActivity.this);
-                    }
-                }, 360);
-                break;
             case R.id.ll_nav_exit:// 退出应用
                 finish();
                 break;
             default:
                 break;
         }
+    }
+
+    /**
+     * 夜间模式待完善
+     */
+    public boolean getNightMode() {
+        return SPUtils.getNightMode();
+    }
+
+    public void onNightModeClick(View view) {
+        if (!SPUtils.getNightMode()) {
+            SkinCompatManager.getInstance().loadSkin(Constants.NIGHT_SKIN);
+        } else {
+            // 恢复应用默认皮肤
+            SkinCompatManager.getInstance().restoreDefaultTheme();
+        }
+        SPUtils.setNightMode(!SPUtils.getNightMode());
+        bind.dayNightSwitch.setChecked(SPUtils.getNightMode());
     }
 
     @Override
