@@ -33,9 +33,10 @@
     <string name="string_lib">
          xrecyclerview
         \n zoomlibrary
-        \n com.android.support:appcompat-v7:24.2.1
-        \n com.android.support:design:24.2.1
-        \n com.jakewharton.retrofit:retrofit1-okhttp3-client
+        \n com.android.support:appcompat-v7:25.1.1
+        \n com.android.support:design:25.1.1
+        \n com.android.support:cardview-v7:25.1.1
+        \n com.squareup.retrofit2:retrofit:2.1.0
         \n io.reactivex:rxandroid:1.2.0
         \n com.nineoldandroids:library:2.4.0
         \n jp.wasabeef:glide-transformations:2.0.1
@@ -43,6 +44,8 @@
         \n com.daimajia.slider:library:1.1.5@aar
         \n com.cocosw:bottomsheet:1.+@aar
         \n com.google.zxing:core:3.2.1
+        \n skin.support:skin-support:1.0.1
+        \n skin.support:skin-support-design:0.0.2
     </string>
 
     <string name="string_everyday_empty">暂时没有更新内容，去看看其他信息吧~</string>
