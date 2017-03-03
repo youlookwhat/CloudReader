@@ -21,6 +21,7 @@
         android:paddingTop="5dp">
 
         <LinearLayout
+            android:id="@+id/ll_item"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
@@ -31,8 +32,8 @@
                 android:layout_height="132dp"
                 android:layout_marginRight="12dp"
                 android:background="@color/colorPageBg"
-                android:showMovieImg="@{subjectsBean.images.large}"
-                android:scaleType="fitXY" />
+                android:scaleType="fitXY"
+                android:showMovieImg="@{subjectsBean.images.large}" />
             <!--android:defaultPicType="@{0}"-->
             <!--android:displayFadeImage="@{subjectsBean.images.large}"-->
 
@@ -133,19 +134,11 @@
 
         </LinearLayout>
 
-        <!--<SeekBar-->
-        <!--android:id="@+id/pb_rate"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="5dp"-->
-        <!--android:background="@color/colorPageBg"-->
-        <!--android:max="10" />-->
-
         <View
             android:id="@+id/view_color"
             android:layout_width="match_parent"
             android:layout_height="1px"
             android:layout_marginLeft="112dp"
-            android:layout_marginTop="5dp"
-            android:background="@color/colorPageBg" />
+            android:layout_marginTop="5dp" />
     </LinearLayout>
 </layout>

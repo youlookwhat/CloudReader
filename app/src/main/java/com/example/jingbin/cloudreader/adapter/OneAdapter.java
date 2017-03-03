@@ -56,7 +56,6 @@ public class OneAdapter extends BaseRecyclerViewAdapter<SubjectsBean> {
                 // 分割线颜色
                 binding.viewColor.setBackgroundColor(CommonUtils.randomColor());
 
-//                ViewHelper.setScaleX(itemView,0.6f);
                 ViewHelper.setScaleX(itemView,0.8f);
                 ViewHelper.setScaleY(itemView,0.8f);
                 ViewPropertyAnimator.animate(itemView).scaleX(1).setDuration(350).setInterpolator(new OvershootInterpolator()).start();
