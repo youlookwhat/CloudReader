@@ -52,4 +52,6 @@ dependencies {
     compile 'com.youth.banner:banner:1.4.2'
     compile 'com.daimajia.slider:library:1.1.5@aar'
     compile 'com.cocosw:bottomsheet:1.3.0@aar'
+    compile 'skin.support:skin-support:1.0.1'
+    compile 'skin.support:skin-support-design:0.0.2'
 }

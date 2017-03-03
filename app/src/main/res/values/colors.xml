@@ -9,6 +9,17 @@
     <color name="colorPageBg">#f2f4f5</color>
 
     <color name="colorWhite">#ffffffff</color>
+
+    <!--主页tab背景-->
+    <color name="colorTabBg">#ffffffff</color>
+    <color name="colorTabTextCheck">#ffce3d3a</color>
+    <color name="colorTabTextNormal">#585858</color>
+    <color name="colorTabLine">#ffce3d3a</color>
+
+    <!--侧边栏分割线-->
+    <color name="colorNavLine">#E0E0E0</color>
+
+
     <!--分割线-->
     <color name="colorLine">#EBEBEB</color>
     <!--首页分割线-->

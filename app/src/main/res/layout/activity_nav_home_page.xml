@@ -5,17 +5,13 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-
         tools:context=".ui.menu.NavHomePageActivity">
-        <!--android:fitsSystemWindows="true"-->
 
         <android.support.design.widget.AppBarLayout
             android:id="@+id/app_bar"
             android:layout_width="match_parent"
             android:layout_height="210dp"
             android:theme="@style/AppTheme.AppBarOverlay">
-            <!--android:fitsSystemWindows="true"-->
-
 
             <android.support.design.widget.CollapsingToolbarLayout
                 android:id="@+id/toolbar_layout"

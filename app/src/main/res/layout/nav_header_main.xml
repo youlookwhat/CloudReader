@@ -1,14 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <ScrollView
-        android:background="@color/colorPageBg"
+    <data>
+
+        <variable
+            name="listener"
+            type="com.example.jingbin.cloudreader.MainActivity" />
+    </data>
+
+    <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true"
+        android:background="@color/colorPageBg">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:background="@color/colorPageBg"
             android:orientation="vertical">
 
@@ -180,7 +188,7 @@
                 android:id="@+id/line"
                 android:layout_width="match_parent"
                 android:layout_height="0.3dp"
-                android:background="#E0E0E0" />
+                android:background="@color/colorNavLine" />
 
             <LinearLayout
                 android:id="@+id/ll_nav_login"
@@ -207,6 +215,43 @@
                     android:textSize="15sp" />
 
             </LinearLayout>
+
+
+            <!--夜间模式，正在完善-->
+            <LinearLayout
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:background="@drawable/ripple_one_item_bg"
+                android:clickable="true"
+                android:gravity="center_vertical"
+                android:onClick="@{listener.onNightModeClick}"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/activity_horizontal_margin"
+                android:paddingRight="@dimen/activity_horizontal_margin">
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/ic_nav_night" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:layout_weight="1"
+                    android:text="夜间模式"
+                    android:textColor="@color/colorContent"
+                    android:textSize="15sp" />
+
+                <android.support.v7.widget.SwitchCompat
+                    android:id="@+id/day_night_switch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="@{listener.getNightMode}"
+                    android:clickable="false" />
+            </LinearLayout>
+
 
             <LinearLayout
                 android:id="@+id/ll_nav_exit"
@@ -235,5 +280,5 @@
             </LinearLayout>
 
         </LinearLayout>
-    </ScrollView>
+    </android.support.v4.widget.NestedScrollView>
 </layout>

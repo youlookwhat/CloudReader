@@ -7,6 +7,9 @@ package com.example.jingbin.cloudreader.app;
 
 public class Constants {
 
+    public static final String NIGHT_SKIN = "night.skin";
+    public static final String KEY_MODE_NIGHT = "mode-night";
+
     // 首页没日推荐缓存
     public static String GANK_ALL = "gank_all";
     // 安卓数据

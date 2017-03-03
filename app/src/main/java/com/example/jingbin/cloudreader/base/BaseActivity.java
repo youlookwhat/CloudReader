@@ -6,7 +6,6 @@ import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,11 +21,12 @@ import com.example.jingbin.cloudreader.view.statusbar.StatusBarUtil;
 
 import rx.Subscription;
 import rx.subscriptions.CompositeSubscription;
+import skin.support.app.SkinCompatActivity;
 
 /**
  * Created by jingbin on 16/12/10.
  */
-public class BaseActivity<SV extends ViewDataBinding> extends AppCompatActivity {
+public class BaseActivity<SV extends ViewDataBinding> extends SkinCompatActivity {
 
     // 布局view
     protected SV bindingView;
