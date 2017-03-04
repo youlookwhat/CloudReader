@@ -9,12 +9,12 @@
 > Netease cloud music Ui && Retrofit + RxJava + MVVM-databinding && GankIo、Douban Api 
 
 
-### Introduce
+## Introduce
 一款基于网易云音乐UI，使用GankIo及豆瓣api开发的符合Google Material Desgin阅读类的开源项目。项目采取的是Retrofit + RxJava + MVVM-DataBinding架构开发。
 
 A netease cloud music based UI, using GankIo and douban API development accord with Google Material Desgin reading class open source projects.
 
-### Screenshots
+## Screenshots
 
 <img width="173" height=“274” src="https://github.com/youlookwhat/CloudReader/blob/master/file/page_gank_00.png"></img>
 <img width="173" height=“274” src="https://github.com/youlookwhat/CloudReader/blob/master/file/page_movie_01.png"></img>
@@ -26,12 +26,12 @@ A netease cloud music based UI, using GankIo and douban API development accord w
 
 <img width="320" height=“590” src="https://github.com/youlookwhat/CloudReader/blob/master/file/cloudreader.gif"></img>
 
-### Issues 宝贵意见
+## Issues 宝贵意见
 如果有任何问题，请到github的[issue处][21]写上你不明白的地方，也可以通过下面提供的方式联系我，我会及时给予帮助。
 
 If you have any questions, please write to [the issue][21] of making you don't understand of place, also can contact me through here, I will help them in time.
 
-### Features 特性
+## Features 特性
 * 1、基本遵循Google Material Design设计风格。                                    
 * 2、干货集中营内容与豆瓣电影书籍内容。                                    
 * 3、MvvM-DataBinding的项目应用。                                    
