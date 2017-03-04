@@ -52,7 +52,7 @@ If you have any questions, please write to [the issue][21] of making you don't u
 
 
 ## See Detail
-> [项目介绍详情](https://github.com/youlookwhat/CloudReader/blob/master/file/Introduction.md) | [细节优化详情](https://github.com/youlookwhat/CloudReader/wiki) | [**版本更新详情(V1.5.0)**](http://jingbin.me/2016/12/30/%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97-%E4%BA%91%E9%98%85/)
+> [项目介绍详情](https://github.com/youlookwhat/CloudReader/blob/master/file/Introduction.md) | [细节优化详情](https://github.com/youlookwhat/CloudReader/wiki) | [**版本更新详情(V1.8.0)**](http://jingbin.me/2016/12/30/%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97-%E4%BA%91%E9%98%85/)
 
 ### Download
 　[火速跳转](https://fir.im/cloudreader)                                    
@@ -66,6 +66,16 @@ If you have any questions, please write to [the issue][21] of making you don't u
 　
 
 ### Version
+#### 版本 V1.8.0（3-3）
+ - 1、[新增] 侧边栏增加“**登录GitHub账号**”和“**退出应用**”功能
+ - 2、[新增] WebView新增“**分享到**”、“**复制链接**”、“**打开链接**”功能
+ - 3、[新增] 使其系统更改字体无效
+ - 4、[改进] 网络请求更换成``retrofit 2.x``
+ - 5、[改进] 首页轮播图更换显示链接
+ - 6、[优化] 进入主界面动画优化
+ - 7、[优化] 兼容至7.0、升级关联库和代码优化等
+ - 8、[待完善] 换肤功能入口隐藏，正在逐步完善。
+
 #### 版本 V1.5.0（1-29）
  - 1、**App体积大小从16M降到5.8M！**
  - 2、将App里固定的图片以移动到七牛。
