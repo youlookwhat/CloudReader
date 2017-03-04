@@ -9,6 +9,7 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
 import android.view.Menu;
@@ -18,7 +19,6 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 
-import com.example.jingbin.cloudreader.app.Constants;
 import com.example.jingbin.cloudreader.app.ConstantsImageUrl;
 import com.example.jingbin.cloudreader.databinding.ActivityMainBinding;
 import com.example.jingbin.cloudreader.databinding.NavHeaderMainBinding;
@@ -43,8 +43,6 @@ import com.example.jingbin.cloudreader.view.webview.WebViewActivity;
 import java.util.ArrayList;
 
 import rx.functions.Action1;
-import skin.support.SkinCompatManager;
-import skin.support.app.SkinCompatActivity;
 
 
 /**
@@ -52,7 +50,7 @@ import skin.support.app.SkinCompatActivity;
  * Link to:https://github.com/youlookwhat/CloudReader
  * Contact me:http://www.jianshu.com/u/e43c6e979831
  */
-public class MainActivity extends SkinCompatActivity implements View.OnClickListener, ViewPager.OnPageChangeListener {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener, ViewPager.OnPageChangeListener {
 
     private FrameLayout llTitleMenu;
     private Toolbar toolbar;
@@ -237,10 +235,10 @@ public class MainActivity extends SkinCompatActivity implements View.OnClickList
 
     public void onNightModeClick(View view) {
         if (!SPUtils.getNightMode()) {
-            SkinCompatManager.getInstance().loadSkin(Constants.NIGHT_SKIN);
+//            SkinCompatManager.getInstance().loadSkin(Constants.NIGHT_SKIN);
         } else {
             // 恢复应用默认皮肤
-            SkinCompatManager.getInstance().restoreDefaultTheme();
+//            SkinCompatManager.getInstance().restoreDefaultTheme();
         }
         SPUtils.setNightMode(!SPUtils.getNightMode());
         bind.dayNightSwitch.setChecked(SPUtils.getNightMode());
