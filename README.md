@@ -47,8 +47,7 @@ If you have any questions, please write to [the issue][21] of making you don't u
 * 13、基于``DataBinding``的``BaseActivity``和``BaseFragment``。                                    
 * 14、``Fragment``懒加载模式。                                    
 * 15、``SwipeRefreshLayout``结合``RecyclerView``下拉刷新上拉加载。                                    
-* 16、``CoordinatorLayout``+``Behavior``实现标题栏渐变。                                    
-* 17、``NestedScrollView ``嵌套``RecyclerView ``的使用。                                    
+* 16、``CoordinatorLayout``+``Behavior``实现标题栏渐变。                                                                       
 
 
 ## See Detail
