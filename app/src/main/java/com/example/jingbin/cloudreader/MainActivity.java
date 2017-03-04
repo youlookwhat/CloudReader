@@ -126,6 +126,7 @@ public class MainActivity extends SkinCompatActivity implements View.OnClickList
 
         ImgLoadUtil.displayCircle(bind.ivAvatar, ConstantsImageUrl.IC_AVATAR);
         bind.llNavExit.setOnClickListener(this);
+        bind.ivAvatar.setOnClickListener(this);
 
         bind.llNavHomepage.setOnClickListener(listener);
         bind.llNavScanDownload.setOnClickListener(listener);
@@ -215,6 +216,9 @@ public class MainActivity extends SkinCompatActivity implements View.OnClickList
                     llTitleGank.setSelected(false);
                     vpContent.setCurrentItem(2);
                 }
+                break;
+            case R.id.iv_avatar: // 头像进入GitHub
+                WebViewActivity.loadUrl(v.getContext(),CommonUtils.getString(R.string.string_url_cloudreader),"CloudReader");
                 break;
             case R.id.ll_nav_exit:// 退出应用
                 finish();
