@@ -73,7 +73,6 @@ If you have any questions, please write to [the issue][21] of making you don't u
  - 5、[改进] 首页轮播图更换显示链接
  - 6、[优化] 进入主界面动画优化
  - 7、[优化] 兼容至7.0、升级关联库和代码优化等
- - 8、[待完善] 换肤功能入口隐藏，正在逐步完善。
 
 #### 版本 V1.5.0（1-29）
  - 1、**App体积大小从16M降到5.8M！**
