@@ -67,7 +67,6 @@ public class GankFragment extends BaseFragment<FragmentGankBinding> {
         mFragments.add(new WelfareFragment());
         mFragments.add(new CustomFragment());
         mFragments.add(AndroidFragment.newInstance("Android"));
-//        mFragments.add(AndroidFragment.newInstance("iOS"));
     }
 
     /**
