@@ -66,7 +66,7 @@ If you have any questions, please write to [the issue][21] of making you don't u
 
 ### Version
 
-#### 版本 V1.8.1（3-4）
+#### 版本 V1.8.1（3-7）
  - 1、[修复]修复首页有六个以上item时，图片显示不出的bug
 
 #### 版本 V1.8.0（3-3）
