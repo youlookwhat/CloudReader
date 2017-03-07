@@ -181,7 +181,7 @@ public class EverydayModel {
             androidBean.setImage_url(ConstantsImageUrl.HOME_ONE_URLS[getRandom(1)]);//一图
         } else if (androidSize == 5) {
             androidBean.setImage_url(ConstantsImageUrl.HOME_TWO_URLS[getRandom(2)]);//两图
-        } else if (androidSize == 6) {
+        } else if (androidSize >= 6) {
             androidBean.setImage_url(ConstantsImageUrl.HOME_SIX_URLS[getRandom(3)]);//三小图
         }
         return androidBean;
