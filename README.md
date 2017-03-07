@@ -51,7 +51,7 @@ If you have any questions, please write to [the issue][21] of making you don't u
 
 
 ## See Detail
-> [项目介绍详情](https://github.com/youlookwhat/CloudReader/blob/master/file/Introduction.md) | [细节优化详情](https://github.com/youlookwhat/CloudReader/wiki) | [**版本更新详情(V1.8.0)**](http://jingbin.me/2016/12/30/%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97-%E4%BA%91%E9%98%85/)
+> [项目介绍详情](https://github.com/youlookwhat/CloudReader/blob/master/file/Introduction.md) | [细节优化详情](https://github.com/youlookwhat/CloudReader/wiki) | [**版本更新详情(V1.8.1)**](http://jingbin.me/2016/12/30/%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97-%E4%BA%91%E9%98%85/)
 
 ### Download
 　[火速跳转](https://fir.im/cloudreader)                                    
@@ -65,6 +65,10 @@ If you have any questions, please write to [the issue][21] of making you don't u
 　
 
 ### Version
+
+#### 版本 V1.8.1（3-4）
+ - 1、[修复]修复首页有六个以上item时，图片显示不出的bug
+
 #### 版本 V1.8.0（3-3）
  - 1、[新增] 侧边栏增加“**登录GitHub账号**”和“**退出应用**”功能
  - 2、[新增] WebView新增“**分享到**”、“**复制链接**”、“**打开链接**”功能
@@ -139,7 +143,7 @@ limitations under the License.
 [2]:https://www.apache.org/licenses/LICENSE-2.0.html
 [3]:https://img.shields.io/badge/API-19%2B-red.svg?style=flat
 [4]:https://android-arsenal.com/api?level=19
-[30]:https://img.shields.io/badge/release-1.8.0-red.svg
+[30]:https://img.shields.io/badge/release-1.8.1-red.svg
 [31]:https://github.com/youlookwhat/CloudReader/releases
 [32]:https://img.shields.io/badge/PRs-welcome-brightgreen.svg
 [33]:https://github.com/youlookwhat/CloudReader/pulls
