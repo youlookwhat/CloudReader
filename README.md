@@ -117,10 +117,10 @@ If you have any questions, please write to [the issue][21] of making you don't u
 > 注意：此开源项目仅做学习交流使用，如用到实际项目还需多考虑其他因素如并发等，请多多斟酌。如果你觉得不错，对你有帮助，欢迎点个fork，star，follow，也可以帮忙分享给你更多的朋友，这是给我们最大的动力与支持。另，此MvvM-databinding框架是依照自己理解而写，有疑问可以看[这里](https://github.com/youlookwhat/ProjectPatternStudy)。
 
 ## About me
- - **QQ：**770413277
+ - **QQ：** 770413277
  - **简书：**[Jingbin_](http://www.jianshu.com/users/e43c6e979831/latest_articles)
  - **Blog：**[http://jingbin.me](http://jingbin.me)
- - **Email：**jingbin127@163.com
+ - **Email：** jingbin127@163.com
 
 ## License
 ```
