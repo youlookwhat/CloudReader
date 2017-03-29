@@ -52,9 +52,9 @@ public class HttpUtils {
     private IpmlTokenGetListener listener;
     private boolean debug;
     // gankio、豆瓣、（轮播图）
-    private final static String API_GANKIO = "http://gank.io/api/";
+    private final static String API_GANKIO = "https://gank.io/api/";
     private final static String API_DOUBAN = "Https://api.douban.com/";
-    private final static String API_TING = "http://tingapi.ting.baidu.com/v1/restserver/";
+    private final static String API_TING = "https://tingapi.ting.baidu.com/v1/restserver/";
     /**
      * 分页数据，每页的数量
      */

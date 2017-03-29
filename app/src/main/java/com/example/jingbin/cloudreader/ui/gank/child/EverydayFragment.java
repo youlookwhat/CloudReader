@@ -35,6 +35,7 @@ import com.example.jingbin.cloudreader.utils.PerfectClickListener;
 import com.example.jingbin.cloudreader.utils.SPUtils;
 import com.example.jingbin.cloudreader.utils.TimeUtil;
 import com.example.jingbin.cloudreader.view.webview.WebViewActivity;
+import com.youth.banner.listener.OnBannerClickListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -96,7 +97,6 @@ public class EverydayFragment extends BaseFragment<FragmentEverydayBinding> {
         maCache = ACache.get(getContext());
         mEverydayModel = new EverydayModel();
         mBannerImages = (ArrayList<String>) maCache.getAsObject(Constants.BANNER_PIC);
-//        mLists = (ArrayList<List<AndroidBean>>) maCache.getAsObject(Constants.EVERYDAY_CONTENT);
         DebugUtil.error("----mBannerImages: " + (mBannerImages == null));
         DebugUtil.error("----mLists: " + (mLists == null));
 
@@ -276,8 +276,6 @@ public class EverydayFragment extends BaseFragment<FragmentEverydayBinding> {
 
         // 保存请求的日期
         SPUtils.putString("everyday_data", TimeUtil.getData());
-//        ArrayList<String> lastTime = TimeUtil.getLastTime(getTodayTime().get(0), getTodayTime().get(1), getTodayTime().get(2));
-//        SPUtils.putString("everyday_data", lastTime.get(0) + "-" + lastTime.get(1) + "-" + lastTime.get(2));
 
         mIsFirst = false;
     }
@@ -303,7 +301,6 @@ public class EverydayFragment extends BaseFragment<FragmentEverydayBinding> {
     }
 
     private void setAdapter(ArrayList<List<AndroidBean>> lists) {
-//        DebugUtil.error("----lists.size():  " + lists.size());
         showRotaLoading(false);
         if (mEverydayAdapter == null) {
             mEverydayAdapter = new EverydayAdapter();
@@ -370,13 +367,24 @@ public class EverydayFragment extends BaseFragment<FragmentEverydayBinding> {
                 }
                 FrontpageBean bean = (FrontpageBean) object;
                 if (bean != null && bean.getResult() != null && bean.getResult().getFocus() != null && bean.getResult().getFocus().getResult() != null) {
-                    List<FrontpageBean.ResultBeanXXXXXXXXXXXXXX.FocusBean.ResultBeanX> result = bean.getResult().getFocus().getResult();
+                    final List<FrontpageBean.ResultBeanXXXXXXXXXXXXXX.FocusBean.ResultBeanX> result = bean.getResult().getFocus().getResult();
                     if (result != null && result.size() > 0) {
                         for (int i = 0; i < result.size(); i++) {
                             //获取所有图片
                             mBannerImages.add(result.get(i).getRandpic());
                         }
                         mHeaderBinding.banner.setImages(mBannerImages).setImageLoader(new GlideImageLoader()).start();
+                        mHeaderBinding.banner.setOnBannerClickListener(new OnBannerClickListener() {
+                            @Override
+                            public void OnBannerClick(int position) {
+                                position = position - 1;
+                                // 链接没有做缓存，如果轮播图使用的缓存则点击图片无效
+                                if (result.get(position) != null && result.get(position).getCode() != null
+                                        && result.get(position).getCode().startsWith("http")) {
+                                    WebViewActivity.loadUrl(getContext(), result.get(position).getCode(), "加载中...");
+                                }
+                            }
+                        });
                         maCache.remove(Constants.BANNER_PIC);
                         maCache.put(Constants.BANNER_PIC, mBannerImages, 30000);
                     }
