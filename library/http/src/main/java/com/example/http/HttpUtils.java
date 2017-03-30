@@ -40,6 +40,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * 返回：code:112（rate_limit_exceeded2 IP 访问速度限制）
  * 解决：1.使用每分钟访问次数限制（客户端）2.更换ip (更换wifi)
  * 豆瓣开发者服务使用条款: https://developers.douban.com/wiki/?title=terms
+ * 使用时请在"CloudReaderApplication"下初始化。
  */
 
 public class HttpUtils {
