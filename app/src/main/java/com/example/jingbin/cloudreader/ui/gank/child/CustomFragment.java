@@ -235,6 +235,8 @@ public class CustomFragment extends BaseFragment<FragmentCustomBinding> {
             ToastUtil.showToast("当前已经是" + selectType + "分类");
             return false;
         } else {
+            // 重置XRecyclerView状态，解决 如出现刷新到底无内容再切换其他类别后，无法上拉加载的情况
+            bindingView.xrvCustom.reset();
             return true;
         }
     }

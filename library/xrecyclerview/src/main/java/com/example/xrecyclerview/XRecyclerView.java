@@ -59,7 +59,7 @@ public class XRecyclerView extends RecyclerView {
 
     /**
      * 改为公有。供外添加view使用,使用标识
-     * 注意：使用后不能使用 上拉刷新，否则添加无效
+     * 注意：使用后不能使用 上拉加载，否则添加无效
      * 使用时 isOther 传入 true，然后调用 noMoreLoading即可。
      */
     public void addFootView(final View view, boolean isOther) {
@@ -351,6 +351,7 @@ public class XRecyclerView extends RecyclerView {
 
     public void reset() {
         isnomore = false;
+        previousTotal = 0;
         final View footView = mFootViews.get(0);
         if (footView instanceof LoadingMoreFooter) {
             ((LoadingMoreFooter) footView).reSet();
