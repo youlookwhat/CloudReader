@@ -11,7 +11,7 @@ import com.example.jingbin.cloudreader.adapter.DouBanTopAdapter;
 import com.example.jingbin.cloudreader.base.BaseActivity;
 import com.example.jingbin.cloudreader.bean.HotMovieBean;
 import com.example.jingbin.cloudreader.databinding.ActivityDoubanTopBinding;
-import com.example.jingbin.cloudreader.http.HttpUtils;
+import com.example.jingbin.cloudreader.http.HttpClient;
 import com.example.xrecyclerview.XRecyclerView;
 
 import rx.Observer;
@@ -50,7 +50,7 @@ public class DoubanTopActivity extends BaseActivity<ActivityDoubanTopBinding> {
     }
 
     private void loadDouBanTop250() {
-        Subscription get = HttpUtils.getInstance().getDouBanServer().getMovieTop250(mStart, mCount)
+        Subscription get = HttpClient.Builder.getDouBanService().getMovieTop250(mStart, mCount)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<HotMovieBean>() {

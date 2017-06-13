@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 import com.example.jingbin.cloudreader.app.CloudReaderApplication;
+import com.example.jingbin.cloudreader.app.Constants;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +15,6 @@ import java.util.List;
 public class SPUtils {
 
     private static final String CONFIG = "config";
-
 
     /**
      * 获取SharedPreferences实例对象
@@ -128,8 +128,7 @@ public class SPUtils {
      * @param key     List<String>对应的key
      * @param strList 对应需要存储的List<String>
      */
-    public static void putStrListValue(String key,
-                                       List<String> strList) {
+    public static void putStrListValue(String key, List<String> strList) {
         if (null == strList) {
             return;
         }
@@ -164,6 +163,14 @@ public class SPUtils {
     public static void remove(String key) {
         SharedPreferences.Editor editor = getSharedPreference(CONFIG).edit();
         editor.remove(key).apply();
+    }
+
+    public static boolean getNightMode() {
+        return SPUtils.getBoolean(Constants.KEY_MODE_NIGHT, false);
+    }
+
+    public static void setNightMode(boolean nightMode) {
+        SPUtils.putBoolean(Constants.KEY_MODE_NIGHT, nightMode);
     }
 
 }

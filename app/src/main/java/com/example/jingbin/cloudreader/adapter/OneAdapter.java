@@ -56,7 +56,6 @@ public class OneAdapter extends BaseRecyclerViewAdapter<SubjectsBean> {
                 // 分割线颜色
                 binding.viewColor.setBackgroundColor(CommonUtils.randomColor());
 
-//                ViewHelper.setScaleX(itemView,0.6f);
                 ViewHelper.setScaleX(itemView,0.8f);
                 ViewHelper.setScaleY(itemView,0.8f);
                 ViewPropertyAnimator.animate(itemView).scaleX(1).setDuration(350).setInterpolator(new OvershootInterpolator()).start();
@@ -65,20 +64,23 @@ public class OneAdapter extends BaseRecyclerViewAdapter<SubjectsBean> {
                 binding.llOneItem.setOnClickListener(new PerfectClickListener() {
                     @Override
                     protected void onNoDoubleClick(View v) {
-                        if (position % 2 == 0) {
+
+                        OneMovieDetailActivity.start(activity, positionData, binding.ivOnePhoto);
+
+//                        if (position % 2 == 0) {
 
 //                            SlideScrollViewActivity.start(activity, positionData, binding.ivOnePhoto);
 
 //                            MovieDetailActivity.start(activity, positionData, binding.ivOnePhoto);
-                            OneMovieDetailActivity.start(activity, positionData, binding.ivOnePhoto);
+//                            OneMovieDetailActivity.start(activity, positionData, binding.ivOnePhoto);
 
 //                            TestActivity.start(activity, positionData, binding.ivOnePhoto);
 //                            activity.overridePendingTransition(R.anim.push_fade_out, R.anim.push_fade_in);
-                        } else {
+//                        } else {
 //                            SlideScrollViewActivity.start(activity, positionData, binding.ivOnePhoto);
 //                            SlideShadeViewActivity.start(activity, positionData, binding.ivOnePhoto);
-                            OneMovieDetailActivity.start(activity, positionData, binding.ivOnePhoto);
-                        }
+//                            OneMovieDetailActivity.start(activity, positionData, binding.ivOnePhoto);
+//                        }
 
                         // 这个可以
 //                        SlideScrollViewActivity.start(activity, positionData, binding.ivOnePhoto);

@@ -16,7 +16,7 @@ import com.example.jingbin.cloudreader.bean.MovieDetailBean;
 import com.example.jingbin.cloudreader.bean.moviechild.SubjectsBean;
 import com.example.jingbin.cloudreader.databinding.ActivityOneMovieDetailBinding;
 import com.example.jingbin.cloudreader.databinding.HeaderSlideShapeBinding;
-import com.example.jingbin.cloudreader.http.HttpUtils;
+import com.example.jingbin.cloudreader.http.HttpClient;
 import com.example.jingbin.cloudreader.utils.CommonUtils;
 import com.example.jingbin.cloudreader.utils.StringFormatUtil;
 import com.example.jingbin.cloudreader.view.webview.WebViewActivity;
@@ -78,7 +78,7 @@ public class OneMovieDetailActivity extends BaseHeaderActivity<HeaderSlideShapeB
     }
 
     private void loadMovieDetail() {
-        Subscription get = HttpUtils.getInstance().getDouBanServer().getMovieDetail(subjectsBean.getId())
+        Subscription get = HttpClient.Builder.getDouBanService().getMovieDetail(subjectsBean.getId())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<MovieDetailBean>() {

@@ -1,181 +1,284 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <LinearLayout
+    <data>
+
+        <variable
+            name="listener"
+            type="com.example.jingbin.cloudreader.MainActivity" />
+    </data>
+
+    <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/colorPageBg"
-        android:orientation="vertical">
+        android:fitsSystemWindows="true"
+        android:background="@color/colorPageBg">
 
-        <LinearLayout xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/ll_header_bg"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/nav_header_height"
-            android:background="@drawable/ic_nav_bg_drawerlayout"
-            android:gravity="bottom"
-            android:orientation="vertical"
-            android:theme="@style/ThemeOverlay.AppCompat.Dark">
+            android:layout_height="match_parent"
+            android:background="@color/colorPageBg"
+            android:orientation="vertical">
 
-            <LinearLayout
+            <LinearLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/ll_header_bg"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="#4000"
+                android:layout_height="@dimen/nav_header_height"
+                android:background="@drawable/ic_nav_bg_drawerlayout"
                 android:gravity="bottom"
                 android:orientation="vertical"
-                android:paddingBottom="@dimen/activity_vertical_margin"
-                android:paddingLeft="@dimen/activity_horizontal_margin"
-                android:paddingRight="@dimen/activity_horizontal_margin"
-                android:paddingTop="@dimen/activity_vertical_margin">
-
-                <ImageView
-                    android:id="@+id/iv_avatar"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
-                    android:scaleType="centerCrop" />
+                android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:paddingTop="@dimen/nav_header_vertical_spacing">
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#4000"
+                    android:gravity="bottom"
+                    android:orientation="vertical"
+                    android:paddingBottom="@dimen/activity_vertical_margin"
+                    android:paddingLeft="@dimen/activity_horizontal_margin"
+                    android:paddingRight="@dimen/activity_horizontal_margin"
+                    android:paddingTop="@dimen/activity_vertical_margin">
 
-                    <TextView
-                        android:id="@+id/tv_username"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="用户已注销"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                        android:textColor="@color/colorWhite"
-                        android:textSize="17sp" />
+                    <ImageView
+                        android:id="@+id/iv_avatar"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:scaleType="centerCrop" />
 
-                    <TextView
-                        android:id="@+id/tv_level"
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginLeft="6dp"
-                        android:background="@drawable/shape_bg_level"
-                        android:text="Lv.10"
-                        android:textColor="@color/colorWhite"
-                        android:textSize="10sp"
-                        android:textStyle="italic|bold" />
+                        android:orientation="horizontal"
+                        android:paddingTop="@dimen/nav_header_vertical_spacing">
+
+                        <TextView
+                            android:id="@+id/tv_username"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="夕阳无限好"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                            android:textColor="@color/colorWhite"
+                            android:textSize="17sp" />
+
+                        <TextView
+                            android:id="@+id/tv_level"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="6dp"
+                            android:background="@drawable/shape_bg_level"
+                            android:text="Lv.10"
+                            android:textColor="@color/colorWhite"
+                            android:textSize="10sp"
+                            android:textStyle="italic|bold" />
+
+                    </LinearLayout>
 
                 </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_nav_homepage"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/ripple_one_item_bg"
+                android:clickable="true"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp">
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/ic_nav_homepage" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:text="项目主页"
+                    android:textColor="@color/colorContent"
+                    android:textSize="15sp" />
 
             </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/ll_nav_scan_download"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:background="@drawable/ripple_one_item_bg"
+                android:clickable="true"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp">
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/ic_nav_scan" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:text="扫码下载"
+                    android:textColor="@color/colorContent"
+                    android:textSize="15sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_nav_deedback"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:background="@drawable/ripple_one_item_bg"
+                android:clickable="true"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp">
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/ic_nav_deedback" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:text="问题反馈"
+                    android:textColor="@color/colorContent"
+                    android:textSize="15sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_nav_about"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:background="@drawable/ripple_one_item_bg"
+                android:clickable="true"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp">
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/ic_nav_about" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:text="关于云阅"
+                    android:textColor="@color/colorContent"
+                    android:textSize="15sp" />
+
+            </LinearLayout>
+
+            <View
+                android:id="@+id/line"
+                android:layout_width="match_parent"
+                android:layout_height="0.3dp"
+                android:background="@color/colorNavLine" />
+
+            <LinearLayout
+                android:id="@+id/ll_nav_login"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:background="@drawable/ripple_one_item_bg"
+                android:clickable="true"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp">
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/ic_nav_login" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:text="登录GitHub账号"
+                    android:textColor="@color/colorContent"
+                    android:textSize="15sp" />
+
+            </LinearLayout>
+
+
+            <!--夜间模式，正在完善-->
+            <LinearLayout
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:background="@drawable/ripple_one_item_bg"
+                android:clickable="true"
+                android:gravity="center_vertical"
+                android:onClick="@{listener.onNightModeClick}"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/activity_horizontal_margin"
+                android:paddingRight="@dimen/activity_horizontal_margin">
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/ic_nav_night" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:layout_weight="1"
+                    android:text="夜间模式"
+                    android:textColor="@color/colorContent"
+                    android:textSize="15sp" />
+
+                <android.support.v7.widget.SwitchCompat
+                    android:id="@+id/day_night_switch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="@{listener.getNightMode}"
+                    android:clickable="false" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/ll_nav_exit"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:background="@drawable/ripple_one_item_bg"
+                android:clickable="true"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp">
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/ic_nav_exit" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:text="退出应用"
+                    android:textColor="@color/colorContent"
+                    android:textSize="15sp" />
+
+            </LinearLayout>
+
         </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/ll_nav_homepage"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:layout_marginTop="8dp"
-            android:background="@drawable/ripple_one_item_bg"
-            android:clickable="true"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:paddingLeft="16dp"
-            android:paddingRight="16dp">
-
-            <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:src="@drawable/ic_nav_homepage" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="16dp"
-                android:text="项目主页"
-                android:textColor="@color/colorContent"
-                android:textSize="15sp" />
-
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:id="@+id/ll_nav_scan_download"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:background="@drawable/ripple_one_item_bg"
-            android:clickable="true"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:paddingLeft="16dp"
-            android:paddingRight="16dp">
-
-            <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:src="@drawable/ic_nav_scan" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="16dp"
-                android:text="扫码下载"
-                android:textColor="@color/colorContent"
-                android:textSize="15sp" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/ll_nav_deedback"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:background="@drawable/ripple_one_item_bg"
-            android:clickable="true"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:paddingLeft="16dp"
-            android:paddingRight="16dp">
-
-            <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:src="@drawable/ic_nav_deedback" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="16dp"
-                android:text="问题反馈"
-                android:textColor="@color/colorContent"
-                android:textSize="15sp" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/ll_nav_about"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:background="@drawable/ripple_one_item_bg"
-            android:clickable="true"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:paddingLeft="16dp"
-            android:paddingRight="16dp">
-
-            <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:src="@drawable/ic_nav_about" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="16dp"
-                android:text="关于云阅"
-                android:textColor="@color/colorContent"
-                android:textSize="15sp" />
-
-        </LinearLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1px"
-            android:background="#e0e0e0"
-            android:visibility="gone" />
-
-    </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
 </layout>

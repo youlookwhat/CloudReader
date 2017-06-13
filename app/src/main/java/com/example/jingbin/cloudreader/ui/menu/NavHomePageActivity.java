@@ -6,7 +6,6 @@ import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.view.ViewGroup;
 
 import com.example.jingbin.cloudreader.R;
 import com.example.jingbin.cloudreader.databinding.ActivityNavHomePageBinding;
@@ -23,7 +22,7 @@ public class NavHomePageActivity extends AppCompatActivity {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_nav_home_page);
 
         binding.toolbarLayout.setTitle(getString(R.string.app_name));
-        initTranslucentBar();
+        StatusBarUtil.setTranslucentForImageView(this, 0, binding.toolbar);
         binding.fabShare.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -31,16 +30,6 @@ public class NavHomePageActivity extends AppCompatActivity {
             }
         });
     }
-
-
-    private void initTranslucentBar() {
-        StatusBarUtil.setTranslucentForImageView(this, 0, binding.toolbarLayout);
-        ViewGroup.MarginLayoutParams layoutParams = (ViewGroup.MarginLayoutParams) binding.toolbarLayout.getLayoutParams();
-        layoutParams.setMargins(0, -StatusBarUtil.getStatusBarHeight(this), 0, 0);
-        ViewGroup.MarginLayoutParams layoutParams2 = (ViewGroup.MarginLayoutParams) binding.toolbar.getLayoutParams();
-        layoutParams2.setMargins(0, StatusBarUtil.getStatusBarHeight(this), 0, 0);
-    }
-
 
     public static void startHome(Context mContext) {
         Intent intent = new Intent(mContext, NavHomePageActivity.class);

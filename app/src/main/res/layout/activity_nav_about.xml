@@ -26,11 +26,12 @@
                 android:scaleType="centerCrop" />
 
             <TextView
+                android:id="@+id/tv_version_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="10dp"
-                android:text="当前版本  V1.0 "
+                android:text="当前版本  V1.0.0 "
                 android:textColor="@color/colorSubtitle"
                 android:textSize="13sp" />
 

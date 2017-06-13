@@ -3,9 +3,9 @@ package com.example.jingbin.cloudreader.bean.book;
 import android.databinding.BaseObservable;
 import android.databinding.Bindable;
 
+import com.example.http.ParamNames;
 import com.example.jingbin.cloudreader.BR;
 import com.example.jingbin.cloudreader.bean.moviechild.ImagesBean;
-import com.example.jingbin.cloudreader.http.ParamNames;
 
 import java.io.Serializable;
 import java.util.List;

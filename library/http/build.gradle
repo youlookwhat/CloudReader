@@ -1,0 +1,39 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion 25
+    buildToolsVersion "25.0.2"
+
+    defaultConfig {
+        minSdkVersion 19
+        targetSdkVersion 25
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile 'com.android.support:appcompat-v7:25.1.1'
+    testCompile 'junit:junit:4.12'
+    // 网络请求
+    compile 'com.google.code.gson:gson:2.8.0'
+    compile('com.squareup.retrofit2:retrofit:2.1.0') {
+        exclude module: 'com.squareup.okhttp3:okhttp:3.4.1'
+        exclude module: 'com.squareup.okio:okio:1.9.0'
+    }
+    compile 'com.squareup.okhttp3:okhttp:3.4.2'
+    compile 'com.squareup.okio:okio:1.11.0'
+    compile 'com.squareup.retrofit2:converter-gson:2.1.0'
+    compile 'com.squareup.okhttp3:logging-interceptor:3.4.1'
+    compile 'com.squareup.retrofit2:adapter-rxjava:2.1.0'
+}

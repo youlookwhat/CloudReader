@@ -6,15 +6,24 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <android.support.design.widget.TabLayout
-            android:id="@+id/tab_gank"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:background="@color/colorWhite"
-            app:tabBackground="@drawable/ripple_tab_bg"
-            app:tabIndicatorColor="@color/colorTheme"
-            app:tabSelectedTextColor="@color/colorTheme"
-            app:tabTextColor="@color/colorTabText" />
+            android:background="@color/colorTabBg"
+            android:orientation="vertical">
+
+            <!--app:tabBackground="@drawable/ripple_tab_bg"-->
+            <!-- ToDO:// 换肤框架 暂不支持TabLayout:tabBackground属性 -->
+            <android.support.design.widget.TabLayout
+                android:id="@+id/tab_gank"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                app:tabBackground="@drawable/ripple_tab_bg"
+                app:tabIndicatorColor="@color/colorTabLine"
+                app:tabSelectedTextColor="@color/colorTabTextCheck"
+                app:tabTextColor="@color/colorTabTextNormal" />
+
+        </LinearLayout>
 
         <android.support.v4.view.ViewPager
             android:id="@+id/vp_gank"

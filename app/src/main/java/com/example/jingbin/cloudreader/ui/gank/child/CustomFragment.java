@@ -8,23 +8,22 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.cocosw.bottomsheet.BottomSheet;
+import com.example.http.HttpUtils;
 import com.example.jingbin.cloudreader.R;
 import com.example.jingbin.cloudreader.adapter.AndroidAdapter;
 import com.example.jingbin.cloudreader.app.Constants;
 import com.example.jingbin.cloudreader.base.BaseFragment;
 import com.example.jingbin.cloudreader.bean.GankIoDataBean;
 import com.example.jingbin.cloudreader.databinding.FragmentCustomBinding;
-import com.example.jingbin.cloudreader.http.HttpUtils;
+import com.example.jingbin.cloudreader.http.RequestImpl;
 import com.example.jingbin.cloudreader.http.cache.ACache;
+import com.example.jingbin.cloudreader.model.GankOtherModel;
 import com.example.jingbin.cloudreader.utils.DebugUtil;
 import com.example.jingbin.cloudreader.utils.SPUtils;
 import com.example.jingbin.cloudreader.utils.ToastUtil;
 import com.example.xrecyclerview.XRecyclerView;
 
-import rx.Observer;
 import rx.Subscription;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
 
 public class CustomFragment extends BaseFragment<FragmentCustomBinding> {
 
@@ -38,6 +37,7 @@ public class CustomFragment extends BaseFragment<FragmentCustomBinding> {
     private ACache mACache;
     private GankIoDataBean mAllBean;
     private View mHeaderView;
+    private GankOtherModel mModel;
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
@@ -45,6 +45,7 @@ public class CustomFragment extends BaseFragment<FragmentCustomBinding> {
         DebugUtil.error("--CustomFragment   ----onActivityCreated");
 
         mACache = ACache.get(getContext());
+        mModel = new GankOtherModel();
 //        mAllBean = (GankIoDataBean) mACache.getAsObject(Constants.GANK_CUSTOM);
 
         // 禁止下拉刷新
@@ -91,49 +92,48 @@ public class CustomFragment extends BaseFragment<FragmentCustomBinding> {
     }
 
     private void loadCustomData() {
-        Subscription subscribe = HttpUtils.getInstance().getGankIOServer().getGankIoData(mType, mPage, HttpUtils.per_page_more)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<GankIoDataBean>() {
-                    @Override
-                    public void onCompleted() {
-                        showContentView();
-                    }
+        mModel.setData(mType, mPage, HttpUtils.per_page_more);
+        mModel.getGankIoData(new RequestImpl() {
+            @Override
+            public void loadSuccess(Object object) {
+                showContentView();
+                GankIoDataBean gankIoDataBean = (GankIoDataBean) object;
+                if (mPage == 1) {
+                    if (gankIoDataBean != null && gankIoDataBean.getResults() != null && gankIoDataBean.getResults().size() > 0) {
+                        setAdapter(gankIoDataBean);
 
-                    @Override
-                    public void onError(Throwable e) {
-                        showContentView();
+                        mACache.remove(Constants.GANK_CUSTOM);
+                        // 缓存50分钟
+                        mACache.put(Constants.GANK_CUSTOM, gankIoDataBean, 30000);
+                    }
+                } else {
+                    if (gankIoDataBean != null && gankIoDataBean.getResults() != null && gankIoDataBean.getResults().size() > 0) {
                         bindingView.xrvCustom.refreshComplete();
-                        if (mAndroidAdapter.getItemCount() == 0) {
-                            showError();
-                        }
-                        if (mPage > 1) {
-                            mPage--;
-                        }
+                        mAndroidAdapter.addAll(gankIoDataBean.getResults());
+                        mAndroidAdapter.notifyDataSetChanged();
+                    } else {
+                        bindingView.xrvCustom.noMoreLoading();
                     }
+                }
+            }
 
-                    @Override
-                    public void onNext(GankIoDataBean gankIoDataBean) {
-                        if (mPage == 1) {
-                            if (gankIoDataBean != null && gankIoDataBean.getResults() != null && gankIoDataBean.getResults().size() > 0) {
-                                setAdapter(gankIoDataBean);
+            @Override
+            public void loadFailed() {
+                showContentView();
+                bindingView.xrvCustom.refreshComplete();
+                if (mAndroidAdapter.getItemCount() == 0) {
+                    showError();
+                }
+                if (mPage > 1) {
+                    mPage--;
+                }
+            }
 
-                                mACache.remove(Constants.GANK_CUSTOM);
-                                // 缓存50分钟
-                                mACache.put(Constants.GANK_CUSTOM, gankIoDataBean, 30000);
-                            }
-                        } else {
-                            if (gankIoDataBean != null && gankIoDataBean.getResults() != null && gankIoDataBean.getResults().size() > 0) {
-                                bindingView.xrvCustom.refreshComplete();
-                                mAndroidAdapter.addAll(gankIoDataBean.getResults());
-                                mAndroidAdapter.notifyDataSetChanged();
-                            } else {
-                                bindingView.xrvCustom.noMoreLoading();
-                            }
-                        }
-                    }
-                });
-        addSubscription(subscribe);
+            @Override
+            public void addSubscription(Subscription subscription) {
+                CustomFragment.this.addSubscription(subscription);
+            }
+        });
     }
 
     /**
@@ -235,6 +235,8 @@ public class CustomFragment extends BaseFragment<FragmentCustomBinding> {
             ToastUtil.showToast("当前已经是" + selectType + "分类");
             return false;
         } else {
+            // 重置XRecyclerView状态，解决 如出现刷新到底无内容再切换其他类别后，无法上拉加载的情况
+            bindingView.xrvCustom.reset();
             return true;
         }
     }

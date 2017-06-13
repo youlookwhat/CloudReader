@@ -17,7 +17,6 @@ import com.example.jingbin.cloudreader.databinding.FooterItemBookBinding;
 import com.example.jingbin.cloudreader.databinding.HeaderItemBookBinding;
 import com.example.jingbin.cloudreader.databinding.ItemBookBinding;
 import com.example.jingbin.cloudreader.ui.book.child.BookDetailActivity;
-import com.example.jingbin.cloudreader.utils.DebugUtil;
 import com.example.jingbin.cloudreader.utils.PerfectClickListener;
 
 import java.util.ArrayList;
@@ -88,7 +87,7 @@ public class BookAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             BookViewHolder bookViewHolder = (BookViewHolder) holder;
             if (list != null && list.size() > 0) {
                 // 内容从"1"开始
-                DebugUtil.error("------position: "+position);
+//                DebugUtil.error("------position: "+position);
                 bookViewHolder.bindItem(list.get(position - 1), position-1);
             }
         }
@@ -209,6 +208,11 @@ public class BookAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         this.status = status;
         notifyDataSetChanged();
     }
+
+    public int getLoadStatus(){
+        return this.status;
+    }
+
 
     private class BookViewHolder extends RecyclerView.ViewHolder {
 

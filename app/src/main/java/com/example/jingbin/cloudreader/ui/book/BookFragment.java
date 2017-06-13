@@ -16,7 +16,6 @@ import java.util.ArrayList;
 /**
  * Created by jingbin on 16/12/14.
  * 展示书籍的页面
- *  v2.0 将会增加缓存 和 根据api完善更多内容
  */
 public class BookFragment extends BaseFragment<FragmentBookBinding> {
 
@@ -50,11 +49,11 @@ public class BookFragment extends BaseFragment<FragmentBookBinding> {
     }
 
     private void initFragmentList() {
-        mTitleList.add("综合");
         mTitleList.add("文学");
+        mTitleList.add("文化");
         mTitleList.add("生活");
-        mFragments.add(BookCustomFragment.newInstance("综合"));
         mFragments.add(BookCustomFragment.newInstance("文学"));
+        mFragments.add(BookCustomFragment.newInstance("文化"));
         mFragments.add(BookCustomFragment.newInstance("生活"));
     }
 }

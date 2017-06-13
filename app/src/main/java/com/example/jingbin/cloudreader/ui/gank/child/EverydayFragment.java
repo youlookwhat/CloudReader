@@ -22,6 +22,7 @@ import com.example.jingbin.cloudreader.bean.FrontpageBean;
 import com.example.jingbin.cloudreader.databinding.FooterItemEverydayBinding;
 import com.example.jingbin.cloudreader.databinding.FragmentEverydayBinding;
 import com.example.jingbin.cloudreader.databinding.HeaderItemEverydayBinding;
+import com.example.jingbin.cloudreader.http.RequestImpl;
 import com.example.jingbin.cloudreader.http.cache.ACache;
 import com.example.jingbin.cloudreader.http.rx.RxBus;
 import com.example.jingbin.cloudreader.http.rx.RxBusBaseMessage;
@@ -34,6 +35,7 @@ import com.example.jingbin.cloudreader.utils.PerfectClickListener;
 import com.example.jingbin.cloudreader.utils.SPUtils;
 import com.example.jingbin.cloudreader.utils.TimeUtil;
 import com.example.jingbin.cloudreader.view.webview.WebViewActivity;
+import com.youth.banner.listener.OnBannerClickListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,7 +47,7 @@ import rx.Subscription;
  * 更新逻辑：判断是否是第二天(相对于2016-11-26)
  * 是：判断是否是大于12：30
  * *****     |是：刷新当天数据
- * *****     |否：使用缓存：|无：请求前一天数据
+ * *****     |否：使用缓存：|无：请求前一天数据,直到请求到数据为止
  * **********             |有：使用缓存
  * 否：使用缓存 ： |无：请求今天数据
  * **********    |有：使用缓存
@@ -64,11 +66,13 @@ public class EverydayFragment extends BaseFragment<FragmentEverydayBinding> {
     private EverydayAdapter mEverydayAdapter;
     private boolean mIsPrepared = false;
     private boolean mIsFirst = true;
-    // 是否正在刷新（避免重复刷新）
-    private boolean mIsLoading = false;
     // 是否是上一天的请求
     private boolean isOldDayRequest;
     private RotateAnimation animation;
+    // 记录请求的日期
+    String year = getTodayTime().get(0);
+    String month = getTodayTime().get(1);
+    String day = getTodayTime().get(2);
 
     @Override
     public int setContent() {
@@ -93,7 +97,6 @@ public class EverydayFragment extends BaseFragment<FragmentEverydayBinding> {
         maCache = ACache.get(getContext());
         mEverydayModel = new EverydayModel();
         mBannerImages = (ArrayList<String>) maCache.getAsObject(Constants.BANNER_PIC);
-//        mLists = (ArrayList<List<AndroidBean>>) maCache.getAsObject(Constants.EVERYDAY_CONTENT);
         DebugUtil.error("----mBannerImages: " + (mBannerImages == null));
         DebugUtil.error("----mLists: " + (mLists == null));
 
@@ -126,6 +129,45 @@ public class EverydayFragment extends BaseFragment<FragmentEverydayBinding> {
         return list;
     }
 
+    @Override
+    protected void loadData() {
+        // 显示时轮播图滚动
+        if (mHeaderBinding != null && mHeaderBinding.banner != null) {
+            mHeaderBinding.banner.startAutoPlay();
+            mHeaderBinding.banner.setDelayTime(4000);
+        }
+
+        if (!mIsVisible || !mIsPrepared) {
+            return;
+        }
+
+        String oneData = SPUtils.getString("everyday_data", "2016-11-26");
+        if (!oneData.equals(TimeUtil.getData())) {// 是第二天
+            if (TimeUtil.isRightTime()) {//大于12：30,请求
+
+                isOldDayRequest = false;
+                mEverydayModel.setData(getTodayTime().get(0), getTodayTime().get(1), getTodayTime().get(2));
+                showRotaLoading(true);
+                loadBannerPicture();
+                showContentData();
+            } else {// 小于，取缓存没有请求前一天
+
+                ArrayList<String> lastTime = TimeUtil.getLastTime(getTodayTime().get(0), getTodayTime().get(1), getTodayTime().get(2));
+                mEverydayModel.setData(lastTime.get(0), lastTime.get(1), lastTime.get(2));
+                year = lastTime.get(0);
+                month = lastTime.get(1);
+                day = lastTime.get(2);
+
+                isOldDayRequest = true;// 是昨天
+                getACacheData();
+            }
+        } else {// 当天，取缓存没有请求当天
+
+            isOldDayRequest = false;
+            getACacheData();
+        }
+    }
+
     private void initLocalSetting() {
         mEverydayModel.setData(getTodayTime().get(0), getTodayTime().get(1), getTodayTime().get(2));
 //        DebugUtil.error("" + year + month + day);
@@ -146,42 +188,10 @@ public class EverydayFragment extends BaseFragment<FragmentEverydayBinding> {
         });
     }
 
-    @Override
-    protected void loadData() {
-        // 显示时轮播图滚动
-        if (mHeaderBinding != null && mHeaderBinding.banner != null) {
-            mHeaderBinding.banner.startAutoPlay();
-            mHeaderBinding.banner.setDelayTime(5000);
-        }
-
-        if (!mIsVisible || !mIsPrepared) {
-            return;
-        }
-
-        String oneData = SPUtils.getString("everyday_data", "2016-11-26");
-        if (!oneData.equals(TimeUtil.getData())) {// 是第二天
-            if (TimeUtil.isRightTime()) {//大于12：30,请求
-
-                showRotaLoading(true);
-                loadBannerPicture();
-                showContentData();
-            } else {// 小于，取缓存没有请求前一天
-                ArrayList<String> lastTime = TimeUtil.getLastTime(getTodayTime().get(0), getTodayTime().get(1), getTodayTime().get(2));
-                mEverydayModel.setData(lastTime.get(0), lastTime.get(1), lastTime.get(2));
-                isOldDayRequest = true;
-                getACacheData();
-            }
-        } else {// 当天，取缓存没有请求当天
-            isOldDayRequest = false;
-            getACacheData();
-        }
-    }
-
     /**
      * 取缓存
      */
     private void getACacheData() {
-
         if (!mIsFirst) {
             return;
         }
@@ -205,7 +215,7 @@ public class EverydayFragment extends BaseFragment<FragmentEverydayBinding> {
      * 加载正文内容
      */
     private void showContentData() {
-        mEverydayModel.showRecyclerViewData(new EverydayModel.HomeImpl() {
+        mEverydayModel.showRecyclerViewData(new RequestImpl() {
             @Override
             public void loadSuccess(Object object) {
                 if (mLists != null) {
@@ -215,15 +225,15 @@ public class EverydayFragment extends BaseFragment<FragmentEverydayBinding> {
                 if (mLists.size() > 0 && mLists.get(0).size() > 0) {
                     setAdapter(mLists);
                 } else {
-                    if (mEverydayAdapter != null) {
-                        mEverydayAdapter = null;
-                    }
-                    setEmptyAdapter();
+                    requestBeforeData();
                 }
             }
 
             @Override
             public void loadFailed() {
+                if (mLists != null && mLists.size() > 0) {
+                    return;
+                }
                 showError();
             }
 
@@ -234,6 +244,27 @@ public class EverydayFragment extends BaseFragment<FragmentEverydayBinding> {
         });
     }
 
+    /**
+     * 没请求到数据就取缓存，没缓存一直请求前一天数据
+     */
+    private void requestBeforeData() {
+        mLists = (ArrayList<List<AndroidBean>>) maCache.getAsObject(Constants.EVERYDAY_CONTENT);
+        if (mLists != null && mLists.size() > 0) {
+            setAdapter(mLists);
+        } else {
+            // 一直请求，知道请求到数据为止
+            ArrayList<String> lastTime = TimeUtil.getLastTime(year, month, day);
+            mEverydayModel.setData(lastTime.get(0), lastTime.get(1), lastTime.get(2));
+            year = lastTime.get(0);
+            month = lastTime.get(1);
+            day = lastTime.get(2);
+            showContentData();
+        }
+    }
+
+    /**
+     * 无数据返回时，暂时去掉
+     */
     private void setEmptyAdapter() {
         showRotaLoading(false);
 
@@ -245,11 +276,8 @@ public class EverydayFragment extends BaseFragment<FragmentEverydayBinding> {
 
         // 保存请求的日期
         SPUtils.putString("everyday_data", TimeUtil.getData());
-//        ArrayList<String> lastTime = TimeUtil.getLastTime(getTodayTime().get(0), getTodayTime().get(1), getTodayTime().get(2));
-//        SPUtils.putString("everyday_data", lastTime.get(0) + "-" + lastTime.get(1) + "-" + lastTime.get(2));
 
         mIsFirst = false;
-        mIsLoading = false;
     }
 
     private void initRecyclerView() {
@@ -280,12 +308,14 @@ public class EverydayFragment extends BaseFragment<FragmentEverydayBinding> {
             mEverydayAdapter.clear();
         }
         mEverydayAdapter.addAll(lists);
-        bindingView.xrvEveryday.setAdapter(mEverydayAdapter);
-        mEverydayAdapter.notifyDataSetChanged();
-
+//        DebugUtil.error("----111111 ");
+//        bindingView.xrvEveryday.setAdapter(mEverydayAdapter);
+//        mEverydayAdapter.notifyDataSetChanged();
+//        DebugUtil.error("----222222 ");
         maCache.remove(Constants.EVERYDAY_CONTENT);
         // 缓存三天，这样就可以取到缓存了！
         maCache.put(Constants.EVERYDAY_CONTENT, lists, 259200);
+
         if (isOldDayRequest) {
             ArrayList<String> lastTime = TimeUtil.getLastTime(getTodayTime().get(0), getTodayTime().get(1), getTodayTime().get(2));
             SPUtils.putString("everyday_data", lastTime.get(0) + "-" + lastTime.get(1) + "-" + lastTime.get(2));
@@ -293,10 +323,10 @@ public class EverydayFragment extends BaseFragment<FragmentEverydayBinding> {
             // 保存请求的日期
             SPUtils.putString("everyday_data", TimeUtil.getData());
         }
-
         mIsFirst = false;
-        mIsLoading = false;
 
+        bindingView.xrvEveryday.setAdapter(mEverydayAdapter);
+        mEverydayAdapter.notifyDataSetChanged();
     }
 
     @Override
@@ -310,7 +340,7 @@ public class EverydayFragment extends BaseFragment<FragmentEverydayBinding> {
     @Override
     public void onResume() {
         super.onResume();
-        // 失去焦点，否则recyclerview第一个item会回到顶部
+        // 失去焦点，否则RecyclerView第一个item会回到顶部
         bindingView.xrvEveryday.setFocusable(false);
         DebugUtil.error("-----EverydayFragment----onResume()");
         // 开始图片请求
@@ -326,11 +356,8 @@ public class EverydayFragment extends BaseFragment<FragmentEverydayBinding> {
 
     }
 
-    /**
-     * 轮播图
-     */
     private void loadBannerPicture() {
-        mEverydayModel.showBanncerPage(new EverydayModel.HomeImpl() {
+        mEverydayModel.showBanncerPage(new RequestImpl() {
             @Override
             public void loadSuccess(Object object) {
                 if (mBannerImages == null) {
@@ -338,30 +365,35 @@ public class EverydayFragment extends BaseFragment<FragmentEverydayBinding> {
                 } else {
                     mBannerImages.clear();
                 }
-                FrontpageBean frontpageBean = (FrontpageBean) object;
-                List<FrontpageBean.DataBeanX.DataBean> data = null;
-                if (frontpageBean != null
-                        && frontpageBean.getData() != null
-                        && frontpageBean.getData().get(0) != null
-                        && frontpageBean.getData().get(0).getData() != null) {
-
-                    data = frontpageBean.getData().get(0).getData();
-                }
-                if (data != null && data.size() > 0) {
-                    for (int i = 0; i < data.size(); i++) {
-                        //获取所有图片
-                        FrontpageBean.DataBeanX.DataBean bean = data.get(i);
-                        mBannerImages.add(bean.getPicUrl());
+                FrontpageBean bean = (FrontpageBean) object;
+                if (bean != null && bean.getResult() != null && bean.getResult().getFocus() != null && bean.getResult().getFocus().getResult() != null) {
+                    final List<FrontpageBean.ResultBeanXXXXXXXXXXXXXX.FocusBean.ResultBeanX> result = bean.getResult().getFocus().getResult();
+                    if (result != null && result.size() > 0) {
+                        for (int i = 0; i < result.size(); i++) {
+                            //获取所有图片
+                            mBannerImages.add(result.get(i).getRandpic());
+                        }
+                        mHeaderBinding.banner.setImages(mBannerImages).setImageLoader(new GlideImageLoader()).start();
+                        mHeaderBinding.banner.setOnBannerClickListener(new OnBannerClickListener() {
+                            @Override
+                            public void OnBannerClick(int position) {
+                                position = position - 1;
+                                // 链接没有做缓存，如果轮播图使用的缓存则点击图片无效
+                                if (result.get(position) != null && result.get(position).getCode() != null
+                                        && result.get(position).getCode().startsWith("http")) {
+                                    WebViewActivity.loadUrl(getContext(), result.get(position).getCode(), "加载中...");
+                                }
+                            }
+                        });
+                        maCache.remove(Constants.BANNER_PIC);
+                        maCache.put(Constants.BANNER_PIC, mBannerImages, 30000);
                     }
-                    mHeaderBinding.banner.setImages(mBannerImages).setImageLoader(new GlideImageLoader()).start();
-                    maCache.remove(Constants.BANNER_PIC);
-                    maCache.put(Constants.BANNER_PIC, mBannerImages, 30000);
                 }
             }
 
             @Override
             public void loadFailed() {
-//                showError();
+
             }
 
             @Override
@@ -387,9 +419,7 @@ public class EverydayFragment extends BaseFragment<FragmentEverydayBinding> {
     protected void onRefresh() {
         showContentView();
         showRotaLoading(true);
-//        loadData();
-        loadBannerPicture();
-        showContentData();
+        loadData();
     }
 
     @Override

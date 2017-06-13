@@ -14,7 +14,7 @@ import com.example.jingbin.cloudreader.adapter.BookAdapter;
 import com.example.jingbin.cloudreader.base.BaseFragment;
 import com.example.jingbin.cloudreader.bean.book.BookBean;
 import com.example.jingbin.cloudreader.databinding.FragmentBookCustomBinding;
-import com.example.jingbin.cloudreader.http.HttpUtils;
+import com.example.jingbin.cloudreader.http.HttpClient;
 import com.example.jingbin.cloudreader.utils.CommonUtils;
 import com.example.jingbin.cloudreader.utils.DebugUtil;
 
@@ -122,23 +122,12 @@ public class BookCustomFragment extends BaseFragment<FragmentBookCustomBinding> 
                 loadCustomData();
             }
         }, 500);
-//        loadCustomData();
         DebugUtil.error("-----setRefreshing");
-//        mIsFirst = false;
-
-//        if (mAndroidBean != null
-//                && mAndroidBean.getResults() != null
-//                && mAndroidBean.getResults().size() > 0) {
-//            showContentView();
-//            setAdapter(mAndroidBean);
-//        } else {
-//            loadAndroidData();
-//        }
     }
 
     private void loadCustomData() {
 
-        Subscription get = HttpUtils.getInstance().getDouBanServer().getBook(mType, mStart, mCount)
+        Subscription get = HttpClient.Builder.getDouBanService().getBook(mType, mStart, mCount)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<BookBean>() {
@@ -166,7 +155,7 @@ public class BookCustomFragment extends BaseFragment<FragmentBookCustomBinding> 
                         if (mStart == 0) {
                             if (bookBean != null && bookBean.getBooks() != null && bookBean.getBooks().size() > 0) {
 
-                                if (mBookAdapter==null) {
+                                if (mBookAdapter == null) {
                                     mBookAdapter = new BookAdapter(getActivity());
                                 }
                                 mBookAdapter.setList(bookBean.getBooks());
@@ -174,30 +163,21 @@ public class BookCustomFragment extends BaseFragment<FragmentBookCustomBinding> 
                                 bindingView.xrvBook.setAdapter(mBookAdapter);
 
 
-//                                mBookAdapter = new BookAdapter(activity);
-//                                mBookAdapter.addAll(bookBean.getBooks());
 //                                //构造器中，第一个参数表示列数或者行数，第二个参数表示滑动方向,瀑布流
 //                                bindingView.xrvBook.setLayoutManager(new StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL));
 //                                bindingView.xrvBook.setAdapter(mBookAdapter);
 //                                bindingView.xrvBook.setPullRefreshEnabled(false);
 //                                bindingView.xrvBook.setLoadingMoreEnabled(true);
-//                                mBookAdapter.notifyDataSetChanged();
-//                            } else {
-//                                bindingView.xrvBook.setVisibility(View.GONE);
+
                             }
                             mIsFirst = false;
                         } else {
                             mBookAdapter.addAll(bookBean.getBooks());
                             mBookAdapter.notifyDataSetChanged();
-//                            if (bookBean != null && bookBean.getBooks() != null && bookBean.getBooks().size() > 0) {
-//                                bindingView.xrvBook.refreshComplete();
-//                                mBookAdapter.addAll(bookBean.getBooks());
-//                                mBookAdapter.notifyDataSetChanged();
-//                            } else {
-//                                bindingView.xrvBook.noMoreLoading();
-//                            }
                         }
-
+                        if (mBookAdapter != null) {
+                            mBookAdapter.updateLoadStatus(BookAdapter.LOAD_PULL_TO);
+                        }
                     }
                 });
         addSubscription(get);
@@ -218,25 +198,25 @@ public class BookCustomFragment extends BaseFragment<FragmentBookCustomBinding> 
 //                    int[] into = new int[(mLayoutManager).getSpanCount()];
 //                    lastVisibleItem = findMax(mLayoutManager.findLastVisibleItemPositions(into));
 
+                    if (mBookAdapter == null) {
+                        return;
+                    }
                     if (mLayoutManager.getItemCount() == 0) {
-                        if (mBookAdapter != null) {
-                            mBookAdapter.updateLoadStatus(BookAdapter.LOAD_NONE);
-                        }
+                        mBookAdapter.updateLoadStatus(BookAdapter.LOAD_NONE);
                         return;
 
                     }
-                    if (lastVisibleItem + 1 == mLayoutManager.getItemCount()) {
-                        if (mBookAdapter != null) {
-                            mBookAdapter.updateLoadStatus(BookAdapter.LOAD_PULL_TO);
-                            // isLoadMore = true;
-                            mBookAdapter.updateLoadStatus(BookAdapter.LOAD_MORE);
-                        }
+                    if (lastVisibleItem + 1 == mLayoutManager.getItemCount()
+                            && mBookAdapter.getLoadStatus() != BookAdapter.LOAD_MORE) {
+//                        mBookAdapter.updateLoadStatus(BookAdapter.LOAD_PULL_TO);
+                        // isLoadMore = true;
+                        mBookAdapter.updateLoadStatus(BookAdapter.LOAD_MORE);
+
                         //new Handler().postDelayed(() -> getBeforeNews(time), 1000);
                         new Handler().postDelayed(new Runnable() {
                             @Override
                             public void run() {
 //                                String tag= BookApiUtils.getRandomTAG(listTag);
-
 //                                doubanBookPresenter.searchBookByTag(BookReadingFragment.this,tag,true);
                                 mStart += mCount;
                                 loadCustomData();
@@ -251,7 +231,7 @@ public class BookCustomFragment extends BaseFragment<FragmentBookCustomBinding> 
                 super.onScrolled(recyclerView, dx, dy);
                 lastVisibleItem = mLayoutManager.findLastVisibleItemPosition();
 
-                 /**StaggeredGridLayoutManager*/
+                /**StaggeredGridLayoutManager*/
 //                int[] into = new int[(mLayoutManager).getSpanCount()];
 //                lastVisibleItem = findMax(mLayoutManager.findLastVisibleItemPositions(into));
             }
