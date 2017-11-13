@@ -26,6 +26,7 @@ import rx.Subscription;
 
 /**
  * 福利
+ * @author jingbin
  */
 public class WelfareFragment extends BaseFragment<FragmentWelfareBinding> {
 
@@ -45,8 +46,11 @@ public class WelfareFragment extends BaseFragment<FragmentWelfareBinding> {
         DebugUtil.error("--WelfareFragment   ----onActivityCreated");
         mModel = new GankOtherModel();
         aCache = ACache.get(getContext());
-//        meiziBean = (GankIoDataBean) aCache.getAsObject(Constants.GANK_MEIZI);
+        initRecycleView();
+        isPrepared = true;
+    }
 
+    private void initRecycleView() {
         bindingView.xrvWelfare.setPullRefreshEnabled(false);
         bindingView.xrvWelfare.clearHeader();
         mWelfareAdapter = new WelfareAdapter();
@@ -63,7 +67,6 @@ public class WelfareFragment extends BaseFragment<FragmentWelfareBinding> {
                 loadWelfareData();
             }
         });
-        isPrepared = true;
     }
 
     @Override
@@ -153,8 +156,8 @@ public class WelfareFragment extends BaseFragment<FragmentWelfareBinding> {
         mWelfareAdapter.setOnItemClickListener(new OnItemClickListener<GankIoDataBean.ResultBean>() {
             @Override
             public void onClick(GankIoDataBean.ResultBean resultsBean, int position) {
-                DebugUtil.error("-----" + imgList.toString());
-                DebugUtil.error("----imgList.size():  " + imgList.size());
+//                DebugUtil.error("-----" + imgList.toString());
+//                DebugUtil.error("----imgList.size():  " + imgList.size());
                 Bundle bundle = new Bundle();
                 bundle.putInt("selet", 2);// 2,大图显示当前页数，1,头像，不显示页数
                 bundle.putInt("code", position);//第几张
@@ -189,6 +192,5 @@ public class WelfareFragment extends BaseFragment<FragmentWelfareBinding> {
     @Override
     public void onResume() {
         super.onResume();
-        DebugUtil.error(TAG + "   ----onResume");
     }
 }

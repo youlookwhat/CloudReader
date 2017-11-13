@@ -78,6 +78,8 @@ public class NavAboutActivity extends BaseActivity<ActivityNavAboutBinding> {
                 case R.id.tv_function:// 更新日志
                     url = string_url_update_log;
                     break;
+                default:
+                    break;
             }
             WebViewActivity.loadUrl(v.getContext(), url, "加载中...");
         }

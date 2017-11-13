@@ -111,6 +111,9 @@ public class ACache {
 	public void put(String key, String value) {
 		File file = mCache.newFile(key);
 		BufferedWriter out = null;
+		if (!file.exists()) {
+			file.getParentFile().mkdirs();
+		}
 		try {
 			out = new BufferedWriter(new FileWriter(file), 1024);
 			out.write(value);

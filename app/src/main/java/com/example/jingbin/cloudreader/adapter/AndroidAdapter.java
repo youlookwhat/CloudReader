@@ -62,7 +62,6 @@ public class AndroidAdapter extends BaseRecyclerViewAdapter<GankIoDataBean.Resul
             if (object.getImages() != null
                     && object.getImages().size() > 0
                     && !TextUtils.isEmpty(object.getImages().get(0))) {
-//                binding.ivAndroidPic.setVisibility(View.GONE);
                 binding.ivAndroidPic.setVisibility(View.VISIBLE);
                 ImgLoadUtil.displayGif(object.getImages().get(0), binding.ivAndroidPic);
             } else {

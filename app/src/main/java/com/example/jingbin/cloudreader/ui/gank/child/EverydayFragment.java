@@ -70,9 +70,9 @@ public class EverydayFragment extends BaseFragment<FragmentEverydayBinding> {
     private boolean isOldDayRequest;
     private RotateAnimation animation;
     // 记录请求的日期
-    String year = getTodayTime().get(0);
-    String month = getTodayTime().get(1);
-    String day = getTodayTime().get(2);
+    private String year = getTodayTime().get(0);
+    private String month = getTodayTime().get(1);
+    private String day = getTodayTime().get(2);
 
     @Override
     public int setContent() {
@@ -86,20 +86,11 @@ public class EverydayFragment extends BaseFragment<FragmentEverydayBinding> {
 
 //        showLoading();
         showContentView();
-        bindingView.llLoading.setVisibility(View.VISIBLE);
-        animation = new RotateAnimation(0f, 360f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
-        animation.setDuration(3000);//设置动画持续时间
-        animation.setInterpolator(new LinearInterpolator());//不停顿
-        animation.setRepeatCount(10);
-        bindingView.ivLoading.setAnimation(animation);
-        animation.startNow();
+        initAnimation();
 
         maCache = ACache.get(getContext());
         mEverydayModel = new EverydayModel();
         mBannerImages = (ArrayList<String>) maCache.getAsObject(Constants.BANNER_PIC);
-        DebugUtil.error("----mBannerImages: " + (mBannerImages == null));
-        DebugUtil.error("----mLists: " + (mLists == null));
-
         mHeaderBinding = DataBindingUtil.inflate(LayoutInflater.from(getContext()), R.layout.header_item_everyday, null, false);
         // 设置本地数据点击事件等
         initLocalSetting();
@@ -111,6 +102,16 @@ public class EverydayFragment extends BaseFragment<FragmentEverydayBinding> {
          * 所以此处要额外调用load(),不然最初不会加载内容
          */
         loadData();
+    }
+
+    private void initAnimation() {
+        bindingView.llLoading.setVisibility(View.VISIBLE);
+        animation = new RotateAnimation(0f, 360f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
+        animation.setDuration(3000);//设置动画持续时间
+        animation.setInterpolator(new LinearInterpolator());//不停顿
+        animation.setRepeatCount(10);
+        bindingView.ivLoading.setAnimation(animation);
+        animation.startNow();
     }
 
     /**
@@ -170,7 +171,6 @@ public class EverydayFragment extends BaseFragment<FragmentEverydayBinding> {
 
     private void initLocalSetting() {
         mEverydayModel.setData(getTodayTime().get(0), getTodayTime().get(1), getTodayTime().get(2));
-//        DebugUtil.error("" + year + month + day);
         // 显示日期,去掉第一位的"0"
         mHeaderBinding.includeEveryday.tvDailyText.setText(getTodayTime().get(2).indexOf("0") == 0 ?
                 getTodayTime().get(2).replace("0", "") : getTodayTime().get(2));
@@ -308,10 +308,6 @@ public class EverydayFragment extends BaseFragment<FragmentEverydayBinding> {
             mEverydayAdapter.clear();
         }
         mEverydayAdapter.addAll(lists);
-//        DebugUtil.error("----111111 ");
-//        bindingView.xrvEveryday.setAdapter(mEverydayAdapter);
-//        mEverydayAdapter.notifyDataSetChanged();
-//        DebugUtil.error("----222222 ");
         maCache.remove(Constants.EVERYDAY_CONTENT);
         // 缓存三天，这样就可以取到缓存了！
         maCache.put(Constants.EVERYDAY_CONTENT, lists, 259200);
