@@ -25,6 +25,9 @@ import com.example.xrecyclerview.XRecyclerView;
 
 import rx.Subscription;
 
+/**
+ * @author jingbin
+ */
 public class CustomFragment extends BaseFragment<FragmentCustomBinding> {
 
     private static final String TAG = "CustomFragment";
@@ -42,12 +45,26 @@ public class CustomFragment extends BaseFragment<FragmentCustomBinding> {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        DebugUtil.error("--CustomFragment   ----onActivityCreated");
-
         mACache = ACache.get(getContext());
         mModel = new GankOtherModel();
-//        mAllBean = (GankIoDataBean) mACache.getAsObject(Constants.GANK_CUSTOM);
+        initData();
+        initRecyclerView();
+        // 准备就绪
+        mIsPrepared = true;
+    }
 
+    private void initData() {
+        String type = SPUtils.getString("gank_cala", "全部");
+        if ("全部".equals(type)) {
+            mType = "all";
+        } else if ("IOS".equals(type)) {
+            mType = "iOS";
+        } else {
+            mType = type;
+        }
+    }
+
+    private void initRecyclerView() {
         // 禁止下拉刷新
         bindingView.xrvCustom.setPullRefreshEnabled(false);
         // 去掉刷新头
@@ -56,7 +73,6 @@ public class CustomFragment extends BaseFragment<FragmentCustomBinding> {
         bindingView.xrvCustom.setLoadingListener(new XRecyclerView.LoadingListener() {
             @Override
             public void onRefresh() {
-
             }
 
             @Override
@@ -65,8 +81,6 @@ public class CustomFragment extends BaseFragment<FragmentCustomBinding> {
                 loadCustomData();
             }
         });
-        // 准备就绪
-        mIsPrepared = true;
     }
 
     @Override
@@ -79,7 +93,6 @@ public class CustomFragment extends BaseFragment<FragmentCustomBinding> {
         if (!mIsPrepared || !mIsVisible || !mIsFirst) {
             return;
         }
-
         if (mAllBean != null
                 && mAllBean.getResults() != null
                 && mAllBean.getResults().size() > 0) {
@@ -211,6 +224,8 @@ public class CustomFragment extends BaseFragment<FragmentCustomBinding> {
                                     changeContent(txName, "拓展资源");
                                 }
                                 break;
+                            default:
+                                break;
                         }
                     }
                 }).show();
@@ -259,6 +274,5 @@ public class CustomFragment extends BaseFragment<FragmentCustomBinding> {
     @Override
     public void onResume() {
         super.onResume();
-        DebugUtil.error(TAG + "   ----onResume");
     }
 }
