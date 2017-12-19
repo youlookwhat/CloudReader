@@ -43,8 +43,16 @@ dependencies {
     compile "com.android.support:design:$rootProject.supportLibraryVersion"
     compile "com.android.support:support-v4:$rootProject.supportLibraryVersion"
     compile "com.android.support:cardview-v7:$rootProject.supportLibraryVersion"
-    compile 'com.google.zxing:core:3.3.0'
 
+    compile "android.arch.persistence.room:runtime:$rootProject.roomVersion"
+    annotationProcessor "android.arch.persistence.room:compiler:$rootProject.roomVersion"
+    compile 'com.google.dagger:dagger:2.12'
+    annotationProcessor 'com.google.dagger:dagger-compiler:2.12'
+    implementation "android.arch.lifecycle:extensions:1.0.0"
+    implementation "android.arch.lifecycle:reactivestreams:1.0.0"
+    testImplementation "android.arch.core:core-testing:1.0.0"
+
+    compile 'com.google.zxing:core:3.3.0'
     compile 'io.reactivex:rxandroid:1.2.1'
     compile 'com.nineoldandroids:library:2.4.0'
     compile 'jp.wasabeef:glide-transformations:2.0.1'

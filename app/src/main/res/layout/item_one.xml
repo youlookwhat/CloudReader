@@ -9,6 +9,13 @@
         <variable
             name="subjectsBean"
             type="com.example.jingbin.cloudreader.bean.moviechild.SubjectsBean" />
+
+        <variable
+            name="callback"
+            type="com.example.jingbin.cloudreader.viewmodel.OneItemClickCallback" />
+
+        <import type="com.example.jingbin.cloudreader.utils.CommonUtils" />
+
     </data>
 
     <LinearLayout
@@ -16,6 +23,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/ripple_one_item_bg"
+        android:onClick="@{() -> callback.onClick(subjectsBean)}"
         android:orientation="vertical"
         android:paddingLeft="5dp"
         android:paddingTop="5dp">
@@ -139,6 +147,7 @@
             android:layout_width="match_parent"
             android:layout_height="1px"
             android:layout_marginLeft="112dp"
-            android:layout_marginTop="5dp" />
+            android:layout_marginTop="5dp"
+            android:background="@{CommonUtils.randomColor()}" />
     </LinearLayout>
 </layout>
