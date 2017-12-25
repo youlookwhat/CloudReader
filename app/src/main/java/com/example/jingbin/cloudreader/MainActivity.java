@@ -42,7 +42,8 @@ import com.example.jingbin.cloudreader.view.webview.WebViewActivity;
 
 import java.util.ArrayList;
 
-import rx.functions.Action1;
+import rx.Subscription;
+import rx.subscriptions.CompositeSubscription;
 
 
 /**
@@ -64,6 +65,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private ImageView llTitleGank;
     private ImageView llTitleOne;
     private ImageView llTitleDou;
+    private CompositeSubscription mCompositeSubscription;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -213,7 +215,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
                 break;
             case R.id.iv_avatar: // 头像进入GitHub
-                WebViewActivity.loadUrl(v.getContext(),CommonUtils.getString(R.string.string_url_cloudreader),"CloudReader");
+                WebViewActivity.loadUrl(v.getContext(), CommonUtils.getString(R.string.string_url_cloudreader), "CloudReader");
                 break;
             case R.id.ll_nav_exit:// 退出应用
                 finish();
@@ -318,12 +320,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
      * 每日推荐点击"新电影热映榜"跳转
      */
     private void initRxBus() {
-        RxBus.getDefault().toObservable(RxCodeConstants.JUMP_TYPE_TO_ONE, RxBusBaseMessage.class)
-                .subscribe(new Action1<RxBusBaseMessage>() {
-                    @Override
-                    public void call(RxBusBaseMessage integer) {
-                        mBinding.include.vpContent.setCurrentItem(1);
-                    }
-                });
+        Subscription subscribe = RxBus.getDefault().toObservable(RxCodeConstants.JUMP_TYPE_TO_ONE, RxBusBaseMessage.class)
+                .subscribe(integer -> mBinding.include.vpContent.setCurrentItem(1));
+        addSubscription(subscribe);
+    }
+
+    public void addSubscription(Subscription s) {
+        if (this.mCompositeSubscription == null) {
+            this.mCompositeSubscription = new CompositeSubscription();
+        }
+        this.mCompositeSubscription.add(s);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (this.mCompositeSubscription != null && mCompositeSubscription.hasSubscriptions()) {
+            this.mCompositeSubscription.unsubscribe();
+        }
     }
 }
