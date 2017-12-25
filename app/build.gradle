@@ -51,6 +51,8 @@ dependencies {
     implementation "android.arch.lifecycle:extensions:1.0.0"
     implementation "android.arch.lifecycle:reactivestreams:1.0.0"
     testImplementation "android.arch.core:core-testing:1.0.0"
+    debugCompile 'com.squareup.leakcanary:leakcanary-android:1.5.4'
+    releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.4'
 
     compile 'com.google.zxing:core:3.3.0'
     compile 'io.reactivex:rxandroid:1.2.1'

@@ -6,6 +6,7 @@ import android.content.res.Resources;
 
 import com.example.http.HttpUtils;
 import com.example.jingbin.cloudreader.utils.DebugUtil;
+import com.squareup.leakcanary.LeakCanary;
 
 /**
  * Created by jingbin on 2016/11/22.
@@ -23,6 +24,12 @@ public class CloudReaderApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        if (LeakCanary.isInAnalyzerProcess(this)) {
+            // This process is dedicated to LeakCanary for heap analysis.
+            // You should not init your app in this process.
+            return;
+        }
+        LeakCanary.install(this);
         cloudReaderApplication = this;
         HttpUtils.getInstance().init(this, DebugUtil.DEBUG);
 
