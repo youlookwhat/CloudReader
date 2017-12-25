@@ -160,26 +160,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         @Override
         protected void onNoDoubleClick(final View v) {
             mBinding.drawerLayout.closeDrawer(GravityCompat.START);
-            mBinding.drawerLayout.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    switch (v.getId()) {
-                        case R.id.ll_nav_homepage:// 主页
-                            NavHomePageActivity.startHome(MainActivity.this);
-                            break;
-                        case R.id.ll_nav_scan_download://扫码下载
-                            NavDownloadActivity.start(MainActivity.this);
-                            break;
-                        case R.id.ll_nav_deedback:// 问题反馈
-                            NavDeedBackActivity.start(MainActivity.this);
-                            break;
-                        case R.id.ll_nav_about:// 关于云阅
-                            NavAboutActivity.start(MainActivity.this);
-                            break;
-                        case R.id.ll_nav_login:// 登录GitHub账号
-                            WebViewActivity.loadUrl(v.getContext(), "https://github.com/login", "登录GitHub账号");
-                            break;
-                    }
+            mBinding.drawerLayout.postDelayed(() -> {
+                switch (v.getId()) {
+                    case R.id.ll_nav_homepage:// 主页
+                        NavHomePageActivity.startHome(MainActivity.this);
+                        break;
+                    case R.id.ll_nav_scan_download://扫码下载
+                        NavDownloadActivity.start(MainActivity.this);
+                        break;
+                    case R.id.ll_nav_deedback:// 问题反馈
+                        NavDeedBackActivity.start(MainActivity.this);
+                        break;
+                    case R.id.ll_nav_about:// 关于云阅
+                        NavAboutActivity.start(MainActivity.this);
+                        break;
+                    case R.id.ll_nav_login:// 登录GitHub账号
+                        WebViewActivity.loadUrl(v.getContext(), "https://github.com/login", "登录GitHub账号");
+                        break;
                 }
             }, 260);
         }

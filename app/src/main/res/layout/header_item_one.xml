@@ -1,80 +1,97 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@color/colorPageBg"
-    android:gravity="bottom"
-    android:orientation="vertical">
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <RelativeLayout
-        android:id="@+id/ll_movie_top"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:background="@drawable/select_one_header"
-        android:orientation="horizontal">
+    <data>
 
-        <ImageView
-            android:id="@+id/iv_img"
-            android:scaleType="centerCrop"
-            android:layout_width="66dp"
-            android:layout_height="66dp" />
+        <variable
+            name="view"
+            type="com.example.jingbin.cloudreader.ui.one.OneFragment" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="10dp"
-            android:layout_toRightOf="@+id/iv_img"
-            android:orientation="vertical">
+        <import type="com.example.jingbin.cloudreader.app.ConstantsImageUrl" />
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="豆瓣电影Top250"
-                android:textColor="@color/colorContent"
-                android:textSize="16sp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="9dp"
-                android:text="从前现在过去了再不来~"
-                android:textColor="@color/colorTitle"
-                android:textSize="12sp" />
-
-        </LinearLayout>
-
-        <ImageView
-            android:layout_width="23dp"
-            android:layout_height="23dp"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="20dp"
-            android:src="@drawable/home_arrow_right_gray" />
-
-    </RelativeLayout>
+    </data>
 
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        android:paddingBottom="5dp"
-        android:paddingTop="7dp">
+        android:background="@color/colorPageBg"
+        android:gravity="bottom"
+        android:orientation="vertical">
 
-        <ImageView
-            android:layout_width="15dp"
-            android:layout_height="23dp"
-            android:background="@drawable/ic_cylinder" />
-
-        <TextView
-            android:layout_width="wrap_content"
+        <RelativeLayout
+            android:id="@+id/ll_movie_top"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="热映榜"
-            android:textColor="@color/colorContent"
-            android:textSize="17sp" />
-    </LinearLayout>
+            android:layout_margin="10dp"
+            android:background="@drawable/select_one_header"
+            android:onClick="@{() -> view.headerClick()}"
+            android:orientation="horizontal">
 
-</LinearLayout>
+            <ImageView
+                android:id="@+id/iv_img"
+                android:layout_width="66dp"
+                android:layout_height="66dp"
+                android:displayRandom="@{ConstantsImageUrl.ONE_URL_01}"
+                android:imgType="@{3}"
+                android:scaleType="centerCrop" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@+id/iv_img"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="豆瓣电影Top250"
+                    android:textColor="@color/colorContent"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="9dp"
+                    android:text="从前现在过去了再不来~"
+                    android:textColor="@color/colorTitle"
+                    android:textSize="12sp" />
+
+            </LinearLayout>
+
+            <ImageView
+                android:layout_width="23dp"
+                android:layout_height="23dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="20dp"
+                android:src="@drawable/home_arrow_right_gray" />
+
+        </RelativeLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingBottom="5dp"
+            android:paddingTop="7dp">
+
+            <ImageView
+                android:layout_width="15dp"
+                android:layout_height="23dp"
+                android:background="@drawable/ic_cylinder" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="热映榜"
+                android:textColor="@color/colorContent"
+                android:textSize="17sp" />
+        </LinearLayout>
+
+    </LinearLayout>
+</layout>

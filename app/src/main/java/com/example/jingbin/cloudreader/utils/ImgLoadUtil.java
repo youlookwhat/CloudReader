@@ -183,4 +183,13 @@ public class ImgLoadUtil {
     public static void showImgBg(ImageView imageView, String url) {
         displayGaussian(imageView.getContext(), url, imageView);
     }
+
+
+    /**
+     * 热门电影头部图片
+     */
+    @BindingAdapter({"android:displayRandom", "android:imgType"})
+    public static void displayRandom(ImageView imageView, String imageUrl,int imgType) {
+        displayRandom(imgType,imageUrl,imageView);
+    }
 }

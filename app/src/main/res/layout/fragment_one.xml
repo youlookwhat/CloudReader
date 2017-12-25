@@ -1,4 +1,5 @@
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <!--<com.example.jingbin.cloudreader.view.sliding.SlidingLayout xmlns:app="http://schemas.android.com/apk/res-auto"-->
     <!--android:id="@+id/slidingLayout"-->
@@ -10,8 +11,20 @@
     <!--app:sliding_mode="both" 上下均显示-->
     <!--app:sliding_pointer_mode="more"-->
 
+    <data>
+
+        <variable
+            name="recyclerAdapter"
+            type="com.example.jingbin.cloudreader.adapter.OneAdapter" />
+
+        <variable
+            name="viewmodel"
+            type="com.example.jingbin.cloudreader.viewmodel.OneViewModel" />
+    </data>
+
+
     <!--为了出现下拉阴影效果（加了上面的控件后就没有了）-->
-    <FrameLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+    <FrameLayout
         android:id="@+id/frameLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
