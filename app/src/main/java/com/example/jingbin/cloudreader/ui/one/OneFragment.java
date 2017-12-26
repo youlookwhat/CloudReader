@@ -116,7 +116,7 @@ public class OneFragment extends BaseFragment<FragmentOneBinding> {
                 mIsLoading = false;
             } else {
                 if (mHotMovieBean != null) {
-                    setAdapter(hotMovieBean);
+                    setAdapter(mHotMovieBean);
                 } else {
                     if (oneAdapter.getItemCount() == 0) {
                         showError();
@@ -177,11 +177,6 @@ public class OneFragment extends BaseFragment<FragmentOneBinding> {
     @Override
     protected void onRefresh() {
         loadHotMovie();
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
     }
 
     /**

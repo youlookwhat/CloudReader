@@ -41,7 +41,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="15dp"
                     android:text="加载失败,点击重试"
-                    android:textSize="15sp" />
+                    android:textSize="14sp" />
             </LinearLayout>
 
             <!--加载中..-->
