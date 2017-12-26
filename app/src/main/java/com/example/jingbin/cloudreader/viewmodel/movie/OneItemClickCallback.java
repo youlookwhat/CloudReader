@@ -1,4 +1,4 @@
-package com.example.jingbin.cloudreader.viewmodel;
+package com.example.jingbin.cloudreader.viewmodel.movie;
 
 import com.example.jingbin.cloudreader.bean.moviechild.SubjectsBean;
 

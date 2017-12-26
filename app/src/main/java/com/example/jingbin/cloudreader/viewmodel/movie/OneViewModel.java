@@ -1,4 +1,4 @@
-package com.example.jingbin.cloudreader.viewmodel;
+package com.example.jingbin.cloudreader.viewmodel.movie;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;

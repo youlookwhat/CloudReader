@@ -12,7 +12,7 @@
 
         <variable
             name="callback"
-            type="com.example.jingbin.cloudreader.viewmodel.OneItemClickCallback" />
+            type="com.example.jingbin.cloudreader.viewmodel.movie.OneItemClickCallback" />
 
         <import type="com.example.jingbin.cloudreader.utils.CommonUtils" />
 

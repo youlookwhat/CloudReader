@@ -12,7 +12,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
 import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebSettings;
@@ -85,32 +84,24 @@ public class WebViewActivity extends AppCompatActivity implements IWebPageView {
         }
         setTitle(mTitle);
         mTitleToolBar.setOverflowIcon(ContextCompat.getDrawable(this, R.drawable.actionbar_more));
-        mTitleToolBar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onBackPressed();
+        mTitleToolBar.setNavigationOnClickListener(v -> onBackPressed());
+        mTitleToolBar.setOnMenuItemClickListener(item -> {
+            switch (item.getItemId()) {
+                case R.id.actionbar_share:// 分享到
+                    String shareText = mWebChromeClient.getTitle() + mUrl + "（分享自云阅）";
+                    ShareUtils.share(WebViewActivity.this, shareText);
+                    break;
+                case R.id.actionbar_cope:// 复制链接
+                    BaseTools.copy(mUrl);
+                    ToastUtil.showToast("复制成功");
+                    break;
+                case R.id.actionbar_open:// 打开链接
+                    BaseTools.openLink(WebViewActivity.this, mUrl);
+                    break;
+                default:
+                    break;
             }
-        });
-        mTitleToolBar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                switch (item.getItemId()) {
-                    case R.id.actionbar_share:// 分享到
-                        String shareText = mWebChromeClient.getTitle() + mUrl + "（分享自云阅）";
-                        ShareUtils.share(WebViewActivity.this, shareText);
-                        break;
-                    case R.id.actionbar_cope:// 复制链接
-                        BaseTools.copy(mUrl);
-                        ToastUtil.showToast("复制成功");
-                        break;
-                    case R.id.actionbar_open:// 打开链接
-                        BaseTools.openLink(WebViewActivity.this, mUrl);
-                        break;
-                    default:
-                        break;
-                }
-                return false;
-            }
+            return false;
         });
     }
 
@@ -360,12 +351,13 @@ public class WebViewActivity extends AppCompatActivity implements IWebPageView {
         super.onDestroy();
         videoFullView.removeAllViews();
         if (webView != null) {
+            webView.loadDataWithBaseURL(null, "", "text/html", "utf-8", null);
+            webView.clearHistory();
             ViewGroup parent = (ViewGroup) webView.getParent();
             if (parent != null) {
                 parent.removeView(webView);
             }
             webView.removeAllViews();
-            webView.loadUrl("about:blank");
             webView.stopLoading();
             webView.setWebChromeClient(null);
             webView.setWebViewClient(null);

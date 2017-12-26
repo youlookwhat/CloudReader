@@ -18,7 +18,7 @@ import com.example.jingbin.cloudreader.databinding.HeaderItemOneBinding;
 import com.example.jingbin.cloudreader.http.cache.ACache;
 import com.example.jingbin.cloudreader.utils.SPUtils;
 import com.example.jingbin.cloudreader.utils.TimeUtil;
-import com.example.jingbin.cloudreader.viewmodel.OneViewModel;
+import com.example.jingbin.cloudreader.viewmodel.movie.OneViewModel;
 
 public class OneFragment extends BaseFragment<FragmentOneBinding> {
 

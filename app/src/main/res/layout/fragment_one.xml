@@ -19,7 +19,7 @@
 
         <variable
             name="viewmodel"
-            type="com.example.jingbin.cloudreader.viewmodel.OneViewModel" />
+            type="com.example.jingbin.cloudreader.viewmodel.movie.OneViewModel" />
     </data>
 
 
