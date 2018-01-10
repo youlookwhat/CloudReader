@@ -39,7 +39,7 @@
             android:ellipsize="marquee"
             android:focusable="true"
             android:focusableInTouchMode="true"
-            android:maxLines="1"
+            android:singleLine="true"
             android:text="@{bean.title}"
             android:textColor="@color/colorTitle"
             android:textSize="12sp" />
