@@ -8,6 +8,7 @@ import com.google.gson.FieldNamingStrategy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Field;
 import java.security.SecureRandom;
@@ -22,6 +23,8 @@ import javax.net.ssl.SSLSocketFactory;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
 
+import okhttp3.Cache;
+import okhttp3.CacheControl;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -142,7 +145,7 @@ public class HttpUtils {
         }
     }
 
-    public OkHttpClient getUnsafeOkHttpClient() {
+    private OkHttpClient getUnsafeOkHttpClient() {
         try {
             final TrustManager[] trustAllCerts = new TrustManager[]{new X509TrustManager() {
                 @Override
@@ -161,13 +164,21 @@ public class HttpUtils {
             // Install the all-trusting trust manager
             SSLContext sslContext = SSLContext.getInstance("TLS");
             sslContext.init(null, trustAllCerts, new SecureRandom());
+            //cache url
+            File httpCacheDirectory = new File(context.getCacheDir(), "responses");
+            // 50 MiB
+            int cacheSize = 50 * 1024 * 1024;
+            Cache cache = new Cache(httpCacheDirectory, cacheSize);
             // Create an ssl socket factory with our all-trusting manager
             SSLSocketFactory sslSocketFactory = sslContext.getSocketFactory();
             OkHttpClient.Builder okBuilder = new OkHttpClient.Builder();
-            okBuilder.readTimeout(20, TimeUnit.SECONDS);
-            okBuilder.connectTimeout(10, TimeUnit.SECONDS);
-            okBuilder.writeTimeout(20, TimeUnit.SECONDS);
+            okBuilder.readTimeout(30, TimeUnit.SECONDS);
+            okBuilder.connectTimeout(30, TimeUnit.SECONDS);
+            okBuilder.writeTimeout(30, TimeUnit.SECONDS);
             okBuilder.addInterceptor(new HttpHeadInterceptor());
+            // 添加缓存，无网访问时会拿缓存,只会缓存get请求
+            okBuilder.addInterceptor(new AddCacheInterceptor(context));
+            okBuilder.cache(cache);
             okBuilder.addInterceptor(getInterceptor());
             okBuilder.sslSocketFactory(sslSocketFactory);
             okBuilder.hostnameVerifier(new HostnameVerifier() {
@@ -185,7 +196,7 @@ public class HttpUtils {
 
     }
 
-    public OkHttpClient getOkClient() {
+    private OkHttpClient getOkClient() {
         OkHttpClient client1;
         client1 = getUnsafeOkHttpClient();
         return client1;
@@ -196,7 +207,7 @@ public class HttpUtils {
     }
 
 
-    class HttpHeadInterceptor implements Interceptor {
+    private class HttpHeadInterceptor implements Interceptor {
         @Override
         public Response intercept(Chain chain) throws IOException {
             Request request = chain.request();
@@ -209,12 +220,6 @@ public class HttpUtils {
                 int maxStale = 60 * 60 * 24 * 28;
                 builder.addHeader("Cache-Control", "public, only-if-cached, max-stale=" + maxStale);
             }
-            // 可添加token
-//            if (listener != null) {
-//                builder.addHeader("token", listener.getToken());
-//            }
-            // 如有需要，添加请求头
-//            builder.addHeader("a", HttpHead.getHeader(request.method()));
             return chain.proceed(builder.build());
         }
     }
@@ -227,5 +232,45 @@ public class HttpUtils {
             interceptor.setLevel(HttpLoggingInterceptor.Level.NONE); // 打包
         }
         return interceptor;
+    }
+
+    private class AddCacheInterceptor implements Interceptor {
+        private Context context;
+
+        AddCacheInterceptor(Context context) {
+            super();
+            this.context = context;
+        }
+
+        @Override
+        public Response intercept(Chain chain) throws IOException {
+
+            CacheControl.Builder cacheBuilder = new CacheControl.Builder();
+            cacheBuilder.maxAge(0, TimeUnit.SECONDS);
+            cacheBuilder.maxStale(365, TimeUnit.DAYS);
+            CacheControl cacheControl = cacheBuilder.build();
+            Request request = chain.request();
+            if (!CheckNetwork.isNetworkConnected(context)) {
+                request = request.newBuilder()
+                        .cacheControl(cacheControl)
+                        .build();
+            }
+            Response originalResponse = chain.proceed(request);
+            if (CheckNetwork.isNetworkConnected(context)) {
+                // read from cache
+                int maxAge = 0;
+                return originalResponse.newBuilder()
+                        .removeHeader("Pragma")
+                        .header("Cache-Control", "public ,max-age=" + maxAge)
+                        .build();
+            } else {
+                // tolerate 4-weeks stale
+                int maxStale = 60 * 60 * 24 * 28;
+                return originalResponse.newBuilder()
+                        .removeHeader("Pragma")
+                        .header("Cache-Control", "public, only-if-cached, max-stale=" + maxStale)
+                        .build();
+            }
+        }
     }
 }

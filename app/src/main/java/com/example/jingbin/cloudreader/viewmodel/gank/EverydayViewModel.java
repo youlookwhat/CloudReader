@@ -9,7 +9,7 @@ import com.example.jingbin.cloudreader.bean.AndroidBean;
 import com.example.jingbin.cloudreader.bean.FrontpageBean;
 import com.example.jingbin.cloudreader.http.RequestImpl;
 import com.example.jingbin.cloudreader.http.cache.ACache;
-import com.example.jingbin.cloudreader.model.EverydayModel;
+import com.example.jingbin.cloudreader.data.model.EverydayModel;
 import com.example.jingbin.cloudreader.utils.SPUtils;
 import com.example.jingbin.cloudreader.utils.TimeUtil;
 
@@ -26,7 +26,7 @@ import rx.Subscription;
 public class EverydayViewModel extends ViewModel {
 
     private final EverydayModel mEverydayModel;
-    private EverydayCallback loadListener;
+    private EverydayNavigator loadListener;
     private BaseFragment activity;
     private ArrayList<List<AndroidBean>> mLists;
     private ArrayList<String> mBannerImages;
@@ -34,7 +34,7 @@ public class EverydayViewModel extends ViewModel {
     private String month = getTodayTime().get(1);
     private String day = getTodayTime().get(2);
 
-    public void setEverydayCallback(EverydayCallback loadListener) {
+    public void setEverydayCallback(EverydayNavigator loadListener) {
         this.loadListener = loadListener;
     }
 

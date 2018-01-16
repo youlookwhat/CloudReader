@@ -30,7 +30,7 @@ import com.example.jingbin.cloudreader.utils.PerfectClickListener;
 import com.example.jingbin.cloudreader.utils.SPUtils;
 import com.example.jingbin.cloudreader.utils.TimeUtil;
 import com.example.jingbin.cloudreader.view.webview.WebViewActivity;
-import com.example.jingbin.cloudreader.viewmodel.gank.EverydayCallback;
+import com.example.jingbin.cloudreader.viewmodel.gank.EverydayNavigator;
 import com.example.jingbin.cloudreader.viewmodel.gank.EverydayViewModel;
 
 import java.util.ArrayList;
@@ -48,7 +48,7 @@ import static com.example.jingbin.cloudreader.viewmodel.gank.EverydayViewModel.g
  * 否：使用缓存 ： |无：请求今天数据
  * **********    |有：使用缓存
  */
-public class EverydayFragment extends BaseFragment<FragmentEverydayBinding> implements EverydayCallback {
+public class EverydayFragment extends BaseFragment<FragmentEverydayBinding> implements EverydayNavigator {
 
     private static final String TAG = "EverydayFragment";
     private ACache maCache;

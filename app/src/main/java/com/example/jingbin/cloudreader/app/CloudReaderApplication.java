@@ -1,8 +1,8 @@
 package com.example.jingbin.cloudreader.app;
 
-import android.app.Application;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.support.multidex.MultiDexApplication;
 
 import com.example.http.HttpUtils;
 import com.example.jingbin.cloudreader.utils.DebugUtil;
@@ -12,7 +12,7 @@ import com.squareup.leakcanary.LeakCanary;
  * Created by jingbin on 2016/11/22.
  */
 
-public class CloudReaderApplication extends Application {
+public class CloudReaderApplication extends MultiDexApplication{
 
     private static CloudReaderApplication cloudReaderApplication;
 

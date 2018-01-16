@@ -1,4 +1,4 @@
-package com.example.jingbin.cloudreader.model;
+package com.example.jingbin.cloudreader.data.model;
 
 import com.example.jingbin.cloudreader.bean.GankIoDataBean;
 import com.example.jingbin.cloudreader.http.HttpClient;

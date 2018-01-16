@@ -12,7 +12,7 @@ import java.util.List;
  * @Description
  */
 
-public interface EverydayCallback {
+public interface EverydayNavigator {
 
     /**
      * 显示列表数据

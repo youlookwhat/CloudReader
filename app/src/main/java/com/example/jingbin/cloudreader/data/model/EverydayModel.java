@@ -1,4 +1,4 @@
-package com.example.jingbin.cloudreader.model;
+package com.example.jingbin.cloudreader.data.model;
 
 import android.text.TextUtils;
 
