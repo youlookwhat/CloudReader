@@ -79,7 +79,7 @@ public class EverydayFragment extends BaseFragment<FragmentEverydayBinding> impl
 
         maCache = ACache.get(getContext());
         everydayViewModel = new EverydayViewModel(this);
-        everydayViewModel.setEverydayCallback(this);
+        everydayViewModel.setEverydayNavigator(this);
         mHeaderBinding = DataBindingUtil.inflate(LayoutInflater.from(getContext()), R.layout.header_item_everyday, null, false);
         initLocalSetting();
         initRecyclerView();
