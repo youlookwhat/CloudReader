@@ -12,6 +12,7 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         renderscriptTargetApi 19
         renderscriptSupportModeEnabled true
+        multiDexEnabled true
 
     }
     buildTypes {
@@ -61,4 +62,5 @@ dependencies {
     compile 'com.youth.banner:banner:1.4.9'
     compile 'com.daimajia.slider:library:1.1.5@aar'
     compile 'com.cocosw:bottomsheet:1.3.0@aar'
+    compile 'com.android.support:multidex:1.0.2'
 }
