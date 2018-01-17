@@ -59,9 +59,6 @@ public class EverydayModel {
 
                     @Override
                     public void onNext(FrontpageBean frontpageBean) {
-
-                        frontpageBean.getResult().getFocus();
-
                         listener.loadSuccess(frontpageBean);
                     }
                 });

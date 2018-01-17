@@ -17,7 +17,7 @@ import rx.Subscription;
 /**
  * @author jingbin
  * @data 2018/1/16
- * @Description
+ * @Description 大安卓ViewModel
  */
 
 public class BigAndroidViewModel extends ViewModel {

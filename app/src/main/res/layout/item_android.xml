@@ -11,6 +11,10 @@
             name="resultsBean"
             type="com.example.jingbin.cloudreader.bean.GankIoDataBean.ResultBean" />
 
+        <variable
+            name="command"
+            type="com.example.jingbin.cloudreader.adapter.AndroidAdapter" />
+
     </data>
 
     <android.support.v7.widget.CardView
@@ -26,6 +30,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/ripple_one_item_bg"
+            android:onClick="@{()->command.openDetail(resultsBean)}"
             android:orientation="vertical"
             android:paddingTop="12dp">
 

@@ -26,7 +26,7 @@ import rx.Subscription;
 public class EverydayViewModel extends ViewModel {
 
     private final EverydayModel mEverydayModel;
-    private EverydayNavigator loadListener;
+    private EverydayNavigator everydayNavigator;
     private BaseFragment activity;
     private ArrayList<List<AndroidBean>> mLists;
     private ArrayList<String> mBannerImages;
@@ -34,12 +34,12 @@ public class EverydayViewModel extends ViewModel {
     private String month = getTodayTime().get(1);
     private String day = getTodayTime().get(2);
 
-    public void setEverydayCallback(EverydayNavigator loadListener) {
-        this.loadListener = loadListener;
+    public void setEverydayNavigator(EverydayNavigator everydayNavigator) {
+        this.everydayNavigator = everydayNavigator;
     }
 
     public void onDestroy() {
-        loadListener = null;
+        everydayNavigator = null;
     }
 
     public EverydayViewModel(BaseFragment activity) {
@@ -57,11 +57,11 @@ public class EverydayViewModel extends ViewModel {
                 }
                 mLists = (ArrayList<List<AndroidBean>>) object;
                 if (mLists.size() > 0 && mLists.get(0).size() > 0) {
-                    loadListener.showListView(mLists);
+                    everydayNavigator.showListView(mLists);
                 } else {
                     mLists = (ArrayList<List<AndroidBean>>) ACache.get(activity.getContext()).getAsObject(Constants.EVERYDAY_CONTENT);
                     if (mLists != null && mLists.size() > 0) {
-                        loadListener.showListView(mLists);
+                        everydayNavigator.showListView(mLists);
                     } else {
                         // 一直请求，知道请求到数据为止
                         ArrayList<String> lastTime = TimeUtil.getLastTime(year, month, day);
@@ -79,7 +79,7 @@ public class EverydayViewModel extends ViewModel {
                 if (mLists != null && mLists.size() > 0) {
                     return;
                 }
-                loadListener.showErrorView();
+                everydayNavigator.showErrorView();
             }
 
             @Override
@@ -106,7 +106,7 @@ public class EverydayViewModel extends ViewModel {
                             //获取所有图片
                             mBannerImages.add(result.get(i).getRandpic());
                         }
-                        loadListener.showBannerView(mBannerImages, result);
+                        everydayNavigator.showBannerView(mBannerImages, result);
                         ACache.get(CloudReaderApplication.getInstance()).remove(Constants.BANNER_PIC);
                         ACache.get(CloudReaderApplication.getInstance()).put(Constants.BANNER_PIC, mBannerImages);
                         ACache.get(CloudReaderApplication.getInstance()).remove(Constants.BANNER_PIC_DATA);
@@ -136,15 +136,15 @@ public class EverydayViewModel extends ViewModel {
         }
         if (mBannerImages != null && mBannerImages.size() > 0) {
             // 加上缓存使其可以点击
-            loadListener.showBannerView(mBannerImages, result);
+            everydayNavigator.showBannerView(mBannerImages, result);
         } else {
             showBanncerPage();
         }
         mLists = (ArrayList<List<AndroidBean>>) ACache.get(CloudReaderApplication.getInstance()).getAsObject(Constants.EVERYDAY_CONTENT);
         if (mLists != null && mLists.size() > 0) {
-            loadListener.showListView(mLists);
+            everydayNavigator.showListView(mLists);
         } else {
-            loadListener.showRotaLoading();
+            everydayNavigator.showRotaLoading();
             showRecyclerViewData();
         }
     }
@@ -155,9 +155,9 @@ public class EverydayViewModel extends ViewModel {
         if (!oneData.equals(TimeUtil.getData())) {// 是第二天
             if (TimeUtil.isRightTime()) {//大于12：30,请求
 
-                loadListener.setIsOldDayRequest(false);
+                everydayNavigator.setIsOldDayRequest(false);
                 mEverydayModel.setData(getTodayTime().get(0), getTodayTime().get(1), getTodayTime().get(2));
-                loadListener.showRotaLoading();
+                everydayNavigator.showRotaLoading();
                 showBanncerPage();
                 showRecyclerViewData();
             } else {// 小于，取缓存没有请求前一天
@@ -168,13 +168,13 @@ public class EverydayViewModel extends ViewModel {
                 month = lastTime.get(1);
                 day = lastTime.get(2);
                 // 是昨天
-                loadListener.setIsOldDayRequest(true);
-                loadListener.getACacheData();
+                everydayNavigator.setIsOldDayRequest(true);
+                everydayNavigator.getACacheData();
             }
         } else {// 当天，取缓存没有请求当天
             // 是昨天
-            loadListener.setIsOldDayRequest(false);
-            loadListener.getACacheData();
+            everydayNavigator.setIsOldDayRequest(false);
+            everydayNavigator.getACacheData();
         }
     }
 

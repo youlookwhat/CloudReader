@@ -1,5 +1,6 @@
 package com.example.jingbin.cloudreader.adapter;
 
+import android.content.Context;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +20,11 @@ import com.example.jingbin.cloudreader.view.webview.WebViewActivity;
 public class AndroidAdapter extends BaseRecyclerViewAdapter<GankIoDataBean.ResultBean> {
 
     private boolean isAll = false;
+    private Context context;
+
+    public AndroidAdapter(Context context) {
+        this.context = context;
+    }
 
     public void setAllType(boolean isAll) {
         this.isAll = isAll;
@@ -55,8 +61,6 @@ public class AndroidAdapter extends BaseRecyclerViewAdapter<GankIoDataBean.Resul
                 binding.tvContentType.setVisibility(View.GONE);
 
             }
-            binding.setResultsBean(object);
-            binding.executePendingBindings();
 
             // 显示gif图片会很耗内存
             if (object.getImages() != null
@@ -68,13 +72,14 @@ public class AndroidAdapter extends BaseRecyclerViewAdapter<GankIoDataBean.Resul
                 binding.ivAndroidPic.setVisibility(View.GONE);
             }
 
-            binding.llAll.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    WebViewActivity.loadUrl(v.getContext(), object.getUrl(), "加载中...");
-                }
-            });
+            binding.setResultsBean(object);
+            binding.setCommand(AndroidAdapter.this);
+            binding.executePendingBindings();
         }
 
+    }
+
+    public void openDetail(GankIoDataBean.ResultBean object) {
+        WebViewActivity.loadUrl(context, object.getUrl(), "加载中...");
     }
 }
