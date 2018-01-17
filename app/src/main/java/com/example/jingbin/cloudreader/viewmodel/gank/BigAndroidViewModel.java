@@ -54,7 +54,7 @@ public class BigAndroidViewModel extends ViewModel {
         mModel.getGankIoData(new RequestImpl() {
             @Override
             public void loadSuccess(Object object) {
-                navigator.showContentView();
+                navigator.showLoadSuccessView();
                 GankIoDataBean gankIoDataBean = (GankIoDataBean) object;
                 if (mPage == 1) {
                     if (gankIoDataBean != null && gankIoDataBean.getResults() != null && gankIoDataBean.getResults().size() > 0) {
@@ -62,6 +62,8 @@ public class BigAndroidViewModel extends ViewModel {
 
                         mACache.remove(Constants.GANK_ANDROID);
                         mACache.put(Constants.GANK_ANDROID, gankIoDataBean);
+                    } else {
+                        handlerFailed();
                     }
                 } else {
                     if (gankIoDataBean != null && gankIoDataBean.getResults() != null && gankIoDataBean.getResults().size() > 0) {
@@ -74,7 +76,6 @@ public class BigAndroidViewModel extends ViewModel {
 
             @Override
             public void loadFailed() {
-                DebugUtil.error("----22222");
                 handlerFailed();
                 if (mPage > 1) {
                     mPage--;
@@ -96,7 +97,7 @@ public class BigAndroidViewModel extends ViewModel {
         if (mAndroidBean != null
                 && mAndroidBean.getResults() != null
                 && mAndroidBean.getResults().size() > 0) {
-            navigator.showContentView();
+            navigator.showLoadSuccessView();
             navigator.showAdapterView(mAndroidBean);
         } else {
             DebugUtil.error("-----1111");

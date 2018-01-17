@@ -23,7 +23,6 @@ public class AndroidFragment extends BaseFragment<FragmentAndroidBinding> implem
     private static final String TAG = "AndroidFragment";
     private static final String TYPE = "mType";
     private String mType = "Android";
-    //    private int mPage = 1;
     private boolean mIsPrepared;
     private boolean mIsFirst = true;
     private AndroidAdapter mAndroidAdapter;
@@ -83,7 +82,6 @@ public class AndroidFragment extends BaseFragment<FragmentAndroidBinding> implem
     private void setAdapter(GankIoDataBean mAndroidBean) {
         mAndroidAdapter.clear();
         mAndroidAdapter.addAll(mAndroidBean.getResults());
-        bindingView.xrvAndroid.setAdapter(mAndroidAdapter);
         mAndroidAdapter.notifyDataSetChanged();
         bindingView.xrvAndroid.refreshComplete();
 
@@ -96,10 +94,8 @@ public class AndroidFragment extends BaseFragment<FragmentAndroidBinding> implem
         bindingView.xrvAndroid.setLoadingListener(new XRecyclerView.LoadingListener() {
             @Override
             public void onRefresh() {
-//                mPage = 1;
                 everydayViewModel.setPage(1);
                 everydayViewModel.loadAndroidData();
-//                loadAndroidData();
             }
 
             @Override
@@ -108,9 +104,9 @@ public class AndroidFragment extends BaseFragment<FragmentAndroidBinding> implem
                 page++;
                 everydayViewModel.setPage(page);
                 everydayViewModel.loadAndroidData();
-//                loadAndroidData();
             }
         });
+        bindingView.xrvAndroid.setAdapter(mAndroidAdapter);
     }
 
     /**
@@ -132,7 +128,7 @@ public class AndroidFragment extends BaseFragment<FragmentAndroidBinding> implem
     }
 
     @Override
-    public void showContentView() {
+    public void showLoadSuccessView() {
         showContentView();
     }
 

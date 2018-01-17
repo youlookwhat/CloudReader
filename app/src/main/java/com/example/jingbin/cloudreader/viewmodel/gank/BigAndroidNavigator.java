@@ -10,7 +10,7 @@ import com.example.jingbin.cloudreader.bean.GankIoDataBean;
 
 public interface BigAndroidNavigator {
 
-    void showContentView();
+    void showLoadSuccessView();
 
     /**
      * 显示adapter数据

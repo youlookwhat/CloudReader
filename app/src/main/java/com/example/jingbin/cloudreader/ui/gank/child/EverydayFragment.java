@@ -155,9 +155,7 @@ public class EverydayFragment extends BaseFragment<FragmentEverydayBinding> impl
     public void showBannerView(ArrayList<String> mBannerImages, List<FrontpageBean.ResultBeanXXXXXXXXXXXXXX.FocusBean.ResultBeanX> result) {
         mHeaderBinding.banner.setImages(mBannerImages).setImageLoader(new GlideImageLoader()).start();
         if (result != null) {
-            mHeaderBinding.banner.setOnBannerClickListener(position -> {
-                position = position - 1;
-                // 链接没有做缓存，如果轮播图使用的缓存则点击图片无效
+            mHeaderBinding.banner.setOnBannerListener(position -> {
                 if (result.get(position) != null && result.get(position).getCode() != null
                         && result.get(position).getCode().startsWith("http")) {
                     WebViewActivity.loadUrl(getContext(), result.get(position).getCode(), "加载中...");

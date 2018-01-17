@@ -1,5 +1,6 @@
 package com.example.jingbin.cloudreader.utils;
 
+import android.annotation.SuppressLint;
 import android.widget.Toast;
 
 import com.example.jingbin.cloudreader.app.CloudReaderApplication;
@@ -13,6 +14,7 @@ public class ToastUtil {
 
     private static Toast mToast;
 
+    @SuppressLint("ShowToast")
     public static void showToast(String text) {
         if (mToast == null) {
             mToast = Toast.makeText(CloudReaderApplication.getInstance(), text, Toast.LENGTH_SHORT);

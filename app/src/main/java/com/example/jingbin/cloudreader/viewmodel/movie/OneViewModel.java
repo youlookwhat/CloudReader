@@ -32,7 +32,10 @@ public class OneViewModel extends ViewModel {
     }
 
     public LiveData<HotMovieBean> getHotMovie() {
-        if (hotMovieBean == null) {
+        if (hotMovieBean == null
+                || hotMovieBean.getValue() == null
+                || hotMovieBean.getValue().getSubjects() == null
+                || hotMovieBean.getValue().getSubjects().size() == 0) {
             hotMovieBean = new MutableLiveData<>();
             return loadHotMovie();
         } else {
