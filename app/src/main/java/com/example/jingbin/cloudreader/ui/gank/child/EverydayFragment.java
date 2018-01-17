@@ -287,6 +287,7 @@ public class EverydayFragment extends BaseFragment<FragmentEverydayBinding> impl
     @Override
     public void onDestroy() {
         super.onDestroy();
+        everydayViewModel.onDestroy();
     }
 
 }

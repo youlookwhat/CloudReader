@@ -27,7 +27,7 @@ public class AndroidFragment extends BaseFragment<FragmentAndroidBinding> implem
     private boolean mIsFirst = true;
     private AndroidAdapter mAndroidAdapter;
     private MainActivity activity;
-    private BigAndroidViewModel everydayViewModel;
+    private BigAndroidViewModel viewModel;
 
 
     @Override
@@ -61,8 +61,8 @@ public class AndroidFragment extends BaseFragment<FragmentAndroidBinding> implem
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        everydayViewModel = new BigAndroidViewModel(this, mType);
-        everydayViewModel.setBigAndroidNavigator(this);
+        viewModel = new BigAndroidViewModel(this, mType);
+        viewModel.setBigAndroidNavigator(this);
         initRecyclerView();
         // 准备就绪
         mIsPrepared = true;
@@ -73,7 +73,7 @@ public class AndroidFragment extends BaseFragment<FragmentAndroidBinding> implem
         if (!mIsPrepared || !mIsVisible || !mIsFirst) {
             return;
         }
-        everydayViewModel.loadAndroidData();
+        viewModel.loadAndroidData();
     }
 
     /**
@@ -94,16 +94,16 @@ public class AndroidFragment extends BaseFragment<FragmentAndroidBinding> implem
         bindingView.xrvAndroid.setLoadingListener(new XRecyclerView.LoadingListener() {
             @Override
             public void onRefresh() {
-                everydayViewModel.setPage(1);
-                everydayViewModel.loadAndroidData();
+                viewModel.setPage(1);
+                viewModel.loadAndroidData();
             }
 
             @Override
             public void onLoadMore() {
-                int page = everydayViewModel.getPage();
+                int page = viewModel.getPage();
                 page++;
-                everydayViewModel.setPage(page);
-                everydayViewModel.loadAndroidData();
+                viewModel.setPage(page);
+                viewModel.loadAndroidData();
             }
         });
         bindingView.xrvAndroid.setAdapter(mAndroidAdapter);
@@ -114,12 +114,13 @@ public class AndroidFragment extends BaseFragment<FragmentAndroidBinding> implem
      */
     @Override
     protected void onRefresh() {
-        everydayViewModel.loadAndroidData();
+        viewModel.loadAndroidData();
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
+        viewModel.onDestroy();
     }
 
     @Override
