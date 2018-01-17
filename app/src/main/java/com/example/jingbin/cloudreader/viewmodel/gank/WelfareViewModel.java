@@ -18,7 +18,7 @@ import rx.Subscription;
 /**
  * @author jingbin
  * @data 2018/1/17
- * @Description
+ * @Description 福利页面ViewModel
  */
 
 public class WelfareViewModel extends ViewModel {
@@ -60,7 +60,6 @@ public class WelfareViewModel extends ViewModel {
                         for (int i = 0; i < gankIoDataBean.getResults().size(); i++) {
                             imgList.add(gankIoDataBean.getResults().get(i).getUrl());
                         }
-//                        setAdapter(gankIoDataBean);
                         navigator.setImageList(imgList);
                         navigator.showAdapterView(gankIoDataBean);
                         mACache.remove(Constants.GANK_MEIZI);
@@ -72,18 +71,12 @@ public class WelfareViewModel extends ViewModel {
                 } else {
                     if (gankIoDataBean != null && gankIoDataBean.getResults() != null && gankIoDataBean.getResults().size() > 0) {
                         navigator.refreshAdapter(gankIoDataBean);
-
-//                        bindingView.xrvWelfare.refreshComplete();
-//                        mWelfareAdapter.addAll(gankIoDataBean.getResults());
-//                        mWelfareAdapter.notifyDataSetChanged();
-
                         for (int i = 0; i < gankIoDataBean.getResults().size(); i++) {
                             imgList.add(gankIoDataBean.getResults().get(i).getUrl());
                         }
                         navigator.setImageList(imgList);
                     } else {
                         navigator.showListNoMoreLoading();
-//                        bindingView.xrvWelfare.noMoreLoading();
                     }
                 }
             }

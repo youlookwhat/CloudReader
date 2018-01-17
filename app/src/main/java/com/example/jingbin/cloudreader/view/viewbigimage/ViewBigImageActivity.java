@@ -18,7 +18,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.drawable.GlideDrawable;
@@ -291,7 +290,7 @@ public class ViewBigImageActivity extends FragmentActivity implements OnPageChan
                     .listener(new RequestListener<String, GlideDrawable>() {
                         @Override
                         public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
-                            Toast.makeText(getApplicationContext(), "资源加载异常", Toast.LENGTH_SHORT).show();
+                            ToastUtil.showToast("资源加载异常");
                             spinner.setVisibility(View.GONE);
                             return false;
                         }
