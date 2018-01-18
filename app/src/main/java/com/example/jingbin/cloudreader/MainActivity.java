@@ -179,6 +179,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     case R.id.ll_nav_login:// 登录GitHub账号
                         WebViewActivity.loadUrl(v.getContext(), "https://github.com/login", "登录GitHub账号");
                         break;
+                    default:
+                        break;
                 }
             }, 260);
         }
@@ -283,6 +285,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 llTitleDou.setSelected(true);
                 llTitleOne.setSelected(false);
                 llTitleGank.setSelected(false);
+                break;
+            default:
                 break;
         }
     }
