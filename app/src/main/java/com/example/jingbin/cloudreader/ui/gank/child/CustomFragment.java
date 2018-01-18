@@ -18,13 +18,14 @@ import com.example.jingbin.cloudreader.viewmodel.gank.CustomNavigator;
 import com.example.jingbin.cloudreader.viewmodel.gank.CustomViewModel;
 import com.example.xrecyclerview.XRecyclerView;
 
+import static com.example.jingbin.cloudreader.app.Constants.GANK_CALA;
+
 /**
  * @author jingbin
  */
 public class CustomFragment extends BaseFragment<FragmentCustomBinding> implements CustomNavigator {
 
     private static final String TAG = "CustomFragment";
-    private static final String TYPE = "mType";
     private String mType = "all";
     private boolean mIsPrepared;
     private boolean mIsFirst = true;
@@ -45,7 +46,7 @@ public class CustomFragment extends BaseFragment<FragmentCustomBinding> implemen
     }
 
     private void initData() {
-        String type = SPUtils.getString("gank_cala", "全部");
+        String type = SPUtils.getString(GANK_CALA, "全部");
         if ("全部".equals(type)) {
             mType = "all";
         } else if ("IOS".equals(type)) {
@@ -100,7 +101,7 @@ public class CustomFragment extends BaseFragment<FragmentCustomBinding> implemen
         }
         initHeader(mHeaderView);
 
-        boolean isAll = SPUtils.getString("gank_cala", "全部").equals("全部");
+        boolean isAll = SPUtils.getString(GANK_CALA, "全部").equals("全部");
         mAndroidAdapter.clear();
         mAndroidAdapter.setAllType(isAll);
         mAndroidAdapter.addAll(mCustomBean.getResults());
@@ -113,7 +114,7 @@ public class CustomFragment extends BaseFragment<FragmentCustomBinding> implemen
 
     private void initHeader(View mHeaderView) {
         final TextView txName = (TextView) mHeaderView.findViewById(R.id.tx_name);
-        String gankCala = SPUtils.getString("gank_cala", "全部");
+        String gankCala = SPUtils.getString(GANK_CALA, "全部");
         txName.setText(gankCala);
         View view = mHeaderView.findViewById(R.id.ll_choose_catalogue);
         view.setOnClickListener(v -> new BottomSheet.Builder(getActivity(), R.style.BottomSheet_StyleDialog)
@@ -128,7 +129,7 @@ public class CustomFragment extends BaseFragment<FragmentCustomBinding> implemen
                                 viewModel.setType(mType);
                                 viewModel.setPage(1);
                                 mAndroidAdapter.clear();
-                                SPUtils.putString("gank_cala", "全部");
+                                SPUtils.putString(GANK_CALA, "全部");
                                 showLoading();
                                 viewModel.loadCustomData();
                             }
@@ -141,7 +142,7 @@ public class CustomFragment extends BaseFragment<FragmentCustomBinding> implemen
                                 viewModel.setType(mType);
                                 viewModel.setPage(1);
                                 mAndroidAdapter.clear();
-                                SPUtils.putString("gank_cala", "IOS");
+                                SPUtils.putString(GANK_CALA, "IOS");
                                 showLoading();
                                 viewModel.loadCustomData();
                             }
@@ -179,13 +180,13 @@ public class CustomFragment extends BaseFragment<FragmentCustomBinding> implemen
 //        mPage = 1;
         viewModel.setPage(1);
         mAndroidAdapter.clear();
-        SPUtils.putString("gank_cala", content);
+        SPUtils.putString(GANK_CALA, content);
         showLoading();
         viewModel.loadCustomData();
     }
 
     private boolean isOtherType(String selectType) {
-        String clickText = SPUtils.getString("gank_cala", "全部");
+        String clickText = SPUtils.getString(GANK_CALA, "全部");
         if (clickText.equals(selectType)) {
             ToastUtil.showToast("当前已经是" + selectType + "分类");
             return false;
