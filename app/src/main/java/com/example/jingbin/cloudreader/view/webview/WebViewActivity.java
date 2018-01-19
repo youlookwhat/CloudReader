@@ -3,7 +3,6 @@ package com.example.jingbin.cloudreader.view.webview;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
@@ -64,7 +63,7 @@ public class WebViewActivity extends AppCompatActivity implements IWebPageView {
         getIntentData();
         initTitle();
         initWebView();
-        loadUrl(mUrl);
+        webView.loadUrl(mUrl);
     }
 
     private void initTitle() {
@@ -366,22 +365,6 @@ public class WebViewActivity extends AppCompatActivity implements IWebPageView {
             webView.setWebViewClient(null);
             webView.destroy();
             webView = null;
-        }
-    }
-
-    private void loadUrl(String url) {
-        // bilibili跳转到浏览器
-        if (url.startsWith("http://www.bilibili.com")) {
-            Intent intent = new Intent();
-            intent.setAction("android.intent.action.VIEW");
-            intent.addCategory("android.intent.category.DEFAULT");
-            intent.addCategory("android.intent.category.BROWSABLE");
-            Uri contentUrl = Uri.parse(url);
-            intent.setData(contentUrl);
-            startActivity(intent);
-            finish();
-        } else {
-            webView.loadUrl(url);
         }
     }
 
