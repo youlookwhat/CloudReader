@@ -27,7 +27,7 @@ public interface EverydayNavigator {
     /**
      * 显示轮播图
      */
-    void showBannerView(ArrayList<String> mBannerImages, List<FrontpageBean.ResultBeanXXXXXXXXXXXXXX.FocusBean.ResultBeanX> result);
+    void showBannerView(ArrayList<String> mBannerImages, List<FrontpageBean.ResultBannerBean.FocusBean.ResultBeanX> result);
 
     /**
      * 显示旋转动画

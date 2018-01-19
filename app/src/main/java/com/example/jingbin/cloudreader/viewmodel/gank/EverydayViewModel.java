@@ -26,6 +26,7 @@ import rx.Subscription;
 public class EverydayViewModel extends ViewModel {
 
     private final EverydayModel mEverydayModel;
+    private final ACache maCache;
     private EverydayNavigator everydayNavigator;
     private BaseFragment activity;
     private ArrayList<List<AndroidBean>> mLists;
@@ -44,6 +45,7 @@ public class EverydayViewModel extends ViewModel {
 
     public EverydayViewModel(BaseFragment activity) {
         this.activity = activity;
+        maCache = ACache.get(CloudReaderApplication.getInstance());
         mEverydayModel = new EverydayModel();
         mEverydayModel.setData(getTodayTime().get(0), getTodayTime().get(1), getTodayTime().get(2));
     }
@@ -58,12 +60,14 @@ public class EverydayViewModel extends ViewModel {
                 mLists = (ArrayList<List<AndroidBean>>) object;
                 if (mLists.size() > 0 && mLists.get(0).size() > 0) {
                     everydayNavigator.showListView(mLists);
+                    maCache.remove(Constants.EVERYDAY_CONTENT);
+                    maCache.put(Constants.EVERYDAY_CONTENT, mLists);
                 } else {
                     mLists = (ArrayList<List<AndroidBean>>) ACache.get(activity.getContext()).getAsObject(Constants.EVERYDAY_CONTENT);
                     if (mLists != null && mLists.size() > 0) {
                         everydayNavigator.showListView(mLists);
                     } else {
-                        // 一直请求，知道请求到数据为止
+                        // 一直请求，直到请求到数据为止
                         ArrayList<String> lastTime = TimeUtil.getLastTime(year, month, day);
                         mEverydayModel.setData(lastTime.get(0), lastTime.get(1), lastTime.get(2));
                         year = lastTime.get(0);
@@ -79,7 +83,7 @@ public class EverydayViewModel extends ViewModel {
                 if (mLists != null && mLists.size() > 0) {
                     return;
                 }
-                everydayNavigator.showErrorView();
+                handleNoData();
             }
 
             @Override
@@ -87,6 +91,15 @@ public class EverydayViewModel extends ViewModel {
                 activity.addSubscription(subscription);
             }
         });
+    }
+
+    private void handleNoData(){
+        mLists = (ArrayList<List<AndroidBean>>) ACache.get(activity.getContext()).getAsObject(Constants.EVERYDAY_CONTENT);
+        if (mLists != null && mLists.size() > 0) {
+            everydayNavigator.showListView(mLists);
+        } else {
+            everydayNavigator.showErrorView();
+        }
     }
 
     private void showBanncerPage() {
@@ -100,17 +113,17 @@ public class EverydayViewModel extends ViewModel {
                 }
                 FrontpageBean bean = (FrontpageBean) object;
                 if (bean != null && bean.getResult() != null && bean.getResult().getFocus() != null && bean.getResult().getFocus().getResult() != null) {
-                    final ArrayList<FrontpageBean.ResultBeanXXXXXXXXXXXXXX.FocusBean.ResultBeanX> result = (ArrayList<FrontpageBean.ResultBeanXXXXXXXXXXXXXX.FocusBean.ResultBeanX>) bean.getResult().getFocus().getResult();
+                    final ArrayList<FrontpageBean.ResultBannerBean.FocusBean.ResultBeanX> result = (ArrayList<FrontpageBean.ResultBannerBean.FocusBean.ResultBeanX>) bean.getResult().getFocus().getResult();
                     if (result != null && result.size() > 0) {
                         for (int i = 0; i < result.size(); i++) {
                             //获取所有图片
                             mBannerImages.add(result.get(i).getRandpic());
                         }
                         everydayNavigator.showBannerView(mBannerImages, result);
-                        ACache.get(CloudReaderApplication.getInstance()).remove(Constants.BANNER_PIC);
-                        ACache.get(CloudReaderApplication.getInstance()).put(Constants.BANNER_PIC, mBannerImages);
-                        ACache.get(CloudReaderApplication.getInstance()).remove(Constants.BANNER_PIC_DATA);
-                        ACache.get(CloudReaderApplication.getInstance()).put(Constants.BANNER_PIC_DATA, result);
+                        maCache.remove(Constants.BANNER_PIC);
+                        maCache.put(Constants.BANNER_PIC, mBannerImages);
+                        maCache.remove(Constants.BANNER_PIC_DATA);
+                        maCache.put(Constants.BANNER_PIC_DATA, result);
                     }
                 }
             }
@@ -128,10 +141,10 @@ public class EverydayViewModel extends ViewModel {
     }
 
     public void handleCache() {
-        ArrayList<FrontpageBean.ResultBeanXXXXXXXXXXXXXX.FocusBean.ResultBeanX> result = null;
+        ArrayList<FrontpageBean.ResultBannerBean.FocusBean.ResultBeanX> result = null;
         try {
-            mBannerImages = (ArrayList<String>) ACache.get(CloudReaderApplication.getInstance()).getAsObject(Constants.BANNER_PIC);
-            result = (ArrayList<FrontpageBean.ResultBeanXXXXXXXXXXXXXX.FocusBean.ResultBeanX>) ACache.get(CloudReaderApplication.getInstance()).getAsObject(Constants.BANNER_PIC_DATA);
+            mBannerImages = (ArrayList<String>) maCache.getAsObject(Constants.BANNER_PIC);
+            result = (ArrayList<FrontpageBean.ResultBannerBean.FocusBean.ResultBeanX>) maCache.getAsObject(Constants.BANNER_PIC_DATA);
         } catch (Exception ignored) {
         }
         if (mBannerImages != null && mBannerImages.size() > 0) {
@@ -140,7 +153,7 @@ public class EverydayViewModel extends ViewModel {
         } else {
             showBanncerPage();
         }
-        mLists = (ArrayList<List<AndroidBean>>) ACache.get(CloudReaderApplication.getInstance()).getAsObject(Constants.EVERYDAY_CONTENT);
+        mLists = (ArrayList<List<AndroidBean>>) maCache.getAsObject(Constants.EVERYDAY_CONTENT);
         if (mLists != null && mLists.size() > 0) {
             everydayNavigator.showListView(mLists);
         } else {

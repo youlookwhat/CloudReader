@@ -14,14 +14,12 @@ import android.view.animation.RotateAnimation;
 import com.bumptech.glide.Glide;
 import com.example.jingbin.cloudreader.R;
 import com.example.jingbin.cloudreader.adapter.EverydayAdapter;
-import com.example.jingbin.cloudreader.app.Constants;
 import com.example.jingbin.cloudreader.base.BaseFragment;
 import com.example.jingbin.cloudreader.bean.AndroidBean;
 import com.example.jingbin.cloudreader.bean.FrontpageBean;
 import com.example.jingbin.cloudreader.databinding.FooterItemEverydayBinding;
 import com.example.jingbin.cloudreader.databinding.FragmentEverydayBinding;
 import com.example.jingbin.cloudreader.databinding.HeaderItemEverydayBinding;
-import com.example.jingbin.cloudreader.http.cache.ACache;
 import com.example.jingbin.cloudreader.http.rx.RxBus;
 import com.example.jingbin.cloudreader.http.rx.RxBusBaseMessage;
 import com.example.jingbin.cloudreader.http.rx.RxCodeConstants;
@@ -51,7 +49,6 @@ import static com.example.jingbin.cloudreader.viewmodel.gank.EverydayViewModel.g
 public class EverydayFragment extends BaseFragment<FragmentEverydayBinding> implements EverydayNavigator {
 
     private static final String TAG = "EverydayFragment";
-    private ACache maCache;
     private HeaderItemEverydayBinding mHeaderBinding;
     private FooterItemEverydayBinding mFooterBinding;
     private View mHeaderView;
@@ -77,7 +74,6 @@ public class EverydayFragment extends BaseFragment<FragmentEverydayBinding> impl
         showContentView();
         initAnimation();
 
-        maCache = ACache.get(getContext());
         everydayViewModel = new EverydayViewModel(this);
         everydayViewModel.setEverydayNavigator(this);
         mHeaderBinding = DataBindingUtil.inflate(LayoutInflater.from(getContext()), R.layout.header_item_everyday, null, false);
@@ -152,7 +148,7 @@ public class EverydayFragment extends BaseFragment<FragmentEverydayBinding> impl
      * 设置banner图
      */
     @Override
-    public void showBannerView(ArrayList<String> mBannerImages, List<FrontpageBean.ResultBeanXXXXXXXXXXXXXX.FocusBean.ResultBeanX> result) {
+    public void showBannerView(ArrayList<String> mBannerImages, List<FrontpageBean.ResultBannerBean.FocusBean.ResultBeanX> result) {
         mHeaderBinding.banner.setImages(mBannerImages).setImageLoader(new GlideImageLoader()).start();
         if (result != null) {
             mHeaderBinding.banner.setOnBannerListener(position -> {
@@ -224,8 +220,6 @@ public class EverydayFragment extends BaseFragment<FragmentEverydayBinding> impl
             mEverydayAdapter.clear();
         }
         mEverydayAdapter.addAll(lists);
-        maCache.remove(Constants.EVERYDAY_CONTENT);
-        maCache.put(Constants.EVERYDAY_CONTENT, lists);
 
         if (isOldDayRequest) {
             ArrayList<String> lastTime = TimeUtil.getLastTime(getTodayTime().get(0), getTodayTime().get(1), getTodayTime().get(2));
@@ -265,6 +259,9 @@ public class EverydayFragment extends BaseFragment<FragmentEverydayBinding> impl
 
     }
 
+    /**
+     * 显示旋转动画
+     */
     private void showRotaLoading(boolean isLoading) {
         if (isLoading) {
             bindingView.llLoading.setVisibility(View.VISIBLE);

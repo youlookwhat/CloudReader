@@ -10,15 +10,15 @@ import java.util.List;
 
 public class FrontpageBean implements Serializable {
 
-    private ResultBeanXXXXXXXXXXXXXX result;
+    private ResultBannerBean result;
     private int error_code;
     private List<ModuleBean> module;
 
-    public ResultBeanXXXXXXXXXXXXXX getResult() {
+    public ResultBannerBean getResult() {
         return result;
     }
 
-    public void setResult(ResultBeanXXXXXXXXXXXXXX result) {
+    public void setResult(ResultBannerBean result) {
         this.result = result;
     }
 
@@ -38,7 +38,7 @@ public class FrontpageBean implements Serializable {
         this.module = module;
     }
 
-    public static class ResultBeanXXXXXXXXXXXXXX implements Serializable{
+    public static class ResultBannerBean implements Serializable{
 
 //        private Mix9Bean mix_9;
         private FocusBean focus;
