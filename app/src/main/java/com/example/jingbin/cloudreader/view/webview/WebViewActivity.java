@@ -246,20 +246,23 @@ public class WebViewActivity extends AppCompatActivity implements IWebPageView {
      * 进度条 假装加载到90%
      */
     public void startProgress90() {
-        for (int i = 0; i < 900; i++) {
-            final int progress = i + 1;
-            mProgressBar.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    mProgressBar.setProgress(progress);
-                    if (progress == 900) {
-                        mProgress90 = true;
-                        if (mPageFinish) {
-                            startProgress90to100();
+        int oldProgress = mProgressBar.getProgress();
+        if (oldProgress == 0) {
+            for (int i = 0; i < 900; i++) {
+                final int progress = i + 1;
+                mProgressBar.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        mProgressBar.setProgress(progress);
+                        if (progress == 900) {
+                            mProgress90 = true;
+                            if (mPageFinish) {
+                                startProgress90to100();
+                            }
                         }
                     }
-                }
-            }, (i + 1) * 2);
+                }, (i + 1) * 2);
+            }
         }
     }
 
