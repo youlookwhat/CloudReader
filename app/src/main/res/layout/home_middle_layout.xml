@@ -12,15 +12,16 @@
             android:layout_marginTop="16dp"
             android:orientation="horizontal">
 
-            <RelativeLayout
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center_vertical">
 
                 <RelativeLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="35dp">
+                    android:layout_weight="1"
+                    android:gravity="center">
 
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -29,8 +30,8 @@
 
                         <ImageButton
                             android:id="@+id/ib_xiandu"
-                            android:layout_width="53dp"
-                            android:layout_height="53dp"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
                             android:background="@drawable/home_middle_fm" />
 
                         <TextView
@@ -45,9 +46,10 @@
                 </RelativeLayout>
 
                 <RelativeLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_centerInParent="true">
+                    android:layout_weight="1"
+                    android:gravity="center">
 
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -57,14 +59,14 @@
 
                         <FrameLayout
                             android:id="@+id/fl_everyday"
-                            android:layout_width="53dp"
-                            android:layout_height="53dp"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
                             android:clickable="true">
 
                             <ImageView
                                 android:id="@+id/daily_btn"
-                                android:layout_width="53dp"
-                                android:layout_height="53dp"
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
                                 android:background="@drawable/home_middle_day" />
 
                             <TextView
@@ -72,9 +74,10 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
-                                android:text="xx"
+                                android:layout_marginTop="3dp"
+                                android:text="21"
                                 android:textColor="@color/select_gank_day"
-                                android:textSize="25sp" />
+                                android:textSize="12sp" />
 
                         </FrameLayout>
 
@@ -83,7 +86,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
-                            android:text="每日干货推荐"
+                            android:text="每日推荐"
                             android:textColor="@color/colorContent"
                             android:textSize="12sp" />
 
@@ -93,10 +96,40 @@
                 </RelativeLayout>
 
                 <RelativeLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginEnd="35dp">
+                    android:layout_weight="1"
+                    android:gravity="center">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <ImageButton
+                            android:id="@+id/ib_wan_android"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:layout_gravity="center"
+                            android:background="@drawable/home_middle_music" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="8dp"
+                            android:text="玩安卓"
+                            android:textColor="@color/colorContent"
+                            android:textSize="12sp" />
+                    </LinearLayout>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center">
 
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -105,8 +138,8 @@
 
                         <ImageButton
                             android:id="@+id/ib_movie_hot"
-                            android:layout_width="53dp"
-                            android:layout_height="53dp"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
                             android:layout_gravity="center"
                             android:background="@drawable/home_middle_rank" />
 
@@ -115,13 +148,13 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:layout_marginTop="8dp"
-                            android:text="新电影热映榜"
+                            android:text="热映榜"
                             android:textColor="@color/colorContent"
                             android:textSize="12sp" />
                     </LinearLayout>
 
                 </RelativeLayout>
-            </RelativeLayout>
+            </LinearLayout>
 
         </LinearLayout>
 

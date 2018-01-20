@@ -19,13 +19,14 @@
         <RelativeLayout
             android:id="@+id/ll_title_more"
             android:layout_width="match_parent"
-            android:layout_height="27dp"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
             android:orientation="horizontal">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
+                android:layout_marginTop="8dp"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
@@ -54,6 +55,7 @@
                     android:layout_width="17dp"
                     android:layout_height="17dp"
                     android:layout_marginLeft="2dp"
+                    android:layout_marginTop="1dp"
                     android:src="@drawable/home_arrow_right" />
 
 

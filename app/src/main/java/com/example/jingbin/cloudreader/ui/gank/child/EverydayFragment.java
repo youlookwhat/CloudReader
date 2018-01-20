@@ -125,6 +125,12 @@ public class EverydayFragment extends BaseFragment<FragmentEverydayBinding> impl
                 WebViewActivity.loadUrl(v.getContext(), "https://gank.io/xiandu", "加载中...");
             }
         });
+        mHeaderBinding.includeEveryday.ibWanAndroid.setOnClickListener(new PerfectClickListener() {
+            @Override
+            protected void onNoDoubleClick(View v) {
+                WebViewActivity.loadUrl(v.getContext(), "http://www.wanandroid.com/index", "玩Android");
+            }
+        });
         mHeaderBinding.includeEveryday.ibMovieHot.setOnClickListener(new PerfectClickListener() {
             @Override
             protected void onNoDoubleClick(View v) {
