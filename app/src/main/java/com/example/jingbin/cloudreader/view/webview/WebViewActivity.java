@@ -140,7 +140,7 @@ public class WebViewActivity extends AppCompatActivity implements IWebPageView {
         // 设置此属性，可任意比例缩放。
         ws.setUseWideViewPort(true);
         // 缩放比例 1
-        webView.setInitialScale(1);
+        webView.setInitialScale(100);
         // 告诉WebView启用JavaScript执行。默认的是false。
         ws.setJavaScriptEnabled(true);
         //  页面加载好以后，再放开图片

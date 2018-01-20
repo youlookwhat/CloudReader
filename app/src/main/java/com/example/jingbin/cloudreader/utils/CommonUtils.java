@@ -1,14 +1,11 @@
 package com.example.jingbin.cloudreader.utils;
 
-import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
-import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewParent;
-import android.view.WindowManager;
 
 import com.example.jingbin.cloudreader.app.CloudReaderApplication;
 
@@ -42,22 +39,6 @@ public class CommonUtils {
         return dateFm.format(date);
     }
 
-    /**
-     * 获取屏幕px
-     *
-     * @param context
-     * @return 分辨率
-     */
-    static public int getScreenWidthPixels(Context context) {
-        DisplayMetrics dm = new DisplayMetrics();
-        ((WindowManager) context.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay()
-                .getMetrics(dm);
-        return dm.widthPixels;
-    }
-
-//	public static void RunOnUiThread(Runnable r) {
-//		CloudReaderApplication.getInstance().getMainLooper().post(r);
-//	}
 
     public static Drawable getDrawable(int resid) {
         return getResoure().getDrawable(resid);

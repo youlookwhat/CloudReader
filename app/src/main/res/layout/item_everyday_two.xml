@@ -5,8 +5,6 @@
         android:id="@+id/ll_two_one"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
         android:visibility="visible">
 
         <LinearLayout
@@ -31,13 +29,15 @@
                 android:layout_marginTop="2dp"
                 android:ellipsize="end"
                 android:maxLines="2"
+                android:paddingLeft="4dp"
+                android:paddingRight="4dp"
                 android:text=""
                 android:textColor="@color/colorContent"
                 android:textSize="12sp" />
         </LinearLayout>
 
         <View
-            android:layout_width="7dp"
+            android:layout_width="4dp"
             android:layout_height="match_parent"
             android:background="@color/colorPageBg" />
 
@@ -62,6 +62,8 @@
                 android:ellipsize="end"
                 android:lineSpacingExtra="2dp"
                 android:maxLines="2"
+                android:paddingLeft="4dp"
+                android:paddingRight="4dp"
                 android:text=""
                 android:textColor="@color/colorContent"
                 android:textSize="12sp" />

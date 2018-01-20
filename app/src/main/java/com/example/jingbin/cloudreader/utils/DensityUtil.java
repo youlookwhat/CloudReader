@@ -1,7 +1,12 @@
 package com.example.jingbin.cloudreader.utils;
 
+import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
 import com.example.jingbin.cloudreader.app.CloudReaderApplication;
 
@@ -69,4 +74,49 @@ public class DensityUtil {
         view.requestLayout();
         return marginParams;
     }
+
+    /**
+     * 通过比例得到高度
+     *
+     * @param bili         图片比例
+     * @param type         1:外层 LinearLayout 2：外层 RelativeLayout
+     * @param marginLR     左右的dp
+     * @param marginTop    上面的dp
+     * @param marginBottom 下面的dp
+     */
+    public static void formartHight(ImageView imageView, float bili, int type, int marginLR, int marginTop, int marginBottom) {
+        WindowManager wm = (WindowManager) CloudReaderApplication.getInstance().getSystemService(Context.WINDOW_SERVICE);
+        int width = wm.getDefaultDisplay().getWidth();
+        int height = (int) (width / bili);
+        if (type == 1) {
+            LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, height);
+            imageView.setLayoutParams(lp);
+        } else {
+            RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, height);
+            imageView.setLayoutParams(lp);
+        }
+
+        ViewGroup.MarginLayoutParams layoutParams = (ViewGroup.MarginLayoutParams) imageView.getLayoutParams();
+        layoutParams.setMargins(dip2px(marginLR), dip2px(marginTop), dip2px(marginLR), dip2px(marginBottom));
+    }
+
+    /**
+     * 通过比例设置图片的高度
+     *
+     * @param width 图片的宽
+     * @param bili  图片比例
+     * @param type  1:外层 LinearLayout 2：外层 RelativeLayout
+     */
+    public static void formartHight(ImageView imageView, int width, float bili, int type) {
+        int height = (int) (width / bili);
+        if (type == 1) {
+            LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, height);
+            imageView.setLayoutParams(lp);
+        } else {
+            RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, height);
+            imageView.setLayoutParams(lp);
+        }
+    }
+
+
 }

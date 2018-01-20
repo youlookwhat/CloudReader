@@ -9,7 +9,7 @@
             android:id="@+id/personal_recommend"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="18dp"
+            android:layout_marginTop="16dp"
             android:orientation="horizontal">
 
             <RelativeLayout
@@ -127,8 +127,9 @@
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="0.4dp"
+            android:layout_height="0.3dp"
             android:layout_below="@+id/personal_recommend"
+            android:layout_marginBottom="13dp"
             android:layout_marginTop="13dp"
             android:background="@color/colorHomeLine" />
     </RelativeLayout>
