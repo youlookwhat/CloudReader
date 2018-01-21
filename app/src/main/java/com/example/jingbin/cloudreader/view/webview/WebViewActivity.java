@@ -139,7 +139,7 @@ public class WebViewActivity extends AppCompatActivity implements IWebPageView {
         // setDefaultZoom  api19被弃用
         // 设置此属性，可任意比例缩放。
         ws.setUseWideViewPort(true);
-        // 缩放比例 1
+        // 不缩放
         webView.setInitialScale(100);
         // 告诉WebView启用JavaScript执行。默认的是false。
         ws.setJavaScriptEnabled(true);
@@ -149,8 +149,8 @@ public class WebViewActivity extends AppCompatActivity implements IWebPageView {
         ws.setDomStorageEnabled(true);
         // 排版适应屏幕
         ws.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.NARROW_COLUMNS);
-        // WebView是否支持多个窗口。
-        ws.setSupportMultipleWindows(true);
+        // WebView是否新窗口打开(加了后可能打不开网页)
+//        ws.setSupportMultipleWindows(true);
 
         // webview从5.0开始默认不允许混合模式,https中不能加载http资源,需要设置开启。
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
