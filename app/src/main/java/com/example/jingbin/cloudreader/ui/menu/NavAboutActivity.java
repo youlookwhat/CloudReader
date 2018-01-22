@@ -15,9 +15,10 @@ import com.example.jingbin.cloudreader.utils.CommonUtils;
 import com.example.jingbin.cloudreader.utils.PerfectClickListener;
 import com.example.jingbin.cloudreader.view.webview.WebViewActivity;
 
+/**
+ * @author jingbin
+ */
 public class NavAboutActivity extends BaseActivity<ActivityNavAboutBinding> {
-
-    private static String string_url_update_log = "http://jingbin.me/2016/12/30/%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97-%E4%BA%91%E9%98%85/";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,47 +42,41 @@ public class NavAboutActivity extends BaseActivity<ActivityNavAboutBinding> {
     private void initListener() {
         bindingView.tvGankio.setOnClickListener(listener);
         bindingView.tvDouban.setOnClickListener(listener);
-        bindingView.tvAboutStar.setOnClickListener(new PerfectClickListener() {
-            @Override
-            protected void onNoDoubleClick(View v) {
-                BaseTools.openLink(v.getContext(), CommonUtils.getString(R.string.string_url_cloudreader));
-            }
-        });
-        bindingView.tvFunction.setOnClickListener(new PerfectClickListener() {
-            @Override
-            protected void onNoDoubleClick(View v) {
-                BaseTools.openLink(v.getContext(), string_url_update_log);
-            }
-        });
-        bindingView.tvNewVersion.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                BaseTools.openLink(v.getContext(), CommonUtils.getString(R.string.string_url_new_version));
-            }
-        });
+        bindingView.tvAboutStar.setOnClickListener(listener);
+        bindingView.tvFunction.setOnClickListener(listener);
+        bindingView.tvNewVersion.setOnClickListener(listener);
     }
 
     private PerfectClickListener listener = new PerfectClickListener() {
         @Override
         protected void onNoDoubleClick(View v) {
             String url = null;
+            String title = "加载中...";
             switch (v.getId()) {
                 case R.id.tv_gankio:
                     url = CommonUtils.getString(R.string.string_url_gankio);
+                    title = "干货集中营";
                     break;
                 case R.id.tv_douban:
                     url = CommonUtils.getString(R.string.string_url_douban);
+                    title = "豆瓣开发者服务使用条款";
                     break;
                 case R.id.tv_about_star:
                     url = CommonUtils.getString(R.string.string_url_cloudreader);
+                    title = "CloudReader";
                     break;
                 case R.id.tv_function:// 更新日志
-                    url = string_url_update_log;
+                    url = CommonUtils.getString(R.string.string_url_update_log);
+                    title = "更新日志";
+                    break;
+                case R.id.tv_new_version:// 检查更新
+                    url = CommonUtils.getString(R.string.string_url_new_version);
+                    title = "检查更新";
                     break;
                 default:
                     break;
             }
-            WebViewActivity.loadUrl(v.getContext(), url, "加载中...");
+            WebViewActivity.loadUrl(v.getContext(), url, title);
         }
     };
 
