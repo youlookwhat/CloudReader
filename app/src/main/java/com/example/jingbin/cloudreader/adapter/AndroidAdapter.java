@@ -80,6 +80,6 @@ public class AndroidAdapter extends BaseRecyclerViewAdapter<GankIoDataBean.Resul
     }
 
     public void openDetail(GankIoDataBean.ResultBean object) {
-        WebViewActivity.loadUrl(context, object.getUrl(), "加载中...");
+        WebViewActivity.loadUrl(context, object.getUrl(), object.getDesc());
     }
 }

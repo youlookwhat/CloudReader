@@ -122,7 +122,7 @@ public class EverydayFragment extends BaseFragment<FragmentEverydayBinding> impl
         mHeaderBinding.includeEveryday.ibXiandu.setOnClickListener(new PerfectClickListener() {
             @Override
             protected void onNoDoubleClick(View v) {
-                WebViewActivity.loadUrl(v.getContext(), "https://gank.io/xiandu", "加载中...");
+                WebViewActivity.loadUrl(v.getContext(), "https://gank.io/xiandu", "闲读");
             }
         });
         mHeaderBinding.includeEveryday.ibWanAndroid.setOnClickListener(new PerfectClickListener() {
