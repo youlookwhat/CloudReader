@@ -9,14 +9,18 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.FrameLayout;
 import android.widget.ProgressBar;
+import android.widget.TextSwitcher;
+import android.widget.TextView;
 
 import com.example.jingbin.cloudreader.R;
 import com.example.jingbin.cloudreader.utils.BaseTools;
@@ -55,6 +59,10 @@ public class WebViewActivity extends AppCompatActivity implements IWebPageView {
     private String mTitle;
     // 网页链接
     private String mUrl;
+    // 可滚动的title 使用复杂 文字显示有渐变效果，文字两旁没有阴影
+    private TextSwitcher mTsTitle;
+    // 可滚动的title 使用简单 没有渐变效果，文字两旁有阴影
+    private TextView tvGunTitle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,46 +76,69 @@ public class WebViewActivity extends AppCompatActivity implements IWebPageView {
 
     private void initTitle() {
         StatusBarUtil.setColor(this, CommonUtils.getColor(R.color.colorTheme), 0);
-        mProgressBar = (ProgressBar) findViewById(R.id.pb_progress);
-        webView = (WebView) findViewById(R.id.webview_detail);
-        videoFullView = (FrameLayout) findViewById(R.id.video_fullView);
-        mTitleToolBar = (Toolbar) findViewById(R.id.title_tool_bar);
+        mProgressBar = findViewById(R.id.pb_progress);
+        webView = findViewById(R.id.webview_detail);
+        videoFullView = findViewById(R.id.video_fullView);
+        mTitleToolBar = findViewById(R.id.title_tool_bar);
+        mTsTitle = findViewById(R.id.ts_title);
+        tvGunTitle = findViewById(R.id.tv_gun_title);
+
+        initToolBar();
+    }
+
+    private void initToolBar() {
         setSupportActionBar(mTitleToolBar);
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             //去除默认Title显示
             actionBar.setDisplayShowTitleEnabled(false);
-            actionBar.setDisplayShowTitleEnabled(false);
-            actionBar.setDisplayHomeAsUpEnabled(true);
-            actionBar.setHomeAsUpIndicator(R.drawable.icon_back);
         }
-        setTitle(mTitle);
         mTitleToolBar.setOverflowIcon(ContextCompat.getDrawable(this, R.drawable.actionbar_more));
-        mTitleToolBar.setNavigationOnClickListener(v -> onBackPressed());
-        mTitleToolBar.setOnMenuItemClickListener(item -> {
-            switch (item.getItemId()) {
-                case R.id.actionbar_share:// 分享到
-                    String shareText = mWebChromeClient.getTitle() + mUrl + "（分享自云阅）";
-                    ShareUtils.share(WebViewActivity.this, shareText);
-                    break;
-                case R.id.actionbar_cope:// 复制链接
-                    BaseTools.copy(mUrl);
-                    ToastUtil.showToast("复制成功");
-                    break;
-                case R.id.actionbar_open:// 打开链接
-                    BaseTools.openLink(WebViewActivity.this, mUrl);
-                    break;
-                default:
-                    break;
-            }
-            return false;
+        tvGunTitle.postDelayed(() -> tvGunTitle.setSelected(true), 1900);
+        setTitle(mTitle);
+    }
+
+    private void initTextSwitch() {
+        mTsTitle.setFactory(() -> {
+            TextView textView = new TextView(this);
+            textView.setTextAppearance(this, R.style.WebTitle);
+            textView.setSingleLine(true);
+            textView.setEllipsize(TextUtils.TruncateAt.MARQUEE);
+            textView.postDelayed(() -> textView.setSelected(true), 1900);
+            return textView;
         });
+        mTsTitle.setInAnimation(this, android.R.anim.fade_in);
+        mTsTitle.setOutAnimation(this, android.R.anim.fade_out);
+        setTitle(mTitle);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.webview_menu, menu);
         return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:// 返回键
+                onBackPressed();
+                break;
+            case R.id.actionbar_share:// 分享到
+                String shareText = mWebChromeClient.getTitle() + mUrl + "（分享自云阅）";
+                ShareUtils.share(WebViewActivity.this, shareText);
+                break;
+            case R.id.actionbar_cope:// 复制链接
+                BaseTools.copy(mUrl);
+                ToastUtil.showToast("复制成功");
+                break;
+            case R.id.actionbar_open:// 打开链接
+                BaseTools.openLink(WebViewActivity.this, mUrl);
+                break;
+            default:
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     private void getIntentData() {
@@ -118,7 +149,7 @@ public class WebViewActivity extends AppCompatActivity implements IWebPageView {
     }
 
     public void setTitle(String mTitle) {
-        mTitleToolBar.setTitle(mTitle);
+        tvGunTitle.setText(mTitle);
     }
 
     private void initWebView() {

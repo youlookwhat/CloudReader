@@ -23,11 +23,30 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="@color/colorTheme"
-            app:contentInsetStart="0.0dp"
-            app:layout_collapseMode="pin"
+            app:contentInsetStartWithNavigation="0dp"
             app:layout_scrollFlags="enterAlways|scroll"
+            app:navigationContentDescription="返回"
+            app:navigationIcon="@drawable/icon_back"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-            app:theme="@style/ToolbarStyle" />
+            app:theme="@style/ToolbarStyle">
+
+            <TextView
+                android:id="@+id/tv_gun_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="marquee"
+                android:singleLine="true"
+                android:textColor="@color/colorWhite"
+                android:textSize="18sp"
+                android:visibility="visible" />
+
+            <TextSwitcher
+                android:id="@+id/ts_title"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="gone" />
+
+        </android.support.v7.widget.Toolbar>
 
         <RelativeLayout
             android:layout_width="match_parent"

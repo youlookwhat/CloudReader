@@ -9,7 +9,6 @@ import android.webkit.WebViewClient;
 
 import com.example.jingbin.cloudreader.utils.BaseTools;
 import com.example.jingbin.cloudreader.utils.CheckNetwork;
-import com.example.jingbin.cloudreader.utils.DebugUtil;
 import com.example.jingbin.cloudreader.view.webview.WebViewActivity;
 
 
