@@ -19,7 +19,19 @@ public class ToastUtil {
         if (mToast == null) {
             mToast = Toast.makeText(CloudReaderApplication.getInstance(), text, Toast.LENGTH_SHORT);
         }
+        mToast.setDuration(Toast.LENGTH_SHORT);
         mToast.setText(text);
         mToast.show();
     }
+
+    @SuppressLint("ShowToast")
+    public static void showToastLong(String text) {
+        if (mToast == null) {
+            mToast = Toast.makeText(CloudReaderApplication.getInstance(), text, Toast.LENGTH_SHORT);
+        }
+        mToast.setDuration(Toast.LENGTH_LONG);
+        mToast.setText(text);
+        mToast.show();
+    }
+
 }

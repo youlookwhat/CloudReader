@@ -24,6 +24,7 @@ import com.bumptech.glide.load.resource.drawable.GlideDrawable;
 import com.bumptech.glide.request.FutureTarget;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
+import com.example.http.utils.CheckNetwork;
 import com.example.jingbin.cloudreader.R;
 import com.example.jingbin.cloudreader.utils.ToastUtil;
 
@@ -146,43 +147,44 @@ public class ViewBigImageActivity extends FragmentActivity implements OnPageChan
         tv_save_big_image = (TextView) findViewById(R.id.tv_save_big_image);
         very_image_viewpager = (ViewPager) findViewById(R.id.very_image_viewpager);
 
-        tv_save_big_image.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        tv_save_big_image.setOnClickListener(view -> {
+            if (!CheckNetwork.isNetworkConnected(view.getContext())){
+                ToastUtil.showToastLong("当前网络不可用，请检查你的网络设置");
+                return;
+            }
 
-                ToastUtil.showToast("开始下载图片");
-                if (isApp) {// 本地图片
-                    Bitmap bitmap = BitmapFactory.decodeResource(getResources(), imageId);
-                    if (bitmap != null) {
-                        saveImageToGallery(ViewBigImageActivity.this, bitmap);
-                        ToastUtil.showToast("保存成功");
+            ToastUtil.showToast("开始下载图片");
+            if (isApp) {// 本地图片
+                Bitmap bitmap = BitmapFactory.decodeResource(getResources(), imageId);
+                if (bitmap != null) {
+                    saveImageToGallery(ViewBigImageActivity.this, bitmap);
+                    ToastUtil.showToast("保存成功");
 //                        Toast.makeText(ViewBigImageActivity.this, "保存成功", Toast.LENGTH_SHORT).show();
-                    }
+                }
 
-                } else {// 网络图片
-                    final BitmapFactory.Options bmOptions = new BitmapFactory.Options();
-                    new Thread(new Runnable() {
-                        @Override
-                        public void run() {
-                            // 子线程获得图片路径
-                            final String imagePath = getImagePath(imageuri.get(page));
-                            // 主线程更新
-                            ViewBigImageActivity.this.runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    if (imagePath != null) {
-                                        Bitmap bitmap = BitmapFactory.decodeFile(imagePath, bmOptions);
-                                        if (bitmap != null) {
-                                            saveImageToGallery(ViewBigImageActivity.this, bitmap);
-                                            ToastUtil.showToast("已保存至"+Environment.getExternalStorageDirectory().getAbsolutePath()+"/云阅相册");
+            } else {// 网络图片
+                final BitmapFactory.Options bmOptions = new BitmapFactory.Options();
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        // 子线程获得图片路径
+                        final String imagePath = getImagePath(imageuri.get(page));
+                        // 主线程更新
+                        ViewBigImageActivity.this.runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                if (imagePath != null) {
+                                    Bitmap bitmap = BitmapFactory.decodeFile(imagePath, bmOptions);
+                                    if (bitmap != null) {
+                                        saveImageToGallery(ViewBigImageActivity.this, bitmap);
+                                        ToastUtil.showToast("已保存至"+Environment.getExternalStorageDirectory().getAbsolutePath()+"/云阅相册");
 //                                            Toast.makeText(ViewBigImageActivity.this, "保存成功", Toast.LENGTH_SHORT).show();
-                                        }
                                     }
                                 }
-                            });
-                        }
-                    }).start();
-                }
+                            }
+                        });
+                    }
+                }).start();
             }
         });
         /************************* 接收传值 ***********************/

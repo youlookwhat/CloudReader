@@ -22,6 +22,7 @@ import android.widget.ProgressBar;
 import android.widget.TextSwitcher;
 import android.widget.TextView;
 
+import com.example.http.utils.CheckNetwork;
 import com.example.jingbin.cloudreader.R;
 import com.example.jingbin.cloudreader.utils.BaseTools;
 import com.example.jingbin.cloudreader.utils.CommonUtils;
@@ -407,9 +408,13 @@ public class WebViewActivity extends AppCompatActivity implements IWebPageView {
      * @param mTitle   title
      */
     public static void loadUrl(Context mContext, String mUrl, String mTitle) {
-        Intent intent = new Intent(mContext, WebViewActivity.class);
-        intent.putExtra("mUrl", mUrl);
-        intent.putExtra("mTitle", mTitle);
-        mContext.startActivity(intent);
+        if (CheckNetwork.isNetworkConnected(mContext)) {
+            Intent intent = new Intent(mContext, WebViewActivity.class);
+            intent.putExtra("mUrl", mUrl);
+            intent.putExtra("mTitle", mTitle == null ? "" : mTitle);
+            mContext.startActivity(intent);
+        } else {
+            ToastUtil.showToastLong("当前网络不可用，请检查你的网络设置");
+        }
     }
 }
