@@ -103,6 +103,7 @@ public class BaseActivity<SV extends ViewDataBinding> extends AppCompatActivity 
         });
     }
 
+    @Override
     public void setTitle(CharSequence text) {
         mBaseBinding.toolBar.setTitle(text);
     }

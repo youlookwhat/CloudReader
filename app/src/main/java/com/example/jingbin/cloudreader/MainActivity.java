@@ -66,6 +66,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private ImageView llTitleOne;
     private ImageView llTitleDou;
     private CompositeSubscription mCompositeSubscription;
+    private NavHeaderMainBinding bind;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -111,8 +112,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mBinding.include.ivTitleOne.setOnClickListener(this);
         fab.setOnClickListener(this);
     }
-
-    NavHeaderMainBinding bind;
 
     /**
      * inflateHeaderView 进来的布局要宽一些

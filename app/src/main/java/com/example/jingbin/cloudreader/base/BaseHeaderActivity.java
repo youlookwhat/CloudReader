@@ -11,12 +11,10 @@ import android.support.annotation.LayoutRes;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.transition.ArcMotion;
 import android.util.Log;
 import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AnimationUtils;
@@ -114,7 +112,7 @@ public abstract class BaseHeaderActivity<HV extends ViewDataBinding, SV extends 
         refresh = getView(R.id.ll_error_refresh);
 
         // 设置自定义元素共享切换动画
-        setMotion(setHeaderPicView(),false);
+        setMotion(setHeaderPicView(), false);
 
         // 初始化滑动渐变
         initSlideShapeTheme(setHeaderImgUrl(), setHeaderImageView());
@@ -168,6 +166,7 @@ public abstract class BaseHeaderActivity<HV extends ViewDataBinding, SV extends 
     /**
      * 1. 标题
      */
+    @Override
     public void setTitle(CharSequence text) {
         bindingTitleView.tbBaseTitle.setTitle(text);
     }
@@ -229,26 +228,19 @@ public abstract class BaseHeaderActivity<HV extends ViewDataBinding, SV extends 
             actionBar.setHomeAsUpIndicator(R.drawable.icon_back);
         }
         // 手动设置才有效果
-        bindingTitleView.tbBaseTitle.setTitleTextAppearance(this, R.style.ToolBar_Title);
-        bindingTitleView.tbBaseTitle.setSubtitleTextAppearance(this, R.style.Toolbar_SubTitle);
-        bindingTitleView.tbBaseTitle.inflateMenu(R.menu.base_header_menu);
+//        bindingTitleView.tbBaseTitle.setTitleTextAppearance(this, R.style.ToolBar_Title);
+//        bindingTitleView.tbBaseTitle.setSubtitleTextAppearance(this, R.style.Toolbar_SubTitle);
         bindingTitleView.tbBaseTitle.setOverflowIcon(ContextCompat.getDrawable(this, R.drawable.actionbar_more));
-        bindingTitleView.tbBaseTitle.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onBackPressed();
+        bindingTitleView.tbBaseTitle.setNavigationOnClickListener(v -> onBackPressed());
+        bindingTitleView.tbBaseTitle.setOnMenuItemClickListener(item -> {
+            switch (item.getItemId()) {
+                case R.id.actionbar_more:// 更多信息
+                    setTitleClickMore();
+                    break;
+                default:
+                    break;
             }
-        });
-        bindingTitleView.tbBaseTitle.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                switch (item.getItemId()) {
-                    case R.id.actionbar_more:// 更多信息
-                        setTitleClickMore();
-                        break;
-                }
-                return false;
-            }
+            return false;
         });
     }
 
