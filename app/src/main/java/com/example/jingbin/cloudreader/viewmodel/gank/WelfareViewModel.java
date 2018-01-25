@@ -29,6 +29,7 @@ public class WelfareViewModel extends ViewModel {
     private WelfareNavigator navigator;
     private int mPage = 1;
     private ArrayList<String> imgList = new ArrayList<>();
+    private ArrayList<String> imageTitleList = new ArrayList<>();
 
     public void setNavigator(WelfareNavigator navigator) {
         this.navigator = navigator;
@@ -59,8 +60,9 @@ public class WelfareViewModel extends ViewModel {
                         imgList.clear();
                         for (int i = 0; i < gankIoDataBean.getResults().size(); i++) {
                             imgList.add(gankIoDataBean.getResults().get(i).getUrl());
+                            imageTitleList.add(gankIoDataBean.getResults().get(i).getDesc());
                         }
-                        navigator.setImageList(imgList);
+                        navigator.setImageList(imgList,imageTitleList);
                         navigator.showAdapterView(gankIoDataBean);
                         mACache.remove(Constants.GANK_MEIZI);
                         mACache.put(Constants.GANK_MEIZI, gankIoDataBean);
@@ -73,8 +75,9 @@ public class WelfareViewModel extends ViewModel {
                         navigator.refreshAdapter(gankIoDataBean);
                         for (int i = 0; i < gankIoDataBean.getResults().size(); i++) {
                             imgList.add(gankIoDataBean.getResults().get(i).getUrl());
+                            imageTitleList.add(gankIoDataBean.getResults().get(i).getDesc());
                         }
-                        navigator.setImageList(imgList);
+                        navigator.setImageList(imgList,imageTitleList);
                     } else {
                         navigator.showListNoMoreLoading();
                     }

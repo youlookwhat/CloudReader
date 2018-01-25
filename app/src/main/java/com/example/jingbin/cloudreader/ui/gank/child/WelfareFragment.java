@@ -1,6 +1,5 @@
 package com.example.jingbin.cloudreader.ui.gank.child;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.StaggeredGridLayoutManager;
@@ -29,6 +28,7 @@ public class WelfareFragment extends BaseFragment<FragmentWelfareBinding> implem
     private boolean isPrepared = false;
     private boolean isFirst = true;
     private ArrayList<String> imgList = new ArrayList<>();
+    private ArrayList<String> imgTitleList = new ArrayList<>();
     private WelfareViewModel viewModel;
 
     @Override
@@ -78,13 +78,7 @@ public class WelfareFragment extends BaseFragment<FragmentWelfareBinding> implem
         mWelfareAdapter.notifyDataSetChanged();
 
         mWelfareAdapter.setOnItemClickListener((resultsBean, position) -> {
-            Bundle bundle = new Bundle();
-            bundle.putInt("selet", 2);// 2,大图显示当前页数，1,头像，不显示页数
-            bundle.putInt("code", position);//第几张
-            bundle.putStringArrayList("imageuri", imgList);
-            Intent intent = new Intent(getContext(), ViewBigImageActivity.class);
-            intent.putExtras(bundle);
-            getContext().startActivity(intent);
+            ViewBigImageActivity.startImageList(getContext(), position, imgList, imgTitleList);
         });
 
         // 显示成功后就不是第一次了，不再刷新
@@ -143,7 +137,8 @@ public class WelfareFragment extends BaseFragment<FragmentWelfareBinding> implem
     }
 
     @Override
-    public void setImageList(ArrayList<String> imgList) {
+    public void setImageList(ArrayList<String> imgList, ArrayList<String> imgTitleList) {
         this.imgList = imgList;
+        this.imgTitleList = imgTitleList;
     }
 }
