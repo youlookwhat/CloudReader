@@ -41,14 +41,14 @@ import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
 /**
- * 修复了重复插入图片问题
+ * 保存图片，重复插入图片提示已存在
  *
  * @author jingbin
  */
 public class RxSaveImage {
 
     private static Observable<Uri> saveImageAndGetPathObservable(Activity context, String url, String title) {
-        return Observable.create(new Observable.OnSubscribe<Bitmap>() {
+        return Observable.unsafeCreate(new Observable.OnSubscribe<Bitmap>() {
             @Override
             public void call(Subscriber<? super Bitmap> subscriber) {
                 // 检查路径
