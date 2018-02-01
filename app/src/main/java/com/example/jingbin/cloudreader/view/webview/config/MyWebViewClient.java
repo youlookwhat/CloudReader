@@ -35,7 +35,6 @@ public class MyWebViewClient extends WebViewClient {
     @Override
     public boolean shouldOverrideUrlLoading(WebView view, String url) {
 //        DebugUtil.error("----url:"+url);
-        mIWebPageView.startProgress();
         if (TextUtils.isEmpty(url)) {
             return false;
         }
@@ -54,11 +53,6 @@ public class MyWebViewClient extends WebViewClient {
 
     @Override
     public void onPageFinished(WebView view, String url) {
-        if (mActivity.mProgress90) {
-            mIWebPageView.hindProgressBar();
-        } else {
-            mActivity.mPageFinish = true;
-        }
         if (!CheckNetwork.isNetworkConnected(mActivity)) {
             mIWebPageView.hindProgressBar();
         }

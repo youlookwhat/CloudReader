@@ -65,7 +65,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="3dp"
                 android:layout_alignParentTop="true"
-                android:max="1000"
+                android:max="100"
                 android:progress="0"
                 android:progressDrawable="@drawable/process_bg"
                 android:visibility="gone" />
