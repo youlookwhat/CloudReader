@@ -58,7 +58,7 @@ public class BaseActivity<SV extends ViewDataBinding> extends AppCompatActivity 
         mContainer.addView(bindingView.getRoot());
         getWindow().setContentView(mBaseBinding.getRoot());
 
-        // 设置透明状态栏
+        // 设置透明状态栏，兼容4.4
         StatusBarUtil.setColor(this, CommonUtils.getColor(R.color.colorTheme),0);
         llProgressBar = getView(R.id.ll_progress_bar);
         refresh = getView(R.id.ll_error_refresh);
