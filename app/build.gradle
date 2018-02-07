@@ -17,8 +17,12 @@ android {
     }
     buildTypes {
         release {
+            buildConfigField "String","UPDATE_TOKEN",pToken
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            buildConfigField "String","updateToken",pToken
         }
     }
 
