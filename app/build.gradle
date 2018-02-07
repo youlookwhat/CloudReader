@@ -22,6 +22,25 @@ android {
         }
     }
 
+    //signing files settings
+    signingConfigs {
+        if (propertyHaveSigningConfigs) {
+            debug {
+                storeFile file(pStoreFile)
+                storePassword pStorePassword
+                keyAlias pKeyAlias
+                keyPassword pKeyPassword
+            }
+
+            release {
+                storeFile file(pStoreFile)
+                storePassword pStorePassword
+                keyAlias pKeyAlias
+                keyPassword pKeyPassword
+            }
+        }
+    }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
