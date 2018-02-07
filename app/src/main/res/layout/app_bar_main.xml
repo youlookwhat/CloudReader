@@ -55,19 +55,19 @@
                     app:theme="@style/AppTheme">
 
                     <ImageView
-                        android:id="@+id/iv_title_gank"
+                        android:id="@+id/iv_title_one"
                         android:layout_width="55dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:background="?attr/selectableItemBackgroundBorderless"
-                        android:src="@drawable/titlebar_disco" />
+                        android:src="@drawable/titlebar_music" />
 
                     <ImageView
-                        android:id="@+id/iv_title_one"
+                        android:id="@+id/iv_title_gank"
                         android:layout_width="55dp"
                         android:layout_height="match_parent"
                         android:background="?attr/selectableItemBackgroundBorderless"
-                        android:src="@drawable/titlebar_music" />
+                        android:src="@drawable/titlebar_disco" />
 
                     <ImageView
                         android:id="@+id/iv_title_dou"

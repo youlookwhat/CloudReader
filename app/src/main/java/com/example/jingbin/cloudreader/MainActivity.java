@@ -136,8 +136,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void initContentFragment() {
         ArrayList<Fragment> mFragmentList = new ArrayList<>();
-        mFragmentList.add(new GankFragment());
         mFragmentList.add(new OneFragment());
+        mFragmentList.add(new GankFragment());
         mFragmentList.add(new BookFragment());
         // 注意使用的是：getSupportFragmentManager
         MyFragmentPagerAdapter adapter = new MyFragmentPagerAdapter(getSupportFragmentManager(), mFragmentList);
@@ -154,6 +154,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             //去除默认Title显示
             actionBar.setDisplayShowTitleEnabled(false);
         }
+        llTitleGank.setSelected(true);
+        llTitleDou.setSelected(false);
+        llTitleOne.setSelected(false);
+        vpContent.setCurrentItem(1);
     }
 
 
@@ -192,19 +196,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 drawerLayout.openDrawer(GravityCompat.START);
                 break;
             case R.id.iv_title_gank:// 干货栏
-                if (vpContent.getCurrentItem() != 0) {//不然cpu会有损耗
+                if (vpContent.getCurrentItem() != 1) {//不然cpu会有损耗
                     llTitleGank.setSelected(true);
                     llTitleOne.setSelected(false);
                     llTitleDou.setSelected(false);
-                    vpContent.setCurrentItem(0);
+                    vpContent.setCurrentItem(1);
                 }
                 break;
             case R.id.iv_title_one:// 电影栏
-                if (vpContent.getCurrentItem() != 1) {
+                if (vpContent.getCurrentItem() != 0) {
                     llTitleOne.setSelected(true);
                     llTitleGank.setSelected(false);
                     llTitleDou.setSelected(false);
-                    vpContent.setCurrentItem(1);
+                    vpContent.setCurrentItem(0);
                 }
                 break;
             case R.id.iv_title_dou:// 书籍栏
@@ -271,13 +275,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onPageSelected(int position) {
         switch (position) {
             case 0:
-                llTitleGank.setSelected(true);
-                llTitleOne.setSelected(false);
+                llTitleGank.setSelected(false);
+                llTitleOne.setSelected(true);
                 llTitleDou.setSelected(false);
                 break;
             case 1:
-                llTitleOne.setSelected(true);
-                llTitleGank.setSelected(false);
+                llTitleOne.setSelected(false);
+                llTitleGank.setSelected(true);
                 llTitleDou.setSelected(false);
                 break;
             case 2:
