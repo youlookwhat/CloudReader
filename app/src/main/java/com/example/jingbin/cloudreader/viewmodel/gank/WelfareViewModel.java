@@ -4,7 +4,6 @@ import android.arch.lifecycle.ViewModel;
 
 import com.example.http.HttpUtils;
 import com.example.jingbin.cloudreader.app.CloudReaderApplication;
-import com.example.jingbin.cloudreader.app.Constants;
 import com.example.jingbin.cloudreader.base.BaseFragment;
 import com.example.jingbin.cloudreader.bean.GankIoDataBean;
 import com.example.jingbin.cloudreader.data.model.GankOtherModel;
@@ -64,11 +63,9 @@ public class WelfareViewModel extends ViewModel {
                         }
                         navigator.setImageList(imgList,imageTitleList);
                         navigator.showAdapterView(gankIoDataBean);
-                        mACache.remove(Constants.GANK_MEIZI);
-                        mACache.put(Constants.GANK_MEIZI, gankIoDataBean);
 
                     } else {
-                        handlerFailed();
+                        navigator.showLoadFailedView();
                     }
                 } else {
                     if (gankIoDataBean != null && gankIoDataBean.getResults() != null && gankIoDataBean.getResults().size() > 0) {
@@ -86,7 +83,7 @@ public class WelfareViewModel extends ViewModel {
 
             @Override
             public void loadFailed() {
-                handlerFailed();
+                navigator.showLoadFailedView();
                 if (mPage > 1) {
                     mPage--;
                 }
@@ -97,21 +94,6 @@ public class WelfareViewModel extends ViewModel {
                 activity.addSubscription(subscription);
             }
         });
-    }
-
-    /**
-     * 处理请求失败后的情况
-     */
-    private void handlerFailed() {
-        GankIoDataBean mAndroidBean = (GankIoDataBean) mACache.getAsObject(Constants.GANK_MEIZI);
-        if (mAndroidBean != null
-                && mAndroidBean.getResults() != null
-                && mAndroidBean.getResults().size() > 0) {
-            navigator.showLoadSuccessView();
-            navigator.showAdapterView(mAndroidBean);
-        } else {
-            navigator.showLoadFailedView();
-        }
     }
 
     public int getPage() {

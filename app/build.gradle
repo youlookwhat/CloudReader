@@ -47,6 +47,8 @@ dependencies {
 
     implementation "android.arch.persistence.room:runtime:$rootProject.roomVersion"
     annotationProcessor "android.arch.persistence.room:compiler:$rootProject.roomVersion"
+    implementation "android.arch.lifecycle:extensions:1.1.0"
+    implementation "android.arch.lifecycle:reactivestreams:1.1.0"
 
     implementation 'com.google.zxing:core:3.3.0'
     implementation 'io.reactivex:rxandroid:1.2.1'
