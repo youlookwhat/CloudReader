@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -84,15 +85,18 @@ public class DensityUtil {
      * @param marginTop    上面的dp
      * @param marginBottom 下面的dp
      */
-    public static void formartHight(ImageView imageView, float bili, int type, int marginLR, int marginTop, int marginBottom) {
+    public static void formartHight(View imageView, float bili, int type, int marginLR, int marginTop, int marginBottom) {
         WindowManager wm = (WindowManager) CloudReaderApplication.getInstance().getSystemService(Context.WINDOW_SERVICE);
         int width = wm.getDefaultDisplay().getWidth();
         int height = (int) (width / bili);
         if (type == 1) {
             LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, height);
             imageView.setLayoutParams(lp);
-        } else {
+        } else if (type == 2){
             RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, height);
+            imageView.setLayoutParams(lp);
+        } else {
+            FrameLayout.LayoutParams lp = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, height);
             imageView.setLayoutParams(lp);
         }
 

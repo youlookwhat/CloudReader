@@ -54,6 +54,7 @@ public class HttpUtils {
     private Object doubanHttps;
     private Object dongtingHttps;
     private Object firHttps;
+    private Object wanAndroidHttps;
     private IpmlTokenGetListener listener;
     private boolean debug;
     // gankio、豆瓣、（轮播图）
@@ -61,6 +62,7 @@ public class HttpUtils {
     private final static String API_DOUBAN = "Https://api.douban.com/";
     private final static String API_TING = "https://tingapi.ting.baidu.com/v1/restserver/";
     private final static String API_FIR = "http://api.fir.im/apps/";
+    private final static String API_WAN_ANDROID = "http://www.wanandroid.com/";
     /**
      * 分页数据，每页的数量
      */
@@ -126,6 +128,16 @@ public class HttpUtils {
             }
         }
         return (T) firHttps;
+    }
+    public <T> T getWanAndroidServer(Class<T> a) {
+        if (wanAndroidHttps == null) {
+            synchronized (HttpUtils.class) {
+                if (wanAndroidHttps == null) {
+                    wanAndroidHttps = getBuilder(API_WAN_ANDROID).build().create(a);
+                }
+            }
+        }
+        return (T) wanAndroidHttps;
     }
     private Retrofit.Builder getBuilder(String apiUrl) {
         Retrofit.Builder builder = new Retrofit.Builder();

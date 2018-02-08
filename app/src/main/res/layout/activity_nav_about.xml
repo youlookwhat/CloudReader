@@ -54,7 +54,6 @@
                         android:text="检查更新" />
 
                     <TextView
-                        android:id="@+id/tv_newVersion"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
@@ -63,7 +62,7 @@
                         android:text=""
                         android:textColor="@color/colorSubtitle"
                         android:textSize="13sp"
-                        android:visibility="visible" />
+                        android:visibility="gone" />
                 </RelativeLayout>
 
                 <View

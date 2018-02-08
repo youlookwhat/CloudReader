@@ -8,6 +8,8 @@ import android.support.v4.app.Fragment;
 import com.example.jingbin.cloudreader.R;
 import com.example.jingbin.cloudreader.base.BaseFragment;
 import com.example.jingbin.cloudreader.databinding.FragmentBookBinding;
+import com.example.jingbin.cloudreader.ui.book.child.BookListFragment;
+import com.example.jingbin.cloudreader.ui.book.child.JokeFragment;
 import com.example.jingbin.cloudreader.ui.book.child.WanAndroidFragment;
 import com.example.jingbin.cloudreader.view.MyFragmentPagerAdapter;
 
@@ -49,14 +51,11 @@ public class BookFragment extends BaseFragment<FragmentBookBinding> {
     }
 
     private void initFragmentList() {
-        mTitleList.add("文学");
-        mTitleList.add("文化");
-        mTitleList.add("心理学");
+        mTitleList.add("玩安卓");
+        mTitleList.add("书籍");
+        mTitleList.add("段子");
         mFragments.add(WanAndroidFragment.newInstance("文学"));
-        mFragments.add(WanAndroidFragment.newInstance("文化"));
-        mFragments.add(WanAndroidFragment.newInstance("心理学"));
-//        mFragments.add(BookCustomFragment.newInstance("文学"));
-//        mFragments.add(BookCustomFragment.newInstance("文化"));
-//        mFragments.add(BookCustomFragment.newInstance("生活"));
+        mFragments.add(JokeFragment.newInstance("文化"));
+        mFragments.add(BookListFragment.newInstance("心理学"));
     }
 }

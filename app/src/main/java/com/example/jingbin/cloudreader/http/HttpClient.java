@@ -7,6 +7,8 @@ import com.example.jingbin.cloudreader.bean.GankIoDayBean;
 import com.example.jingbin.cloudreader.bean.HotMovieBean;
 import com.example.jingbin.cloudreader.bean.MovieDetailBean;
 import com.example.jingbin.cloudreader.bean.UpdateBean;
+import com.example.jingbin.cloudreader.bean.wanandroid.HomeListBean;
+import com.example.jingbin.cloudreader.bean.wanandroid.WanAndroidBannerBean;
 import com.example.jingbin.cloudreader.bean.book.BookBean;
 import com.example.jingbin.cloudreader.bean.book.BookDetailBean;
 
@@ -16,7 +18,8 @@ import retrofit2.http.Query;
 import rx.Observable;
 
 /**
- * Created by jingbin on 16/11/21.
+ * @author jingbin
+ * @date 16/11/21
  * 网络请求类（一个接口一个方法）
  */
 public interface HttpClient {
@@ -37,6 +40,10 @@ public interface HttpClient {
         public static HttpClient getFirServer() {
             return HttpUtils.getInstance().getFirServer(HttpClient.class);
         }
+
+        public static HttpClient getWanAndroidServer() {
+            return HttpUtils.getInstance().getWanAndroidServer(HttpClient.class);
+        }
     }
 
     /**
@@ -44,6 +51,12 @@ public interface HttpClient {
      */
     @GET("ting?from=android&version=5.8.1.0&channel=ppzs&operator=3&method=baidu.ting.plaza.index&cuid=89CF1E1A06826F9AB95A34DC0F6AAA14")
     Observable<FrontpageBean> getFrontpage();
+
+    /**
+     * 玩安卓轮播图
+     */
+    @GET("banner/json")
+    Observable<WanAndroidBannerBean> getWanAndroidBanner();
 
     /**
      * 分类数据: http://gank.io/api/data/数据类型/请求个数/第几页
@@ -103,6 +116,12 @@ public interface HttpClient {
      */
     @GET("latest/{id}")
     Observable<UpdateBean> checkUpdate(@Path("id") String id, @Query("api_token") String apiToken);
+
+    /**
+     * @param page 页码，从0开始
+     */
+    @GET("article/list/{page}/json")
+    Observable<HomeListBean> getHomeList(@Path("page") int page);
 
     /**
      * 根据tag获取music

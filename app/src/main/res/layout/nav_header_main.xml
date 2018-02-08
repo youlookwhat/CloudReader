@@ -225,7 +225,7 @@
                 android:background="@drawable/ripple_one_item_bg"
                 android:clickable="true"
                 android:gravity="center_vertical"
-                android:onClick="@{listener.onNightModeClick}"
+                android:onClick="@{listener::onNightModeClick}"
                 android:orientation="horizontal"
                 android:paddingLeft="@dimen/activity_horizontal_margin"
                 android:paddingRight="@dimen/activity_horizontal_margin">

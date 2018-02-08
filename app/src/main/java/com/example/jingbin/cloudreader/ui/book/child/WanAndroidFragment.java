@@ -1,44 +1,47 @@
 package com.example.jingbin.cloudreader.ui.book.child;
 
 import android.content.Context;
+import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
+import android.text.TextUtils;
+import android.view.View;
 
 import com.example.jingbin.cloudreader.MainActivity;
 import com.example.jingbin.cloudreader.R;
-import com.example.jingbin.cloudreader.adapter.WanAdapter;
+import com.example.jingbin.cloudreader.adapter.WanAndroidAdapter;
 import com.example.jingbin.cloudreader.base.BaseFragment;
-import com.example.jingbin.cloudreader.bean.book.BookBean;
+import com.example.jingbin.cloudreader.bean.wanandroid.HomeListBean;
+import com.example.jingbin.cloudreader.bean.wanandroid.WanAndroidBannerBean;
 import com.example.jingbin.cloudreader.databinding.FragmentWanAndroidBinding;
-import com.example.jingbin.cloudreader.http.HttpClient;
+import com.example.jingbin.cloudreader.databinding.HeaderWanAndroidBinding;
 import com.example.jingbin.cloudreader.utils.CommonUtils;
 import com.example.jingbin.cloudreader.utils.DebugUtil;
+import com.example.jingbin.cloudreader.utils.GlideImageLoader;
+import com.example.jingbin.cloudreader.view.webview.WebViewActivity;
+import com.example.jingbin.cloudreader.viewmodel.wan.WanAndroidViewModel;
+import com.example.jingbin.cloudreader.viewmodel.wan.WanNavigator;
 import com.example.xrecyclerview.XRecyclerView;
 
-import rx.Observer;
-import rx.Subscription;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author jingbin
  *         Updated by jingbin on 18/02/07.
  */
-public class WanAndroidFragment extends BaseFragment<FragmentWanAndroidBinding> {
+public class WanAndroidFragment extends BaseFragment<FragmentWanAndroidBinding> implements WanNavigator.WanAndroidNavigator {
 
     private static final String TYPE = "param1";
     private String mType = "综合";
     private boolean mIsPrepared;
     private boolean mIsFirst = true;
-    // 开始请求的角标
-    private int mStart = 0;
-    // 一次请求的数量
-    private int mCount = 18;
     private MainActivity activity;
-    private WanAdapter mBookAdapter;
-    private GridLayoutManager mLayoutManager;
+    private WanAndroidAdapter mBookAdapter;
+    private HeaderWanAndroidBinding androidBinding;
+    private WanAndroidViewModel viewModel;
 
     @Override
     public int setContent() {
@@ -71,6 +74,8 @@ public class WanAndroidFragment extends BaseFragment<FragmentWanAndroidBinding> 
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         showContentView();
+        viewModel = new WanAndroidViewModel(this);
+        viewModel.setNavigator(this);
         initRefreshView();
 
         // 准备就绪
@@ -88,20 +93,20 @@ public class WanAndroidFragment extends BaseFragment<FragmentWanAndroidBinding> 
             @Override
             public void onRefresh() {
                 bindingView.srlBook.postDelayed(() -> {
-                    mStart = 0;
+                    viewModel.setPage(0);
                     loadCustomData();
                 }, 1000);
 
             }
         });
-        mLayoutManager = new GridLayoutManager(getActivity(), 3);
-        bindingView.xrvBook.setLayoutManager(mLayoutManager);
+        bindingView.xrvBook.setLayoutManager(new LinearLayoutManager(getActivity()));
         bindingView.xrvBook.setPullRefreshEnabled(false);
         bindingView.xrvBook.clearHeader();
-        mBookAdapter = new WanAdapter(getActivity());
+        mBookAdapter = new WanAndroidAdapter(getActivity());
         bindingView.xrvBook.setAdapter(mBookAdapter);
-//        HeaderItemOneBinding oneBinding = DataBindingUtil.inflate(getLayoutInflater(), R.layout.header_item_one, null, false);
-//        bindingView.xrvBook.addHeaderView(oneBinding.getRoot());
+        androidBinding = DataBindingUtil.inflate(getLayoutInflater(), R.layout.header_wan_android, null, false);
+        viewModel.getWanAndroidBanner();
+        bindingView.xrvBook.addHeaderView(androidBinding.getRoot());
 
         bindingView.xrvBook.setLoadingListener(new XRecyclerView.LoadingListener() {
             @Override
@@ -111,15 +116,79 @@ public class WanAndroidFragment extends BaseFragment<FragmentWanAndroidBinding> 
 
             @Override
             public void onLoadMore() {
-                mStart += mCount;
+                int page = viewModel.getPage();
+                viewModel.setPage(++page);
                 loadCustomData();
             }
         });
     }
 
+    /**
+     * 设置banner图
+     */
+    @Override
+    public void showBannerView(ArrayList<String> bannerImages, ArrayList<String> mBannerTitle, List<WanAndroidBannerBean.DataBean> result) {
+        androidBinding.banner.setVisibility(View.VISIBLE);
+        androidBinding.banner.setBannerTitles(mBannerTitle);
+        androidBinding.banner.setImages(bannerImages).setImageLoader(new GlideImageLoader()).start();
+        androidBinding.banner.setOnBannerListener(position -> {
+            if (result.get(position) != null && !TextUtils.isEmpty(result.get(position).getUrl())) {
+                WebViewActivity.loadUrl(getContext(), result.get(position).getUrl(), result.get(position).getTitle());
+            }
+        });
+    }
+
+    @Override
+    public void loadBannerFailure() {
+        androidBinding.banner.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void loadHomeListFailure() {
+        showContentView();
+        if (bindingView.srlBook.isRefreshing()) {
+            bindingView.srlBook.setRefreshing(false);
+        }
+        if (viewModel.getPage() == 0) {
+            showError();
+        } else {
+            bindingView.xrvBook.refreshComplete();
+        }
+    }
+
+    @Override
+    public void showAdapterView(HomeListBean bean) {
+        mBookAdapter.clear();
+        mBookAdapter.addAll(bean.getData().getDatas());
+        mBookAdapter.notifyDataSetChanged();
+        bindingView.xrvBook.refreshComplete();
+
+        mIsFirst = false;
+    }
+
+    @Override
+    public void refreshAdapter(HomeListBean bean) {
+        mBookAdapter.addAll(bean.getData().getDatas());
+        mBookAdapter.notifyDataSetChanged();
+        bindingView.xrvBook.refreshComplete();
+    }
+
+    @Override
+    public void showListNoMoreLoading() {
+        bindingView.xrvBook.noMoreLoading();
+    }
+
+    @Override
+    public void showLoadSuccessView() {
+        showContentView();
+        bindingView.srlBook.setRefreshing(false);
+    }
+
     @Override
     protected void loadData() {
-        DebugUtil.error("-----loadData");
+        DebugUtil.error("-----mIsPrepared:" + mIsPrepared);
+        DebugUtil.error("-----mIsVisible:" + mIsVisible);
+        DebugUtil.error("-----mIsFirst:" + mIsFirst);
         if (!mIsPrepared || !mIsVisible || !mIsFirst) {
             return;
         }
@@ -134,52 +203,16 @@ public class WanAndroidFragment extends BaseFragment<FragmentWanAndroidBinding> 
         DebugUtil.error("-----setRefreshing");
     }
 
+    @Override
+    protected void onInvisible() {
+        // 不可见时轮播图停止滚动
+        if (androidBinding != null && androidBinding.banner != null) {
+            androidBinding.banner.stopAutoPlay();
+        }
+    }
+
     private void loadCustomData() {
-
-        Subscription get = HttpClient.Builder.getDouBanService().getBook(mType, mStart, mCount)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<BookBean>() {
-                    @Override
-                    public void onCompleted() {
-                        showContentView();
-                        if (bindingView.srlBook.isRefreshing()) {
-                            bindingView.srlBook.setRefreshing(false);
-                        }
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        showContentView();
-                        if (bindingView.srlBook.isRefreshing()) {
-                            bindingView.srlBook.setRefreshing(false);
-                        }
-                        if (mStart == 0) {
-                            showError();
-                        } else {
-                            bindingView.xrvBook.refreshComplete();
-                        }
-                    }
-
-                    @Override
-                    public void onNext(BookBean bookBean) {
-                        if (mStart == 0) {
-                            if (bookBean != null && bookBean.getBooks() != null && bookBean.getBooks().size() > 0) {
-
-                                mBookAdapter.clear();
-                                mBookAdapter.addAll(bookBean.getBooks());
-                                mBookAdapter.notifyDataSetChanged();
-                                bindingView.xrvBook.refreshComplete();
-                            }
-                            mIsFirst = false;
-                        } else {
-                            mBookAdapter.addAll(bookBean.getBooks());
-                            mBookAdapter.notifyDataSetChanged();
-                            bindingView.xrvBook.refreshComplete();
-                        }
-                    }
-                });
-        addSubscription(get);
+        viewModel.getHomeList();
     }
 
     @Override
