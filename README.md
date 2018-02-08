@@ -65,11 +65,20 @@ If you have any questions, please write to [the issue][21] of making you don't u
 　
 
 ### Version
+#### V1.9.0（02-08）
+> TODO：玩安卓登录/收藏网页等功能；段子页面等
+
+ - 1、首页大幅调整，增加进入玩安卓页面和Trending页面的入口
+ - 2、新增鸿洋玩安卓模块(部分功能)
+ - 3、优化WebView网页显示，解决大部分问题,[详细](https://github.com/youlookwhat/WebViewStudy)
+ - 4、尽可能规范MvvM框架，后期会慢慢调整
+ - 5、使用fir.im更新接口，完善更新功能
 
 #### V1.8.3（11-14）
  - 1、[修复] 已选择分类退出App再次进入,type失效的问题
  - 2、[修复] 跳转B站视频显示网页错误的问题
 
+<!-- 
 #### V1.8.2（3-30）
  - 1、[修复] 首页轮播图显示异常问题
  - 2、[修复] 干货订制页，刷新内容到底无内容后切换到其他类别，无法上拉加载的情况
@@ -105,7 +114,7 @@ If you have any questions, please write to [the issue][21] of making you don't u
  - 2.代码优化
  - 3.其他
 　　
-
+-->
 
 
 ## Thanks
