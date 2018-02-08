@@ -27,7 +27,7 @@ public class UpdateUtil {
      */
     public static void check(final Activity activity, final boolean isShowToast) {
 
-        Subscription get = HttpClient.Builder.getFirServer().checkUpdate("58677918ca87a8490d000395", BuildConfig.updateToken)
+        Subscription get = HttpClient.Builder.getFirServer().checkUpdate("58677918ca87a8490d000395", BuildConfig.UPDATE_TOKEN)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<UpdateBean>() {
