@@ -9,7 +9,7 @@
         <android.support.design.widget.TabLayout
             android:id="@+id/tab_book"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="38dp"
             android:background="@color/colorWhite"
             app:tabBackground="@drawable/ripple_tab_bg"
             app:tabIndicatorColor="@color/colorTheme"
