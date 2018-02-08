@@ -25,7 +25,7 @@
         \n\n 我的GitHub：https://github.com/youlookwhat
         \n\n 项目完全开源，如果你觉得不错，请帮忙Star一下吧，或帮忙分享给你的朋友，这是给我们最大的动力与支持，非常感谢！
         </string>
-    
+
     <string name="string_about_me">
         Blog: http://jingbin.me
         \nEmail: 770413277@qq.com | jingbin127@163.com
@@ -73,4 +73,8 @@
     <string name="string_url_update_log">http://jingbin.me/2016/12/30/%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97-%E4%BA%91%E9%98%85/</string>
     <!--问题归纳-->
     <string name="string_url_faq">http://jingbin.me/2016/12/25/%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98-%E4%BA%91%E9%98%85/</string>
+
+    <string name="string_url_xiandu">https://gank.io/xiandu</string>
+    <string name="string_url_wanandroid">http://www.wanandroid.com/index</string>
+    <string name="string_url_trending">https://github.com/trending</string>
 </resources>

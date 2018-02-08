@@ -119,25 +119,33 @@ public class EverydayFragment extends BaseFragment<FragmentEverydayBinding> impl
         // 显示日期,去掉第一位的"0"
         mHeaderBinding.includeEveryday.tvDailyText.setText(getTodayTime().get(2).indexOf("0") == 0 ?
                 getTodayTime().get(2).replace("0", "") : getTodayTime().get(2));
-        mHeaderBinding.includeEveryday.ibXiandu.setOnClickListener(new PerfectClickListener() {
-            @Override
-            protected void onNoDoubleClick(View v) {
-                WebViewActivity.loadUrl(v.getContext(), "https://gank.io/xiandu", "闲读");
-            }
-        });
-        mHeaderBinding.includeEveryday.ibWanAndroid.setOnClickListener(new PerfectClickListener() {
-            @Override
-            protected void onNoDoubleClick(View v) {
-                WebViewActivity.loadUrl(v.getContext(), "http://www.wanandroid.com/index", "玩Android");
-            }
-        });
-        mHeaderBinding.includeEveryday.ibMovieHot.setOnClickListener(new PerfectClickListener() {
-            @Override
-            protected void onNoDoubleClick(View v) {
-                RxBus.getDefault().post(RxCodeConstants.JUMP_TYPE_TO_ONE, new RxBusBaseMessage());
-            }
-        });
+        mHeaderBinding.includeEveryday.ibXiandu.setOnClickListener(listener);
+        mHeaderBinding.includeEveryday.ibWanAndroid.setOnClickListener(listener);
+        mHeaderBinding.includeEveryday.ibMovieHot.setOnClickListener(listener);
+        mHeaderBinding.includeEveryday.flEveryday.setOnClickListener(listener);
     }
+
+    private PerfectClickListener listener = new PerfectClickListener() {
+        @Override
+        protected void onNoDoubleClick(View v) {
+            switch (v.getId()) {
+                case R.id.ib_xiandu:
+                    WebViewActivity.loadUrl(v.getContext(), getString(R.string.string_url_xiandu), "闲读");
+                    break;
+                case R.id.ib_wan_android:
+                    WebViewActivity.loadUrl(v.getContext(), getString(R.string.string_url_wanandroid), "玩Android");
+                    break;
+                case R.id.ib_movie_hot:
+                    RxBus.getDefault().post(RxCodeConstants.JUMP_TYPE_TO_ONE, new RxBusBaseMessage());
+                    break;
+                case R.id.fl_everyday:
+                    WebViewActivity.loadUrl(v.getContext(), getString(R.string.string_url_trending), "Trending");
+                    break;
+                default:
+                    break;
+            }
+        }
+    };
 
     /**
      * 取缓存

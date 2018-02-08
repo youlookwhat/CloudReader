@@ -328,7 +328,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
      */
     private void initRxBus() {
         Subscription subscribe = RxBus.getDefault().toObservable(RxCodeConstants.JUMP_TYPE_TO_ONE, RxBusBaseMessage.class)
-                .subscribe(integer -> mBinding.include.vpContent.setCurrentItem(1));
+                .subscribe(integer -> mBinding.include.vpContent.setCurrentItem(0));
         addSubscription(subscribe);
     }
 
