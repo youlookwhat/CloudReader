@@ -50,18 +50,20 @@
                         android:id="@+id/tv_new_version"
                         style="@style/menuItem"
                         android:clickable="true"
+                        android:onClick="checkUpdate"
                         android:text="检查更新" />
 
                     <TextView
+                        android:id="@+id/tv_newVersion"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
                         android:layout_centerVertical="true"
                         android:layout_marginRight="15dp"
-                        android:text="1.0"
-                        android:visibility="gone"
+                        android:text=""
                         android:textColor="@color/colorSubtitle"
-                        android:textSize="13sp" />
+                        android:textSize="13sp"
+                        android:visibility="visible" />
                 </RelativeLayout>
 
                 <View

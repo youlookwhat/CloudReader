@@ -13,6 +13,7 @@ import com.example.jingbin.cloudreader.databinding.ActivityNavAboutBinding;
 import com.example.jingbin.cloudreader.utils.BaseTools;
 import com.example.jingbin.cloudreader.utils.CommonUtils;
 import com.example.jingbin.cloudreader.utils.PerfectClickListener;
+import com.example.jingbin.cloudreader.utils.UpdateUtil;
 import com.example.jingbin.cloudreader.view.webview.WebViewActivity;
 
 /**
@@ -44,7 +45,7 @@ public class NavAboutActivity extends BaseActivity<ActivityNavAboutBinding> {
         bindingView.tvDouban.setOnClickListener(listener);
         bindingView.tvAboutStar.setOnClickListener(listener);
         bindingView.tvFunction.setOnClickListener(listener);
-        bindingView.tvNewVersion.setOnClickListener(listener);
+//        bindingView.tvNewVersion.setOnClickListener(listener);
     }
 
     private PerfectClickListener listener = new PerfectClickListener() {
@@ -83,5 +84,9 @@ public class NavAboutActivity extends BaseActivity<ActivityNavAboutBinding> {
     public static void start(Context mContext) {
         Intent intent = new Intent(mContext, NavAboutActivity.class);
         mContext.startActivity(intent);
+    }
+
+    public void checkUpdate(View view) {
+        UpdateUtil.check(this,true);
     }
 }

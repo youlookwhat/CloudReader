@@ -27,6 +27,7 @@ import com.example.jingbin.cloudreader.utils.GlideImageLoader;
 import com.example.jingbin.cloudreader.utils.PerfectClickListener;
 import com.example.jingbin.cloudreader.utils.SPUtils;
 import com.example.jingbin.cloudreader.utils.TimeUtil;
+import com.example.jingbin.cloudreader.utils.UpdateUtil;
 import com.example.jingbin.cloudreader.view.webview.WebViewActivity;
 import com.example.jingbin.cloudreader.viewmodel.gank.EverydayNavigator;
 import com.example.jingbin.cloudreader.viewmodel.gank.EverydayViewModel;
@@ -79,6 +80,7 @@ public class EverydayFragment extends BaseFragment<FragmentEverydayBinding> impl
         mHeaderBinding = DataBindingUtil.inflate(LayoutInflater.from(getContext()), R.layout.header_item_everyday, null, false);
         initLocalSetting();
         initRecyclerView();
+        UpdateUtil.check(getActivity(),false);
 
         mIsPrepared = true;
         /**

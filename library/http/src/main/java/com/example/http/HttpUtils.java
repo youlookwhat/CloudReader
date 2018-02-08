@@ -53,12 +53,14 @@ public class HttpUtils {
     private Object gankHttps;
     private Object doubanHttps;
     private Object dongtingHttps;
+    private Object firHttps;
     private IpmlTokenGetListener listener;
     private boolean debug;
     // gankio、豆瓣、（轮播图）
     private final static String API_GANKIO = "https://gank.io/api/";
     private final static String API_DOUBAN = "Https://api.douban.com/";
     private final static String API_TING = "https://tingapi.ting.baidu.com/v1/restserver/";
+    private final static String API_FIR = "http://api.fir.im/apps/";
     /**
      * 分页数据，每页的数量
      */
@@ -113,6 +115,17 @@ public class HttpUtils {
             }
         }
         return (T) dongtingHttps;
+    }
+
+    public <T> T getFirServer(Class<T> a) {
+        if (firHttps == null) {
+            synchronized (HttpUtils.class) {
+                if (firHttps == null) {
+                    firHttps = getBuilder(API_FIR).build().create(a);
+                }
+            }
+        }
+        return (T) firHttps;
     }
     private Retrofit.Builder getBuilder(String apiUrl) {
         Retrofit.Builder builder = new Retrofit.Builder();

@@ -58,7 +58,6 @@ public class BookDetailActivity extends BaseHeaderActivity<HeaderBookDetailBindi
     private void loadBookDetail() {
         DebugUtil.error("------http2");
         Subscription get = HttpClient.Builder.getDouBanService().getBookDetail(booksBean.getId())
-//        Subscription get = HttpUtils.getInstance().getDouBanServer().getBookDetail(booksBean.getId())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<BookDetailBean>() {
