@@ -39,7 +39,7 @@ public class WanAndroidFragment extends BaseFragment<FragmentWanAndroidBinding> 
     private boolean mIsPrepared;
     private boolean mIsFirst = true;
     private MainActivity activity;
-    private WanAndroidAdapter mBookAdapter;
+    private WanAndroidAdapter mAdapter;
     private HeaderWanAndroidBinding androidBinding;
     private WanAndroidViewModel viewModel;
 
@@ -102,8 +102,8 @@ public class WanAndroidFragment extends BaseFragment<FragmentWanAndroidBinding> 
         bindingView.xrvBook.setLayoutManager(new LinearLayoutManager(getActivity()));
         bindingView.xrvBook.setPullRefreshEnabled(false);
         bindingView.xrvBook.clearHeader();
-        mBookAdapter = new WanAndroidAdapter(getActivity());
-        bindingView.xrvBook.setAdapter(mBookAdapter);
+        mAdapter = new WanAndroidAdapter(getActivity());
+        bindingView.xrvBook.setAdapter(mAdapter);
         androidBinding = DataBindingUtil.inflate(getLayoutInflater(), R.layout.header_wan_android, null, false);
         viewModel.getWanAndroidBanner();
         bindingView.xrvBook.addHeaderView(androidBinding.getRoot());
@@ -158,9 +158,9 @@ public class WanAndroidFragment extends BaseFragment<FragmentWanAndroidBinding> 
 
     @Override
     public void showAdapterView(HomeListBean bean) {
-        mBookAdapter.clear();
-        mBookAdapter.addAll(bean.getData().getDatas());
-        mBookAdapter.notifyDataSetChanged();
+        mAdapter.clear();
+        mAdapter.addAll(bean.getData().getDatas());
+        mAdapter.notifyDataSetChanged();
         bindingView.xrvBook.refreshComplete();
 
         mIsFirst = false;
@@ -168,8 +168,8 @@ public class WanAndroidFragment extends BaseFragment<FragmentWanAndroidBinding> 
 
     @Override
     public void refreshAdapter(HomeListBean bean) {
-        mBookAdapter.addAll(bean.getData().getDatas());
-        mBookAdapter.notifyDataSetChanged();
+        mAdapter.addAll(bean.getData().getDatas());
+        mAdapter.notifyDataSetChanged();
         bindingView.xrvBook.refreshComplete();
     }
 

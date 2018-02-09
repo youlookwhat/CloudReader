@@ -51,18 +51,16 @@ public class HttpUtils {
     private Gson gson;
     private Context context;
     private Object gankHttps;
-    private Object doubanHttps;
-    private Object dongtingHttps;
-    private Object firHttps;
-    private Object wanAndroidHttps;
     private IpmlTokenGetListener listener;
     private boolean debug;
     // gankio、豆瓣、（轮播图）
-    private final static String API_GANKIO = "https://gank.io/api/";
-    private final static String API_DOUBAN = "Https://api.douban.com/";
-    private final static String API_TING = "https://tingapi.ting.baidu.com/v1/restserver/";
-    private final static String API_FIR = "http://api.fir.im/apps/";
-    private final static String API_WAN_ANDROID = "http://www.wanandroid.com/";
+    public final static String API_GANKIO = "https://gank.io/api/";
+    public final static String API_DOUBAN = "Https://api.douban.com/";
+    public final static String API_TING = "https://tingapi.ting.baidu.com/v1/restserver/";
+    public final static String API_FIR = "http://api.fir.im/apps/";
+    public final static String API_WAN_ANDROID = "http://www.wanandroid.com/";
+    public final static String API_NHDZ = "https://ic.snssdk.com/";
+    public final static String API_QSBK = "http://m2.qiushibaike.com/";
     /**
      * 分页数据，每页的数量
      */
@@ -97,49 +95,8 @@ public class HttpUtils {
         return (T) gankHttps;
     }
 
-    public <T> T getDouBanServer(Class<T> a) {
-        if (doubanHttps == null) {
-            synchronized (HttpUtils.class) {
-                if (doubanHttps == null) {
-                    doubanHttps = getBuilder(API_DOUBAN).build().create(a);
-                }
-            }
-        }
-        return (T) doubanHttps;
-    }
 
-    public <T> T getTingServer(Class<T> a) {
-        if (dongtingHttps == null) {
-            synchronized (HttpUtils.class) {
-                if (dongtingHttps == null) {
-                    dongtingHttps = getBuilder(API_TING).build().create(a);
-                }
-            }
-        }
-        return (T) dongtingHttps;
-    }
-
-    public <T> T getFirServer(Class<T> a) {
-        if (firHttps == null) {
-            synchronized (HttpUtils.class) {
-                if (firHttps == null) {
-                    firHttps = getBuilder(API_FIR).build().create(a);
-                }
-            }
-        }
-        return (T) firHttps;
-    }
-    public <T> T getWanAndroidServer(Class<T> a) {
-        if (wanAndroidHttps == null) {
-            synchronized (HttpUtils.class) {
-                if (wanAndroidHttps == null) {
-                    wanAndroidHttps = getBuilder(API_WAN_ANDROID).build().create(a);
-                }
-            }
-        }
-        return (T) wanAndroidHttps;
-    }
-    private Retrofit.Builder getBuilder(String apiUrl) {
+    public Retrofit.Builder getBuilder(String apiUrl) {
         Retrofit.Builder builder = new Retrofit.Builder();
         builder.client(getOkClient());
         builder.baseUrl(apiUrl);//设置远程地址

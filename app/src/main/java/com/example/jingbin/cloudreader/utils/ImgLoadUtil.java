@@ -52,6 +52,8 @@ public class ImgLoadUtil {
                 return R.drawable.img_four_bi_three;
             case 3:
                 return R.drawable.img_one_bi_one;
+            default:
+                break;
         }
         return R.drawable.img_four_bi_three;
     }
@@ -116,6 +118,7 @@ public class ImgLoadUtil {
     /**
      * 加载圆角图,暂时用到显示头像
      */
+    @BindingAdapter("android:displayCircle")
     public static void displayCircle(ImageView imageView, String imageUrl) {
         Glide.with(imageView.getContext())
                 .load(imageUrl)
@@ -189,7 +192,7 @@ public class ImgLoadUtil {
      * 热门电影头部图片
      */
     @BindingAdapter({"android:displayRandom", "android:imgType"})
-    public static void displayRandom(ImageView imageView, String imageUrl,int imgType) {
-        displayRandom(imgType,imageUrl,imageView);
+    public static void displayRandom(ImageView imageView, String imageUrl, int imgType) {
+        displayRandom(imgType, imageUrl, imageView);
     }
 }

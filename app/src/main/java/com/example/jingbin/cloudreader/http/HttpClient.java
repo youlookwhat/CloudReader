@@ -1,16 +1,19 @@
 package com.example.jingbin.cloudreader.http;
 
 import com.example.http.HttpUtils;
+import com.example.http.utils.BuildFactory;
 import com.example.jingbin.cloudreader.bean.FrontpageBean;
 import com.example.jingbin.cloudreader.bean.GankIoDataBean;
 import com.example.jingbin.cloudreader.bean.GankIoDayBean;
 import com.example.jingbin.cloudreader.bean.HotMovieBean;
 import com.example.jingbin.cloudreader.bean.MovieDetailBean;
 import com.example.jingbin.cloudreader.bean.UpdateBean;
-import com.example.jingbin.cloudreader.bean.wanandroid.HomeListBean;
-import com.example.jingbin.cloudreader.bean.wanandroid.WanAndroidBannerBean;
 import com.example.jingbin.cloudreader.bean.book.BookBean;
 import com.example.jingbin.cloudreader.bean.book.BookDetailBean;
+import com.example.jingbin.cloudreader.bean.wanandroid.HomeListBean;
+import com.example.jingbin.cloudreader.bean.wanandroid.NhdzListBean;
+import com.example.jingbin.cloudreader.bean.wanandroid.QsbkListBean;
+import com.example.jingbin.cloudreader.bean.wanandroid.WanAndroidBannerBean;
 
 import retrofit2.http.GET;
 import retrofit2.http.Path;
@@ -26,23 +29,32 @@ public interface HttpClient {
 
     class Builder {
         public static HttpClient getDouBanService() {
-            return HttpUtils.getInstance().getDouBanServer(HttpClient.class);
+            return BuildFactory.getInstance().create(HttpClient.class, HttpUtils.API_DOUBAN);
         }
 
         public static HttpClient getTingServer() {
-            return HttpUtils.getInstance().getTingServer(HttpClient.class);
+            return BuildFactory.getInstance().create(HttpClient.class, HttpUtils.API_TING);
         }
 
         public static HttpClient getGankIOServer() {
-            return HttpUtils.getInstance().getGankIOServer(HttpClient.class);
+            return BuildFactory.getInstance().create(HttpClient.class, HttpUtils.API_GANKIO);
+//            return HttpUtils.getInstance().getGankIOServer(HttpClient.class);
         }
 
         public static HttpClient getFirServer() {
-            return HttpUtils.getInstance().getFirServer(HttpClient.class);
+            return BuildFactory.getInstance().create(HttpClient.class, HttpUtils.API_FIR);
         }
 
         public static HttpClient getWanAndroidServer() {
-            return HttpUtils.getInstance().getWanAndroidServer(HttpClient.class);
+            return BuildFactory.getInstance().create(HttpClient.class, HttpUtils.API_WAN_ANDROID);
+        }
+
+        public static HttpClient getNHDZServer() {
+            return BuildFactory.getInstance().create(HttpClient.class, HttpUtils.API_NHDZ);
+        }
+
+        public static HttpClient getQSBKServer() {
+            return BuildFactory.getInstance().create(HttpClient.class, HttpUtils.API_QSBK);
         }
     }
 
@@ -122,6 +134,20 @@ public interface HttpClient {
      */
     @GET("article/list/{page}/json")
     Observable<HomeListBean> getHomeList(@Path("page") int page);
+
+    /**
+     * @param page 页码，从1开始
+     */
+    @GET("article/list/text")
+    Observable<QsbkListBean> getQsbkList(@Query("page") int page);
+
+    /**
+     * @param page 页码，从0开始
+     */
+//    @GET("neihan/stream/mix/v1/?mpic=2&essence={page}&content_type=-102&message_cursor=-1&bd_Stringitude=113.369569&bd_latitude=23.149678&bd_city=广州市&am_Stringitude=113.367846&am_latitude=23.149878&am_city=广州市&am_loc_time=1465213692154&count=30&min_time=1465213700&screen_width=720&iid=4512422578&device_id=17215021497&ac=wifi&channel=NHSQH5AN&aid=7&app_name=joke_essay&version_code=431&device_platform=android&ssmix=a&device_type=6s+Plus&os_api=19&os_version=4.4.2&uuid=864394108025091&openudid=80FA5B208E050000&manifest_version_code=431")
+    @GET("neihan/stream/mix/v1/?mpic=2&essence=1&content_type=-102&message_cursor=-1&bd_Stringitude=113.369569&bd_latitude=23.149678&bd_city=广州市&am_Stringitude=113.367846&am_latitude=23.149878&am_city=广州市&am_loc_time=1465213692154&count=30&min_time=1465213700&screen_width=720&iid=4512422578&device_id=17215021497&ac=wifi&channel=NHSQH5AN&aid=7&app_name=joke_essay&version_code=431&device_platform=android&ssmix=a&device_type=6s+Plus&os_api=19&os_version=4.4.2&uuid=864394108025091&openudid=80FA5B208E050000&manifest_version_code=431")
+    Observable<NhdzListBean> getNhdzList(@Query("page") int page);
+
 
     /**
      * 根据tag获取music

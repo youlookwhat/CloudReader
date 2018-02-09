@@ -2,13 +2,10 @@ package com.example.jingbin.cloudreader.viewmodel.wan;
 
 import android.arch.lifecycle.ViewModel;
 
-import com.example.jingbin.cloudreader.app.CloudReaderApplication;
 import com.example.jingbin.cloudreader.base.BaseFragment;
 import com.example.jingbin.cloudreader.bean.wanandroid.HomeListBean;
 import com.example.jingbin.cloudreader.bean.wanandroid.WanAndroidBannerBean;
-import com.example.jingbin.cloudreader.data.model.GankOtherModel;
 import com.example.jingbin.cloudreader.http.HttpClient;
-import com.example.jingbin.cloudreader.http.cache.ACache;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,12 +24,8 @@ import rx.schedulers.Schedulers;
 public class WanAndroidViewModel extends ViewModel {
 
     private final BaseFragment activity;
-    private final GankOtherModel mModel;
-    private final ACache mACache;
     private WanNavigator.WanAndroidNavigator navigator;
     private int mPage = 0;
-    private ArrayList<String> imgList = new ArrayList<>();
-    private ArrayList<String> imageTitleList = new ArrayList<>();
     private ArrayList<String> mBannerImages;
     private ArrayList<String> mBannerTitles;
 
@@ -46,8 +39,6 @@ public class WanAndroidViewModel extends ViewModel {
 
     public WanAndroidViewModel(BaseFragment activity) {
         this.activity = activity;
-        mModel = new GankOtherModel();
-        mACache = ACache.get(CloudReaderApplication.getInstance());
     }
 
     public void getWanAndroidBanner() {
@@ -86,10 +77,6 @@ public class WanAndroidViewModel extends ViewModel {
                                     mBannerTitles.add(result.get(i).getTitle());
                                 }
                                 navigator.showBannerView(mBannerImages, mBannerTitles, result);
-//                                maCache.remove(Constants.BANNER_PIC);
-//                                maCache.put(Constants.BANNER_PIC, mBannerImages);
-//                                maCache.remove(Constants.BANNER_PIC_DATA);
-//                                maCache.put(Constants.BANNER_PIC_DATA, result);
                             }
                         }
                         if (result == null) {
