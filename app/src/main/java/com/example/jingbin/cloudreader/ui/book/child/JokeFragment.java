@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 
+import com.bumptech.glide.Glide;
 import com.example.jingbin.cloudreader.MainActivity;
 import com.example.jingbin.cloudreader.R;
 import com.example.jingbin.cloudreader.adapter.JokeAdapter;
@@ -22,6 +23,8 @@ import com.example.xrecyclerview.XRecyclerView;
 
 import java.util.List;
 import java.util.Random;
+
+import jp.wasabeef.glide.transformations.BlurTransformation;
 
 /**
  * @author jingbin
@@ -89,8 +92,16 @@ public class JokeFragment extends BaseFragment<FragmentWanAndroidBinding> implem
             public void onRefresh() {
                 bindingView.srlBook.postDelayed(() -> {
                     bindingView.xrvBook.reset();
-                    viewModel.setPage(1);
-                    loadCustomData();
+//                    loadCustomData();
+                    if (isNhdz) {
+                        viewModel.setPage(1);
+                        viewModel.showNhdzList();
+                    } else {
+                        viewModel.setPage(new Random().nextInt(100));
+                        viewModel.showQSBKList();
+                    }
+
+
                 }, 500);
             }
         });
@@ -99,8 +110,10 @@ public class JokeFragment extends BaseFragment<FragmentWanAndroidBinding> implem
         bindingView.xrvBook.clearHeader();
         mAdapter = new JokeAdapter(getActivity());
         bindingView.xrvBook.setAdapter(mAdapter);
-        headerBinding= DataBindingUtil.inflate(getLayoutInflater(), R.layout.header_item_joke, null, false);
+        headerBinding = DataBindingUtil.inflate(getLayoutInflater(), R.layout.header_item_joke, null, false);
         bindingView.xrvBook.addHeaderView(headerBinding.getRoot());
+        headerBinding.tvJsbk.setOnClickListener(v -> showQsbkData());
+        headerBinding.tvNhdz.setOnClickListener(v -> showNhdzData());
 
         bindingView.xrvBook.setLoadingListener(new XRecyclerView.LoadingListener() {
             @Override
@@ -115,6 +128,16 @@ public class JokeFragment extends BaseFragment<FragmentWanAndroidBinding> implem
                 loadCustomData();
             }
         });
+
+    }
+
+
+    private void showImage(List<DuanZiBean> beans) {
+        String avatarUrl = beans.get(0).getAvatarUrl();
+        // 高斯模糊背景 原来 参数：12,5  23,4
+        Glide.with(this).load(avatarUrl)
+                .bitmapTransform(new BlurTransformation(activity, 23, 4)).into(headerBinding.ivJoke);
+
     }
 
     @Override
@@ -135,11 +158,15 @@ public class JokeFragment extends BaseFragment<FragmentWanAndroidBinding> implem
     }
 
     private void loadCustomData() {
-        viewModel.showNhdzList();
-//        viewModel.showQSBKList();
+        if (isNhdz) {
+            viewModel.showNhdzList();
+        } else {
+            viewModel.showQSBKList();
+        }
     }
 
     public void showNhdzData() {
+        isNhdz = true;
         if (!bindingView.srlBook.isRefreshing()) {
             bindingView.srlBook.setRefreshing(true);
             bindingView.xrvBook.reset();
@@ -148,11 +175,15 @@ public class JokeFragment extends BaseFragment<FragmentWanAndroidBinding> implem
         }
     }
 
+    private boolean isNhdz = true;
+
     public void showQsbkData() {
+        isNhdz = false;
         if (!bindingView.srlBook.isRefreshing()) {
             bindingView.srlBook.setRefreshing(true);
             bindingView.xrvBook.reset();
-            viewModel.setPage(new Random(100).nextInt());
+//            viewModel.setPage(new Random().nextInt(100));
+            viewModel.setPage(1);
             viewModel.showQSBKList();
         }
     }
@@ -183,6 +214,7 @@ public class JokeFragment extends BaseFragment<FragmentWanAndroidBinding> implem
         mAdapter.notifyDataSetChanged();
         bindingView.xrvBook.refreshComplete();
 
+//        showImage(bean);
         mIsFirst = false;
     }
 

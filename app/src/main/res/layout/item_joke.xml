@@ -8,6 +8,10 @@
             name="time"
             type="String" />
 
+        <import type="android.text.TextUtils" />
+        <!--用于控制是否显示-->
+        <import type="android.view.View" />
+
         <variable
             name="bean"
             type="com.example.jingbin.cloudreader.bean.wanandroid.DuanZiBean" />
@@ -32,8 +36,8 @@
             android:orientation="horizontal">
 
             <ImageView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="46dp"
+                android:layout_height="46dp"
                 android:displayCircle='@{bean.avatarUrl}'
                 android:scaleType="centerCrop" />
 
@@ -46,13 +50,15 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@{bean.name}" />
+                    android:text="@{bean.name}"
+                    android:textSize="15sp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
-                    android:text="@{time}" />
+                    android:text="@{time}"
+                    android:textSize="13sp" />
             </LinearLayout>
 
         </LinearLayout>
@@ -60,7 +66,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="62dp"
+            android:layout_marginLeft="58dp"
             android:lineSpacingExtra="4dp"
             android:text="@{bean.content}"
             android:textColor="@color/colorContent"
@@ -69,10 +75,11 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="72dp"
+            android:layout_marginLeft="58dp"
             android:layout_marginTop="25dp"
-            android:text="@{bean.categoryName}"
-            android:textSize="12sp" />
+            android:text="@{@string/string_joke + bean.categoryName}"
+            android:textSize="12sp"
+            android:visibility="@{TextUtils.isEmpty(bean.categoryName) ? View.GONE : View.VISIBLE}" />
 
         <View
             android:layout_width="match_parent"

@@ -25,6 +25,7 @@ public class JokeViewModel extends ViewModel {
     private final ACache mACache;
     private WanNavigator.JokeNavigator jokeNavigator;
     private int mPage = 1;
+    private boolean isChear = false;
 
     public void setNavigator(WanNavigator.JokeNavigator navigator) {
         this.jokeNavigator = navigator;
@@ -75,6 +76,10 @@ public class JokeViewModel extends ViewModel {
             activity.addSubscription(subscription);
         }
     };
+
+    public void setClear() {
+        isChear = true;
+    }
 
     public int getPage() {
         return mPage;
