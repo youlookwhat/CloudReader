@@ -2,11 +2,9 @@ package com.example.jingbin.cloudreader.viewmodel.wan;
 
 import android.arch.lifecycle.ViewModel;
 
-import com.example.jingbin.cloudreader.app.CloudReaderApplication;
 import com.example.jingbin.cloudreader.base.BaseFragment;
 import com.example.jingbin.cloudreader.bean.wanandroid.DuanZiBean;
 import com.example.jingbin.cloudreader.data.model.JokeModel;
-import com.example.jingbin.cloudreader.http.cache.ACache;
 
 import java.util.List;
 
@@ -22,10 +20,12 @@ public class JokeViewModel extends ViewModel {
 
     private final BaseFragment activity;
     private final JokeModel mModel;
-    private final ACache mACache;
     private WanNavigator.JokeNavigator jokeNavigator;
     private int mPage = 1;
-    private boolean isChear = false;
+    // 刷新内涵段子
+    private boolean isRefreshNH = false;
+    // 刷新糗事百科
+    private boolean isRefreshBK = false;
 
     public void setNavigator(WanNavigator.JokeNavigator navigator) {
         this.jokeNavigator = navigator;
@@ -38,7 +38,6 @@ public class JokeViewModel extends ViewModel {
     public JokeViewModel(BaseFragment activity) {
         this.activity = activity;
         mModel = new JokeModel();
-        mACache = ACache.get(CloudReaderApplication.getInstance());
     }
 
     public void showNhdzList() {
@@ -53,7 +52,7 @@ public class JokeViewModel extends ViewModel {
         @Override
         public void loadSuccess(List<DuanZiBean> lists) {
             jokeNavigator.showLoadSuccessView();
-            if (mPage == 1) {
+            if (isRefreshBK | isRefreshNH) {
                 if (lists != null && lists.size() > 0) {
                     jokeNavigator.showAdapterView(lists);
                 }
@@ -77,8 +76,22 @@ public class JokeViewModel extends ViewModel {
         }
     };
 
-    public void setClear() {
-        isChear = true;
+    public boolean isRefreshNH() {
+        return isRefreshNH;
+    }
+
+    public void setRefreshNH(boolean refreshNH) {
+        isRefreshNH = refreshNH;
+        isRefreshBK = false;
+    }
+
+    public void setRefreshBK(boolean refreshBK) {
+        isRefreshBK = refreshBK;
+        isRefreshNH = false;
+    }
+
+    public boolean isRefreshBK() {
+        return isRefreshBK;
     }
 
     public int getPage() {

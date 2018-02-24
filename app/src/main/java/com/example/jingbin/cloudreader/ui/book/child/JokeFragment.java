@@ -40,6 +40,8 @@ public class JokeFragment extends BaseFragment<FragmentWanAndroidBinding> implem
     private JokeAdapter mAdapter;
     private HeaderItemJokeBinding headerBinding;
     private JokeViewModel viewModel;
+    // 判断刷新内涵段子数据还是糗事百科数据
+    private boolean isNhdz = true;
 
     @Override
     public int setContent() {
@@ -71,7 +73,6 @@ public class JokeFragment extends BaseFragment<FragmentWanAndroidBinding> implem
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        showContentView();
         viewModel = new JokeViewModel(this);
         viewModel.setNavigator(this);
         initRefreshView();
@@ -92,17 +93,16 @@ public class JokeFragment extends BaseFragment<FragmentWanAndroidBinding> implem
             public void onRefresh() {
                 bindingView.srlBook.postDelayed(() -> {
                     bindingView.xrvBook.reset();
-//                    loadCustomData();
                     if (isNhdz) {
-                        viewModel.setPage(1);
+                        viewModel.setRefreshNH(true);
                         viewModel.showNhdzList();
                     } else {
+                        viewModel.setRefreshBK(true);
                         viewModel.setPage(new Random().nextInt(100));
                         viewModel.showQSBKList();
                     }
 
-
-                }, 500);
+                }, 100);
             }
         });
         bindingView.xrvBook.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -123,8 +123,13 @@ public class JokeFragment extends BaseFragment<FragmentWanAndroidBinding> implem
 
             @Override
             public void onLoadMore() {
-                int page = viewModel.getPage();
-                viewModel.setPage(++page);
+                if (isNhdz) {
+                    viewModel.setRefreshNH(false);
+                } else {
+                    int page = viewModel.getPage();
+                    viewModel.setPage(++page);
+                    viewModel.setRefreshBK(false);
+                }
                 loadCustomData();
             }
         });
@@ -142,7 +147,7 @@ public class JokeFragment extends BaseFragment<FragmentWanAndroidBinding> implem
 
     @Override
     protected void loadData() {
-        DebugUtil.error("-----loadData");
+        DebugUtil.error("-----mIsPrepared：" + mIsPrepared + "--mIsVisible：" + mIsVisible + "--mIsFirst：" + mIsFirst);
         if (!mIsPrepared || !mIsVisible || !mIsFirst) {
             return;
         }
@@ -151,10 +156,10 @@ public class JokeFragment extends BaseFragment<FragmentWanAndroidBinding> implem
         bindingView.srlBook.postDelayed(new Runnable() {
             @Override
             public void run() {
+                viewModel.setRefreshNH(true);
                 loadCustomData();
             }
-        }, 500);
-        DebugUtil.error("-----setRefreshing");
+        }, 100);
     }
 
     private void loadCustomData() {
@@ -165,25 +170,29 @@ public class JokeFragment extends BaseFragment<FragmentWanAndroidBinding> implem
         }
     }
 
+    /**
+     * 内涵段子数据
+     */
     public void showNhdzData() {
         isNhdz = true;
         if (!bindingView.srlBook.isRefreshing()) {
             bindingView.srlBook.setRefreshing(true);
             bindingView.xrvBook.reset();
-            viewModel.setPage(1);
+            viewModel.setRefreshNH(true);
             viewModel.showNhdzList();
         }
     }
 
-    private boolean isNhdz = true;
-
+    /**
+     * 糗事百科数据
+     */
     public void showQsbkData() {
         isNhdz = false;
         if (!bindingView.srlBook.isRefreshing()) {
             bindingView.srlBook.setRefreshing(true);
             bindingView.xrvBook.reset();
-//            viewModel.setPage(new Random().nextInt(100));
             viewModel.setPage(1);
+            viewModel.setRefreshBK(true);
             viewModel.showQSBKList();
         }
     }
@@ -200,7 +209,7 @@ public class JokeFragment extends BaseFragment<FragmentWanAndroidBinding> implem
         if (bindingView.srlBook.isRefreshing()) {
             bindingView.srlBook.setRefreshing(false);
         }
-        if (viewModel.getPage() == 0) {
+        if (viewModel.isRefreshNH() && mIsFirst) {
             showError();
         } else {
             bindingView.xrvBook.refreshComplete();
