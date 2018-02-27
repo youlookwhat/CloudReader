@@ -1,6 +1,7 @@
 package com.example.jingbin.cloudreader.adapter;
 
 import android.app.Activity;
+import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.jingbin.cloudreader.R;
@@ -8,6 +9,7 @@ import com.example.jingbin.cloudreader.base.baseadapter.BaseRecyclerViewAdapter;
 import com.example.jingbin.cloudreader.base.baseadapter.BaseRecyclerViewHolder;
 import com.example.jingbin.cloudreader.bean.wanandroid.DuanZiBean;
 import com.example.jingbin.cloudreader.databinding.ItemJokeBinding;
+import com.example.jingbin.cloudreader.utils.DialogBuild;
 import com.example.jingbin.cloudreader.utils.TimeUtil;
 
 /**
@@ -40,6 +42,13 @@ public class JokeAdapter extends BaseRecyclerViewAdapter<DuanZiBean> {
                 binding.executePendingBindings();
                 String time = TimeUtil.formatDataTime(Long.valueOf(bean.getCreateTime() + "000"));
                 binding.setTime(time);
+                binding.llItemTop.setOnLongClickListener(new View.OnLongClickListener() {
+                    @Override
+                    public boolean onLongClick(View v) {
+                        DialogBuild.showItems(v,bean.getContent());
+                        return false;
+                    }
+                });
             }
         }
     }
