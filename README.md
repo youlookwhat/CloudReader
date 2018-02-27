@@ -51,7 +51,7 @@ If you have any questions, please write to [the issue][21] of making you don't u
 
 
 ## See Detail
-> [项目介绍详情](https://github.com/youlookwhat/CloudReader/blob/master/file/Introduction.md) | [细节优化详情](https://github.com/youlookwhat/CloudReader/wiki) | [**版本更新详情(V1.9.0)**](http://jingbin.me/2016/12/30/%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97-%E4%BA%91%E9%98%85/)
+> [项目介绍详情](https://github.com/youlookwhat/CloudReader/blob/master/file/Introduction.md) | [细节优化详情](https://github.com/youlookwhat/CloudReader/wiki) | [**版本更新详情(V1.9.1)**](http://jingbin.me/2016/12/30/%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97-%E4%BA%91%E9%98%85/)
 
 ### Download
 　[火速跳转](https://fir.im/cloudreader)                                    
@@ -65,9 +65,12 @@ If you have any questions, please write to [the issue][21] of making you don't u
 　
 
 ### Version
-#### V1.9.0（02-08）
-> TODO：玩安卓登录/收藏网页等功能；段子页面等
+#### V1.9.1（02-27）
+> TODO：玩安卓登录/收藏网页等功能；书籍页面订制
 
+ - 1、[新增] 新增段子页面，长按条目可选择复制或分享
+
+#### V1.9.0（02-08）
  - 1、首页大幅调整，增加进入玩安卓页面和Trending页面的入口
  - 2、新增鸿洋玩安卓模块(部分功能)
  - 3、优化WebView网页显示，解决大部分问题,[详细](https://github.com/youlookwhat/WebViewStudy)
@@ -160,7 +163,7 @@ limitations under the License.
 [2]:https://www.apache.org/licenses/LICENSE-2.0.html
 [3]:https://img.shields.io/badge/API-19%2B-red.svg?style=flat
 [4]:https://android-arsenal.com/api?level=19
-[30]:https://img.shields.io/badge/release-1.9.0-red.svg
+[30]:https://img.shields.io/badge/release-1.9.1-red.svg
 [31]:https://github.com/youlookwhat/CloudReader/releases
 [32]:https://img.shields.io/badge/PRs-welcome-brightgreen.svg
 [33]:https://github.com/youlookwhat/CloudReader/pulls
