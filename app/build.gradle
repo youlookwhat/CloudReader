@@ -16,6 +16,7 @@ android {
 
     }
     buildTypes {
+        // 将pToken使用 "" 代替！
         release {
             buildConfigField "String", "UPDATE_TOKEN", pToken
             minifyEnabled false
