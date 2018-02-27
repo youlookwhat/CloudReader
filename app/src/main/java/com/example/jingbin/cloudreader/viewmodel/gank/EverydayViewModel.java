@@ -7,9 +7,9 @@ import com.example.jingbin.cloudreader.app.Constants;
 import com.example.jingbin.cloudreader.base.BaseFragment;
 import com.example.jingbin.cloudreader.bean.AndroidBean;
 import com.example.jingbin.cloudreader.bean.FrontpageBean;
+import com.example.jingbin.cloudreader.data.model.EverydayModel;
 import com.example.jingbin.cloudreader.http.RequestImpl;
 import com.example.jingbin.cloudreader.http.cache.ACache;
-import com.example.jingbin.cloudreader.data.model.EverydayModel;
 import com.example.jingbin.cloudreader.utils.SPUtils;
 import com.example.jingbin.cloudreader.utils.TimeUtil;
 
@@ -145,7 +145,8 @@ public class EverydayViewModel extends ViewModel {
         try {
             mBannerImages = (ArrayList<String>) maCache.getAsObject(Constants.BANNER_PIC);
             result = (ArrayList<FrontpageBean.ResultBannerBean.FocusBean.ResultBeanX>) maCache.getAsObject(Constants.BANNER_PIC_DATA);
-        } catch (Exception ignored) {
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         if (mBannerImages != null && mBannerImages.size() > 0) {
             // 加上缓存使其可以点击
@@ -165,6 +166,7 @@ public class EverydayViewModel extends ViewModel {
 
     public void loadData() {
         String oneData = SPUtils.getString("everyday_data", "2016-11-26");
+//        DebugUtil.error("----"+oneData);
         if (!oneData.equals(TimeUtil.getData())) {// 是第二天
             if (TimeUtil.isRightTime()) {//大于12：30,请求
 
