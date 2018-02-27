@@ -2,7 +2,6 @@ package com.example.jingbin.cloudreader.adapter;
 
 import android.content.Context;
 import android.content.DialogInterface;
-import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,6 +23,7 @@ import com.example.jingbin.cloudreader.databinding.ItemEverydayTwoBinding;
 import com.example.jingbin.cloudreader.http.rx.RxBus;
 import com.example.jingbin.cloudreader.http.rx.RxCodeConstants;
 import com.example.jingbin.cloudreader.utils.DensityUtil;
+import com.example.jingbin.cloudreader.utils.DialogBuild;
 import com.example.jingbin.cloudreader.utils.ImgLoadUtil;
 import com.example.jingbin.cloudreader.utils.PerfectClickListener;
 import com.example.jingbin.cloudreader.view.webview.WebViewActivity;
@@ -223,20 +223,13 @@ public class EverydayAdapter extends BaseRecyclerViewAdapter<List<AndroidBean>> 
         linearLayout.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
-                View view = View.inflate(v.getContext(), R.layout.title_douban_top, null);
-                TextView titleTop = (TextView) view.findViewById(R.id.title_top);
-                titleTop.setTextSize(14);
                 String title = TextUtils.isEmpty(bean.getType()) ? bean.getDesc() : bean.getType() + "：  " + bean.getDesc();
-                titleTop.setText(title);
-                builder.setCustomTitle(view);
-                builder.setPositiveButton("查看详情", new DialogInterface.OnClickListener() {
+                DialogBuild.show(v, title, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         WebViewActivity.loadUrl(linearLayout.getContext(), bean.getUrl(), bean.getDesc());
                     }
                 });
-                builder.show();
                 return false;
             }
         });
