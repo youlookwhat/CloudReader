@@ -15,8 +15,9 @@ android {
         multiDexEnabled true
 
     }
+
+    // ----------------在项目根目录下新建 gradle.properties  里面添加 pToken = "xx"--------------------
     buildTypes {
-        // 将pToken使用 "" 代替！
         release {
             buildConfigField "String", "UPDATE_TOKEN", pToken
             minifyEnabled false
@@ -27,7 +28,7 @@ android {
         }
     }
 
-    //signing files settings
+    // 删除下面代码(签名配置)
     signingConfigs {
         if (propertyHaveSigningConfigs) {
             debug {
@@ -45,6 +46,7 @@ android {
             }
         }
     }
+    // --------------------------------------------------------------------------------------------
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
