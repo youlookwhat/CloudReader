@@ -1,10 +1,12 @@
 package com.example.jingbin.cloudreader.ui.book.child;
 
 import android.content.Context;
+import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
+import android.view.inputmethod.EditorInfo;
 
 import com.example.jingbin.cloudreader.MainActivity;
 import com.example.jingbin.cloudreader.R;
@@ -12,6 +14,7 @@ import com.example.jingbin.cloudreader.adapter.WanAdapter;
 import com.example.jingbin.cloudreader.base.BaseFragment;
 import com.example.jingbin.cloudreader.bean.book.BookBean;
 import com.example.jingbin.cloudreader.databinding.FragmentWanAndroidBinding;
+import com.example.jingbin.cloudreader.databinding.HeaderItemBookBinding;
 import com.example.jingbin.cloudreader.http.HttpClient;
 import com.example.jingbin.cloudreader.utils.CommonUtils;
 import com.example.jingbin.cloudreader.utils.DebugUtil;
@@ -89,6 +92,7 @@ public class BookListFragment extends BaseFragment<FragmentWanAndroidBinding> {
             public void onRefresh() {
                 bindingView.srlBook.postDelayed(() -> {
                     mStart = 0;
+                    bindingView.xrvBook.reset();
                     loadCustomData();
                 }, 1000);
 
@@ -100,9 +104,20 @@ public class BookListFragment extends BaseFragment<FragmentWanAndroidBinding> {
         bindingView.xrvBook.clearHeader();
         mBookAdapter = new WanAdapter(getActivity());
         bindingView.xrvBook.setAdapter(mBookAdapter);
-//        HeaderItemOneBinding oneBinding = DataBindingUtil.inflate(getLayoutInflater(), R.layout.header_item_one, null, false);
-//        bindingView.xrvBook.addHeaderView(oneBinding.getRoot());
-
+        HeaderItemBookBinding oneBinding = DataBindingUtil.inflate(getLayoutInflater(), R.layout.header_item_book, null, false);
+        bindingView.xrvBook.addHeaderView(oneBinding.getRoot());
+        oneBinding.etTypeName.setText(mType);
+        oneBinding.etTypeName.setSelection(mType.length());
+        /** 处理键盘搜索键 */
+        oneBinding.etTypeName.setOnEditorActionListener((textView, actionId, keyEvent) -> {
+            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                mStart = 0;
+                bindingView.xrvBook.reset();
+                mType = oneBinding.etTypeName.getText().toString().trim();
+                loadCustomData();
+            }
+            return false;
+        });
         bindingView.xrvBook.setLoadingListener(new XRecyclerView.LoadingListener() {
             @Override
             public void onRefresh() {

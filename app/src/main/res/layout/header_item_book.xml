@@ -2,27 +2,42 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
 
     <RelativeLayout
-        android:id="@+id/rl_more"
         android:layout_width="match_parent"
-        android:layout_height="1dp"
+        android:layout_height="wrap_content"
         android:background="@color/colorPageBg"
-        android:gravity="center"
         android:orientation="vertical">
 
-
-        <RelativeLayout
+        <LinearLayout
+            android:id="@+id/ll_type_book"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingBottom="5dp"
+            android:paddingTop="5dp">
 
-            <TextView
-                android:id="@+id/tv_load_prompt"
+            <ImageView
+                android:layout_width="15dp"
+                android:layout_height="23dp"
+                android:background="@drawable/ic_cylinder" />
+
+            <EditText
+                android:id="@+id/et_type_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:layout_marginLeft="10dp"
-                android:text="头布局"
-                android:textSize="12sp" />
+                android:ellipsize="end"
+                android:imeOptions="actionSearch"
+                android:inputType="text"
+                android:maxLines="1"
+                android:text="心理学"
+                android:textColor="@color/colorContent"
+                android:textSize="16sp" />
 
-        </RelativeLayout>
+            <ImageView
+                android:layout_width="22dp"
+                android:layout_height="22dp"
+                android:layout_marginLeft="5dp"
+                android:src="@drawable/home_arrow_right" />
+        </LinearLayout>
     </RelativeLayout>
 </layout>
