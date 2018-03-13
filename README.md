@@ -136,7 +136,7 @@ If you have any questions, please write to [the issue][21] of making you don't u
 ## End
 > 注意：此开源项目仅做学习交流使用，如用到实际项目还需多考虑其他因素如并发等，请多多斟酌。如果你觉得不错，对你有帮助，欢迎点个star，follow，也可以帮忙分享给你更多的朋友，或给点赞赏，这是给我们最大的动力与支持。另，此MvvM-databinding框架是依照自己理解而写，有疑问可以看[这里](https://github.com/youlookwhat/ProjectPatternStudy)。
 
-<img width="173" height=“173” src="https://github.com/youlookwhat/CloudReader/blob/master/file/Wechat-admire.jpeg"></img>
+<img width="200" height=“200” src="https://github.com/youlookwhat/CloudReader/blob/master/file/Wechat-admire.jpeg"></img>
 
 ## About me
  - **QQ：** 770413277
