@@ -125,7 +125,7 @@ If you have any questions, please write to [the issue][21] of making you don't u
  
  - 图片来源：[iconfont][6]、UI工程师[Sandawang](https://github.com/Sandawang)和网易云音乐App。
 
- - 参考项目：[ImitateNetEasyCloud][7]、[banya][8]；主要数据来源：[Gank.Io][9]、[豆瓣Api][10]。
+ - 参考项目：[ImitateNetEasyCloud][7]、[banya][8]；主要数据来源：[Gank.Io][9]、[豆瓣Api][10]、[wanandroid][27]。
 
  - 使用到的开源库：[glide][11]、[bottomsheet][12]、[nineoldandroids][13]、[rxandroid][14]等等。
 
@@ -134,7 +134,9 @@ If you have any questions, please write to [the issue][21] of making you don't u
 感谢[网易云音乐App](https://play.google.com/store/apps/details?id=com.netease.cloudmusic)提供参考，附上[《网易云音乐Android 3.0视觉设计规范文档》](http://www.25xt.com/appdesign/12385.html)。本人是网易云音乐的粉丝，使用了其中的部分素材，并非攻击，如构成侵权请及时通知我修改或删除。大部分数据来自于干货集中营和豆瓣APIV2.0，一切数据解释权都归代码家和豆瓣所有。
  
 ## End
-> 注意：此开源项目仅做学习交流使用，如用到实际项目还需多考虑其他因素如并发等，请多多斟酌。如果你觉得不错，对你有帮助，欢迎点个fork，star，follow，也可以帮忙分享给你更多的朋友，这是给我们最大的动力与支持。另，此MvvM-databinding框架是依照自己理解而写，有疑问可以看[这里](https://github.com/youlookwhat/ProjectPatternStudy)。
+> 注意：此开源项目仅做学习交流使用，如用到实际项目还需多考虑其他因素如并发等，请多多斟酌。如果你觉得不错，对你有帮助，欢迎点个star，follow，也可以帮忙分享给你更多的朋友，或给点赞赏，这是给我们最大的动力与支持。另，此MvvM-databinding框架是依照自己理解而写，有疑问可以看[这里](https://github.com/youlookwhat/ProjectPatternStudy)。
+
+<img width="173" height=“173” src="https://github.com/youlookwhat/CloudReader/blob/master/file/Wechat-admire.jpeg"></img>
 
 ## About me
  - **QQ：** 770413277
@@ -191,3 +193,4 @@ limitations under the License.
 [24]:http://jingbin.me/2017/11/23/%E5%BC%80%E5%8F%91%E4%B8%AD%E6%89%80%E9%81%87%E9%97%AE%E9%A2%98%E5%BD%92%E7%BA%B3/
 [25]:http://jingbin.me/2016/12/25/%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98-%E4%BA%91%E9%98%85/
 [26]:https://segmentfault.com/a/1190000002876984#articleHeader21
+[27]:http://www.wanandroid.com/index
