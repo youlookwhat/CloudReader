@@ -19,15 +19,18 @@ import rx.schedulers.Schedulers;
  */
 public class UpdateUtil {
 
+    final private static String UPDATE_TOKEN = "5c5cbd9772b995661a3f00b72e429233";
+
     /**
      * 检查更新
+     * BuildConfig.UPDATE_TOKEN
      *
      * @param activity
      * @param isShowToast 是否弹出Snackbar提示
      */
     public static void check(final Activity activity, final boolean isShowToast) {
 
-        Subscription get = HttpClient.Builder.getFirServer().checkUpdate("58677918ca87a8490d000395", BuildConfig.UPDATE_TOKEN)
+        Subscription get = HttpClient.Builder.getFirServer().checkUpdate("58677918ca87a8490d000395", UPDATE_TOKEN)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<UpdateBean>() {

@@ -16,36 +16,36 @@ android {
 
     }
 
-    // ----------------在项目根目录下新建 gradle.properties  里面添加 pToken = "xx"--------------------
-    buildTypes {
-        release {
-            buildConfigField "String", "UPDATE_TOKEN", pToken
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-        }
-        debug {
-            buildConfigField "String", "UPDATE_TOKEN", pToken
-        }
-    }
+    // ---------------- 注视下一块 boolean String "false"  pToken--------------------
+//    buildTypes {
+//        release {
+//            buildConfigField "String", "UPDATE_TOKEN", pToken
+//            minifyEnabled false
+//            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+//        }
+//        debug {
+//            buildConfigField "String", "UPDATE_TOKEN", pToken
+//        }
+//    }
 
     // 删除下面代码(签名配置)
-    signingConfigs {
-        if (propertyHaveSigningConfigs) {
-            debug {
-                storeFile file(pStoreFile)
-                storePassword pStorePassword
-                keyAlias pKeyAlias
-                keyPassword pKeyPassword
-            }
-
-            release {
-                storeFile file(pStoreFile)
-                storePassword pStorePassword
-                keyAlias pKeyAlias
-                keyPassword pKeyPassword
-            }
-        }
-    }
+//    signingConfigs {
+//        if (propertyHaveSigningConfigs) {
+//            debug {
+//                storeFile file(pStoreFile)
+//                storePassword pStorePassword
+//                keyAlias pKeyAlias
+//                keyPassword pKeyPassword
+//            }
+//
+//            release {
+//                storeFile file(pStoreFile)
+//                storePassword pStorePassword
+//                keyAlias pKeyAlias
+//                keyPassword pKeyPassword
+//            }
+//        }
+//    }
     // --------------------------------------------------------------------------------------------
 
     compileOptions {
