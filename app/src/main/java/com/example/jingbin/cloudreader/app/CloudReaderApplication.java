@@ -7,6 +7,7 @@ import android.support.multidex.MultiDexApplication;
 import com.example.http.HttpUtils;
 import com.example.jingbin.cloudreader.utils.DebugUtil;
 import com.squareup.leakcanary.LeakCanary;
+import com.tencent.bugly.crashreport.CrashReport;
 
 /**
  * Created by jingbin on 2016/11/22.
@@ -30,6 +31,7 @@ public class CloudReaderApplication extends MultiDexApplication{
             return;
         }
         LeakCanary.install(this);
+        CrashReport.initCrashReport(getApplicationContext(), "3977b2d86f", DebugUtil.DEBUG);
         cloudReaderApplication = this;
         HttpUtils.getInstance().init(this, DebugUtil.DEBUG);
 

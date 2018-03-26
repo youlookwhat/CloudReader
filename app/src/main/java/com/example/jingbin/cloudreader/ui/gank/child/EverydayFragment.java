@@ -1,5 +1,6 @@
 package com.example.jingbin.cloudreader.ui.gank.child;
 
+import android.animation.ValueAnimator;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -95,7 +96,8 @@ public class EverydayFragment extends BaseFragment<FragmentEverydayBinding> impl
         animation = new RotateAnimation(0f, 360f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
         animation.setDuration(3000);//设置动画持续时间
         animation.setInterpolator(new LinearInterpolator());//不停顿
-        animation.setRepeatCount(10);
+        animation.setRepeatMode(ValueAnimator.RESTART);//重新从头执行
+        animation.setRepeatCount(ValueAnimator.INFINITE);//设置重复次数
         bindingView.ivLoading.setAnimation(animation);
         animation.startNow();
     }

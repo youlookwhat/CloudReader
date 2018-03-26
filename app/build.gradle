@@ -16,7 +16,7 @@ android {
 
     }
 
-    // ---------------- 注视下一块 boolean String "false"  pToken--------------------
+    // ----------------------------------------------------------------------------
 //    buildTypes {
 //        release {
 //            buildConfigField "String", "UPDATE_TOKEN", pToken
@@ -28,24 +28,24 @@ android {
 //        }
 //    }
 
-    // 删除下面代码(签名配置)
-//    signingConfigs {
-//        if (propertyHaveSigningConfigs) {
-//            debug {
-//                storeFile file(pStoreFile)
-//                storePassword pStorePassword
-//                keyAlias pKeyAlias
-//                keyPassword pKeyPassword
-//            }
-//
-//            release {
-//                storeFile file(pStoreFile)
-//                storePassword pStorePassword
-//                keyAlias pKeyAlias
-//                keyPassword pKeyPassword
-//            }
-//        }
-//    }
+    // 注释下面代码(签名配置)
+    signingConfigs {
+        if (propertyHaveSigningConfigs) {
+            debug {
+                storeFile file(pStoreFile)
+                storePassword pStorePassword
+                keyAlias pKeyAlias
+                keyPassword pKeyPassword
+            }
+
+            release {
+                storeFile file(pStoreFile)
+                storePassword pStorePassword
+                keyAlias pKeyAlias
+                keyPassword pKeyPassword
+            }
+        }
+    }
     // --------------------------------------------------------------------------------------------
 
     compileOptions {
@@ -85,4 +85,7 @@ dependencies {
     implementation 'com.android.support:multidex:1.0.3'
     debugCompile 'com.squareup.leakcanary:leakcanary-android:1.5.4'
     releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.4'
+    // bugly start
+    compile 'com.tencent.bugly:crashreport:2.6.6.1'
+    compile 'com.tencent.bugly:nativecrashreport:3.3.1'
 }
