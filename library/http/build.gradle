@@ -1,12 +1,12 @@
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 26
-    buildToolsVersion "26.0.2"
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
 
     defaultConfig {
-        minSdkVersion 19
-        targetSdkVersion 26
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
         versionName "1.0"
 
@@ -22,18 +22,21 @@ android {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    testCompile "junit:junit:$rootProject.ext.junitVersion"
-    compile "com.android.support:appcompat-v7:$rootProject.supportLibraryVersion"
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    testImplementation "junit:junit:$rootProject.ext.junitVersion"
+    implementation "com.android.support:appcompat-v7:$rootProject.supportLibraryVersion"
     // 网络请求
-    compile 'com.google.code.gson:gson:2.8.1'
-    compile('com.squareup.retrofit2:retrofit:2.1.0') {
-        exclude module: 'com.squareup.okhttp3:okhttp:3.4.1'
-        exclude module: 'com.squareup.okio:okio:1.9.0'
-    }
-    compile 'com.squareup.okhttp3:okhttp:3.9.0'
-    compile 'com.squareup.okio:okio:1.13.0'
-    compile 'com.squareup.retrofit2:converter-gson:2.3.0'
-    compile 'com.squareup.okhttp3:logging-interceptor:3.9.0'
+    implementation 'com.google.code.gson:gson:2.8.2'
+//    implementation('com.squareup.retrofit2:retrofit:2.3.0') {
+//        exclude module: 'com.squareup.okhttp3:okhttp:3.9.1'
+//        exclude module: 'com.squareup.okio:okio:1.13.0'
+//    }
+    implementation 'com.squareup.retrofit2:retrofit:2.3.0'
+    implementation 'com.squareup.okhttp3:okhttp:3.9.1'
+    implementation 'com.squareup.okio:okio:1.13.0'
+
+    implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.9.1'
+    // 使用adapter-rxjava 将 compile 替换为 implementation 会报错
     compile 'com.squareup.retrofit2:adapter-rxjava:2.3.0'
 }
