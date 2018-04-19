@@ -16,13 +16,12 @@ import io.reactivex.Flowable;
  * @Description Data Access Object for the User table.
  * @date 2018/3/13
  */
-
 @Dao
 public interface WaitDao {
 
     /**
      * 查找数据库的全部内容
-     * Query("SELECT DISTINCT  * FROM Wait order by wid DESC ")
+     * Query("SELECT DISTINCT  * FROM Wait order by id DESC ")
      *
      * @return 用户信息列表，可以用作Rx链式调用
      */
@@ -45,7 +44,7 @@ public interface WaitDao {
      * 如果有多条信息，则返回第一条数据
      */
     @Query("SELECT * FROM Wait")
-    Wait findWaitss();
+    Wait findSingleBean();
 
     /**
      * 加入一条数据，如果主键值一样就替换，如果不一样就添加
@@ -64,25 +63,25 @@ public interface WaitDao {
 
     /**
      * Select a Wait by id.
-     * 注意：下面的括号里的wid要和注解里的[wid = :wid]一致，不然databinding会报错
+     * 注意：下面的括号里的wid要和注解里的[id = :id]一致，不然databinding会报错
      *
-     * @param wid the task id.
+     * @param id the bean id.
      * @return the task with taskId.
      */
-    @Query("SELECT * FROM Wait WHERE wid = :wid")
-    Flowable<Wait> getWaitById(String wid);
+    @Query("SELECT * FROM Wait WHERE id = :id")
+    Flowable<Wait> getWaitById(int id);
 
 //    /**
 //     * 清空数据库
 //     * Delete all Wait.
 //     */
 //    @Query("DELETE FROM Wait")
-//    void deleteAll();
+//    void deleteAllData();
 
     /**
      * 清空数据库
      *
-     * @return 返回：1 表示删除成功
+     * @return 返回：1 表示删除成功；0:没有数据时
      */
     @Query("DELETE FROM Wait")
     int deleteAll();
@@ -97,11 +96,11 @@ public interface WaitDao {
     int updateWaitResult(Wait wait);
 
     /**
-     * Select a task by id.
+     * Select a bean by id.
      *
-     * @param wid the task id.
-     * @return the task with taskId.
+     * @param id the bean id.
+     * @return the bean with beanId.
      */
-    @Query("SELECT * FROM Wait WHERE wid = :wid")
-    Wait getTaskById(String wid);
+    @Query("SELECT * FROM Wait WHERE id = :id")
+    Wait getTaskById(int id);
 }

@@ -6,9 +6,11 @@ import android.arch.persistence.room.PrimaryKey;
 import android.support.annotation.NonNull;
 
 /**
- * @author dangxueyi
- * @description
+ * @author jingbin
  * @date 2017/12/30
+ * @description 注意：1、建值如果为 String id; 使用getWid(),则会报错！！！
+ * 2、有一个key就要有对应的get和set
+ * 3、List<>不能简单使用，需要处理
  */
 
 @Entity(tableName = "Wait")
@@ -16,73 +18,100 @@ public class Wait {
 
 
     /**
-     * 通过主键来标识删除的，主键递增
+     * 通过主键来标识删除的
+     * 主键递增：PrimaryKey(autoGenerate = true)
      */
-//    @PrimaryKey(autoGenerate = true)
-//    @ColumnInfo(name = "id")
-//    private int id;
-
     @PrimaryKey
     @NonNull
-    @ColumnInfo(name = "wid")
-    private String wid;
+    @ColumnInfo(name = "id")
+    private int id;
 
+    @ColumnInfo(name = "email")
+    private String email;
+    @ColumnInfo(name = "icon")
+    private String icon;
+    @ColumnInfo(name = "password")
+    private String password;
+    @ColumnInfo(name = "type")
+    private int type;
+    @ColumnInfo(name = "username")
+    private String username;
 
-    @ColumnInfo(name = "title")
-    private String title;
-    @ColumnInfo(name = "summary")
-    private String summary;
-    @ColumnInfo(name = "url")
-    private String url;
+//    @ColumnInfo(name = "collectIds")
+//    private List<Integer> collectIds;
+
+    //这里定义User 和 Book的关系
+//    @Relation(parentColumn = "id", entityColumn = "id", entity = Integer.class)
+//    private ArrayList<Integer> collectIds;
+
 
     @NonNull
-    public String getWid() {
-        return wid;
+    public int getId() {
+        return id;
     }
 
-    public void setWid(String wid) {
-        this.wid = wid;
+    public void setId(@NonNull int id) {
+        this.id = id;
     }
 
-    public String getTitle() {
-        return title;
+    public String getEmail() {
+        return email;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
-    public String getSummary() {
-        return summary;
+    public String getIcon() {
+        return icon;
     }
 
-    public void setSummary(String summary) {
-        this.summary = summary;
+    public void setIcon(String icon) {
+        this.icon = icon;
     }
 
-    public String getUrl() {
-        return url;
+    public String getPassword() {
+        return password;
     }
 
-    public void setUrl(String url) {
-        this.url = url;
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public Wait(@NonNull int id, String email, String icon, String password, int type, String username) {
+        this.id = id;
+        this.email = email;
+        this.icon = icon;
+        this.password = password;
+        this.type = type;
+        this.username = username;
     }
 
     @Override
     public String toString() {
         return "Wait{" +
-                "wid='" + wid + '\'' +
-                ", title='" + title + '\'' +
-                ", summary='" + summary + '\'' +
-                ", url='" + url + '\'' +
+                "id=" + id +
+                ", email='" + email + '\'' +
+                ", icon='" + icon + '\'' +
+                ", password='" + password + '\'' +
+                ", type=" + type +
+                ", username='" + username + '\'' +
                 '}';
     }
-
-    public Wait(@NonNull String wid, String title, String summary, String url) {
-        this.wid = wid;
-        this.title = title;
-        this.summary = summary;
-        this.url = url;
-    }
-
 }
