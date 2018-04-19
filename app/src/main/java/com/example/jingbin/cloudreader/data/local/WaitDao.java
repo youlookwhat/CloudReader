@@ -1,0 +1,107 @@
+package com.example.jingbin.cloudreader.data.local;
+
+import android.arch.persistence.room.Dao;
+import android.arch.persistence.room.Delete;
+import android.arch.persistence.room.Insert;
+import android.arch.persistence.room.OnConflictStrategy;
+import android.arch.persistence.room.Query;
+import android.arch.persistence.room.Update;
+
+import java.util.List;
+
+import io.reactivex.Flowable;
+
+/**
+ * @author jingbin
+ * @Description Data Access Object for the User table.
+ * @date 2018/3/13
+ */
+
+@Dao
+public interface WaitDao {
+
+    /**
+     * 查找数据库的全部内容
+     * Query("SELECT DISTINCT  * FROM Wait order by wid DESC ")
+     *
+     * @return 用户信息列表，可以用作Rx链式调用
+     */
+    @Query("SELECT * FROM Wait")
+    Flowable<List<Wait>> findAll();
+
+
+    /**
+     * 查找数据库的全部内容
+     *
+     * @return 用户信息列表
+     */
+    @Query("SELECT * FROM Wait")
+    List<Wait> findWaits();
+
+
+    /**
+     * 查找任何的bean：
+     * 如果数据库里有一条数据就返回这条数据
+     * 如果有多条信息，则返回第一条数据
+     */
+    @Query("SELECT * FROM Wait")
+    Wait findWaitss();
+
+    /**
+     * 加入一条数据，如果主键值一样就替换，如果不一样就添加
+     * Insert a wait in the database. If the wait already exists, replace it.
+     *
+     * @param wait the task to be inserted.
+     */
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    void addWait(Wait wait);
+
+    @Delete
+    void deleteWait(Wait wait);
+
+    @Update
+    void updateWait(Wait wait);
+
+    /**
+     * Select a Wait by id.
+     * 注意：下面的括号里的wid要和注解里的[wid = :wid]一致，不然databinding会报错
+     *
+     * @param wid the task id.
+     * @return the task with taskId.
+     */
+    @Query("SELECT * FROM Wait WHERE wid = :wid")
+    Flowable<Wait> getWaitById(String wid);
+
+//    /**
+//     * 清空数据库
+//     * Delete all Wait.
+//     */
+//    @Query("DELETE FROM Wait")
+//    void deleteAll();
+
+    /**
+     * 清空数据库
+     *
+     * @return 返回：1 表示删除成功
+     */
+    @Query("DELETE FROM Wait")
+    int deleteAll();
+
+    /**
+     * Update a task.
+     *
+     * @param wait task to be updated
+     * @return the number of tasks updated. This should always be 1.
+     */
+    @Update
+    int updateWaitResult(Wait wait);
+
+    /**
+     * Select a task by id.
+     *
+     * @param wid the task id.
+     * @return the task with taskId.
+     */
+    @Query("SELECT * FROM Wait WHERE wid = :wid")
+    Wait getTaskById(String wid);
+}

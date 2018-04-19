@@ -85,7 +85,12 @@ dependencies {
     implementation 'android.arch.lifecycle:extensions:1.1.1'
     implementation 'android.arch.lifecycle:reactivestreams:1.1.1'
     implementation 'com.google.zxing:core:3.3.0'
-    implementation 'io.reactivex:rxandroid:1.2.1'
+
+    // 用于Flowable的rxjava
+    implementation 'io.reactivex.rxjava2:rxandroid:2.0.1'
+//    implementation 'io.reactivex:rxandroid:1.2.1'
+//    implementation "io.reactivex.rxjava2:rxjava:2.1.7"
+
     implementation 'com.nineoldandroids:library:2.4.0'
     implementation 'jp.wasabeef:glide-transformations:2.0.1'
     implementation 'com.youth.banner:banner:1.4.10'
