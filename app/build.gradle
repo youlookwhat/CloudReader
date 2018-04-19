@@ -17,16 +17,16 @@ android {
     }
 
     // ----------------------------------------------------------------------------
-//    buildTypes {
-//        release {
+    buildTypes {
+        release {
 //            buildConfigField "String", "UPDATE_TOKEN", pToken
-//            minifyEnabled false
-//            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-//        }
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
 //        debug {
 //            buildConfigField "String", "UPDATE_TOKEN", pToken
 //        }
-//    }
+    }
 
     // 注释下面代码(签名配置)
     signingConfigs {
@@ -56,30 +56,39 @@ android {
     dataBinding {
         enabled = true
     }
+
+    // https://github.com/ReactiveX/RxJava/issues/4445
+    packagingOptions {
+        exclude 'META-INF/rxjava.properties'
+    }
 }
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     androidTestImplementation('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    implementation project(':library:xrecyclerview')
-    implementation project(':library:http')
+    implementation project(path: ':library:xrecyclerview')
+    implementation project(path: ':library:http')
     implementation project(path: ':library:zoomlibrary')
     testImplementation "junit:junit:$rootProject.ext.junitVersion"
     implementation "com.android.support:appcompat-v7:$rootProject.supportLibraryVersion"
     implementation "com.android.support:design:$rootProject.supportLibraryVersion"
     implementation "com.android.support:support-v4:$rootProject.supportLibraryVersion"
     implementation "com.android.support:cardview-v7:$rootProject.supportLibraryVersion"
+    // Room
     implementation "android.arch.persistence.room:runtime:$rootProject.roomVersion"
     annotationProcessor "android.arch.persistence.room:compiler:$rootProject.roomVersion"
+    implementation "android.arch.persistence.room:rxjava2:1.0.0"
+    implementation "android.arch.paging:runtime:1.0.0-beta1"
+
 //    implementation "android.arch.lifecycle:common-java8:1.0.0"
-    implementation 'android.arch.lifecycle:extensions:1.1.0'
-    implementation 'android.arch.lifecycle:reactivestreams:1.1.0'
+    implementation 'android.arch.lifecycle:extensions:1.1.1'
+    implementation 'android.arch.lifecycle:reactivestreams:1.1.1'
     implementation 'com.google.zxing:core:3.3.0'
     implementation 'io.reactivex:rxandroid:1.2.1'
     implementation 'com.nineoldandroids:library:2.4.0'
     implementation 'jp.wasabeef:glide-transformations:2.0.1'
-    implementation 'com.youth.banner:banner:1.4.9'
+    implementation 'com.youth.banner:banner:1.4.10'
     implementation 'com.daimajia.slider:library:1.1.5@aar'
     implementation 'com.cocosw:bottomsheet:1.3.0@aar'
     implementation 'com.android.support:multidex:1.0.3'

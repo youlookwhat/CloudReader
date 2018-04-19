@@ -3,12 +3,10 @@ package com.example.jingbin.cloudreader.viewmodel.gank;
 import android.arch.lifecycle.ViewModel;
 
 import com.example.http.HttpUtils;
-import com.example.jingbin.cloudreader.app.CloudReaderApplication;
 import com.example.jingbin.cloudreader.base.BaseFragment;
 import com.example.jingbin.cloudreader.bean.GankIoDataBean;
 import com.example.jingbin.cloudreader.data.model.GankOtherModel;
 import com.example.jingbin.cloudreader.http.RequestImpl;
-import com.example.jingbin.cloudreader.http.cache.ACache;
 
 import rx.Subscription;
 
@@ -21,7 +19,6 @@ import rx.Subscription;
 public class BigAndroidViewModel extends ViewModel {
 
     private final GankOtherModel mModel;
-    private final ACache mACache;
     private String mType = "Android";
     private BaseFragment activity;
     private BigAndroidNavigator navigator;
@@ -30,8 +27,6 @@ public class BigAndroidViewModel extends ViewModel {
     public BigAndroidViewModel(BaseFragment activity, String mType) {
         this.activity = activity;
         this.mType = mType;
-
-        mACache = ACache.get(CloudReaderApplication.getInstance());
         mModel = new GankOtherModel();
     }
 
