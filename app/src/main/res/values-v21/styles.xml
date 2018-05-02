@@ -37,6 +37,14 @@
         <item name="android:textColor">#99ffffff</item>
     </style>
 
+    <!--项目主页的主题,用于解决项目主页标题栏透明-->
+    <style name="HomePageTheme" parent="AppTheme">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+    </style>
+
     <!--用于项目主页-->
     <style name="CollapsingToolbarTitleStyle" parent="@android:style/TextAppearance">
         <item name="android:textSize">18.0sp</item>
