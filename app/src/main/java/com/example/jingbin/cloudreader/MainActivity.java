@@ -191,18 +191,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.ll_title_menu:// 开启菜单
+            case R.id.ll_title_menu:
+                // 开启菜单
                 drawerLayout.openDrawer(GravityCompat.START);
                 break;
-            case R.id.iv_title_gank:// 干货栏
-                if (vpContent.getCurrentItem() != 1) {//不然cpu会有损耗
+            case R.id.iv_title_gank:
+                // 干货栏 不然cpu会有损耗
+                if (vpContent.getCurrentItem() != 1) {
                     llTitleGank.setSelected(true);
                     llTitleOne.setSelected(false);
                     llTitleDou.setSelected(false);
                     vpContent.setCurrentItem(1);
                 }
                 break;
-            case R.id.iv_title_one:// 电影栏
+            case R.id.iv_title_one:
+                // 电影栏
                 if (vpContent.getCurrentItem() != 0) {
                     llTitleOne.setSelected(true);
                     llTitleGank.setSelected(false);
@@ -210,7 +213,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     vpContent.setCurrentItem(0);
                 }
                 break;
-            case R.id.iv_title_dou:// 书籍栏
+            case R.id.iv_title_dou:
+                // 书籍栏
                 if (vpContent.getCurrentItem() != 2) {
                     llTitleDou.setSelected(true);
                     llTitleOne.setSelected(false);
@@ -218,10 +222,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     vpContent.setCurrentItem(2);
                 }
                 break;
-            case R.id.iv_avatar: // 头像进入GitHub
+            case R.id.iv_avatar:
+                // 头像进入GitHub
                 WebViewActivity.loadUrl(v.getContext(), CommonUtils.getString(R.string.string_url_cloudreader), "CloudReader");
                 break;
-            case R.id.ll_nav_exit:// 退出应用
+            case R.id.ll_nav_exit:
+                // 退出应用
                 finish();
                 break;
             default:

@@ -138,7 +138,7 @@ public class WaitDataBaseSource {
     }
 
     /**
-     * 清除数据库：退出登录时
+     * 清除数据库
      */
     public void deleteAllData() {
         Runnable saveRunnable = new Runnable() {

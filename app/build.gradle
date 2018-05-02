@@ -16,16 +16,11 @@ android {
 
     }
 
-    // ----------------------------------------------------------------------------
     buildTypes {
         release {
-//            buildConfigField "String", "UPDATE_TOKEN", pToken
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
-//        debug {
-//            buildConfigField "String", "UPDATE_TOKEN", pToken
-//        }
     }
 
     // 注释下面代码(签名配置)
@@ -46,7 +41,6 @@ android {
             }
         }
     }
-    // --------------------------------------------------------------------------------------------
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -79,7 +73,7 @@ dependencies {
     implementation "android.arch.persistence.room:runtime:$rootProject.roomVersion"
     annotationProcessor "android.arch.persistence.room:compiler:$rootProject.roomVersion"
     implementation "android.arch.persistence.room:rxjava2:1.0.0"
-    implementation "android.arch.paging:runtime:1.0.0-beta1"
+    implementation "android.arch.paging:runtime:1.0.0-rc1"
 
 //    implementation "android.arch.lifecycle:common-java8:1.0.0"
     implementation 'android.arch.lifecycle:extensions:1.1.1'
