@@ -20,8 +20,6 @@
                 android:layout_height="95dp"
                 android:scaleType="fitXY" />
 
-            <!--android:background="@drawable/img_two_bi_one"-->
-
             <TextView
                 android:id="@+id/tv_two_one_one_title"
                 android:layout_width="match_parent"

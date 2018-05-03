@@ -19,9 +19,8 @@
             android:id="@+id/iv_one_photo"
             android:layout_width="match_parent"
             android:layout_height="127dp"
-            android:background="@drawable/img_two_bi_one"
             android:scaleType="fitXY" />
-
+        
         <TextView
             android:id="@+id/tv_one_photo_title"
             android:layout_width="match_parent"

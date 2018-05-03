@@ -2,6 +2,7 @@ package com.example.jingbin.cloudreader.adapter;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.support.annotation.NonNull;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
@@ -62,8 +63,9 @@ public class EverydayAdapter extends BaseRecyclerViewAdapter<List<AndroidBean>> 
     }
 
 
+    @NonNull
     @Override
-    public BaseRecyclerViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public BaseRecyclerViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         switch (viewType) {
             case TYPE_TITLE:
                 return new TitleHolder(parent, R.layout.item_everyday_title);

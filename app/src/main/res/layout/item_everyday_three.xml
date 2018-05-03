@@ -19,7 +19,6 @@
                 android:id="@+id/iv_three_one_one"
                 android:layout_width="match_parent"
                 android:layout_height="110dp"
-                android:background="@drawable/img_one_bi_one"
                 android:scaleType="fitXY" />
 
             <TextView
