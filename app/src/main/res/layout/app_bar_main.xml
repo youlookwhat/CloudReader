@@ -63,14 +63,14 @@
                         android:src="@drawable/titlebar_music" />
 
                     <ImageView
-                        android:id="@+id/iv_title_gank"
+                        android:id="@+id/iv_title_two"
                         android:layout_width="55dp"
                         android:layout_height="match_parent"
                         android:background="?attr/selectableItemBackgroundBorderless"
                         android:src="@drawable/titlebar_disco" />
 
                     <ImageView
-                        android:id="@+id/iv_title_dou"
+                        android:id="@+id/iv_title_three"
                         android:layout_width="55dp"
                         android:layout_height="match_parent"
                         android:background="?attr/selectableItemBackgroundBorderless"

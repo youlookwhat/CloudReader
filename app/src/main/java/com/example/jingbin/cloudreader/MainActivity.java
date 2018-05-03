@@ -59,12 +59,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private NavigationView navView;
     private DrawerLayout drawerLayout;
     private ViewPager vpContent;
-
-    // 一定需要对应的bean
     private ActivityMainBinding mBinding;
-    private ImageView llTitleGank;
-    private ImageView llTitleOne;
-    private ImageView llTitleDou;
+    private ImageView ivTitleTwo;
+    private ImageView ivTitleOne;
+    private ImageView ivTitleThree;
     private CompositeSubscription mCompositeSubscription;
     private NavHeaderMainBinding bind;
 
@@ -97,18 +95,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         toolbar = mBinding.include.toolbar;
         llTitleMenu = mBinding.include.llTitleMenu;
         vpContent = mBinding.include.vpContent;
+        ivTitleOne = mBinding.include.ivTitleOne;
+        ivTitleTwo = mBinding.include.ivTitleTwo;
+        ivTitleThree = mBinding.include.ivTitleThree;
         fab.setVisibility(View.GONE);
-
-        llTitleGank = mBinding.include.ivTitleGank;
-        llTitleOne = mBinding.include.ivTitleOne;
-        llTitleDou = mBinding.include.ivTitleDou;
     }
 
     private void initListener() {
         llTitleMenu.setOnClickListener(this);
-        mBinding.include.ivTitleGank.setOnClickListener(this);
-        mBinding.include.ivTitleDou.setOnClickListener(this);
         mBinding.include.ivTitleOne.setOnClickListener(this);
+        mBinding.include.ivTitleTwo.setOnClickListener(this);
+        mBinding.include.ivTitleThree.setOnClickListener(this);
         fab.setOnClickListener(this);
     }
 
@@ -135,17 +132,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void initContentFragment() {
         ArrayList<Fragment> mFragmentList = new ArrayList<>();
-        mFragmentList.add(new OneFragment());
-        mFragmentList.add(new GankFragment());
         mFragmentList.add(new BookFragment());
+        mFragmentList.add(new GankFragment());
+        mFragmentList.add(new OneFragment());
         // 注意使用的是：getSupportFragmentManager
         MyFragmentPagerAdapter adapter = new MyFragmentPagerAdapter(getSupportFragmentManager(), mFragmentList);
         vpContent.setAdapter(adapter);
         // 设置ViewPager最大缓存的页面个数(cpu消耗少)
         vpContent.setOffscreenPageLimit(2);
         vpContent.addOnPageChangeListener(this);
-        mBinding.include.ivTitleGank.setSelected(true);
-        vpContent.setCurrentItem(0);
 
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
@@ -153,10 +148,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             //去除默认Title显示
             actionBar.setDisplayShowTitleEnabled(false);
         }
-        llTitleGank.setSelected(true);
-        llTitleDou.setSelected(false);
-        llTitleOne.setSelected(false);
-        vpContent.setCurrentItem(1);
+        setCurrentItem(0);
     }
 
 
@@ -195,31 +187,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 // 开启菜单
                 drawerLayout.openDrawer(GravityCompat.START);
                 break;
-            case R.id.iv_title_gank:
+            case R.id.iv_title_two:
                 // 干货栏 不然cpu会有损耗
                 if (vpContent.getCurrentItem() != 1) {
-                    llTitleGank.setSelected(true);
-                    llTitleOne.setSelected(false);
-                    llTitleDou.setSelected(false);
-                    vpContent.setCurrentItem(1);
+                    setCurrentItem(1);
                 }
                 break;
             case R.id.iv_title_one:
-                // 电影栏
                 if (vpContent.getCurrentItem() != 0) {
-                    llTitleOne.setSelected(true);
-                    llTitleGank.setSelected(false);
-                    llTitleDou.setSelected(false);
-                    vpContent.setCurrentItem(0);
+                    setCurrentItem(0);
                 }
                 break;
-            case R.id.iv_title_dou:
+            case R.id.iv_title_three:
                 // 书籍栏
                 if (vpContent.getCurrentItem() != 2) {
-                    llTitleDou.setSelected(true);
-                    llTitleOne.setSelected(false);
-                    llTitleGank.setSelected(false);
-                    vpContent.setCurrentItem(2);
+                    setCurrentItem(2);
                 }
                 break;
             case R.id.iv_avatar:
@@ -233,6 +215,35 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             default:
                 break;
         }
+    }
+
+    /**
+     * 切换页面
+     *
+     * @param position 分类角标
+     */
+    private void setCurrentItem(int position) {
+        boolean isOne = false;
+        boolean isTwo = false;
+        boolean isThree = false;
+        switch (position) {
+            case 0:
+                isOne = true;
+                break;
+            case 1:
+                isTwo = true;
+                break;
+            case 2:
+                isThree = true;
+                break;
+            default:
+                isTwo = true;
+                break;
+        }
+        vpContent.setCurrentItem(position);
+        ivTitleOne.setSelected(isOne);
+        ivTitleTwo.setSelected(isTwo);
+        ivTitleThree.setSelected(isThree);
     }
 
     /**
@@ -280,19 +291,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onPageSelected(int position) {
         switch (position) {
             case 0:
-                llTitleGank.setSelected(false);
-                llTitleOne.setSelected(true);
-                llTitleDou.setSelected(false);
+                setCurrentItem(0);
                 break;
             case 1:
-                llTitleOne.setSelected(false);
-                llTitleGank.setSelected(true);
-                llTitleDou.setSelected(false);
+                setCurrentItem(1);
                 break;
             case 2:
-                llTitleDou.setSelected(true);
-                llTitleOne.setSelected(false);
-                llTitleGank.setSelected(false);
+                setCurrentItem(2);
                 break;
             default:
                 break;
@@ -306,7 +311,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
@@ -333,7 +338,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
      */
     private void initRxBus() {
         Subscription subscribe = RxBus.getDefault().toObservable(RxCodeConstants.JUMP_TYPE_TO_ONE, RxBusBaseMessage.class)
-                .subscribe(integer -> mBinding.include.vpContent.setCurrentItem(0));
+                .subscribe(integer -> setCurrentItem(2));
         addSubscription(subscribe);
     }
 

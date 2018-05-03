@@ -20,7 +20,7 @@
             android:layout_width="match_parent"
             android:layout_height="127dp"
             android:scaleType="fitXY" />
-        
+
         <TextView
             android:id="@+id/tv_one_photo_title"
             android:layout_width="match_parent"
