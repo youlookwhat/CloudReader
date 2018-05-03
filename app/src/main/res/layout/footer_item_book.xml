@@ -5,7 +5,7 @@
         android:id="@+id/rl_more"
         android:layout_width="match_parent"
         android:layout_height="45dp"
-        android:background="@color/colorPageBg"
+        android:background="@color/color_page_bg"
         android:gravity="center"
         android:orientation="vertical">
 

@@ -12,10 +12,10 @@
     </data>
 
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorPageBg"
+        android:background="@color/color_page_bg"
         android:gravity="bottom"
         android:orientation="vertical">
 
@@ -73,6 +73,7 @@
 
 
         <LinearLayout
+            android:layout_below="@+id/ll_movie_top"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
@@ -93,5 +94,5 @@
                 android:textSize="17sp" />
         </LinearLayout>
 
-    </LinearLayout>
+    </RelativeLayout>
 </layout>

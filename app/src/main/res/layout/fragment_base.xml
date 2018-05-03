@@ -5,9 +5,8 @@
         android:id="@+id/ll_root"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/colorPageBg"
         android:orientation="vertical">
-
+        <!--android:background="@color/colorPageBg"-->
         <!--有可能直接显示（固定的布局，非必须，按需要添加）-->
         <RelativeLayout
             android:id="@+id/rl_content_part"

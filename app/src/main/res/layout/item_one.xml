@@ -39,7 +39,6 @@
                 android:layout_width="100dp"
                 android:layout_height="132dp"
                 android:layout_marginRight="12dp"
-                android:background="@color/colorPageBg"
                 android:scaleType="fitXY"
                 android:showMovieImg="@{subjectsBean.images.large}" />
             <!--android:defaultPicType="@{0}"-->

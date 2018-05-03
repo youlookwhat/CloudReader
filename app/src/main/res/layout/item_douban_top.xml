@@ -23,7 +23,7 @@
             android:id="@+id/iv_top_photo"
             android:layout_width="match_parent"
             android:layout_height="135dp"
-            android:background="@color/colorPageBg"
+            android:background="@color/color_page_bg"
             android:scaleType="fitXY"
             android:showMovieImg='@{bean.images.large}'
             android:transitionName="@string/transition_movie_img"

@@ -11,13 +11,12 @@
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fitsSystemWindows="true"
-        android:background="@color/colorPageBg">
+        android:background="@color/color_page_bg"
+        android:fitsSystemWindows="true">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/colorPageBg"
             android:orientation="vertical">
 
             <LinearLayout xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -219,7 +218,6 @@
 
             <!--夜间模式，正在完善-->
             <LinearLayout
-                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:background="@drawable/ripple_one_item_bg"
@@ -228,7 +226,8 @@
                 android:onClick="@{listener::onNightModeClick}"
                 android:orientation="horizontal"
                 android:paddingLeft="@dimen/activity_horizontal_margin"
-                android:paddingRight="@dimen/activity_horizontal_margin">
+                android:paddingRight="@dimen/activity_horizontal_margin"
+                android:visibility="gone">
 
                 <ImageView
                     android:layout_width="30dp"

@@ -46,8 +46,7 @@ import rx.subscriptions.CompositeSubscription;
 /**
  * Created by jingbin on 16/12/12.
  * 电影
- * 书籍
- * 音乐等详情页
+ * 书籍等详情页
  * 根布局：fitsSystemWindows 惹的祸
  */
 public abstract class BaseHeaderActivity<HV extends ViewDataBinding, SV extends ViewDataBinding> extends AppCompatActivity {

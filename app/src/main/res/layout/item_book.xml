@@ -23,7 +23,6 @@
             android:id="@+id/iv_top_photo"
             android:layout_width="match_parent"
             android:layout_height="135dp"
-            android:background="@color/colorPageBg"
             android:showBookImg='@{bean.images.large}'
             android:scaleType="fitXY"
             android:transitionName="@string/transition_book_img"
