@@ -12,24 +12,29 @@
             name="bean"
             type="com.example.jingbin.cloudreader.bean.wanandroid.HomeListBean.DataBean.DatasBean" />
 
+        <import type="android.text.Html" />
     </data>
 
-    <android.support.v7.widget.CardView
+    <RelativeLayout
+        android:background="@color/colorWhite"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="3dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginTop="8dp">
+        android:layout_height="wrap_content">
+    <!--<android.support.v7.widget.CardView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginBottom="3dp"-->
+        <!--android:layout_marginLeft="8dp"-->
+        <!--android:layout_marginRight="8dp"-->
+        <!--android:layout_marginTop="8dp">-->
 
         <RelativeLayout
             android:id="@+id/ll_item_top"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/ripple_one_item_bg"
+            android:background="?attr/selectableItemBackground"
             android:onClick="@{()->adapter.openDetail(bean)}"
             android:padding="8dp">
-
+            <!--android:background="@drawable/ripple_one_item_bg"-->
 
             <TextView
                 android:id="@+id/textView"
@@ -39,7 +44,7 @@
                 android:layout_alignParentTop="true"
                 android:layout_marginTop="8dp"
                 android:lineSpacingExtra="4dp"
-                android:text="@{bean.title}"
+                android:text="@{Html.fromHtml(bean.title)}"
                 android:textColor="@color/colorContent"
                 android:textSize="16sp" />
 
@@ -66,7 +71,12 @@
                 android:textSize="12sp" />
         </RelativeLayout>
 
-    </android.support.v7.widget.CardView>
+    <!--</android.support.v7.widget.CardView>-->
 
-
+        <View
+            android:background="@color/colorLine"
+            android:layout_below="@+id/ll_item_top"
+            android:layout_width="match_parent"
+            android:layout_height="1px"/>
+    </RelativeLayout>
 </layout>

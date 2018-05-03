@@ -10,7 +10,6 @@
             android:id="@+id/banner"
             android:layout_width="match_parent"
             android:layout_height="133dp"
-            android:background="@drawable/img_two_bi_one"
             app:image_scale_type="center_crop"
             app:indicator_drawable_selected="@drawable/banner_red"
             app:indicator_drawable_unselected="@drawable/banner_grey"

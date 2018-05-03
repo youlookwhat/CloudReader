@@ -17,7 +17,7 @@ import java.util.ArrayList;
 
 /**
  * Created by jingbin on 16/12/14.
- * 展示书籍的页面
+ * 展示玩安卓的页面
  */
 public class BookFragment extends BaseFragment<FragmentBookBinding> {
 
