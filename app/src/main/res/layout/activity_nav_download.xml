@@ -28,8 +28,7 @@
             android:id="@+id/iv_erweima"
             android:layout_width="220dp"
             android:layout_height="220dp"
-            android:layout_marginTop="40dp"
-            android:background="@color/colorWhite" />
+            android:layout_marginTop="40dp" />
 
 
         <TextView

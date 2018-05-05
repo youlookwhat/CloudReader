@@ -33,7 +33,6 @@
                 android:layout_marginTop="35dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/colorWhite"
                 android:orientation="vertical">
 
                 <TextView
@@ -81,7 +80,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:background="@color/colorWhite"
                 android:orientation="vertical">
 
                 <TextView

@@ -19,7 +19,7 @@
             android:id="@+id/vp_gank"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#fff2f4f5">
+            android:background="@color/color_page_bg">
 
         </android.support.v4.view.ViewPager>
 
