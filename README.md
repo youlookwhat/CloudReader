@@ -51,7 +51,7 @@ If you have any questions, please write to [the issue][21] of making you don't u
 
 
 ## See Detail
-> [项目介绍详情](https://github.com/youlookwhat/CloudReader/blob/master/file/Introduction.md) | [细节优化详情](https://github.com/youlookwhat/CloudReader/wiki) | [**版本更新详情(V1.9.1)**](http://jingbin.me/2016/12/30/%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97-%E4%BA%91%E9%98%85/)
+> [项目介绍详情](https://github.com/youlookwhat/CloudReader/blob/master/file/Introduction.md) | [细节优化详情](https://github.com/youlookwhat/CloudReader/wiki) | [**版本更新详情(V1.9.2)**](http://jingbin.me/2016/12/30/%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97-%E4%BA%91%E9%98%85/)
 
 ### Download
 　[火速跳转](https://fir.im/cloudreader)                                    
@@ -65,9 +65,15 @@ If you have any questions, please write to [the issue][21] of making you don't u
 　
 
 ### Version
-#### V1.9.1（02-27）
-> TODO：玩安卓登录/收藏网页等功能；书籍页面订制
+#### V1.9.2（05-06）
+> TODO：玩安卓登录/收藏网页等功能；
 
+ - 1、[完善] 主页显示结构修改
+ - 2、[修复] 去掉内涵段子数据
+ - 3、[修复] 解决“项目主页”页面两个布局的问题
+ - 4、[完善] 布局优化及解决部分bug
+
+#### V1.9.1（02-27）
  - 1、[新增] 新增段子页面，长按条目可选择复制或分享
 
 #### V1.9.0（02-08）
@@ -77,11 +83,11 @@ If you have any questions, please write to [the issue][21] of making you don't u
  - 4、尽可能规范MvvM框架，后期会慢慢调整
  - 5、使用fir.im更新接口，完善更新功能
 
+<!-- 
 #### V1.8.3（11-14）
  - 1、[修复] 已选择分类退出App再次进入,type失效的问题
  - 2、[修复] 跳转B站视频显示网页错误的问题
 
-<!-- 
 #### V1.8.2（3-30）
  - 1、[修复] 首页轮播图显示异常问题
  - 2、[修复] 干货订制页，刷新内容到底无内容后切换到其他类别，无法上拉加载的情况
@@ -165,7 +171,7 @@ limitations under the License.
 [2]:https://www.apache.org/licenses/LICENSE-2.0.html
 [3]:https://img.shields.io/badge/API-19%2B-red.svg?style=flat
 [4]:https://android-arsenal.com/api?level=19
-[30]:https://img.shields.io/badge/release-1.9.1-red.svg
+[30]:https://img.shields.io/badge/release-1.9.2-red.svg
 [31]:https://github.com/youlookwhat/CloudReader/releases
 [32]:https://img.shields.io/badge/PRs-welcome-brightgreen.svg
 [33]:https://github.com/youlookwhat/CloudReader/pulls
