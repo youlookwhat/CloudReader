@@ -1,4 +1,4 @@
-package com.example.jingbin.cloudreader.data.remote;
+package com.example.jingbin.cloudreader.data.model;
 
 import android.arch.lifecycle.MutableLiveData;
 

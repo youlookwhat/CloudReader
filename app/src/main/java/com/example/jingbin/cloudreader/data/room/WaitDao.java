@@ -1,4 +1,4 @@
-package com.example.jingbin.cloudreader.data.local;
+package com.example.jingbin.cloudreader.data.room;
 
 import android.arch.persistence.room.Dao;
 import android.arch.persistence.room.Delete;

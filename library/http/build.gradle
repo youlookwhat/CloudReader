@@ -22,7 +22,7 @@ android {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
     testImplementation "junit:junit:$rootProject.ext.junitVersion"
     implementation "com.android.support:appcompat-v7:$rootProject.supportLibraryVersion"
     // 网络请求
@@ -37,5 +37,7 @@ dependencies {
     // 使用adapter-rxjava 将 compile 替换为 implementation 会报错
     // 因为implementation只能用在本项目中，主app项目不能引用 https://www.jianshu.com/p/f34c179bc9d0
     api 'com.squareup.retrofit2:adapter-rxjava:2.4.0'
-//    api 'com.squareup.retrofit2:adapter-rxjava2:2.4.0'
+    //    api 'com.squareup.retrofit2:adapter-rxjava2:2.4.0'
+    // add cookie
+    implementation files('libs/commons-lang-2.6.jar')
 }

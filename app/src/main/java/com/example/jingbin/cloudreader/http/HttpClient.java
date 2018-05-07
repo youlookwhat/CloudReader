@@ -11,11 +11,15 @@ import com.example.jingbin.cloudreader.bean.UpdateBean;
 import com.example.jingbin.cloudreader.bean.book.BookBean;
 import com.example.jingbin.cloudreader.bean.book.BookDetailBean;
 import com.example.jingbin.cloudreader.bean.wanandroid.HomeListBean;
+import com.example.jingbin.cloudreader.bean.wanandroid.LoginBean;
 import com.example.jingbin.cloudreader.bean.wanandroid.NhdzListBean;
 import com.example.jingbin.cloudreader.bean.wanandroid.QsbkListBean;
 import com.example.jingbin.cloudreader.bean.wanandroid.WanAndroidBannerBean;
 
+import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.POST;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 import rx.Observable;
@@ -144,9 +148,25 @@ public interface HttpClient {
     /**
      * @param page 页码，从0开始
      */
-//    @GET("neihan/stream/mix/v1/?mpic=2&essence={page}&content_type=-102&message_cursor=-1&bd_Stringitude=113.369569&bd_latitude=23.149678&bd_city=广州市&am_Stringitude=113.367846&am_latitude=23.149878&am_city=广州市&am_loc_time=1465213692154&count=30&min_time=1465213700&screen_width=720&iid=4512422578&device_id=17215021497&ac=wifi&channel=NHSQH5AN&aid=7&app_name=joke_essay&version_code=431&device_platform=android&ssmix=a&device_type=6s+Plus&os_api=19&os_version=4.4.2&uuid=864394108025091&openudid=80FA5B208E050000&manifest_version_code=431")
     @GET("neihan/stream/mix/v1/?mpic=2&essence=1&content_type=-102&message_cursor=-1&bd_Stringitude=113.369569&bd_latitude=23.149678&bd_city=广州市&am_Stringitude=113.367846&am_latitude=23.149878&am_city=广州市&am_loc_time=1465213692154&count=30&min_time=1465213700&screen_width=720&iid=4512422578&device_id=17215021497&ac=wifi&channel=NHSQH5AN&aid=7&app_name=joke_essay&version_code=431&device_platform=android&ssmix=a&device_type=6s+Plus&os_api=19&os_version=4.4.2&uuid=864394108025091&openudid=80FA5B208E050000&manifest_version_code=431")
     Observable<NhdzListBean> getNhdzList(@Query("page") int page);
+
+    /**
+     * 玩安卓登录
+     *
+     * @param username 用户名
+     * @param password 密码
+     */
+    @FormUrlEncoded
+    @POST("user/login")
+    Observable<LoginBean> login(@Field("username") String username, @Field("password") String password);
+
+    /**
+     * 玩安卓注册
+     */
+    @FormUrlEncoded
+    @POST("user/register")
+    Observable<LoginBean> register(@Field("username") String username, @Field("password") String password, @Field("repassword") String repassword);
 
 
     /**

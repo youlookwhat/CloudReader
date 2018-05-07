@@ -9,7 +9,7 @@
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <!--bugly start-->
+    <!-- bugly start -->
     <uses-permission android:name="android.permission.READ_LOGS" />
 
     <application
@@ -19,7 +19,6 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme"
         tools:replace="android:allowBackup">
-
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTask"
@@ -75,8 +74,8 @@
             android:theme="@style/MyScrollPage" />
         <activity
             android:name=".ui.menu.NavHomePageActivity"
-            android:theme="@style/HomePageTheme"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/HomePageTheme" />
         <activity
             android:name=".ui.menu.NavDeedBackActivity"
             android:screenOrientation="portrait" />
@@ -88,6 +87,9 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".ui.menu.NavDownloadActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.menu.LoginActivity"
             android:screenOrientation="portrait" />
     </application>
 

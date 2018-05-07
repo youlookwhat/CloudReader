@@ -6,6 +6,10 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.example.jingbin.cloudreader.R;
+import com.example.jingbin.cloudreader.data.room.Injection;
+import com.example.jingbin.cloudreader.data.room.Wait;
+import com.example.jingbin.cloudreader.data.room.WaitDataCallback;
+import com.example.jingbin.cloudreader.view.OnLoginListener;
 
 /**
  * @author jingbin
@@ -49,4 +53,45 @@ public class DialogBuild {
         });
         builder.show();
     }
+
+    public static void showItems(View v, OnLoginListener listener) {
+        Injection.get().getSingleBean(new WaitDataCallback() {
+            @Override
+            public void onDataNotAvailable() {
+                String[] items = {"GitHub账号登录", "玩安卓登录"};
+                showDialog(v, items, listener, false);
+            }
+
+            @Override
+            public void getData(Wait bean) {
+                String[] items = {"GitHub账号登录", "退出玩安卓"};
+                showDialog(v, items, listener, true);
+            }
+        });
+
+    }
+
+    private static void showDialog(View v, String[] items, OnLoginListener listener, boolean isLogin) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
+        builder.setTitle("账号登录");
+        builder.setItems(items, (dialog, which) -> {
+            switch (which) {
+                case 0:
+                    listener.loginGitHub();
+                    break;
+                case 1:
+                    if (isLogin) {
+                        Injection.get().deleteAllData();
+                        ToastUtil.showToastLong("退出成功");
+                    } else {
+                        listener.loginWanAndroid();
+                    }
+                    break;
+                default:
+                    break;
+            }
+        });
+        builder.show();
+    }
+
 }

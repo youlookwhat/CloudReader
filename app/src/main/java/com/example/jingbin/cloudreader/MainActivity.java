@@ -27,16 +27,19 @@ import com.example.jingbin.cloudreader.http.rx.RxBusBaseMessage;
 import com.example.jingbin.cloudreader.http.rx.RxCodeConstants;
 import com.example.jingbin.cloudreader.ui.book.BookFragment;
 import com.example.jingbin.cloudreader.ui.gank.GankFragment;
+import com.example.jingbin.cloudreader.ui.menu.LoginActivity;
 import com.example.jingbin.cloudreader.ui.menu.NavAboutActivity;
 import com.example.jingbin.cloudreader.ui.menu.NavDeedBackActivity;
 import com.example.jingbin.cloudreader.ui.menu.NavDownloadActivity;
 import com.example.jingbin.cloudreader.ui.menu.NavHomePageActivity;
 import com.example.jingbin.cloudreader.ui.one.OneFragment;
 import com.example.jingbin.cloudreader.utils.CommonUtils;
+import com.example.jingbin.cloudreader.utils.DialogBuild;
 import com.example.jingbin.cloudreader.utils.ImgLoadUtil;
 import com.example.jingbin.cloudreader.utils.PerfectClickListener;
 import com.example.jingbin.cloudreader.utils.SPUtils;
 import com.example.jingbin.cloudreader.view.MyFragmentPagerAdapter;
+import com.example.jingbin.cloudreader.view.OnLoginListener;
 import com.example.jingbin.cloudreader.view.statusbar.StatusBarUtil;
 import com.example.jingbin.cloudreader.view.webview.WebViewActivity;
 
@@ -170,8 +173,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     case R.id.ll_nav_about:// 关于云阅
                         NavAboutActivity.start(MainActivity.this);
                         break;
-                    case R.id.ll_nav_login:// 登录GitHub账号
-                        WebViewActivity.loadUrl(v.getContext(), "https://github.com/login", "登录GitHub账号");
+                    case R.id.ll_nav_login:// 玩安卓登录
+                        DialogBuild.showItems(v, new OnLoginListener() {
+                            @Override
+                            public void loginWanAndroid() {
+                                LoginActivity.start(MainActivity.this);
+                            }
+
+                            @Override
+                            public void loginGitHub() {
+                                WebViewActivity.loadUrl(v.getContext(), "https://github.com/login", "登录GitHub账号");
+                            }
+                        });
                         break;
                     default:
                         break;

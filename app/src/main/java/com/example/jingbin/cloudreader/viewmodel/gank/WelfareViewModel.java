@@ -3,12 +3,10 @@ package com.example.jingbin.cloudreader.viewmodel.gank;
 import android.arch.lifecycle.ViewModel;
 
 import com.example.http.HttpUtils;
-import com.example.jingbin.cloudreader.app.CloudReaderApplication;
 import com.example.jingbin.cloudreader.base.BaseFragment;
 import com.example.jingbin.cloudreader.bean.GankIoDataBean;
 import com.example.jingbin.cloudreader.data.model.GankOtherModel;
 import com.example.jingbin.cloudreader.http.RequestImpl;
-import com.example.jingbin.cloudreader.http.cache.ACache;
 
 import java.util.ArrayList;
 
@@ -24,7 +22,6 @@ public class WelfareViewModel extends ViewModel {
 
     private final BaseFragment activity;
     private final GankOtherModel mModel;
-    private final ACache mACache;
     private WelfareNavigator navigator;
     private int mPage = 1;
     private ArrayList<String> imgList = new ArrayList<>();
@@ -41,7 +38,6 @@ public class WelfareViewModel extends ViewModel {
     public WelfareViewModel(BaseFragment activity) {
         this.activity = activity;
         mModel = new GankOtherModel();
-        mACache = ACache.get(CloudReaderApplication.getInstance());
     }
 
     public void loadWelfareData(){

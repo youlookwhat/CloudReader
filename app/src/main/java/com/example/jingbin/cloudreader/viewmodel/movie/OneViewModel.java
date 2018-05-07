@@ -5,7 +5,7 @@ import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
 
 import com.example.jingbin.cloudreader.bean.HotMovieBean;
-import com.example.jingbin.cloudreader.data.remote.OneRepository;
+import com.example.jingbin.cloudreader.data.model.OneRepository;
 
 /**
  * @author jingbin

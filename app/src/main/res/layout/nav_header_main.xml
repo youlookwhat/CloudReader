@@ -19,7 +19,7 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <LinearLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+            <RelativeLayout xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:id="@+id/ll_header_bg"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/nav_header_height"
@@ -61,12 +61,17 @@
                             android:textSize="17sp" />
 
                         <TextView
+                            android:gravity="center"
                             android:id="@+id/tv_level"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
                             android:layout_marginLeft="6dp"
                             android:background="@drawable/shape_bg_level"
+                            android:paddingBottom="1dp"
+                            android:paddingLeft="6dp"
+                            android:paddingRight="6dp"
+                            android:paddingTop="1dp"
                             android:text="Lv.10"
                             android:textColor="@color/colorWhite"
                             android:textSize="10sp"
@@ -75,7 +80,25 @@
                     </LinearLayout>
 
                 </LinearLayout>
-            </LinearLayout>
+
+                <TextView
+                    android:id="@+id/tv_login"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginBottom="12dp"
+                    android:layout_marginRight="12dp"
+                    android:background="@drawable/shape_bg_login"
+                    android:paddingBottom="4dp"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:paddingTop="4dp"
+                    android:text="未登录"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="10sp"
+                    android:textStyle="bold" />
+            </RelativeLayout>
 
             <LinearLayout
                 android:id="@+id/ll_nav_homepage"
@@ -209,12 +232,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="16dp"
-                    android:text="登录GitHub账号"
+                    android:text="账号登录"
                     android:textColor="@color/colorContent"
                     android:textSize="15sp" />
 
             </LinearLayout>
-
 
             <!--夜间模式，正在完善-->
             <LinearLayout

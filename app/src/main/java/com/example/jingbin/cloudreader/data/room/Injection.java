@@ -1,4 +1,4 @@
-package com.example.jingbin.cloudreader.data.local;
+package com.example.jingbin.cloudreader.data.room;
 
 import com.example.jingbin.cloudreader.utils.AppExecutors;
 
