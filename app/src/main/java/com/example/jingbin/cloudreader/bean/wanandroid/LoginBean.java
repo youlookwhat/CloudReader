@@ -1,6 +1,6 @@
 package com.example.jingbin.cloudreader.bean.wanandroid;
 
-import com.example.jingbin.cloudreader.data.room.Wait;
+import com.example.jingbin.cloudreader.data.room.User;
 
 import java.util.List;
 
@@ -19,15 +19,15 @@ public class LoginBean {
      * errorMsg :
      */
 
-    private Wait data;
+    private User data;
     private int errorCode;
     private String errorMsg;
 
-    public Wait getData() {
+    public User getData() {
         return data;
     }
 
-    public void setData(Wait data) {
+    public void setData(User data) {
         this.data = data;
     }
 

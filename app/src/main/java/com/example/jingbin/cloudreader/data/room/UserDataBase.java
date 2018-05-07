@@ -16,12 +16,12 @@ import com.example.jingbin.cloudreader.app.CloudReaderApplication;
  * 改变数据库结构要改变版本号,不然会抛异常！
  */
 
-@Database(entities = {Wait.class}, version = 4, exportSchema = false)
-public abstract class WaitDataBase extends RoomDatabase {
+@Database(entities = {User.class}, version = 1, exportSchema = false)
+public abstract class UserDataBase extends RoomDatabase {
 
-    private static WaitDataBase sInstance;
+    private static UserDataBase sInstance;
 
-    public abstract WaitDao waitDao();
+    public abstract UserDao waitDao();
 
     /**
      * 版本号迁移：
@@ -34,10 +34,10 @@ public abstract class WaitDataBase extends RoomDatabase {
         }
     };
 
-    public static WaitDataBase getDatabase() {
+    public static UserDataBase getDatabase() {
         if (sInstance == null) {
             sInstance = Room.databaseBuilder(CloudReaderApplication.getInstance(),
-                    WaitDataBase.class, "User.db")
+                    UserDataBase.class, "User.db")
                     .addMigrations(MIGRATION_1_2)
                     .build();
         }

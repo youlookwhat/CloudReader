@@ -7,8 +7,8 @@ import android.widget.TextView;
 
 import com.example.jingbin.cloudreader.R;
 import com.example.jingbin.cloudreader.data.room.Injection;
-import com.example.jingbin.cloudreader.data.room.Wait;
-import com.example.jingbin.cloudreader.data.room.WaitDataCallback;
+import com.example.jingbin.cloudreader.data.room.User;
+import com.example.jingbin.cloudreader.data.room.UserDataCallback;
 import com.example.jingbin.cloudreader.view.OnLoginListener;
 
 /**
@@ -55,7 +55,7 @@ public class DialogBuild {
     }
 
     public static void showItems(View v, OnLoginListener listener) {
-        Injection.get().getSingleBean(new WaitDataCallback() {
+        Injection.get().getSingleBean(new UserDataCallback() {
             @Override
             public void onDataNotAvailable() {
                 String[] items = {"GitHub账号登录", "玩安卓登录"};
@@ -63,7 +63,7 @@ public class DialogBuild {
             }
 
             @Override
-            public void getData(Wait bean) {
+            public void getData(User bean) {
                 String[] items = {"GitHub账号登录", "退出玩安卓"};
                 showDialog(v, items, listener, true);
             }
@@ -82,6 +82,7 @@ public class DialogBuild {
                 case 1:
                     if (isLogin) {
                         Injection.get().deleteAllData();
+                        SPUtils.remove("cookie");
                         ToastUtil.showToastLong("退出成功");
                     } else {
                         listener.loginWanAndroid();

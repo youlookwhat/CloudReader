@@ -17,23 +17,23 @@ import io.reactivex.schedulers.Schedulers;
  * @Description
  */
 
-public class WaitDataBaseSource {
+public class UserDataBaseSource {
 
-    private static volatile WaitDataBaseSource INSTANCE;
-    private WaitDao mUserDao;
+    private static volatile UserDataBaseSource INSTANCE;
+    private UserDao mUserDao;
     private AppExecutors mAppExecutors;
 
-    private WaitDataBaseSource(@NonNull AppExecutors mAppExecutors, @NonNull WaitDao mUserDao) {
+    private UserDataBaseSource(@NonNull AppExecutors mAppExecutors, @NonNull UserDao mUserDao) {
         this.mAppExecutors = mAppExecutors;
         this.mUserDao = mUserDao;
     }
 
-    public static WaitDataBaseSource getInstance(@NonNull AppExecutors appExecutors,
-                                                 @NonNull WaitDao tasksDao) {
+    public static UserDataBaseSource getInstance(@NonNull AppExecutors appExecutors,
+                                                 @NonNull UserDao tasksDao) {
         if (INSTANCE == null) {
-            synchronized (WaitDataBaseSource.class) {
+            synchronized (UserDataBaseSource.class) {
                 if (INSTANCE == null) {
-                    INSTANCE = new WaitDataBaseSource(appExecutors, tasksDao);
+                    INSTANCE = new UserDataBaseSource(appExecutors, tasksDao);
                 }
             }
         }
@@ -45,20 +45,20 @@ public class WaitDataBaseSource {
      * 如果数据库里有一条数据就返回这条数据
      * 如果有多条信息，则返回第一条数据
      */
-    public void getSingleBean(WaitDataCallback callback) {
+    public void getSingleBean(UserDataCallback callback) {
         Runnable runnable = new Runnable() {
             @Override
             public void run() {
                 try {
-                    Wait wait = mUserDao.findSingleBean();
+                    User user = mUserDao.findSingleBean();
                     mAppExecutors.mainThread().execute(new Runnable() {
                         @Override
                         public void run() {
-                            if (wait == null) {
+                            if (user == null) {
                                 callback.onDataNotAvailable();
                                 DebugUtil.error("----bean = null");
                             } else {
-                                callback.getData(wait);
+                                callback.getData(user);
                             }
                         }
                     });
@@ -73,7 +73,7 @@ public class WaitDataBaseSource {
     /**
      * 先删除后再添加: 重新登录时
      */
-    public void addData(@NonNull Wait wait) {
+    public void addData(@NonNull User user) {
         Runnable runnable = new Runnable() {
             @Override
             public void run() {
@@ -87,7 +87,7 @@ public class WaitDataBaseSource {
                             Runnable saveRunnable = new Runnable() {
                                 @Override
                                 public void run() {
-                                    mUserDao.addWait(wait);
+                                    mUserDao.addUser(user);
                                 }
                             };
                             mAppExecutors.diskIO().execute(saveRunnable);
@@ -106,12 +106,12 @@ public class WaitDataBaseSource {
     /**
      * 更新数据
      */
-    public void updateData(@NonNull Wait wait) {
+    public void updateData(@NonNull User user) {
         Runnable saveRunnable = new Runnable() {
             @Override
             public void run() {
                 try {
-                    mUserDao.addWait(wait);
+                    mUserDao.addUser(user);
                 } catch (Exception e) {
                     DebugUtil.error(e.getMessage());
                 }
@@ -125,12 +125,12 @@ public class WaitDataBaseSource {
      * 获取数据集合
      */
     public void getAll() {
-        WaitDataBase.getDatabase().waitDao().findAll()
+        UserDataBase.getDatabase().waitDao().findAll()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Consumer<List<Wait>>() {
+                .subscribe(new Consumer<List<User>>() {
                     @Override
-                    public void accept(List<Wait> waits) throws Exception {
+                    public void accept(List<User> waits) throws Exception {
 //                        DebugUtil.error("----waitList.size():" + waits.size());
 //                        DebugUtil.error("----waitList:" + waits.toString());
                     }
@@ -162,7 +162,7 @@ public class WaitDataBaseSource {
             @Override
             public void run() {
                 try {
-                    List<Wait> waits = mUserDao.findWaits();
+                    List<User> waits = mUserDao.findUsers();
                     mAppExecutors.mainThread().execute(new Runnable() {
                         @Override
                         public void run() {

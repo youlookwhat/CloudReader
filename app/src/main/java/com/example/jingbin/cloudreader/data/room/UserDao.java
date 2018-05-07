@@ -17,16 +17,16 @@ import io.reactivex.Flowable;
  * @date 2018/3/13
  */
 @Dao
-public interface WaitDao {
+public interface UserDao {
 
     /**
      * 查找数据库的全部内容
-     * Query("SELECT DISTINCT  * FROM Wait order by id DESC ")
+     * Query("SELECT DISTINCT  * FROM User order by id DESC ")
      *
      * @return 用户信息列表，可以用作Rx链式调用
      */
-    @Query("SELECT * FROM Wait")
-    Flowable<List<Wait>> findAll();
+    @Query("SELECT * FROM User")
+    Flowable<List<User>> findAll();
 
 
     /**
@@ -34,8 +34,8 @@ public interface WaitDao {
      *
      * @return 用户信息列表
      */
-    @Query("SELECT * FROM Wait")
-    List<Wait> findWaits();
+    @Query("SELECT * FROM User")
+    List<User> findUsers();
 
 
     /**
@@ -43,39 +43,39 @@ public interface WaitDao {
      * 如果数据库里有一条数据就返回这条数据
      * 如果有多条信息，则返回第一条数据
      */
-    @Query("SELECT * FROM Wait")
-    Wait findSingleBean();
+    @Query("SELECT * FROM User")
+    User findSingleBean();
 
     /**
      * 加入一条数据，如果主键值一样就替换，如果不一样就添加
-     * Insert a wait in the database. If the wait already exists, replace it.
+     * Insert a User in the database. If the User already exists, replace it.
      *
-     * @param wait the task to be inserted.
+     * @param user the task to be inserted.
      */
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void addWait(Wait wait);
+    void addUser(User user);
 
     @Delete
-    void deleteWait(Wait wait);
+    void deleteUser(User user);
 
     @Update
-    void updateWait(Wait wait);
+    void updateUser(User user);
 
     /**
-     * Select a Wait by id.
+     * Select a User by id.
      * 注意：下面的括号里的wid要和注解里的[id = :id]一致，不然databinding会报错
      *
      * @param id the bean id.
      * @return the task with taskId.
      */
-    @Query("SELECT * FROM Wait WHERE id = :id")
-    Flowable<Wait> getWaitById(int id);
+    @Query("SELECT * FROM User WHERE id = :id")
+    Flowable<User> getUserById(int id);
 
 //    /**
 //     * 清空数据库
-//     * Delete all Wait.
+//     * Delete all User.
 //     */
-//    @Query("DELETE FROM Wait")
+//    @Query("DELETE FROM User")
 //    void deleteAllData();
 
     /**
@@ -83,17 +83,17 @@ public interface WaitDao {
      *
      * @return 返回：1 表示删除成功；0:没有数据时
      */
-    @Query("DELETE FROM Wait")
+    @Query("DELETE FROM User")
     int deleteAll();
 
     /**
      * Update a task.
      *
-     * @param wait task to be updated
+     * @param user task to be updated
      * @return the number of tasks updated. This should always be 1.
      */
     @Update
-    int updateWaitResult(Wait wait);
+    int updateUserResult(User user);
 
     /**
      * Select a bean by id.
@@ -101,6 +101,6 @@ public interface WaitDao {
      * @param id the bean id.
      * @return the bean with beanId.
      */
-    @Query("SELECT * FROM Wait WHERE id = :id")
-    Wait getTaskById(int id);
+    @Query("SELECT * FROM User WHERE id = :id")
+    User getTaskById(int id);
 }

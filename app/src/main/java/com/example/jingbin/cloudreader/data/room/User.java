@@ -13,8 +13,8 @@ import android.support.annotation.NonNull;
  * 3、List<>不能简单使用，需要处理
  */
 
-@Entity(tableName = "Wait")
-public class Wait {
+@Entity(tableName = "User")
+public class User {
 
 
     /**
@@ -94,7 +94,7 @@ public class Wait {
         this.username = username;
     }
 
-    public Wait(@NonNull int id, String email, String icon, String password, int type, String username) {
+    public User(@NonNull int id, String email, String icon, String password, int type, String username) {
         this.id = id;
         this.email = email;
         this.icon = icon;
@@ -105,7 +105,7 @@ public class Wait {
 
     @Override
     public String toString() {
-        return "Wait{" +
+        return "User{" +
                 "id=" + id +
                 ", email='" + email + '\'' +
                 ", icon='" + icon + '\'' +

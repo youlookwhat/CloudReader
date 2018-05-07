@@ -6,7 +6,7 @@ package com.example.jingbin.cloudreader.data.room;
  * @Description
  */
 
-public interface WaitDataCallback {
+public interface UserDataCallback {
 
     /**
      * 返回数据为null
@@ -16,5 +16,5 @@ public interface WaitDataCallback {
     /**
      * @param bean 返回数据
      */
-    void getData(Wait bean);
+    void getData(User bean);
 }

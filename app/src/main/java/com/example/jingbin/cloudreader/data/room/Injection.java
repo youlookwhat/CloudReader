@@ -10,9 +10,9 @@ import com.example.jingbin.cloudreader.utils.AppExecutors;
 
 public class Injection {
 
-    public static WaitDataBaseSource get() {
-        WaitDataBase database = WaitDataBase.getDatabase();
-        return WaitDataBaseSource.getInstance(new AppExecutors(), database.waitDao());
+    public static UserDataBaseSource get() {
+        UserDataBase database = UserDataBase.getDatabase();
+        return UserDataBaseSource.getInstance(new AppExecutors(), database.waitDao());
     }
 
 }

@@ -61,13 +61,13 @@
                             android:textSize="17sp" />
 
                         <TextView
-                            android:gravity="center"
                             android:id="@+id/tv_level"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
                             android:layout_marginLeft="6dp"
                             android:background="@drawable/shape_bg_level"
+                            android:gravity="center"
                             android:paddingBottom="1dp"
                             android:paddingLeft="6dp"
                             android:paddingRight="6dp"
@@ -97,7 +97,8 @@
                     android:text="未登录"
                     android:textColor="@color/colorWhite"
                     android:textSize="10sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:visibility="gone" />
             </RelativeLayout>
 
             <LinearLayout
