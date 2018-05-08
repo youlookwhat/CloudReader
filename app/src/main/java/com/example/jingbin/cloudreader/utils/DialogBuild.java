@@ -54,17 +54,20 @@ public class DialogBuild {
         builder.show();
     }
 
+    /**
+     * 用于账号登录
+     */
     public static void showItems(View v, OnLoginListener listener) {
         Injection.get().getSingleBean(new UserDataCallback() {
             @Override
             public void onDataNotAvailable() {
-                String[] items = {"GitHub账号登录", "玩安卓登录"};
+                String[] items = {"GitHub账号", "玩安卓账号"};
                 showDialog(v, items, listener, false);
             }
 
             @Override
             public void getData(User bean) {
-                String[] items = {"GitHub账号登录", "退出玩安卓"};
+                String[] items = {"GitHub账号", "退出玩安卓（" + bean.getUsername() + "）"};
                 showDialog(v, items, listener, true);
             }
         });

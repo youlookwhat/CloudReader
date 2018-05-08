@@ -375,7 +375,7 @@ public abstract class BaseHeaderActivity<HV extends ViewDataBinding, SV extends 
     }
 
     protected void showLoading() {
-        if (llProgressBar.getVisibility() != View.VISIBLE) {
+        if (llProgressBar != null && llProgressBar.getVisibility() != View.VISIBLE) {
             llProgressBar.setVisibility(View.VISIBLE);
         }
         // 开始动画
@@ -391,7 +391,7 @@ public abstract class BaseHeaderActivity<HV extends ViewDataBinding, SV extends 
     }
 
     protected void showContentView() {
-        if (llProgressBar.getVisibility() != View.GONE) {
+        if (llProgressBar != null && llProgressBar.getVisibility() != View.GONE) {
             llProgressBar.setVisibility(View.GONE);
         }
         // 停止动画
@@ -407,7 +407,7 @@ public abstract class BaseHeaderActivity<HV extends ViewDataBinding, SV extends 
     }
 
     protected void showError() {
-        if (llProgressBar.getVisibility() != View.GONE) {
+        if (llProgressBar != null && llProgressBar.getVisibility() != View.GONE) {
             llProgressBar.setVisibility(View.GONE);
         }
         // 停止动画

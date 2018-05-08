@@ -48,8 +48,7 @@ public class AppExecutors {
     }
 
     public AppExecutors() {
-        this(new DiskIOThreadExecutor(), Executors.newFixedThreadPool(THREAD_COUNT),
-                new MainThreadExecutor());
+        this(new DiskIOThreadExecutor(), Executors.newFixedThreadPool(THREAD_COUNT), new MainThreadExecutor());
     }
 
     public Executor diskIO() {
@@ -64,6 +63,9 @@ public class AppExecutors {
         return mainThread;
     }
 
+    /**
+     * 主线程
+     */
     private static class MainThreadExecutor implements Executor {
         private Handler mainThreadHandler = new Handler(Looper.getMainLooper());
 

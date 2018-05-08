@@ -7,6 +7,7 @@ import java.util.concurrent.Executors;
 
 /**
  * Executor that runs a task on a new background thread.
+ * 只开启一个核心线程，依次执行，不存在并发问题
  */
 public class DiskIOThreadExecutor implements Executor {
 
