@@ -4,9 +4,9 @@ import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.view.animation.Animation;
 
 import com.bumptech.glide.Glide;
 import com.example.jingbin.cloudreader.MainActivity;
@@ -16,24 +16,31 @@ import com.example.jingbin.cloudreader.databinding.ActivityTransitionBinding;
 import com.example.jingbin.cloudreader.utils.CommonUtils;
 import com.example.jingbin.cloudreader.utils.PerfectClickListener;
 
+import java.lang.ref.WeakReference;
 import java.util.Random;
 
+/**
+ * @author jingbin
+ */
 public class TransitionActivity extends AppCompatActivity {
 
-    private ActivityTransitionBinding mBinding;
-    private boolean animationEnd;
+    public ActivityTransitionBinding mBinding;
     private boolean isIn;
+    private MyHandler handler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_transition);
         // 后台返回时可能启动这个页面 http://blog.csdn.net/jianiuqi/article/details/54091181
-        if((getIntent().getFlags() & Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT) != 0){
+        if ((getIntent().getFlags() & Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT) != 0) {
             finish();
             return;
         }
+        showImage();
+    }
 
+    private void showImage() {
         int i = new Random().nextInt(ConstantsImageUrl.TRANSITION_URLS.length);
         // 先显示默认图
         mBinding.ivDefultPic.setImageDrawable(CommonUtils.getDrawable(R.drawable.img_transition_default));
@@ -43,58 +50,44 @@ public class TransitionActivity extends AppCompatActivity {
                 .error(R.drawable.img_transition_default)
                 .into(mBinding.ivPic);
 
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                mBinding.ivDefultPic.setVisibility(View.GONE);
-            }
-        }, 1500);
-
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                toMainActivity();
-            }
-        }, 3500);
-
-//        Animation animation = AnimationUtils.loadAnimation(this, R.anim.transition_anim);
-//        animation.setAnimationListener(animationListener);
-//        mBinding.ivPic.startAnimation(animation);
-
         mBinding.tvJump.setOnClickListener(new PerfectClickListener() {
             @Override
             protected void onNoDoubleClick(View v) {
                 toMainActivity();
-//                animationEnd();
             }
         });
+
+        handler = new MyHandler(this);
+        handler.sendEmptyMessageDelayed(0, 1500);
+        handler.sendEmptyMessageDelayed(1, 3500);
     }
 
-    /**
-     * 实现监听跳转效果
-     */
-    private Animation.AnimationListener animationListener = new Animation.AnimationListener() {
-        @Override
-        public void onAnimationEnd(Animation animation) {
-            animationEnd();
+    static class MyHandler extends Handler {
+        private WeakReference<TransitionActivity> mOuter;
+
+        MyHandler(TransitionActivity activity) {
+            mOuter = new WeakReference<>(activity);
         }
 
         @Override
-        public void onAnimationStart(Animation animation) {
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            TransitionActivity outer = mOuter.get();
+            if (outer != null) {
+                something(outer, msg);
+            }
         }
 
-        @Override
-        public void onAnimationRepeat(Animation animation) {
-        }
-    };
-
-
-    private void animationEnd() {
-        synchronized (TransitionActivity.this) {
-            if (!animationEnd) {
-                animationEnd = true;
-                mBinding.ivPic.clearAnimation();
-                toMainActivity();
+        private void something(TransitionActivity outer, Message msg) {
+            switch (msg.what) {
+                case 0:
+                    outer.mBinding.ivDefultPic.setVisibility(View.GONE);
+                    break;
+                case 1:
+                    outer.toMainActivity();
+                    break;
+                default:
+                    break;
             }
         }
     }
@@ -108,5 +101,11 @@ public class TransitionActivity extends AppCompatActivity {
         overridePendingTransition(R.anim.screen_zoom_in, R.anim.screen_zoom_out);
         finish();
         isIn = true;
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        handler.removeCallbacksAndMessages(null);
     }
 }
