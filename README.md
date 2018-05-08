@@ -16,11 +16,11 @@ A netease cloud music based UI, using Gank.Io and douban API development accord 
 
 ## Screenshots
 
-<img width="173" height=“274” src="https://github.com/youlookwhat/CloudReader/blob/master/file/page_book_01.jpg"></img>
-<img width="173" height=“274” src="https://github.com/youlookwhat/CloudReader/blob/master/file/page_gank_00.jpg"></img>
-<img width="173" height=“274” src="https://github.com/youlookwhat/CloudReader/blob/master/file/page_movie_01.jpg"></img>
-<img width="173" height=“274” src="https://github.com/youlookwhat/CloudReader/blob/master/file/page_menu_01.jpg"></img>
-<img width="173" height=“274” src="https://github.com/youlookwhat/CloudReader/blob/master/file/page_movie_03.jpg"></img>
+<img width="173" height=“274” src="https://github.com/youlookwhat/CloudReader/blob/master/file/page_book_01.png"></img>
+<img width="173" height=“274” src="https://github.com/youlookwhat/CloudReader/blob/master/file/page_gank_00.png"></img>
+<img width="173" height=“274” src="https://github.com/youlookwhat/CloudReader/blob/master/file/page_movie_01.png"></img>
+<img width="173" height=“274” src="https://github.com/youlookwhat/CloudReader/blob/master/file/page_menu_01.png"></img>
+<img width="173" height=“274” src="https://github.com/youlookwhat/CloudReader/blob/master/file/page_movie_03.png"></img>
 
 #### Gif Preview
 
