@@ -56,7 +56,6 @@ public class UserDataBaseSource {
                         public void run() {
                             if (user == null) {
                                 callback.onDataNotAvailable();
-                                DebugUtil.error("----bean = null");
                             } else {
                                 callback.getData(user);
                             }
@@ -79,21 +78,8 @@ public class UserDataBaseSource {
             public void run() {
                 try {
                     int success = mUserDao.deleteAll();
-                    mAppExecutors.mainThread().execute(new Runnable() {
-                        @Override
-                        public void run() {
-                            DebugUtil.error("----success:" + success);
-//                            if (success == 1) {
-                            Runnable saveRunnable = new Runnable() {
-                                @Override
-                                public void run() {
-                                    mUserDao.addUser(user);
-                                }
-                            };
-                            mAppExecutors.diskIO().execute(saveRunnable);
-//                            }
-                        }
-                    });
+                    DebugUtil.error("----success:" + success);
+                    mUserDao.addUser(user);
                 } catch (Exception e) {
                     DebugUtil.error(e.getMessage());
                 }
@@ -120,23 +106,6 @@ public class UserDataBaseSource {
         mAppExecutors.diskIO().execute(saveRunnable);
     }
 
-
-    /**
-     * 获取数据集合
-     */
-    public void getAll() {
-        UserDataBase.getDatabase().waitDao().findAll()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Consumer<List<User>>() {
-                    @Override
-                    public void accept(List<User> waits) throws Exception {
-//                        DebugUtil.error("----waitList.size():" + waits.size());
-//                        DebugUtil.error("----waitList:" + waits.toString());
-                    }
-                });
-    }
-
     /**
      * 清除数据库
      */
@@ -154,6 +123,21 @@ public class UserDataBaseSource {
         mAppExecutors.diskIO().execute(saveRunnable);
     }
 
+    /**
+     * 获取数据集合
+     */
+    public void getAll() {
+        UserDataBase.getDatabase().waitDao().findAll()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<List<User>>() {
+                    @Override
+                    public void accept(List<User> users) throws Exception {
+//                        DebugUtil.error("----waitList.size():" + waits.size());
+//                        DebugUtil.error("----waitList:" + waits.toString());
+                    }
+                });
+    }
     /**
      * 获取全部数据集合
      */

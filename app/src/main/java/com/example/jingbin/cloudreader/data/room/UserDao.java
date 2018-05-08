@@ -81,7 +81,7 @@ public interface UserDao {
     /**
      * 清空数据库
      *
-     * @return 返回：1 表示删除成功；0:没有数据时
+     * @return 返回：1 表示有数据删除成功；0:没有数据时
      */
     @Query("DELETE FROM User")
     int deleteAll();
