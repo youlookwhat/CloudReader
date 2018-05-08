@@ -51,6 +51,7 @@ public class BookFragment extends BaseFragment<FragmentBookBinding> {
     }
 
     private void initFragmentList() {
+        mTitleList.clear();
         mTitleList.add("玩安卓");
         mTitleList.add("书籍");
         mTitleList.add("段子");
