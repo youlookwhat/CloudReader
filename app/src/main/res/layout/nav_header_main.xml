@@ -81,24 +81,6 @@
 
                 </LinearLayout>
 
-                <TextView
-                    android:id="@+id/tv_login"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentBottom="true"
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginBottom="12dp"
-                    android:layout_marginRight="12dp"
-                    android:background="@drawable/shape_bg_login"
-                    android:paddingBottom="4dp"
-                    android:paddingLeft="10dp"
-                    android:paddingRight="10dp"
-                    android:paddingTop="4dp"
-                    android:text="未登录"
-                    android:textColor="@color/colorWhite"
-                    android:textSize="10sp"
-                    android:textStyle="bold"
-                    android:visibility="gone" />
             </RelativeLayout>
 
             <LinearLayout

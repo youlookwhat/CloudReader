@@ -15,7 +15,6 @@ import com.example.jingbin.cloudreader.databinding.ActivityBookDetailBinding;
 import com.example.jingbin.cloudreader.databinding.HeaderBookDetailBinding;
 import com.example.jingbin.cloudreader.http.HttpClient;
 import com.example.jingbin.cloudreader.utils.CommonUtils;
-import com.example.jingbin.cloudreader.utils.DebugUtil;
 import com.example.jingbin.cloudreader.view.webview.WebViewActivity;
 
 import rx.Observer;
@@ -56,7 +55,6 @@ public class BookDetailActivity extends BaseHeaderActivity<HeaderBookDetailBindi
     }
 
     private void loadBookDetail() {
-        DebugUtil.error("------http2");
         Subscription get = HttpClient.Builder.getDouBanService().getBookDetail(booksBean.getId())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
