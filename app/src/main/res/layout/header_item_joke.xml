@@ -5,7 +5,7 @@
 
         <variable
             name="view"
-            type="com.example.jingbin.cloudreader.ui.book.child.JokeFragment" />
+            type="com.example.jingbin.cloudreader.ui.wan.child.JokeFragment" />
 
     </data>
 

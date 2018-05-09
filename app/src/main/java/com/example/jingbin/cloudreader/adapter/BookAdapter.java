@@ -16,7 +16,7 @@ import com.example.jingbin.cloudreader.bean.book.BooksBean;
 import com.example.jingbin.cloudreader.databinding.FooterItemBookBinding;
 import com.example.jingbin.cloudreader.databinding.HeaderItemBookBinding;
 import com.example.jingbin.cloudreader.databinding.ItemBookBinding;
-import com.example.jingbin.cloudreader.ui.book.child.BookDetailActivity;
+import com.example.jingbin.cloudreader.ui.wan.child.BookDetailActivity;
 import com.example.jingbin.cloudreader.utils.PerfectClickListener;
 
 import java.util.ArrayList;

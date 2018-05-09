@@ -9,7 +9,7 @@ import com.example.jingbin.cloudreader.base.baseadapter.BaseRecyclerViewAdapter;
 import com.example.jingbin.cloudreader.base.baseadapter.BaseRecyclerViewHolder;
 import com.example.jingbin.cloudreader.bean.book.BooksBean;
 import com.example.jingbin.cloudreader.databinding.ItemBookBinding;
-import com.example.jingbin.cloudreader.ui.book.child.BookDetailActivity;
+import com.example.jingbin.cloudreader.ui.wan.child.BookDetailActivity;
 import com.example.jingbin.cloudreader.utils.PerfectClickListener;
 
 /**

@@ -19,7 +19,7 @@
         android:id="@+id/activity_one_movie_detail"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context="com.example.jingbin.cloudreader.ui.one.OneMovieDetailActivity">
+        tools:context="com.example.jingbin.cloudreader.ui.movie.OneMovieDetailActivity">
 
         <LinearLayout
             android:layout_width="match_parent"

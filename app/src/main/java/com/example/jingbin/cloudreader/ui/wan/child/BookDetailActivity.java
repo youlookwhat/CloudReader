@@ -1,4 +1,4 @@
-package com.example.jingbin.cloudreader.ui.book.child;
+package com.example.jingbin.cloudreader.ui.wan.child;
 
 import android.app.Activity;
 import android.content.Intent;

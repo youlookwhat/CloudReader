@@ -10,7 +10,7 @@ import com.example.jingbin.cloudreader.base.baseadapter.BaseRecyclerViewAdapter;
 import com.example.jingbin.cloudreader.base.baseadapter.BaseRecyclerViewHolder;
 import com.example.jingbin.cloudreader.bean.moviechild.SubjectsBean;
 import com.example.jingbin.cloudreader.databinding.ItemDoubanTopBinding;
-import com.example.jingbin.cloudreader.ui.one.OneMovieDetailActivity;
+import com.example.jingbin.cloudreader.ui.movie.OneMovieDetailActivity;
 import com.example.jingbin.cloudreader.utils.DialogBuild;
 import com.example.jingbin.cloudreader.utils.PerfectClickListener;
 

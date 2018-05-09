@@ -1,4 +1,4 @@
-package com.example.jingbin.cloudreader.ui.book;
+package com.example.jingbin.cloudreader.ui.wan;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -8,9 +8,9 @@ import android.support.v4.app.Fragment;
 import com.example.jingbin.cloudreader.R;
 import com.example.jingbin.cloudreader.base.BaseFragment;
 import com.example.jingbin.cloudreader.databinding.FragmentBookBinding;
-import com.example.jingbin.cloudreader.ui.book.child.BookListFragment;
-import com.example.jingbin.cloudreader.ui.book.child.JokeFragment;
-import com.example.jingbin.cloudreader.ui.book.child.WanAndroidFragment;
+import com.example.jingbin.cloudreader.ui.wan.child.BookListFragment;
+import com.example.jingbin.cloudreader.ui.wan.child.JokeFragment;
+import com.example.jingbin.cloudreader.ui.wan.child.WanAndroidFragment;
 import com.example.jingbin.cloudreader.view.MyFragmentPagerAdapter;
 
 import java.util.ArrayList;
