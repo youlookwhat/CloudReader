@@ -20,6 +20,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 
 import com.example.jingbin.cloudreader.app.ConstantsImageUrl;
+import com.example.jingbin.cloudreader.data.UserUtil;
 import com.example.jingbin.cloudreader.databinding.ActivityMainBinding;
 import com.example.jingbin.cloudreader.databinding.NavHeaderMainBinding;
 import com.example.jingbin.cloudreader.http.rx.RxBus;
@@ -33,6 +34,7 @@ import com.example.jingbin.cloudreader.ui.menu.NavDeedBackActivity;
 import com.example.jingbin.cloudreader.ui.menu.NavDownloadActivity;
 import com.example.jingbin.cloudreader.ui.menu.NavHomePageActivity;
 import com.example.jingbin.cloudreader.ui.movie.OneFragment;
+import com.example.jingbin.cloudreader.ui.wan.child.ArticleListActivity;
 import com.example.jingbin.cloudreader.utils.CommonUtils;
 import com.example.jingbin.cloudreader.utils.DialogBuild;
 import com.example.jingbin.cloudreader.utils.ImgLoadUtil;
@@ -131,6 +133,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         bind.llNavDeedback.setOnClickListener(listener);
         bind.llNavAbout.setOnClickListener(listener);
         bind.llNavLogin.setOnClickListener(listener);
+        bind.llNavCollect.setOnClickListener(listener);
     }
 
     private void initContentFragment() {
@@ -172,6 +175,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         break;
                     case R.id.ll_nav_about:// 关于云阅
                         NavAboutActivity.start(MainActivity.this);
+                        break;
+                    case R.id.ll_nav_collect:// 玩安卓收藏
+                        if (UserUtil.isLogin(MainActivity.this)) {
+                            ArticleListActivity.start(MainActivity.this);
+                        }
                         break;
                     case R.id.ll_nav_login:// 玩安卓登录
                         DialogBuild.showItems(v, new OnLoginListener() {

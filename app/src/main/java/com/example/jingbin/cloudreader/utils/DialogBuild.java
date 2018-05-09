@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.example.jingbin.cloudreader.R;
+import com.example.jingbin.cloudreader.data.UserUtil;
 import com.example.jingbin.cloudreader.data.room.Injection;
 import com.example.jingbin.cloudreader.data.room.User;
 import com.example.jingbin.cloudreader.data.room.UserDataCallback;
@@ -85,7 +86,7 @@ public class DialogBuild {
                 case 1:
                     if (isLogin) {
                         Injection.get().deleteAllData();
-                        SPUtils.remove("cookie");
+                        UserUtil.handleLoginFailure();
                         ToastUtil.showToastLong("退出成功");
                     } else {
                         listener.loginWanAndroid();

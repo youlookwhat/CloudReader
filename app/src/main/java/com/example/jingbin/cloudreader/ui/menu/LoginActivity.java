@@ -51,4 +51,9 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding> implements
         mContext.startActivity(intent);
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        viewModel.onDestroy();
+    }
 }

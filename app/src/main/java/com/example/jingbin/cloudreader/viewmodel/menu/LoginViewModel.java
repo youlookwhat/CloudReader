@@ -6,6 +6,7 @@ import android.text.TextUtils;
 
 import com.example.jingbin.cloudreader.base.BaseActivity;
 import com.example.jingbin.cloudreader.bean.wanandroid.LoginBean;
+import com.example.jingbin.cloudreader.data.UserUtil;
 import com.example.jingbin.cloudreader.data.room.Injection;
 import com.example.jingbin.cloudreader.http.HttpClient;
 import com.example.jingbin.cloudreader.utils.ToastUtil;
@@ -58,6 +59,7 @@ public class LoginViewModel extends ViewModel {
                     public void onNext(LoginBean bean) {
                         if (bean != null && bean.getData() != null) {
                             Injection.get().addData(bean.getData());
+                            UserUtil.handleLoginSuccess();
                             navigator.loadSuccess();
                         } else {
                             if (bean != null) {
@@ -89,6 +91,7 @@ public class LoginViewModel extends ViewModel {
                     public void onNext(LoginBean bean) {
                         if (bean != null && bean.getData() != null) {
                             Injection.get().addData(bean.getData());
+                            UserUtil.handleLoginSuccess();
                             navigator.loadSuccess();
                         } else {
                             if (bean != null) {
@@ -110,5 +113,9 @@ public class LoginViewModel extends ViewModel {
             return false;
         }
         return true;
+    }
+
+    public void onDestroy() {
+        navigator = null;
     }
 }

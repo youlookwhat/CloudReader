@@ -87,6 +87,9 @@
         <activity
             android:name=".ui.menu.LoginActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.wan.child.ArticleListActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

@@ -221,6 +221,31 @@
 
             </LinearLayout>
 
+            <LinearLayout
+                android:id="@+id/ll_nav_collect"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:background="@drawable/ripple_one_item_bg"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp">
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/ic_nav_collect" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:text="我的收藏"
+                    android:textColor="@color/colorContent"
+                    android:textSize="15sp" />
+
+            </LinearLayout>
+
             <!--夜间模式，正在完善-->
             <LinearLayout
                 android:layout_width="match_parent"
