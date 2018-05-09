@@ -13,7 +13,7 @@ import com.example.jingbin.cloudreader.utils.ToastUtil;
 /**
  * @author jingbin
  * @data 2018/5/7
- * @Description
+ * @Description 处理用户登录问题
  */
 
 public class UserUtil {

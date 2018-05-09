@@ -134,6 +134,8 @@ public interface HttpClient {
     Observable<UpdateBean> checkUpdate(@Path("id") String id, @Query("api_token") String apiToken);
 
     /**
+     * 玩安卓
+     *
      * @param page 页码，从0开始
      */
     @GET("article/list/{page}/json")
@@ -168,6 +170,14 @@ public interface HttpClient {
     @POST("user/register")
     Observable<LoginBean> register(@Field("username") String username, @Field("password") String password, @Field("repassword") String repassword);
 
+
+    /**
+     * 收藏文章列表
+     *
+     * @param page 页码
+     */
+    @GET("lg/collect/list/{page}/json")
+    Observable<HomeListBean> getCollectList(@Path("page") int page);
 
     /**
      * 根据tag获取music

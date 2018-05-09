@@ -17,6 +17,7 @@ import com.example.jingbin.cloudreader.view.webview.WebViewActivity;
 public class WanAndroidAdapter extends BaseRecyclerViewAdapter<HomeListBean.DataBean.DatasBean> {
 
     private Activity activity;
+    public boolean isCollect;
 
     public WanAndroidAdapter(Activity activity) {
         this.activity = activity;
@@ -25,6 +26,10 @@ public class WanAndroidAdapter extends BaseRecyclerViewAdapter<HomeListBean.Data
     @Override
     public BaseRecyclerViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         return new ViewHolder(parent, R.layout.item_wan_android);
+    }
+
+    public void setCollect(boolean isCollect) {
+        this.isCollect = isCollect;
     }
 
     private class ViewHolder extends BaseRecyclerViewHolder<HomeListBean.DataBean.DatasBean, ItemWanAndroidBinding> {
@@ -40,6 +45,9 @@ public class WanAndroidAdapter extends BaseRecyclerViewAdapter<HomeListBean.Data
                 binding.setAdapter(WanAndroidAdapter.this);
                 binding.executePendingBindings();
 
+                binding.vbCollect.setOnCheckedChangeListener((buttonView, isChecked) -> {
+                    bean.setCollect(isChecked);
+                });
 //                binding.llItemTop.setOnClickListener(new PerfectClickListener() {
 //                    @Override
 //                    protected void onNoDoubleClick(View v) {
