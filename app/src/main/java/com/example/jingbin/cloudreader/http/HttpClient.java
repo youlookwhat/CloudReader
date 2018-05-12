@@ -180,6 +180,34 @@ public interface HttpClient {
     Observable<HomeListBean> getCollectList(@Path("page") int page);
 
     /**
+     * 收藏本站文章，errorCode返回0为成功
+     *
+     * @param id 文章id
+     */
+    @POST("lg/collect/{id}/json")
+    Observable<HomeListBean> collect(@Path("id") int id);
+
+    /**
+     * 取消收藏(首页文章列表)
+     *
+     * @param id 文章id
+     */
+    @POST("lg/uncollect_originId/{id}/json")
+    Observable<HomeListBean> unCollectOrigin(@Path("id") int id);
+
+    /**
+     * 取消收藏，我的收藏页面（该页面包含自己录入的内容）
+     *
+     * @param id       文章id
+     * @param originId 列表页下发，无则为-1
+     *                 (代表的是你收藏之前的那篇文章本身的id；
+     *                 但是收藏支持主动添加，这种情况下，没有originId则为-1)
+     */
+    @FormUrlEncoded
+    @POST("lg/uncollect/{id}/json")
+    Observable<HomeListBean> unCollect(@Path("id") int id, @Field("originId") int originId);
+
+    /**
      * 根据tag获取music
      * @param tag
      * @return

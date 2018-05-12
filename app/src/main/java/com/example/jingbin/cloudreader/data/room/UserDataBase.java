@@ -16,7 +16,7 @@ import com.example.jingbin.cloudreader.app.CloudReaderApplication;
  * 改变数据库结构要改变版本号,不然会抛异常！
  */
 
-@Database(entities = {User.class}, version = 1, exportSchema = false)
+@Database(entities = {User.class}, version = 2, exportSchema = false)
 public abstract class UserDataBase extends RoomDatabase {
 
     private static UserDataBase sInstance;

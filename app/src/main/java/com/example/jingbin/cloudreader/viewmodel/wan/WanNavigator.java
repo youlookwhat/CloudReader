@@ -27,6 +27,9 @@ public interface WanNavigator {
 
     }
 
+    /**
+     * 段子部分
+     */
     interface JokeNavigator {
 
         /**
@@ -59,6 +62,9 @@ public interface WanNavigator {
         void showLoadSuccessView();
     }
 
+    /**
+     * 玩安卓首页部分
+     */
     interface WanAndroidNavigator {
         /**
          * 显示banner图
@@ -104,7 +110,10 @@ public interface WanNavigator {
         void showLoadSuccessView();
     }
 
-    interface ArticleListNavigator{
+    /**
+     * 我的收藏部分
+     */
+    interface ArticleListNavigator {
         /**
          * 加载文章列表失败
          */
@@ -135,4 +144,12 @@ public interface WanNavigator {
         void showLoadSuccessView();
     }
 
+    /**
+     * 收藏或取消收藏
+     */
+    interface OnCollectNavigator {
+        void onSuccess();
+
+        void onFailure();
+    }
 }

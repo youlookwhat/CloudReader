@@ -35,6 +35,11 @@ public class ArticleListViewModel extends ViewModel {
         this.activity = activity;
     }
 
+
+
+    /**
+     * 我的收藏
+     */
     public void getCollectList() {
         Subscription subscribe = HttpClient.Builder.getWanAndroidServer().getCollectList(mPage)
                 .subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())

@@ -58,7 +58,7 @@
                     android:layout_marginLeft="5dp"
                     android:layout_marginRight="5dp"
                     android:button="@drawable/selector_collect_check"
-                    android:checked="@{adapter.isCollect ? true : bean.collect}"
+                    android:checked="@{adapter.isCollectList ? true : bean.collect}"
                     android:gravity="center" />
             </RelativeLayout>
 
