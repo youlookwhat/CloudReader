@@ -3,16 +3,17 @@ package com.example.jingbin.cloudreader.ui.wan.child;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 
 import com.example.jingbin.cloudreader.R;
 import com.example.jingbin.cloudreader.adapter.WanAndroidAdapter;
 import com.example.jingbin.cloudreader.base.BaseActivity;
+import com.example.jingbin.cloudreader.base.BaseListViewModel;
 import com.example.jingbin.cloudreader.bean.wanandroid.HomeListBean;
 import com.example.jingbin.cloudreader.databinding.FragmentWanAndroidBinding;
 import com.example.jingbin.cloudreader.utils.CommonUtils;
-import com.example.jingbin.cloudreader.viewmodel.wan.ArticleListViewModel;
+import com.example.jingbin.cloudreader.viewmodel.wan.ArticleListListViewModel;
+import com.example.jingbin.cloudreader.viewmodel.wan.WanAndroidListViewModel;
 import com.example.jingbin.cloudreader.viewmodel.wan.WanNavigator;
 import com.example.xrecyclerview.XRecyclerView;
 
@@ -23,44 +24,65 @@ import com.example.xrecyclerview.XRecyclerView;
  */
 public class ArticleListActivity extends BaseActivity<FragmentWanAndroidBinding> implements WanNavigator.ArticleListNavigator {
 
-    private ArticleListViewModel viewModel;
+    private ArticleListListViewModel viewModel;
+    private WanAndroidListViewModel androidViewModel;
     private WanAndroidAdapter mAdapter;
+    private int cid = 0;
+    private String chapterName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_wan_android);
         showContentView();
-        setTitle("我的收藏");
         initRefreshView();
-        viewModel = new ArticleListViewModel(this);
-        viewModel.setNavigator(this);
+        getIntentData();
         loadData();
     }
 
+    private void getIntentData() {
+        cid = getIntent().getIntExtra("cid", 0);
+        chapterName = getIntent().getStringExtra("chapterName");
+
+        if (cid != 0) {
+            setTitle(chapterName);
+            androidViewModel = new WanAndroidListViewModel();
+            androidViewModel.setArticleListNavigator(this);
+        } else {
+            setTitle("我的收藏");
+            viewModel = new ArticleListListViewModel(this);
+            viewModel.setNavigator(this);
+            mAdapter.setCollect(true);
+        }
+    }
+
     private void loadData() {
-        viewModel.getCollectList();
+        if (cid != 0) {
+            androidViewModel.getHomeList(cid);
+        } else {
+            viewModel.getCollectList();
+        }
+    }
+
+    private BaseListViewModel getViewModel() {
+        if (viewModel != null) {
+            return viewModel;
+        } else {
+            return androidViewModel;
+        }
     }
 
     private void initRefreshView() {
         bindingView.srlBook.setColorSchemeColors(CommonUtils.getColor(R.color.colorTheme));
-        bindingView.srlBook.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                bindingView.srlBook.postDelayed(() -> {
-                    viewModel.setPage(0);
-                    loadData();
-                }, 500);
-
-            }
-        });
         bindingView.xrvBook.setLayoutManager(new LinearLayoutManager(this));
         bindingView.xrvBook.setPullRefreshEnabled(false);
         bindingView.xrvBook.clearHeader();
         mAdapter = new WanAndroidAdapter(this);
-        mAdapter.setCollect(true);
         bindingView.xrvBook.setAdapter(mAdapter);
-
+        bindingView.srlBook.setOnRefreshListener(() -> bindingView.srlBook.postDelayed(() -> {
+            getViewModel().setPage(0);
+            loadData();
+        }, 500));
         bindingView.xrvBook.setLoadingListener(new XRecyclerView.LoadingListener() {
             @Override
             public void onRefresh() {
@@ -69,16 +91,11 @@ public class ArticleListActivity extends BaseActivity<FragmentWanAndroidBinding>
 
             @Override
             public void onLoadMore() {
-                int page = viewModel.getPage();
-                viewModel.setPage(++page);
+                int page = getViewModel().getPage();
+                getViewModel().setPage(++page);
                 loadData();
             }
         });
-    }
-
-    public static void start(Context mContext) {
-        Intent intent = new Intent(mContext, ArticleListActivity.class);
-        mContext.startActivity(intent);
     }
 
     @Override
@@ -87,7 +104,7 @@ public class ArticleListActivity extends BaseActivity<FragmentWanAndroidBinding>
         if (bindingView.srlBook.isRefreshing()) {
             bindingView.srlBook.setRefreshing(false);
         }
-        if (viewModel.getPage() == 0) {
+        if (getViewModel().getPage() == 0) {
             showError();
         } else {
             bindingView.xrvBook.refreshComplete();
@@ -96,14 +113,9 @@ public class ArticleListActivity extends BaseActivity<FragmentWanAndroidBinding>
 
     @Override
     public void showAdapterView(HomeListBean bean) {
-        mAdapter.clear();
-        mAdapter.addAll(bean.getData().getDatas());
-        mAdapter.notifyDataSetChanged();
-        bindingView.xrvBook.refreshComplete();
-    }
-
-    @Override
-    public void refreshAdapter(HomeListBean bean) {
+        if (getViewModel().getPage() == 0) {
+            mAdapter.clear();
+        }
         mAdapter.addAll(bean.getData().getDatas());
         mAdapter.notifyDataSetChanged();
         bindingView.xrvBook.refreshComplete();
@@ -118,5 +130,17 @@ public class ArticleListActivity extends BaseActivity<FragmentWanAndroidBinding>
     public void showLoadSuccessView() {
         showContentView();
         bindingView.srlBook.setRefreshing(false);
+    }
+
+    public static void start(Context mContext) {
+        Intent intent = new Intent(mContext, ArticleListActivity.class);
+        mContext.startActivity(intent);
+    }
+
+    public static void start(Context mContext, int cid, String chapterName) {
+        Intent intent = new Intent(mContext, ArticleListActivity.class);
+        intent.putExtra("cid", cid);
+        intent.putExtra("chapterName", chapterName);
+        mContext.startActivity(intent);
     }
 }

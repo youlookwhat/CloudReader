@@ -65,7 +65,7 @@ public interface WanNavigator {
     /**
      * 玩安卓首页部分
      */
-    interface WanAndroidNavigator {
+    interface BannerNavigator {
         /**
          * 显示banner图
          *
@@ -79,35 +79,6 @@ public interface WanNavigator {
          * 加载banner图失败
          */
         void loadBannerFailure();
-
-        /**
-         * 加载文章列表失败
-         */
-        void loadHomeListFailure();
-
-        /**
-         * 显示文章列表
-         *
-         * @param bean 文章数据
-         */
-        void showAdapterView(HomeListBean bean);
-
-        /**
-         * 刷新列表
-         *
-         * @param bean 文章数据
-         */
-        void refreshAdapter(HomeListBean bean);
-
-        /**
-         * 没有更多了
-         */
-        void showListNoMoreLoading();
-
-        /**
-         * 显示加载成功页面
-         */
-        void showLoadSuccessView();
     }
 
     /**
@@ -125,13 +96,6 @@ public interface WanNavigator {
          * @param bean 文章数据
          */
         void showAdapterView(HomeListBean bean);
-
-        /**
-         * 刷新列表
-         *
-         * @param bean 文章数据
-         */
-        void refreshAdapter(HomeListBean bean);
 
         /**
          * 没有更多了

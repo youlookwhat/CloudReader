@@ -134,24 +134,29 @@ public interface HttpClient {
     Observable<UpdateBean> checkUpdate(@Path("id") String id, @Query("api_token") String apiToken);
 
     /**
-     * 玩安卓
+     * 糗事百科
      *
-     * @param page 页码，从0开始
-     */
-    @GET("article/list/{page}/json")
-    Observable<HomeListBean> getHomeList(@Path("page") int page);
-
-    /**
      * @param page 页码，从1开始
      */
     @GET("article/list/text")
     Observable<QsbkListBean> getQsbkList(@Query("page") int page);
 
     /**
+     * 内涵段子
+     *
      * @param page 页码，从0开始
      */
     @GET("neihan/stream/mix/v1/?mpic=2&essence=1&content_type=-102&message_cursor=-1&bd_Stringitude=113.369569&bd_latitude=23.149678&bd_city=广州市&am_Stringitude=113.367846&am_latitude=23.149878&am_city=广州市&am_loc_time=1465213692154&count=30&min_time=1465213700&screen_width=720&iid=4512422578&device_id=17215021497&ac=wifi&channel=NHSQH5AN&aid=7&app_name=joke_essay&version_code=431&device_platform=android&ssmix=a&device_type=6s+Plus&os_api=19&os_version=4.4.2&uuid=864394108025091&openudid=80FA5B208E050000&manifest_version_code=431")
     Observable<NhdzListBean> getNhdzList(@Query("page") int page);
+
+    /**
+     * 玩安卓，文章列表、知识体系下的文章
+     *
+     * @param page 页码，从0开始
+     * @param cid  体系id
+     */
+    @GET("article/list/{page}/json")
+    Observable<HomeListBean> getHomeList(@Path("page") int page, @Query("cid") Integer cid);
 
     /**
      * 玩安卓登录

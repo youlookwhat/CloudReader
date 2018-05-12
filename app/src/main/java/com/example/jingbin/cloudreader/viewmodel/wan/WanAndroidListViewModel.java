@@ -1,8 +1,7 @@
 package com.example.jingbin.cloudreader.viewmodel.wan;
 
-import android.arch.lifecycle.ViewModel;
-
 import com.example.jingbin.cloudreader.base.BaseFragment;
+import com.example.jingbin.cloudreader.base.BaseListViewModel;
 import com.example.jingbin.cloudreader.bean.wanandroid.HomeListBean;
 import com.example.jingbin.cloudreader.bean.wanandroid.WanAndroidBannerBean;
 import com.example.jingbin.cloudreader.http.HttpClient;
@@ -21,15 +20,19 @@ import rx.schedulers.Schedulers;
  * @Description 玩安卓ViewModel
  */
 
-public class WanAndroidViewModel extends ViewModel {
+public class WanAndroidListViewModel extends BaseListViewModel {
 
-    private final BaseFragment activity;
-    private WanNavigator.WanAndroidNavigator navigator;
-    private int mPage = 0;
+    private BaseFragment activity;
+    private WanNavigator.BannerNavigator loadBannerNavigator;
+    private WanNavigator.ArticleListNavigator navigator;
     private ArrayList<String> mBannerImages;
     private ArrayList<String> mBannerTitles;
 
-    public void setNavigator(WanNavigator.WanAndroidNavigator navigator) {
+    public void setNavigator(WanNavigator.BannerNavigator navigator) {
+        this.loadBannerNavigator = navigator;
+    }
+
+    public void setArticleListNavigator(WanNavigator.ArticleListNavigator navigator) {
         this.navigator = navigator;
     }
 
@@ -37,8 +40,11 @@ public class WanAndroidViewModel extends ViewModel {
         navigator = null;
     }
 
-    public WanAndroidViewModel(BaseFragment activity) {
+    public WanAndroidListViewModel(BaseFragment activity) {
         this.activity = activity;
+    }
+
+    public WanAndroidListViewModel() {
     }
 
     public void getWanAndroidBanner() {
@@ -51,7 +57,7 @@ public class WanAndroidViewModel extends ViewModel {
 
                     @Override
                     public void onError(Throwable e) {
-                        navigator.loadBannerFailure();
+                        loadBannerNavigator.loadBannerFailure();
 
                     }
 
@@ -76,21 +82,26 @@ public class WanAndroidViewModel extends ViewModel {
                                     mBannerImages.add(result.get(i).getImagePath());
                                     mBannerTitles.add(result.get(i).getTitle());
                                 }
-                                navigator.showBannerView(mBannerImages, mBannerTitles, result);
+                                loadBannerNavigator.showBannerView(mBannerImages, mBannerTitles, result);
                             }
                         }
                         if (result == null) {
-                            navigator.loadBannerFailure();
+                            loadBannerNavigator.loadBannerFailure();
                         }
 
                     }
                 });
-        activity.addSubscription(subscribe);
+        if (activity != null) {
+            activity.addSubscription(subscribe);
+        }
     }
 
 
-    public void getHomeList() {
-        Subscription subscribe = HttpClient.Builder.getWanAndroidServer().getHomeList(mPage)
+    /**
+     * @param cid 体系id
+     */
+    public void getHomeList(Integer cid) {
+        Subscription subscribe = HttpClient.Builder.getWanAndroidServer().getHomeList(mPage, cid)
                 .subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<HomeListBean>() {
                     @Override
@@ -107,28 +118,21 @@ public class WanAndroidViewModel extends ViewModel {
                     public void onNext(HomeListBean bean) {
                         navigator.showLoadSuccessView();
                         if (mPage == 0) {
-                            if (bean != null && bean.getData() != null && bean.getData().getDatas() != null && bean.getData().getDatas().size() > 0) {
-                                navigator.showAdapterView(bean);
-                            } else {
+                            if (bean == null || bean.getData() == null || bean.getData().getDatas() == null || bean.getData().getDatas().size() <= 0) {
                                 navigator.loadHomeListFailure();
+                                return;
                             }
                         } else {
-                            if (bean != null && bean.getData() != null && bean.getData().getDatas() != null && bean.getData().getDatas().size() > 0) {
-                                navigator.refreshAdapter(bean);
-                            } else {
+                            if (bean == null || bean.getData() == null || bean.getData().getDatas() == null || bean.getData().getDatas().size() <= 0) {
                                 navigator.showListNoMoreLoading();
+                                return;
                             }
                         }
+                        navigator.showAdapterView(bean);
                     }
                 });
-        activity.addSubscription(subscribe);
-    }
-
-    public int getPage() {
-        return mPage;
-    }
-
-    public void setPage(int mPage) {
-        this.mPage = mPage;
+        if (activity != null) {
+            activity.addSubscription(subscribe);
+        }
     }
 }

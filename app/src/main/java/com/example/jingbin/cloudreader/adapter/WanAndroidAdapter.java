@@ -11,6 +11,7 @@ import com.example.jingbin.cloudreader.bean.wanandroid.HomeListBean;
 import com.example.jingbin.cloudreader.data.UserUtil;
 import com.example.jingbin.cloudreader.data.model.CollectModel;
 import com.example.jingbin.cloudreader.databinding.ItemWanAndroidBinding;
+import com.example.jingbin.cloudreader.ui.wan.child.ArticleListActivity;
 import com.example.jingbin.cloudreader.utils.DebugUtil;
 import com.example.jingbin.cloudreader.utils.PerfectClickListener;
 import com.example.jingbin.cloudreader.utils.ToastUtil;
@@ -114,5 +115,9 @@ public class WanAndroidAdapter extends BaseRecyclerViewAdapter<HomeListBean.Data
 
     public void openDetail(HomeListBean.DataBean.DatasBean bean) {
         WebViewActivity.loadUrl(activity, bean.getLink(), bean.getTitle());
+    }
+
+    public void openArticleList(HomeListBean.DataBean.DatasBean bean) {
+        ArticleListActivity.start(activity, bean.getChapterId(), bean.getChapterName());
     }
 }

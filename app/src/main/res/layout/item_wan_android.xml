@@ -47,7 +47,8 @@
                     android:lineSpacingExtra="4dp"
                     android:text="@{Html.fromHtml(bean.title)}"
                     android:textColor="@color/colorContent"
-                    android:textSize="16sp" />
+                    android:textSize="17sp"
+                    android:textStyle="bold" />
 
                 <CheckBox
                     android:id="@+id/vb_collect"
@@ -74,15 +75,33 @@
                 android:textSize="12sp" />
 
             <TextView
-                android:id="@+id/textView3"
+                android:id="@+id/textView4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
                 android:layout_below="@+id/rl_text"
                 android:layout_marginTop="15dp"
+                android:background="@color/color_page_bg"
+                android:onClick="@{()->adapter.openArticleList(bean)}"
+                android:paddingBottom="1dp"
+                android:paddingLeft="4dp"
+                android:paddingRight="4dp"
+                android:paddingTop="1dp"
+                android:text="@{bean.chapterName}"
+                android:textSize="13sp" />
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/rl_text"
+                android:layout_marginLeft="4dp"
+                android:layout_marginTop="15dp"
+                android:layout_toRightOf="@+id/textView4"
                 android:text="@{bean.author}"
                 android:textColor="@color/colorSubtitle"
-                android:textSize="12sp" />
+                android:textSize="13sp" />
+
         </RelativeLayout>
 
         <View

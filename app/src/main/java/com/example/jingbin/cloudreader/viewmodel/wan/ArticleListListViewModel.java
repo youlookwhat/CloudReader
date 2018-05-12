@@ -1,8 +1,7 @@
 package com.example.jingbin.cloudreader.viewmodel.wan;
 
-import android.arch.lifecycle.ViewModel;
-
 import com.example.jingbin.cloudreader.base.BaseActivity;
+import com.example.jingbin.cloudreader.base.BaseListViewModel;
 import com.example.jingbin.cloudreader.bean.wanandroid.HomeListBean;
 import com.example.jingbin.cloudreader.http.HttpClient;
 
@@ -17,11 +16,10 @@ import rx.schedulers.Schedulers;
  * @Description 文章列表ViewModel
  */
 
-public class ArticleListViewModel extends ViewModel {
+public class ArticleListListViewModel extends BaseListViewModel {
 
     private final BaseActivity activity;
     private WanNavigator.ArticleListNavigator navigator;
-    private int mPage = 0;
 
     public void setNavigator(WanNavigator.ArticleListNavigator navigator) {
         this.navigator = navigator;
@@ -31,11 +29,9 @@ public class ArticleListViewModel extends ViewModel {
         navigator = null;
     }
 
-    public ArticleListViewModel(BaseActivity activity) {
+    public ArticleListListViewModel(BaseActivity activity) {
         this.activity = activity;
     }
-
-
 
     /**
      * 我的收藏
@@ -51,36 +47,25 @@ public class ArticleListViewModel extends ViewModel {
                     @Override
                     public void onError(Throwable e) {
                         navigator.loadHomeListFailure();
-
                     }
 
                     @Override
                     public void onNext(HomeListBean bean) {
                         navigator.showLoadSuccessView();
                         if (mPage == 0) {
-                            if (bean != null && bean.getData() != null && bean.getData().getDatas() != null && bean.getData().getDatas().size() > 0) {
-                                navigator.showAdapterView(bean);
-                            } else {
+                            if (bean == null || bean.getData() == null || bean.getData().getDatas() == null || bean.getData().getDatas().size() <= 0) {
                                 navigator.loadHomeListFailure();
+                                return;
                             }
                         } else {
-                            if (bean != null && bean.getData() != null && bean.getData().getDatas() != null && bean.getData().getDatas().size() > 0) {
-                                navigator.refreshAdapter(bean);
-                            } else {
+                            if (bean == null || bean.getData() == null || bean.getData().getDatas() == null || bean.getData().getDatas().size() <= 0) {
                                 navigator.showListNoMoreLoading();
+                                return;
                             }
                         }
+                        navigator.showAdapterView(bean);
                     }
                 });
         activity.addSubscription(subscribe);
     }
-
-    public int getPage() {
-        return mPage;
-    }
-
-    public void setPage(int mPage) {
-        this.mPage = mPage;
-    }
-
 }

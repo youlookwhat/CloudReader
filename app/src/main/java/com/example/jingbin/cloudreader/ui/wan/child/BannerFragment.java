@@ -21,7 +21,7 @@ import com.example.jingbin.cloudreader.utils.CommonUtils;
 import com.example.jingbin.cloudreader.utils.DebugUtil;
 import com.example.jingbin.cloudreader.utils.GlideImageLoader;
 import com.example.jingbin.cloudreader.view.webview.WebViewActivity;
-import com.example.jingbin.cloudreader.viewmodel.wan.WanAndroidViewModel;
+import com.example.jingbin.cloudreader.viewmodel.wan.WanAndroidListViewModel;
 import com.example.jingbin.cloudreader.viewmodel.wan.WanNavigator;
 import com.example.xrecyclerview.XRecyclerView;
 
@@ -32,7 +32,7 @@ import java.util.List;
  * @author jingbin
  *         Updated by jingbin on 18/02/07.
  */
-public class WanAndroidFragment extends BaseFragment<FragmentWanAndroidBinding> implements WanNavigator.WanAndroidNavigator {
+public class BannerFragment extends BaseFragment<FragmentWanAndroidBinding> implements WanNavigator.BannerNavigator, WanNavigator.ArticleListNavigator {
 
     private static final String TYPE = "param1";
     private String mType = "综合";
@@ -41,7 +41,7 @@ public class WanAndroidFragment extends BaseFragment<FragmentWanAndroidBinding> 
     private MainActivity activity;
     private WanAndroidAdapter mAdapter;
     private HeaderWanAndroidBinding androidBinding;
-    private WanAndroidViewModel viewModel;
+    private WanAndroidListViewModel viewModel;
 
     @Override
     public int setContent() {
@@ -54,8 +54,8 @@ public class WanAndroidFragment extends BaseFragment<FragmentWanAndroidBinding> 
         activity = (MainActivity) context;
     }
 
-    public static WanAndroidFragment newInstance(String param1) {
-        WanAndroidFragment fragment = new WanAndroidFragment();
+    public static BannerFragment newInstance(String param1) {
+        BannerFragment fragment = new BannerFragment();
         Bundle args = new Bundle();
         args.putString(TYPE, param1);
         fragment.setArguments(args);
@@ -74,8 +74,9 @@ public class WanAndroidFragment extends BaseFragment<FragmentWanAndroidBinding> 
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         showContentView();
-        viewModel = new WanAndroidViewModel(this);
+        viewModel = new WanAndroidListViewModel(this);
         viewModel.setNavigator(this);
+        viewModel.setArticleListNavigator(this);
         initRefreshView();
 
         // 准备就绪
@@ -158,19 +159,16 @@ public class WanAndroidFragment extends BaseFragment<FragmentWanAndroidBinding> 
 
     @Override
     public void showAdapterView(HomeListBean bean) {
-        mAdapter.clear();
+        if (viewModel.getPage() == 0) {
+            mAdapter.clear();
+        }
         mAdapter.addAll(bean.getData().getDatas());
         mAdapter.notifyDataSetChanged();
         bindingView.xrvBook.refreshComplete();
 
-        mIsFirst = false;
-    }
-
-    @Override
-    public void refreshAdapter(HomeListBean bean) {
-        mAdapter.addAll(bean.getData().getDatas());
-        mAdapter.notifyDataSetChanged();
-        bindingView.xrvBook.refreshComplete();
+        if (viewModel.getPage() == 0) {
+            mIsFirst = false;
+        }
     }
 
     @Override
@@ -212,7 +210,7 @@ public class WanAndroidFragment extends BaseFragment<FragmentWanAndroidBinding> 
     }
 
     private void loadCustomData() {
-        viewModel.getHomeList();
+        viewModel.getHomeList(null);
     }
 
     @Override
