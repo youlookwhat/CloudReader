@@ -28,23 +28,19 @@ public class WanAndroidListViewModel extends BaseListViewModel {
     private ArrayList<String> mBannerImages;
     private ArrayList<String> mBannerTitles;
 
-    public void setNavigator(WanNavigator.BannerNavigator navigator) {
-        this.loadBannerNavigator = navigator;
-    }
-
-    public void setArticleListNavigator(WanNavigator.ArticleListNavigator navigator) {
-        this.navigator = navigator;
-    }
-
-    public void onDestroy() {
-        navigator = null;
+    public WanAndroidListViewModel() {
     }
 
     public WanAndroidListViewModel(BaseFragment activity) {
         this.activity = activity;
     }
 
-    public WanAndroidListViewModel() {
+    public void setNavigator(WanNavigator.BannerNavigator navigator) {
+        this.loadBannerNavigator = navigator;
+    }
+
+    public void setArticleListNavigator(WanNavigator.ArticleListNavigator navigator) {
+        this.navigator = navigator;
     }
 
     public void getWanAndroidBanner() {
@@ -134,5 +130,9 @@ public class WanAndroidListViewModel extends BaseListViewModel {
         if (activity != null) {
             activity.addSubscription(subscribe);
         }
+    }
+
+    public void onDestroy() {
+        navigator = null;
     }
 }

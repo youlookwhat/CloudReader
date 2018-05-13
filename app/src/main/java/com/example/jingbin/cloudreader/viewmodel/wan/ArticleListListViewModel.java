@@ -21,16 +21,9 @@ public class ArticleListListViewModel extends BaseListViewModel {
     private final BaseActivity activity;
     private WanNavigator.ArticleListNavigator navigator;
 
-    public void setNavigator(WanNavigator.ArticleListNavigator navigator) {
-        this.navigator = navigator;
-    }
-
-    public void onDestroy() {
-        navigator = null;
-    }
-
-    public ArticleListListViewModel(BaseActivity activity) {
+    public ArticleListListViewModel(BaseActivity activity, WanNavigator.ArticleListNavigator navigator) {
         this.activity = activity;
+        this.navigator = navigator;
     }
 
     /**
@@ -67,5 +60,9 @@ public class ArticleListListViewModel extends BaseListViewModel {
                     }
                 });
         activity.addSubscription(subscribe);
+    }
+
+    public void onDestroy() {
+        navigator = null;
     }
 }
