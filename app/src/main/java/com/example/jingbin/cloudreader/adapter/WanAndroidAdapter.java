@@ -29,7 +29,11 @@ public class WanAndroidAdapter extends BaseRecyclerViewAdapter<HomeListBean.Data
     /**
      * 是我的收藏页进来的，全部是收藏状态。bean里面没有返回isCollect信息
      */
-    public boolean isCollectList;
+    public boolean isCollectList = false;
+    /**
+     * 不显示类别信息
+     */
+    public boolean isNoShowChapterName = false;
 
     public WanAndroidAdapter(Activity activity) {
         this.activity = activity;
@@ -41,8 +45,12 @@ public class WanAndroidAdapter extends BaseRecyclerViewAdapter<HomeListBean.Data
         return new ViewHolder(parent, R.layout.item_wan_android);
     }
 
-    public void setCollect(boolean isCollect) {
-        this.isCollectList = isCollect;
+    public void setCollectList() {
+        this.isCollectList = true;
+    }
+
+    public void setNoShowChapterName() {
+        this.isNoShowChapterName = true;
     }
 
     private class ViewHolder extends BaseRecyclerViewHolder<HomeListBean.DataBean.DatasBean, ItemWanAndroidBinding> {

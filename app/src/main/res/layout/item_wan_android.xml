@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
-    
+
     <data>
 
         <variable
@@ -12,6 +12,8 @@
             type="com.example.jingbin.cloudreader.bean.wanandroid.HomeListBean.DataBean.DatasBean" />
 
         <import type="android.text.Html" />
+
+        <import type="android.view.View" />
     </data>
 
     <RelativeLayout
@@ -47,13 +49,14 @@
                 android:paddingTop="1dp"
                 android:text="@{bean.chapterName}"
                 android:textColor="@color/colorContent"
-                android:textSize="13sp" />
+                android:textSize="13sp"
+                android:visibility="@{adapter.isNoShowChapterName?View.GONE:View.VISIBLE}" />
 
             <RelativeLayout
                 android:id="@+id/rl_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/textView4"
+                android:layout_below="@+id/textView3"
                 android:layout_marginTop="8dp"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
