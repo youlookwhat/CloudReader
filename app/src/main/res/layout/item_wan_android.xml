@@ -70,7 +70,7 @@
                     android:lineSpacingExtra="4dp"
                     android:text="@{Html.fromHtml(bean.title)}"
                     android:textColor="@color/colorContent"
-                    android:textSize="17sp"
+                    android:textSize="15sp"
                     android:textStyle="bold" />
 
                 <CheckBox
@@ -95,7 +95,7 @@
                 android:layout_marginTop="15dp"
                 android:text="@{bean.niceDate}"
                 android:textColor="@color/colorSubtitle"
-                android:textSize="12sp" />
+                android:textSize="11sp" />
 
         </RelativeLayout>
 

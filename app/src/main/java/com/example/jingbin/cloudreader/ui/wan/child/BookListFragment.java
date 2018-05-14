@@ -10,7 +10,7 @@ import android.view.inputmethod.EditorInfo;
 
 import com.example.jingbin.cloudreader.MainActivity;
 import com.example.jingbin.cloudreader.R;
-import com.example.jingbin.cloudreader.adapter.WanAdapter;
+import com.example.jingbin.cloudreader.adapter.WanBookAdapter;
 import com.example.jingbin.cloudreader.base.BaseFragment;
 import com.example.jingbin.cloudreader.bean.book.BookBean;
 import com.example.jingbin.cloudreader.databinding.FragmentWanAndroidBinding;
@@ -40,7 +40,7 @@ public class BookListFragment extends BaseFragment<FragmentWanAndroidBinding> {
     // 一次请求的数量
     private int mCount = 18;
     private MainActivity activity;
-    private WanAdapter mBookAdapter;
+    private WanBookAdapter mBookAdapter;
     private GridLayoutManager mLayoutManager;
 
     @Override
@@ -102,7 +102,7 @@ public class BookListFragment extends BaseFragment<FragmentWanAndroidBinding> {
         bindingView.xrvBook.setLayoutManager(mLayoutManager);
         bindingView.xrvBook.setPullRefreshEnabled(false);
         bindingView.xrvBook.clearHeader();
-        mBookAdapter = new WanAdapter(getActivity());
+        mBookAdapter = new WanBookAdapter(getActivity());
         bindingView.xrvBook.setAdapter(mBookAdapter);
         HeaderItemBookBinding oneBinding = DataBindingUtil.inflate(getLayoutInflater(), R.layout.header_item_book, null, false);
         bindingView.xrvBook.addHeaderView(oneBinding.getRoot());

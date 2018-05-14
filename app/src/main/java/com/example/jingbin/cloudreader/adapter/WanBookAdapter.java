@@ -16,11 +16,11 @@ import com.example.jingbin.cloudreader.utils.PerfectClickListener;
  * Created by jingbin on 2016/11/25.
  */
 
-public class WanAdapter extends BaseRecyclerViewAdapter<BooksBean> {
+public class WanBookAdapter extends BaseRecyclerViewAdapter<BooksBean> {
 
     private Activity activity;
 
-    public WanAdapter(Activity activity) {
+    public WanBookAdapter(Activity activity) {
         this.activity = activity;
     }
 

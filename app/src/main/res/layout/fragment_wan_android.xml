@@ -11,7 +11,6 @@
             android:id="@+id/xrv_book"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/color_page_bg"
             android:scrollbarAlwaysDrawVerticalTrack="true"
             android:scrollbarFadeDuration="1"
             android:scrollbarSize="4dp"
