@@ -26,7 +26,7 @@ import com.example.jingbin.cloudreader.databinding.NavHeaderMainBinding;
 import com.example.jingbin.cloudreader.http.rx.RxBus;
 import com.example.jingbin.cloudreader.http.rx.RxBusBaseMessage;
 import com.example.jingbin.cloudreader.http.rx.RxCodeConstants;
-import com.example.jingbin.cloudreader.ui.wan.BookFragment;
+import com.example.jingbin.cloudreader.ui.wan.WanFragment;
 import com.example.jingbin.cloudreader.ui.gank.GankFragment;
 import com.example.jingbin.cloudreader.ui.menu.LoginActivity;
 import com.example.jingbin.cloudreader.ui.menu.NavAboutActivity;
@@ -138,7 +138,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void initContentFragment() {
         ArrayList<Fragment> mFragmentList = new ArrayList<>();
-        mFragmentList.add(new BookFragment());
+        mFragmentList.add(new WanFragment());
         mFragmentList.add(new GankFragment());
         mFragmentList.add(new OneFragment());
         // 注意使用的是：getSupportFragmentManager

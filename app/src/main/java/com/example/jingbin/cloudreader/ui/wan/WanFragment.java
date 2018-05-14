@@ -19,7 +19,7 @@ import java.util.ArrayList;
  * Created by jingbin on 16/12/14.
  * 展示玩安卓的页面
  */
-public class BookFragment extends BaseFragment<FragmentBookBinding> {
+public class WanFragment extends BaseFragment<FragmentBookBinding> {
 
     private ArrayList<String> mTitleList = new ArrayList<>(3);
     private ArrayList<Fragment> mFragments = new ArrayList<>(3);

@@ -18,7 +18,6 @@ import com.example.jingbin.cloudreader.bean.wanandroid.WanAndroidBannerBean;
 import com.example.jingbin.cloudreader.databinding.FragmentWanAndroidBinding;
 import com.example.jingbin.cloudreader.databinding.HeaderWanAndroidBinding;
 import com.example.jingbin.cloudreader.utils.CommonUtils;
-import com.example.jingbin.cloudreader.utils.DebugUtil;
 import com.example.jingbin.cloudreader.utils.GlideImageLoader;
 import com.example.jingbin.cloudreader.view.webview.WebViewActivity;
 import com.example.jingbin.cloudreader.viewmodel.wan.WanAndroidListViewModel;
@@ -184,9 +183,6 @@ public class BannerFragment extends BaseFragment<FragmentWanAndroidBinding> impl
 
     @Override
     protected void loadData() {
-        DebugUtil.error("-----mIsPrepared:" + mIsPrepared);
-        DebugUtil.error("-----mIsVisible:" + mIsVisible);
-        DebugUtil.error("-----mIsFirst:" + mIsFirst);
         if (!mIsPrepared || !mIsVisible || !mIsFirst) {
             return;
         }
@@ -198,7 +194,6 @@ public class BannerFragment extends BaseFragment<FragmentWanAndroidBinding> impl
                 loadCustomData();
             }
         }, 500);
-        DebugUtil.error("-----setRefreshing");
     }
 
     @Override
