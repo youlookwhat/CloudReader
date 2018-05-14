@@ -66,29 +66,24 @@
                 android:orientation="horizontal">
 
                 <android.support.v7.widget.AppCompatButton
-                    android:id="@+id/button_login"
-                    style="?android:textAppearanceSmall"
+                    style="@style/Widget.AppCompat.Button.Colored"
                     android:layout_width="0dp"
-                    android:layout_height="35dp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:background="@drawable/shape_button"
-                    android:elevation="10dp"
                     android:onClick="register"
                     android:text="注册"
                     android:textColor="@color/colorWhite"
                     android:textStyle="bold" />
 
-                <android.support.v7.widget.AppCompatButton
-                    style="?android:textAppearanceSmall"
+                <Button
+                    style="@style/Widget.AppCompat.Button.Colored"
                     android:layout_width="0dp"
-                    android:layout_height="35dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
                     android:layout_weight="1"
-                    android:background="@drawable/shape_button"
-                    android:elevation="10dp"
                     android:onClick="login"
                     android:text="登陆"
-                    android:textColor="@color/colorWhite"
+                    android:textColor="@android:color/white"
                     android:textStyle="bold" />
             </LinearLayout>
         </LinearLayout>

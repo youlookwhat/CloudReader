@@ -114,6 +114,9 @@ public class WanAndroidAdapter extends BaseRecyclerViewAdapter<HomeListBean.Data
                                     }
                                 });
                             }
+                        } else {
+                            bean.setCollect(false);
+                            notifyItemChanged(getAdapterPosition());
                         }
                     }
                 });
