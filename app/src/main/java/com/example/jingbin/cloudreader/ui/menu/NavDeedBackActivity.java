@@ -2,6 +2,8 @@ package com.example.jingbin.cloudreader.ui.menu;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
@@ -9,9 +11,13 @@ import android.view.View;
 import com.example.jingbin.cloudreader.R;
 import com.example.jingbin.cloudreader.base.BaseActivity;
 import com.example.jingbin.cloudreader.databinding.ActivityNavDeedBackBinding;
+import com.example.jingbin.cloudreader.utils.BaseTools;
 import com.example.jingbin.cloudreader.utils.CommonUtils;
 import com.example.jingbin.cloudreader.utils.PerfectClickListener;
+import com.example.jingbin.cloudreader.utils.ToastUtil;
 import com.example.jingbin.cloudreader.view.webview.WebViewActivity;
+
+import java.util.List;
 
 /**
  * @author jingbin
@@ -40,8 +46,12 @@ public class NavDeedBackActivity extends BaseActivity<ActivityNavDeedBackBinding
                     WebViewActivity.loadUrl(v.getContext(), CommonUtils.getString(R.string.string_url_issues), "Issues");
                     break;
                 case R.id.tv_qq:
-                    String url = "mqqwpa://im/chat?chat_type=wpa&uin=770413277";
-                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(url)));
+                    if (BaseTools.isApplicationAvilible(NavDeedBackActivity.this, "com.tencent.mobileqq")) {
+                        String url = "mqqwpa://im/chat?chat_type=wpa&uin=770413277";
+                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(url)));
+                    } else {
+                        ToastUtil.showToastLong("先安装一个QQ吧..");
+                    }
                     break;
                 case R.id.tv_email:
                     Intent data = new Intent(Intent.ACTION_SENDTO);
@@ -60,6 +70,26 @@ public class NavDeedBackActivity extends BaseActivity<ActivityNavDeedBackBinding
             }
         }
     };
+
+    /**
+     * 判断qq是否可用
+     *
+     * @param context
+     * @return
+     */
+    public static boolean isQQClientAvailable(Context context) {
+        final PackageManager packageManager = context.getPackageManager();
+        List<PackageInfo> pinfo = packageManager.getInstalledPackages(0);
+        if (pinfo != null) {
+            for (int i = 0; i < pinfo.size(); i++) {
+                String pn = pinfo.get(i).packageName;
+                if (pn.equals("com.tencent.mobileqq")) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
 
     public static void start(Context mContext) {
         Intent intent = new Intent(mContext, NavDeedBackActivity.class);

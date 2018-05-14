@@ -29,6 +29,7 @@ public class CustomFragment extends BaseFragment<FragmentCustomBinding> implemen
     private String mType = "all";
     private boolean mIsPrepared;
     private boolean mIsFirst = true;
+    private BottomSheet.Builder builder = null;
     private AndroidAdapter mAndroidAdapter;
     private View mHeaderView;
     private CustomViewModel viewModel;
@@ -116,61 +117,68 @@ public class CustomFragment extends BaseFragment<FragmentCustomBinding> implemen
         final TextView txName = (TextView) mHeaderView.findViewById(R.id.tx_name);
         String gankCala = SPUtils.getString(GANK_CALA, "全部");
         txName.setText(gankCala);
+        try {
+            builder = new BottomSheet.Builder(getActivity(), R.style.BottomSheet_StyleDialog)
+                    .title("选择分类")
+                    .sheet(R.menu.gank_bottomsheet).listener((dialog, which) -> {
+                        switch (which) {
+                            case R.id.gank_all:
+                                if (isOtherType("全部")) {
+                                    txName.setText("全部");
+                                    mType = "all";// 全部传 all
+                                    viewModel.setType(mType);
+                                    viewModel.setPage(1);
+                                    mAndroidAdapter.clear();
+                                    SPUtils.putString(GANK_CALA, "全部");
+                                    showLoading();
+                                    viewModel.loadCustomData();
+                                }
+                                break;
+                            case R.id.gank_ios:
+                                if (isOtherType("IOS")) {
+                                    txName.setText("IOS");
+                                    mType = "iOS";// 这里有严格大小写
+                                    viewModel.setType(mType);
+                                    viewModel.setPage(1);
+                                    mAndroidAdapter.clear();
+                                    SPUtils.putString(GANK_CALA, "IOS");
+                                    showLoading();
+                                    viewModel.loadCustomData();
+                                }
+                                break;
+                            case R.id.gank_qian:
+                                if (isOtherType("前端")) {
+                                    changeContent(txName, "前端");
+                                }
+                                break;
+                            case R.id.gank_app:
+                                if (isOtherType("App")) {
+                                    changeContent(txName, "App");
+                                }
+                                break;
+                            case R.id.gank_movie:
+                                if (isOtherType("休息视频")) {
+                                    changeContent(txName, "休息视频");
+                                }
+                                break;
+                            case R.id.gank_resouce:
+                                if (isOtherType("拓展资源")) {
+                                    changeContent(txName, "拓展资源");
+                                }
+                                break;
+                            default:
+                                break;
+                        }
+                    });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         View view = mHeaderView.findViewById(R.id.ll_choose_catalogue);
-        view.setOnClickListener(v -> new BottomSheet.Builder(getActivity(), R.style.BottomSheet_StyleDialog)
-                .title("选择分类")
-                .sheet(R.menu.gank_bottomsheet).listener((dialog, which) -> {
-                    switch (which) {
-                        case R.id.gank_all:
-                            if (isOtherType("全部")) {
-                                txName.setText("全部");
-                                mType = "all";// 全部传 all
-//                                    mPage = 1;
-                                viewModel.setType(mType);
-                                viewModel.setPage(1);
-                                mAndroidAdapter.clear();
-                                SPUtils.putString(GANK_CALA, "全部");
-                                showLoading();
-                                viewModel.loadCustomData();
-                            }
-                            break;
-                        case R.id.gank_ios:
-                            if (isOtherType("IOS")) {
-                                txName.setText("IOS");
-                                mType = "iOS";// 这里有严格大小写
-//                                    mPage = 1;
-                                viewModel.setType(mType);
-                                viewModel.setPage(1);
-                                mAndroidAdapter.clear();
-                                SPUtils.putString(GANK_CALA, "IOS");
-                                showLoading();
-                                viewModel.loadCustomData();
-                            }
-                            break;
-                        case R.id.gank_qian:
-                            if (isOtherType("前端")) {
-                                changeContent(txName, "前端");
-                            }
-                            break;
-                        case R.id.gank_app:
-                            if (isOtherType("App")) {
-                                changeContent(txName, "App");
-                            }
-                            break;
-                        case R.id.gank_movie:
-                            if (isOtherType("休息视频")) {
-                                changeContent(txName, "休息视频");
-                            }
-                            break;
-                        case R.id.gank_resouce:
-                            if (isOtherType("拓展资源")) {
-                                changeContent(txName, "拓展资源");
-                            }
-                            break;
-                        default:
-                            break;
-                    }
-                }).show());
+        view.setOnClickListener(v -> {
+            if (builder != null) {
+                builder.show();
+            }
+        });
     }
 
     private void changeContent(TextView textView, String content) {
