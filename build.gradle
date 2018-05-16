@@ -34,5 +34,5 @@ ext {
     // App dependencies
     supportLibraryVersion = '27.1.1'
     junitVersion = '4.12'
-    roomVersion = "1.0.0"
+    roomVersion = "1.1.0"
 }

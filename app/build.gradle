@@ -72,7 +72,7 @@ dependencies {
     // Room
     implementation "android.arch.persistence.room:runtime:$rootProject.roomVersion"
     annotationProcessor "android.arch.persistence.room:compiler:$rootProject.roomVersion"
-    implementation "android.arch.persistence.room:rxjava2:1.0.0"
+    implementation "android.arch.persistence.room:rxjava2:$rootProject.roomVersion"
     implementation "android.arch.paging:runtime:1.0.0-rc1"
 
 //    implementation "android.arch.lifecycle:common-java8:1.0.0"
