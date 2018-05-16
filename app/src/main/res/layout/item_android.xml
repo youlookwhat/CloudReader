@@ -13,7 +13,7 @@
 
         <variable
             name="command"
-            type="com.example.jingbin.cloudreader.adapter.AndroidAdapter" />
+            type="com.example.jingbin.cloudreader.adapter.GankAndroidAdapter" />
 
     </data>
 
@@ -25,11 +25,12 @@
         android:layout_marginRight="8dp"
         android:layout_marginTop="8dp">
 
+        <!--android:background="@drawable/ripple_one_item_bg"-->
         <LinearLayout
             android:id="@+id/ll_all"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/ripple_one_item_bg"
+            android:background="?attr/selectableItemBackground"
             android:onClick="@{()->command.openDetail(resultsBean)}"
             android:orientation="vertical"
             android:paddingTop="12dp">

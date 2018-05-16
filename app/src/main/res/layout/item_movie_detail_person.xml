@@ -9,7 +9,7 @@
             type="com.example.jingbin.cloudreader.bean.moviechild.PersonBean" />
     </data>
 
-
+    <!--android:background="@drawable/ripple_one_item_bg"-->
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -18,7 +18,7 @@
             android:id="@+id/ll_item"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/ripple_one_item_bg"
+            android:background="?attr/selectableItemBackground"
             android:orientation="horizontal"
             android:paddingBottom="10dp"
             android:paddingLeft="10dp"

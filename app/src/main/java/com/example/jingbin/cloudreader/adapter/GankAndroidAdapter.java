@@ -17,12 +17,12 @@ import com.example.jingbin.cloudreader.view.webview.WebViewActivity;
  * Created by jingbin on 2016/12/2.
  */
 
-public class AndroidAdapter extends BaseRecyclerViewAdapter<GankIoDataBean.ResultBean> {
+public class GankAndroidAdapter extends BaseRecyclerViewAdapter<GankIoDataBean.ResultBean> {
 
     private boolean isAll = false;
     private Context context;
 
-    public AndroidAdapter(Context context) {
+    public GankAndroidAdapter(Context context) {
         this.context = context;
     }
 
@@ -78,7 +78,7 @@ public class AndroidAdapter extends BaseRecyclerViewAdapter<GankIoDataBean.Resul
             }
 
             binding.setResultsBean(object);
-            binding.setCommand(AndroidAdapter.this);
+            binding.setCommand(GankAndroidAdapter.this);
             binding.executePendingBindings();
         }
 
