@@ -15,11 +15,13 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
+        <!--去掉background，会影响4.4系统的状态栏-->
         <android.support.design.widget.NavigationView
             android:id="@+id/nav_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="start"
+            android:background="@color/color_page_bg"
             android:fitsSystemWindows="true" />
 
         <!--app:headerLayout="@layout/nav_header_main"-->
