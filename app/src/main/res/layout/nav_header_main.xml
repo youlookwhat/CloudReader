@@ -11,7 +11,6 @@
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/color_page_bg"
         android:fitsSystemWindows="true">
 
         <LinearLayout
@@ -83,12 +82,14 @@
 
             </RelativeLayout>
 
+            <!--android:background="@drawable/ripple_one_item_bg"-->
+
             <LinearLayout
                 android:id="@+id/ll_nav_homepage"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:layout_marginTop="8dp"
-                android:background="@drawable/ripple_one_item_bg"
+                android:background="?attr/selectableItemBackground"
                 android:clickable="true"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
@@ -115,7 +116,7 @@
                 android:id="@+id/ll_nav_scan_download"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
-                android:background="@drawable/ripple_one_item_bg"
+                android:background="?attr/selectableItemBackground"
                 android:clickable="true"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
@@ -141,7 +142,7 @@
                 android:id="@+id/ll_nav_deedback"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
-                android:background="@drawable/ripple_one_item_bg"
+                android:background="?attr/selectableItemBackground"
                 android:clickable="true"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
@@ -167,7 +168,7 @@
                 android:id="@+id/ll_nav_about"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
-                android:background="@drawable/ripple_one_item_bg"
+                android:background="?attr/selectableItemBackground"
                 android:clickable="true"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
@@ -199,7 +200,7 @@
                 android:id="@+id/ll_nav_login"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
-                android:background="@drawable/ripple_one_item_bg"
+                android:background="?attr/selectableItemBackground"
                 android:clickable="true"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
@@ -225,7 +226,7 @@
                 android:id="@+id/ll_nav_collect"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
-                android:background="@drawable/ripple_one_item_bg"
+                android:background="?attr/selectableItemBackground"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
                 android:paddingLeft="16dp"
@@ -286,7 +287,7 @@
                 android:id="@+id/ll_nav_exit"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
-                android:background="@drawable/ripple_one_item_bg"
+                android:background="?attr/selectableItemBackground"
                 android:clickable="true"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
