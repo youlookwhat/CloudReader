@@ -9,8 +9,7 @@
         <com.example.jingbin.cloudreader.view.MyNestedScrollView
             android:id="@+id/mns_base"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/color_page_bg">
+            android:layout_height="match_parent">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -34,8 +33,8 @@
                         android:id="@+id/ll_error_refresh"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:gravity="center"
                         android:layout_marginTop="140dp"
+                        android:gravity="center"
                         android:orientation="vertical"
                         android:visibility="gone">
 

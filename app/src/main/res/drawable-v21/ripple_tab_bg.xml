@@ -4,7 +4,4 @@
     <item>
         <color android:color="@color/colorWhite" />
     </item>
-    <item>
-        <color android:color="@color/colorWhite" />
-    </item>
 </ripple>
