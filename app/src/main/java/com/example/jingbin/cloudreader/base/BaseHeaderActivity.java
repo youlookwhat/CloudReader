@@ -1,5 +1,6 @@
 package com.example.jingbin.cloudreader.base;
 
+import android.annotation.SuppressLint;
 import android.databinding.DataBindingUtil;
 import android.databinding.ViewDataBinding;
 import android.graphics.Color;
@@ -17,10 +18,10 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewStub;
 import android.view.animation.AnimationUtils;
 import android.view.animation.Interpolator;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import com.bumptech.glide.Glide;
@@ -57,7 +58,8 @@ public abstract class BaseHeaderActivity<HV extends ViewDataBinding, SV extends 
     protected HV bindingHeaderView;
     // 内容布局view
     protected SV bindingContentView;
-    private LinearLayout llProgressBar;
+    //    private LinearLayout llProgressBar;
+    private View loadingView;
     private View refresh;
     // 滑动多少距离后标题不透明
     private int slidingDistance;
@@ -107,7 +109,7 @@ public abstract class BaseHeaderActivity<HV extends ViewDataBinding, SV extends 
         mContainer.addView(bindingContentView.getRoot());
         getWindow().setContentView(ll);
 
-        llProgressBar = getView(R.id.ll_progress_bar);
+        loadingView = ((ViewStub) getView(R.id.vs_loading)).inflate();
         refresh = getView(R.id.ll_error_refresh);
 
         // 设置自定义元素共享切换动画
@@ -119,8 +121,7 @@ public abstract class BaseHeaderActivity<HV extends ViewDataBinding, SV extends 
         // 设置toolbar
         setToolBar();
 
-        ImageView img = getView(R.id.img_progress);
-
+        ImageView img = loadingView.findViewById(R.id.img_progress);
         // 加载动画
         mAnimationDrawable = (AnimationDrawable) img.getDrawable();
         // 默认进入页面就开启动画
@@ -252,6 +253,7 @@ public abstract class BaseHeaderActivity<HV extends ViewDataBinding, SV extends 
     /**
      * 显示popu内的图片
      */
+    @SuppressLint("RestrictedApi")
     @Override
     protected boolean onPrepareOptionsPanel(View view, Menu menu) {
         if (menu != null) {
@@ -375,8 +377,8 @@ public abstract class BaseHeaderActivity<HV extends ViewDataBinding, SV extends 
     }
 
     protected void showLoading() {
-        if (llProgressBar != null && llProgressBar.getVisibility() != View.VISIBLE) {
-            llProgressBar.setVisibility(View.VISIBLE);
+        if (loadingView != null && loadingView.getVisibility() != View.VISIBLE) {
+            loadingView.setVisibility(View.VISIBLE);
         }
         // 开始动画
         if (!mAnimationDrawable.isRunning()) {
@@ -391,8 +393,8 @@ public abstract class BaseHeaderActivity<HV extends ViewDataBinding, SV extends 
     }
 
     protected void showContentView() {
-        if (llProgressBar != null && llProgressBar.getVisibility() != View.GONE) {
-            llProgressBar.setVisibility(View.GONE);
+        if (loadingView != null && loadingView.getVisibility() != View.GONE) {
+            loadingView.setVisibility(View.GONE);
         }
         // 停止动画
         if (mAnimationDrawable.isRunning()) {
@@ -407,8 +409,8 @@ public abstract class BaseHeaderActivity<HV extends ViewDataBinding, SV extends 
     }
 
     protected void showError() {
-        if (llProgressBar != null && llProgressBar.getVisibility() != View.GONE) {
-            llProgressBar.setVisibility(View.GONE);
+        if (loadingView != null && loadingView.getVisibility() != View.GONE) {
+            loadingView.setVisibility(View.GONE);
         }
         // 停止动画
         if (mAnimationDrawable.isRunning()) {

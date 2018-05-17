@@ -36,7 +36,7 @@
                         android:layout_marginTop="140dp"
                         android:gravity="center"
                         android:orientation="vertical"
-                        android:visibility="gone">
+                        android:visibility="visible">
 
                         <ImageView
                             android:id="@+id/img_err"
@@ -52,29 +52,15 @@
                             android:textSize="15sp" />
                     </LinearLayout>
 
-                    <LinearLayout
-                        android:id="@+id/ll_progress_bar"
+                    <!--加载中..-->
+                    <ViewStub
+                        android:id="@+id/vs_loading"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerHorizontal="true"
-                        android:layout_marginTop="50dp"
-                        android:gravity="center_vertical">
+                        android:inflatedId="@+id/panel_import"
+                        android:layout="@layout/layout_loading_view" />
 
-                        <ImageView
-                            android:id="@+id/img_progress"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:src="@drawable/yun_anim" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="10dp"
-                            android:text="努力加载中..."
-                            android:textColor="@color/colorTabText"
-                            android:textSize="14sp" />
-
-                    </LinearLayout>
                 </RelativeLayout>
 
             </LinearLayout>
