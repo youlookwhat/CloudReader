@@ -18,14 +18,13 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/colorWhite">
+        android:layout_height="wrap_content">
 
         <RelativeLayout
             android:id="@+id/ll_item_top"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="?attr/selectableItemBackground"
+            android:background="@drawable/ripple_joke_item_bg"
             android:onClick="@{()->adapter.openDetail(bean)}"
             android:padding="8dp">
 

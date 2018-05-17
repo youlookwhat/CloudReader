@@ -56,10 +56,6 @@ public class OneFragment extends BaseFragment<FragmentOneBinding> {
         isPrepared = true;
     }
 
-    public static void showQsbk(){
-
-    }
-
     /**
      * 懒加载
      * 从此页面新开activity界面返回此页面 不会走这里

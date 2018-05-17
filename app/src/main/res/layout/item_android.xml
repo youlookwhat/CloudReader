@@ -25,7 +25,6 @@
         android:layout_marginRight="8dp"
         android:layout_marginTop="8dp">
 
-        <!--android:background="@drawable/ripple_one_item_bg"-->
         <LinearLayout
             android:id="@+id/ll_all"
             android:layout_width="match_parent"
