@@ -28,13 +28,11 @@ public class ArticleListActivity extends BaseActivity<FragmentWanAndroidBinding>
     private WanAndroidListViewModel androidViewModel;
     private WanAndroidAdapter mAdapter;
     private int cid = 0;
-    private String chapterName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_wan_android);
-        showContentView();
         initRefreshView();
         getIntentData();
         loadData();
@@ -42,7 +40,7 @@ public class ArticleListActivity extends BaseActivity<FragmentWanAndroidBinding>
 
     private void getIntentData() {
         cid = getIntent().getIntExtra("cid", 0);
-        chapterName = getIntent().getStringExtra("chapterName");
+        String chapterName = getIntent().getStringExtra("chapterName");
 
         if (cid != 0) {
             setTitle(chapterName);

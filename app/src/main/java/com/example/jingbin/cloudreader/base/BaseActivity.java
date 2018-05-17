@@ -10,8 +10,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewStub;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import com.example.jingbin.cloudreader.R;
@@ -30,8 +30,8 @@ public class BaseActivity<SV extends ViewDataBinding> extends AppCompatActivity 
 
     // 布局view
     protected SV bindingView;
-    private LinearLayout llProgressBar;
     private View refresh;
+    private View loadingView;
     private ActivityBaseBinding mBaseBinding;
     private AnimationDrawable mAnimationDrawable;
     private CompositeSubscription mCompositeSubscription;
@@ -60,9 +60,9 @@ public class BaseActivity<SV extends ViewDataBinding> extends AppCompatActivity 
 
         // 设置透明状态栏，兼容4.4
         StatusBarUtil.setColor(this, CommonUtils.getColor(R.color.colorTheme),0);
-        llProgressBar = getView(R.id.ll_progress_bar);
+         loadingView = ((ViewStub) findViewById(R.id.vs_loading)).inflate();
         refresh = getView(R.id.ll_error_refresh);
-        ImageView img = getView(R.id.img_progress);
+        ImageView img = loadingView.findViewById(R.id.img_progress);
 
         // 加载动画
         mAnimationDrawable = (AnimationDrawable) img.getDrawable();
@@ -109,8 +109,8 @@ public class BaseActivity<SV extends ViewDataBinding> extends AppCompatActivity 
     }
 
     protected void showLoading() {
-        if (llProgressBar.getVisibility() != View.VISIBLE) {
-            llProgressBar.setVisibility(View.VISIBLE);
+        if (loadingView!=null && loadingView.getVisibility() != View.VISIBLE) {
+            loadingView.setVisibility(View.VISIBLE);
         }
         // 开始动画
         if (!mAnimationDrawable.isRunning()) {
@@ -125,8 +125,8 @@ public class BaseActivity<SV extends ViewDataBinding> extends AppCompatActivity 
     }
 
     protected void showContentView() {
-        if (llProgressBar.getVisibility() != View.GONE) {
-            llProgressBar.setVisibility(View.GONE);
+        if (loadingView!=null && loadingView.getVisibility() != View.GONE) {
+            loadingView.setVisibility(View.GONE);
         }
         // 停止动画
         if (mAnimationDrawable.isRunning()) {
@@ -141,8 +141,8 @@ public class BaseActivity<SV extends ViewDataBinding> extends AppCompatActivity 
     }
 
     protected void showError() {
-        if (llProgressBar.getVisibility() != View.GONE) {
-            llProgressBar.setVisibility(View.GONE);
+        if (loadingView!=null && loadingView.getVisibility() != View.GONE) {
+            loadingView.setVisibility(View.GONE);
         }
         // 停止动画
         if (mAnimationDrawable.isRunning()) {

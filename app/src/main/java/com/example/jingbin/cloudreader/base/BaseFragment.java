@@ -9,6 +9,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewStub;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -29,7 +30,7 @@ public abstract class BaseFragment<SV extends ViewDataBinding> extends Fragment 
     // fragment是否显示了
     protected boolean mIsVisible = false;
     // 加载中
-    private LinearLayout mLlProgressBar;
+    private View loadingView;
     // 加载失败
     private LinearLayout mRefresh;
     // 内容布局
@@ -84,8 +85,8 @@ public abstract class BaseFragment<SV extends ViewDataBinding> extends Fragment 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mLlProgressBar = getView(R.id.ll_progress_bar);
-        ImageView img = getView(R.id.img_progress);
+        loadingView = ((ViewStub) getView(R.id.vs_loading)).inflate();
+        ImageView img = loadingView.findViewById(R.id.img_progress);
 
         // 加载动画
         mAnimationDrawable = (AnimationDrawable) img.getDrawable();
@@ -126,8 +127,8 @@ public abstract class BaseFragment<SV extends ViewDataBinding> extends Fragment 
      * 显示加载中状态
      */
     protected void showLoading() {
-        if (mLlProgressBar.getVisibility() != View.VISIBLE) {
-            mLlProgressBar.setVisibility(View.VISIBLE);
+        if (loadingView !=null &&loadingView.getVisibility() != View.VISIBLE) {
+            loadingView.setVisibility(View.VISIBLE);
         }
         // 开始动画
         if (!mAnimationDrawable.isRunning()) {
@@ -145,8 +146,8 @@ public abstract class BaseFragment<SV extends ViewDataBinding> extends Fragment 
      * 加载完成的状态
      */
     protected void showContentView() {
-        if (mLlProgressBar.getVisibility() != View.GONE) {
-            mLlProgressBar.setVisibility(View.GONE);
+        if (loadingView !=null &&loadingView.getVisibility() != View.GONE) {
+            loadingView.setVisibility(View.GONE);
         }
         // 停止动画
         if (mAnimationDrawable.isRunning()) {
@@ -164,8 +165,8 @@ public abstract class BaseFragment<SV extends ViewDataBinding> extends Fragment 
      * 加载失败点击重新加载的状态
      */
     protected void showError() {
-        if (mLlProgressBar.getVisibility() != View.GONE) {
-            mLlProgressBar.setVisibility(View.GONE);
+        if (loadingView !=null &&loadingView.getVisibility() != View.GONE) {
+            loadingView.setVisibility(View.GONE);
         }
         // 停止动画
         if (mAnimationDrawable.isRunning()) {

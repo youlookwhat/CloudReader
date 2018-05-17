@@ -6,7 +6,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-        <!--android:background="@color/colorPageBg"-->
+
         <!--有可能直接显示（固定的布局，非必须，按需要添加）-->
         <RelativeLayout
             android:id="@+id/rl_content_part"
@@ -44,29 +44,14 @@
             </LinearLayout>
 
             <!--加载中..-->
-            <LinearLayout
-                android:id="@+id/ll_progress_bar"
+            <ViewStub
+                android:id="@+id/vs_loading"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="80dp"
-                android:gravity="center_vertical">
+                android:inflatedId="@+id/panel_import"
+                android:layout="@layout/layout_loading_view" />
 
-                <ImageView
-                    android:id="@+id/img_progress"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/yun_anim" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:text="努力加载中..."
-                    android:textColor="@color/colorTabText"
-                    android:textSize="14sp" />
-
-            </LinearLayout>
         </RelativeLayout>
     </LinearLayout>
 </layout>
