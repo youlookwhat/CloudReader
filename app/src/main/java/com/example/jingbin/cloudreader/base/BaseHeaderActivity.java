@@ -58,9 +58,8 @@ public abstract class BaseHeaderActivity<HV extends ViewDataBinding, SV extends 
     protected HV bindingHeaderView;
     // 内容布局view
     protected SV bindingContentView;
-    //    private LinearLayout llProgressBar;
     private View loadingView;
-    private View refresh;
+    private View refreshView;
     // 滑动多少距离后标题不透明
     private int slidingDistance;
     // 这个是高斯图背景的高度
@@ -105,12 +104,13 @@ public abstract class BaseHeaderActivity<HV extends ViewDataBinding, SV extends 
         // content
         RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
         bindingContentView.getRoot().setLayoutParams(params);
-        RelativeLayout mContainer = (RelativeLayout) ll.findViewById(R.id.container);
+        RelativeLayout mContainer = ll.findViewById(R.id.container);
         mContainer.addView(bindingContentView.getRoot());
         getWindow().setContentView(ll);
 
         loadingView = ((ViewStub) getView(R.id.vs_loading)).inflate();
-        refresh = getView(R.id.ll_error_refresh);
+        refreshView = ((ViewStub) getView(R.id.vs_error_refresh)).inflate();
+        refreshView.setVisibility(View.GONE);
 
         // 设置自定义元素共享切换动画
         setMotion(setHeaderPicView(), false);
@@ -129,7 +129,7 @@ public abstract class BaseHeaderActivity<HV extends ViewDataBinding, SV extends 
             mAnimationDrawable.start();
         }
         // 点击加载失败布局
-        refresh.setOnClickListener(new PerfectClickListener() {
+        refreshView.setOnClickListener(new PerfectClickListener() {
             @Override
             protected void onNoDoubleClick(View v) {
                 showLoading();
@@ -387,8 +387,8 @@ public abstract class BaseHeaderActivity<HV extends ViewDataBinding, SV extends 
         if (bindingContentView.getRoot().getVisibility() != View.GONE) {
             bindingContentView.getRoot().setVisibility(View.GONE);
         }
-        if (refresh.getVisibility() != View.GONE) {
-            refresh.setVisibility(View.GONE);
+        if (refreshView != null && refreshView.getVisibility() != View.GONE) {
+            refreshView.setVisibility(View.GONE);
         }
     }
 
@@ -400,8 +400,8 @@ public abstract class BaseHeaderActivity<HV extends ViewDataBinding, SV extends 
         if (mAnimationDrawable.isRunning()) {
             mAnimationDrawable.stop();
         }
-        if (refresh.getVisibility() != View.GONE) {
-            refresh.setVisibility(View.GONE);
+        if (refreshView != null && refreshView.getVisibility() != View.GONE) {
+            refreshView.setVisibility(View.GONE);
         }
         if (bindingContentView.getRoot().getVisibility() != View.VISIBLE) {
             bindingContentView.getRoot().setVisibility(View.VISIBLE);
@@ -416,8 +416,8 @@ public abstract class BaseHeaderActivity<HV extends ViewDataBinding, SV extends 
         if (mAnimationDrawable.isRunning()) {
             mAnimationDrawable.stop();
         }
-        if (refresh.getVisibility() != View.VISIBLE) {
-            refresh.setVisibility(View.VISIBLE);
+        if (refreshView != null && refreshView.getVisibility() != View.VISIBLE) {
+            refreshView.setVisibility(View.VISIBLE);
         }
         if (bindingContentView.getRoot().getVisibility() != View.GONE) {
             bindingContentView.getRoot().setVisibility(View.GONE);
