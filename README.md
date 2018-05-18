@@ -33,7 +33,7 @@ If you have any questions, please write to [the issue][21] of making you don't u
 
 ## Features 特性
 * 1、基本遵循Google Material Design设计风格。                                    
-* 2、干货集中营内容与豆瓣电影书籍内容。                                    
+* 2、玩安卓、干货集中营与豆瓣电影书籍内容。                                    
 * 3、MvvM-DataBinding的项目应用。                                    
 * 4、``NavigationView``搭配``DrawerLayout``的具体使用。                                    
 * 5、透明状态栏使用与版本适配。                                    
@@ -42,7 +42,7 @@ If you have any questions, please write to [the issue][21] of making you don't u
 * 8、``ToolBar``的全方面使用。                                    
 * 9、``Glide``加载监听，获取缓存，圆角图片，高斯模糊。                                    
 * 10、水波纹点击效果详细使用与适配。                                    
-* 11、``RecyclerView``下拉刷新，上拉加载。                                    
+* 11、``Room``的基本使用。
 * 12、基于``DataBinding``的``ViewHolder``。                                    
 * 13、基于``DataBinding``的``BaseActivity``和``BaseFragment``。                                    
 * 14、``Fragment``懒加载模式。                                    
@@ -51,7 +51,7 @@ If you have any questions, please write to [the issue][21] of making you don't u
 
 
 ## See Detail
-> [项目介绍详情](https://github.com/youlookwhat/CloudReader/blob/master/file/Introduction.md) | [细节优化详情](https://github.com/youlookwhat/CloudReader/wiki) | [**版本更新详情(V1.9.2)**](http://jingbin.me/2016/12/30/%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97-%E4%BA%91%E9%98%85/)
+> [项目介绍详情](https://github.com/youlookwhat/CloudReader/blob/master/file/Introduction.md) | [细节优化详情](https://github.com/youlookwhat/CloudReader/wiki) | [**版本更新详情(V1.9.3)**](http://jingbin.me/2016/12/30/%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97-%E4%BA%91%E9%98%85/)
 
 ### Download
 　[火速跳转](https://fir.im/cloudreader)                                    
@@ -65,9 +65,14 @@ If you have any questions, please write to [the issue][21] of making you don't u
 　
 
 ### Version
-#### V1.9.2（05-06）
-> TODO：玩安卓登录/收藏网页等功能；
+#### V1.9.3（05-18）
+ - 1、[新增] 玩安卓模块增加登录与收藏文章的功能
+ - 2、[新增] 增加Room的使用
+ - 3、[修复] 修复7.0以上系统主页显示错乱的bug
+ - 4、[完善] 性能优化之[布局大幅优化](https://jingbin.me/2018/05/17/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E4%B9%8B%E5%B8%83%E5%B1%80%E4%BC%98%E5%8C%96%E8%AE%B0%E5%BD%95/)
+ - 5、[完善] 完善体验修复若干bug
 
+#### V1.9.2（05-06）
  - 1、[完善] 主页显示结构修改
  - 2、[修复] 去掉内涵段子数据
  - 3、[修复] 解决“项目主页”页面两个布局的问题
@@ -131,7 +136,7 @@ If you have any questions, please write to [the issue][21] of making you don't u
  
  - 图片来源：[iconfont][6]、UI工程师[Sandawang](https://github.com/Sandawang)和网易云音乐App。
 
- - 参考项目：[ImitateNetEasyCloud][7]、[banya][8]；主要数据来源：[Gank.Io][9]、[豆瓣Api][10]、[wanandroid][27]。
+ - 主要数据来源：[Gank.Io][9]、[豆瓣Api][10]、[wanandroid][27]。
 
  - 使用到的开源库：[glide][11]、[bottomsheet][12]、[nineoldandroids][13]、[rxandroid][14]等等。
 
@@ -171,7 +176,7 @@ limitations under the License.
 [2]:https://www.apache.org/licenses/LICENSE-2.0.html
 [3]:https://img.shields.io/badge/API-19%2B-red.svg?style=flat
 [4]:https://android-arsenal.com/api?level=19
-[30]:https://img.shields.io/badge/release-1.9.2-red.svg
+[30]:https://img.shields.io/badge/release-1.9.3-red.svg
 [31]:https://github.com/youlookwhat/CloudReader/releases
 [32]:https://img.shields.io/badge/PRs-welcome-brightgreen.svg
 [33]:https://github.com/youlookwhat/CloudReader/pulls
