@@ -14,6 +14,10 @@ android {
         renderscriptSupportModeEnabled true
         multiDexEnabled true
 
+        ndk {
+            //选择要添加的对应cpu类型的.so库。
+            abiFilters 'armeabi-v7a'
+        }
     }
 
     buildTypes {
