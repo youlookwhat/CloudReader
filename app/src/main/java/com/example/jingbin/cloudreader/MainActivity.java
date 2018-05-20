@@ -209,7 +209,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 drawerLayout.openDrawer(GravityCompat.START);
                 break;
             case R.id.iv_title_two:
-                // 干货栏 不然cpu会有损耗
+                // 不然cpu会有损耗
                 if (vpContent.getCurrentItem() != 1) {
                     setCurrentItem(1);
                 }
@@ -220,7 +220,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
                 break;
             case R.id.iv_title_three:
-                // 书籍栏
                 if (vpContent.getCurrentItem() != 2) {
                     setCurrentItem(2);
                 }

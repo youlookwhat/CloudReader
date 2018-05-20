@@ -38,8 +38,7 @@
 
         <View
             android:layout_width="3dp"
-            android:layout_height="match_parent"
-            android:background="@color/color_page_bg" />
+            android:layout_height="match_parent" />
 
         <LinearLayout
             android:id="@+id/ll_three_one_two"
@@ -52,7 +51,6 @@
                 android:id="@+id/iv_three_one_two"
                 android:layout_width="match_parent"
                 android:layout_height="110dp"
-                android:background="@drawable/img_one_bi_one"
                 android:scaleType="centerCrop" />
 
             <TextView
@@ -72,8 +70,7 @@
 
         <View
             android:layout_width="3dp"
-            android:layout_height="match_parent"
-            android:background="@color/color_page_bg" />
+            android:layout_height="match_parent" />
 
         <LinearLayout
             android:id="@+id/ll_three_one_three"
@@ -86,7 +83,6 @@
                 android:id="@+id/iv_three_one_three"
                 android:layout_width="match_parent"
                 android:layout_height="110dp"
-                android:background="@drawable/img_one_bi_one"
                 android:scaleType="centerCrop" />
 
             <TextView

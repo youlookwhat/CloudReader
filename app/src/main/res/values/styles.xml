@@ -12,6 +12,9 @@
         <item name="colorPrimaryDark">@color/colorTheme</item>
         <item name="colorAccent">@color/colorTheme</item>
         <item name="android:windowAnimationStyle">@style/default_animation</item>
+
+        <!--默认状态下页面的背景色-->
+        <!--<item name="android:windowBackground">@color/color_page_bg</item>-->
         <!--正常状态下字体颜色和icon颜色-->
         <!--<item name="android:textColorPrimary">@color/colorTheme</item>-->
     </style>
@@ -157,7 +160,8 @@
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
         <item name="android:windowDrawsSystemBarBackgrounds" tools:targetApi="lollipop">true</item>
-        <item name="android:statusBarColor" tools:targetApi="lollipop">@android:color/transparent</item>
+        <item name="android:statusBarColor" tools:targetApi="lollipop">@android:color/transparent
+        </item>
     </style>
 
 </resources>
