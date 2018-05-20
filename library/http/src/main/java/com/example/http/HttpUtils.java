@@ -1,5 +1,6 @@
 package com.example.http;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.text.TextUtils;
@@ -173,6 +174,7 @@ public class HttpUtils {
             okBuilder.addInterceptor(getInterceptor());
             okBuilder.sslSocketFactory(sslSocketFactory);
             okBuilder.hostnameVerifier(new HostnameVerifier() {
+                @SuppressLint("BadHostnameVerifier")
                 @Override
                 public boolean verify(String hostname, SSLSession session) {
 //                    Log.d("HttpUtils", "==come");

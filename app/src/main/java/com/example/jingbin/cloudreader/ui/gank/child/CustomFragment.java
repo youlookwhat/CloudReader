@@ -120,7 +120,8 @@ public class CustomFragment extends BaseFragment<FragmentCustomBinding> implemen
         try {
             builder = new BottomSheet.Builder(getActivity(), R.style.BottomSheet_StyleDialog)
                     .title("选择分类")
-                    .sheet(R.menu.gank_bottomsheet).listener((dialog, which) -> {
+                    .sheet(R.menu.gank_bottomsheet)
+                    .listener((dialog, which) -> {
                         switch (which) {
                             case R.id.gank_all:
                                 if (isOtherType("全部")) {

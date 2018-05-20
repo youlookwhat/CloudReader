@@ -7,8 +7,8 @@ android {
         applicationId "com.example.jingbin.cloudreader"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 17
-        versionName "1.9.3"
+        versionCode 18
+        versionName "1.9.4"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         renderscriptTargetApi 19
         renderscriptSupportModeEnabled true
@@ -93,7 +93,7 @@ dependencies {
     implementation 'jp.wasabeef:glide-transformations:2.0.1'
     implementation 'com.youth.banner:banner:1.4.10'
     implementation 'com.daimajia.slider:library:1.1.5@aar'
-    implementation 'com.cocosw:bottomsheet:1.3.0@aar'
+    implementation 'com.cocosw:bottomsheet:1.3.1@aar'
     implementation 'com.android.support:multidex:1.0.3'
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:1.5.4'
     releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.4'

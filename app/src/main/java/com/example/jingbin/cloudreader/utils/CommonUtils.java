@@ -3,6 +3,7 @@ package com.example.jingbin.cloudreader.utils;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewParent;
@@ -41,7 +42,8 @@ public class CommonUtils {
 
 
     public static Drawable getDrawable(int resid) {
-        return getResoure().getDrawable(resid);
+        return ContextCompat.getDrawable(CloudReaderApplication.getInstance(), resid);
+//        return getResoure().getDrawable(resid);
     }
 
     public static int getColor(int resid) {

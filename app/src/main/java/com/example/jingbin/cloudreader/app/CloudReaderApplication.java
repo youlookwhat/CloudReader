@@ -30,10 +30,10 @@ public class CloudReaderApplication extends MultiDexApplication{
             // You should not init your app in this process.
             return;
         }
-        LeakCanary.install(this);
-        CrashReport.initCrashReport(getApplicationContext(), "3977b2d86f", DebugUtil.DEBUG);
         cloudReaderApplication = this;
         HttpUtils.getInstance().init(this, DebugUtil.DEBUG);
+        LeakCanary.install(this);
+        CrashReport.initCrashReport(getApplicationContext(), "3977b2d86f", DebugUtil.DEBUG);
 
         initTextSize();
     }
