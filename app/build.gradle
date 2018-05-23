@@ -7,8 +7,8 @@ android {
         applicationId "com.example.jingbin.cloudreader"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 18
-        versionName "1.9.4"
+        versionCode 19
+        versionName "1.9.5"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         renderscriptTargetApi 19
         renderscriptSupportModeEnabled true
@@ -77,7 +77,7 @@ dependencies {
     implementation "android.arch.persistence.room:runtime:$rootProject.roomVersion"
     annotationProcessor "android.arch.persistence.room:compiler:$rootProject.roomVersion"
     implementation "android.arch.persistence.room:rxjava2:$rootProject.roomVersion"
-    implementation "android.arch.paging:runtime:1.0.0-rc1"
+    implementation "android.arch.paging:runtime:1.0.0"
 
 //    implementation "android.arch.lifecycle:common-java8:1.0.0"
     implementation 'android.arch.lifecycle:extensions:1.1.1'
