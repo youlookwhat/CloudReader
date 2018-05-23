@@ -122,15 +122,15 @@ public class WebViewActivity extends AppCompatActivity implements IWebPageView {
                 onBackPressed();
                 break;
             case R.id.actionbar_share:// 分享到
-                String shareText = mWebChromeClient.getTitle() + mUrl + "（分享自云阅）";
+                String shareText = mWebChromeClient.getTitle() + webView.getUrl() + "（分享自云阅）";
                 ShareUtils.share(WebViewActivity.this, shareText);
                 break;
             case R.id.actionbar_cope:// 复制链接
-                BaseTools.copy(mUrl);
+                BaseTools.copy(webView.getUrl());
                 ToastUtil.showToast("复制成功");
                 break;
             case R.id.actionbar_open:// 打开链接
-                BaseTools.openLink(WebViewActivity.this, mUrl);
+                BaseTools.openLink(WebViewActivity.this, webView.getUrl());
                 break;
             default:
                 break;
