@@ -122,6 +122,35 @@
                     android:textSize="13sp" />
 
                 <TextView
+                    android:id="@+id/tv_wanandroid"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="鸿洋 · 玩安卓"
+                    android:textColor="@color/colorContent"
+                    android:textSize="13sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="》"
+                    android:textColor="@color/colorContent"
+                    android:textSize="13sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_marginTop="8dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="《"
+                    android:textColor="@color/colorContent"
+                    android:textSize="13sp" />
+
+                <TextView
                     android:id="@+id/tv_gankio"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -140,7 +169,7 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="8dp"
                 android:orientation="horizontal">
 
                 <TextView

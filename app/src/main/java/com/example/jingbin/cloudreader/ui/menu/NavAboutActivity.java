@@ -32,10 +32,12 @@ public class NavAboutActivity extends BaseActivity<ActivityNavAboutBinding> {
 
         // 直接写在布局文件里会很耗内存
         Glide.with(this).load(R.drawable.ic_cloudreader).into(bindingView.ivIcon);
-        bindingView.tvGankio.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG); //下划线
+        bindingView.tvGankio.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG);
         bindingView.tvGankio.getPaint().setAntiAlias(true);//抗锯齿
-        bindingView.tvDouban.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG); //下划线
+        bindingView.tvDouban.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG);
         bindingView.tvDouban.getPaint().setAntiAlias(true);//抗锯齿
+        bindingView.tvWanandroid.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG);
+        bindingView.tvWanandroid.getPaint().setAntiAlias(true);//抗锯齿
 
         initListener();
     }
@@ -45,6 +47,7 @@ public class NavAboutActivity extends BaseActivity<ActivityNavAboutBinding> {
         bindingView.tvDouban.setOnClickListener(listener);
         bindingView.tvAboutStar.setOnClickListener(listener);
         bindingView.tvFunction.setOnClickListener(listener);
+        bindingView.tvWanandroid.setOnClickListener(listener);
 //        bindingView.tvNewVersion.setOnClickListener(listener);
     }
 
@@ -66,13 +69,17 @@ public class NavAboutActivity extends BaseActivity<ActivityNavAboutBinding> {
                     url = CommonUtils.getString(R.string.string_url_cloudreader);
                     title = "CloudReader";
                     break;
-                case R.id.tv_function:// 更新日志
+                case R.id.tv_function:
                     url = CommonUtils.getString(R.string.string_url_update_log);
                     title = "更新日志";
                     break;
-                case R.id.tv_new_version:// 检查更新
+                case R.id.tv_new_version:
                     url = CommonUtils.getString(R.string.string_url_new_version);
                     title = "检查更新";
+                    break;
+                case R.id.tv_wanandroid:
+                    url = CommonUtils.getString(R.string.string_url_wanandroid);
+                    title = "玩Android";
                     break;
                 default:
                     break;
