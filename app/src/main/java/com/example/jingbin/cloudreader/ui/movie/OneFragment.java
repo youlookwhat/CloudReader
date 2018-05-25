@@ -129,7 +129,6 @@ public class OneFragment extends BaseFragment<FragmentOneBinding> {
     private void setAdapter(HotMovieBean hotMovieBean) {
         oneAdapter.clear();
         oneAdapter.addAll(hotMovieBean.getSubjects());
-        bindingView.listOne.setAdapter(oneAdapter);
         oneAdapter.notifyDataSetChanged();
 
         isFirst = false;
@@ -150,6 +149,7 @@ public class OneFragment extends BaseFragment<FragmentOneBinding> {
         oneBinding.setView(this);
         bindingView.listOne.addHeaderView(oneBinding.getRoot());
         oneAdapter = new OneAdapter(activity);
+        bindingView.listOne.setAdapter(oneAdapter);
     }
 
     /**
