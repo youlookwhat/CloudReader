@@ -36,6 +36,8 @@ import com.example.jingbin.cloudreader.viewmodel.gank.EverydayViewModel;
 import java.util.ArrayList;
 import java.util.List;
 
+import rx.Subscription;
+
 import static com.example.jingbin.cloudreader.viewmodel.gank.EverydayViewModel.getTodayTime;
 
 /**
@@ -76,7 +78,7 @@ public class EverydayFragment extends BaseFragment<FragmentEverydayBinding> impl
         showContentView();
         initAnimation();
 
-        everydayViewModel = new EverydayViewModel(this);
+        everydayViewModel = new EverydayViewModel();
         everydayViewModel.setEverydayNavigator(this);
         mHeaderBinding = DataBindingUtil.inflate(LayoutInflater.from(getContext()), R.layout.header_item_everyday, null, false);
         initLocalSetting();
@@ -160,6 +162,11 @@ public class EverydayFragment extends BaseFragment<FragmentEverydayBinding> impl
             return;
         }
         everydayViewModel.handleCache();
+    }
+
+    @Override
+    public void addRxSubscription(Subscription subscription) {
+        addSubscription(subscription);
     }
 
     /**

@@ -4,7 +4,6 @@ import android.arch.lifecycle.ViewModel;
 import android.databinding.ObservableField;
 import android.text.TextUtils;
 
-import com.example.jingbin.cloudreader.base.BaseActivity;
 import com.example.jingbin.cloudreader.bean.wanandroid.LoginBean;
 import com.example.jingbin.cloudreader.data.UserUtil;
 import com.example.jingbin.cloudreader.data.room.Injection;
@@ -28,12 +27,7 @@ public class LoginViewModel extends ViewModel {
 
     public final ObservableField<String> password = new ObservableField<>();
 
-    private BaseActivity activity;
     private LoginNavigator navigator;
-
-    public LoginViewModel(BaseActivity activity) {
-        this.activity = activity;
-    }
 
     public void setNavigator(LoginNavigator navigator) {
         this.navigator = navigator;
@@ -68,7 +62,7 @@ public class LoginViewModel extends ViewModel {
                         }
                     }
                 });
-        activity.addSubscription(subscribe);
+        navigator.addRxSubscription(subscribe);
     }
 
     public void login() {
@@ -100,7 +94,7 @@ public class LoginViewModel extends ViewModel {
                         }
                     }
                 });
-        activity.addSubscription(subscribe);
+        navigator.addRxSubscription(subscribe);
     }
 
     private boolean verifyData() {

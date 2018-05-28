@@ -1,6 +1,5 @@
 package com.example.jingbin.cloudreader.viewmodel.wan;
 
-import com.example.jingbin.cloudreader.base.BaseActivity;
 import com.example.jingbin.cloudreader.base.BaseListViewModel;
 import com.example.jingbin.cloudreader.bean.wanandroid.HomeListBean;
 import com.example.jingbin.cloudreader.http.HttpClient;
@@ -18,11 +17,9 @@ import rx.schedulers.Schedulers;
 
 public class ArticleListListViewModel extends BaseListViewModel {
 
-    private final BaseActivity activity;
     private WanNavigator.ArticleListNavigator navigator;
 
-    public ArticleListListViewModel(BaseActivity activity, WanNavigator.ArticleListNavigator navigator) {
-        this.activity = activity;
+    public ArticleListListViewModel(WanNavigator.ArticleListNavigator navigator) {
         this.navigator = navigator;
     }
 
@@ -59,7 +56,7 @@ public class ArticleListListViewModel extends BaseListViewModel {
                         navigator.showAdapterView(bean);
                     }
                 });
-        activity.addSubscription(subscribe);
+        navigator.addRxSubscription(subscribe);
     }
 
     public void onDestroy() {

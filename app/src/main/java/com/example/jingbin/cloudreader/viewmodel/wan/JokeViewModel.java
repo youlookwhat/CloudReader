@@ -35,10 +35,6 @@ public class JokeViewModel extends ViewModel {
         mModel = new JokeModel();
     }
 
-    public void showNhdzList() {
-        mModel.showNhdzList(navigator, mPage);
-    }
-
     public void showQSBKList() {
         mModel.showQSBKList(navigator, mPage);
     }

@@ -42,8 +42,6 @@ public class WelfareAdapter extends BaseRecyclerViewAdapter<GankIoDataBean.Resul
                 DensityUtil.setViewMargin(itemView, false, 6, 12, 12, 0);
             }
             binding.setBean(resultsBean);
-            // 仿抖动
-            binding.executePendingBindings();
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

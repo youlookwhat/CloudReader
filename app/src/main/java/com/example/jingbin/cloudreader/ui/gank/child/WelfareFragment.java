@@ -16,6 +16,8 @@ import com.example.xrecyclerview.XRecyclerView;
 
 import java.util.ArrayList;
 
+import rx.Subscription;
+
 /**
  * 福利
  *
@@ -35,7 +37,7 @@ public class WelfareFragment extends BaseFragment<FragmentWelfareBinding> implem
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        viewModel = new WelfareViewModel(this);
+        viewModel = new WelfareViewModel();
         viewModel.setNavigator(this);
 
         initRecycleView();
@@ -63,6 +65,9 @@ public class WelfareFragment extends BaseFragment<FragmentWelfareBinding> implem
                 viewModel.loadWelfareData();
             }
         });
+        mWelfareAdapter.setOnItemClickListener((resultsBean, position) -> {
+            ViewBigImageActivity.startImageList(getContext(), position, imgList, imgTitleList);
+        });
     }
 
     @Override
@@ -73,18 +78,6 @@ public class WelfareFragment extends BaseFragment<FragmentWelfareBinding> implem
         viewModel.loadWelfareData();
     }
 
-    private void setAdapter(GankIoDataBean gankIoDataBean) {
-        mWelfareAdapter.addAll(gankIoDataBean.getResults());
-        mWelfareAdapter.notifyDataSetChanged();
-
-        mWelfareAdapter.setOnItemClickListener((resultsBean, position) -> {
-            ViewBigImageActivity.startImageList(getContext(), position, imgList, imgTitleList);
-        });
-
-        // 显示成功后就不是第一次了，不再刷新
-        isFirst = false;
-    }
-
     @Override
     public int setContent() {
         return R.layout.fragment_welfare;
@@ -93,12 +86,6 @@ public class WelfareFragment extends BaseFragment<FragmentWelfareBinding> implem
     @Override
     protected void onRefresh() {
         viewModel.loadWelfareData();
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        viewModel.onDestroy();
     }
 
     @Override
@@ -113,14 +100,17 @@ public class WelfareFragment extends BaseFragment<FragmentWelfareBinding> implem
 
     @Override
     public void showAdapterView(GankIoDataBean gankIoDataBean) {
-        setAdapter(gankIoDataBean);
-    }
-
-    @Override
-    public void refreshAdapter(GankIoDataBean gankIoDataBean) {
-        bindingView.xrvWelfare.refreshComplete();
+        if (viewModel.getPage() == 1) {
+            mWelfareAdapter.clear();
+        }
         mWelfareAdapter.addAll(gankIoDataBean.getResults());
         mWelfareAdapter.notifyDataSetChanged();
+        bindingView.xrvWelfare.refreshComplete();
+
+        if (isFirst) {
+            // 显示成功后就不是第一次了，不再刷新
+            isFirst = false;
+        }
     }
 
     @Override
@@ -137,8 +127,21 @@ public class WelfareFragment extends BaseFragment<FragmentWelfareBinding> implem
     }
 
     @Override
-    public void setImageList(ArrayList<String> imgList, ArrayList<String> imgTitleList) {
-        this.imgList = imgList;
-        this.imgTitleList = imgTitleList;
+    public void addRxSubscription(Subscription subscription) {
+        addSubscription(subscription);
+    }
+
+    @Override
+    public void setImageList(ArrayList<ArrayList<String>> arrayLists) {
+        if (arrayLists != null && arrayLists.size() == 2) {
+            imgList.addAll(arrayLists.get(0));
+            imgTitleList.addAll(arrayLists.get(1));
+        }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        viewModel.onDestroy();
     }
 }

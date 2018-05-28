@@ -11,6 +11,8 @@ import com.example.jingbin.cloudreader.databinding.ActivityLoginBinding;
 import com.example.jingbin.cloudreader.viewmodel.menu.LoginNavigator;
 import com.example.jingbin.cloudreader.viewmodel.menu.LoginViewModel;
 
+import rx.Subscription;
+
 /**
  * @author jingbin
  */
@@ -25,7 +27,7 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding> implements
         setTitle("玩安卓登录");
         showContentView();
 
-        viewModel = new LoginViewModel(this);
+        viewModel = new LoginViewModel();
         viewModel.setNavigator(this);
         bindingView.setViewmodel(viewModel);
     }
@@ -44,6 +46,11 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding> implements
     @Override
     public void loadSuccess() {
         finish();
+    }
+
+    @Override
+    public void addRxSubscription(Subscription subscription) {
+        addSubscription(subscription);
     }
 
     public static void start(Context mContext) {

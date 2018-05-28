@@ -4,7 +4,6 @@ import android.arch.lifecycle.ViewModel;
 
 import com.example.jingbin.cloudreader.app.CloudReaderApplication;
 import com.example.jingbin.cloudreader.app.Constants;
-import com.example.jingbin.cloudreader.base.BaseFragment;
 import com.example.jingbin.cloudreader.bean.AndroidBean;
 import com.example.jingbin.cloudreader.bean.FrontpageBean;
 import com.example.jingbin.cloudreader.data.model.EverydayModel;
@@ -28,7 +27,6 @@ public class EverydayViewModel extends ViewModel {
     private final EverydayModel mEverydayModel;
     private final ACache maCache;
     private EverydayNavigator everydayNavigator;
-    private BaseFragment activity;
     private ArrayList<List<AndroidBean>> mLists;
     private ArrayList<String> mBannerImages;
     private String year = getTodayTime().get(0);
@@ -43,8 +41,7 @@ public class EverydayViewModel extends ViewModel {
         everydayNavigator = null;
     }
 
-    public EverydayViewModel(BaseFragment activity) {
-        this.activity = activity;
+    public EverydayViewModel() {
         maCache = ACache.get(CloudReaderApplication.getInstance());
         mEverydayModel = new EverydayModel();
         mEverydayModel.setData(getTodayTime().get(0), getTodayTime().get(1), getTodayTime().get(2));
@@ -63,7 +60,7 @@ public class EverydayViewModel extends ViewModel {
                     maCache.remove(Constants.EVERYDAY_CONTENT);
                     maCache.put(Constants.EVERYDAY_CONTENT, mLists);
                 } else {
-                    mLists = (ArrayList<List<AndroidBean>>) ACache.get(activity.getContext()).getAsObject(Constants.EVERYDAY_CONTENT);
+                    mLists = (ArrayList<List<AndroidBean>>) maCache.getAsObject(Constants.EVERYDAY_CONTENT);
                     if (mLists != null && mLists.size() > 0) {
                         everydayNavigator.showListView(mLists);
                     } else {
@@ -88,13 +85,13 @@ public class EverydayViewModel extends ViewModel {
 
             @Override
             public void addSubscription(Subscription subscription) {
-                activity.addSubscription(subscription);
+                everydayNavigator.addRxSubscription(subscription);
             }
         });
     }
 
-    private void handleNoData(){
-        mLists = (ArrayList<List<AndroidBean>>) ACache.get(activity.getContext()).getAsObject(Constants.EVERYDAY_CONTENT);
+    private void handleNoData() {
+        mLists = (ArrayList<List<AndroidBean>>) maCache.getAsObject(Constants.EVERYDAY_CONTENT);
         if (mLists != null && mLists.size() > 0) {
             everydayNavigator.showListView(mLists);
         } else {
@@ -135,7 +132,7 @@ public class EverydayViewModel extends ViewModel {
 
             @Override
             public void addSubscription(Subscription subscription) {
-                activity.addSubscription(subscription);
+                everydayNavigator.addRxSubscription(subscription);
             }
         });
     }

@@ -21,7 +21,6 @@ import rx.Subscription;
 
 public class CustomViewModel extends ViewModel {
 
-    //    private final BaseFragment activity;
     private final GankOtherModel mModel;
     private CustomNavigator navigator;
     private int mPage = 1;

@@ -51,7 +51,7 @@ public class ArticleListActivity extends BaseActivity<FragmentWanAndroidBinding>
             mAdapter.setNoShowChapterName();
         } else {
             setTitle("我的收藏");
-            viewModel = new ArticleListListViewModel(this, this);
+            viewModel = new ArticleListListViewModel(this);
             mAdapter.setCollectList();
         }
     }

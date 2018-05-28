@@ -6,6 +6,8 @@ import com.example.jingbin.cloudreader.bean.FrontpageBean;
 import java.util.ArrayList;
 import java.util.List;
 
+import rx.Subscription;
+
 /**
  * @author jingbin
  * @data 2017/12/19
@@ -43,4 +45,9 @@ public interface EverydayNavigator {
      * 取缓存
      */
     void getACacheData();
+
+    /**
+     * 取消注册
+     */
+    void addRxSubscription(Subscription subscription);
 }
