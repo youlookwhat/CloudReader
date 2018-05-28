@@ -17,6 +17,8 @@ import com.example.jingbin.cloudreader.viewmodel.wan.WanAndroidListViewModel;
 import com.example.jingbin.cloudreader.viewmodel.wan.WanNavigator;
 import com.example.xrecyclerview.XRecyclerView;
 
+import rx.Subscription;
+
 /**
  * 玩安卓文章列表
  *
@@ -128,6 +130,11 @@ public class ArticleListActivity extends BaseActivity<FragmentWanAndroidBinding>
     public void showLoadSuccessView() {
         showContentView();
         bindingView.srlBook.setRefreshing(false);
+    }
+
+    @Override
+    public void addRxSubscription(Subscription subscription) {
+        addSubscription(subscription);
     }
 
     @Override

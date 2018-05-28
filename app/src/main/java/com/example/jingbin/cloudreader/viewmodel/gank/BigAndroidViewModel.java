@@ -3,7 +3,6 @@ package com.example.jingbin.cloudreader.viewmodel.gank;
 import android.arch.lifecycle.ViewModel;
 
 import com.example.http.HttpUtils;
-import com.example.jingbin.cloudreader.base.BaseFragment;
 import com.example.jingbin.cloudreader.bean.GankIoDataBean;
 import com.example.jingbin.cloudreader.data.model.GankOtherModel;
 import com.example.jingbin.cloudreader.http.RequestImpl;
@@ -20,12 +19,10 @@ public class BigAndroidViewModel extends ViewModel {
 
     private final GankOtherModel mModel;
     private String mType = "Android";
-    private BaseFragment activity;
     private BigAndroidNavigator navigator;
     private int mPage = 1;
 
-    public BigAndroidViewModel(BaseFragment activity, String mType) {
-        this.activity = activity;
+    public BigAndroidViewModel(String mType) {
         this.mType = mType;
         mModel = new GankOtherModel();
     }
@@ -50,19 +47,17 @@ public class BigAndroidViewModel extends ViewModel {
                 navigator.showLoadSuccessView();
                 GankIoDataBean gankIoDataBean = (GankIoDataBean) object;
                 if (mPage == 1) {
-                    if (gankIoDataBean != null && gankIoDataBean.getResults() != null && gankIoDataBean.getResults().size() > 0) {
-                        navigator.showAdapterView(gankIoDataBean);
-
-                    } else {
+                    if (gankIoDataBean == null || gankIoDataBean.getResults() == null || gankIoDataBean.getResults().size() <= 0) {
                         navigator.showLoadFailedView();
+                        return;
                     }
                 } else {
-                    if (gankIoDataBean != null && gankIoDataBean.getResults() != null && gankIoDataBean.getResults().size() > 0) {
-                        navigator.refreshAdapter(gankIoDataBean);
-                    } else {
+                    if (gankIoDataBean == null || gankIoDataBean.getResults() == null || gankIoDataBean.getResults().size() <= 0) {
                         navigator.showListNoMoreLoading();
+                        return;
                     }
                 }
+                navigator.showAdapterView(gankIoDataBean);
             }
 
             @Override
@@ -75,7 +70,7 @@ public class BigAndroidViewModel extends ViewModel {
 
             @Override
             public void addSubscription(Subscription subscription) {
-                activity.addSubscription(subscription);
+                navigator.addRxSubscription(subscription);
             }
         });
     }

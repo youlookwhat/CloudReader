@@ -1,6 +1,5 @@
 package com.example.jingbin.cloudreader.viewmodel.wan;
 
-import com.example.jingbin.cloudreader.base.BaseFragment;
 import com.example.jingbin.cloudreader.base.BaseListViewModel;
 import com.example.jingbin.cloudreader.bean.wanandroid.HomeListBean;
 import com.example.jingbin.cloudreader.bean.wanandroid.WanAndroidBannerBean;
@@ -22,18 +21,10 @@ import rx.schedulers.Schedulers;
 
 public class WanAndroidListViewModel extends BaseListViewModel {
 
-    private BaseFragment activity;
     private WanNavigator.BannerNavigator loadBannerNavigator;
     private WanNavigator.ArticleListNavigator navigator;
     private ArrayList<String> mBannerImages;
     private ArrayList<String> mBannerTitles;
-
-    public WanAndroidListViewModel() {
-    }
-
-    public WanAndroidListViewModel(BaseFragment activity) {
-        this.activity = activity;
-    }
 
     public void setNavigator(WanNavigator.BannerNavigator navigator) {
         this.loadBannerNavigator = navigator;
@@ -87,9 +78,7 @@ public class WanAndroidListViewModel extends BaseListViewModel {
 
                     }
                 });
-        if (activity != null) {
-            activity.addSubscription(subscribe);
-        }
+        loadBannerNavigator.addRxSubscription(subscribe);
     }
 
 
@@ -127,9 +116,7 @@ public class WanAndroidListViewModel extends BaseListViewModel {
                         navigator.showAdapterView(bean);
                     }
                 });
-        if (activity != null) {
-            activity.addSubscription(subscribe);
-        }
+        navigator.addRxSubscription(subscribe);
     }
 
     public void onDestroy() {

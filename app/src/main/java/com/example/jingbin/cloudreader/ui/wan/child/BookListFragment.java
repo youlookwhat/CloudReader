@@ -41,7 +41,6 @@ public class BookListFragment extends BaseFragment<FragmentWanAndroidBinding> {
     private int mCount = 18;
     private MainActivity activity;
     private WanBookAdapter mBookAdapter;
-    private GridLayoutManager mLayoutManager;
 
     @Override
     public int setContent() {
@@ -94,20 +93,20 @@ public class BookListFragment extends BaseFragment<FragmentWanAndroidBinding> {
                     mStart = 0;
                     bindingView.xrvBook.reset();
                     loadCustomData();
-                }, 1000);
+                }, 300);
 
             }
         });
-        mLayoutManager = new GridLayoutManager(getActivity(), 3);
+        GridLayoutManager mLayoutManager = new GridLayoutManager(getActivity(), 3);
         bindingView.xrvBook.setLayoutManager(mLayoutManager);
         bindingView.xrvBook.setPullRefreshEnabled(false);
         bindingView.xrvBook.clearHeader();
         mBookAdapter = new WanBookAdapter(getActivity());
         bindingView.xrvBook.setAdapter(mBookAdapter);
         HeaderItemBookBinding oneBinding = DataBindingUtil.inflate(getLayoutInflater(), R.layout.header_item_book, null, false);
-        bindingView.xrvBook.addHeaderView(oneBinding.getRoot());
         oneBinding.etTypeName.setText(mType);
         oneBinding.etTypeName.setSelection(mType.length());
+        bindingView.xrvBook.addHeaderView(oneBinding.getRoot());
         /** 处理键盘搜索键 */
         oneBinding.etTypeName.setOnEditorActionListener((textView, actionId, keyEvent) -> {
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {

@@ -2,7 +2,6 @@ package com.example.jingbin.cloudreader.viewmodel.wan;
 
 import android.arch.lifecycle.ViewModel;
 
-import com.example.jingbin.cloudreader.base.BaseFragment;
 import com.example.jingbin.cloudreader.bean.wanandroid.DuanZiBean;
 import com.example.jingbin.cloudreader.data.model.JokeModel;
 
@@ -18,12 +17,9 @@ import rx.Subscription;
 
 public class JokeViewModel extends ViewModel {
 
-    private final BaseFragment activity;
     private final JokeModel mModel;
     private WanNavigator.JokeNavigator jokeNavigator;
     private int mPage = 1;
-    // 刷新内涵段子
-    private boolean isRefreshNH = false;
     // 刷新糗事百科
     private boolean isRefreshBK = false;
 
@@ -35,8 +31,7 @@ public class JokeViewModel extends ViewModel {
         navigator = null;
     }
 
-    public JokeViewModel(BaseFragment activity) {
-        this.activity = activity;
+    public JokeViewModel() {
         mModel = new JokeModel();
     }
 
@@ -52,17 +47,18 @@ public class JokeViewModel extends ViewModel {
         @Override
         public void loadSuccess(List<DuanZiBean> lists) {
             jokeNavigator.showLoadSuccessView();
-            if (isRefreshBK | isRefreshNH) {
-                if (lists != null && lists.size() > 0) {
-                    jokeNavigator.showAdapterView(lists);
+            if (isRefreshBK) {
+                if (lists == null || lists.size() <= 0) {
+                    jokeNavigator.loadListFailure();
+                    return;
                 }
             } else {
-                if (lists != null && lists.size() > 0) {
-                    jokeNavigator.refreshAdapter(lists);
-                } else {
+                if (lists == null || lists.size() <= 0) {
                     jokeNavigator.showListNoMoreLoading();
+                    return;
                 }
             }
+            jokeNavigator.showAdapterView(lists);
         }
 
         @Override
@@ -72,22 +68,12 @@ public class JokeViewModel extends ViewModel {
 
         @Override
         public void addSubscription(Subscription subscription) {
-            activity.addSubscription(subscription);
+            jokeNavigator.addRxSubscription(subscription);
         }
     };
 
-    public boolean isRefreshNH() {
-        return isRefreshNH;
-    }
-
-    public void setRefreshNH(boolean refreshNH) {
-        isRefreshNH = refreshNH;
-        isRefreshBK = false;
-    }
-
     public void setRefreshBK(boolean refreshBK) {
         isRefreshBK = refreshBK;
-        isRefreshNH = false;
     }
 
     public boolean isRefreshBK() {

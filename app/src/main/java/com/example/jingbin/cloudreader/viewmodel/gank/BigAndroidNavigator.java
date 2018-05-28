@@ -2,6 +2,8 @@ package com.example.jingbin.cloudreader.viewmodel.gank;
 
 import com.example.jingbin.cloudreader.bean.GankIoDataBean;
 
+import rx.Subscription;
+
 /**
  * @author jingbin
  * @data 2018/1/16
@@ -10,6 +12,9 @@ import com.example.jingbin.cloudreader.bean.GankIoDataBean;
 
 public interface BigAndroidNavigator {
 
+    /**
+     * 请求成功
+     */
     void showLoadSuccessView();
 
     /**
@@ -18,14 +23,17 @@ public interface BigAndroidNavigator {
     void showAdapterView(GankIoDataBean gankIoDataBean);
 
     /**
-     * 刷新adapter数据
-     */
-    void refreshAdapter(GankIoDataBean gankIoDataBean);
-
-    /**
      * 显示列表没有更多数据布局
      */
     void showListNoMoreLoading();
 
+    /**
+     * 无数据或请求失败
+     */
     void showLoadFailedView();
+
+    /**
+     * 取消注册
+     */
+    void addRxSubscription(Subscription subscription);
 }

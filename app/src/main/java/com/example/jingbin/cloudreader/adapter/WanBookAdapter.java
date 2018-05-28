@@ -1,6 +1,7 @@
 package com.example.jingbin.cloudreader.adapter;
 
 import android.app.Activity;
+import android.support.annotation.NonNull;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -24,8 +25,9 @@ public class WanBookAdapter extends BaseRecyclerViewAdapter<BooksBean> {
         this.activity = activity;
     }
 
+    @NonNull
     @Override
-    public BaseRecyclerViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public BaseRecyclerViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         return new ViewHolder(parent, R.layout.item_book);
     }
 
@@ -39,7 +41,6 @@ public class WanBookAdapter extends BaseRecyclerViewAdapter<BooksBean> {
         public void onBindViewHolder(final BooksBean book, final int position) {
             if (book != null) {
                 binding.setBean(book);
-                binding.executePendingBindings();
 
                 binding.llItemTop.setOnClickListener(new PerfectClickListener() {
                     @Override

@@ -48,7 +48,7 @@ public class OneFragment extends BaseFragment<FragmentOneBinding> {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        showContentView();
+
         initRecyclerView();
         aCache = ACache.get(getActivity());
         mHotMovieBean = (HotMovieBean) aCache.getAsObject(Constants.ONE_HOT_MOVIE);

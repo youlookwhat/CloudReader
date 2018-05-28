@@ -18,6 +18,8 @@ import com.example.jingbin.cloudreader.viewmodel.gank.CustomNavigator;
 import com.example.jingbin.cloudreader.viewmodel.gank.CustomViewModel;
 import com.example.xrecyclerview.XRecyclerView;
 
+import rx.Subscription;
+
 import static com.example.jingbin.cloudreader.app.Constants.GANK_CALA;
 
 /**
@@ -37,7 +39,7 @@ public class CustomFragment extends BaseFragment<FragmentCustomBinding> implemen
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        viewModel = new CustomViewModel(this);
+        viewModel = new CustomViewModel();
         viewModel.setNavigator(this);
 
         initData();
@@ -64,6 +66,13 @@ public class CustomFragment extends BaseFragment<FragmentCustomBinding> implemen
         // 去掉刷新头
         bindingView.xrvCustom.clearHeader();
         mGankAndroidAdapter = new GankAndroidAdapter(getActivity());
+        if (mHeaderView == null) {
+            mHeaderView = View.inflate(getContext(), R.layout.header_item_gank_custom, null);
+            bindingView.xrvCustom.addHeaderView(mHeaderView);
+        }
+        initHeader(mHeaderView);
+        bindingView.xrvCustom.setLayoutManager(new LinearLayoutManager(getActivity()));
+        bindingView.xrvCustom.setAdapter(mGankAndroidAdapter);
         bindingView.xrvCustom.setLoadingListener(new XRecyclerView.LoadingListener() {
             @Override
             public void onRefresh() {
@@ -96,21 +105,18 @@ public class CustomFragment extends BaseFragment<FragmentCustomBinding> implemen
      * 设置adapter
      */
     private void setAdapter(GankIoDataBean mCustomBean) {
-        if (mHeaderView == null) {
-            mHeaderView = View.inflate(getContext(), R.layout.header_item_gank_custom, null);
-            bindingView.xrvCustom.addHeaderView(mHeaderView);
+        if (viewModel.getPage() == 1) {
+            boolean isAll = SPUtils.getString(GANK_CALA, "全部").equals("全部");
+            mGankAndroidAdapter.clear();
+            mGankAndroidAdapter.setAllType(isAll);
         }
-        initHeader(mHeaderView);
 
-        boolean isAll = SPUtils.getString(GANK_CALA, "全部").equals("全部");
-        mGankAndroidAdapter.clear();
-        mGankAndroidAdapter.setAllType(isAll);
         mGankAndroidAdapter.addAll(mCustomBean.getResults());
-        bindingView.xrvCustom.setLayoutManager(new LinearLayoutManager(getActivity()));
-        bindingView.xrvCustom.setAdapter(mGankAndroidAdapter);
         mGankAndroidAdapter.notifyDataSetChanged();
-
-        mIsFirst = false;
+        bindingView.xrvCustom.refreshComplete();
+        if (mIsFirst) {
+            mIsFirst = false;
+        }
     }
 
     private void initHeader(View mHeaderView) {
@@ -237,13 +243,6 @@ public class CustomFragment extends BaseFragment<FragmentCustomBinding> implemen
     }
 
     @Override
-    public void refreshAdapter(GankIoDataBean gankIoDataBean) {
-        mGankAndroidAdapter.addAll(gankIoDataBean.getResults());
-        bindingView.xrvCustom.refreshComplete();
-        mGankAndroidAdapter.notifyDataSetChanged();
-    }
-
-    @Override
     public void showListNoMoreLoading() {
         bindingView.xrvCustom.noMoreLoading();
     }
@@ -254,5 +253,10 @@ public class CustomFragment extends BaseFragment<FragmentCustomBinding> implemen
         if (mGankAndroidAdapter.getItemCount() == 0) {
             showError();
         }
+    }
+
+    @Override
+    public void addRxSubscription(Subscription subscription) {
+        addSubscription(subscription);
     }
 }

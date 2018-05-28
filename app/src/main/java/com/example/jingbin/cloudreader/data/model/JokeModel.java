@@ -102,13 +102,11 @@ public class JokeModel {
                             String thumb = user.getThumb();
                             if (!TextUtils.isEmpty(thumb)) {
                                 StringBuffer stringBuffer = new StringBuffer();
-//                                String s = thumb.replaceAll("\\\\\\\\", "\\");
                                 stringBuffer.append("http:");
                                 stringBuffer.append(thumb);
                                 duanZiBean.setAvatarUrl(stringBuffer.toString());
                             }
                         }
-//                        bean1.getHot_comment();
                         lists.add(duanZiBean);
                     }
                 }

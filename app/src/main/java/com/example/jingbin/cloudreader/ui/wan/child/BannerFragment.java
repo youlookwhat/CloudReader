@@ -27,6 +27,8 @@ import com.example.xrecyclerview.XRecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
+import rx.Subscription;
+
 /**
  * @author jingbin
  *         Updated by jingbin on 18/02/07.
@@ -73,7 +75,7 @@ public class BannerFragment extends BaseFragment<FragmentWanAndroidBinding> impl
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         showContentView();
-        viewModel = new WanAndroidListViewModel(this);
+        viewModel = new WanAndroidListViewModel();
         viewModel.setNavigator(this);
         viewModel.setArticleListNavigator(this);
         initRefreshView();
@@ -141,6 +143,11 @@ public class BannerFragment extends BaseFragment<FragmentWanAndroidBinding> impl
     @Override
     public void loadBannerFailure() {
         androidBinding.banner.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void addRxSubscription(Subscription subscription) {
+        addSubscription(subscription);
     }
 
     @Override

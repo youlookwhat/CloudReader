@@ -15,6 +15,8 @@ import com.example.jingbin.cloudreader.viewmodel.gank.BigAndroidNavigator;
 import com.example.jingbin.cloudreader.viewmodel.gank.BigAndroidViewModel;
 import com.example.xrecyclerview.XRecyclerView;
 
+import rx.Subscription;
+
 /**
  * 大安卓 fragment
  */
@@ -61,7 +63,7 @@ public class AndroidFragment extends BaseFragment<FragmentAndroidBinding> implem
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        viewModel = new BigAndroidViewModel(this, mType);
+        viewModel = new BigAndroidViewModel(mType);
         viewModel.setBigAndroidNavigator(this);
         initRecyclerView();
         // 准备就绪
@@ -74,18 +76,6 @@ public class AndroidFragment extends BaseFragment<FragmentAndroidBinding> implem
             return;
         }
         viewModel.loadAndroidData();
-    }
-
-    /**
-     * 设置adapter
-     */
-    private void setAdapter(GankIoDataBean mAndroidBean) {
-        mGankAndroidAdapter.clear();
-        mGankAndroidAdapter.addAll(mAndroidBean.getResults());
-        mGankAndroidAdapter.notifyDataSetChanged();
-        bindingView.xrvAndroid.refreshComplete();
-
-        mIsFirst = false;
     }
 
     private void initRecyclerView() {
@@ -135,14 +125,16 @@ public class AndroidFragment extends BaseFragment<FragmentAndroidBinding> implem
 
     @Override
     public void showAdapterView(GankIoDataBean gankIoDataBean) {
-        setAdapter(gankIoDataBean);
-    }
-
-    @Override
-    public void refreshAdapter(GankIoDataBean gankIoDataBean) {
-        bindingView.xrvAndroid.refreshComplete();
+        if (viewModel.getPage() == 1) {
+            mGankAndroidAdapter.clear();
+        }
         mGankAndroidAdapter.addAll(gankIoDataBean.getResults());
         mGankAndroidAdapter.notifyDataSetChanged();
+        bindingView.xrvAndroid.refreshComplete();
+
+        if (mIsFirst) {
+            mIsFirst = false;
+        }
     }
 
     @Override
@@ -157,5 +149,10 @@ public class AndroidFragment extends BaseFragment<FragmentAndroidBinding> implem
         if (mGankAndroidAdapter.getItemCount() == 0) {
             showError();
         }
+    }
+
+    @Override
+    public void addRxSubscription(Subscription subscription) {
+        addSubscription(subscription);
     }
 }

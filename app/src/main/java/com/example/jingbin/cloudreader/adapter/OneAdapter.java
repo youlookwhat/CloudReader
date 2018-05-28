@@ -41,7 +41,6 @@ public class OneAdapter extends BaseRecyclerViewAdapter<SubjectsBean> {
             if (positionData != null) {
                 binding.setSubjectsBean(positionData);
                 binding.setCallback(subjectsBean -> OneMovieDetailActivity.start(activity, positionData, binding.ivOnePhoto));
-                binding.executePendingBindings();
 
                 // 图片
 //                ImgLoadUtil.displayEspImage(positionData.getImages().getLarge(), binding.ivOnePhoto,0);

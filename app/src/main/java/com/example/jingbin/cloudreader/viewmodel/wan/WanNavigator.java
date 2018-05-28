@@ -45,13 +45,6 @@ public interface WanNavigator {
         void showAdapterView(List<DuanZiBean> bean);
 
         /**
-         * 刷新列表
-         *
-         * @param bean 文章数据
-         */
-        void refreshAdapter(List<DuanZiBean> bean);
-
-        /**
          * 没有更多了
          */
         void showListNoMoreLoading();
@@ -60,6 +53,11 @@ public interface WanNavigator {
          * 显示加载成功页面
          */
         void showLoadSuccessView();
+
+        /**
+         * 取消注册
+         */
+        void addRxSubscription(Subscription subscription);
     }
 
     /**
@@ -79,6 +77,11 @@ public interface WanNavigator {
          * 加载banner图失败
          */
         void loadBannerFailure();
+
+        /**
+         * 取消注册
+         */
+        void addRxSubscription(Subscription subscription);
     }
 
     /**
@@ -106,6 +109,11 @@ public interface WanNavigator {
          * 显示加载成功页面
          */
         void showLoadSuccessView();
+
+        /**
+         * 取消注册
+         */
+        void addRxSubscription(Subscription subscription);
     }
 
     /**
