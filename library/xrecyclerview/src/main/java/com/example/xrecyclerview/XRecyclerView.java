@@ -169,10 +169,12 @@ public class XRecyclerView extends RecyclerView {
 
                 View footView = mFootViews.get(0);
                 isLoadingData = true;
-                if (footView instanceof LoadingMoreFooter) {
-                    ((LoadingMoreFooter) footView).setState(LoadingMoreFooter.STATE_LOADING);
-                } else {
-                    footView.setVisibility(View.VISIBLE);
+                if (footView != null) {
+                    if (footView instanceof LoadingMoreFooter) {
+                        ((LoadingMoreFooter) footView).setState(LoadingMoreFooter.STATE_LOADING);
+                    } else {
+                        footView.setVisibility(View.VISIBLE);
+                    }
                 }
                 if (isNetWorkConnected(getContext())) {
                     mLoadingListener.onLoadMore();

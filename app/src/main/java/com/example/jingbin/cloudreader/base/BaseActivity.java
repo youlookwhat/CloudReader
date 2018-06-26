@@ -24,9 +24,10 @@ import rx.Subscription;
 import rx.subscriptions.CompositeSubscription;
 
 /**
- * Created by jingbin on 16/12/10.
+ * @author jingbin
+ * @date 16/12/10
  */
-public class BaseActivity<SV extends ViewDataBinding> extends AppCompatActivity {
+public abstract class BaseActivity<SV extends ViewDataBinding> extends AppCompatActivity {
 
     // 布局view
     protected SV bindingView;
@@ -59,8 +60,8 @@ public class BaseActivity<SV extends ViewDataBinding> extends AppCompatActivity 
         getWindow().setContentView(mBaseBinding.getRoot());
 
         // 设置透明状态栏，兼容4.4
-        StatusBarUtil.setColor(this, CommonUtils.getColor(R.color.colorTheme),0);
-         loadingView = ((ViewStub) findViewById(R.id.vs_loading)).inflate();
+        StatusBarUtil.setColor(this, CommonUtils.getColor(R.color.colorTheme), 0);
+        loadingView = ((ViewStub) findViewById(R.id.vs_loading)).inflate();
         refresh = getView(R.id.ll_error_refresh);
         ImageView img = loadingView.findViewById(R.id.img_progress);
 
@@ -109,7 +110,7 @@ public class BaseActivity<SV extends ViewDataBinding> extends AppCompatActivity 
     }
 
     protected void showLoading() {
-        if (loadingView!=null && loadingView.getVisibility() != View.VISIBLE) {
+        if (loadingView != null && loadingView.getVisibility() != View.VISIBLE) {
             loadingView.setVisibility(View.VISIBLE);
         }
         // 开始动画
@@ -125,7 +126,7 @@ public class BaseActivity<SV extends ViewDataBinding> extends AppCompatActivity 
     }
 
     protected void showContentView() {
-        if (loadingView!=null && loadingView.getVisibility() != View.GONE) {
+        if (loadingView != null && loadingView.getVisibility() != View.GONE) {
             loadingView.setVisibility(View.GONE);
         }
         // 停止动画
@@ -141,7 +142,7 @@ public class BaseActivity<SV extends ViewDataBinding> extends AppCompatActivity 
     }
 
     protected void showError() {
-        if (loadingView!=null && loadingView.getVisibility() != View.GONE) {
+        if (loadingView != null && loadingView.getVisibility() != View.GONE) {
             loadingView.setVisibility(View.GONE);
         }
         // 停止动画

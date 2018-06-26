@@ -1,6 +1,7 @@
 package com.example.jingbin.cloudreader.utils;
 
 import android.content.Context;
+import android.os.Looper;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -43,6 +44,12 @@ public class DebugUtil {
         if (DEBUG) {
 
             Log.e(TAG, error);
+        }
+    }
+
+    public static void isMainThread() {
+        if (DEBUG) {
+            Log.e(TAG, "---是否在主线程：" + (Thread.currentThread() == Looper.getMainLooper().getThread()));
         }
     }
 }

@@ -125,8 +125,9 @@ public class EverydayModel {
         };
 
         Subscription subscription = HttpClient.Builder.getGankIOServer().getGankIoDay(year, month, day)
-                .subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
                 .flatMap(func1)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(observer);
         listener.addSubscription(subscription);
     }

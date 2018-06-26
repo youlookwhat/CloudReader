@@ -54,7 +54,7 @@ public class MyFragmentPagerAdapter extends FragmentPagerAdapter {
      */
     @Override
     public CharSequence getPageTitle(int position) {
-        if (mTitleList != null) {
+        if (mTitleList != null && position < mTitleList.size()) {
             return mTitleList.get(position);
         } else {
             return "";

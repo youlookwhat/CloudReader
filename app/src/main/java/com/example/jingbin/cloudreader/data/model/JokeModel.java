@@ -73,8 +73,8 @@ public class JokeModel {
         };
 
         Subscription subscription = HttpClient.Builder.getNHDZServer().getNhdzList(page)
-                .subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
                 .flatMap(func1)
+                .subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
                 .subscribe(observer);
         listener.addSubscription(subscription);
     }
@@ -132,8 +132,8 @@ public class JokeModel {
         };
 
         Subscription subscription = HttpClient.Builder.getQSBKServer().getQsbkList(page)
-                .subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
                 .flatMap(func1)
+                .subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
                 .subscribe(observer);
         listener.addSubscription(subscription);
     }
