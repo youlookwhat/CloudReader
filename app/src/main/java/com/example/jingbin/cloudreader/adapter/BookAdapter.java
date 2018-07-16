@@ -176,7 +176,6 @@ public class BookAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                     itemView.setVisibility(View.VISIBLE);
                     break;
                 case LOAD_NONE:
-                    System.out.println("LOAD_NONE----");
                     mBindFooter.progress.setVisibility(View.GONE);
                     mBindFooter.tvLoadPrompt.setText("没有更多内容了");
                     break;

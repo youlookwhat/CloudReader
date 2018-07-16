@@ -37,6 +37,7 @@ import jp.wasabeef.glide.transformations.BlurTransformation;
 import static com.example.jingbin.cloudreader.view.statusbar.StatusBarUtil.getStatusBarHeight;
 
 /**
+ * （已使用：{@link OneMovieDetailActivity} 替代）
  * 思路：
  * 1、透明状态栏（透明titlebar,使背景图上移）
  * 2、titlebar底部增加和背景一样的高斯模糊图，并上移图片的高度-titlebar的高度（为了使背景图的底部作为titlebar的背景）

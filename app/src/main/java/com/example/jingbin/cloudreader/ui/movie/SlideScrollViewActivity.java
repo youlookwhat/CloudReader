@@ -34,6 +34,7 @@ import java.util.Arrays;
 import static com.example.jingbin.cloudreader.view.statusbar.StatusBarUtil.getStatusBarHeight;
 
 /**
+ * （已使用：{@link OneMovieDetailActivity} 替代）
  * 暂时的电影详情页 2016-11-29
  */
 public class SlideScrollViewActivity extends AppCompatActivity {

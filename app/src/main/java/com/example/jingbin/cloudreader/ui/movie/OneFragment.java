@@ -20,6 +20,9 @@ import com.example.jingbin.cloudreader.utils.SPUtils;
 import com.example.jingbin.cloudreader.utils.TimeUtil;
 import com.example.jingbin.cloudreader.viewmodel.movie.OneViewModel;
 
+/**
+ * @author jingbin
+ */
 public class OneFragment extends BaseFragment<FragmentOneBinding> {
 
     // 初始化完成后加载数据

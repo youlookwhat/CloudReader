@@ -21,6 +21,9 @@ import com.example.jingbin.cloudreader.utils.DebugUtil;
 import com.example.jingbin.cloudreader.view.CallBack_ScrollChanged;
 import com.example.jingbin.cloudreader.view.test.StatusBarUtils;
 
+/**
+ * （已使用：{@link OneMovieDetailActivity} 替代）
+ */
 public class SlideActivity extends AppCompatActivity {
 
     private ActivitySlideBinding binding;
@@ -52,7 +55,7 @@ public class SlideActivity extends AppCompatActivity {
         if (binding.imgItemBg != null) {
             ViewGroup.MarginLayoutParams layoutParams = (ViewGroup.MarginLayoutParams) binding.imgItemBg.getLayoutParams();
             layoutParams.setMargins(0, -getStatusBarHeight(this), 0, 0);
-            DebugUtil.error("getStatusBarHeight:"+getStatusBarHeight(this));
+            DebugUtil.error("getStatusBarHeight:" + getStatusBarHeight(this));
         }
         initNewSlidingParams();
 

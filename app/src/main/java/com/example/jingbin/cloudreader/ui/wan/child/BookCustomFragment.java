@@ -23,6 +23,9 @@ import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
+/**
+ * 已废弃，使用{@link BookListFragment}，替代
+ */
 public class BookCustomFragment extends BaseFragment<FragmentBookCustomBinding> {
 
     private static final String TYPE = "param1";

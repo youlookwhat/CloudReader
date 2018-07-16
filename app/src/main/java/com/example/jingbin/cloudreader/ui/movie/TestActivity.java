@@ -32,6 +32,7 @@ import java.util.List;
 import jp.wasabeef.glide.transformations.BlurTransformation;
 
 /**
+ * （已使用：{@link OneMovieDetailActivity} 替代）
  * 第二种电影详情页
  */
 public class TestActivity extends AppCompatActivity {
