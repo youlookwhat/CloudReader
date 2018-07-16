@@ -15,8 +15,9 @@ public class CustomChangeBounds extends ChangeBounds {
                                    final TransitionValues endValues) {
 
         Animator changeBounds = super.createAnimator(sceneRoot, startValues, endValues);
-        if (startValues == null || endValues == null || changeBounds == null)
+        if (startValues == null || endValues == null || changeBounds == null) {
             return null;
+        }
 
 //        if (endValues.view instanceof ViewGroup) {
 //            ViewGroup vg = (ViewGroup) endValues.view;

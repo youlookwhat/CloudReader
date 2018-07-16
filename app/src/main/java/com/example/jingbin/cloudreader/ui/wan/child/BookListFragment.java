@@ -8,7 +8,6 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.view.inputmethod.EditorInfo;
 
-import com.example.jingbin.cloudreader.MainActivity;
 import com.example.jingbin.cloudreader.R;
 import com.example.jingbin.cloudreader.adapter.WanBookAdapter;
 import com.example.jingbin.cloudreader.base.BaseFragment;
@@ -39,7 +38,6 @@ public class BookListFragment extends BaseFragment<FragmentWanAndroidBinding> {
     private int mStart = 0;
     // 一次请求的数量
     private int mCount = 18;
-    private MainActivity activity;
     private WanBookAdapter mBookAdapter;
 
     @Override
@@ -50,7 +48,6 @@ public class BookListFragment extends BaseFragment<FragmentWanAndroidBinding> {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        activity = (MainActivity) context;
     }
 
     public static BookListFragment newInstance(String param1) {
@@ -179,18 +176,21 @@ public class BookListFragment extends BaseFragment<FragmentWanAndroidBinding> {
                     public void onNext(BookBean bookBean) {
                         if (mStart == 0) {
                             if (bookBean != null && bookBean.getBooks() != null && bookBean.getBooks().size() > 0) {
-
                                 mBookAdapter.clear();
-                                mBookAdapter.addAll(bookBean.getBooks());
-                                mBookAdapter.notifyDataSetChanged();
-                                bindingView.xrvBook.refreshComplete();
+                            } else {
+                                showError();
+                                return;
                             }
                             mIsFirst = false;
                         } else {
-                            mBookAdapter.addAll(bookBean.getBooks());
-                            mBookAdapter.notifyDataSetChanged();
-                            bindingView.xrvBook.refreshComplete();
+                            if (bookBean == null || bookBean.getBooks() == null || bookBean.getBooks().size() == 0) {
+                                bindingView.xrvBook.noMoreLoading();
+                                return;
+                            }
                         }
+                        mBookAdapter.addAll(bookBean.getBooks());
+                        mBookAdapter.notifyDataSetChanged();
+                        bindingView.xrvBook.refreshComplete();
                     }
                 });
         addSubscription(get);
