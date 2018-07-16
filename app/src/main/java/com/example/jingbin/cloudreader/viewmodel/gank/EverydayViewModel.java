@@ -21,30 +21,28 @@ import rx.Subscription;
  * @author jingbin
  * @data 2017/12/15
  */
-
 public class EverydayViewModel extends ViewModel {
 
-    private final EverydayModel mEverydayModel;
-    private final ACache maCache;
+    private EverydayModel mEverydayModel;
+    private ACache maCache;
     private EverydayNavigator everydayNavigator;
     private ArrayList<List<AndroidBean>> mLists;
     private ArrayList<String> mBannerImages;
-    private String year = getTodayTime().get(0);
-    private String month = getTodayTime().get(1);
-    private String day = getTodayTime().get(2);
+    private String year;
+    private String month;
+    private String day;
 
     public void setEverydayNavigator(EverydayNavigator everydayNavigator) {
         this.everydayNavigator = everydayNavigator;
     }
 
-    public void onDestroy() {
-        everydayNavigator = null;
-    }
-
     public EverydayViewModel() {
         maCache = ACache.get(CloudReaderApplication.getInstance());
         mEverydayModel = new EverydayModel();
-        mEverydayModel.setData(getTodayTime().get(0), getTodayTime().get(1), getTodayTime().get(2));
+        year = getTodayTime().get(0);
+        month = getTodayTime().get(1);
+        day = getTodayTime().get(2);
+        mEverydayModel.setData(year, month, day);
     }
 
     private void showRecyclerViewData() {
@@ -100,7 +98,7 @@ public class EverydayViewModel extends ViewModel {
     }
 
     private void showBanncerPage() {
-        mEverydayModel.showBanncerPage(new RequestImpl() {
+        mEverydayModel.showBannerPage(new RequestImpl() {
             @Override
             public void loadSuccess(Object object) {
                 if (mBannerImages == null) {
@@ -163,17 +161,18 @@ public class EverydayViewModel extends ViewModel {
 
     public void loadData() {
         String oneData = SPUtils.getString("everyday_data", "2016-11-26");
-//        DebugUtil.error("----"+oneData);
-        if (!oneData.equals(TimeUtil.getData())) {// 是第二天
-            if (TimeUtil.isRightTime()) {//大于12：30,请求
-
+        if (!oneData.equals(TimeUtil.getData())) {
+            // 是第二天
+            if (TimeUtil.isRightTime()) {
+                //大于12：30,请求
                 everydayNavigator.setIsOldDayRequest(false);
                 mEverydayModel.setData(getTodayTime().get(0), getTodayTime().get(1), getTodayTime().get(2));
                 everydayNavigator.showRotaLoading();
                 showBanncerPage();
                 showRecyclerViewData();
-            } else {// 小于，取缓存没有请求前一天
 
+            } else {
+                // 小于，取缓存没有请求前一天
                 ArrayList<String> lastTime = TimeUtil.getLastTime(getTodayTime().get(0), getTodayTime().get(1), getTodayTime().get(2));
                 mEverydayModel.setData(lastTime.get(0), lastTime.get(1), lastTime.get(2));
                 year = lastTime.get(0);
@@ -204,5 +203,18 @@ public class EverydayViewModel extends ViewModel {
         list.add(month);
         list.add(day);
         return list;
+    }
+
+    public void onDestroy() {
+        everydayNavigator = null;
+        mEverydayModel = null;
+        if (mLists != null) {
+            mLists.clear();
+            mLists = null;
+        }
+        if (mBannerImages != null) {
+            mBannerImages.clear();
+            mBannerImages = null;
+        }
     }
 }

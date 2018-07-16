@@ -25,7 +25,6 @@ import rx.schedulers.Schedulers;
  * Created by jingbin on 2016/12/1.
  * 每日推荐model
  */
-
 public class EverydayModel {
 
     private String year = "2016";
@@ -44,7 +43,7 @@ public class EverydayModel {
     /**
      * 轮播图
      */
-    public void showBanncerPage(final RequestImpl listener) {
+    public void showBannerPage(final RequestImpl listener) {
         Subscription subscription = HttpClient.Builder.getTingServer().getFrontpage()
                 .observeOn(AndroidSchedulers.mainThread()).subscribeOn(Schedulers.io())
                 .subscribe(new Observer<FrontpageBean>() {
@@ -54,15 +53,21 @@ public class EverydayModel {
 
                     @Override
                     public void onError(Throwable e) {
-                        listener.loadFailed();
+                        if (listener != null) {
+                            listener.loadFailed();
+                        }
                     }
 
                     @Override
                     public void onNext(FrontpageBean frontpageBean) {
-                        listener.loadSuccess(frontpageBean);
+                        if (listener != null) {
+                            listener.loadSuccess(frontpageBean);
+                        }
                     }
                 });
-        listener.addSubscription(subscription);
+        if (listener != null) {
+            listener.addSubscription(subscription);
+        }
     }
 
     /**
