@@ -97,7 +97,7 @@ public class EverydayViewModel extends ViewModel {
         }
     }
 
-    private void showBanncerPage() {
+    private void showBannerPage() {
         mEverydayModel.showBannerPage(new RequestImpl() {
             @Override
             public void loadSuccess(Object object) {
@@ -147,7 +147,7 @@ public class EverydayViewModel extends ViewModel {
             // 加上缓存使其可以点击
             everydayNavigator.showBannerView(mBannerImages, result);
         } else {
-            showBanncerPage();
+            showBannerPage();
         }
         mLists = (ArrayList<List<AndroidBean>>) maCache.getAsObject(Constants.EVERYDAY_CONTENT);
         if (mLists != null && mLists.size() > 0) {
@@ -168,7 +168,7 @@ public class EverydayViewModel extends ViewModel {
                 everydayNavigator.setIsOldDayRequest(false);
                 mEverydayModel.setData(getTodayTime().get(0), getTodayTime().get(1), getTodayTime().get(2));
                 everydayNavigator.showRotaLoading();
-                showBanncerPage();
+                showBannerPage();
                 showRecyclerViewData();
 
             } else {

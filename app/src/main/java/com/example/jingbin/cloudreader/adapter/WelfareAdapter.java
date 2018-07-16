@@ -21,8 +21,7 @@ public class WelfareAdapter extends BaseRecyclerViewAdapter<GankIoDataBean.Resul
     public BaseRecyclerViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         return new ViewHolder(parent, R.layout.item_welfare);
     }
-
-
+    
     private class ViewHolder extends BaseRecyclerViewHolder<GankIoDataBean.ResultBean, ItemWelfareBinding> {
 
 

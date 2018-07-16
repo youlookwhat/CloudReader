@@ -184,8 +184,6 @@ public class ViewBigImageActivity extends FragmentActivity implements OnPageChan
 
     /**
      * ViewPager的适配器
-     *
-     * @author guolin
      */
     private class ViewPagerAdapter extends PagerAdapter {
 

@@ -232,10 +232,10 @@ public class EverydayModel {
             urlLength = ConstantsImageUrl.HOME_SIX_URLS.length;
         }
 
-        String home_six = SPUtils.getString(saveWhere, "");
-        if (!TextUtils.isEmpty(home_six)) {
+        String homeSix = SPUtils.getString(saveWhere, "");
+        if (!TextUtils.isEmpty(homeSix)) {
             // 已取到的值
-            String[] split = home_six.split(",");
+            String[] split = homeSix.split(",");
 
             Random random = new Random();
             for (int j = 0; j < urlLength; j++) {
@@ -249,7 +249,7 @@ public class EverydayModel {
                     }
                 }
                 if (!isUse) {
-                    StringBuilder sb = new StringBuilder(home_six);
+                    StringBuilder sb = new StringBuilder(homeSix);
                     sb.insert(0, randomInt + ",");
                     SPUtils.putString(saveWhere, sb.toString());
                     return randomInt;
