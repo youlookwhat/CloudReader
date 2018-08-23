@@ -48,7 +48,7 @@ public class NavAboutActivity extends BaseActivity<ActivityNavAboutBinding> {
         bindingView.tvAboutStar.setOnClickListener(listener);
         bindingView.tvFunction.setOnClickListener(listener);
         bindingView.tvWanandroid.setOnClickListener(listener);
-//        bindingView.tvNewVersion.setOnClickListener(listener);
+        bindingView.tvDownloadUrl.setOnClickListener(listener);
     }
 
     private PerfectClickListener listener = new PerfectClickListener() {
@@ -73,9 +73,9 @@ public class NavAboutActivity extends BaseActivity<ActivityNavAboutBinding> {
                     url = CommonUtils.getString(R.string.string_url_update_log);
                     title = "更新日志";
                     break;
-                case R.id.tv_new_version:
+                case R.id.tv_download_url:
                     url = CommonUtils.getString(R.string.string_url_new_version);
-                    title = "检查更新";
+                    title = "云阅 - fir.im";
                     break;
                 case R.id.tv_wanandroid:
                     url = CommonUtils.getString(R.string.string_url_wanandroid);
@@ -94,6 +94,6 @@ public class NavAboutActivity extends BaseActivity<ActivityNavAboutBinding> {
     }
 
     public void checkUpdate(View view) {
-        UpdateUtil.check(this,true);
+        UpdateUtil.check(this, true);
     }
 }

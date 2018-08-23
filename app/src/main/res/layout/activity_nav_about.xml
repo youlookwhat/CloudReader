@@ -52,15 +52,16 @@
                         android:text="检查更新" />
 
                     <TextView
+                        android:id="@+id/tv_download_url"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
                         android:layout_centerVertical="true"
                         android:layout_marginRight="15dp"
-                        android:text=""
+                        android:text="下载链接"
                         android:textColor="@color/colorSubtitle"
                         android:textSize="13sp"
-                        android:visibility="gone" />
+                        android:visibility="visible" />
                 </RelativeLayout>
 
                 <View
@@ -82,7 +83,6 @@
                     style="@style/menuItem"
                     android:clickable="true"
                     android:text="给个Star吧" />
-
 
             </LinearLayout>
 
@@ -138,9 +138,9 @@
             </LinearLayout>
 
             <LinearLayout
-                android:layout_marginTop="8dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
                 android:orientation="horizontal">
 
                 <TextView

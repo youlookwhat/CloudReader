@@ -101,10 +101,14 @@ public class JokeModel {
                             duanZiBean.setName(user.getLogin());
                             String thumb = user.getThumb();
                             if (!TextUtils.isEmpty(thumb)) {
-                                StringBuffer stringBuffer = new StringBuffer();
-                                stringBuffer.append("http:");
-                                stringBuffer.append(thumb);
-                                duanZiBean.setAvatarUrl(stringBuffer.toString());
+                                if (!thumb.contains("http")) {
+                                    StringBuilder stringBuffer = new StringBuilder();
+                                    stringBuffer.append("http:");
+                                    stringBuffer.append(thumb);
+                                    duanZiBean.setAvatarUrl(stringBuffer.toString());
+                                } else {
+                                    duanZiBean.setAvatarUrl(thumb);
+                                }
                             }
                         }
                         lists.add(duanZiBean);
