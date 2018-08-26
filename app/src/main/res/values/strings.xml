@@ -15,6 +15,7 @@
     <string name="actionbar_webview_share">分享到</string>
     <string name="actionbar_webview_cope">复制链接</string>
     <string name="actionbar_webview_open">打开链接</string>
+    <string name="actionbar_webview_refresh">刷新页面</string>
     <string name="actionbar_share">分享给朋友\(^o^)/~</string>
     <string name="picture_has_save_to">已保存至 %s</string>
     <string name="github_issues">您好，很希望得到您的意见，由于没有线上反馈系统，您可以在GitHub的Issues处说明问题原因，也可以通过以下方式联系我，我将根据情况尽量处理哦 ~</string>

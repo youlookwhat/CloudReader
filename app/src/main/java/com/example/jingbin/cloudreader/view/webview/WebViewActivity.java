@@ -9,7 +9,6 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -95,20 +94,6 @@ public class WebViewActivity extends AppCompatActivity implements IWebPageView {
         setTitle(mTitle);
     }
 
-    private void initTextSwitch() {
-        mTsTitle.setFactory(() -> {
-            TextView textView = new TextView(this);
-            textView.setTextAppearance(this, R.style.WebTitle);
-            textView.setSingleLine(true);
-            textView.setEllipsize(TextUtils.TruncateAt.MARQUEE);
-            textView.postDelayed(() -> textView.setSelected(true), 1900);
-            return textView;
-        });
-        mTsTitle.setInAnimation(this, android.R.anim.fade_in);
-        mTsTitle.setOutAnimation(this, android.R.anim.fade_out);
-        setTitle(mTitle);
-    }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.webview_menu, menu);
@@ -131,6 +116,11 @@ public class WebViewActivity extends AppCompatActivity implements IWebPageView {
                 break;
             case R.id.actionbar_open:// 打开链接
                 BaseTools.openLink(WebViewActivity.this, webView.getUrl());
+                break;
+            case R.id.actionbar_webview_refresh:// 刷新页面
+                if (webView != null) {
+                    webView.reload();
+                }
                 break;
             default:
                 break;
