@@ -25,14 +25,12 @@ public class CloudReaderApplication extends MultiDexApplication{
     @Override
     public void onCreate() {
         super.onCreate();
+        cloudReaderApplication = this;
         if (LeakCanary.isInAnalyzerProcess(this)) {
-            // This process is dedicated to LeakCanary for heap analysis.
-            // You should not init your app in this process.
             return;
         }
-        cloudReaderApplication = this;
-        HttpUtils.getInstance().init(this, DebugUtil.DEBUG);
         LeakCanary.install(this);
+        HttpUtils.getInstance().init(this, DebugUtil.DEBUG);
         CrashReport.initCrashReport(getApplicationContext(), "3977b2d86f", DebugUtil.DEBUG);
 
         initTextSize();
