@@ -3,6 +3,7 @@ package com.example.jingbin.cloudreader.base;
 import android.databinding.DataBindingUtil;
 import android.databinding.ViewDataBinding;
 import android.graphics.drawable.AnimationDrawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
 import android.support.v7.app.ActionBar;
@@ -99,7 +100,11 @@ public abstract class BaseActivity<SV extends ViewDataBinding> extends AppCompat
         mBaseBinding.toolBar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onBackPressed();
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    finishAfterTransition();
+                } else {
+                    onBackPressed();
+                }
             }
         });
     }

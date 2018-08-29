@@ -1,5 +1,6 @@
 package com.example.jingbin.cloudreader.view.webview;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
@@ -18,7 +19,6 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.FrameLayout;
 import android.widget.ProgressBar;
-import android.widget.TextSwitcher;
 import android.widget.TextView;
 
 import com.example.http.utils.CheckNetwork;
@@ -55,8 +55,6 @@ public class WebViewActivity extends AppCompatActivity implements IWebPageView {
     private String mTitle;
     // 网页链接
     private String mUrl;
-    // 可滚动的title 使用复杂 文字显示有渐变效果，文字两旁没有阴影
-    private TextSwitcher mTsTitle;
     // 可滚动的title 使用简单 没有渐变效果，文字两旁有阴影
     private TextView tvGunTitle;
 
@@ -76,7 +74,6 @@ public class WebViewActivity extends AppCompatActivity implements IWebPageView {
         webView = findViewById(R.id.webview_detail);
         videoFullView = findViewById(R.id.video_fullView);
         mTitleToolBar = findViewById(R.id.title_tool_bar);
-        mTsTitle = findViewById(R.id.ts_title);
         tvGunTitle = findViewById(R.id.tv_gun_title);
 
         initToolBar();
@@ -104,7 +101,11 @@ public class WebViewActivity extends AppCompatActivity implements IWebPageView {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:// 返回键
-                onBackPressed();
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    finishAfterTransition();
+                } else {
+                    finish();
+                }
                 break;
             case R.id.actionbar_share:// 分享到
                 String shareText = mWebChromeClient.getTitle() + webView.getUrl() + "（分享自云阅）";
@@ -139,6 +140,7 @@ public class WebViewActivity extends AppCompatActivity implements IWebPageView {
         tvGunTitle.setText(mTitle);
     }
 
+    @SuppressLint("SetJavaScriptEnabled")
     private void initWebView() {
         mProgressBar.setVisibility(View.VISIBLE);
         WebSettings ws = webView.getSettings();
@@ -289,7 +291,11 @@ public class WebViewActivity extends AppCompatActivity implements IWebPageView {
 
                 //退出网页
             } else {
-                finish();
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    finishAfterTransition();
+                } else {
+                    finish();
+                }
             }
         }
         return false;
@@ -315,8 +321,10 @@ public class WebViewActivity extends AppCompatActivity implements IWebPageView {
 
     @Override
     protected void onDestroy() {
-        super.onDestroy();
-        videoFullView.removeAllViews();
+        if (videoFullView != null) {
+            videoFullView.clearAnimation();
+            videoFullView.removeAllViews();
+        }
         if (webView != null) {
             webView.loadDataWithBaseURL(null, "", "text/html", "utf-8", null);
             webView.clearHistory();
@@ -330,7 +338,11 @@ public class WebViewActivity extends AppCompatActivity implements IWebPageView {
             webView.setWebViewClient(null);
             webView.destroy();
             webView = null;
+            mProgressBar.clearAnimation();
+            tvGunTitle.clearAnimation();
+            tvGunTitle.clearFocus();
         }
+        super.onDestroy();
     }
 
     /**
