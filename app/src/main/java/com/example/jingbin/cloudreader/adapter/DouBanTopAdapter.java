@@ -11,6 +11,7 @@ import com.example.jingbin.cloudreader.base.baseadapter.BaseRecyclerViewHolder;
 import com.example.jingbin.cloudreader.bean.moviechild.SubjectsBean;
 import com.example.jingbin.cloudreader.databinding.ItemDoubanTopBinding;
 import com.example.jingbin.cloudreader.ui.movie.OneMovieDetailActivity;
+import com.example.jingbin.cloudreader.utils.DensityUtil;
 import com.example.jingbin.cloudreader.utils.DialogBuild;
 import com.example.jingbin.cloudreader.utils.PerfectClickListener;
 
@@ -22,9 +23,12 @@ public class DouBanTopAdapter extends BaseRecyclerViewAdapter<SubjectsBean> {
 
 
     private Activity activity;
+    private int width;
 
     public DouBanTopAdapter(Activity activity) {
         this.activity = activity;
+        int px = DensityUtil.dip2px(48);
+        width = (DensityUtil.getDisplayWidth() - px) / 3;
     }
 
     @Override
@@ -44,6 +48,7 @@ public class DouBanTopAdapter extends BaseRecyclerViewAdapter<SubjectsBean> {
             /**
              * 当数据改变时，binding会在下一帧去改变数据，如果我们需要立即改变，就去调用executePendingBindings方法。
              */
+            DensityUtil.formartHight(binding.ivTopPhoto, width, 0.758f, 1);
             binding.executePendingBindings();
             binding.llItemTop.setOnClickListener(new PerfectClickListener() {
                 @Override

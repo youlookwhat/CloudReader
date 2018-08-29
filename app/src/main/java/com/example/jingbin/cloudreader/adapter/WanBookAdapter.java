@@ -11,6 +11,7 @@ import com.example.jingbin.cloudreader.base.baseadapter.BaseRecyclerViewHolder;
 import com.example.jingbin.cloudreader.bean.book.BooksBean;
 import com.example.jingbin.cloudreader.databinding.ItemBookBinding;
 import com.example.jingbin.cloudreader.ui.wan.child.BookDetailActivity;
+import com.example.jingbin.cloudreader.utils.DensityUtil;
 import com.example.jingbin.cloudreader.utils.PerfectClickListener;
 
 /**
@@ -19,10 +20,13 @@ import com.example.jingbin.cloudreader.utils.PerfectClickListener;
 
 public class WanBookAdapter extends BaseRecyclerViewAdapter<BooksBean> {
 
+    private int width;
     private Activity activity;
 
     public WanBookAdapter(Activity activity) {
         this.activity = activity;
+        int px = DensityUtil.dip2px(48);
+        width = (DensityUtil.getDisplayWidth() - px) / 3;
     }
 
     @NonNull
@@ -41,11 +45,11 @@ public class WanBookAdapter extends BaseRecyclerViewAdapter<BooksBean> {
         public void onBindViewHolder(final BooksBean book, final int position) {
             if (book != null) {
                 binding.setBean(book);
-
+                DensityUtil.formartHight(binding.ivTopPhoto, width, 0.703f, 1);
                 binding.llItemTop.setOnClickListener(new PerfectClickListener() {
                     @Override
                     protected void onNoDoubleClick(View v) {
-                        BookDetailActivity.start(activity,book,binding.ivTopPhoto);
+                        BookDetailActivity.start(activity, book, binding.ivTopPhoto);
                     }
                 });
             }

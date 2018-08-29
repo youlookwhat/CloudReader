@@ -234,7 +234,13 @@ public abstract class BaseHeaderActivity<HV extends ViewDataBinding, SV extends 
 //        bindingTitleView.tbBaseTitle.setTitleTextAppearance(this, R.style.ToolBar_Title);
 //        bindingTitleView.tbBaseTitle.setSubtitleTextAppearance(this, R.style.Toolbar_SubTitle);
         bindingTitleView.tbBaseTitle.setOverflowIcon(ContextCompat.getDrawable(this, R.drawable.actionbar_more));
-        bindingTitleView.tbBaseTitle.setNavigationOnClickListener(v -> onBackPressed());
+        bindingTitleView.tbBaseTitle.setNavigationOnClickListener(v -> {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                finishAfterTransition();
+            } else {
+                finish();
+            }
+        });
         bindingTitleView.tbBaseTitle.setOnMenuItemClickListener(item -> {
             switch (item.getItemId()) {
                 case R.id.actionbar_more:// 更多信息
