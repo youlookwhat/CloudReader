@@ -100,8 +100,8 @@
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="5dp"
+            android:layout_height="1px"
             android:layout_below="@+id/ll_item_top"
-            android:background="@color/color_page_bg" />
+            android:background="@color/colorHomeLine" />
     </RelativeLayout>
 </layout>

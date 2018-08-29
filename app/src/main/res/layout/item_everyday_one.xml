@@ -12,7 +12,6 @@
             android:id="@+id/ll_one_photo_line"
             android:layout_width="match_parent"
             android:layout_height="12dp"
-            android:background="@color/color_page_bg"
             android:visibility="gone" />
 
         <ImageView

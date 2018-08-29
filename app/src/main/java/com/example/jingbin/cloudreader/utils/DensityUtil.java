@@ -5,7 +5,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
@@ -92,7 +91,7 @@ public class DensityUtil {
         if (type == 1) {
             LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, height);
             imageView.setLayoutParams(lp);
-        } else if (type == 2){
+        } else if (type == 2) {
             RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, height);
             imageView.setLayoutParams(lp);
         } else {
@@ -111,16 +110,30 @@ public class DensityUtil {
      * @param bili  图片比例
      * @param type  1:外层 LinearLayout 2：外层 RelativeLayout
      */
-    public static void formartHight(ImageView imageView, int width, float bili, int type) {
+    public static void formartHight(View imageView, int width, float bili, int type) {
         int height = (int) (width / bili);
         if (type == 1) {
             LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, height);
             imageView.setLayoutParams(lp);
-        } else {
+        } else if (type == 2) {
             RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, height);
+            imageView.setLayoutParams(lp);
+        } else {
+            FrameLayout.LayoutParams lp = new FrameLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, height);
             imageView.setLayoutParams(lp);
         }
     }
 
 
+    /**
+     * 得到屏幕的宽度
+     */
+    public static int getDisplayWidth() {
+        try {
+            WindowManager wm = (WindowManager) CloudReaderApplication.getInstance().getSystemService(Context.WINDOW_SERVICE);
+            return wm.getDefaultDisplay().getWidth();
+        } catch (Exception e) {
+            return 1080;
+        }
+    }
 }

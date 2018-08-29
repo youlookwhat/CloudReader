@@ -24,6 +24,7 @@ import com.example.jingbin.cloudreader.databinding.HeaderItemEverydayBinding;
 import com.example.jingbin.cloudreader.http.rx.RxBus;
 import com.example.jingbin.cloudreader.http.rx.RxBusBaseMessage;
 import com.example.jingbin.cloudreader.http.rx.RxCodeConstants;
+import com.example.jingbin.cloudreader.utils.DensityUtil;
 import com.example.jingbin.cloudreader.utils.GlideImageLoader;
 import com.example.jingbin.cloudreader.utils.PerfectClickListener;
 import com.example.jingbin.cloudreader.utils.SPUtils;
@@ -54,7 +55,6 @@ public class EverydayFragment extends BaseFragment<FragmentEverydayBinding> impl
 
     private static final String TAG = "EverydayFragment";
     private HeaderItemEverydayBinding mHeaderBinding;
-    private FooterItemEverydayBinding mFooterBinding;
     private View mHeaderView;
     private View mFooterView;
     private EverydayAdapter mEverydayAdapter;
@@ -64,6 +64,7 @@ public class EverydayFragment extends BaseFragment<FragmentEverydayBinding> impl
     private boolean isOldDayRequest;
     private RotateAnimation animation;
     private EverydayViewModel everydayViewModel;
+    private boolean isLoadBanner;
 
     @Override
     public int setContent() {
@@ -83,7 +84,7 @@ public class EverydayFragment extends BaseFragment<FragmentEverydayBinding> impl
         mHeaderBinding = DataBindingUtil.inflate(LayoutInflater.from(getContext()), R.layout.header_item_everyday, null, false);
         initLocalSetting();
         initRecyclerView();
-        UpdateUtil.check(getActivity(),false);
+        UpdateUtil.check(getActivity(), false);
 
         mIsPrepared = true;
         /**
@@ -106,12 +107,6 @@ public class EverydayFragment extends BaseFragment<FragmentEverydayBinding> impl
 
     @Override
     protected void loadData() {
-        // 显示时轮播图滚动
-        if (mHeaderBinding != null && mHeaderBinding.banner != null) {
-            mHeaderBinding.banner.startAutoPlay();
-            mHeaderBinding.banner.setDelayTime(4000);
-        }
-
         if (!mIsVisible || !mIsPrepared) {
             return;
         }
@@ -123,12 +118,13 @@ public class EverydayFragment extends BaseFragment<FragmentEverydayBinding> impl
      */
     private void initLocalSetting() {
         // 显示日期,去掉第一位的"0"
-        mHeaderBinding.includeEveryday.tvDailyText.setText(getTodayTime().get(2).indexOf("0") == 0 ?
-                getTodayTime().get(2).replace("0", "") : getTodayTime().get(2));
+        String day = getTodayTime().get(2);
+        mHeaderBinding.includeEveryday.tvDailyText.setText(day.indexOf("0") == 0 ? day.replace("0", "") : day);
         mHeaderBinding.includeEveryday.ibXiandu.setOnClickListener(listener);
         mHeaderBinding.includeEveryday.ibWanAndroid.setOnClickListener(listener);
         mHeaderBinding.includeEveryday.ibMovieHot.setOnClickListener(listener);
         mHeaderBinding.includeEveryday.flEveryday.setOnClickListener(listener);
+        DensityUtil.formartHight(mHeaderBinding.banner, DensityUtil.getDisplayWidth(), 2.5f, 1);
     }
 
     private PerfectClickListener listener = new PerfectClickListener() {
@@ -183,6 +179,7 @@ public class EverydayFragment extends BaseFragment<FragmentEverydayBinding> impl
                 }
             });
         }
+        isLoadBanner = true;
     }
 
     /**
@@ -225,7 +222,7 @@ public class EverydayFragment extends BaseFragment<FragmentEverydayBinding> impl
             bindingView.xrvEveryday.addHeaderView(mHeaderView);
         }
         if (mFooterView == null) {
-            mFooterBinding = DataBindingUtil.inflate(LayoutInflater.from(getContext()), R.layout.footer_item_everyday, null, false);
+            FooterItemEverydayBinding mFooterBinding = DataBindingUtil.inflate(LayoutInflater.from(getContext()), R.layout.footer_item_everyday, null, false);
             mFooterView = mFooterBinding.getRoot();
             bindingView.xrvEveryday.addFootView(mFooterView, true);
             bindingView.xrvEveryday.noMoreLoading();
@@ -260,20 +257,15 @@ public class EverydayFragment extends BaseFragment<FragmentEverydayBinding> impl
     }
 
     @Override
-    protected void onInvisible() {
-        // 不可见时轮播图停止滚动
-        if (mHeaderBinding != null && mHeaderBinding.banner != null) {
-            mHeaderBinding.banner.stopAutoPlay();
-        }
-    }
-
-    @Override
     public void onResume() {
         super.onResume();
         // 失去焦点，否则RecyclerView第一个item会回到顶部
         bindingView.xrvEveryday.setFocusable(false);
         // 开始图片请求
         Glide.with(getActivity()).resumeRequests();
+        if (isLoadBanner) {
+            mHeaderBinding.banner.startAutoPlay();
+        }
     }
 
     @Override
@@ -281,7 +273,10 @@ public class EverydayFragment extends BaseFragment<FragmentEverydayBinding> impl
         super.onPause();
         // 停止全部图片请求 跟随着Activity
         Glide.with(getActivity()).pauseRequests();
-
+        // 不可见时轮播图停止滚动
+        if (isLoadBanner) {
+            mHeaderBinding.banner.stopAutoPlay();
+        }
     }
 
     /**

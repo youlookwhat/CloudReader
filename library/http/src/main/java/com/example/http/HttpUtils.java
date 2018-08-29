@@ -16,19 +16,12 @@ import org.apache.commons.lang.StringUtils;
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Field;
-import java.security.SecureRandom;
-import java.security.cert.CertificateException;
-import java.security.cert.X509Certificate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import javax.net.ssl.HostnameVerifier;
-import javax.net.ssl.SSLContext;
 import javax.net.ssl.SSLSession;
-import javax.net.ssl.SSLSocketFactory;
-import javax.net.ssl.TrustManager;
-import javax.net.ssl.X509TrustManager;
 
 import okhttp3.Cache;
 import okhttp3.CacheControl;
@@ -136,30 +129,12 @@ public class HttpUtils {
 
     private OkHttpClient getUnsafeOkHttpClient() {
         try {
-            final TrustManager[] trustAllCerts = new TrustManager[]{new X509TrustManager() {
-                @Override
-                public void checkClientTrusted(X509Certificate[] chain, String authType) throws CertificateException {
-                }
-
-                @Override
-                public void checkServerTrusted(X509Certificate[] chain, String authType) throws CertificateException {
-                }
-
-                @Override
-                public X509Certificate[] getAcceptedIssuers() {
-                    return new X509Certificate[]{};
-                }
-            }};
-            // Install the all-trusting trust manager
-            SSLContext sslContext = SSLContext.getInstance("TLS");
-            sslContext.init(null, trustAllCerts, new SecureRandom());
             //cache url
             File httpCacheDirectory = new File(context.getCacheDir(), "responses");
             // 50 MiB
             int cacheSize = 50 * 1024 * 1024;
             Cache cache = new Cache(httpCacheDirectory, cacheSize);
             // Create an ssl socket factory with our all-trusting manager
-            SSLSocketFactory sslSocketFactory = sslContext.getSocketFactory();
             OkHttpClient.Builder okBuilder = new OkHttpClient.Builder();
             okBuilder.readTimeout(30, TimeUnit.SECONDS);
             okBuilder.connectTimeout(30, TimeUnit.SECONDS);
@@ -172,7 +147,6 @@ public class HttpUtils {
             okBuilder.addInterceptor(new AddCacheInterceptor(context));
             okBuilder.cache(cache);
             okBuilder.addInterceptor(getInterceptor());
-            okBuilder.sslSocketFactory(sslSocketFactory);
             okBuilder.hostnameVerifier(new HostnameVerifier() {
                 @SuppressLint("BadHostnameVerifier")
                 @Override

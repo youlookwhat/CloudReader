@@ -1,6 +1,5 @@
 package com.example.jingbin.cloudreader.data.model;
 
-import com.example.jingbin.cloudreader.base.BaseActivity;
 import com.example.jingbin.cloudreader.bean.wanandroid.HomeListBean;
 import com.example.jingbin.cloudreader.http.HttpClient;
 import com.example.jingbin.cloudreader.viewmodel.wan.WanNavigator;
@@ -17,15 +16,6 @@ import rx.schedulers.Schedulers;
  */
 
 public class CollectModel {
-
-    private BaseActivity activity;
-
-    public CollectModel() {
-    }
-
-    public CollectModel(BaseActivity activity) {
-        this.activity = activity;
-    }
 
     /**
      * 收藏
@@ -52,9 +42,6 @@ public class CollectModel {
                         }
                     }
                 });
-        if (activity != null) {
-            activity.addSubscription(subscribe);
-        }
     }
 
     /**
@@ -95,9 +82,6 @@ public class CollectModel {
                         }
                     }
                 });
-        if (activity != null) {
-            activity.addSubscription(subscribe);
-        }
     }
 
     /**
@@ -125,9 +109,6 @@ public class CollectModel {
                         }
                     }
                 });
-        if (activity != null) {
-            activity.addSubscription(subscribe);
-        }
     }
 
 }

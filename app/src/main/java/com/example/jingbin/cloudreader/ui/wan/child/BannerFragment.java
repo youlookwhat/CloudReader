@@ -9,7 +9,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.text.TextUtils;
 import android.view.View;
 
-import com.example.jingbin.cloudreader.MainActivity;
 import com.example.jingbin.cloudreader.R;
 import com.example.jingbin.cloudreader.adapter.WanAndroidAdapter;
 import com.example.jingbin.cloudreader.base.BaseFragment;
@@ -18,11 +17,13 @@ import com.example.jingbin.cloudreader.bean.wanandroid.WanAndroidBannerBean;
 import com.example.jingbin.cloudreader.databinding.FragmentWanAndroidBinding;
 import com.example.jingbin.cloudreader.databinding.HeaderWanAndroidBinding;
 import com.example.jingbin.cloudreader.utils.CommonUtils;
+import com.example.jingbin.cloudreader.utils.DensityUtil;
 import com.example.jingbin.cloudreader.utils.GlideImageLoader;
 import com.example.jingbin.cloudreader.view.webview.WebViewActivity;
 import com.example.jingbin.cloudreader.viewmodel.wan.WanAndroidListViewModel;
 import com.example.jingbin.cloudreader.viewmodel.wan.WanNavigator;
 import com.example.xrecyclerview.XRecyclerView;
+import com.youth.banner.BannerConfig;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,10 +40,10 @@ public class BannerFragment extends BaseFragment<FragmentWanAndroidBinding> impl
     private String mType = "综合";
     private boolean mIsPrepared;
     private boolean mIsFirst = true;
-    private MainActivity activity;
     private WanAndroidAdapter mAdapter;
     private HeaderWanAndroidBinding androidBinding;
     private WanAndroidListViewModel viewModel;
+    private boolean isLoadBanner = false;
 
     @Override
     public int setContent() {
@@ -52,7 +53,6 @@ public class BannerFragment extends BaseFragment<FragmentWanAndroidBinding> impl
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        activity = (MainActivity) context;
     }
 
     public static BannerFragment newInstance(String param1) {
@@ -97,7 +97,7 @@ public class BannerFragment extends BaseFragment<FragmentWanAndroidBinding> impl
                 bindingView.srlBook.postDelayed(() -> {
                     viewModel.setPage(0);
                     loadCustomData();
-                }, 1000);
+                }, 350);
 
             }
         });
@@ -109,7 +109,7 @@ public class BannerFragment extends BaseFragment<FragmentWanAndroidBinding> impl
         androidBinding = DataBindingUtil.inflate(getLayoutInflater(), R.layout.header_wan_android, null, false);
         viewModel.getWanAndroidBanner();
         bindingView.xrvBook.addHeaderView(androidBinding.getRoot());
-
+        DensityUtil.formartHight(androidBinding.banner, DensityUtil.getDisplayWidth(), 1.8f, 3);
         bindingView.xrvBook.setLoadingListener(new XRecyclerView.LoadingListener() {
             @Override
             public void onRefresh() {
@@ -132,12 +132,14 @@ public class BannerFragment extends BaseFragment<FragmentWanAndroidBinding> impl
     public void showBannerView(ArrayList<String> bannerImages, ArrayList<String> mBannerTitle, List<WanAndroidBannerBean.DataBean> result) {
         androidBinding.banner.setVisibility(View.VISIBLE);
         androidBinding.banner.setBannerTitles(mBannerTitle);
+        androidBinding.banner.setBannerStyle(BannerConfig.NUM_INDICATOR_TITLE);
         androidBinding.banner.setImages(bannerImages).setImageLoader(new GlideImageLoader()).start();
         androidBinding.banner.setOnBannerListener(position -> {
             if (result.get(position) != null && !TextUtils.isEmpty(result.get(position).getUrl())) {
                 WebViewActivity.loadUrl(getContext(), result.get(position).getUrl(), result.get(position).getTitle());
             }
         });
+        isLoadBanner = true;
     }
 
     @Override
@@ -193,20 +195,23 @@ public class BannerFragment extends BaseFragment<FragmentWanAndroidBinding> impl
         if (!mIsPrepared || !mIsVisible || !mIsFirst) {
             return;
         }
-
         bindingView.srlBook.setRefreshing(true);
-        bindingView.srlBook.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                loadCustomData();
-            }
-        }, 500);
+        bindingView.srlBook.postDelayed(this::loadCustomData, 500);
     }
 
     @Override
-    protected void onInvisible() {
+    public void onResume() {
+        super.onResume();
+        if (isLoadBanner){
+            androidBinding.banner.startAutoPlay();
+        }
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
         // 不可见时轮播图停止滚动
-        if (androidBinding != null && androidBinding.banner != null) {
+        if (isLoadBanner) {
             androidBinding.banner.stopAutoPlay();
         }
     }

@@ -40,12 +40,6 @@
                 android:textSize="18sp"
                 android:visibility="visible" />
 
-            <TextSwitcher
-                android:id="@+id/ts_title"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:visibility="gone" />
-
         </android.support.v7.widget.Toolbar>
 
         <RelativeLayout

@@ -69,7 +69,7 @@ public class WanAndroidAdapter extends BaseRecyclerViewAdapter<HomeListBean.Data
                 binding.vbCollect.setOnClickListener(new PerfectClickListener() {
                     @Override
                     protected void onNoDoubleClick(View v) {
-                        if (UserUtil.isLogin(activity)) {
+                        if (UserUtil.isLogin(activity) && model != null) {
                             // 为什么状态值相反？因为点了之后控件已改变状态
                             DebugUtil.error("-----binding.vbCollect.isChecked():" + binding.vbCollect.isChecked());
                             if (!binding.vbCollect.isChecked()) {
