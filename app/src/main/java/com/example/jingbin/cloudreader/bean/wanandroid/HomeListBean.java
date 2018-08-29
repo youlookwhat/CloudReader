@@ -173,6 +173,15 @@ public class HomeListBean extends BaseObservable {
             private String title;
             private int visible;
             private int zan;
+            private boolean fresh;
+
+            public boolean isFresh() {
+                return fresh;
+            }
+
+            public void setFresh(boolean fresh) {
+                this.fresh = fresh;
+            }
 
             public int getOriginId() {
                 return originId;

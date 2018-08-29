@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -28,10 +29,18 @@
             android:onClick="@{()->adapter.openDetail(bean)}"
             android:padding="8dp">
 
+            <ImageView
+                android:id="@+id/iv_new"
+                android:layout_width="40dp"
+                android:layout_height="25dp"
+                android:src="@drawable/icon_new"
+                android:visibility="@{bean.fresh?View.VISIBLE:View.GONE}" />
+
             <TextView
                 android:id="@+id/textView3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/iv_new"
                 android:text="@{bean.author}"
                 android:textColor="@color/colorSubtitle"
                 android:textSize="13sp" />
@@ -41,60 +50,55 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
+                android:background="?android:attr/selectableItemBackground"
                 android:onClick="@{()->adapter.openArticleList(bean)}"
-                android:paddingBottom="1dp"
-                android:paddingLeft="4dp"
-                android:paddingRight="4dp"
-                android:paddingTop="1dp"
+                android:paddingBottom="2dp"
+                android:paddingLeft="7dp"
+                android:paddingRight="7dp"
+                android:paddingTop="2dp"
                 android:text="@{bean.chapterName}"
                 android:textColor="@color/colorContent"
-                android:textSize="13sp"
-                android:visibility="@{adapter.isNoShowChapterName?View.GONE:View.VISIBLE}" />
+                android:textSize="14sp"
+                android:visibility="@{adapter.isNoShowChapterName?View.GONE:View.VISIBLE}"
+                tools:text="技术博客" />
 
-            <RelativeLayout
-                android:id="@+id/rl_text"
+
+            <TextView
+                android:id="@+id/tv_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
                 android:layout_below="@+id/textView3"
-                android:layout_marginTop="8dp"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/textView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:layout_toLeftOf="@+id/vb_collect"
-                    android:lineSpacingExtra="4dp"
-                    android:text="@{Html.fromHtml(bean.title)}"
-                    android:textColor="@color/colorContent"
-                    android:textSize="15sp"
-                    android:textStyle="bold" />
-
-                <CheckBox
-                    android:id="@+id/vb_collect"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp"
-                    android:button="@drawable/selector_collect_check"
-                    android:checked="@{adapter.isCollectList ? true : bean.collect}"
-                    android:gravity="center" />
-            </RelativeLayout>
+                android:layout_marginTop="10dp"
+                android:lineSpacingExtra="4dp"
+                android:text="@{Html.fromHtml(bean.title)}"
+                android:textColor="@color/colorContent"
+                android:textSize="15sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/textView2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_below="@+id/rl_text"
-                android:layout_marginTop="15dp"
+                android:layout_below="@+id/tv_title"
+                android:layout_marginTop="20dp"
                 android:text="@{bean.niceDate}"
                 android:textColor="@color/colorSubtitle"
-                android:textSize="11sp" />
+                android:textSize="12sp"
+                tools:text="2010-10-10" />
+
+            <CheckBox
+                android:id="@+id/vb_collect"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_below="@+id/tv_title"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="10dp"
+                android:button="@drawable/selector_collect_check"
+                android:checked="@{adapter.isCollectList ? true : bean.collect}"
+                android:gravity="center" />
 
         </RelativeLayout>
 
