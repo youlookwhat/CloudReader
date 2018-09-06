@@ -74,12 +74,12 @@
                         android:orientation="horizontal">
 
                         <LinearLayout
-                            android:layout_width="43dp"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:orientation="vertical">
 
                             <TextView
-                                android:layout_width="match_parent"
+                                android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="作者："
                                 android:textColor="@color/colorWhite" />

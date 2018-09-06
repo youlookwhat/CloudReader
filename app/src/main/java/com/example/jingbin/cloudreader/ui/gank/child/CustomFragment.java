@@ -65,7 +65,7 @@ public class CustomFragment extends BaseFragment<FragmentCustomBinding> implemen
         bindingView.xrvCustom.setPullRefreshEnabled(false);
         // 去掉刷新头
         bindingView.xrvCustom.clearHeader();
-        mGankAndroidAdapter = new GankAndroidAdapter(getActivity());
+        mGankAndroidAdapter = new GankAndroidAdapter();
         if (mHeaderView == null) {
             mHeaderView = View.inflate(getContext(), R.layout.header_item_gank_custom, null);
             bindingView.xrvCustom.addHeaderView(mHeaderView);

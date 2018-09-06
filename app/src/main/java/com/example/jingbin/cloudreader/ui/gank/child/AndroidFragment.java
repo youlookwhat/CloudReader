@@ -79,7 +79,7 @@ public class AndroidFragment extends BaseFragment<FragmentAndroidBinding> implem
     }
 
     private void initRecyclerView() {
-        mGankAndroidAdapter = new GankAndroidAdapter(activity);
+        mGankAndroidAdapter = new GankAndroidAdapter();
         bindingView.xrvAndroid.setLayoutManager(new LinearLayoutManager(getActivity()));
         bindingView.xrvAndroid.setLoadingListener(new XRecyclerView.LoadingListener() {
             @Override

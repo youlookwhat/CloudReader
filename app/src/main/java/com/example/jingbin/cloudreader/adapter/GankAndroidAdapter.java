@@ -1,6 +1,5 @@
 package com.example.jingbin.cloudreader.adapter;
 
-import android.content.Context;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,11 +19,6 @@ import com.example.jingbin.cloudreader.view.webview.WebViewActivity;
 public class GankAndroidAdapter extends BaseRecyclerViewAdapter<GankIoDataBean.ResultBean> {
 
     private boolean isAll = false;
-    private Context context;
-
-    public GankAndroidAdapter(Context context) {
-        this.context = context;
-    }
 
     public void setAllType(boolean isAll) {
         this.isAll = isAll;
@@ -76,15 +70,12 @@ public class GankAndroidAdapter extends BaseRecyclerViewAdapter<GankIoDataBean.R
             } else {
                 binding.ivAndroidPic.setVisibility(View.GONE);
             }
+            binding.llAll.setOnClickListener(v -> WebViewActivity.loadUrl(v.getContext(), object.getUrl(), object.getDesc()));
 
             binding.setResultsBean(object);
             binding.setCommand(GankAndroidAdapter.this);
             binding.executePendingBindings();
         }
 
-    }
-
-    public void openDetail(GankIoDataBean.ResultBean object) {
-        WebViewActivity.loadUrl(context, object.getUrl(), object.getDesc());
     }
 }

@@ -1,6 +1,5 @@
 package com.example.jingbin.cloudreader.adapter;
 
-import android.app.Activity;
 import android.support.annotation.NonNull;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,12 +17,6 @@ import com.example.jingbin.cloudreader.utils.TimeUtil;
  */
 
 public class JokeAdapter extends BaseRecyclerViewAdapter<DuanZiBean> {
-
-    private Activity activity;
-
-    public JokeAdapter(Activity activity) {
-        this.activity = activity;
-    }
 
     @NonNull
     @Override

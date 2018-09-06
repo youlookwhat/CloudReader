@@ -22,6 +22,10 @@ import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
+/**
+ * 书籍详情
+ * @author jingbin
+ */
 public class BookDetailActivity extends BaseHeaderActivity<HeaderBookDetailBinding, ActivityBookDetailBinding> {
 
     private BooksBean booksBean;
@@ -38,7 +42,8 @@ public class BookDetailActivity extends BaseHeaderActivity<HeaderBookDetailBindi
             booksBean = (BooksBean) getIntent().getSerializableExtra(EXTRA_PARAM);
         }
 
-        setMotion(setHeaderPicView(),true);
+        // 曲线动画
+//        setMotion(setHeaderPicView(), true);
         initSlideShapeTheme(setHeaderImgUrl(), setHeaderImageView());
 
         setTitle(booksBean.getTitle());
@@ -107,6 +112,11 @@ public class BookDetailActivity extends BaseHeaderActivity<HeaderBookDetailBindi
     @Override
     protected void onRefresh() {
         loadBookDetail();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
     }
 
     /**

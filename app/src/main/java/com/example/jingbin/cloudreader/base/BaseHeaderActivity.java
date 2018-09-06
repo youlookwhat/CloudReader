@@ -449,18 +449,22 @@ public abstract class BaseHeaderActivity<HV extends ViewDataBinding, SV extends 
 
     @Override
     public void onDestroy() {
-        super.onDestroy();
         if (this.mCompositeSubscription != null && mCompositeSubscription.hasSubscriptions()) {
             this.mCompositeSubscription.unsubscribe();
         }
         if (changeBounds != null) {
-            changeBounds.removeListener(null);
+            changeBounds.addListener(null);
             changeBounds.removeTarget(setHeaderPicView());
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                 getWindow().setSharedElementEnterTransition(null);
                 getWindow().setSharedElementReturnTransition(null);
             }
         }
+        if (mAnimationDrawable != null) {
+            mAnimationDrawable.stop();
+            mAnimationDrawable = null;
+        }
+        super.onDestroy();
     }
 
     public void removeSubscription() {

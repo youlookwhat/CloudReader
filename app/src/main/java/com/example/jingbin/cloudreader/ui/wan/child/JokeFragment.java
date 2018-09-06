@@ -93,7 +93,7 @@ public class JokeFragment extends BaseFragment<FragmentWanAndroidBinding> implem
         bindingView.xrvBook.setLayoutManager(new LinearLayoutManager(getActivity()));
         bindingView.xrvBook.setPullRefreshEnabled(false);
         bindingView.xrvBook.clearHeader();
-        mAdapter = new JokeAdapter(getActivity());
+        mAdapter = new JokeAdapter();
         bindingView.xrvBook.setAdapter(mAdapter);
 
         bindingView.xrvBook.setLoadingListener(new XRecyclerView.LoadingListener() {
