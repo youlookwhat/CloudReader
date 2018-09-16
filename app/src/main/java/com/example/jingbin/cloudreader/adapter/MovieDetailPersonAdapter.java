@@ -88,8 +88,8 @@ public class MovieDetailPersonAdapter extends RecyclerView.Adapter {
             ActivityMovieHeaderBinding binding = DataBindingUtil.getBinding(itemView);
             // 绑定数据
             binding.setSubjectsBean(subjectsBean);
-//            ImgLoadUtil.displayGaussian(itemView.getContext(), subjectsBean.getImages().getLarge(), binding.imgItemBg);
-//            ImgLoadUtil.getInstance().displayEspImage(itemView.getContext(), subjectsBean.getImages().getLarge(), binding.ivOnePhoto);
+//            ImageLoadUtil.displayGaussian(itemView.getContext(), subjectsBean.getImages().getLarge(), binding.imgItemBg);
+//            ImageLoadUtil.getInstance().displayEspImage(itemView.getContext(), subjectsBean.getImages().getLarge(), binding.ivOnePhoto);
 
             // 删掉图片的下面三个状态栏的高度
             if (binding.imgItemBg != null) {

@@ -49,7 +49,7 @@ public class SlideActivity extends AppCompatActivity {
         // 先设置状态栏透明
         StatusBarUtils.setTranslucentImageHeader(this, 0, binding.titleToolBar);
         // 高斯模糊
-//        ImgLoadUtil.displayGaussian(this, subjectsBean.getImages().getLarge(), binding.imgItemBg);
+//        ImageLoadUtil.displayGaussian(this, subjectsBean.getImages().getLarge(), binding.imgItemBg);
 
 
         if (binding.imgItemBg != null) {

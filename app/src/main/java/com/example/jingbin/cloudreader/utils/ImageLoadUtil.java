@@ -13,16 +13,16 @@ import jp.wasabeef.glide.transformations.BlurTransformation;
  * Created by jingbin on 2016/11/26.
  */
 
-public class ImgLoadUtil {
+public class ImageLoadUtil {
 
-    private static ImgLoadUtil instance;
+    private static ImageLoadUtil instance;
 
-    private ImgLoadUtil() {
+    private ImageLoadUtil() {
     }
 
-    public static ImgLoadUtil getInstance() {
+    public static ImageLoadUtil getInstance() {
         if (instance == null) {
-            instance = new ImgLoadUtil();
+            instance = new ImageLoadUtil();
         }
         return instance;
     }
@@ -97,6 +97,8 @@ public class ImgLoadUtil {
                 return R.drawable.img_default_meizi;
             case 2:// 书籍
                 return R.drawable.img_default_book;
+            default:
+                break;
         }
         return R.drawable.img_default_meizi;
     }
@@ -192,7 +194,12 @@ public class ImgLoadUtil {
      * 热门电影头部图片
      */
     @BindingAdapter({"android:displayRandom", "android:imgType"})
-    public static void displayRandom(ImageView imageView, String imageUrl, int imgType) {
-        displayRandom(imgType, imageUrl, imageView);
+    public static void displayRandom(ImageView imageView, int imageUrl, int imgType) {
+        Glide.with(imageView.getContext())
+                .load(imageUrl)
+                .placeholder(getMusicDefaultPic(imgType))
+                .error(getMusicDefaultPic(imgType))
+                .crossFade(1500)
+                .into(imageView);
     }
 }

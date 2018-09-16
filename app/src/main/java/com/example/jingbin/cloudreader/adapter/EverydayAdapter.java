@@ -25,7 +25,7 @@ import com.example.jingbin.cloudreader.http.rx.RxBus;
 import com.example.jingbin.cloudreader.http.rx.RxCodeConstants;
 import com.example.jingbin.cloudreader.utils.DensityUtil;
 import com.example.jingbin.cloudreader.utils.DialogBuild;
-import com.example.jingbin.cloudreader.utils.ImgLoadUtil;
+import com.example.jingbin.cloudreader.utils.ImageLoadUtil;
 import com.example.jingbin.cloudreader.utils.PerfectClickListener;
 import com.example.jingbin.cloudreader.view.webview.WebViewActivity;
 
@@ -143,7 +143,7 @@ public class EverydayAdapter extends BaseRecyclerViewAdapter<List<AndroidBean>> 
             if ("福利".equals(object.get(0).getType())) {
                 binding.tvOnePhotoTitle.setVisibility(View.GONE);
                 binding.ivOnePhoto.setScaleType(ImageView.ScaleType.CENTER_CROP);
-//                ImgLoadUtil.displayEspImage(object.get(0).getUrl(), binding.ivOnePhoto, 1);
+//                ImageLoadUtil.displayEspImage(object.get(0).getUrl(), binding.ivOnePhoto, 1);
                 Glide.with(binding.ivOnePhoto.getContext())
                         .load(object.get(0).getUrl())
                         .crossFade(1500)
@@ -210,7 +210,7 @@ public class EverydayAdapter extends BaseRecyclerViewAdapter<List<AndroidBean>> 
 
     private void displayRandomImg(int imgNumber, int position, ImageView imageView, List<AndroidBean> object) {
 //        DebugUtil.error("-----Image_url: "+object.get(position).getImage_url());
-        ImgLoadUtil.displayRandom(imgNumber, object.get(position).getImage_url(), imageView);
+        ImageLoadUtil.displayRandom(imgNumber, object.get(position).getImage_url(), imageView);
     }
 
 

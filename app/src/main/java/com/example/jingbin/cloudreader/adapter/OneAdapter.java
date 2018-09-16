@@ -43,7 +43,7 @@ public class OneAdapter extends BaseRecyclerViewAdapter<SubjectsBean> {
                 binding.setCallback(subjectsBean -> OneMovieDetailActivity.start(activity, positionData, binding.ivOnePhoto));
 
                 // 图片
-//                ImgLoadUtil.displayEspImage(positionData.getImages().getLarge(), binding.ivOnePhoto,0);
+//                ImageLoadUtil.displayEspImage(positionData.getImages().getLarge(), binding.ivOnePhoto,0);
                 // 导演
 //                binding.tvOneDirectors.setText(StringFormatUtil.formatName(positionData.getDirectors()));
                 // 主演

@@ -37,7 +37,7 @@ import com.example.jingbin.cloudreader.ui.movie.OneFragment;
 import com.example.jingbin.cloudreader.ui.wan.child.ArticleListActivity;
 import com.example.jingbin.cloudreader.utils.CommonUtils;
 import com.example.jingbin.cloudreader.utils.DialogBuild;
-import com.example.jingbin.cloudreader.utils.ImgLoadUtil;
+import com.example.jingbin.cloudreader.utils.ImageLoadUtil;
 import com.example.jingbin.cloudreader.utils.PerfectClickListener;
 import com.example.jingbin.cloudreader.utils.SPUtils;
 import com.example.jingbin.cloudreader.view.MyFragmentPagerAdapter;
@@ -124,7 +124,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         bind.setListener(this);
         bind.dayNightSwitch.setChecked(SPUtils.getNightMode());
 
-        ImgLoadUtil.displayCircle(bind.ivAvatar, ConstantsImageUrl.IC_AVATAR);
+        ImageLoadUtil.displayCircle(bind.ivAvatar, ConstantsImageUrl.IC_AVATAR);
         bind.llNavExit.setOnClickListener(this);
         bind.ivAvatar.setOnClickListener(this);
 
