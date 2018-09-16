@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <data>
+
+        <variable
+            name="bean"
+            type="com.example.jingbin.cloudreader.bean.wanandroid.TreeBean.DataBean" />
+
+        <import type="android.text.Html" />
+    </data>
+
+    <LinearLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/ll_item_top"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="8dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:text="@{Html.fromHtml(bean.name)}"
+            android:textColor="@color/colorContent"
+            android:textSize="17sp"
+            android:textStyle="bold" />
+
+        <com.zhy.view.flowlayout.TagFlowLayout
+            android:id="@+id/tfl_tree"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="7dp" />
+    </LinearLayout>
+</layout>

@@ -14,6 +14,7 @@ import com.example.jingbin.cloudreader.bean.wanandroid.HomeListBean;
 import com.example.jingbin.cloudreader.bean.wanandroid.LoginBean;
 import com.example.jingbin.cloudreader.bean.wanandroid.NhdzListBean;
 import com.example.jingbin.cloudreader.bean.wanandroid.QsbkListBean;
+import com.example.jingbin.cloudreader.bean.wanandroid.TreeBean;
 import com.example.jingbin.cloudreader.bean.wanandroid.WanAndroidBannerBean;
 
 import retrofit2.http.Field;
@@ -42,7 +43,6 @@ public interface HttpClient {
 
         public static HttpClient getGankIOServer() {
             return BuildFactory.getInstance().create(HttpClient.class, HttpUtils.API_GANKIO);
-//            return HttpUtils.getInstance().getGankIOServer(HttpClient.class);
         }
 
         public static HttpClient getFirServer() {
@@ -213,14 +213,8 @@ public interface HttpClient {
     Observable<HomeListBean> unCollect(@Path("id") int id, @Field("originId") int originId);
 
     /**
-     * 根据tag获取music
-     * @param tag
-     * @return
+     * 体系数据
      */
-
-//    @GET("v2/music/search")
-//    Observable<MusicRoot> searchMusicByTag(@Query("tag")String tag);
-
-//    @GET("v2/music/{id}")
-//    Observable<Musics> getMusicDetail(@Path("id") String id);
+    @GET("tree/json")
+    Observable<TreeBean> getTree();
 }
