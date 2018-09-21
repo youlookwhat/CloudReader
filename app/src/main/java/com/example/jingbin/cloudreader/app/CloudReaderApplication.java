@@ -6,7 +6,6 @@ import android.support.multidex.MultiDexApplication;
 
 import com.example.http.HttpUtils;
 import com.example.jingbin.cloudreader.utils.DebugUtil;
-import com.squareup.leakcanary.LeakCanary;
 import com.tencent.bugly.crashreport.CrashReport;
 
 /**
@@ -26,10 +25,10 @@ public class CloudReaderApplication extends MultiDexApplication{
     public void onCreate() {
         super.onCreate();
         cloudReaderApplication = this;
-        if (LeakCanary.isInAnalyzerProcess(this)) {
-            return;
-        }
-        LeakCanary.install(this);
+//        if (LeakCanary.isInAnalyzerProcess(this)) {
+//            return;
+//        }
+//        LeakCanary.install(this);
         HttpUtils.getInstance().init(this, DebugUtil.DEBUG);
         CrashReport.initCrashReport(getApplicationContext(), "3977b2d86f", DebugUtil.DEBUG);
 
