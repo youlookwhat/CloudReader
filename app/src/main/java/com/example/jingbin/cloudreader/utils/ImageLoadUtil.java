@@ -52,6 +52,8 @@ public class ImageLoadUtil {
                 return R.drawable.img_four_bi_three;
             case 3:
                 return R.drawable.img_one_bi_one;
+            case 4:
+                return R.drawable.shape_bg_loading;
             default:
                 break;
         }
@@ -97,6 +99,8 @@ public class ImageLoadUtil {
                 return R.drawable.img_default_meizi;
             case 2:// 书籍
                 return R.drawable.img_default_book;
+            case 3:
+                return R.drawable.shape_bg_loading;
             default:
                 break;
         }

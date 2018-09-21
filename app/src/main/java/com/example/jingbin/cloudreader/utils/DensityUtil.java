@@ -1,5 +1,6 @@
 package com.example.jingbin.cloudreader.utils;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
@@ -84,7 +85,7 @@ public class DensityUtil {
      * @param marginTop    上面的dp
      * @param marginBottom 下面的dp
      */
-    public static void formartHight(View imageView, float bili, int type, int marginLR, int marginTop, int marginBottom) {
+    public static void formatHeight(View imageView, float bili, int type, int marginLR, int marginTop, int marginBottom) {
         WindowManager wm = (WindowManager) CloudReaderApplication.getInstance().getSystemService(Context.WINDOW_SERVICE);
         int width = wm.getDefaultDisplay().getWidth();
         int height = (int) (width / bili);
@@ -110,7 +111,7 @@ public class DensityUtil {
      * @param bili  图片比例
      * @param type  1:外层 LinearLayout 2：外层 RelativeLayout
      */
-    public static void formartHight(View imageView, int width, float bili, int type) {
+    public static void formatHeight(View imageView, int width, float bili, int type) {
         int height = (int) (width / bili);
         if (type == 1) {
             LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, height);
@@ -135,5 +136,18 @@ public class DensityUtil {
         } catch (Exception e) {
             return 1080;
         }
+    }
+
+    @SuppressLint("ResourceType")
+    public static void formatBannerHeight(View imageView, View view) {
+        float displayWidth = getDisplayWidth();
+        float width = (2f / 3 * displayWidth);
+        float height = (2f / 3 * (displayWidth / 1.8f));
+        RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams((int) width, (int) height);
+        imageView.setLayoutParams(lp);
+        imageView.setId(1);
+        RelativeLayout.LayoutParams lp2 = new RelativeLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, (int) height);
+        lp2.addRule(RelativeLayout.RIGHT_OF, 1);
+        view.setLayoutParams(lp2);
     }
 }

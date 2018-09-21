@@ -139,7 +139,7 @@ public class EverydayAdapter extends BaseRecyclerViewAdapter<List<AndroidBean>> 
 
         @Override
         public void onBindViewHolder(final List<AndroidBean> object, int position) {
-            DensityUtil.formartHight(binding.ivOnePhoto, width, 2.6f, 1);
+            DensityUtil.formatHeight(binding.ivOnePhoto, width, 2.6f, 1);
             if ("福利".equals(object.get(0).getType())) {
                 binding.tvOnePhotoTitle.setVisibility(View.GONE);
                 binding.ivOnePhoto.setScaleType(ImageView.ScaleType.CENTER_CROP);
@@ -169,8 +169,8 @@ public class EverydayAdapter extends BaseRecyclerViewAdapter<List<AndroidBean>> 
         @Override
         public void onBindViewHolder(List<AndroidBean> object, int position) {
             int imageWidth = (width - DensityUtil.dip2px(3)) / 2;
-            DensityUtil.formartHight(binding.ivTwoOneOne, imageWidth, 1.75f, 1);
-            DensityUtil.formartHight(binding.ivTwoOneTwo, imageWidth, 1.75f, 1);
+            DensityUtil.formatHeight(binding.ivTwoOneOne, imageWidth, 1.75f, 1);
+            DensityUtil.formatHeight(binding.ivTwoOneTwo, imageWidth, 1.75f, 1);
             displayRandomImg(2, 0, binding.ivTwoOneOne, object);
             displayRandomImg(2, 1, binding.ivTwoOneTwo, object);
             setDes(object, 0, binding.tvTwoOneOneTitle);
@@ -189,9 +189,9 @@ public class EverydayAdapter extends BaseRecyclerViewAdapter<List<AndroidBean>> 
         @Override
         public void onBindViewHolder(List<AndroidBean> object, int position) {
             int imageWidth = (width - DensityUtil.dip2px(6)) / 3;
-            DensityUtil.formartHight(binding.ivThreeOneOne, imageWidth, 1, 1);
-            DensityUtil.formartHight(binding.ivThreeOneTwo, imageWidth, 1, 1);
-            DensityUtil.formartHight(binding.ivThreeOneThree, imageWidth, 1, 1);
+            DensityUtil.formatHeight(binding.ivThreeOneOne, imageWidth, 1, 1);
+            DensityUtil.formatHeight(binding.ivThreeOneTwo, imageWidth, 1, 1);
+            DensityUtil.formatHeight(binding.ivThreeOneThree, imageWidth, 1, 1);
             displayRandomImg(3, 0, binding.ivThreeOneOne, object);
             displayRandomImg(3, 1, binding.ivThreeOneTwo, object);
             displayRandomImg(3, 2, binding.ivThreeOneThree, object);

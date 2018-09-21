@@ -19,6 +19,7 @@ import com.example.jingbin.cloudreader.databinding.HeaderWanAndroidBinding;
 import com.example.jingbin.cloudreader.utils.CommonUtils;
 import com.example.jingbin.cloudreader.utils.DensityUtil;
 import com.example.jingbin.cloudreader.utils.GlideImageLoader;
+import com.example.jingbin.cloudreader.utils.ImageLoadUtil;
 import com.example.jingbin.cloudreader.view.webview.WebViewActivity;
 import com.example.jingbin.cloudreader.viewmodel.wan.WanAndroidListViewModel;
 import com.example.jingbin.cloudreader.viewmodel.wan.WanNavigator;
@@ -109,7 +110,7 @@ public class BannerFragment extends BaseFragment<FragmentWanAndroidBinding> impl
         androidBinding = DataBindingUtil.inflate(getLayoutInflater(), R.layout.header_wan_android, null, false);
         viewModel.getWanAndroidBanner();
         bindingView.xrvBook.addHeaderView(androidBinding.getRoot());
-        DensityUtil.formartHight(androidBinding.banner, DensityUtil.getDisplayWidth(), 1.8f, 3);
+        DensityUtil.formatBannerHeight(androidBinding.banner, androidBinding.llBannerImage);
         bindingView.xrvBook.setLoadingListener(new XRecyclerView.LoadingListener() {
             @Override
             public void onRefresh() {
@@ -130,7 +131,7 @@ public class BannerFragment extends BaseFragment<FragmentWanAndroidBinding> impl
      */
     @Override
     public void showBannerView(ArrayList<String> bannerImages, ArrayList<String> mBannerTitle, List<WanAndroidBannerBean.DataBean> result) {
-        androidBinding.banner.setVisibility(View.VISIBLE);
+        androidBinding.rlBanner.setVisibility(View.VISIBLE);
         androidBinding.banner.setBannerTitles(mBannerTitle);
         androidBinding.banner.setBannerStyle(BannerConfig.NUM_INDICATOR_TITLE);
         androidBinding.banner.setImages(bannerImages).setImageLoader(new GlideImageLoader()).start();
@@ -139,12 +140,25 @@ public class BannerFragment extends BaseFragment<FragmentWanAndroidBinding> impl
                 WebViewActivity.loadUrl(getContext(), result.get(position).getUrl(), result.get(position).getTitle());
             }
         });
+        int size = bannerImages.size();
+        int position1 = 0;
+        int position2 = 0;
+        if (size > 1) {
+            position1 = size - 2;
+            position2 = size - 1;
+        }
+        ImageLoadUtil.displayFadeImage(androidBinding.ivBannerOne, bannerImages.get(position1), 3);
+        ImageLoadUtil.displayFadeImage(androidBinding.ivBannerTwo, bannerImages.get(position2), 3);
+        int finalPosition = position1;
+        int finalPosition2 = position2;
+        androidBinding.ivBannerOne.setOnClickListener(v -> WebViewActivity.loadUrl(getContext(), result.get(finalPosition).getUrl(), result.get(finalPosition).getTitle()));
+        androidBinding.ivBannerTwo.setOnClickListener(v -> WebViewActivity.loadUrl(getContext(), result.get(finalPosition2).getUrl(), result.get(finalPosition2).getTitle()));
         isLoadBanner = true;
     }
 
     @Override
     public void loadBannerFailure() {
-        androidBinding.banner.setVisibility(View.GONE);
+        androidBinding.rlBanner.setVisibility(View.GONE);
     }
 
     @Override
@@ -202,7 +216,7 @@ public class BannerFragment extends BaseFragment<FragmentWanAndroidBinding> impl
     @Override
     public void onResume() {
         super.onResume();
-        if (isLoadBanner){
+        if (isLoadBanner) {
             androidBinding.banner.startAutoPlay();
         }
     }

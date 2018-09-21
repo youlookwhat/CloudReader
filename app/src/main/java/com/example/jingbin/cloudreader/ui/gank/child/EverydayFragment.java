@@ -124,7 +124,7 @@ public class EverydayFragment extends BaseFragment<FragmentEverydayBinding> impl
         mHeaderBinding.includeEveryday.ibWanAndroid.setOnClickListener(listener);
         mHeaderBinding.includeEveryday.ibMovieHot.setOnClickListener(listener);
         mHeaderBinding.includeEveryday.flEveryday.setOnClickListener(listener);
-        DensityUtil.formartHight(mHeaderBinding.banner, DensityUtil.getDisplayWidth(), 2.5f, 1);
+        DensityUtil.formatHeight(mHeaderBinding.banner, DensityUtil.getDisplayWidth(), 2.5f, 1);
     }
 
     private PerfectClickListener listener = new PerfectClickListener() {

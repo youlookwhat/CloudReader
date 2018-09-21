@@ -42,7 +42,7 @@ public class WanBookAdapter extends BaseRecyclerViewAdapter<BooksBean> {
         public void onBindViewHolder(final BooksBean book, final int position) {
             if (book != null) {
                 binding.setBean(book);
-                DensityUtil.formartHight(binding.ivTopPhoto, width, 0.703f, 1);
+                DensityUtil.formatHeight(binding.ivTopPhoto, width, 0.703f, 1);
                 binding.llItemTop.setOnClickListener(new PerfectClickListener() {
                     @Override
                     protected void onNoDoubleClick(View v) {

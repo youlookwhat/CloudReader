@@ -48,7 +48,7 @@ public class DouBanTopAdapter extends BaseRecyclerViewAdapter<SubjectsBean> {
             /**
              * 当数据改变时，binding会在下一帧去改变数据，如果我们需要立即改变，就去调用executePendingBindings方法。
              */
-            DensityUtil.formartHight(binding.ivTopPhoto, width, 0.758f, 1);
+            DensityUtil.formatHeight(binding.ivTopPhoto, width, 0.758f, 1);
             binding.executePendingBindings();
             binding.llItemTop.setOnClickListener(new PerfectClickListener() {
                 @Override
