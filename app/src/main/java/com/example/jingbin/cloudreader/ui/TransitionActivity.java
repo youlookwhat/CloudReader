@@ -8,16 +8,13 @@ import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
-import com.bumptech.glide.Glide;
 import com.example.jingbin.cloudreader.MainActivity;
 import com.example.jingbin.cloudreader.R;
-import com.example.jingbin.cloudreader.app.ConstantsImageUrl;
 import com.example.jingbin.cloudreader.databinding.ActivityTransitionBinding;
 import com.example.jingbin.cloudreader.utils.CommonUtils;
 import com.example.jingbin.cloudreader.utils.PerfectClickListener;
 
 import java.lang.ref.WeakReference;
-import java.util.Random;
 
 /**
  * @author jingbin
@@ -38,17 +35,20 @@ public class TransitionActivity extends AppCompatActivity {
             return;
         }
         showImage();
+//        toMainActivity();
     }
 
     private void showImage() {
-        int i = new Random().nextInt(ConstantsImageUrl.TRANSITION_URLS.length);
         // 先显示默认图
         mBinding.ivDefultPic.setImageDrawable(CommonUtils.getDrawable(R.drawable.img_transition_default));
-        Glide.with(this)
-                .load(ConstantsImageUrl.TRANSITION_URLS[i])
-                .placeholder(R.drawable.img_transition_default)
-                .error(R.drawable.img_transition_default)
-                .into(mBinding.ivPic);
+
+
+        //        int i = new Random().nextInt(ConstantsImageUrl.TRANSITION_URLS.length);
+//        Glide.with(this)
+//                .load(ConstantsImageUrl.TRANSITION_URLS[i])
+//                .placeholder(R.drawable.img_transition_default)
+//                .error(R.drawable.img_transition_default)
+//                .into(mBinding.ivPic);
 
         mBinding.tvJump.setOnClickListener(new PerfectClickListener() {
             @Override
@@ -58,8 +58,8 @@ public class TransitionActivity extends AppCompatActivity {
         });
 
         handler = new MyHandler(this);
-        handler.sendEmptyMessageDelayed(0, 1500);
-        handler.sendEmptyMessageDelayed(1, 3500);
+        handler.sendEmptyMessageDelayed(1, 300);
+//        handler.sendEmptyMessageDelayed(1, 3500);
     }
 
     static class MyHandler extends Handler {

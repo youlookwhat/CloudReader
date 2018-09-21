@@ -7,5 +7,5 @@
     android:layout_height="wrap_content"
     android:background="@drawable/shape_tree_tag"
     android:textColor="@color/colorContent"
-    android:textSize="13sp"
+    android:textSize="12sp"
     tools:text="title" />

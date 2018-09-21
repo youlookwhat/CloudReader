@@ -14,6 +14,8 @@
 
         <import type="android.text.Html" />
 
+        <import type="android.text.TextUtils" />
+
         <import type="android.view.View" />
     </data>
 
@@ -25,77 +27,107 @@
             android:id="@+id/ll_item_top"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/ripple_joke_item_bg"
+            android:background="?attr/selectableItemBackground"
             android:onClick="@{()->adapter.openDetail(bean)}"
             android:padding="8dp">
 
-            <ImageView
-                android:id="@+id/iv_new"
-                android:layout_width="40dp"
-                android:layout_height="25dp"
-                android:src="@drawable/icon_new"
-                android:visibility="@{bean.fresh?View.VISIBLE:View.GONE}" />
-
-            <TextView
-                android:id="@+id/textView3"
+            <RelativeLayout
+                android:id="@+id/rl_top"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_toRightOf="@+id/iv_new"
-                android:text="@{bean.author}"
-                android:textColor="@color/colorSubtitle"
-                android:textSize="13sp" />
+                android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/textView4"
+                <ImageView
+                    android:id="@+id/iv_new"
+                    android:layout_width="40dp"
+                    android:layout_height="25dp"
+                    android:src="@drawable/icon_new"
+                    android:visibility="@{bean.fresh?View.VISIBLE:View.GONE}" />
+
+                <TextView
+                    android:id="@+id/textView4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:background="?android:attr/selectableItemBackground"
+                    android:onClick="@{()->adapter.openArticleList(bean)}"
+                    android:paddingBottom="2dp"
+                    android:paddingLeft="7dp"
+                    android:paddingRight="7dp"
+                    android:paddingTop="2dp"
+                    android:text="@{bean.chapterName}"
+                    android:textColor="@color/colorContent"
+                    android:textSize="13sp"
+                    android:visibility="@{adapter.isNoShowChapterName?View.GONE:View.VISIBLE}"
+                    tools:text="技术博客" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rl_content"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:background="?android:attr/selectableItemBackground"
-                android:onClick="@{()->adapter.openArticleList(bean)}"
-                android:paddingBottom="2dp"
-                android:paddingLeft="7dp"
-                android:paddingRight="7dp"
-                android:paddingTop="2dp"
-                android:text="@{bean.chapterName}"
-                android:textColor="@color/colorContent"
-                android:textSize="14sp"
-                android:visibility="@{adapter.isNoShowChapterName?View.GONE:View.VISIBLE}"
-                tools:text="技术博客" />
+                android:layout_below="@+id/rl_top">
 
+                <ImageView
+                    android:id="@+id/iv_image"
+                    android:layout_width="60dp"
+                    android:layout_height="78dp"
+                    android:layout_marginRight="8dp"
+                    android:defaultPicType="@{1}"
+                    android:displayFadeImage="@{bean.envelopePic}"
+                    android:scaleType="centerCrop"
+                    android:visibility="@{!TextUtils.isEmpty(bean.envelopePic)?View.VISIBLE:View.GONE}"
+                    tools:background="@color/colorLine" />
 
-            <TextView
-                android:id="@+id/tv_title"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_below="@+id/textView3"
-                android:layout_marginTop="10dp"
-                android:lineSpacingExtra="4dp"
-                android:text="@{Html.fromHtml(bean.title)}"
-                android:textColor="@color/colorContent"
-                android:textSize="15sp"
-                android:textStyle="bold" />
+                <TextView
+                    android:id="@+id/tv_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="7dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_toRightOf="@+id/iv_image"
+                    android:lineSpacingExtra="4dp"
+                    android:text="@{Html.fromHtml(bean.title)}"
+                    android:textColor="@color/colorContent"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    tools:text="支付宝" />
+            </RelativeLayout>
 
             <TextView
                 android:id="@+id/textView2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/tv_title"
-                android:layout_marginTop="20dp"
+                android:layout_below="@+id/rl_content"
+                android:layout_marginTop="13dp"
                 android:text="@{bean.niceDate}"
                 android:textColor="@color/colorSubtitle"
-                android:textSize="12sp"
+                android:textSize="11sp"
                 tools:text="2010-10-10" />
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/rl_content"
+                android:layout_marginTop="13dp"
+                android:layout_toEndOf="@+id/textView2"
+                android:text="@{@string/string_dian + bean.author}"
+                android:textColor="@color/colorSubtitle"
+                android:textSize="11sp"
+                tools:text="jingbin" />
 
             <CheckBox
                 android:id="@+id/vb_collect"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
-                android:layout_below="@+id/tv_title"
+                android:layout_below="@+id/rl_content"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="3dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
                 android:button="@drawable/selector_collect_check"
                 android:checked="@{adapter.isCollectList ? true : bean.collect}"
                 android:gravity="center" />

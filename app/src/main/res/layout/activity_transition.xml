@@ -7,9 +7,14 @@
         android:layout_height="match_parent"
         tools:context="com.example.jingbin.cloudreader.ui.TransitionActivity">
 
-
         <ImageView
             android:id="@+id/iv_pic"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop" />
+
+        <ImageView
+            android:id="@+id/iv_defult_pic"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scaleType="centerCrop" />
@@ -18,21 +23,16 @@
             android:id="@+id/tv_jump"
             android:layout_width="70dp"
             android:layout_height="30dp"
-            android:layout_alignParentRight="true"
             android:layout_alignParentBottom="true"
-            android:layout_marginRight="30dp"
+            android:layout_alignParentRight="true"
             android:layout_marginBottom="40dp"
+            android:layout_marginRight="30dp"
             android:background="@drawable/shape_jump"
             android:gravity="center"
             android:text="跳过"
             android:textColor="#fff"
-            android:textSize="16sp" />
-
-        <ImageView
-            android:id="@+id/iv_defult_pic"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scaleType="centerCrop" />
+            android:textSize="16sp"
+            android:visibility="gone" />
 
     </RelativeLayout>
 </layout>

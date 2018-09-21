@@ -1,5 +1,7 @@
 package com.example.jingbin.cloudreader.app;
 
+import com.example.jingbin.cloudreader.R;
+
 import java.util.ArrayList;
 
 /**
@@ -13,10 +15,10 @@ import java.util.ArrayList;
 public class ConstantsImageUrl {
 
     // 电影栏头部的图片
-    public static final String ONE_URL_01 = "http://ojyz0c8un.bkt.clouddn.com/one_01.png";
+    public static final int ONE_URL_01 = R.drawable.header_item_one;
 
     // 头像
-    public static final String IC_AVATAR = "http://ojyz0c8un.bkt.clouddn.com/ic_avatar.png";
+    public static final String IC_AVATAR = "https://upload-images.jianshu.io/upload_images/1354448-5a6a2b440de5b7e6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240";
 
     // 过渡图的图片链接
     private static final String TRANSITION_URL_01 = "http://ojyz0c8un.bkt.clouddn.com/b_1.jpg";

@@ -1,21 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <FrameLayout
+    <RelativeLayout
+        android:id="@+id/rl_banner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <com.youth.banner.Banner xmlns:app="http://schemas.android.com/apk/res-auto"
             android:id="@+id/banner"
-            android:layout_width="match_parent"
-            android:layout_height="160dp"
+            android:layout_width="200dp"
+            android:layout_height="150dp"
+            app:delay_time="5000"
             app:image_scale_type="center_crop"
             app:indicator_drawable_selected="@drawable/banner_red"
             app:indicator_drawable_unselected="@drawable/banner_grey"
             app:indicator_height="9dp"
             app:indicator_margin="3dp"
             app:indicator_width="9dp"
-            app:delay_time="5000"
-            app:is_auto_play="true" />
-    </FrameLayout>
+            app:is_auto_play="true"
+            app:title_height="28dp"
+            app:title_textsize="12sp"
+            tools:background="@color/colorLine" />
+
+        <LinearLayout
+            android:id="@+id/ll_banner_image"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_toRightOf="@+id/banner"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/iv_banner_one"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                tools:background="@color/colorLine" />
+
+            <ImageView
+                android:id="@+id/iv_banner_two"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                tools:background="@color/colorLine" />
+
+        </LinearLayout>
+    </RelativeLayout>
 </layout>
