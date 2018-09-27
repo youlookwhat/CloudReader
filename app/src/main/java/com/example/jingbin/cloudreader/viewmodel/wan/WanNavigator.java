@@ -1,5 +1,6 @@
 package com.example.jingbin.cloudreader.viewmodel.wan;
 
+import com.example.jingbin.cloudreader.bean.CollectUrlBean;
 import com.example.jingbin.cloudreader.bean.wanandroid.DuanZiBean;
 import com.example.jingbin.cloudreader.bean.wanandroid.HomeListBean;
 import com.example.jingbin.cloudreader.bean.wanandroid.WanAndroidBannerBean;
@@ -123,5 +124,32 @@ public interface WanNavigator {
         void onSuccess();
 
         void onFailure();
+    }
+
+    /**
+     * 我的收藏部分
+     */
+    interface CollectUrlNavigator {
+        /**
+         * 加载文章列表失败
+         */
+        void loadFailure();
+
+        /**
+         * 显示网址数据
+         *
+         * @param bean 网址数据
+         */
+        void showAdapterView(CollectUrlBean bean);
+
+        /**
+         * 显示加载成功页面
+         */
+        void showLoadSuccessView();
+
+        /**
+         * 取消注册
+         */
+        void addRxSubscription(Subscription subscription);
     }
 }

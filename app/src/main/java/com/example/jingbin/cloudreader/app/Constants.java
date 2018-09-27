@@ -22,4 +22,6 @@ public class Constants {
     public static String GANK_CALA = "gank_cala";
     // 是否登录
     public static String IS_LOGIN = "is_login";
+    // 是否第一次收藏网址
+    public static String IS_FIRST_COLLECTURL = "isFirstCollectUrl";
 }

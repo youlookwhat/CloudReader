@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="adapter"
+            type="com.example.jingbin.cloudreader.adapter.CollectUrlAdapter" />
+
+        <variable
+            name="bean"
+            type="com.example.jingbin.cloudreader.bean.CollectUrlBean.DataBean" />
+
+        <import type="android.text.Html" />
+
+        <import type="android.text.TextUtils" />
+
+        <import type="android.view.View" />
+    </data>
+
+    <RelativeLayout
+        android:id="@+id/rl_item_link"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/selectableItemBackground"
+        android:onClick="@{()->adapter.openDetail(bean)}"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingTop="10dp">
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:lineSpacingExtra="1.6dp"
+            android:maxLines="2"
+            android:text="@{bean.name}"
+            android:textColor="@color/colorContent"
+            tools:text="MMKV——基于 mmap 的高性能通用 key-value 组件MMKV——基于 mmap 的高性能通用 key-value 组件" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_below="@+id/tv_title"
+            android:layout_marginTop="10dp"
+            android:background="@color/colorHomeLine" />
+    </RelativeLayout>
+</layout>

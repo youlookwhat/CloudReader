@@ -91,7 +91,6 @@
                     android:text="@{Html.fromHtml(bean.title)}"
                     android:textColor="@color/colorContent"
                     android:textSize="14sp"
-                    android:textStyle="bold"
                     tools:text="支付宝" />
             </RelativeLayout>
 

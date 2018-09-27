@@ -89,6 +89,9 @@
         <activity
             android:name=".ui.wan.child.ArticleListActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.wan.child.MyCollectActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

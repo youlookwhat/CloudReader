@@ -77,9 +77,7 @@ public class XRecyclerView extends RecyclerView {
      */
     public void clearHeader() {
         mHeaderViews.clear();
-        final float scale = getContext().getResources().getDisplayMetrics().density;
-        int height = (int) (1.0f * scale + 0.5f);
-        ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, height);
+        ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 1);
         View view = new View(getContext());
         view.setLayoutParams(params);
         mHeaderViews.put(0, view);

@@ -33,6 +33,14 @@ public class DialogBuild {
         builder.show();
     }
 
+    public static void show(View v, String title, String buttonText, DialogInterface.OnClickListener clickListener) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
+        builder.setTitle("提示");
+        builder.setMessage(title);
+        builder.setPositiveButton(buttonText, clickListener);
+        builder.show();
+    }
+
     /**
      * 显示选项的AlertDialog
      */

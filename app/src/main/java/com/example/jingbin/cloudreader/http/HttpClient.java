@@ -2,6 +2,7 @@ package com.example.jingbin.cloudreader.http;
 
 import com.example.http.HttpUtils;
 import com.example.http.utils.BuildFactory;
+import com.example.jingbin.cloudreader.bean.CollectUrlBean;
 import com.example.jingbin.cloudreader.bean.FrontpageBean;
 import com.example.jingbin.cloudreader.bean.GankIoDataBean;
 import com.example.jingbin.cloudreader.bean.GankIoDayBean;
@@ -217,4 +218,29 @@ public interface HttpClient {
      */
     @GET("tree/json")
     Observable<TreeBean> getTree();
+
+    /**
+     * 收藏网址
+     *
+     * @param name 标题
+     * @param link 链接
+     */
+    @FormUrlEncoded
+    @POST("lg/collect/addtool/json")
+    Observable<HomeListBean> collectUrl(@Field("name") String name, @Field("link") String link);
+
+    /**
+     * 删除收藏网站
+     *
+     * @param id 收藏网址id
+     */
+    @FormUrlEncoded
+    @POST("lg/collect/deletetool/json")
+    Observable<HomeListBean> unCollectUrl(@Field("id") int id);
+
+    /**
+     * 收藏网站列表
+     */
+    @GET("lg/collect/usertools/json")
+    Observable<CollectUrlBean> getCollectUrlList();
 }
