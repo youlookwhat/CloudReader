@@ -59,6 +59,8 @@
             android:theme="@style/ViewBigPicTheme" />
         <activity
             android:name=".view.webview.WebViewActivity"
+            android:configChanges="orientation|screenSize"
+            android:hardwareAccelerated="true"
             android:screenOrientation="portrait" />
         <activity
             android:name=".ui.movie.DoubanTopActivity"

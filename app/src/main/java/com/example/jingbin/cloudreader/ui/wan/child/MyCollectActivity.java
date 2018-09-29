@@ -3,7 +3,6 @@ package com.example.jingbin.cloudreader.ui.wan.child;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 
 import com.example.jingbin.cloudreader.R;
@@ -35,7 +34,6 @@ public class MyCollectActivity extends BaseActivity<ActivityMyCollectBinding> {
         MyFragmentPagerAdapter myAdapter = new MyFragmentPagerAdapter(getSupportFragmentManager(), mFragments, mTitleList);
         bindingView.vpMyCollect.setAdapter(myAdapter);
         myAdapter.notifyDataSetChanged();
-        bindingView.tabMyCollect.setTabMode(TabLayout.MODE_SCROLLABLE);
         bindingView.tabMyCollect.setupWithViewPager(bindingView.vpMyCollect);
         showContentView();
     }
