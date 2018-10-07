@@ -26,7 +26,6 @@ import com.example.jingbin.cloudreader.databinding.NavHeaderMainBinding;
 import com.example.jingbin.cloudreader.http.rx.RxBus;
 import com.example.jingbin.cloudreader.http.rx.RxBusBaseMessage;
 import com.example.jingbin.cloudreader.http.rx.RxCodeConstants;
-import com.example.jingbin.cloudreader.ui.wan.WanFragment;
 import com.example.jingbin.cloudreader.ui.gank.GankFragment;
 import com.example.jingbin.cloudreader.ui.menu.LoginActivity;
 import com.example.jingbin.cloudreader.ui.menu.NavAboutActivity;
@@ -34,7 +33,8 @@ import com.example.jingbin.cloudreader.ui.menu.NavDeedBackActivity;
 import com.example.jingbin.cloudreader.ui.menu.NavDownloadActivity;
 import com.example.jingbin.cloudreader.ui.menu.NavHomePageActivity;
 import com.example.jingbin.cloudreader.ui.movie.OneFragment;
-import com.example.jingbin.cloudreader.ui.wan.child.ArticleListActivity;
+import com.example.jingbin.cloudreader.ui.wan.WanFragment;
+import com.example.jingbin.cloudreader.ui.wan.child.MyCollectActivity;
 import com.example.jingbin.cloudreader.utils.CommonUtils;
 import com.example.jingbin.cloudreader.utils.DialogBuild;
 import com.example.jingbin.cloudreader.utils.ImageLoadUtil;
@@ -178,7 +178,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         break;
                     case R.id.ll_nav_collect:// 玩安卓收藏
                         if (UserUtil.isLogin(MainActivity.this)) {
-                            ArticleListActivity.start(MainActivity.this);
+                            MyCollectActivity.start(MainActivity.this);
                         }
                         break;
                     case R.id.ll_nav_login:// 玩安卓登录

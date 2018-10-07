@@ -174,6 +174,15 @@ public class HomeListBean extends BaseObservable {
             private int visible;
             private int zan;
             private boolean fresh;
+            private boolean isShowImage = true;
+
+            public boolean isShowImage() {
+                return isShowImage;
+            }
+
+            public void setShowImage(boolean showImage) {
+                isShowImage = showImage;
+            }
 
             public boolean isFresh() {
                 return fresh;

@@ -1,6 +1,7 @@
 package com.example.jingbin.cloudreader.adapter;
 
 import android.app.Activity;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -34,6 +35,7 @@ public class WanAndroidAdapter extends BaseRecyclerViewAdapter<HomeListBean.Data
      * 不显示类别信息
      */
     public boolean isNoShowChapterName = false;
+    public boolean isNoImage = false;
 
     public WanAndroidAdapter(Activity activity) {
         this.activity = activity;
@@ -53,6 +55,10 @@ public class WanAndroidAdapter extends BaseRecyclerViewAdapter<HomeListBean.Data
         this.isNoShowChapterName = true;
     }
 
+    public void setNoImage() {
+        this.isNoImage = true;
+    }
+
     private class ViewHolder extends BaseRecyclerViewHolder<HomeListBean.DataBean.DatasBean, ItemWanAndroidBinding> {
 
         ViewHolder(ViewGroup context, int layoutId) {
@@ -64,7 +70,11 @@ public class WanAndroidAdapter extends BaseRecyclerViewAdapter<HomeListBean.Data
             if (bean != null) {
                 binding.setBean(bean);
                 binding.setAdapter(WanAndroidAdapter.this);
-                binding.executePendingBindings();
+                if (!TextUtils.isEmpty(bean.getEnvelopePic()) && !isNoImage) {
+                    bean.setShowImage(true);
+                } else {
+                    bean.setShowImage(false);
+                }
 
                 binding.vbCollect.setOnClickListener(new PerfectClickListener() {
                     @Override

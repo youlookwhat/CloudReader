@@ -106,6 +106,7 @@ public class BannerFragment extends BaseFragment<FragmentWanAndroidBinding> impl
         bindingView.xrvBook.setPullRefreshEnabled(false);
         bindingView.xrvBook.clearHeader();
         mAdapter = new WanAndroidAdapter(getActivity());
+        mAdapter.setNoImage();
         bindingView.xrvBook.setAdapter(mAdapter);
         androidBinding = DataBindingUtil.inflate(getLayoutInflater(), R.layout.header_wan_android, null, false);
         viewModel.getWanAndroidBanner();
