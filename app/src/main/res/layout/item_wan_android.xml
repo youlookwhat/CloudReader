@@ -10,7 +10,7 @@
 
         <variable
             name="bean"
-            type="com.example.jingbin.cloudreader.bean.wanandroid.HomeListBean.DataBean.DatasBean" />
+            type="com.example.jingbin.cloudreader.bean.wanandroid.ArticlesBean" />
 
         <import type="android.text.Html" />
 

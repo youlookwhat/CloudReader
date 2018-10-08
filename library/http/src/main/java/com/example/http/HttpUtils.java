@@ -47,10 +47,10 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 
 public class HttpUtils {
+
     private static HttpUtils instance;
     private Gson gson;
     private Context context;
-    private Object gankHttps;
     private IpmlTokenGetListener listener;
     private boolean debug;
     // gankio、豆瓣、（轮播图）
@@ -59,7 +59,6 @@ public class HttpUtils {
     public final static String API_TING = "https://tingapi.ting.baidu.com/v1/restserver/";
     public final static String API_FIR = "http://api.fir.im/apps/";
     public final static String API_WAN_ANDROID = "http://www.wanandroid.com/";
-    public final static String API_NHDZ = "https://ic.snssdk.com/";
     public final static String API_QSBK = "http://m2.qiushibaike.com/";
     /**
      * 分页数据，每页的数量
@@ -82,17 +81,6 @@ public class HttpUtils {
         this.context = context;
         this.debug = debug;
         HttpHead.init(context);
-    }
-
-    public <T> T getGankIOServer(Class<T> a) {
-        if (gankHttps == null) {
-            synchronized (HttpUtils.class) {
-                if (gankHttps == null) {
-                    gankHttps = getBuilder(API_GANKIO).build().create(a);
-                }
-            }
-        }
-        return (T) gankHttps;
     }
 
 

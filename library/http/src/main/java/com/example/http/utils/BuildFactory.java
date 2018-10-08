@@ -5,7 +5,6 @@ import com.example.http.HttpUtils;
 import static com.example.http.HttpUtils.API_DOUBAN;
 import static com.example.http.HttpUtils.API_FIR;
 import static com.example.http.HttpUtils.API_GANKIO;
-import static com.example.http.HttpUtils.API_NHDZ;
 import static com.example.http.HttpUtils.API_QSBK;
 import static com.example.http.HttpUtils.API_TING;
 import static com.example.http.HttpUtils.API_WAN_ANDROID;
@@ -86,15 +85,6 @@ public class BuildFactory {
                     }
                 }
                 return (T) wanAndroidHttps;
-            case API_NHDZ:
-                if (nhdzHttps == null) {
-                    synchronized (BuildFactory.class) {
-                        if (nhdzHttps == null) {
-                            nhdzHttps = HttpUtils.getInstance().getBuilder(type).build().create(a);
-                        }
-                    }
-                }
-                return (T) nhdzHttps;
             case API_QSBK:
                 if (qsbkHttps == null) {
                     synchronized (BuildFactory.class) {

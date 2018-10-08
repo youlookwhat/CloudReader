@@ -3,7 +3,6 @@ package com.example.jingbin.cloudreader.data.model;
 import android.text.TextUtils;
 
 import com.example.jingbin.cloudreader.bean.wanandroid.DuanZiBean;
-import com.example.jingbin.cloudreader.bean.wanandroid.NhdzListBean;
 import com.example.jingbin.cloudreader.bean.wanandroid.QsbkListBean;
 import com.example.jingbin.cloudreader.http.HttpClient;
 import com.example.jingbin.cloudreader.viewmodel.wan.WanNavigator;
@@ -25,60 +24,6 @@ import rx.schedulers.Schedulers;
  */
 
 public class JokeModel {
-
-
-    public void showNhdzList(final WanNavigator.JokeModelNavigator listener, int page) {
-        Func1<NhdzListBean, Observable<List<DuanZiBean>>> func1 = new Func1<NhdzListBean, Observable<List<DuanZiBean>>>() {
-            @Override
-            public Observable<List<DuanZiBean>> call(NhdzListBean bean) {
-                List<DuanZiBean> lists = new ArrayList<>();
-
-                if (bean != null && bean.getData() != null && bean.getData().getData() != null
-                        && bean.getData().getData().size() > 0) {
-                    List<NhdzListBean.DataBeanX.DataBean> data = bean.getData().getData();
-                    for (NhdzListBean.DataBeanX.DataBean bean1 : data) {
-                        NhdzListBean.DataBeanX.DataBean.GroupBean group = bean1.getGroup();
-                        if (group != null) {
-                            DuanZiBean duanZiBean = new DuanZiBean();
-                            duanZiBean.setCategoryName(group.getCategory_name());
-                            duanZiBean.setContent(group.getContent());
-                            duanZiBean.setCreateTime(group.getCreate_time());
-                            NhdzListBean.DataBeanX.DataBean.GroupBean.UserBean user = group.getUser();
-                            if (user != null) {
-                                duanZiBean.setAvatarUrl(user.getAvatar_url());
-                                duanZiBean.setName(user.getName());
-                            }
-                            lists.add(duanZiBean);
-                        }
-                    }
-                }
-                return Observable.just(lists);
-            }
-        };
-
-        Observer<List<DuanZiBean>> observer = new Observer<List<DuanZiBean>>() {
-            @Override
-            public void onCompleted() {
-            }
-
-            @Override
-            public void onError(Throwable e) {
-                listener.loadFailed();
-            }
-
-            @Override
-            public void onNext(List<DuanZiBean> lists) {
-                listener.loadSuccess(lists);
-            }
-        };
-
-        Subscription subscription = HttpClient.Builder.getNHDZServer().getNhdzList(page)
-                .flatMap(func1)
-                .subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
-                .subscribe(observer);
-        listener.addSubscription(subscription);
-    }
-
 
     public void showQSBKList(final WanNavigator.JokeModelNavigator listener, int page) {
         Func1<QsbkListBean, Observable<List<DuanZiBean>>> func1 = new Func1<QsbkListBean, Observable<List<DuanZiBean>>>() {

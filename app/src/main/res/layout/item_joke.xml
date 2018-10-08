@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
 
 
     <data>
@@ -50,14 +51,16 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@{bean.name ?? @string/no_name_joke}"
-                    android:textSize="15sp" />
+                    android:textSize="14sp"
+                    tools:text="用户名" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
+                    android:layout_marginTop="3dp"
                     android:text="@{time}"
-                    android:textSize="13sp" />
+                    android:textSize="12sp"
+                    tools:text="2018-10-07" />
             </LinearLayout>
 
         </LinearLayout>
@@ -66,10 +69,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="58dp"
+            android:layout_marginRight="5dp"
             android:lineSpacingExtra="4dp"
             android:text="@{bean.content}"
             android:textColor="@color/colorContent"
-            android:textSize="17sp" />
+            android:textSize="15sp"
+            tools:text="这是内容" />
 
         <TextView
             android:layout_width="wrap_content"
