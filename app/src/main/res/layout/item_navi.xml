@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+
+    <data>
+
+        <variable
+            name="bean"
+            type="com.example.jingbin.cloudreader.bean.wanandroid.NaviJsonBean.DataBean" />
+
+        <import type="android.text.Html" />
+    </data>
+
+    <LinearLayout
+        android:id="@+id/ll_item"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?android:attr/selectableItemBackground"
+        android:orientation="vertical"
+        android:padding="8dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{Html.fromHtml(bean.name)}"
+            android:textColor="@color/colorContent"
+            android:textSize="16sp"
+            tools:text="常用网站" />
+
+    </LinearLayout>
+</layout>

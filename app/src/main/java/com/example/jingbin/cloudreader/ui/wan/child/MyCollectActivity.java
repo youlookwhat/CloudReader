@@ -21,8 +21,8 @@ import java.util.ArrayList;
  */
 public class MyCollectActivity extends BaseActivity<ActivityMyCollectBinding> {
 
-    private ArrayList<String> mTitleList = new ArrayList<>(2);
-    private ArrayList<Fragment> mFragments = new ArrayList<>(2);
+    private ArrayList<String> mTitleList = new ArrayList<>(4);
+    private ArrayList<Fragment> mFragments = new ArrayList<>(4);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +33,7 @@ public class MyCollectActivity extends BaseActivity<ActivityMyCollectBinding> {
         initFragmentList();
         MyFragmentPagerAdapter myAdapter = new MyFragmentPagerAdapter(getSupportFragmentManager(), mFragments, mTitleList);
         bindingView.vpMyCollect.setAdapter(myAdapter);
+        bindingView.vpMyCollect.setOffscreenPageLimit(3);
         myAdapter.notifyDataSetChanged();
         bindingView.tabMyCollect.setupWithViewPager(bindingView.vpMyCollect);
         showContentView();
@@ -42,10 +43,12 @@ public class MyCollectActivity extends BaseActivity<ActivityMyCollectBinding> {
         mTitleList.clear();
         mTitleList.add("文章");
         mTitleList.add("网址");
-//        mTitleList.add("书籍");
+        mTitleList.add("书籍");
+        mTitleList.add("段子");
         mFragments.add(CollectArticleFragment.newInstance());
         mFragments.add(CollectLinkFragment.newInstance());
-//        mFragments.add(BookListFragment.newInstance("心理学"));
+        mFragments.add(BookListFragment.newInstance("心理学"));
+        mFragments.add(JokeFragment.newInstance("段子"));
     }
 
     @Override

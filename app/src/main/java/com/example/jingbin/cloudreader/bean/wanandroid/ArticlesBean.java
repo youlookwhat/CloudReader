@@ -3,7 +3,7 @@ package com.example.jingbin.cloudreader.bean.wanandroid;
 /**
  * @author jingbin
  * @data 2018/10/8
- * @description
+ * @description 完安卓item bean
  */
 
 public class ArticlesBean {

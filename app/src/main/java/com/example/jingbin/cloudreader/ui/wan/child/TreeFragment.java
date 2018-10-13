@@ -29,8 +29,6 @@ import rx.schedulers.Schedulers;
  */
 public class TreeFragment extends BaseFragment<FragmentWanAndroidBinding> {
 
-    private static final String TYPE = "param2";
-    private String mType = "知识体系";
     private boolean mIsPrepared;
     private boolean mIsFirst = true;
     private TreeAdapter mTreeAdapter;
@@ -47,20 +45,8 @@ public class TreeFragment extends BaseFragment<FragmentWanAndroidBinding> {
         activity = getActivity();
     }
 
-    public static TreeFragment newInstance(String param1) {
-        TreeFragment fragment = new TreeFragment();
-        Bundle args = new Bundle();
-        args.putString(TYPE, param1);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mType = getArguments().getString(TYPE);
-        }
+    public static TreeFragment newInstance() {
+        return new TreeFragment();
     }
 
     @Override
@@ -68,7 +54,6 @@ public class TreeFragment extends BaseFragment<FragmentWanAndroidBinding> {
         super.onActivityCreated(savedInstanceState);
         showContentView();
         initRefreshView();
-//        new TreeViewModel();
 
         // 准备就绪
         mIsPrepared = true;

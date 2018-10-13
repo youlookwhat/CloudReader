@@ -1,6 +1,5 @@
 package com.example.jingbin.cloudreader.ui.wan.child;
 
-import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -37,8 +36,6 @@ import rx.Subscription;
  */
 public class BannerFragment extends BaseFragment<FragmentWanAndroidBinding> implements WanNavigator.BannerNavigator, WanNavigator.ArticleListNavigator {
 
-    private static final String TYPE = "param1";
-    private String mType = "综合";
     private boolean mIsPrepared;
     private boolean mIsFirst = true;
     private WanAndroidAdapter mAdapter;
@@ -51,25 +48,8 @@ public class BannerFragment extends BaseFragment<FragmentWanAndroidBinding> impl
         return R.layout.fragment_wan_android;
     }
 
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-    }
-
-    public static BannerFragment newInstance(String param1) {
-        BannerFragment fragment = new BannerFragment();
-        Bundle args = new Bundle();
-        args.putString(TYPE, param1);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mType = getArguments().getString(TYPE);
-        }
+    public static BannerFragment newInstance() {
+        return new BannerFragment();
     }
 
     @Override

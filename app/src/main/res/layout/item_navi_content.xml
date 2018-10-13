@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+
+    <data>
+
+        <variable
+            name="bean"
+            type="com.example.jingbin.cloudreader.bean.wanandroid.NaviJsonBean.DataBean" />
+
+        <import type="android.text.Html" />
+    </data>
+
+    <LinearLayout
+        android:id="@+id/ll_item_top"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorLine"
+            android:paddingBottom="3dp"
+            android:paddingLeft="12dp"
+            android:paddingTop="3dp"
+            android:text="@{Html.fromHtml(bean.name)}"
+            android:textSize="14sp"
+            tools:text="网址导航" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+</layout>

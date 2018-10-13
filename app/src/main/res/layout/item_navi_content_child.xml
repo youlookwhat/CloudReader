@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+
+    <data>
+
+        <variable
+            name="bean"
+            type="com.example.jingbin.cloudreader.bean.wanandroid.ArticlesBean" />
+
+        <import type="android.text.Html" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <View
+            android:id="@+id/view_left"
+            android:layout_width="1px"
+            android:layout_height="40dp"
+            android:layout_alignParentRight="true"
+            android:background="@color/colorHomeLine" />
+
+        <TextView
+            android:id="@+id/tv_text_child"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_toLeftOf="@+id/view_left"
+            android:background="@drawable/ripple_joke_item_bg"
+            android:gravity="center"
+            android:paddingLeft="3dp"
+            android:paddingRight="3dp"
+            android:text="@{Html.fromHtml(bean.title)}"
+            android:textColor="@color/colorContent"
+            android:textSize="13sp"
+            tools:text="网址导航" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_below="@+id/tv_text_child"
+            android:background="@color/colorHomeLine" />
+    </RelativeLayout>
+</layout>

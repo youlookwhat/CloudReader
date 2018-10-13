@@ -13,6 +13,7 @@ import com.example.jingbin.cloudreader.bean.book.BookBean;
 import com.example.jingbin.cloudreader.bean.book.BookDetailBean;
 import com.example.jingbin.cloudreader.bean.wanandroid.HomeListBean;
 import com.example.jingbin.cloudreader.bean.wanandroid.LoginBean;
+import com.example.jingbin.cloudreader.bean.wanandroid.NaviJsonBean;
 import com.example.jingbin.cloudreader.bean.wanandroid.QsbkListBean;
 import com.example.jingbin.cloudreader.bean.wanandroid.TreeBean;
 import com.example.jingbin.cloudreader.bean.wanandroid.WanAndroidBannerBean;
@@ -230,4 +231,10 @@ public interface HttpClient {
      */
     @GET("lg/collect/usertools/json")
     Observable<CollectUrlBean> getCollectUrlList();
+
+    /**
+     * 导航数据
+     */
+    @GET("navi/json")
+    Observable<NaviJsonBean> getNaviJson();
 }
