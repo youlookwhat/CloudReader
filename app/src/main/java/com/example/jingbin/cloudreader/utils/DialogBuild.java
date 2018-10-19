@@ -2,6 +2,8 @@ package com.example.jingbin.cloudreader.utils;
 
 import android.content.DialogInterface;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.AppCompatEditText;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.TextView;
 
@@ -29,7 +31,7 @@ public class DialogBuild {
         TextView titleTop = view.findViewById(R.id.title_top);
         titleTop.setText(title);
         builder.setView(view);
-        builder.setPositiveButton("查看详情", clickListener::onClick);
+        builder.setPositiveButton("查看详情", clickListener);
         builder.show();
     }
 
@@ -105,6 +107,45 @@ public class DialogBuild {
             }
         });
         builder.show();
+    }
+
+    /**
+     * 编辑收藏网址
+     */
+    public static void show(View v, String name, String link, OnEditClickListener listener) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
+        builder.setTitle("编辑");
+        View inflate = View.inflate(v.getContext(), R.layout.dialog_eidt_url, null);
+        builder.setView(inflate);
+        AppCompatEditText etName = inflate.findViewById(R.id.et_name);
+        AppCompatEditText etLink = inflate.findViewById(R.id.et_link);
+        if (!TextUtils.isEmpty(name)) {
+            etName.setText(name);
+            etName.setSelection(name.length());
+        }
+        etLink.setText(link);
+        builder.setNegativeButton("取消", null);
+        builder.setPositiveButton("编辑完成", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                String name = etName.getText().toString().trim();
+                String link = etLink.getText().toString().trim();
+                if (TextUtils.isEmpty(name)) {
+                    ToastUtil.showToastLong("请输入名称");
+                    return;
+                }
+                if (TextUtils.isEmpty(link)) {
+                    ToastUtil.showToastLong("请输入链接");
+                    return;
+                }
+                listener.onClick(name, link);
+            }
+        });
+        builder.show();
+    }
+
+    public interface OnEditClickListener {
+        void onClick(String name, String link);
     }
 
 }

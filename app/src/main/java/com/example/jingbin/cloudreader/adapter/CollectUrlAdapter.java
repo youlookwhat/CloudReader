@@ -12,7 +12,7 @@ import com.example.jingbin.cloudreader.base.baseadapter.BaseRecyclerViewHolder;
 import com.example.jingbin.cloudreader.bean.CollectUrlBean;
 import com.example.jingbin.cloudreader.data.model.CollectModel;
 import com.example.jingbin.cloudreader.databinding.ItemCollectLinkBinding;
-import com.example.jingbin.cloudreader.utils.DebugUtil;
+import com.example.jingbin.cloudreader.utils.DialogBuild;
 import com.example.jingbin.cloudreader.utils.ToastUtil;
 import com.example.jingbin.cloudreader.view.webview.WebViewActivity;
 import com.example.jingbin.cloudreader.viewmodel.wan.WanNavigator;
@@ -55,6 +55,25 @@ public class CollectUrlAdapter extends BaseRecyclerViewAdapter<CollectUrlBean.Da
                         builder.setItems(items, (dialog, which) -> {
                             switch (which) {
                                 case 0:
+                                    DialogBuild.show(v, bean.getName(), bean.getLink(), (DialogBuild.OnEditClickListener) (name, link) -> {
+                                        if (model == null) {
+                                            model = new CollectModel();
+                                        }
+                                        model.updateUrl(bean.getId(), name, link, new WanNavigator.OnCollectNavigator() {
+                                            @Override
+                                            public void onSuccess() {
+                                                bean.setName(name);
+                                                bean.setLink(link);
+                                                notifyItemChanged(getAdapterPosition());
+                                                ToastUtil.showToastLong("编辑成功");
+                                            }
+
+                                            @Override
+                                            public void onFailure() {
+                                                ToastUtil.showToastLong("编辑失败");
+                                            }
+                                        });
+                                    });
                                     break;
                                 case 1:
                                     if (model == null) {
@@ -67,8 +86,6 @@ public class CollectUrlAdapter extends BaseRecyclerViewAdapter<CollectUrlBean.Da
                                             // 角标始终加一
                                             int adapterPosition = getAdapterPosition();
 
-                                            DebugUtil.error("getAdapterPosition():" + getAdapterPosition());
-                                            DebugUtil.error("indexOf:" + indexOf);
                                             // 移除数据增加删除动画
                                             getData().remove(indexOf);
                                             notifyItemRemoved(adapterPosition);

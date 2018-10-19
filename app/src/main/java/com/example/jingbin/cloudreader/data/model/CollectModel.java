@@ -165,4 +165,30 @@ public class CollectModel {
                 });
     }
 
+    /**
+     * 编辑收藏网站
+     */
+    public void updateUrl(int id, String name, String link, WanNavigator.OnCollectNavigator navigator) {
+        HttpClient.Builder.getWanAndroidServer().updateUrl(id,name,link)
+                .subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<HomeListBean>() {
+                    @Override
+                    public void onCompleted() {
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        navigator.onFailure();
+                    }
+
+                    @Override
+                    public void onNext(HomeListBean bean) {
+                        if (bean != null && bean.getErrorCode() == 0) {
+                            navigator.onSuccess();
+                        } else {
+                            navigator.onFailure();
+                        }
+                    }
+                });
+    }
 }

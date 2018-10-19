@@ -2,6 +2,7 @@ package com.example.jingbin.cloudreader.view.webview;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Build;
@@ -150,7 +151,7 @@ public class WebViewActivity extends AppCompatActivity implements IWebPageView {
                 // 添加到收藏
                 if (UserUtil.isLogin(webView.getContext())) {
                     if (SPUtils.getBoolean(Constants.IS_FIRST_COLLECTURL, true)) {
-                        DialogBuild.show(webView, "网址不同于文章，相同网址可多次进行收藏，且不会显示收藏状态。", "知道了", (dialog, which) -> {
+                        DialogBuild.show(webView, "网址不同于文章，相同网址可多次进行收藏，且不会显示收藏状态。", "知道了", (DialogInterface.OnClickListener) (dialog, which) -> {
                             SPUtils.putBoolean(Constants.IS_FIRST_COLLECTURL, false);
                             collectUrl();
                         });

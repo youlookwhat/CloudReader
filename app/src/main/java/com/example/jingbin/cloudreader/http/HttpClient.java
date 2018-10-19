@@ -218,6 +218,16 @@ public interface HttpClient {
     Observable<HomeListBean> collectUrl(@Field("name") String name, @Field("link") String link);
 
     /**
+     * 编辑收藏网站
+     *
+     * @param name 标题
+     * @param link 链接
+     */
+    @FormUrlEncoded
+    @POST("lg/collect/updatetool/json")
+    Observable<HomeListBean> updateUrl(@Field("id") int id, @Field("name") String name, @Field("link") String link);
+
+    /**
      * 删除收藏网站
      *
      * @param id 收藏网址id
