@@ -18,6 +18,8 @@
 
     <!--侧边栏分割线-->
     <color name="colorNavLine">#E0E0E0</color>
+    <!--导航数据侧边栏背景色-->
+    <color name="colorNaviBg">#80ffffff</color>
 
 
     <!--分割线-->

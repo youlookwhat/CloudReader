@@ -10,8 +10,7 @@
             android:id="@+id/xrv_navi"
             android:layout_width="100dp"
             android:layout_height="match_parent"
-            android:scrollbarSize="1px"
-            android:scrollbars="vertical" />
+            android:scrollbars="none" />
 
         <View
             android:layout_width="1dp"

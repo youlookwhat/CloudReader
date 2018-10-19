@@ -86,7 +86,7 @@ public class NaviFragment extends BaseFragment<FragmentNaviBinding> {
                 super.onScrolled(recyclerView, dx, dy);
                 int firstPosition = layoutManager2.findFirstVisibleItemPosition();
                 if (oldPosition != firstPosition) {
-                    layoutManager.smoothScrollToPosition(bindingView.xrvNavi, new RecyclerView.State(), firstPosition);
+                    bindingView.xrvNavi.smoothScrollToPosition(firstPosition);
                     mNaviAdapter.setSelected(firstPosition);
                     oldPosition = firstPosition;
                 }

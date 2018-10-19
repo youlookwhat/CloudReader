@@ -5,7 +5,9 @@
     android:id="@+id/tv_tag"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:background="@drawable/shape_tree_tag"
+    android:background="@drawable/home_adjust_background"
     android:textColor="@color/colorContent"
     android:textSize="12sp"
     tools:text="title" />
+
+    <!--android:background="@drawable/shape_tree_tag"-->
