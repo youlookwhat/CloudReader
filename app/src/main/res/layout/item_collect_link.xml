@@ -36,7 +36,7 @@
             android:ellipsize="end"
             android:lineSpacingExtra="1.6dp"
             android:maxLines="2"
-            android:text="@{bean.name}"
+            android:text="@{Html.fromHtml(bean.name)}"
             android:textColor="@color/colorContent"
             tools:text="MMKV——基于 mmap 的高性能通用 key-value 组件MMKV——基于 mmap 的高性能通用 key-value 组件" />
 
