@@ -51,7 +51,7 @@ If you have any questions, please write to [the issue][21] of making you don't u
 
 
 ## See Detail
-> [项目介绍详情](https://github.com/youlookwhat/CloudReader/blob/master/file/Introduction.md) | [细节优化详情](https://github.com/youlookwhat/CloudReader/wiki) | [**版本更新详情(V1.9.4)**](http://jingbin.me/2016/12/30/%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97-%E4%BA%91%E9%98%85/)
+> [项目介绍详情](https://github.com/youlookwhat/CloudReader/blob/master/file/Introduction.md) | [细节优化详情](https://github.com/youlookwhat/CloudReader/wiki) | [**版本更新详情(V2.0)**](http://jingbin.me/2016/12/30/%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97-%E4%BA%91%E9%98%85/)
 
 ### Download
 　[火速跳转](https://fir.im/cloudreader)                                    
@@ -65,6 +65,15 @@ If you have any questions, please write to [the issue][21] of making you don't u
 　
 
 ### Version
+#### V2.0（10-26）
+ - 1、[新增] 知识体系页面
+ - 2、[新增] 导航数据页面
+ - 3、[新增] 收藏网址功能
+ - 4、[更改] 固定图片链接替换
+ - 5、[更改] 暂时将书籍/段子页面移入我的收藏里
+ - 6、[修复] 段子头像显示不全修复
+ - 7、[优化] 首页ui及部分图片显示比例优化
+
 #### V1.9.4（05-21）
  - 1、[修复] 修复干货订制点击“选择分类”崩溃的bug
  - 2、[新增] 干货订制页面长按item增加[水波纹扩散效果](https://jingbin.me/2018/05/20/Android%20%E6%B0%B4%E6%B3%A2%E7%BA%B9%E6%95%88%E6%9E%9C%E7%9A%84%E6%8E%A2%E7%A9%B6/)
@@ -76,6 +85,7 @@ If you have any questions, please write to [the issue][21] of making you don't u
  - 4、[完善] 性能优化之[布局大幅优化](https://jingbin.me/2018/05/17/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E4%B9%8B%E5%B8%83%E5%B1%80%E4%BC%98%E5%8C%96%E8%AE%B0%E5%BD%95/)
  - 5、[完善] 完善体验修复若干bug
 
+<!-- 
 #### V1.9.2（05-06）
  - 1、[完善] 主页显示结构修改
  - 2、[修复] 去掉内涵段子数据
@@ -92,7 +102,6 @@ If you have any questions, please write to [the issue][21] of making you don't u
  - 4、尽可能规范MvvM框架，后期会慢慢调整
  - 5、使用fir.im更新接口，完善更新功能
 
-<!-- 
 #### V1.8.3（11-14）
  - 1、[修复] 已选择分类退出App再次进入,type失效的问题
  - 2、[修复] 跳转B站视频显示网页错误的问题
@@ -182,7 +191,7 @@ limitations under the License.
 [2]:https://www.apache.org/licenses/LICENSE-2.0.html
 [3]:https://img.shields.io/badge/API-19%2B-red.svg?style=flat
 [4]:https://android-arsenal.com/api?level=19
-[30]:https://img.shields.io/badge/release-1.9.4-red.svg
+[30]:https://img.shields.io/badge/release-2.0-red.svg
 [31]:https://github.com/youlookwhat/CloudReader/releases
 [32]:https://img.shields.io/badge/PRs-welcome-brightgreen.svg
 [33]:https://github.com/youlookwhat/CloudReader/pulls
