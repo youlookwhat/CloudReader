@@ -27,8 +27,7 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding> implements
         setTitle("玩安卓登录");
         showContentView();
 
-        viewModel = new LoginViewModel();
-        viewModel.setNavigator(this);
+        viewModel = new LoginViewModel(this);
         bindingView.setViewmodel(viewModel);
     }
 
