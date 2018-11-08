@@ -102,6 +102,7 @@ public class WanAndroidAdapter extends BaseRecyclerViewAdapter<ArticlesBean> {
                                             notifyItemRemoved(adapterPosition);
                                         } else {
                                             bean.setCollect(binding.vbCollect.isChecked());
+                                            ToastUtil.showToastLong("已取消收藏");
                                         }
                                     }
 
@@ -117,6 +118,7 @@ public class WanAndroidAdapter extends BaseRecyclerViewAdapter<ArticlesBean> {
                                     @Override
                                     public void onSuccess() {
                                         bean.setCollect(true);
+                                        ToastUtil.showToastLong("收藏成功");
                                     }
 
                                     @Override
