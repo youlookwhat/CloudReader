@@ -27,7 +27,7 @@
             android:id="@+id/ll_item_top"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="?attr/selectableItemBackground"
+            android:foreground="?attr/selectableItemBackgroundBorderless"
             android:onClick="@{()->adapter.openDetail(bean)}"
             android:padding="8dp">
 

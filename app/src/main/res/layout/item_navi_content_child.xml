@@ -28,7 +28,7 @@
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_toLeftOf="@+id/view_left"
-            android:background="@drawable/ripple_joke_item_bg"
+            android:foreground="?attr/selectableItemBackgroundBorderless"
             android:gravity="center"
             android:paddingLeft="3dp"
             android:paddingRight="3dp"
