@@ -31,22 +31,22 @@ import rx.schedulers.Schedulers;
 public class DialogBuild {
 
     /**
-     * 显示单行文字的AlertDialog
+     * 显示自定义布局
      */
-    public static void show(View v, String title, DialogInterface.OnClickListener clickListener) {
+    public static void showCustom(View v, String content, String buttonText,DialogInterface.OnClickListener clickListener) {
         AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
         View view = View.inflate(v.getContext(), R.layout.title_douban_top, null);
         TextView titleTop = view.findViewById(R.id.title_top);
-        titleTop.setText(title);
+        titleTop.setText(content);
         builder.setView(view);
-        builder.setPositiveButton("查看详情", clickListener);
+        builder.setPositiveButton(buttonText, clickListener);
         builder.show();
     }
 
-    public static void show(View v, String title, String buttonText, DialogInterface.OnClickListener clickListener) {
+    public static void show(View v, String message, String buttonText, DialogInterface.OnClickListener clickListener) {
         AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
         builder.setTitle("提示");
-        builder.setMessage(title);
+        builder.setMessage(message);
         builder.setPositiveButton(buttonText, clickListener);
         builder.show();
     }

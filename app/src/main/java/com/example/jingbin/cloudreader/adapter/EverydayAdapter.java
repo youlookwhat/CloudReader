@@ -90,28 +90,20 @@ public class EverydayAdapter extends BaseRecyclerViewAdapter<List<AndroidBean>> 
             String title = object.get(0).getType_title();
             binding.tvTitleType.setText(title);
             if ("Android".equals(title)) {
-//                binding.ivTitleType.setImageDrawable(CommonUtils.getDrawable(R.drawable.home_title_android));
                 index = 0;
             } else if ("福利".equals(title)) {
-//                binding.ivTitleType.setImageDrawable(CommonUtils.getDrawable(R.drawable.home_title_meizi));
                 index = 1;
             } else if ("IOS".equals(title)) {
-//                binding.ivTitleType.setImageDrawable(CommonUtils.getDrawable(R.drawable.home_title_ios));
                 index = 2;
             } else if ("休息视频".equals(title)) {
-//                binding.ivTitleType.setImageDrawable(CommonUtils.getDrawable(R.drawable.home_title_movie));
                 index = 2;
             } else if ("拓展资源".equals(title)) {
-//                binding.ivTitleType.setImageDrawable(CommonUtils.getDrawable(R.drawable.home_title_source));
                 index = 2;
             } else if ("瞎推荐".equals(title)) {
-//                binding.ivTitleType.setImageDrawable(CommonUtils.getDrawable(R.drawable.home_title_xia));
                 index = 2;
             } else if ("前端".equals(title)) {
-//                binding.ivTitleType.setImageDrawable(CommonUtils.getDrawable(R.drawable.home_title_qian));
                 index = 2;
             } else if ("App".equals(title)) {
-//                binding.ivTitleType.setImageDrawable(CommonUtils.getDrawable(R.drawable.home_title_app));
                 index = 2;
             }
 
@@ -226,7 +218,7 @@ public class EverydayAdapter extends BaseRecyclerViewAdapter<List<AndroidBean>> 
             @Override
             public boolean onLongClick(View v) {
                 String title = TextUtils.isEmpty(bean.getType()) ? bean.getDesc() : bean.getType() + "：  " + bean.getDesc();
-                DialogBuild.show(v, title, new DialogInterface.OnClickListener() {
+                DialogBuild.showCustom(v, title, "查看详情", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         WebViewActivity.loadUrl(linearLayout.getContext(), bean.getUrl(), bean.getDesc());

@@ -68,16 +68,16 @@ public class CollectLinkFragment extends BaseFragment<FragmentWanAndroidBinding>
 
 
     private void initRefreshView() {
-        bindingView.srlBook.setColorSchemeColors(CommonUtils.getColor(R.color.colorTheme));
-        bindingView.xrvBook.setLayoutManager(new LinearLayoutManager(activity));
-        bindingView.xrvBook.setPullRefreshEnabled(false);
-        bindingView.xrvBook.clearHeader();
+        bindingView.srlWan.setColorSchemeColors(CommonUtils.getColor(R.color.colorTheme));
+        bindingView.xrvWan.setLayoutManager(new LinearLayoutManager(activity));
+        bindingView.xrvWan.setPullRefreshEnabled(false);
+        bindingView.xrvWan.clearHeader();
         mAdapter = new CollectUrlAdapter(activity);
-        bindingView.xrvBook.setAdapter(mAdapter);
-        bindingView.srlBook.setOnRefreshListener(() -> bindingView.srlBook.postDelayed(() -> {
+        bindingView.xrvWan.setAdapter(mAdapter);
+        bindingView.srlWan.setOnRefreshListener(() -> bindingView.srlWan.postDelayed(() -> {
             viewModel.getCollectUrlList();
         }, 300));
-        bindingView.xrvBook.setLoadingListener(new XRecyclerView.LoadingListener() {
+        bindingView.xrvWan.setLoadingListener(new XRecyclerView.LoadingListener() {
             @Override
             public void onRefresh() {
 
@@ -96,8 +96,8 @@ public class CollectLinkFragment extends BaseFragment<FragmentWanAndroidBinding>
             return;
         }
 
-        bindingView.srlBook.setRefreshing(true);
-        bindingView.srlBook.postDelayed(new Runnable() {
+        bindingView.srlWan.setRefreshing(true);
+        bindingView.srlWan.postDelayed(new Runnable() {
             @Override
             public void run() {
                 viewModel.getCollectUrlList();
@@ -108,17 +108,17 @@ public class CollectLinkFragment extends BaseFragment<FragmentWanAndroidBinding>
 
     @Override
     protected void onRefresh() {
-        bindingView.srlBook.setRefreshing(true);
+        bindingView.srlWan.setRefreshing(true);
         viewModel.getCollectUrlList();
     }
 
     @Override
     public void loadFailure() {
         showContentView();
-        if (bindingView.srlBook.isRefreshing()) {
-            bindingView.srlBook.setRefreshing(false);
+        if (bindingView.srlWan.isRefreshing()) {
+            bindingView.srlWan.setRefreshing(false);
         }
-        bindingView.xrvBook.refreshComplete();
+        bindingView.xrvWan.refreshComplete();
         ToastUtil.showToastLong("还没有收藏网址哦~");
     }
 
@@ -128,10 +128,10 @@ public class CollectLinkFragment extends BaseFragment<FragmentWanAndroidBinding>
         mAdapter.clear();
         mAdapter.addAll(data);
         mAdapter.notifyDataSetChanged();
-        bindingView.xrvBook.refreshComplete();
+        bindingView.xrvWan.refreshComplete();
 
         if (data.size() > 10) {
-            bindingView.xrvBook.noMoreLoading();
+            bindingView.xrvWan.noMoreLoading();
         }
 
         mIsFirst = false;
@@ -140,7 +140,7 @@ public class CollectLinkFragment extends BaseFragment<FragmentWanAndroidBinding>
     @Override
     public void showLoadSuccessView() {
         showContentView();
-        bindingView.srlBook.setRefreshing(false);
+        bindingView.srlWan.setRefreshing(false);
     }
 
     @Override

@@ -1,5 +1,6 @@
 package com.example.jingbin.cloudreader.view.viewbigimage;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -21,6 +22,7 @@ import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 import com.example.http.utils.CheckNetwork;
 import com.example.jingbin.cloudreader.R;
+import com.example.jingbin.cloudreader.utils.PermissionHandler;
 import com.example.jingbin.cloudreader.utils.RxSaveImage;
 import com.example.jingbin.cloudreader.utils.ToastUtil;
 
@@ -131,6 +133,9 @@ public class ViewBigImageActivity extends FragmentActivity implements OnPageChan
         tvSaveBigImage.setOnClickListener(view -> {
             if (!CheckNetwork.isNetworkConnected(view.getContext())) {
                 ToastUtil.showToastLong("当前网络不可用，请检查你的网络设置");
+                return;
+            }
+            if (!PermissionHandler.isHandlePermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
                 return;
             }
 
@@ -310,6 +315,12 @@ public class ViewBigImageActivity extends FragmentActivity implements OnPageChan
             imageTitles = null;
         }
         super.onDestroy();
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        PermissionHandler.onRequestPermissionsResult("存储权限被拒绝，请到设置中开启", requestCode, permissions, grantResults, null);
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
 
     /**

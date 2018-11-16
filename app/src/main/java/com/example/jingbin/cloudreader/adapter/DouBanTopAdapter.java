@@ -60,7 +60,7 @@ public class DouBanTopAdapter extends BaseRecyclerViewAdapter<SubjectsBean> {
                 @Override
                 public boolean onLongClick(View v) {
                     String title = "Top" + (position + 1) + ": " + bean.getTitle();
-                    DialogBuild.show(v, title, new DialogInterface.OnClickListener() {
+                    DialogBuild.showCustom(v, title, "查看详情", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             OneMovieDetailActivity.start(activity, bean, binding.ivTopPhoto);

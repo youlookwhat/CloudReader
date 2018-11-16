@@ -1,8 +1,9 @@
 package com.example.jingbin.cloudreader;
 
+import android.content.ClipboardManager;
+import android.content.DialogInterface;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
@@ -11,6 +12,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -40,6 +42,7 @@ import com.example.jingbin.cloudreader.utils.DialogBuild;
 import com.example.jingbin.cloudreader.utils.ImageLoadUtil;
 import com.example.jingbin.cloudreader.utils.PerfectClickListener;
 import com.example.jingbin.cloudreader.utils.SPUtils;
+import com.example.jingbin.cloudreader.utils.StringFormatUtil;
 import com.example.jingbin.cloudreader.view.MyFragmentPagerAdapter;
 import com.example.jingbin.cloudreader.view.OnLoginListener;
 import com.example.jingbin.cloudreader.view.statusbar.StatusBarUtil;
@@ -60,7 +63,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private FrameLayout llTitleMenu;
     private Toolbar toolbar;
-    private FloatingActionButton fab;
     private NavigationView navView;
     private DrawerLayout drawerLayout;
     private ViewPager vpContent;
@@ -96,14 +98,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void initId() {
         drawerLayout = mBinding.drawerLayout;
         navView = mBinding.navView;
-        fab = mBinding.include.fab;
         toolbar = mBinding.include.toolbar;
         llTitleMenu = mBinding.include.llTitleMenu;
         vpContent = mBinding.include.vpContent;
         ivTitleOne = mBinding.include.ivTitleOne;
         ivTitleTwo = mBinding.include.ivTitleTwo;
         ivTitleThree = mBinding.include.ivTitleThree;
-        fab.setVisibility(View.GONE);
     }
 
     private void initListener() {
@@ -111,7 +111,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mBinding.include.ivTitleOne.setOnClickListener(this);
         mBinding.include.ivTitleTwo.setOnClickListener(this);
         mBinding.include.ivTitleThree.setOnClickListener(this);
-        fab.setOnClickListener(this);
+        getClipContent();
     }
 
     /**
@@ -336,6 +336,33 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             drawer.closeDrawer(GravityCompat.START);
         } else {
             super.onBackPressed();
+        }
+    }
+
+    /**
+     * 获取剪切板链接
+     */
+    private void getClipContent() {
+        // 获取系统剪切板
+        ClipboardManager manager = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
+        if (manager != null) {
+            if (manager.hasPrimaryClip() && manager.getPrimaryClip().getItemCount() > 0) {
+                CharSequence addedText = manager.getPrimaryClip().getItemAt(0).getText();
+                String addedTextString = String.valueOf(addedText);
+                if (!TextUtils.isEmpty(addedTextString)) {
+                    String formatUrl = StringFormatUtil.formatUrl(String.valueOf(addedText));
+                    if (!TextUtils.isEmpty(formatUrl)) {
+                        DialogBuild.showCustom(vpContent, addedTextString, "打开其中链接", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                WebViewActivity.loadUrl(MainActivity.this, formatUrl, "加载中..");
+                                // 清除剪切板内容
+                                manager.setText(null);
+                            }
+                        });
+                    }
+                }
+            }
         }
     }
 

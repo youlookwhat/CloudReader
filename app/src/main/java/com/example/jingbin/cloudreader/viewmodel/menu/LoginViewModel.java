@@ -29,7 +29,7 @@ public class LoginViewModel extends ViewModel {
 
     private LoginNavigator navigator;
 
-    public void setNavigator(LoginNavigator navigator) {
+    public LoginViewModel(LoginNavigator navigator) {
         this.navigator = navigator;
     }
 

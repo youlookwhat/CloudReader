@@ -77,12 +77,12 @@ public class JokeFragment extends BaseFragment<FragmentWanAndroidBinding> implem
     }
 
     private void initRefreshView() {
-        bindingView.srlBook.setColorSchemeColors(CommonUtils.getColor(R.color.colorTheme));
-        bindingView.srlBook.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+        bindingView.srlWan.setColorSchemeColors(CommonUtils.getColor(R.color.colorTheme));
+        bindingView.srlWan.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                bindingView.srlBook.postDelayed(() -> {
-                    bindingView.xrvBook.reset();
+                bindingView.srlWan.postDelayed(() -> {
+                    bindingView.xrvWan.reset();
                     viewModel.setRefreshBK(true);
                     viewModel.setPage(new Random().nextInt(100));
                     viewModel.showQSBKList();
@@ -90,13 +90,13 @@ public class JokeFragment extends BaseFragment<FragmentWanAndroidBinding> implem
                 }, 100);
             }
         });
-        bindingView.xrvBook.setLayoutManager(new LinearLayoutManager(getActivity()));
-        bindingView.xrvBook.setPullRefreshEnabled(false);
-        bindingView.xrvBook.clearHeader();
+        bindingView.xrvWan.setLayoutManager(new LinearLayoutManager(getActivity()));
+        bindingView.xrvWan.setPullRefreshEnabled(false);
+        bindingView.xrvWan.clearHeader();
         mAdapter = new JokeAdapter();
-        bindingView.xrvBook.setAdapter(mAdapter);
+        bindingView.xrvWan.setAdapter(mAdapter);
 
-        bindingView.xrvBook.setLoadingListener(new XRecyclerView.LoadingListener() {
+        bindingView.xrvWan.setLoadingListener(new XRecyclerView.LoadingListener() {
             @Override
             public void onRefresh() {
 
@@ -119,8 +119,8 @@ public class JokeFragment extends BaseFragment<FragmentWanAndroidBinding> implem
             return;
         }
 
-        bindingView.srlBook.setRefreshing(true);
-        bindingView.srlBook.postDelayed(new Runnable() {
+        bindingView.srlWan.setRefreshing(true);
+        bindingView.srlWan.postDelayed(new Runnable() {
             @Override
             public void run() {
                 loadCustomData();
@@ -134,20 +134,20 @@ public class JokeFragment extends BaseFragment<FragmentWanAndroidBinding> implem
 
     @Override
     protected void onRefresh() {
-        bindingView.srlBook.setRefreshing(true);
+        bindingView.srlWan.setRefreshing(true);
         loadCustomData();
     }
 
     @Override
     public void loadListFailure() {
         showContentView();
-        if (bindingView.srlBook.isRefreshing()) {
-            bindingView.srlBook.setRefreshing(false);
+        if (bindingView.srlWan.isRefreshing()) {
+            bindingView.srlWan.setRefreshing(false);
         }
         if (viewModel.isRefreshBK()) {
             showError();
         } else {
-            bindingView.xrvBook.refreshComplete();
+            bindingView.xrvWan.refreshComplete();
         }
     }
 
@@ -158,7 +158,7 @@ public class JokeFragment extends BaseFragment<FragmentWanAndroidBinding> implem
         }
         mAdapter.addAll(bean);
         mAdapter.notifyDataSetChanged();
-        bindingView.xrvBook.refreshComplete();
+        bindingView.xrvWan.refreshComplete();
 
         if (mIsFirst) {
             mIsFirst = false;
@@ -167,13 +167,13 @@ public class JokeFragment extends BaseFragment<FragmentWanAndroidBinding> implem
 
     @Override
     public void showListNoMoreLoading() {
-        bindingView.xrvBook.noMoreLoading();
+        bindingView.xrvWan.noMoreLoading();
     }
 
     @Override
     public void showLoadSuccessView() {
         showContentView();
-        bindingView.srlBook.setRefreshing(false);
+        bindingView.srlWan.setRefreshing(false);
     }
 
     @Override

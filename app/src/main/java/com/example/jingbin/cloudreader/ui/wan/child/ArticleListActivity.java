@@ -73,17 +73,18 @@ public class ArticleListActivity extends BaseActivity<FragmentWanAndroidBinding>
     }
 
     private void initRefreshView() {
-        bindingView.srlBook.setColorSchemeColors(CommonUtils.getColor(R.color.colorTheme));
-        bindingView.xrvBook.setLayoutManager(new LinearLayoutManager(this));
-        bindingView.xrvBook.setPullRefreshEnabled(false);
-        bindingView.xrvBook.clearHeader();
+        bindingView.srlWan.setColorSchemeColors(CommonUtils.getColor(R.color.colorTheme));
+        bindingView.xrvWan.setLayoutManager(new LinearLayoutManager(this));
+        bindingView.xrvWan.setPullRefreshEnabled(false);
+        bindingView.xrvWan.clearHeader();
         mAdapter = new WanAndroidAdapter(this);
-        bindingView.xrvBook.setAdapter(mAdapter);
-        bindingView.srlBook.setOnRefreshListener(() -> bindingView.srlBook.postDelayed(() -> {
+        bindingView.xrvWan.setAdapter(mAdapter);
+        bindingView.srlWan.setOnRefreshListener(() -> bindingView.srlWan.postDelayed(() -> {
+            bindingView.xrvWan.reset();
             getViewModel().setPage(0);
             loadData();
         }, 500));
-        bindingView.xrvBook.setLoadingListener(new XRecyclerView.LoadingListener() {
+        bindingView.xrvWan.setLoadingListener(new XRecyclerView.LoadingListener() {
             @Override
             public void onRefresh() {
 
@@ -101,13 +102,13 @@ public class ArticleListActivity extends BaseActivity<FragmentWanAndroidBinding>
     @Override
     public void loadHomeListFailure() {
         showContentView();
-        if (bindingView.srlBook.isRefreshing()) {
-            bindingView.srlBook.setRefreshing(false);
+        if (bindingView.srlWan.isRefreshing()) {
+            bindingView.srlWan.setRefreshing(false);
         }
         if (getViewModel().getPage() == 0) {
             showError();
         } else {
-            bindingView.xrvBook.refreshComplete();
+            bindingView.xrvWan.refreshComplete();
         }
     }
 
@@ -118,18 +119,18 @@ public class ArticleListActivity extends BaseActivity<FragmentWanAndroidBinding>
         }
         mAdapter.addAll(bean.getData().getDatas());
         mAdapter.notifyDataSetChanged();
-        bindingView.xrvBook.refreshComplete();
+        bindingView.xrvWan.refreshComplete();
     }
 
     @Override
     public void showListNoMoreLoading() {
-        bindingView.xrvBook.noMoreLoading();
+        bindingView.xrvWan.noMoreLoading();
     }
 
     @Override
     public void showLoadSuccessView() {
         showContentView();
-        bindingView.srlBook.setRefreshing(false);
+        bindingView.srlWan.setRefreshing(false);
     }
 
     @Override
