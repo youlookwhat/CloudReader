@@ -218,7 +218,7 @@ public class EverydayAdapter extends BaseRecyclerViewAdapter<List<AndroidBean>> 
             @Override
             public boolean onLongClick(View v) {
                 String title = TextUtils.isEmpty(bean.getType()) ? bean.getDesc() : bean.getType() + "：  " + bean.getDesc();
-                DialogBuild.show(v, title, new DialogInterface.OnClickListener() {
+                DialogBuild.showCustom(v, title, "查看详情", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         WebViewActivity.loadUrl(linearLayout.getContext(), bean.getUrl(), bean.getDesc());

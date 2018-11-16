@@ -10,13 +10,13 @@
         tools:context="com.example.jingbin.cloudreader.MainActivity">
 
 
-         <!--状态栏-->
+        <!--状态栏-->
         <View
             android:id="@+id/view_status"
             android:layout_width="match_parent"
             android:layout_height="24dp"
-            android:visibility="gone"
-            android:background="@color/colorTheme" />
+            android:background="@color/colorTheme"
+            android:visibility="gone" />
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
@@ -82,24 +82,11 @@
 
         </android.support.v7.widget.Toolbar>
 
-        <FrameLayout
+        <android.support.v4.view.ViewPager
+            android:id="@+id/vp_content"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:descendantFocusability="blocksDescendants" />
 
-            <android.support.v4.view.ViewPager
-                android:id="@+id/vp_content"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:descendantFocusability="blocksDescendants" />
-
-            <android.support.design.widget.FloatingActionButton
-                android:id="@+id/fab"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom|end"
-                android:layout_margin="@dimen/fab_margin"
-                app:srcCompat="@android:drawable/ic_dialog_email" />
-
-        </FrameLayout>
     </LinearLayout>
 </layout>
