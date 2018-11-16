@@ -65,20 +65,20 @@ public class TreeFragment extends BaseFragment<FragmentWanAndroidBinding> {
     }
 
     private void initRefreshView() {
-        bindingView.srlBook.setColorSchemeColors(CommonUtils.getColor(R.color.colorTheme));
-        bindingView.srlBook.setOnRefreshListener(() -> bindingView.srlBook.postDelayed(() -> {
-            bindingView.xrvBook.reset();
+        bindingView.srlWan.setColorSchemeColors(CommonUtils.getColor(R.color.colorTheme));
+        bindingView.srlWan.setOnRefreshListener(() -> bindingView.srlWan.postDelayed(() -> {
+            bindingView.xrvWan.reset();
             loadCustomData();
         }, 150));
         LinearLayoutManager layoutManager = new LinearLayoutManager(activity);
-        bindingView.xrvBook.setLayoutManager(layoutManager);
-        bindingView.xrvBook.setPullRefreshEnabled(false);
-        bindingView.xrvBook.setLoadingMoreEnabled(false);
-        bindingView.xrvBook.clearHeader();
+        bindingView.xrvWan.setLayoutManager(layoutManager);
+        bindingView.xrvWan.setPullRefreshEnabled(false);
+        bindingView.xrvWan.setLoadingMoreEnabled(false);
+        bindingView.xrvWan.clearHeader();
         mTreeAdapter = new TreeAdapter();
-        bindingView.xrvBook.setAdapter(mTreeAdapter);
+        bindingView.xrvWan.setAdapter(mTreeAdapter);
         HeaderItemTreeBinding oneBinding = DataBindingUtil.inflate(getLayoutInflater(), R.layout.header_item_tree, null, false);
-        bindingView.xrvBook.addHeaderView(oneBinding.getRoot());
+        bindingView.xrvWan.addHeaderView(oneBinding.getRoot());
         oneBinding.tvPosition.setOnClickListener(v -> layoutManager.scrollToPositionWithOffset(mTreeAdapter.mProjectPosition + 2, 0));
     }
 
@@ -89,8 +89,8 @@ public class TreeFragment extends BaseFragment<FragmentWanAndroidBinding> {
             return;
         }
 
-        bindingView.srlBook.setRefreshing(true);
-        bindingView.srlBook.postDelayed(this::loadCustomData, 150);
+        bindingView.srlWan.setRefreshing(true);
+        bindingView.srlWan.postDelayed(this::loadCustomData, 150);
         DebugUtil.error("-----setRefreshing");
     }
 
@@ -102,21 +102,21 @@ public class TreeFragment extends BaseFragment<FragmentWanAndroidBinding> {
                     @Override
                     public void onCompleted() {
                         showContentView();
-                        if (bindingView.srlBook.isRefreshing()) {
-                            bindingView.srlBook.setRefreshing(false);
+                        if (bindingView.srlWan.isRefreshing()) {
+                            bindingView.srlWan.setRefreshing(false);
                         }
                     }
 
                     @Override
                     public void onError(Throwable e) {
                         showContentView();
-                        if (bindingView.srlBook.isRefreshing()) {
-                            bindingView.srlBook.setRefreshing(false);
+                        if (bindingView.srlWan.isRefreshing()) {
+                            bindingView.srlWan.setRefreshing(false);
                         }
                         if (mIsFirst) {
                             showError();
                         } else {
-                            bindingView.xrvBook.refreshComplete();
+                            bindingView.xrvWan.refreshComplete();
                         }
                     }
 
@@ -129,7 +129,7 @@ public class TreeFragment extends BaseFragment<FragmentWanAndroidBinding> {
                             mTreeAdapter.clear();
                             mTreeAdapter.addAll(treeBean.getData());
                             mTreeAdapter.notifyDataSetChanged();
-                            bindingView.xrvBook.refreshComplete();
+                            bindingView.xrvWan.refreshComplete();
 
                             mIsFirst = false;
                         } else {
@@ -142,7 +142,7 @@ public class TreeFragment extends BaseFragment<FragmentWanAndroidBinding> {
 
     @Override
     protected void onRefresh() {
-        bindingView.srlBook.setRefreshing(true);
+        bindingView.srlWan.setRefreshing(true);
         loadCustomData();
     }
 }

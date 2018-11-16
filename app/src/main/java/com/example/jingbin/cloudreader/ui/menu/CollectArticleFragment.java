@@ -68,17 +68,18 @@ public class CollectArticleFragment extends BaseFragment<FragmentWanAndroidBindi
 
 
     private void initRefreshView() {
-        bindingView.srlBook.setColorSchemeColors(CommonUtils.getColor(R.color.colorTheme));
-        bindingView.xrvBook.setLayoutManager(new LinearLayoutManager(activity));
-        bindingView.xrvBook.setPullRefreshEnabled(false);
-        bindingView.xrvBook.clearHeader();
+        bindingView.srlWan.setColorSchemeColors(CommonUtils.getColor(R.color.colorTheme));
+        bindingView.xrvWan.setLayoutManager(new LinearLayoutManager(activity));
+        bindingView.xrvWan.setPullRefreshEnabled(false);
+        bindingView.xrvWan.clearHeader();
         mAdapter = new WanAndroidAdapter(activity);
-        bindingView.xrvBook.setAdapter(mAdapter);
-        bindingView.srlBook.setOnRefreshListener(() -> bindingView.srlBook.postDelayed(() -> {
+        bindingView.xrvWan.setAdapter(mAdapter);
+        bindingView.srlWan.setOnRefreshListener(() -> bindingView.srlWan.postDelayed(() -> {
+            bindingView.xrvWan.reset();
             viewModel.setPage(0);
             viewModel.getCollectList();
         }, 300));
-        bindingView.xrvBook.setLoadingListener(new XRecyclerView.LoadingListener() {
+        bindingView.xrvWan.setLoadingListener(new XRecyclerView.LoadingListener() {
             @Override
             public void onRefresh() {
 
@@ -99,8 +100,8 @@ public class CollectArticleFragment extends BaseFragment<FragmentWanAndroidBindi
             return;
         }
 
-        bindingView.srlBook.setRefreshing(true);
-        bindingView.srlBook.postDelayed(new Runnable() {
+        bindingView.srlWan.setRefreshing(true);
+        bindingView.srlWan.postDelayed(new Runnable() {
             @Override
             public void run() {
                 viewModel.getCollectList();
@@ -111,20 +112,20 @@ public class CollectArticleFragment extends BaseFragment<FragmentWanAndroidBindi
 
     @Override
     protected void onRefresh() {
-        bindingView.srlBook.setRefreshing(true);
+        bindingView.srlWan.setRefreshing(true);
         viewModel.getCollectList();
     }
 
     @Override
     public void loadHomeListFailure() {
         showContentView();
-        if (bindingView.srlBook.isRefreshing()) {
-            bindingView.srlBook.setRefreshing(false);
+        if (bindingView.srlWan.isRefreshing()) {
+            bindingView.srlWan.setRefreshing(false);
         }
         if (viewModel.getPage() == 0) {
             showError();
         } else {
-            bindingView.xrvBook.refreshComplete();
+            bindingView.xrvWan.refreshComplete();
         }
     }
 
@@ -135,20 +136,20 @@ public class CollectArticleFragment extends BaseFragment<FragmentWanAndroidBindi
         }
         mAdapter.addAll(bean.getData().getDatas());
         mAdapter.notifyDataSetChanged();
-        bindingView.xrvBook.refreshComplete();
+        bindingView.xrvWan.refreshComplete();
 
         mIsFirst = false;
     }
 
     @Override
     public void showListNoMoreLoading() {
-        bindingView.xrvBook.noMoreLoading();
+        bindingView.xrvWan.noMoreLoading();
     }
 
     @Override
     public void showLoadSuccessView() {
         showContentView();
-        bindingView.srlBook.setRefreshing(false);
+        bindingView.srlWan.setRefreshing(false);
     }
 
     @Override

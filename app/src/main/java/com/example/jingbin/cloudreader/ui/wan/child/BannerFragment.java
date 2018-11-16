@@ -71,28 +71,29 @@ public class BannerFragment extends BaseFragment<FragmentWanAndroidBinding> impl
     }
 
     private void initRefreshView() {
-        bindingView.srlBook.setColorSchemeColors(CommonUtils.getColor(R.color.colorTheme));
-        bindingView.srlBook.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+        bindingView.srlWan.setColorSchemeColors(CommonUtils.getColor(R.color.colorTheme));
+        bindingView.srlWan.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                bindingView.srlBook.postDelayed(() -> {
+                bindingView.srlWan.postDelayed(() -> {
                     viewModel.setPage(0);
+                    bindingView.xrvWan.reset();
                     loadCustomData();
                 }, 350);
 
             }
         });
-        bindingView.xrvBook.setLayoutManager(new LinearLayoutManager(getActivity()));
-        bindingView.xrvBook.setPullRefreshEnabled(false);
-        bindingView.xrvBook.clearHeader();
+        bindingView.xrvWan.setLayoutManager(new LinearLayoutManager(getActivity()));
+        bindingView.xrvWan.setPullRefreshEnabled(false);
+        bindingView.xrvWan.clearHeader();
         mAdapter = new WanAndroidAdapter(getActivity());
         mAdapter.setNoImage();
-        bindingView.xrvBook.setAdapter(mAdapter);
+        bindingView.xrvWan.setAdapter(mAdapter);
         androidBinding = DataBindingUtil.inflate(getLayoutInflater(), R.layout.header_wan_android, null, false);
         viewModel.getWanAndroidBanner();
-        bindingView.xrvBook.addHeaderView(androidBinding.getRoot());
+        bindingView.xrvWan.addHeaderView(androidBinding.getRoot());
         DensityUtil.formatBannerHeight(androidBinding.banner, androidBinding.llBannerImage);
-        bindingView.xrvBook.setLoadingListener(new XRecyclerView.LoadingListener() {
+        bindingView.xrvWan.setLoadingListener(new XRecyclerView.LoadingListener() {
             @Override
             public void onRefresh() {
 
@@ -150,13 +151,13 @@ public class BannerFragment extends BaseFragment<FragmentWanAndroidBinding> impl
     @Override
     public void loadHomeListFailure() {
         showContentView();
-        if (bindingView.srlBook.isRefreshing()) {
-            bindingView.srlBook.setRefreshing(false);
+        if (bindingView.srlWan.isRefreshing()) {
+            bindingView.srlWan.setRefreshing(false);
         }
         if (viewModel.getPage() == 0) {
             showError();
         } else {
-            bindingView.xrvBook.refreshComplete();
+            bindingView.xrvWan.refreshComplete();
         }
     }
 
@@ -167,7 +168,7 @@ public class BannerFragment extends BaseFragment<FragmentWanAndroidBinding> impl
         }
         mAdapter.addAll(bean.getData().getDatas());
         mAdapter.notifyDataSetChanged();
-        bindingView.xrvBook.refreshComplete();
+        bindingView.xrvWan.refreshComplete();
 
         if (viewModel.getPage() == 0) {
             mIsFirst = false;
@@ -176,13 +177,13 @@ public class BannerFragment extends BaseFragment<FragmentWanAndroidBinding> impl
 
     @Override
     public void showListNoMoreLoading() {
-        bindingView.xrvBook.noMoreLoading();
+        bindingView.xrvWan.noMoreLoading();
     }
 
     @Override
     public void showLoadSuccessView() {
         showContentView();
-        bindingView.srlBook.setRefreshing(false);
+        bindingView.srlWan.setRefreshing(false);
     }
 
     @Override
@@ -190,8 +191,8 @@ public class BannerFragment extends BaseFragment<FragmentWanAndroidBinding> impl
         if (!mIsPrepared || !mIsVisible || !mIsFirst) {
             return;
         }
-        bindingView.srlBook.setRefreshing(true);
-        bindingView.srlBook.postDelayed(this::loadCustomData, 500);
+        bindingView.srlWan.setRefreshing(true);
+        bindingView.srlWan.postDelayed(this::loadCustomData, 500);
     }
 
     @Override
@@ -217,7 +218,7 @@ public class BannerFragment extends BaseFragment<FragmentWanAndroidBinding> impl
 
     @Override
     protected void onRefresh() {
-        bindingView.srlBook.setRefreshing(true);
+        bindingView.srlWan.setRefreshing(true);
         loadCustomData();
     }
 }
