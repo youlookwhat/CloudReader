@@ -21,13 +21,12 @@ import com.example.jingbin.cloudreader.utils.PerfectClickListener;
 
 public class DouBanTopAdapter extends BaseRecyclerViewAdapter<SubjectsBean> {
 
-
     private Activity activity;
     private int width;
 
     public DouBanTopAdapter(Activity activity) {
         this.activity = activity;
-        int px = DensityUtil.dip2px(48);
+        int px = DensityUtil.dip2px(36);
         width = (DensityUtil.getDisplayWidth() - px) / 3;
     }
 
@@ -50,23 +49,10 @@ public class DouBanTopAdapter extends BaseRecyclerViewAdapter<SubjectsBean> {
              */
             DensityUtil.formatHeight(binding.ivTopPhoto, width, 0.758f, 1);
             binding.executePendingBindings();
-            binding.llItemTop.setOnClickListener(new PerfectClickListener() {
+            binding.cvTopMovie.setOnClickListener(new PerfectClickListener() {
                 @Override
                 protected void onNoDoubleClick(View v) {
                     OneMovieDetailActivity.start(activity, bean, binding.ivTopPhoto);
-                }
-            });
-            binding.llItemTop.setOnLongClickListener(new View.OnLongClickListener() {
-                @Override
-                public boolean onLongClick(View v) {
-                    String title = "Top" + (position + 1) + ": " + bean.getTitle();
-                    DialogBuild.showCustom(v, title, "查看详情", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            OneMovieDetailActivity.start(activity, bean, binding.ivTopPhoto);
-                        }
-                    });
-                    return false;
                 }
             });
         }

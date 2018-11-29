@@ -43,12 +43,12 @@ public class MyCollectActivity extends BaseActivity<ActivityMyCollectBinding> {
         mTitleList.clear();
         mTitleList.add("文章");
         mTitleList.add("网址");
-        mTitleList.add("书籍");
         mTitleList.add("段子");
+        mTitleList.add("书籍");
         mFragments.add(CollectArticleFragment.newInstance());
         mFragments.add(CollectLinkFragment.newInstance());
-        mFragments.add(BookListFragment.newInstance("心理学"));
         mFragments.add(JokeFragment.newInstance("段子"));
+        mFragments.add(BookListFragment.newInstance("沟通"));
     }
 
     @Override
