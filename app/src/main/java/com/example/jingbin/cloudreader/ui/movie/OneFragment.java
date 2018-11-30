@@ -65,8 +65,6 @@ public class OneFragment extends BaseFragment<FragmentOneBinding> {
      */
     @Override
     protected void loadData() {
-//        DebugUtil.error("------OneFragment---loadData: ");
-
         if (!isPrepared || !mIsVisible) {
             return;
         }
@@ -80,10 +78,7 @@ public class OneFragment extends BaseFragment<FragmentOneBinding> {
             postDelayLoad();
         } else {
             // 为了正在刷新时不执行这部分
-            if (mIsLoading) {
-                return;
-            }
-            if (!isFirst) {
+            if (mIsLoading || !isFirst) {
                 return;
             }
 

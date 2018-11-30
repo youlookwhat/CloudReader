@@ -13,8 +13,7 @@ import rx.schedulers.Schedulers;
 /**
  * @author jingbin
  * @data 2017/12/14
- * @Description 干货订制页面
- * @Singleton // informs Dagger that this class should be constructed once
+ * @Description 电影部分
  */
 public class OneRepository {
 
