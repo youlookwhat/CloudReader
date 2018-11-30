@@ -6,7 +6,7 @@
         <import type="android.view.View" />
 
         <variable
-            name="viewmodel"
+            name="viewModel"
             type="com.example.jingbin.cloudreader.viewmodel.menu.LoginViewModel" />
     </data>
 
@@ -37,7 +37,7 @@
                     android:inputType="textEmailAddress"
                     android:maxLines="1"
                     android:singleLine="true"
-                    android:text="@={viewmodel.username}" />
+                    android:text="@={viewModel.username}" />
 
             </android.support.design.widget.TextInputLayout>
 
@@ -54,7 +54,7 @@
                     android:inputType="textPassword"
                     android:maxLines="1"
                     android:singleLine="true"
-                    android:text="@={viewmodel.password}" />
+                    android:text="@={viewModel.password}" />
 
             </android.support.design.widget.TextInputLayout>
 

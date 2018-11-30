@@ -1,9 +1,11 @@
 package com.example.jingbin.cloudreader.viewmodel.menu;
 
+import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
 import android.databinding.ObservableField;
 import android.text.TextUtils;
 
+import com.example.jingbin.cloudreader.bean.HotMovieBean;
 import com.example.jingbin.cloudreader.bean.wanandroid.LoginBean;
 import com.example.jingbin.cloudreader.data.UserUtil;
 import com.example.jingbin.cloudreader.data.room.Injection;
@@ -18,7 +20,7 @@ import rx.schedulers.Schedulers;
 /**
  * @author jingbin
  * @data 2018/5/7
- * @Description
+ * @Description wanandroid登录的ViewModel
  */
 
 public class LoginViewModel extends ViewModel {
@@ -27,17 +29,49 @@ public class LoginViewModel extends ViewModel {
 
     public final ObservableField<String> password = new ObservableField<>();
 
-    private LoginNavigator navigator;
+    public MutableLiveData<Boolean> register() {
+        final MutableLiveData<Boolean> data = new MutableLiveData<>();
+        if (!verifyData()) {
+            data.setValue(false);
+            return data;
+        }
+        HttpClient.Builder.getWanAndroidServer().register(username.get(), password.get(), password.get())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<LoginBean>() {
+                    @Override
+                    public void onCompleted() {
+                    }
 
-    public LoginViewModel(LoginNavigator navigator) {
-        this.navigator = navigator;
+                    @Override
+                    public void onError(Throwable e) {
+                    }
+
+                    @Override
+                    public void onNext(LoginBean bean) {
+                        if (bean != null && bean.getData() != null) {
+                            // 存入数据库
+                            Injection.get().addData(bean.getData());
+                            UserUtil.handleLoginSuccess();
+                            data.setValue(true);
+                        } else {
+                            if (bean != null) {
+                                ToastUtil.showToastLong(bean.getErrorMsg());
+                            }
+                            data.setValue(false);
+                        }
+                    }
+                });
+        return data;
     }
 
-    public void register() {
+    public MutableLiveData<Boolean> login() {
+        final MutableLiveData<Boolean> data = new MutableLiveData<>();
         if (!verifyData()) {
-            return;
+            data.setValue(false);
+            return data;
         }
-        Subscription subscribe = HttpClient.Builder.getWanAndroidServer().register(username.get(), password.get(), password.get())
+        HttpClient.Builder.getWanAndroidServer().login(username.get(), password.get())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<LoginBean>() {
@@ -54,47 +88,16 @@ public class LoginViewModel extends ViewModel {
                         if (bean != null && bean.getData() != null) {
                             Injection.get().addData(bean.getData());
                             UserUtil.handleLoginSuccess();
-                            navigator.loadSuccess();
+                            data.setValue(true);
                         } else {
                             if (bean != null) {
                                 ToastUtil.showToastLong(bean.getErrorMsg());
                             }
+                            data.setValue(false);
                         }
                     }
                 });
-        navigator.addRxSubscription(subscribe);
-    }
-
-    public void login() {
-        if (!verifyData()) {
-            return;
-        }
-        Subscription subscribe = HttpClient.Builder.getWanAndroidServer().login(username.get(), password.get())
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<LoginBean>() {
-                    @Override
-                    public void onCompleted() {
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                    }
-
-                    @Override
-                    public void onNext(LoginBean bean) {
-                        if (bean != null && bean.getData() != null) {
-                            Injection.get().addData(bean.getData());
-                            UserUtil.handleLoginSuccess();
-                            navigator.loadSuccess();
-                        } else {
-                            if (bean != null) {
-                                ToastUtil.showToastLong(bean.getErrorMsg());
-                            }
-                        }
-                    }
-                });
-        navigator.addRxSubscription(subscribe);
+        return data;
     }
 
     private boolean verifyData() {
@@ -107,9 +110,5 @@ public class LoginViewModel extends ViewModel {
             return false;
         }
         return true;
-    }
-
-    public void onDestroy() {
-        navigator = null;
     }
 }

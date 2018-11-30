@@ -1,5 +1,6 @@
 package com.example.jingbin.cloudreader.ui.menu;
 
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,17 +9,16 @@ import android.view.View;
 import com.example.jingbin.cloudreader.R;
 import com.example.jingbin.cloudreader.base.BaseActivity;
 import com.example.jingbin.cloudreader.databinding.ActivityLoginBinding;
-import com.example.jingbin.cloudreader.viewmodel.menu.LoginNavigator;
 import com.example.jingbin.cloudreader.viewmodel.menu.LoginViewModel;
 
-import rx.Subscription;
-
 /**
+ * 玩安卓登录
+ *
  * @author jingbin
  */
-public class LoginActivity extends BaseActivity<ActivityLoginBinding> implements LoginNavigator {
+public class LoginActivity extends BaseActivity<ActivityLoginBinding> {
 
-    private LoginViewModel viewModel;
+    private LoginViewModel loginViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,40 +26,29 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding> implements
         setContentView(R.layout.activity_login);
         setTitle("玩安卓登录");
         showContentView();
-
-        viewModel = new LoginViewModel(this);
-        bindingView.setViewmodel(viewModel);
+        loginViewModel = ViewModelProviders.of(this).get(LoginViewModel.class);
+        bindingView.setViewModel(loginViewModel);
     }
 
     public void register(View view) {
-        viewModel.register();
+        loginViewModel.register().observe(this, this::loadSuccess);
     }
 
     public void login(View view) {
-        viewModel.login();
+        loginViewModel.login().observe(this, this::loadSuccess);
     }
 
     /**
      * 注册或登录成功
      */
-    @Override
-    public void loadSuccess() {
-        finish();
-    }
-
-    @Override
-    public void addRxSubscription(Subscription subscription) {
-        addSubscription(subscription);
+    public void loadSuccess(Boolean aBoolean) {
+        if (aBoolean != null && aBoolean) {
+            finish();
+        }
     }
 
     public static void start(Context mContext) {
         Intent intent = new Intent(mContext, LoginActivity.class);
         mContext.startActivity(intent);
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        viewModel.onDestroy();
     }
 }
