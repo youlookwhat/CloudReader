@@ -12,11 +12,6 @@
             android:layout_height="match_parent"
             android:scrollbars="none" />
 
-        <View
-            android:layout_width="1dp"
-            android:layout_height="match_parent"
-            android:background="@color/colorLine" />
-
         <android.support.v7.widget.RecyclerView
             android:id="@+id/xrv_navi_detail"
             android:layout_width="match_parent"
@@ -24,6 +19,5 @@
             android:scrollbars="vertical" />
 
     </LinearLayout>
-
 
 </layout>

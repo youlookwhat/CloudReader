@@ -20,6 +20,6 @@
         android:padding="8dp"
         android:text="@{Html.fromHtml(bean.name)}"
         android:textColor="@color/select_navi_text"
-        android:textSize="15sp"
+        android:textSize="14sp"
         tools:text="常用网站" />
 </layout>

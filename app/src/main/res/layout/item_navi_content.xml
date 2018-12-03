@@ -21,18 +21,19 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/colorLine"
-            android:paddingBottom="3dp"
-            android:paddingLeft="12dp"
-            android:paddingTop="3dp"
+            android:layout_margin="15dp"
             android:text="@{Html.fromHtml(bean.name)}"
-            android:textSize="14sp"
+            android:textColor="@color/colorTabText"
+            android:textSize="15sp"
+            android:textStyle="bold"
             tools:text="网址导航" />
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/rv_content"
+        <com.zhy.view.flowlayout.TagFlowLayout
+            android:id="@+id/tfl_content"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:layout_marginStart="17dp" />
 
     </LinearLayout>
 </layout>
