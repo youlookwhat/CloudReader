@@ -1,5 +1,6 @@
 package com.example.jingbin.cloudreader.ui.wan.child;
 
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -15,6 +16,8 @@ import com.example.jingbin.cloudreader.bean.wanandroid.NaviJsonBean;
 import com.example.jingbin.cloudreader.databinding.FragmentNaviBinding;
 import com.example.jingbin.cloudreader.http.HttpClient;
 import com.example.jingbin.cloudreader.utils.DebugUtil;
+import com.example.jingbin.cloudreader.viewmodel.menu.LoginViewModel;
+import com.example.jingbin.cloudreader.viewmodel.wan.NaviViewModel;
 
 import rx.Observer;
 import rx.Subscription;
@@ -33,6 +36,8 @@ public class NaviFragment extends BaseFragment<FragmentNaviBinding> {
     private NaviAdapter mNaviAdapter;
     private NaviContentAdapter mContentAdapter;
     private FragmentActivity activity;
+    private NaviViewModel viewModel;
+    private int oldPosition = 0;
 
     @Override
     public int setContent() {
@@ -54,6 +59,7 @@ public class NaviFragment extends BaseFragment<FragmentNaviBinding> {
         super.onActivityCreated(savedInstanceState);
         initRefreshView();
 
+        viewModel = ViewModelProviders.of(this).get(NaviViewModel.class);
         // 准备就绪
         mIsPrepared = true;
         loadData();
@@ -73,11 +79,7 @@ public class NaviFragment extends BaseFragment<FragmentNaviBinding> {
         mNaviAdapter.setOnSelectListener(new NaviAdapter.OnSelectListener() {
             @Override
             public void onSelected(int position) {
-                if (position <= oldPosition) {
-                    bindingView.xrvNaviDetail.smoothScrollToPosition(position);
-                } else {
-                    layoutManager2.scrollToPositionWithOffset(position, 0);
-                }
+                layoutManager2.scrollToPositionWithOffset(position, 0);
             }
         });
         bindingView.xrvNaviDetail.addOnScrollListener(new RecyclerView.OnScrollListener() {
@@ -94,59 +96,38 @@ public class NaviFragment extends BaseFragment<FragmentNaviBinding> {
         });
     }
 
-    private int oldPosition = 0;
-
     @Override
     protected void loadData() {
-        DebugUtil.error("-----loadData");
         if (!mIsPrepared || !mIsVisible || !mIsFirst) {
             return;
         }
-
         loadCustomData();
-        DebugUtil.error("-----setRefreshing");
     }
 
     private void loadCustomData() {
-        Subscription get = HttpClient.Builder.getWanAndroidServer().getNaviJson()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<NaviJsonBean>() {
-                    @Override
-                    public void onCompleted() {
-                        showContentView();
-                    }
+        viewModel.getNaviJson().observe(this, new android.arch.lifecycle.Observer<NaviJsonBean>() {
+            @Override
+            public void onChanged(@Nullable NaviJsonBean naviJsonBean) {
+                if (naviJsonBean != null
+                        && naviJsonBean.getData() != null
+                        && naviJsonBean.getData().size() > 0) {
 
-                    @Override
-                    public void onError(Throwable e) {
-                        showContentView();
-                        if (mIsFirst) {
-                            showError();
-                        }
-                    }
+                    showContentView();
+                    mNaviAdapter.clear();
+                    mNaviAdapter.addAll(naviJsonBean.getData());
+                    mNaviAdapter.notifyDataSetChanged();
+                    mNaviAdapter.setSelected(0);
 
-                    @Override
-                    public void onNext(NaviJsonBean naviJsonBean) {
-                        if (naviJsonBean != null
-                                && naviJsonBean.getData() != null
-                                && naviJsonBean.getData().size() > 0) {
+                    mContentAdapter.clear();
+                    mContentAdapter.addAll(naviJsonBean.getData());
+                    mContentAdapter.notifyDataSetChanged();
 
-                            mNaviAdapter.clear();
-                            mNaviAdapter.addAll(naviJsonBean.getData());
-                            mNaviAdapter.notifyDataSetChanged();
-                            mNaviAdapter.setSelected(0);
-
-                            mContentAdapter.clear();
-                            mContentAdapter.addAll(naviJsonBean.getData());
-                            mContentAdapter.notifyDataSetChanged();
-
-                            mIsFirst = false;
-                        } else {
-                            showError();
-                        }
-                    }
-                });
-        addSubscription(get);
+                    mIsFirst = false;
+                } else {
+                    showError();
+                }
+            }
+        });
     }
 
     @Override
