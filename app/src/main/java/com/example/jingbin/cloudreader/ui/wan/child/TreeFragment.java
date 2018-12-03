@@ -1,5 +1,6 @@
 package com.example.jingbin.cloudreader.ui.wan.child;
 
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
@@ -16,6 +17,8 @@ import com.example.jingbin.cloudreader.databinding.HeaderItemTreeBinding;
 import com.example.jingbin.cloudreader.http.HttpClient;
 import com.example.jingbin.cloudreader.utils.CommonUtils;
 import com.example.jingbin.cloudreader.utils.DebugUtil;
+import com.example.jingbin.cloudreader.viewmodel.wan.NaviViewModel;
+import com.example.jingbin.cloudreader.viewmodel.wan.TreeViewModel;
 
 import rx.Observer;
 import rx.Subscription;
@@ -33,6 +36,7 @@ public class TreeFragment extends BaseFragment<FragmentWanAndroidBinding> {
     private boolean mIsFirst = true;
     private TreeAdapter mTreeAdapter;
     private FragmentActivity activity;
+    private TreeViewModel viewModel;
 
     @Override
     public int setContent() {
@@ -54,7 +58,7 @@ public class TreeFragment extends BaseFragment<FragmentWanAndroidBinding> {
         super.onActivityCreated(savedInstanceState);
         showContentView();
         initRefreshView();
-
+        viewModel = ViewModelProviders.of(this).get(TreeViewModel.class);
         // 准备就绪
         mIsPrepared = true;
         /**
@@ -68,7 +72,7 @@ public class TreeFragment extends BaseFragment<FragmentWanAndroidBinding> {
         bindingView.srlWan.setColorSchemeColors(CommonUtils.getColor(R.color.colorTheme));
         bindingView.srlWan.setOnRefreshListener(() -> bindingView.srlWan.postDelayed(() -> {
             bindingView.xrvWan.reset();
-            loadCustomData();
+            getTree();
         }, 150));
         LinearLayoutManager layoutManager = new LinearLayoutManager(activity);
         bindingView.xrvWan.setLayoutManager(layoutManager);
@@ -90,59 +94,42 @@ public class TreeFragment extends BaseFragment<FragmentWanAndroidBinding> {
         }
 
         bindingView.srlWan.setRefreshing(true);
-        bindingView.srlWan.postDelayed(this::loadCustomData, 150);
+        bindingView.srlWan.postDelayed(this::getTree, 150);
         DebugUtil.error("-----setRefreshing");
     }
 
-    private void loadCustomData() {
-        Subscription get = HttpClient.Builder.getWanAndroidServer().getTree()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<TreeBean>() {
-                    @Override
-                    public void onCompleted() {
-                        showContentView();
-                        if (bindingView.srlWan.isRefreshing()) {
-                            bindingView.srlWan.setRefreshing(false);
-                        }
+    private void getTree() {
+        viewModel.getTree().observe(this, new android.arch.lifecycle.Observer<TreeBean>() {
+            @Override
+            public void onChanged(@Nullable TreeBean treeBean) {
+                showContentView();
+                if (bindingView.srlWan.isRefreshing()) {
+                    bindingView.srlWan.setRefreshing(false);
+                }
+                if (treeBean != null
+                        && treeBean.getData() != null
+                        && treeBean.getData().size() > 0) {
+
+                    mTreeAdapter.clear();
+                    mTreeAdapter.addAll(treeBean.getData());
+                    mTreeAdapter.notifyDataSetChanged();
+                    bindingView.xrvWan.refreshComplete();
+
+                    mIsFirst = false;
+                } else {
+                    if (mIsFirst) {
+                        showError();
+                    } else {
+                        bindingView.xrvWan.refreshComplete();
                     }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        showContentView();
-                        if (bindingView.srlWan.isRefreshing()) {
-                            bindingView.srlWan.setRefreshing(false);
-                        }
-                        if (mIsFirst) {
-                            showError();
-                        } else {
-                            bindingView.xrvWan.refreshComplete();
-                        }
-                    }
-
-                    @Override
-                    public void onNext(TreeBean treeBean) {
-                        if (treeBean != null
-                                && treeBean.getData() != null
-                                && treeBean.getData().size() > 0) {
-
-                            mTreeAdapter.clear();
-                            mTreeAdapter.addAll(treeBean.getData());
-                            mTreeAdapter.notifyDataSetChanged();
-                            bindingView.xrvWan.refreshComplete();
-
-                            mIsFirst = false;
-                        } else {
-                            showError();
-                        }
-                    }
-                });
-        addSubscription(get);
+                }
+            }
+        });
     }
 
     @Override
     protected void onRefresh() {
         bindingView.srlWan.setRefreshing(true);
-        loadCustomData();
+        getTree();
     }
 }
