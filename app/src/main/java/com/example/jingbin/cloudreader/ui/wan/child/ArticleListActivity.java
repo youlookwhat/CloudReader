@@ -1,5 +1,6 @@
 package com.example.jingbin.cloudreader.ui.wan.child;
 
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,21 +13,18 @@ import com.example.jingbin.cloudreader.base.BaseListViewModel;
 import com.example.jingbin.cloudreader.bean.wanandroid.HomeListBean;
 import com.example.jingbin.cloudreader.databinding.FragmentWanAndroidBinding;
 import com.example.jingbin.cloudreader.utils.CommonUtils;
-import com.example.jingbin.cloudreader.viewmodel.wan.ArticleListListViewModel;
+import com.example.jingbin.cloudreader.viewmodel.wan.ArticleListViewModel;
 import com.example.jingbin.cloudreader.viewmodel.wan.WanAndroidListViewModel;
-import com.example.jingbin.cloudreader.viewmodel.wan.WanNavigator;
 import com.example.xrecyclerview.XRecyclerView;
 
-import rx.Subscription;
-
 /**
- * 玩安卓文章列表
+ * 玩安卓分类文章列表、我的收藏文章列表
  *
  * @author jingbin
  */
-public class ArticleListActivity extends BaseActivity<FragmentWanAndroidBinding> implements WanNavigator.ArticleListNavigator {
+public class ArticleListActivity extends BaseActivity<FragmentWanAndroidBinding> {
 
-    private ArticleListListViewModel viewModel;
+    private ArticleListViewModel viewModel;
     private WanAndroidListViewModel androidViewModel;
     private WanAndroidAdapter mAdapter;
     private int cid = 0;
@@ -46,21 +44,44 @@ public class ArticleListActivity extends BaseActivity<FragmentWanAndroidBinding>
 
         if (cid != 0) {
             setTitle(chapterName);
-            androidViewModel = new WanAndroidListViewModel();
-            androidViewModel.setArticleListNavigator(this);
+            androidViewModel = ViewModelProviders.of(this).get(WanAndroidListViewModel.class);
             mAdapter.setNoShowChapterName();
         } else {
             setTitle("我的收藏");
-            viewModel = new ArticleListListViewModel(this);
+            viewModel = ViewModelProviders.of(this).get(ArticleListViewModel.class);
             mAdapter.setCollectList();
         }
     }
 
     private void loadData() {
         if (cid != 0) {
-            androidViewModel.getHomeList(cid);
+            androidViewModel.getHomeList(cid).observe(this, this::showContent);
         } else {
-            viewModel.getCollectList();
+            viewModel.getCollectList().observe(this, this::showContent);
+        }
+    }
+
+    private void showContent(HomeListBean homeListBean) {
+        showContentView();
+        if (bindingView.srlWan.isRefreshing()) {
+            bindingView.srlWan.setRefreshing(false);
+        }
+
+        if (homeListBean != null) {
+            if (getViewModel().getPage() == 0) {
+                mAdapter.clear();
+            }
+            mAdapter.addAll(homeListBean.getData().getDatas());
+            mAdapter.notifyDataSetChanged();
+            bindingView.xrvWan.refreshComplete();
+
+        } else {
+            if (getViewModel().getPage() == 0) {
+                showError();
+            } else {
+                bindingView.xrvWan.refreshComplete();
+                bindingView.xrvWan.noMoreLoading();
+            }
         }
     }
 
@@ -97,45 +118,6 @@ public class ArticleListActivity extends BaseActivity<FragmentWanAndroidBinding>
                 loadData();
             }
         });
-    }
-
-    @Override
-    public void loadHomeListFailure() {
-        showContentView();
-        if (bindingView.srlWan.isRefreshing()) {
-            bindingView.srlWan.setRefreshing(false);
-        }
-        if (getViewModel().getPage() == 0) {
-            showError();
-        } else {
-            bindingView.xrvWan.refreshComplete();
-        }
-    }
-
-    @Override
-    public void showAdapterView(HomeListBean bean) {
-        if (getViewModel().getPage() == 0) {
-            mAdapter.clear();
-        }
-        mAdapter.addAll(bean.getData().getDatas());
-        mAdapter.notifyDataSetChanged();
-        bindingView.xrvWan.refreshComplete();
-    }
-
-    @Override
-    public void showListNoMoreLoading() {
-        bindingView.xrvWan.noMoreLoading();
-    }
-
-    @Override
-    public void showLoadSuccessView() {
-        showContentView();
-        bindingView.srlWan.setRefreshing(false);
-    }
-
-    @Override
-    public void addRxSubscription(Subscription subscription) {
-        addSubscription(subscription);
     }
 
     @Override

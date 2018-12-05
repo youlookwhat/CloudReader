@@ -1,5 +1,7 @@
 package com.example.jingbin.cloudreader.ui.wan.child;
 
+import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.ViewModelProviders;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -21,20 +23,19 @@ import com.example.jingbin.cloudreader.utils.GlideImageLoader;
 import com.example.jingbin.cloudreader.utils.ImageLoadUtil;
 import com.example.jingbin.cloudreader.view.webview.WebViewActivity;
 import com.example.jingbin.cloudreader.viewmodel.wan.WanAndroidListViewModel;
-import com.example.jingbin.cloudreader.viewmodel.wan.WanNavigator;
 import com.example.xrecyclerview.XRecyclerView;
 import com.youth.banner.BannerConfig;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import rx.Subscription;
-
 /**
+ * 玩安卓首页
+ *
  * @author jingbin
- *         Updated by jingbin on 18/02/07.
+ *         Updated on 18/02/07...18/12/05
  */
-public class BannerFragment extends BaseFragment<FragmentWanAndroidBinding> implements WanNavigator.BannerNavigator, WanNavigator.ArticleListNavigator {
+public class BannerFragment extends BaseFragment<FragmentWanAndroidBinding> {
 
     private boolean mIsPrepared;
     private boolean mIsFirst = true;
@@ -56,33 +57,16 @@ public class BannerFragment extends BaseFragment<FragmentWanAndroidBinding> impl
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         showContentView();
-        viewModel = new WanAndroidListViewModel();
-        viewModel.setNavigator(this);
-        viewModel.setArticleListNavigator(this);
+        viewModel = ViewModelProviders.of(this).get(WanAndroidListViewModel.class);
         initRefreshView();
 
         // 准备就绪
         mIsPrepared = true;
-        /**
-         * 因为启动时先走loadData()再走onActivityCreated，
-         * 所以此处要额外调用load(),不然最初不会加载内容
-         */
         loadData();
     }
 
     private void initRefreshView() {
         bindingView.srlWan.setColorSchemeColors(CommonUtils.getColor(R.color.colorTheme));
-        bindingView.srlWan.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                bindingView.srlWan.postDelayed(() -> {
-                    viewModel.setPage(0);
-                    bindingView.xrvWan.reset();
-                    loadCustomData();
-                }, 350);
-
-            }
-        });
         bindingView.xrvWan.setLayoutManager(new LinearLayoutManager(getActivity()));
         bindingView.xrvWan.setPullRefreshEnabled(false);
         bindingView.xrvWan.clearHeader();
@@ -90,28 +74,48 @@ public class BannerFragment extends BaseFragment<FragmentWanAndroidBinding> impl
         mAdapter.setNoImage();
         bindingView.xrvWan.setAdapter(mAdapter);
         androidBinding = DataBindingUtil.inflate(getLayoutInflater(), R.layout.header_wan_android, null, false);
-        viewModel.getWanAndroidBanner();
         bindingView.xrvWan.addHeaderView(androidBinding.getRoot());
         DensityUtil.formatBannerHeight(androidBinding.banner, androidBinding.llBannerImage);
+        bindingView.srlWan.setOnRefreshListener(this::swipeRefresh);
         bindingView.xrvWan.setLoadingListener(new XRecyclerView.LoadingListener() {
             @Override
             public void onRefresh() {
-
             }
 
             @Override
             public void onLoadMore() {
                 int page = viewModel.getPage();
                 viewModel.setPage(++page);
-                loadCustomData();
+                getHomeList();
+            }
+        });
+        viewModel.getWanAndroidBanner().observe(this, new Observer<WanAndroidBannerBean>() {
+            @Override
+            public void onChanged(@Nullable WanAndroidBannerBean bean) {
+                if (bean != null) {
+                    showBannerView(bean.getmBannerImages(), bean.getmBannerTitles(), bean.getData());
+                    androidBinding.rlBanner.setVisibility(View.VISIBLE);
+                } else {
+                    androidBinding.rlBanner.setVisibility(View.GONE);
+                }
             }
         });
     }
 
     /**
+     * 下拉刷新
+     */
+    private void swipeRefresh() {
+        bindingView.srlWan.postDelayed(() -> {
+            viewModel.setPage(0);
+            bindingView.xrvWan.reset();
+            getHomeList();
+        }, 350);
+    }
+
+    /**
      * 设置banner图
      */
-    @Override
     public void showBannerView(ArrayList<String> bannerImages, ArrayList<String> mBannerTitle, List<WanAndroidBannerBean.DataBean> result) {
         androidBinding.rlBanner.setVisibility(View.VISIBLE);
         androidBinding.banner.setBannerTitles(mBannerTitle);
@@ -139,60 +143,12 @@ public class BannerFragment extends BaseFragment<FragmentWanAndroidBinding> impl
     }
 
     @Override
-    public void loadBannerFailure() {
-        androidBinding.rlBanner.setVisibility(View.GONE);
-    }
-
-    @Override
-    public void addRxSubscription(Subscription subscription) {
-        addSubscription(subscription);
-    }
-
-    @Override
-    public void loadHomeListFailure() {
-        showContentView();
-        if (bindingView.srlWan.isRefreshing()) {
-            bindingView.srlWan.setRefreshing(false);
-        }
-        if (viewModel.getPage() == 0) {
-            showError();
-        } else {
-            bindingView.xrvWan.refreshComplete();
-        }
-    }
-
-    @Override
-    public void showAdapterView(HomeListBean bean) {
-        if (viewModel.getPage() == 0) {
-            mAdapter.clear();
-        }
-        mAdapter.addAll(bean.getData().getDatas());
-        mAdapter.notifyDataSetChanged();
-        bindingView.xrvWan.refreshComplete();
-
-        if (viewModel.getPage() == 0) {
-            mIsFirst = false;
-        }
-    }
-
-    @Override
-    public void showListNoMoreLoading() {
-        bindingView.xrvWan.noMoreLoading();
-    }
-
-    @Override
-    public void showLoadSuccessView() {
-        showContentView();
-        bindingView.srlWan.setRefreshing(false);
-    }
-
-    @Override
     protected void loadData() {
         if (!mIsPrepared || !mIsVisible || !mIsFirst) {
             return;
         }
         bindingView.srlWan.setRefreshing(true);
-        bindingView.srlWan.postDelayed(this::loadCustomData, 500);
+        bindingView.srlWan.postDelayed(this::getHomeList, 500);
     }
 
     @Override
@@ -212,13 +168,41 @@ public class BannerFragment extends BaseFragment<FragmentWanAndroidBinding> impl
         }
     }
 
-    private void loadCustomData() {
-        viewModel.getHomeList(null);
+    private void getHomeList() {
+        viewModel.getHomeList(null).observe(this, new Observer<HomeListBean>() {
+            @Override
+            public void onChanged(@Nullable HomeListBean homeListBean) {
+                showContentView();
+                if (bindingView.srlWan.isRefreshing()) {
+                    bindingView.srlWan.setRefreshing(false);
+                }
+
+                if (homeListBean != null) {
+                    if (viewModel.getPage() == 0) {
+                        mAdapter.clear();
+                    }
+                    mAdapter.addAll(homeListBean.getData().getDatas());
+                    mAdapter.notifyDataSetChanged();
+                    bindingView.xrvWan.refreshComplete();
+
+                    if (viewModel.getPage() == 0) {
+                        mIsFirst = false;
+                    }
+                } else {
+                    if (viewModel.getPage() == 0) {
+                        showError();
+                    } else {
+                        bindingView.xrvWan.refreshComplete();
+                        bindingView.xrvWan.noMoreLoading();
+                    }
+                }
+            }
+        });
     }
 
     @Override
     protected void onRefresh() {
         bindingView.srlWan.setRefreshing(true);
-        loadCustomData();
+        getHomeList();
     }
 }

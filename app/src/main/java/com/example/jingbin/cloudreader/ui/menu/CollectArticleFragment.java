@@ -1,5 +1,7 @@
 package com.example.jingbin.cloudreader.ui.menu;
 
+import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -12,24 +14,21 @@ import com.example.jingbin.cloudreader.base.BaseFragment;
 import com.example.jingbin.cloudreader.bean.wanandroid.HomeListBean;
 import com.example.jingbin.cloudreader.databinding.FragmentWanAndroidBinding;
 import com.example.jingbin.cloudreader.utils.CommonUtils;
-import com.example.jingbin.cloudreader.viewmodel.wan.ArticleListListViewModel;
-import com.example.jingbin.cloudreader.viewmodel.wan.WanNavigator;
+import com.example.jingbin.cloudreader.viewmodel.wan.ArticleListViewModel;
 import com.example.xrecyclerview.XRecyclerView;
-
-import rx.Subscription;
 
 /**
  * @author jingbin
  * @date 2018/09/27.
  * @description 文章
  */
-public class CollectArticleFragment extends BaseFragment<FragmentWanAndroidBinding> implements WanNavigator.ArticleListNavigator {
+public class CollectArticleFragment extends BaseFragment<FragmentWanAndroidBinding> {
 
     private boolean mIsPrepared;
     private boolean mIsFirst = true;
     private FragmentActivity activity;
     private WanAndroidAdapter mAdapter;
-    private ArticleListListViewModel viewModel;
+    private ArticleListViewModel viewModel;
 
     @Override
     public int setContent() {
@@ -54,15 +53,13 @@ public class CollectArticleFragment extends BaseFragment<FragmentWanAndroidBindi
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+
         showContentView();
         initRefreshView();
-
-        viewModel = new ArticleListListViewModel(this);
+        viewModel = ViewModelProviders.of(this).get(ArticleListViewModel.class);
         mAdapter.setCollectList();
-
         // 准备就绪
         mIsPrepared = true;
-
         loadData();
     }
 
@@ -77,7 +74,7 @@ public class CollectArticleFragment extends BaseFragment<FragmentWanAndroidBindi
         bindingView.srlWan.setOnRefreshListener(() -> bindingView.srlWan.postDelayed(() -> {
             bindingView.xrvWan.reset();
             viewModel.setPage(0);
-            viewModel.getCollectList();
+            getCollectList();
         }, 300));
         bindingView.xrvWan.setLoadingListener(new XRecyclerView.LoadingListener() {
             @Override
@@ -89,7 +86,7 @@ public class CollectArticleFragment extends BaseFragment<FragmentWanAndroidBindi
             public void onLoadMore() {
                 int page = viewModel.getPage();
                 viewModel.setPage(++page);
-                viewModel.getCollectList();
+                getCollectList();
             }
         });
     }
@@ -101,59 +98,43 @@ public class CollectArticleFragment extends BaseFragment<FragmentWanAndroidBindi
         }
 
         bindingView.srlWan.setRefreshing(true);
-        bindingView.srlWan.postDelayed(new Runnable() {
+        bindingView.srlWan.postDelayed(this::getCollectList, 150);
+    }
+
+    private void getCollectList() {
+        viewModel.getCollectList().observe(this, new Observer<HomeListBean>() {
             @Override
-            public void run() {
-                viewModel.getCollectList();
+            public void onChanged(@Nullable HomeListBean homeListBean) {
+                showContentView();
+                if (bindingView.srlWan.isRefreshing()) {
+                    bindingView.srlWan.setRefreshing(false);
+                }
+
+                if (homeListBean != null) {
+                    if (viewModel.getPage() == 0) {
+                        mAdapter.clear();
+                    }
+                    mAdapter.addAll(homeListBean.getData().getDatas());
+                    mAdapter.notifyDataSetChanged();
+                    bindingView.xrvWan.refreshComplete();
+
+                    mIsFirst = false;
+                } else {
+                    if (viewModel.getPage() == 0) {
+                        showError();
+                    } else {
+                        bindingView.xrvWan.refreshComplete();
+                        bindingView.xrvWan.noMoreLoading();
+                    }
+                }
             }
-        }, 150);
+        });
     }
 
 
     @Override
     protected void onRefresh() {
         bindingView.srlWan.setRefreshing(true);
-        viewModel.getCollectList();
-    }
-
-    @Override
-    public void loadHomeListFailure() {
-        showContentView();
-        if (bindingView.srlWan.isRefreshing()) {
-            bindingView.srlWan.setRefreshing(false);
-        }
-        if (viewModel.getPage() == 0) {
-            showError();
-        } else {
-            bindingView.xrvWan.refreshComplete();
-        }
-    }
-
-    @Override
-    public void showAdapterView(HomeListBean bean) {
-        if (viewModel.getPage() == 0) {
-            mAdapter.clear();
-        }
-        mAdapter.addAll(bean.getData().getDatas());
-        mAdapter.notifyDataSetChanged();
-        bindingView.xrvWan.refreshComplete();
-
-        mIsFirst = false;
-    }
-
-    @Override
-    public void showListNoMoreLoading() {
-        bindingView.xrvWan.noMoreLoading();
-    }
-
-    @Override
-    public void showLoadSuccessView() {
-        showContentView();
-        bindingView.srlWan.setRefreshing(false);
-    }
-
-    @Override
-    public void addRxSubscription(Subscription subscription) {
-        addSubscription(subscription);
+        getCollectList();
     }
 }

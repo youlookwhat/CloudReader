@@ -1,5 +1,6 @@
 package com.example.jingbin.cloudreader.bean.wanandroid;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -19,6 +20,24 @@ public class WanAndroidBannerBean {
     private int errorCode;
     private String errorMsg;
     private List<DataBean> data;
+    private ArrayList<String> mBannerImages;
+    private ArrayList<String> mBannerTitles;
+
+    public ArrayList<String> getmBannerImages() {
+        return mBannerImages;
+    }
+
+    public void setmBannerImages(ArrayList<String> mBannerImages) {
+        this.mBannerImages = mBannerImages;
+    }
+
+    public ArrayList<String> getmBannerTitles() {
+        return mBannerTitles;
+    }
+
+    public void setmBannerTitles(ArrayList<String> mBannerTitles) {
+        this.mBannerTitles = mBannerTitles;
+    }
 
     public int getErrorCode() {
         return errorCode;
