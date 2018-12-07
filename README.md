@@ -10,7 +10,7 @@
 
 
 ## Introduce
-一款基于网易云音乐UI，使用GankIo及豆瓣api开发的符合Google Material Desgin阅读类的开源项目。项目采取的是Retrofit + RxJava + MVVM-DataBinding架构开发。
+一款基于网易云音乐UI，使用wanandroid、GankIo及豆瓣api开发的符合Google Material Desgin阅读类的开源项目。项目采取的是Retrofit + RxJava + MVVM-DataBinding架构开发。
 
 A netease cloud music based UI, using wanandroid、Gank.Io and douban API development accord with Google Material Desgin reading class open source projects.
 
@@ -51,7 +51,7 @@ If you have any questions, please write to [the issue][21] of making you don't u
 
 
 ## See Detail
-> [项目介绍详情](https://github.com/youlookwhat/CloudReader/blob/master/file/Introduction.md) | [细节优化详情](https://github.com/youlookwhat/CloudReader/wiki) | [**版本更新详情(V2.0)**](http://jingbin.me/2016/12/30/%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97-%E4%BA%91%E9%98%85/)
+> [项目介绍详情](https://github.com/youlookwhat/CloudReader/blob/master/file/Introduction.md) | [细节优化详情](https://github.com/youlookwhat/CloudReader/wiki) | [**版本更新详情(V2.2)**](http://jingbin.me/2016/12/30/%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97-%E4%BA%91%E9%98%85/)
 
 ### Download
 　[火速跳转](https://fir.im/cloudreader)                                    
@@ -65,6 +65,13 @@ If you have any questions, please write to [the issue][21] of making you don't u
 　
 
 ### Version
+#### V2.2（12-05）
+ - 1、[新增] 进入首页可以获取剪切板的链接
+ - 2、[规范] 玩安卓模块mvvm修正
+ - 3、[优化] 导航数据界面显示优化
+ - 4、[优化] 电影、书籍和玩安卓首页等item点击效果
+ - 5、[修复] 保存图片权限问题、上拉加载逻辑问题
+
 #### V2.0（10-26）
  - 1、[新增] 知识体系页面
  - 2、[新增] 导航数据页面
