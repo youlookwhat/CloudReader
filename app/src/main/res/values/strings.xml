@@ -19,6 +19,7 @@
     <string name="actionbar_webview_collect">添加到收藏</string>
     <string name="actionbar_share">分享给朋友\(^o^)/~</string>
     <string name="picture_has_save_to">已保存至 %s</string>
+    <string name="string_empty">""</string>
     <string name="github_issues">您好，很希望得到您的意见，由于没有线上反馈系统，您可以在GitHub的Issues处说明问题原因，也可以通过以下方式联系我，我将根据情况尽量处理哦 ~</string>
     <string name="string_about">由于网易云音乐用了很久，特别喜爱它的界面风格，所以仿写了它的UI。如构成侵权请及时通知我修改或删除。
         \n\n 大部分数据使用的是鸿洋的玩安卓、代码家的干货集中营和豆瓣APIV2.0，一切数据解释权都归鸿洋、代码家和豆瓣所有。
