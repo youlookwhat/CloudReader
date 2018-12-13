@@ -49,7 +49,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
-                    android:background="?android:attr/selectableItemBackgroundBorderless"
+                    android:background="?android:attr/selectableItemBackground"
                     android:onClick="@{()->adapter.openArticleList(bean)}"
                     android:paddingBottom="2dp"
                     android:paddingLeft="7dp"
@@ -59,7 +59,6 @@
                     android:textColor="@color/colorContent"
                     android:textSize="13sp"
                     android:visibility="@{adapter.isNoShowChapterName?View.GONE:View.VISIBLE}"
-                    tools:targetApi="lollipop"
                     tools:text="技术博客" />
 
             </RelativeLayout>
