@@ -16,12 +16,19 @@ import org.apache.commons.lang.StringUtils;
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Field;
+import java.security.SecureRandom;
+import java.security.cert.CertificateException;
+import java.security.cert.X509Certificate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import javax.net.ssl.HostnameVerifier;
+import javax.net.ssl.SSLContext;
 import javax.net.ssl.SSLSession;
+import javax.net.ssl.SSLSocketFactory;
+import javax.net.ssl.TrustManager;
+import javax.net.ssl.X509TrustManager;
 
 import okhttp3.Cache;
 import okhttp3.CacheControl;
@@ -117,13 +124,18 @@ public class HttpUtils {
 
     private OkHttpClient getUnsafeOkHttpClient() {
         try {
+            // Install the all-trusting trust manager TLS
+            SSLContext sslContext = SSLContext.getInstance("SSL");
+            sslContext.init(null, trustAllCerts, new SecureRandom());
             //cache url
             File httpCacheDirectory = new File(context.getCacheDir(), "responses");
             // 50 MiB
             int cacheSize = 50 * 1024 * 1024;
             Cache cache = new Cache(httpCacheDirectory, cacheSize);
             // Create an ssl socket factory with our all-trusting manager
+            SSLSocketFactory sslSocketFactory = sslContext.getSocketFactory();
             OkHttpClient.Builder okBuilder = new OkHttpClient.Builder();
+            okBuilder.sslSocketFactory(sslSocketFactory, (X509TrustManager) trustAllCerts[0]);
             okBuilder.readTimeout(30, TimeUnit.SECONDS);
             okBuilder.connectTimeout(30, TimeUnit.SECONDS);
             okBuilder.writeTimeout(30, TimeUnit.SECONDS);
@@ -139,7 +151,6 @@ public class HttpUtils {
                 @SuppressLint("BadHostnameVerifier")
                 @Override
                 public boolean verify(String hostname, SSLSession session) {
-//                    Log.d("HttpUtils", "==come");
                     return true;
                 }
             });
@@ -153,6 +164,8 @@ public class HttpUtils {
 
     private OkHttpClient getOkClient() {
         OkHttpClient client1;
+
+
         client1 = getUnsafeOkHttpClient();
         return client1;
     }
@@ -325,4 +338,20 @@ public class HttpUtils {
             return chain.proceed(builder.build());
         }
     }
+
+    final TrustManager[] trustAllCerts = new TrustManager[]{new X509TrustManager() {
+        @Override
+        public void checkClientTrusted(X509Certificate[] chain, String authType) throws CertificateException {
+        }
+
+        @Override
+        public void checkServerTrusted(X509Certificate[] chain, String authType) throws CertificateException {
+        }
+
+        @Override
+        public X509Certificate[] getAcceptedIssuers() {
+            return new X509Certificate[]{};
+        }
+    }};
+
 }
