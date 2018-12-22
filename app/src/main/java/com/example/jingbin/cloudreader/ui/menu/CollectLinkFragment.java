@@ -26,7 +26,7 @@ import rx.Subscription;
  * @date 2018/09/27.
  * @description 网址
  */
-public class CollectLinkFragment extends BaseFragment<FragmentWanAndroidBinding> implements WanNavigator.CollectUrlNavigator {
+public class CollectLinkFragment extends BaseFragment<CollectLinkModel,FragmentWanAndroidBinding> implements WanNavigator.CollectUrlNavigator {
 
     private boolean mIsPrepared;
     private boolean mIsFirst = true;
@@ -59,7 +59,7 @@ public class CollectLinkFragment extends BaseFragment<FragmentWanAndroidBinding>
         super.onActivityCreated(savedInstanceState);
         showContentView();
         initRefreshView();
-        viewModel = new CollectLinkModel(this);
+        viewModel.setNavigator(this);
 
         // 准备就绪
         mIsPrepared = true;

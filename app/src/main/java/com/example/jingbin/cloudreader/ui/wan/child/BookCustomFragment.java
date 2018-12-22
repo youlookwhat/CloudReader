@@ -17,6 +17,7 @@ import com.example.jingbin.cloudreader.databinding.FragmentBookCustomBinding;
 import com.example.jingbin.cloudreader.http.HttpClient;
 import com.example.jingbin.cloudreader.utils.CommonUtils;
 import com.example.jingbin.cloudreader.utils.DebugUtil;
+import com.example.jingbin.cloudreader.viewmodel.menu.NoViewModel;
 
 import rx.Observer;
 import rx.Subscription;
@@ -26,7 +27,7 @@ import rx.schedulers.Schedulers;
 /**
  * 已废弃，使用{@link BookListFragment}，替代
  */
-public class BookCustomFragment extends BaseFragment<FragmentBookCustomBinding> {
+public class BookCustomFragment extends BaseFragment<NoViewModel,FragmentBookCustomBinding> {
 
     private static final String TYPE = "param1";
     private String mType = "综合";

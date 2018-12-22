@@ -1,14 +1,14 @@
 package com.example.jingbin.cloudreader.viewmodel.wan;
 
+import android.app.Application;
+import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.MutableLiveData;
-import android.arch.lifecycle.ViewModel;
+import android.support.annotation.NonNull;
 
-import com.example.jingbin.cloudreader.bean.wanandroid.NaviJsonBean;
 import com.example.jingbin.cloudreader.bean.wanandroid.TreeBean;
 import com.example.jingbin.cloudreader.http.HttpClient;
 
 import rx.Observer;
-import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
@@ -18,8 +18,12 @@ import rx.schedulers.Schedulers;
  * @Description wanandroid知识体系的ViewModel
  */
 
-public class TreeViewModel extends ViewModel {
+public class TreeViewModel extends AndroidViewModel {
 
+
+    public TreeViewModel(@NonNull Application application) {
+        super(application);
+    }
 
     public MutableLiveData<TreeBean> getTree() {
         final MutableLiveData<TreeBean> data = new MutableLiveData<>();

@@ -1,6 +1,8 @@
 package com.example.jingbin.cloudreader.base;
 
-import android.arch.lifecycle.ViewModel;
+import android.app.Application;
+import android.arch.lifecycle.AndroidViewModel;
+import android.support.annotation.NonNull;
 
 /**
  * @author jingbin
@@ -8,9 +10,13 @@ import android.arch.lifecycle.ViewModel;
  * @Description 有列表的页面
  */
 
-public class BaseListViewModel extends ViewModel {
+public class BaseListViewModel extends AndroidViewModel {
 
     public int mPage = 0;
+
+    public BaseListViewModel(@NonNull Application application) {
+        super(application);
+    }
 
     public int getPage() {
         return mPage;

@@ -33,6 +33,7 @@ import com.example.jingbin.cloudreader.utils.UpdateUtil;
 import com.example.jingbin.cloudreader.view.webview.WebViewActivity;
 import com.example.jingbin.cloudreader.viewmodel.gank.EverydayNavigator;
 import com.example.jingbin.cloudreader.viewmodel.gank.EverydayViewModel;
+import com.example.jingbin.cloudreader.viewmodel.menu.NoViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,7 +52,7 @@ import static com.example.jingbin.cloudreader.viewmodel.gank.EverydayViewModel.g
  * 否：使用缓存 ： |无：请求今天数据
  * **********    |有：使用缓存
  */
-public class EverydayFragment extends BaseFragment<FragmentEverydayBinding> implements EverydayNavigator {
+public class EverydayFragment extends BaseFragment<NoViewModel,FragmentEverydayBinding> implements EverydayNavigator {
 
     private static final String TAG = "EverydayFragment";
     private HeaderItemEverydayBinding mHeaderBinding;

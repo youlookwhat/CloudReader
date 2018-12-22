@@ -18,6 +18,7 @@ import com.example.jingbin.cloudreader.databinding.HeaderItemBookBinding;
 import com.example.jingbin.cloudreader.http.HttpClient;
 import com.example.jingbin.cloudreader.utils.CommonUtils;
 import com.example.jingbin.cloudreader.utils.DebugUtil;
+import com.example.jingbin.cloudreader.viewmodel.menu.NoViewModel;
 import com.example.xrecyclerview.XRecyclerView;
 
 import rx.Observer;
@@ -29,7 +30,7 @@ import rx.schedulers.Schedulers;
  * @author jingbin
  *         Updated by jingbin on 18/02/07.
  */
-public class BookListFragment extends BaseFragment<FragmentWanAndroidBinding> {
+public class BookListFragment extends BaseFragment<NoViewModel,FragmentWanAndroidBinding> {
 
     private static final String TYPE = "param1";
     private String mType = "综合";

@@ -12,6 +12,7 @@ import com.example.jingbin.cloudreader.databinding.FragmentWelfareBinding;
 import com.example.jingbin.cloudreader.view.viewbigimage.ViewBigImageActivity;
 import com.example.jingbin.cloudreader.viewmodel.gank.WelfareNavigator;
 import com.example.jingbin.cloudreader.viewmodel.gank.WelfareViewModel;
+import com.example.jingbin.cloudreader.viewmodel.menu.NoViewModel;
 import com.example.xrecyclerview.XRecyclerView;
 
 import java.util.ArrayList;
@@ -23,7 +24,7 @@ import rx.Subscription;
  *
  * @author jingbin
  */
-public class WelfareFragment extends BaseFragment<FragmentWelfareBinding> implements WelfareNavigator {
+public class WelfareFragment extends BaseFragment<NoViewModel,FragmentWelfareBinding> implements WelfareNavigator {
 
     private static final String TAG = "WelfareFragment";
     private WelfareAdapter mWelfareAdapter;

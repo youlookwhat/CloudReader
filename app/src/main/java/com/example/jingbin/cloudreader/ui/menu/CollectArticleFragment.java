@@ -14,6 +14,7 @@ import com.example.jingbin.cloudreader.base.BaseFragment;
 import com.example.jingbin.cloudreader.bean.wanandroid.HomeListBean;
 import com.example.jingbin.cloudreader.databinding.FragmentWanAndroidBinding;
 import com.example.jingbin.cloudreader.utils.CommonUtils;
+import com.example.jingbin.cloudreader.viewmodel.menu.NoViewModel;
 import com.example.jingbin.cloudreader.viewmodel.wan.ArticleListViewModel;
 import com.example.xrecyclerview.XRecyclerView;
 
@@ -22,7 +23,7 @@ import com.example.xrecyclerview.XRecyclerView;
  * @date 2018/09/27.
  * @description 文章
  */
-public class CollectArticleFragment extends BaseFragment<FragmentWanAndroidBinding> {
+public class CollectArticleFragment extends BaseFragment<NoViewModel,FragmentWanAndroidBinding> {
 
     private boolean mIsPrepared;
     private boolean mIsFirst = true;
