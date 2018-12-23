@@ -1,6 +1,5 @@
 package com.example.jingbin.cloudreader.ui.wan.child;
 
-import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -14,29 +13,20 @@ import com.example.jingbin.cloudreader.adapter.NaviContentAdapter;
 import com.example.jingbin.cloudreader.base.BaseFragment;
 import com.example.jingbin.cloudreader.bean.wanandroid.NaviJsonBean;
 import com.example.jingbin.cloudreader.databinding.FragmentNaviBinding;
-import com.example.jingbin.cloudreader.http.HttpClient;
-import com.example.jingbin.cloudreader.utils.DebugUtil;
-import com.example.jingbin.cloudreader.viewmodel.menu.LoginViewModel;
 import com.example.jingbin.cloudreader.viewmodel.wan.NaviViewModel;
-
-import rx.Observer;
-import rx.Subscription;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
 
 /**
  * @author jingbin
  * @date 2018/10/8.
  * @description 导航数据
  */
-public class NaviFragment extends BaseFragment<FragmentNaviBinding> {
+public class NaviFragment extends BaseFragment<NaviViewModel,FragmentNaviBinding> {
 
     private boolean mIsPrepared;
     private boolean mIsFirst = true;
     private NaviAdapter mNaviAdapter;
     private NaviContentAdapter mContentAdapter;
     private FragmentActivity activity;
-    private NaviViewModel viewModel;
     private int oldPosition = 0;
 
     @Override
@@ -59,7 +49,6 @@ public class NaviFragment extends BaseFragment<FragmentNaviBinding> {
         super.onActivityCreated(savedInstanceState);
         initRefreshView();
 
-        viewModel = ViewModelProviders.of(this).get(NaviViewModel.class);
         // 准备就绪
         mIsPrepared = true;
         loadData();

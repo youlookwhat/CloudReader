@@ -1,9 +1,12 @@
 package com.example.jingbin.cloudreader.base;
 
+import android.arch.lifecycle.AndroidViewModel;
+import android.arch.lifecycle.ViewModelProviders;
 import android.databinding.DataBindingUtil;
 import android.databinding.ViewDataBinding;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -16,6 +19,10 @@ import android.widget.RelativeLayout;
 
 import com.example.jingbin.cloudreader.R;
 import com.example.jingbin.cloudreader.utils.PerfectClickListener;
+import com.example.jingbin.cloudreader.viewmodel.menu.NoViewModel;
+
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
 
 import rx.Subscription;
 import rx.subscriptions.CompositeSubscription;
@@ -23,8 +30,10 @@ import rx.subscriptions.CompositeSubscription;
 /**
  * 是没有title的Fragment
  */
-public abstract class BaseFragment<SV extends ViewDataBinding> extends Fragment {
+public abstract class BaseFragment<VM extends AndroidViewModel, SV extends ViewDataBinding> extends Fragment {
 
+    // ViewModel
+    protected VM viewModel;
     // 布局view
     protected SV bindingView;
     // fragment是否显示了
@@ -41,12 +50,12 @@ public abstract class BaseFragment<SV extends ViewDataBinding> extends Fragment 
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View ll = inflater.inflate(R.layout.fragment_base, null);
         bindingView = DataBindingUtil.inflate(getActivity().getLayoutInflater(), setContent(), null, false);
         RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
         bindingView.getRoot().setLayoutParams(params);
-        mContainer = (RelativeLayout) ll.findViewById(R.id.container);
+        mContainer = ll.findViewById(R.id.container);
         mContainer.addView(bindingView.getRoot());
         return ll;
     }
@@ -104,7 +113,44 @@ public abstract class BaseFragment<SV extends ViewDataBinding> extends Fragment 
             }
         });
         bindingView.getRoot().setVisibility(View.GONE);
+        initViewModel();
+    }
 
+    /**
+     * 初始化ViewModel
+     */
+    private void initViewModel() {
+        Class<VM> viewModelClass = getViewModel(this);
+        if (viewModelClass != null) {
+            this.viewModel = ViewModelProviders.of(this).get(viewModelClass);
+        }
+//        onObserveViewModel(viewModel);
+    }
+
+    /**
+     * 获取泛型ViewModel的class对象
+     */
+    public static <T> Class<T> getViewModel(Object obj) {
+        Class<?> currentClass = obj.getClass();
+        Class<T> tClass = getGenericClass(currentClass, AndroidViewModel.class);
+        if (tClass == null || tClass == AndroidViewModel.class || tClass == NoViewModel.class) {
+            return null;
+        }
+        return tClass;
+    }
+
+    private static <T> Class<T> getGenericClass(Class<?> klass, Class<?> filterClass) {
+        Type type = klass.getGenericSuperclass();
+        if (type == null || !(type instanceof ParameterizedType)) return null;
+        ParameterizedType parameterizedType = (ParameterizedType) type;
+        Type[] types = parameterizedType.getActualTypeArguments();
+        for (Type t : types) {
+            Class<T> tClass = (Class<T>) t;
+            if (filterClass.isAssignableFrom(tClass)) {
+                return tClass;
+            }
+        }
+        return null;
     }
 
     protected <T extends View> T getView(int id) {
@@ -127,7 +173,7 @@ public abstract class BaseFragment<SV extends ViewDataBinding> extends Fragment 
      * 显示加载中状态
      */
     protected void showLoading() {
-        if (loadingView !=null &&loadingView.getVisibility() != View.VISIBLE) {
+        if (loadingView != null && loadingView.getVisibility() != View.VISIBLE) {
             loadingView.setVisibility(View.VISIBLE);
         }
         // 开始动画
@@ -146,7 +192,7 @@ public abstract class BaseFragment<SV extends ViewDataBinding> extends Fragment 
      * 加载完成的状态
      */
     protected void showContentView() {
-        if (loadingView !=null &&loadingView.getVisibility() != View.GONE) {
+        if (loadingView != null && loadingView.getVisibility() != View.GONE) {
             loadingView.setVisibility(View.GONE);
         }
         // 停止动画
@@ -165,7 +211,7 @@ public abstract class BaseFragment<SV extends ViewDataBinding> extends Fragment 
      * 加载失败点击重新加载的状态
      */
     protected void showError() {
-        if (loadingView !=null &&loadingView.getVisibility() != View.GONE) {
+        if (loadingView != null && loadingView.getVisibility() != View.GONE) {
             loadingView.setVisibility(View.GONE);
         }
         // 停止动画

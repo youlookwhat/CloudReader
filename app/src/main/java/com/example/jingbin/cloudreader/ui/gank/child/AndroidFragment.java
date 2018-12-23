@@ -9,27 +9,22 @@ import com.example.jingbin.cloudreader.MainActivity;
 import com.example.jingbin.cloudreader.R;
 import com.example.jingbin.cloudreader.adapter.GankAndroidAdapter;
 import com.example.jingbin.cloudreader.base.BaseFragment;
-import com.example.jingbin.cloudreader.bean.GankIoDataBean;
 import com.example.jingbin.cloudreader.databinding.FragmentAndroidBinding;
-import com.example.jingbin.cloudreader.viewmodel.gank.BigAndroidNavigator;
 import com.example.jingbin.cloudreader.viewmodel.gank.BigAndroidViewModel;
 import com.example.xrecyclerview.XRecyclerView;
-
-import rx.Subscription;
 
 /**
  * 大安卓 fragment
  */
-public class AndroidFragment extends BaseFragment<FragmentAndroidBinding> implements BigAndroidNavigator {
+public class AndroidFragment extends BaseFragment<BigAndroidViewModel, FragmentAndroidBinding> {
 
     private static final String TAG = "AndroidFragment";
     private static final String TYPE = "mType";
     private String mType = "Android";
     private boolean mIsPrepared;
     private boolean mIsFirst = true;
-    private GankAndroidAdapter mGankAndroidAdapter;
+    private GankAndroidAdapter adapter;
     private MainActivity activity;
-    private BigAndroidViewModel viewModel;
 
 
     @Override
@@ -63,8 +58,7 @@ public class AndroidFragment extends BaseFragment<FragmentAndroidBinding> implem
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        viewModel = new BigAndroidViewModel(mType);
-        viewModel.setBigAndroidNavigator(this);
+        viewModel.setType(mType);
         initRecyclerView();
         // 准备就绪
         mIsPrepared = true;
@@ -75,17 +69,17 @@ public class AndroidFragment extends BaseFragment<FragmentAndroidBinding> implem
         if (!mIsPrepared || !mIsVisible || !mIsFirst) {
             return;
         }
-        viewModel.loadAndroidData();
+        loadAndroidData();
     }
 
     private void initRecyclerView() {
-        mGankAndroidAdapter = new GankAndroidAdapter();
-        bindingView.xrvAndroid.setLayoutManager(new LinearLayoutManager(getActivity()));
+        adapter = new GankAndroidAdapter();
+        bindingView.xrvAndroid.setLayoutManager(new LinearLayoutManager(activity));
         bindingView.xrvAndroid.setLoadingListener(new XRecyclerView.LoadingListener() {
             @Override
             public void onRefresh() {
                 viewModel.setPage(1);
-                viewModel.loadAndroidData();
+                loadAndroidData();
             }
 
             @Override
@@ -93,10 +87,35 @@ public class AndroidFragment extends BaseFragment<FragmentAndroidBinding> implem
                 int page = viewModel.getPage();
                 page++;
                 viewModel.setPage(page);
-                viewModel.loadAndroidData();
+                loadAndroidData();
             }
         });
-        bindingView.xrvAndroid.setAdapter(mGankAndroidAdapter);
+        bindingView.xrvAndroid.setAdapter(adapter);
+    }
+
+    private void loadAndroidData() {
+        viewModel.loadAndroidData().observe(this, bean -> {
+            if (bean != null && bean.getResults() != null && bean.getResults().size() > 0) {
+                if (viewModel.getPage() == 1) {
+                    showContentView();
+                    adapter.clear();
+                }
+                adapter.addAll(bean.getResults());
+                adapter.notifyDataSetChanged();
+                bindingView.xrvAndroid.refreshComplete();
+                if (mIsFirst) {
+                    mIsFirst = false;
+                }
+            } else {
+                bindingView.xrvAndroid.refreshComplete();
+                // 注意：这里不能写成 mPage == 1，否则会一直显示错误页面
+                if (adapter.getItemCount() == 0) {
+                    showError();
+                } else {
+                    bindingView.xrvAndroid.noMoreLoading();
+                }
+            }
+        });
     }
 
     /**
@@ -104,55 +123,6 @@ public class AndroidFragment extends BaseFragment<FragmentAndroidBinding> implem
      */
     @Override
     protected void onRefresh() {
-        viewModel.loadAndroidData();
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        viewModel.onDestroy();
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-    }
-
-    @Override
-    public void showLoadSuccessView() {
-        showContentView();
-    }
-
-    @Override
-    public void showAdapterView(GankIoDataBean gankIoDataBean) {
-        if (viewModel.getPage() == 1) {
-            mGankAndroidAdapter.clear();
-        }
-        mGankAndroidAdapter.addAll(gankIoDataBean.getResults());
-        mGankAndroidAdapter.notifyDataSetChanged();
-        bindingView.xrvAndroid.refreshComplete();
-
-        if (mIsFirst) {
-            mIsFirst = false;
-        }
-    }
-
-    @Override
-    public void showListNoMoreLoading() {
-        bindingView.xrvAndroid.noMoreLoading();
-    }
-
-    @Override
-    public void showLoadFailedView() {
-        bindingView.xrvAndroid.refreshComplete();
-        // 注意：这里不能写成 mPage == 1，否则会一直显示错误页面
-        if (mGankAndroidAdapter.getItemCount() == 0) {
-            showError();
-        }
-    }
-
-    @Override
-    public void addRxSubscription(Subscription subscription) {
-        addSubscription(subscription);
+        loadAndroidData();
     }
 }

@@ -1,6 +1,5 @@
 package com.example.jingbin.cloudreader.ui.movie;
 
-import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
@@ -23,7 +22,7 @@ import com.example.jingbin.cloudreader.viewmodel.movie.OneViewModel;
 /**
  * @author jingbin
  */
-public class OneFragment extends BaseFragment<FragmentOneBinding> {
+public class OneFragment extends BaseFragment<OneViewModel, FragmentOneBinding> {
 
     // 初始化完成后加载数据
     private boolean isPrepared = false;
@@ -35,7 +34,6 @@ public class OneFragment extends BaseFragment<FragmentOneBinding> {
     private MainActivity activity;
     private HotMovieBean mHotMovieBean;
     private OneAdapter oneAdapter;
-    private OneViewModel oneViewModel;
 
     @Override
     public int setContent() {
@@ -55,7 +53,6 @@ public class OneFragment extends BaseFragment<FragmentOneBinding> {
         initRecyclerView();
         aCache = ACache.get(getActivity());
         mHotMovieBean = (HotMovieBean) aCache.getAsObject(Constants.ONE_HOT_MOVIE);
-        oneViewModel = ViewModelProviders.of(this).get(OneViewModel.class);
         isPrepared = true;
     }
 
@@ -101,7 +98,7 @@ public class OneFragment extends BaseFragment<FragmentOneBinding> {
     }
 
     private void loadHotMovie() {
-        oneViewModel.getHotMovie().observe(this, hotMovieBean -> {
+        viewModel.getHotMovie().observe(this, hotMovieBean -> {
             showContentView();
             if (hotMovieBean != null && hotMovieBean.getSubjects() != null) {
                 setAdapter(hotMovieBean);

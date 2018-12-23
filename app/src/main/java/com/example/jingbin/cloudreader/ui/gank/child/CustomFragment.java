@@ -1,5 +1,6 @@
 package com.example.jingbin.cloudreader.ui.gank.child;
 
+import android.arch.lifecycle.Observer;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
@@ -14,38 +15,44 @@ import com.example.jingbin.cloudreader.bean.GankIoDataBean;
 import com.example.jingbin.cloudreader.databinding.FragmentCustomBinding;
 import com.example.jingbin.cloudreader.utils.SPUtils;
 import com.example.jingbin.cloudreader.utils.ToastUtil;
-import com.example.jingbin.cloudreader.viewmodel.gank.CustomNavigator;
 import com.example.jingbin.cloudreader.viewmodel.gank.CustomViewModel;
 import com.example.xrecyclerview.XRecyclerView;
-
-import rx.Subscription;
 
 import static com.example.jingbin.cloudreader.app.Constants.GANK_CALA;
 
 /**
  * @author jingbin
+ * @data 2018-12-22
  */
-public class CustomFragment extends BaseFragment<FragmentCustomBinding> implements CustomNavigator {
+public class CustomFragment extends BaseFragment<CustomViewModel, FragmentCustomBinding> {
 
     private static final String TAG = "CustomFragment";
     private String mType = "all";
     private boolean mIsPrepared;
     private boolean mIsFirst = true;
     private BottomSheet.Builder builder = null;
-    private GankAndroidAdapter mGankAndroidAdapter;
-    private View mHeaderView;
-    private CustomViewModel viewModel;
+    private GankAndroidAdapter adapter;
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        viewModel = new CustomViewModel();
-        viewModel.setNavigator(this);
-
         initData();
         initRecyclerView();
         // 准备就绪
         mIsPrepared = true;
+    }
+
+    @Override
+    public int setContent() {
+        return R.layout.fragment_custom;
+    }
+
+    @Override
+    protected void loadData() {
+        if (!mIsPrepared || !mIsVisible || !mIsFirst) {
+            return;
+        }
+        loadCustomData();
     }
 
     private void initData() {
@@ -65,14 +72,12 @@ public class CustomFragment extends BaseFragment<FragmentCustomBinding> implemen
         bindingView.xrvCustom.setPullRefreshEnabled(false);
         // 去掉刷新头
         bindingView.xrvCustom.clearHeader();
-        mGankAndroidAdapter = new GankAndroidAdapter();
-        if (mHeaderView == null) {
-            mHeaderView = View.inflate(getContext(), R.layout.header_item_gank_custom, null);
-            bindingView.xrvCustom.addHeaderView(mHeaderView);
-        }
+        adapter = new GankAndroidAdapter();
+        View mHeaderView = View.inflate(getContext(), R.layout.header_item_gank_custom, null);
+        bindingView.xrvCustom.addHeaderView(mHeaderView);
         initHeader(mHeaderView);
         bindingView.xrvCustom.setLayoutManager(new LinearLayoutManager(getActivity()));
-        bindingView.xrvCustom.setAdapter(mGankAndroidAdapter);
+        bindingView.xrvCustom.setAdapter(adapter);
         bindingView.xrvCustom.setLoadingListener(new XRecyclerView.LoadingListener() {
             @Override
             public void onRefresh() {
@@ -83,40 +88,40 @@ public class CustomFragment extends BaseFragment<FragmentCustomBinding> implemen
                 int page = viewModel.getPage();
                 page++;
                 viewModel.setPage(page);
-                viewModel.loadCustomData();
+                loadCustomData();
             }
         });
     }
 
-    @Override
-    public int setContent() {
-        return R.layout.fragment_custom;
-    }
+    private void loadCustomData() {
+        viewModel.loadCustomData().observe(this, new Observer<GankIoDataBean>() {
+            @Override
+            public void onChanged(@Nullable GankIoDataBean bean) {
+                if (bean != null && bean.getResults() != null && bean.getResults().size() > 0) {
+                    if (viewModel.getPage() == 1) {
+                        showContentView();
+                        boolean isAll = SPUtils.getString(GANK_CALA, "全部").equals("全部");
+                        adapter.setAllType(isAll);
+                        adapter.clear();
+                    }
 
-    @Override
-    protected void loadData() {
-        if (!mIsPrepared || !mIsVisible || !mIsFirst) {
-            return;
-        }
-        viewModel.loadCustomData();
-    }
-
-    /**
-     * 设置adapter
-     */
-    private void setAdapter(GankIoDataBean mCustomBean) {
-        if (viewModel.getPage() == 1) {
-            boolean isAll = SPUtils.getString(GANK_CALA, "全部").equals("全部");
-            mGankAndroidAdapter.clear();
-            mGankAndroidAdapter.setAllType(isAll);
-        }
-
-        mGankAndroidAdapter.addAll(mCustomBean.getResults());
-        mGankAndroidAdapter.notifyDataSetChanged();
-        bindingView.xrvCustom.refreshComplete();
-        if (mIsFirst) {
-            mIsFirst = false;
-        }
+                    adapter.addAll(bean.getResults());
+                    adapter.notifyDataSetChanged();
+                    bindingView.xrvCustom.refreshComplete();
+                    if (mIsFirst) {
+                        mIsFirst = false;
+                    }
+                } else {
+                    bindingView.xrvCustom.refreshComplete();
+                    // 注意：这里不能写成 mPage == 1，否则会一直显示错误页面
+                    if (adapter.getItemCount() == 0) {
+                        showError();
+                    } else {
+                        bindingView.xrvCustom.noMoreLoading();
+                    }
+                }
+            }
+        });
     }
 
     private void initHeader(View mHeaderView) {
@@ -135,10 +140,11 @@ public class CustomFragment extends BaseFragment<FragmentCustomBinding> implemen
                                     mType = "all";// 全部传 all
                                     viewModel.setType(mType);
                                     viewModel.setPage(1);
-                                    mGankAndroidAdapter.clear();
+                                    adapter.clear();
+                                    bindingView.xrvCustom.reset();
                                     SPUtils.putString(GANK_CALA, "全部");
                                     showLoading();
-                                    viewModel.loadCustomData();
+                                    loadCustomData();
                                 }
                                 break;
                             case R.id.gank_ios:
@@ -147,10 +153,11 @@ public class CustomFragment extends BaseFragment<FragmentCustomBinding> implemen
                                     mType = "iOS";// 这里有严格大小写
                                     viewModel.setType(mType);
                                     viewModel.setPage(1);
-                                    mGankAndroidAdapter.clear();
+                                    adapter.clear();
+                                    bindingView.xrvCustom.reset();
                                     SPUtils.putString(GANK_CALA, "IOS");
                                     showLoading();
-                                    viewModel.loadCustomData();
+                                    loadCustomData();
                                 }
                                 break;
                             case R.id.gank_qian:
@@ -192,12 +199,12 @@ public class CustomFragment extends BaseFragment<FragmentCustomBinding> implemen
         textView.setText(content);
         mType = content;
         viewModel.setType(mType);
-//        mPage = 1;
         viewModel.setPage(1);
-        mGankAndroidAdapter.clear();
+        adapter.clear();
+        bindingView.xrvCustom.reset();
         SPUtils.putString(GANK_CALA, content);
         showLoading();
-        viewModel.loadCustomData();
+        loadCustomData();
     }
 
     private boolean isOtherType(String selectType) {
@@ -217,46 +224,6 @@ public class CustomFragment extends BaseFragment<FragmentCustomBinding> implemen
      */
     @Override
     protected void onRefresh() {
-        viewModel.loadCustomData();
-    }
-
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        viewModel.onDestroy();
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-    }
-
-    @Override
-    public void showLoadSuccessView() {
-        showContentView();
-    }
-
-    @Override
-    public void showAdapterView(GankIoDataBean gankIoDataBean) {
-        setAdapter(gankIoDataBean);
-    }
-
-    @Override
-    public void showListNoMoreLoading() {
-        bindingView.xrvCustom.noMoreLoading();
-    }
-
-    @Override
-    public void showLoadFailedView() {
-        bindingView.xrvCustom.refreshComplete();
-        if (mGankAndroidAdapter.getItemCount() == 0) {
-            showError();
-        }
-    }
-
-    @Override
-    public void addRxSubscription(Subscription subscription) {
-        addSubscription(subscription);
+        loadCustomData();
     }
 }

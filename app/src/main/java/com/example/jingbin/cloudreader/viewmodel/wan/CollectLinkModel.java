@@ -1,5 +1,8 @@
 package com.example.jingbin.cloudreader.viewmodel.wan;
 
+import android.app.Application;
+import android.support.annotation.NonNull;
+
 import com.example.jingbin.cloudreader.base.BaseListViewModel;
 import com.example.jingbin.cloudreader.bean.CollectUrlBean;
 import com.example.jingbin.cloudreader.http.HttpClient;
@@ -19,9 +22,14 @@ public class CollectLinkModel extends BaseListViewModel {
 
     private WanNavigator.CollectUrlNavigator navigator;
 
-    public CollectLinkModel(WanNavigator.CollectUrlNavigator navigator) {
+    public CollectLinkModel(@NonNull Application application) {
+        super(application);
+    }
+
+    public void setNavigator(WanNavigator.CollectUrlNavigator navigator) {
         this.navigator = navigator;
     }
+
 
     public void getCollectUrlList() {
         Subscription subscribe = HttpClient.Builder.getWanAndroidServer().getCollectUrlList()

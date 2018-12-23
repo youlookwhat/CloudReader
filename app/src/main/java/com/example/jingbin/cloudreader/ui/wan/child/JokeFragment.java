@@ -12,6 +12,7 @@ import com.example.jingbin.cloudreader.base.BaseFragment;
 import com.example.jingbin.cloudreader.bean.wanandroid.DuanZiBean;
 import com.example.jingbin.cloudreader.databinding.FragmentWanAndroidBinding;
 import com.example.jingbin.cloudreader.utils.CommonUtils;
+import com.example.jingbin.cloudreader.viewmodel.menu.NoViewModel;
 import com.example.jingbin.cloudreader.viewmodel.wan.JokeViewModel;
 import com.example.jingbin.cloudreader.viewmodel.wan.WanNavigator;
 import com.example.xrecyclerview.XRecyclerView;
@@ -25,7 +26,7 @@ import rx.Subscription;
  * @author jingbin
  *         Updated by jingbin on 18/04/19.
  */
-public class JokeFragment extends BaseFragment<FragmentWanAndroidBinding> implements WanNavigator.JokeNavigator {
+public class JokeFragment extends BaseFragment<NoViewModel,FragmentWanAndroidBinding> implements WanNavigator.JokeNavigator {
 
     private static final String TYPE = "param1";
     private String mType = "综合";

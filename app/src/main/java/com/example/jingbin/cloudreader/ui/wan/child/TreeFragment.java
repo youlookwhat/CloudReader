@@ -1,6 +1,5 @@
 package com.example.jingbin.cloudreader.ui.wan.child;
 
-import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
@@ -23,13 +22,12 @@ import com.example.jingbin.cloudreader.viewmodel.wan.TreeViewModel;
  * @date 2018/09/15.
  * @description 知识体系
  */
-public class TreeFragment extends BaseFragment<FragmentWanAndroidBinding> {
+public class TreeFragment extends BaseFragment<TreeViewModel,FragmentWanAndroidBinding> {
 
     private boolean mIsPrepared;
     private boolean mIsFirst = true;
     private TreeAdapter mTreeAdapter;
     private FragmentActivity activity;
-    private TreeViewModel viewModel;
 
     @Override
     public int setContent() {
@@ -51,7 +49,6 @@ public class TreeFragment extends BaseFragment<FragmentWanAndroidBinding> {
         super.onActivityCreated(savedInstanceState);
         showContentView();
         initRefreshView();
-        viewModel = ViewModelProviders.of(this).get(TreeViewModel.class);
         // 准备就绪
         mIsPrepared = true;
         /**

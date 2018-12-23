@@ -1,6 +1,9 @@
 package com.example.jingbin.cloudreader.viewmodel.gank;
 
-import android.arch.lifecycle.ViewModel;
+import android.app.Application;
+import android.arch.lifecycle.AndroidViewModel;
+import android.arch.lifecycle.MutableLiveData;
+import android.support.annotation.NonNull;
 
 import com.example.http.HttpUtils;
 import com.example.jingbin.cloudreader.bean.GankIoDataBean;
@@ -15,20 +18,19 @@ import rx.Subscription;
  * @Description 大安卓ViewModel
  */
 
-public class BigAndroidViewModel extends ViewModel {
+public class BigAndroidViewModel extends AndroidViewModel {
 
     private final GankOtherModel mModel;
     private String mType = "Android";
-    private BigAndroidNavigator navigator;
     private int mPage = 1;
 
-    public BigAndroidViewModel(String mType) {
-        this.mType = mType;
+    public BigAndroidViewModel(@NonNull Application application) {
+        super(application);
         mModel = new GankOtherModel();
     }
 
-    public void setBigAndroidNavigator(BigAndroidNavigator bigAndroidNavigator) {
-        this.navigator = bigAndroidNavigator;
+    public void setType(String mType) {
+        this.mType = mType;
     }
 
     public void setPage(int mPage) {
@@ -39,30 +41,18 @@ public class BigAndroidViewModel extends ViewModel {
         return mPage;
     }
 
-    public void loadAndroidData() {
+    public MutableLiveData<GankIoDataBean> loadAndroidData() {
+        final MutableLiveData<GankIoDataBean> data = new MutableLiveData<>();
         mModel.setData(mType, mPage, HttpUtils.per_page_more);
         mModel.getGankIoData(new RequestImpl() {
             @Override
             public void loadSuccess(Object object) {
-                navigator.showLoadSuccessView();
-                GankIoDataBean gankIoDataBean = (GankIoDataBean) object;
-                if (mPage == 1) {
-                    if (gankIoDataBean == null || gankIoDataBean.getResults() == null || gankIoDataBean.getResults().size() <= 0) {
-                        navigator.showLoadFailedView();
-                        return;
-                    }
-                } else {
-                    if (gankIoDataBean == null || gankIoDataBean.getResults() == null || gankIoDataBean.getResults().size() <= 0) {
-                        navigator.showListNoMoreLoading();
-                        return;
-                    }
-                }
-                navigator.showAdapterView(gankIoDataBean);
+                data.setValue((GankIoDataBean) object);
             }
 
             @Override
             public void loadFailed() {
-                navigator.showLoadFailedView();
+                data.setValue(null);
                 if (mPage > 1) {
                     mPage--;
                 }
@@ -70,12 +60,8 @@ public class BigAndroidViewModel extends ViewModel {
 
             @Override
             public void addSubscription(Subscription subscription) {
-                navigator.addRxSubscription(subscription);
             }
         });
-    }
-
-    public void onDestroy() {
-        navigator = null;
+        return data;
     }
 }

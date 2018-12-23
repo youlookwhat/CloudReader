@@ -12,6 +12,7 @@ import com.example.jingbin.cloudreader.ui.wan.child.BannerFragment;
 import com.example.jingbin.cloudreader.ui.wan.child.NaviFragment;
 import com.example.jingbin.cloudreader.ui.wan.child.TreeFragment;
 import com.example.jingbin.cloudreader.view.MyFragmentPagerAdapter;
+import com.example.jingbin.cloudreader.viewmodel.menu.NoViewModel;
 
 import java.util.ArrayList;
 
@@ -19,7 +20,7 @@ import java.util.ArrayList;
  * Created by jingbin on 16/12/14.
  * 展示玩安卓的页面
  */
-public class WanFragment extends BaseFragment<FragmentBookBinding> {
+public class WanFragment extends BaseFragment<NoViewModel,FragmentBookBinding> {
 
     private ArrayList<String> mTitleList = new ArrayList<>(3);
     private ArrayList<Fragment> mFragments = new ArrayList<>(3);

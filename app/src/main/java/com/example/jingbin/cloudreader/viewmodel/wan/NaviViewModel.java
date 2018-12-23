@@ -1,19 +1,14 @@
 package com.example.jingbin.cloudreader.viewmodel.wan;
 
+import android.app.Application;
+import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.MutableLiveData;
-import android.arch.lifecycle.ViewModel;
-import android.databinding.ObservableField;
-import android.text.TextUtils;
+import android.support.annotation.NonNull;
 
-import com.example.jingbin.cloudreader.bean.wanandroid.LoginBean;
 import com.example.jingbin.cloudreader.bean.wanandroid.NaviJsonBean;
-import com.example.jingbin.cloudreader.data.UserUtil;
-import com.example.jingbin.cloudreader.data.room.Injection;
 import com.example.jingbin.cloudreader.http.HttpClient;
-import com.example.jingbin.cloudreader.utils.ToastUtil;
 
 import rx.Observer;
-import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
@@ -23,7 +18,11 @@ import rx.schedulers.Schedulers;
  * @Description wanandroid导航数据的ViewModel
  */
 
-public class NaviViewModel extends ViewModel {
+public class NaviViewModel extends AndroidViewModel {
+
+    public NaviViewModel(@NonNull Application application) {
+        super(application);
+    }
 
     public MutableLiveData<NaviJsonBean> getNaviJson() {
         final MutableLiveData<NaviJsonBean> data = new MutableLiveData<>();
