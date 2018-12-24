@@ -26,8 +26,11 @@ import rx.schedulers.Schedulers;
 
 /**
  * 已废弃，使用{@link BookListFragment}，替代
+ *
+ * @author jingbin
  */
-public class BookCustomFragment extends BaseFragment<NoViewModel,FragmentBookCustomBinding> {
+@Deprecated
+public class BookCustomFragment extends BaseFragment<NoViewModel, FragmentBookCustomBinding> {
 
     private static final String TYPE = "param1";
     private String mType = "综合";

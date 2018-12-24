@@ -23,13 +23,12 @@ import com.example.xrecyclerview.XRecyclerView;
  * @date 2018/09/27.
  * @description 文章
  */
-public class CollectArticleFragment extends BaseFragment<NoViewModel,FragmentWanAndroidBinding> {
+public class CollectArticleFragment extends BaseFragment<ArticleListViewModel,FragmentWanAndroidBinding> {
 
     private boolean mIsPrepared;
     private boolean mIsFirst = true;
     private FragmentActivity activity;
     private WanAndroidAdapter mAdapter;
-    private ArticleListViewModel viewModel;
 
     @Override
     public int setContent() {
@@ -57,7 +56,6 @@ public class CollectArticleFragment extends BaseFragment<NoViewModel,FragmentWan
 
         showContentView();
         initRefreshView();
-        viewModel = ViewModelProviders.of(this).get(ArticleListViewModel.class);
         mAdapter.setCollectList();
         // 准备就绪
         mIsPrepared = true;

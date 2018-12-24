@@ -13,9 +13,9 @@ public class Constants {
     // 热映缓存
     public static String ONE_HOT_MOVIE = "one_hot_movie";
     // 保存每日推荐轮播图url
-    public static String BANNER_PIC = "banner_pic";
+    public static String BANNER_PIC = "gank_banner_pic";
     // 保存每日推荐轮播图的跳转数据
-    public static String BANNER_PIC_DATA = "banner_pic_data";
+    public static String BANNER_PIC_DATA = "gank_banner_data";
     // 保存每日推荐recyclerview内容
     public static String EVERYDAY_CONTENT = "everyday_content";
     // 干货订制类别

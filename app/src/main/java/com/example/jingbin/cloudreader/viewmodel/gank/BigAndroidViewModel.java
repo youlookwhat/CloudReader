@@ -52,10 +52,10 @@ public class BigAndroidViewModel extends AndroidViewModel {
 
             @Override
             public void loadFailed() {
-                data.setValue(null);
                 if (mPage > 1) {
                     mPage--;
                 }
+                data.setValue(null);
             }
 
             @Override

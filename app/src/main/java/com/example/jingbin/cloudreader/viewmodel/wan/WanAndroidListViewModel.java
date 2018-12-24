@@ -82,10 +82,10 @@ public class WanAndroidListViewModel extends BaseListViewModel {
 
                     @Override
                     public void onError(Throwable e) {
-                        listData.setValue(null);
                         if (mPage > 0) {
                             mPage--;
                         }
+                        listData.setValue(null);
                     }
 
                     @Override

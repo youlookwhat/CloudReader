@@ -38,10 +38,10 @@ public class ArticleListViewModel extends BaseListViewModel {
 
                     @Override
                     public void onError(Throwable e) {
-                        data.setValue(null);
                         if (mPage > 0) {
                             mPage--;
                         }
+                        data.setValue(null);
                     }
 
                     @Override

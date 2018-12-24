@@ -19,6 +19,7 @@ import com.example.jingbin.cloudreader.http.HttpClient;
 import com.example.jingbin.cloudreader.utils.CommonUtils;
 import com.example.jingbin.cloudreader.utils.DebugUtil;
 import com.example.jingbin.cloudreader.viewmodel.menu.NoViewModel;
+import com.example.jingbin.cloudreader.viewmodel.movie.BookListViewModel;
 import com.example.xrecyclerview.XRecyclerView;
 
 import rx.Observer;
@@ -28,18 +29,14 @@ import rx.schedulers.Schedulers;
 
 /**
  * @author jingbin
- *         Updated by jingbin on 18/02/07.
+ *         Updated by jingbin on 18/12/23.
  */
-public class BookListFragment extends BaseFragment<NoViewModel,FragmentWanAndroidBinding> {
+public class BookListFragment extends BaseFragment<BookListViewModel, FragmentWanAndroidBinding> {
 
     private static final String TYPE = "param1";
     private String mType = "综合";
     private boolean mIsPrepared;
     private boolean mIsFirst = true;
-    // 开始请求的角标
-    private int mStart = 0;
-    // 一次请求的数量
-    private int mCount = 18;
     private WanBookAdapter mBookAdapter;
     private FragmentActivity activity;
 
@@ -91,9 +88,9 @@ public class BookListFragment extends BaseFragment<NoViewModel,FragmentWanAndroi
             @Override
             public void onRefresh() {
                 bindingView.srlWan.postDelayed(() -> {
-                    mStart = 0;
+                    viewModel.setStart(0);
                     bindingView.xrvWan.reset();
-                    loadCustomData();
+                    getBook();
                 }, 300);
 
             }
@@ -112,10 +109,11 @@ public class BookListFragment extends BaseFragment<NoViewModel,FragmentWanAndroi
         /** 处理键盘搜索键 */
         oneBinding.etTypeName.setOnEditorActionListener((textView, actionId, keyEvent) -> {
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                mStart = 0;
                 bindingView.xrvWan.reset();
+                viewModel.setStart(0);
                 mType = oneBinding.etTypeName.getText().toString().trim();
-                loadCustomData();
+                viewModel.setType(mType);
+                getBook();
             }
             return false;
         });
@@ -127,8 +125,8 @@ public class BookListFragment extends BaseFragment<NoViewModel,FragmentWanAndroi
 
             @Override
             public void onLoadMore() {
-                mStart += mCount;
-                loadCustomData();
+                viewModel.setStart(viewModel.getStart() + viewModel.getCount());
+                getBook();
             }
         });
     }
@@ -144,66 +142,42 @@ public class BookListFragment extends BaseFragment<NoViewModel,FragmentWanAndroi
         bindingView.srlWan.postDelayed(new Runnable() {
             @Override
             public void run() {
-                loadCustomData();
+                getBook();
             }
         }, 500);
         DebugUtil.error("-----setRefreshing");
     }
 
-    private void loadCustomData() {
-
-        Subscription get = HttpClient.Builder.getDouBanService().getBook(mType, mStart, mCount)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<BookBean>() {
-                    @Override
-                    public void onCompleted() {
+    private void getBook() {
+        viewModel.getBook().observe(this, new android.arch.lifecycle.Observer<BookBean>() {
+            @Override
+            public void onChanged(@Nullable BookBean bookBean) {
+                if (bindingView.srlWan.isRefreshing()) {
+                    bindingView.srlWan.setRefreshing(false);
+                }
+                if (bookBean != null && bookBean.getBooks() != null && bookBean.getBooks().size() > 0) {
+                    if (viewModel.getStart() == 0) {
                         showContentView();
-                        if (bindingView.srlWan.isRefreshing()) {
-                            bindingView.srlWan.setRefreshing(false);
-                        }
+                        mBookAdapter.clear();
                     }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        showContentView();
-                        if (bindingView.srlWan.isRefreshing()) {
-                            bindingView.srlWan.setRefreshing(false);
-                        }
-                        if (mStart == 0) {
-                            showError();
-                        } else {
-                            bindingView.xrvWan.refreshComplete();
-                        }
-                    }
-
-                    @Override
-                    public void onNext(BookBean bookBean) {
-                        if (mStart == 0) {
-                            if (bookBean != null && bookBean.getBooks() != null && bookBean.getBooks().size() > 0) {
-                                mBookAdapter.clear();
-                            } else {
-                                showError();
-                                return;
-                            }
-                            mIsFirst = false;
-                        } else {
-                            if (bookBean == null || bookBean.getBooks() == null || bookBean.getBooks().size() == 0) {
-                                bindingView.xrvWan.noMoreLoading();
-                                return;
-                            }
-                        }
-                        mBookAdapter.addAll(bookBean.getBooks());
-                        mBookAdapter.notifyDataSetChanged();
+                    mBookAdapter.addAll(bookBean.getBooks());
+                    mBookAdapter.notifyDataSetChanged();
+                    bindingView.xrvWan.refreshComplete();
+                    mIsFirst = false;
+                } else {
+                    if (viewModel.getStart() == 0) {
+                        showError();
+                    } else {
                         bindingView.xrvWan.refreshComplete();
                     }
-                });
-        addSubscription(get);
+                }
+            }
+        });
     }
 
     @Override
     protected void onRefresh() {
         bindingView.srlWan.setRefreshing(true);
-        loadCustomData();
+        getBook();
     }
 }

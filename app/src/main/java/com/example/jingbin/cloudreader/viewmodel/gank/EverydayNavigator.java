@@ -1,6 +1,7 @@
 package com.example.jingbin.cloudreader.viewmodel.gank;
 
 import com.example.jingbin.cloudreader.bean.AndroidBean;
+import com.example.jingbin.cloudreader.bean.BannerItemBean;
 import com.example.jingbin.cloudreader.bean.FrontpageBean;
 
 import java.util.ArrayList;
@@ -29,7 +30,7 @@ public interface EverydayNavigator {
     /**
      * 显示轮播图
      */
-    void showBannerView(ArrayList<String> mBannerImages, List<FrontpageBean.ResultBannerBean.FocusBean.ResultBeanX> result);
+    void showBannerView(ArrayList<String> mBannerImages, List<BannerItemBean> result);
 
     /**
      * 显示旋转动画

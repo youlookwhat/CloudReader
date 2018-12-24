@@ -1,5 +1,6 @@
 package com.example.jingbin.cloudreader.ui.menu;
 
+import android.arch.lifecycle.Observer;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -26,13 +27,12 @@ import rx.Subscription;
  * @date 2018/09/27.
  * @description 网址
  */
-public class CollectLinkFragment extends BaseFragment<CollectLinkModel,FragmentWanAndroidBinding> implements WanNavigator.CollectUrlNavigator {
+public class CollectLinkFragment extends BaseFragment<CollectLinkModel, FragmentWanAndroidBinding> {
 
     private boolean mIsPrepared;
     private boolean mIsFirst = true;
     private FragmentActivity activity;
     private CollectUrlAdapter mAdapter;
-    private CollectLinkModel viewModel;
 
     @Override
     public int setContent() {
@@ -59,13 +59,11 @@ public class CollectLinkFragment extends BaseFragment<CollectLinkModel,FragmentW
         super.onActivityCreated(savedInstanceState);
         showContentView();
         initRefreshView();
-        viewModel.setNavigator(this);
 
         // 准备就绪
         mIsPrepared = true;
         loadData();
     }
-
 
     private void initRefreshView() {
         bindingView.srlWan.setColorSchemeColors(CommonUtils.getColor(R.color.colorTheme));
@@ -74,20 +72,7 @@ public class CollectLinkFragment extends BaseFragment<CollectLinkModel,FragmentW
         bindingView.xrvWan.clearHeader();
         mAdapter = new CollectUrlAdapter(activity);
         bindingView.xrvWan.setAdapter(mAdapter);
-        bindingView.srlWan.setOnRefreshListener(() -> bindingView.srlWan.postDelayed(() -> {
-            viewModel.getCollectUrlList();
-        }, 300));
-        bindingView.xrvWan.setLoadingListener(new XRecyclerView.LoadingListener() {
-            @Override
-            public void onRefresh() {
-
-            }
-
-            @Override
-            public void onLoadMore() {
-                viewModel.getCollectUrlList();
-            }
-        });
+        bindingView.srlWan.setOnRefreshListener(() -> bindingView.srlWan.postDelayed(this::getCollectUrlList, 300));
     }
 
     @Override
@@ -97,54 +82,36 @@ public class CollectLinkFragment extends BaseFragment<CollectLinkModel,FragmentW
         }
 
         bindingView.srlWan.setRefreshing(true);
-        bindingView.srlWan.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                viewModel.getCollectUrlList();
-            }
-        }, 150);
+        bindingView.srlWan.postDelayed(this::getCollectUrlList, 150);
     }
 
+    private void getCollectUrlList() {
+        viewModel.getCollectUrlList().observe(this, new Observer<CollectUrlBean>() {
+            @Override
+            public void onChanged(@Nullable CollectUrlBean bean) {
+                showContentView();
+                if (bindingView.srlWan.isRefreshing()) {
+                    bindingView.srlWan.setRefreshing(false);
+                }
+                if (bean != null && bean.getData() != null && bean.getData().size() > 0) {
+                    mAdapter.clear();
+                    mAdapter.addAll(bean.getData());
+                    mAdapter.notifyDataSetChanged();
+                    bindingView.xrvWan.refreshComplete();
+                    bindingView.xrvWan.noMoreLoading();
+
+                    mIsFirst = false;
+                } else {
+                    bindingView.xrvWan.refreshComplete();
+                    ToastUtil.showToastLong("还没有收藏网址哦~");
+                }
+            }
+        });
+    }
 
     @Override
     protected void onRefresh() {
         bindingView.srlWan.setRefreshing(true);
-        viewModel.getCollectUrlList();
-    }
-
-    @Override
-    public void loadFailure() {
-        showContentView();
-        if (bindingView.srlWan.isRefreshing()) {
-            bindingView.srlWan.setRefreshing(false);
-        }
-        bindingView.xrvWan.refreshComplete();
-        ToastUtil.showToastLong("还没有收藏网址哦~");
-    }
-
-    @Override
-    public void showAdapterView(CollectUrlBean bean) {
-        List<CollectUrlBean.DataBean> data = bean.getData();
-        mAdapter.clear();
-        mAdapter.addAll(data);
-        mAdapter.notifyDataSetChanged();
-        bindingView.xrvWan.refreshComplete();
-
-        if (data.size() > 10) {
-            bindingView.xrvWan.noMoreLoading();
-        }
-
-        mIsFirst = false;
-    }
-
-    @Override
-    public void showLoadSuccessView() {
-        showContentView();
-        bindingView.srlWan.setRefreshing(false);
-    }
-
-    @Override
-    public void addRxSubscription(Subscription subscription) {
-        addSubscription(subscription);
+        getCollectUrlList();
     }
 }
