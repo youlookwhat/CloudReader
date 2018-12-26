@@ -16,13 +16,14 @@ import com.example.jingbin.cloudreader.utils.CommonUtils;
 import com.example.jingbin.cloudreader.utils.PerfectClickListener;
 import com.example.jingbin.cloudreader.utils.ToastUtil;
 import com.example.jingbin.cloudreader.view.webview.WebViewActivity;
+import com.example.jingbin.cloudreader.viewmodel.menu.NoViewModel;
 
 import java.util.List;
 
 /**
  * @author jingbin
  */
-public class NavDeedBackActivity extends BaseActivity<ActivityNavDeedBackBinding> {
+public class NavDeedBackActivity extends BaseActivity<NoViewModel, ActivityNavDeedBackBinding> {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,26 +71,6 @@ public class NavDeedBackActivity extends BaseActivity<ActivityNavDeedBackBinding
             }
         }
     };
-
-    /**
-     * 判断qq是否可用
-     *
-     * @param context
-     * @return
-     */
-    public static boolean isQQClientAvailable(Context context) {
-        final PackageManager packageManager = context.getPackageManager();
-        List<PackageInfo> pinfo = packageManager.getInstalledPackages(0);
-        if (pinfo != null) {
-            for (int i = 0; i < pinfo.size(); i++) {
-                String pn = pinfo.get(i).packageName;
-                if (pn.equals("com.tencent.mobileqq")) {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
 
     public static void start(Context mContext) {
         Intent intent = new Intent(mContext, NavDeedBackActivity.class);

@@ -11,14 +11,10 @@ import com.example.jingbin.cloudreader.base.BaseFragment;
 import com.example.jingbin.cloudreader.bean.GankIoDataBean;
 import com.example.jingbin.cloudreader.databinding.FragmentWelfareBinding;
 import com.example.jingbin.cloudreader.view.viewbigimage.ViewBigImageActivity;
-import com.example.jingbin.cloudreader.viewmodel.gank.WelfareNavigator;
 import com.example.jingbin.cloudreader.viewmodel.gank.WelfareViewModel;
-import com.example.jingbin.cloudreader.viewmodel.menu.NoViewModel;
 import com.example.xrecyclerview.XRecyclerView;
 
 import java.util.ArrayList;
-
-import rx.Subscription;
 
 /**
  * 福利

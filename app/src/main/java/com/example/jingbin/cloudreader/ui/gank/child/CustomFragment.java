@@ -26,7 +26,6 @@ import static com.example.jingbin.cloudreader.app.Constants.GANK_CALA;
  */
 public class CustomFragment extends BaseFragment<CustomViewModel, FragmentCustomBinding> {
 
-    private static final String TAG = "CustomFragment";
     private String mType = "all";
     private boolean mIsPrepared;
     private boolean mIsFirst = true;
@@ -100,7 +99,7 @@ public class CustomFragment extends BaseFragment<CustomViewModel, FragmentCustom
                 if (bean != null && bean.getResults() != null && bean.getResults().size() > 0) {
                     if (viewModel.getPage() == 1) {
                         showContentView();
-                        boolean isAll = SPUtils.getString(GANK_CALA, "全部").equals("全部");
+                        boolean isAll = "全部".equals(SPUtils.getString(GANK_CALA, "全部"));
                         adapter.setAllType(isAll);
                         adapter.clear();
                     }

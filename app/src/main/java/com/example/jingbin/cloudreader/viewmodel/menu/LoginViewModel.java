@@ -1,8 +1,11 @@
 package com.example.jingbin.cloudreader.viewmodel.menu;
 
+import android.app.Application;
+import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
 import android.databinding.ObservableField;
+import android.support.annotation.NonNull;
 import android.text.TextUtils;
 
 import com.example.jingbin.cloudreader.bean.HotMovieBean;
@@ -23,11 +26,15 @@ import rx.schedulers.Schedulers;
  * @Description wanandroid登录的ViewModel
  */
 
-public class LoginViewModel extends ViewModel {
+public class LoginViewModel extends AndroidViewModel {
 
     public final ObservableField<String> username = new ObservableField<>();
 
     public final ObservableField<String> password = new ObservableField<>();
+
+    public LoginViewModel(@NonNull Application application) {
+        super(application);
+    }
 
     public MutableLiveData<Boolean> register() {
         final MutableLiveData<Boolean> data = new MutableLiveData<>();

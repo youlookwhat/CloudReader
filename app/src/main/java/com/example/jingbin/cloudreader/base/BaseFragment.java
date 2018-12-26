@@ -18,6 +18,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import com.example.jingbin.cloudreader.R;
+import com.example.jingbin.cloudreader.utils.ClassUtil;
 import com.example.jingbin.cloudreader.utils.PerfectClickListener;
 import com.example.jingbin.cloudreader.viewmodel.menu.NoViewModel;
 
@@ -120,37 +121,10 @@ public abstract class BaseFragment<VM extends AndroidViewModel, SV extends ViewD
      * 初始化ViewModel
      */
     private void initViewModel() {
-        Class<VM> viewModelClass = getViewModel(this);
+        Class<VM> viewModelClass = ClassUtil.getViewModel(this);
         if (viewModelClass != null) {
             this.viewModel = ViewModelProviders.of(this).get(viewModelClass);
         }
-//        onObserveViewModel(viewModel);
-    }
-
-    /**
-     * 获取泛型ViewModel的class对象
-     */
-    public static <T> Class<T> getViewModel(Object obj) {
-        Class<?> currentClass = obj.getClass();
-        Class<T> tClass = getGenericClass(currentClass, AndroidViewModel.class);
-        if (tClass == null || tClass == AndroidViewModel.class || tClass == NoViewModel.class) {
-            return null;
-        }
-        return tClass;
-    }
-
-    private static <T> Class<T> getGenericClass(Class<?> klass, Class<?> filterClass) {
-        Type type = klass.getGenericSuperclass();
-        if (type == null || !(type instanceof ParameterizedType)) return null;
-        ParameterizedType parameterizedType = (ParameterizedType) type;
-        Type[] types = parameterizedType.getActualTypeArguments();
-        for (Type t : types) {
-            Class<T> tClass = (Class<T>) t;
-            if (filterClass.isAssignableFrom(tClass)) {
-                return tClass;
-            }
-        }
-        return null;
     }
 
     protected <T extends View> T getView(int id) {

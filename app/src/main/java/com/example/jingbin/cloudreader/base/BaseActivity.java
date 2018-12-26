@@ -1,5 +1,7 @@
 package com.example.jingbin.cloudreader.base;
 
+import android.arch.lifecycle.AndroidViewModel;
+import android.arch.lifecycle.ViewModelProviders;
 import android.databinding.DataBindingUtil;
 import android.databinding.ViewDataBinding;
 import android.graphics.drawable.AnimationDrawable;
@@ -17,6 +19,7 @@ import android.widget.RelativeLayout;
 
 import com.example.jingbin.cloudreader.R;
 import com.example.jingbin.cloudreader.databinding.ActivityBaseBinding;
+import com.example.jingbin.cloudreader.utils.ClassUtil;
 import com.example.jingbin.cloudreader.utils.CommonUtils;
 import com.example.jingbin.cloudreader.utils.PerfectClickListener;
 import com.example.jingbin.cloudreader.view.statusbar.StatusBarUtil;
@@ -28,8 +31,10 @@ import rx.subscriptions.CompositeSubscription;
  * @author jingbin
  * @date 16/12/10
  */
-public abstract class BaseActivity<SV extends ViewDataBinding> extends AppCompatActivity {
+public abstract class BaseActivity<VM extends AndroidViewModel,SV extends ViewDataBinding> extends AppCompatActivity {
 
+    // ViewModel
+    protected VM viewModel;
     // 布局view
     protected SV bindingView;
     private View refresh;
@@ -83,6 +88,17 @@ public abstract class BaseActivity<SV extends ViewDataBinding> extends AppCompat
             }
         });
         bindingView.getRoot().setVisibility(View.GONE);
+        initViewModel();
+    }
+
+    /**
+     * 初始化ViewModel
+     */
+    private void initViewModel() {
+        Class<VM> viewModelClass = ClassUtil.getViewModel(this);
+        if (viewModelClass != null) {
+            this.viewModel = ViewModelProviders.of(this).get(viewModelClass);
+        }
     }
 
     /**

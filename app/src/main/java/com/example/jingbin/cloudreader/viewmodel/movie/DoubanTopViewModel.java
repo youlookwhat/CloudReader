@@ -1,6 +1,10 @@
 package com.example.jingbin.cloudreader.viewmodel.movie;
 
+import android.app.Application;
+import android.arch.lifecycle.AndroidViewModel;
+import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
+import android.support.annotation.NonNull;
 
 import com.example.jingbin.cloudreader.bean.HotMovieBean;
 import com.example.jingbin.cloudreader.data.model.OneRepository;
@@ -12,38 +16,53 @@ import com.example.jingbin.cloudreader.data.model.OneRepository;
  * 我们推荐Google的Dagger 2库在Android应用程序中实现依赖注入。Dagger 2通过遍历依赖关系树来自动构造对象，并为依赖关系提供编译时间保证。
  */
 
-public class DoubanTopViewModel extends ViewModel {
+public class DoubanTopViewModel extends AndroidViewModel {
 
+    private int mStart = 0;
+    private int mCount = 21;
     private OneRepository oneRepo;
-    private OnMovieLoadListener loadListener;
+//    private OnMovieLoadListener loadListener;
 
-    public void setOnMovieLoadListener(OnMovieLoadListener loadListener) {
-        this.loadListener = loadListener;
-    }
-
-    public void onDestroy() {
-        loadListener = null;
-    }
-
-    public DoubanTopViewModel() {
+    public DoubanTopViewModel(@NonNull Application application) {
+        super(application);
         this.oneRepo = new OneRepository();
     }
 
-    public void getHotMovie(int start, int count) {
-        oneRepo.getMovieTop250(start, count, new OnMovieLoadListener() {
+//    public void setOnMovieLoadListener(OnMovieLoadListener loadListener) {
+//        this.loadListener = loadListener;
+//    }
+//
+//    public void onDestroy() {
+//        loadListener = null;
+//    }
+
+    public MutableLiveData<HotMovieBean> getHotMovie() {
+        final MutableLiveData<HotMovieBean> data = new MutableLiveData<>();
+        oneRepo.getMovieTop250(mStart, mCount, new OnMovieLoadListener() {
             @Override
             public void onSuccess(HotMovieBean hotMovieBean) {
-                if (loadListener != null) {
-                    loadListener.onSuccess(hotMovieBean);
-                }
+                data.setValue(hotMovieBean);
+//                if (loadListener != null) {
+//                    loadListener.onSuccess(hotMovieBean);
+//                }
             }
 
             @Override
             public void onFailure() {
-                if (loadListener != null) {
-                    loadListener.onFailure();
-                }
+                data.setValue(null);
+//                if (loadListener != null) {
+//                    loadListener.onFailure();
+//                }
             }
         });
+        return data;
+    }
+
+    public int getStart() {
+        return mStart;
+    }
+
+    public void handleNextStart() {
+        mStart += mCount;
     }
 }

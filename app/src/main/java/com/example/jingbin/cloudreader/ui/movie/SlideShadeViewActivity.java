@@ -44,6 +44,7 @@ import static com.example.jingbin.cloudreader.view.statusbar.StatusBarUtil.getSt
  * 3、上移，通过scrollview拿到上移的高度，同时（在背景图的高度内） 调整titlebar的颜色使透明变为不透明，调整背景图的颜色，是不透明变为透明
  * 4、下拉，使上面反过来即可
  */
+@Deprecated
 public class SlideShadeViewActivity extends AppCompatActivity {
 
     private int slidingDistance;

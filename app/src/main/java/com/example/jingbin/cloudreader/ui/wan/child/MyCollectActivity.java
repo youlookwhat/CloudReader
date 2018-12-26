@@ -11,6 +11,7 @@ import com.example.jingbin.cloudreader.databinding.ActivityMyCollectBinding;
 import com.example.jingbin.cloudreader.ui.menu.CollectArticleFragment;
 import com.example.jingbin.cloudreader.ui.menu.CollectLinkFragment;
 import com.example.jingbin.cloudreader.view.MyFragmentPagerAdapter;
+import com.example.jingbin.cloudreader.viewmodel.menu.NoViewModel;
 
 import java.util.ArrayList;
 
@@ -19,7 +20,7 @@ import java.util.ArrayList;
  *
  * @author jingbin
  */
-public class MyCollectActivity extends BaseActivity<ActivityMyCollectBinding> {
+public class MyCollectActivity extends BaseActivity<NoViewModel, ActivityMyCollectBinding> {
 
     private ArrayList<String> mTitleList = new ArrayList<>(4);
     private ArrayList<Fragment> mFragments = new ArrayList<>(4);

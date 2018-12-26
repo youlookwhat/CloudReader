@@ -11,8 +11,9 @@ import com.example.jingbin.cloudreader.databinding.ActivityNavDownloadBinding;
 import com.example.jingbin.cloudreader.utils.PerfectClickListener;
 import com.example.jingbin.cloudreader.utils.QRCodeUtil;
 import com.example.jingbin.cloudreader.utils.ShareUtils;
+import com.example.jingbin.cloudreader.viewmodel.menu.NoViewModel;
 
-public class NavDownloadActivity extends BaseActivity<ActivityNavDownloadBinding> {
+public class NavDownloadActivity extends BaseActivity<NoViewModel, ActivityNavDownloadBinding> {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
