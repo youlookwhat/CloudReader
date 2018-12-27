@@ -54,6 +54,7 @@ public class OneFragment extends BaseFragment<OneViewModel, FragmentOneBinding> 
         aCache = ACache.get(getActivity());
         mHotMovieBean = (HotMovieBean) aCache.getAsObject(Constants.ONE_HOT_MOVIE);
         isPrepared = true;
+        loadData();
     }
 
     /**
@@ -91,7 +92,7 @@ public class OneFragment extends BaseFragment<OneViewModel, FragmentOneBinding> 
                             showContentView();
                         }
                     }
-                }, 150);
+                }, 300);
             }
         }
 

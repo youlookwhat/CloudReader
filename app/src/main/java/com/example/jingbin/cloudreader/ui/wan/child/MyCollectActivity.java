@@ -34,7 +34,7 @@ public class MyCollectActivity extends BaseActivity<NoViewModel, ActivityMyColle
         initFragmentList();
         MyFragmentPagerAdapter myAdapter = new MyFragmentPagerAdapter(getSupportFragmentManager(), mFragments, mTitleList);
         bindingView.vpMyCollect.setAdapter(myAdapter);
-        bindingView.vpMyCollect.setOffscreenPageLimit(3);
+        bindingView.vpMyCollect.setOffscreenPageLimit(2);
         myAdapter.notifyDataSetChanged();
         bindingView.tabMyCollect.setupWithViewPager(bindingView.vpMyCollect);
         showContentView();
@@ -45,11 +45,9 @@ public class MyCollectActivity extends BaseActivity<NoViewModel, ActivityMyColle
         mTitleList.add("文章");
         mTitleList.add("网址");
         mTitleList.add("段子");
-        mTitleList.add("书籍");
         mFragments.add(CollectArticleFragment.newInstance());
         mFragments.add(CollectLinkFragment.newInstance());
         mFragments.add(JokeFragment.newInstance("段子"));
-        mFragments.add(BookListFragment.newInstance("沟通"));
     }
 
     @Override

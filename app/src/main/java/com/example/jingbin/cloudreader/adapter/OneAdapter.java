@@ -1,6 +1,7 @@
 package com.example.jingbin.cloudreader.adapter;
 
 import android.app.Activity;
+import android.support.annotation.NonNull;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.OvershootInterpolator;
@@ -27,8 +28,9 @@ public class OneAdapter extends BaseRecyclerViewAdapter<SubjectsBean> {
         this.activity = activity;
     }
 
+    @NonNull
     @Override
-    public BaseRecyclerViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public BaseRecyclerViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         return new ViewHolder(parent, R.layout.item_one);
     }
 

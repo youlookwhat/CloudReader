@@ -8,6 +8,7 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.view.inputmethod.EditorInfo;
+import android.widget.Toast;
 
 import com.example.jingbin.cloudreader.R;
 import com.example.jingbin.cloudreader.adapter.WanBookAdapter;
@@ -16,6 +17,7 @@ import com.example.jingbin.cloudreader.bean.book.BookBean;
 import com.example.jingbin.cloudreader.databinding.FragmentWanAndroidBinding;
 import com.example.jingbin.cloudreader.databinding.HeaderItemBookBinding;
 import com.example.jingbin.cloudreader.http.HttpClient;
+import com.example.jingbin.cloudreader.utils.BaseTools;
 import com.example.jingbin.cloudreader.utils.CommonUtils;
 import com.example.jingbin.cloudreader.utils.DebugUtil;
 import com.example.jingbin.cloudreader.viewmodel.menu.NoViewModel;
@@ -29,7 +31,7 @@ import rx.schedulers.Schedulers;
 
 /**
  * @author jingbin
- *         Updated by jingbin on 18/12/23.
+ *         Updated by jingbin on 18/12/27.
  */
 public class BookListFragment extends BaseFragment<BookListViewModel, FragmentWanAndroidBinding> {
 
@@ -72,7 +74,6 @@ public class BookListFragment extends BaseFragment<BookListViewModel, FragmentWa
         super.onActivityCreated(savedInstanceState);
         showContentView();
         initRefreshView();
-
         // 准备就绪
         mIsPrepared = true;
         /**
@@ -84,6 +85,27 @@ public class BookListFragment extends BaseFragment<BookListViewModel, FragmentWa
 
     private void initRefreshView() {
         bindingView.srlWan.setColorSchemeColors(CommonUtils.getColor(R.color.colorTheme));
+        GridLayoutManager mLayoutManager = new GridLayoutManager(getActivity(), 3);
+        bindingView.xrvWan.setLayoutManager(mLayoutManager);
+        bindingView.xrvWan.setPullRefreshEnabled(false);
+        bindingView.xrvWan.clearHeader();
+        mBookAdapter = new WanBookAdapter();
+        bindingView.xrvWan.setAdapter(mBookAdapter);
+        HeaderItemBookBinding oneBinding = DataBindingUtil.inflate(getLayoutInflater(), R.layout.header_item_book, null, false);
+        viewModel.bookType.set(mType);
+        oneBinding.setViewModel(viewModel);
+        bindingView.xrvWan.addHeaderView(oneBinding.getRoot());
+        mBookAdapter.setOnClickListener((bean, view) -> BookDetailActivity.start(activity, bean, view));
+        /** 处理键盘搜索键 */
+        oneBinding.etTypeName.setOnEditorActionListener((textView, actionId, keyEvent) -> {
+            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                bindingView.xrvWan.reset();
+                viewModel.setStart(0);
+                BaseTools.hideSoftKeyBoard(activity);
+                getBook();
+            }
+            return false;
+        });
         bindingView.srlWan.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -95,28 +117,6 @@ public class BookListFragment extends BaseFragment<BookListViewModel, FragmentWa
 
             }
         });
-        GridLayoutManager mLayoutManager = new GridLayoutManager(getActivity(), 3);
-        bindingView.xrvWan.setLayoutManager(mLayoutManager);
-        bindingView.xrvWan.setPullRefreshEnabled(false);
-        bindingView.xrvWan.clearHeader();
-        mBookAdapter = new WanBookAdapter();
-        bindingView.xrvWan.setAdapter(mBookAdapter);
-        HeaderItemBookBinding oneBinding = DataBindingUtil.inflate(getLayoutInflater(), R.layout.header_item_book, null, false);
-        oneBinding.etTypeName.setText(mType);
-        oneBinding.etTypeName.setSelection(mType.length());
-        bindingView.xrvWan.addHeaderView(oneBinding.getRoot());
-        mBookAdapter.setOnClickListener((bean, view) -> BookDetailActivity.start(activity, bean, view));
-        /** 处理键盘搜索键 */
-        oneBinding.etTypeName.setOnEditorActionListener((textView, actionId, keyEvent) -> {
-            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                bindingView.xrvWan.reset();
-                viewModel.setStart(0);
-                mType = oneBinding.etTypeName.getText().toString().trim();
-                viewModel.setType(mType);
-                getBook();
-            }
-            return false;
-        });
         bindingView.xrvWan.setLoadingListener(new XRecyclerView.LoadingListener() {
             @Override
             public void onRefresh() {
@@ -125,7 +125,7 @@ public class BookListFragment extends BaseFragment<BookListViewModel, FragmentWa
 
             @Override
             public void onLoadMore() {
-                viewModel.setStart(viewModel.getStart() + viewModel.getCount());
+                viewModel.handleNextStart();
                 getBook();
             }
         });
@@ -139,12 +139,7 @@ public class BookListFragment extends BaseFragment<BookListViewModel, FragmentWa
         }
 
         bindingView.srlWan.setRefreshing(true);
-        bindingView.srlWan.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                getBook();
-            }
-        }, 500);
+        bindingView.srlWan.postDelayed(this::getBook, 500);
         DebugUtil.error("-----setRefreshing");
     }
 
@@ -165,7 +160,7 @@ public class BookListFragment extends BaseFragment<BookListViewModel, FragmentWa
                     bindingView.xrvWan.refreshComplete();
                     mIsFirst = false;
                 } else {
-                    if (viewModel.getStart() == 0) {
+                    if (mBookAdapter.getItemCount() == 0) {
                         showError();
                     } else {
                         bindingView.xrvWan.refreshComplete();
@@ -179,5 +174,14 @@ public class BookListFragment extends BaseFragment<BookListViewModel, FragmentWa
     protected void onRefresh() {
         bindingView.srlWan.setRefreshing(true);
         getBook();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (mBookAdapter != null) {
+            mBookAdapter.clear();
+            mBookAdapter = null;
+        }
     }
 }

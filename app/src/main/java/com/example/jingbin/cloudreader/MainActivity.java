@@ -34,6 +34,7 @@ import com.example.jingbin.cloudreader.ui.menu.NavAboutActivity;
 import com.example.jingbin.cloudreader.ui.menu.NavDeedBackActivity;
 import com.example.jingbin.cloudreader.ui.menu.NavDownloadActivity;
 import com.example.jingbin.cloudreader.ui.menu.NavHomePageActivity;
+import com.example.jingbin.cloudreader.ui.movie.DoubanFragment;
 import com.example.jingbin.cloudreader.ui.movie.OneFragment;
 import com.example.jingbin.cloudreader.ui.wan.WanFragment;
 import com.example.jingbin.cloudreader.ui.wan.child.MyCollectActivity;
@@ -140,7 +141,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         ArrayList<Fragment> mFragmentList = new ArrayList<>();
         mFragmentList.add(new WanFragment());
         mFragmentList.add(new GankFragment());
-        mFragmentList.add(new OneFragment());
+        mFragmentList.add(new DoubanFragment());
         // 注意使用的是：getSupportFragmentManager
         MyFragmentPagerAdapter adapter = new MyFragmentPagerAdapter(getSupportFragmentManager(), mFragmentList);
         vpContent.setAdapter(adapter);

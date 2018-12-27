@@ -14,11 +14,12 @@
 
     </data>
 
+    <!--android:background="@drawable/ripple_one_item_bg"-->
     <LinearLayout
         android:id="@+id/ll_one_item"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/ripple_one_item_bg"
+        android:background="?android:attr/selectableItemBackground"
         android:orientation="vertical"
         android:paddingLeft="5dp"
         android:paddingTop="5dp">

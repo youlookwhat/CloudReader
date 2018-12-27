@@ -106,9 +106,9 @@ public abstract class BaseFragment<VM extends AndroidViewModel, SV extends ViewD
         }
         mRefresh = getView(R.id.ll_error_refresh);
         // 点击加载失败布局
-        mRefresh.setOnClickListener(new PerfectClickListener() {
+        mRefresh.setOnClickListener(new View.OnClickListener() {
             @Override
-            protected void onNoDoubleClick(View v) {
+            public void onClick(View v) {
                 showLoading();
                 onRefresh();
             }

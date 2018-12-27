@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="viewModel"
+            type="com.example.jingbin.cloudreader.viewmodel.movie.BookListViewModel" />
+    </data>
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -20,16 +29,18 @@
                 android:layout_height="23dp"
                 android:background="@drawable/ic_cylinder" />
 
-            <EditText
+            <android.support.v7.widget.AppCompatEditText
                 android:id="@+id/et_type_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
+                android:hint="书籍类型"
                 android:imeOptions="actionSearch"
                 android:inputType="text"
                 android:maxLines="1"
-                android:text="心理学"
+                android:text="@={viewModel.bookType}"
                 android:textColor="@color/colorContent"
+                android:textSelection='@{viewModel.bookType}'
                 android:textSize="16sp" />
 
             <ImageView

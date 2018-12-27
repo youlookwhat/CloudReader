@@ -4,7 +4,11 @@ import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
+import android.databinding.BindingAdapter;
+import android.databinding.ObservableField;
 import android.support.annotation.NonNull;
+import android.support.v7.widget.AppCompatEditText;
+import android.text.TextUtils;
 
 import com.example.http.HttpUtils;
 import com.example.jingbin.cloudreader.bean.GankIoDataBean;
@@ -31,7 +35,8 @@ public class BookListViewModel extends AndroidViewModel {
     private int mStart = 0;
     // 一次请求的数量
     private int mCount = 18;
-    private String mType = "综合";
+
+    public final ObservableField<String> bookType = new ObservableField<>();
 
     public BookListViewModel(@NonNull Application application) {
         super(application);
@@ -41,21 +46,13 @@ public class BookListViewModel extends AndroidViewModel {
         this.mStart = mStart;
     }
 
-    public void setType(String mType) {
-        this.mType = mType;
-    }
-
     public int getStart() {
         return mStart;
     }
 
-    public int getCount() {
-        return mCount;
-    }
-
     public MutableLiveData<BookBean> getBook() {
         final MutableLiveData<BookBean> data = new MutableLiveData<>();
-        Subscription get = HttpClient.Builder.getDouBanService().getBook(mType, mStart, mCount)
+        HttpClient.Builder.getDouBanService().getBook(bookType.get(), mStart, mCount)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<BookBean>() {
@@ -74,5 +71,18 @@ public class BookListViewModel extends AndroidViewModel {
                     }
                 });
         return data;
+    }
+
+    public void handleNextStart() {
+        mStart += mCount;
+    }
+
+    @BindingAdapter("android:textSelection")
+    public static void textSelection(AppCompatEditText tv, ObservableField<String> value) {
+        if (!TextUtils.isEmpty(tv.getText())) {
+//            tv.setText(value.get());
+            // Set the cursor to the end of the text
+            tv.setSelection(tv.getText().length());
+        }
     }
 }
