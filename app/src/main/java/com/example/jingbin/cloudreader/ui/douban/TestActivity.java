@@ -1,4 +1,4 @@
-package com.example.jingbin.cloudreader.ui.movie;
+package com.example.jingbin.cloudreader.ui.douban;
 
 import android.app.Activity;
 import android.content.Context;
@@ -35,6 +35,7 @@ import jp.wasabeef.glide.transformations.BlurTransformation;
  * （已使用：{@link OneMovieDetailActivity} 替代）
  * 第二种电影详情页
  */
+@Deprecated
 public class TestActivity extends AppCompatActivity {
 
     private static final String TAG = "MainActivity";
@@ -58,7 +59,7 @@ public class TestActivity extends AppCompatActivity {
     }
 
     private void setData() {
-        if (subjectsBean!=null) {
+        if (subjectsBean != null) {
 
             // 高斯模糊背景
             Glide.with(this).load(subjectsBean.getImages().getLarge())

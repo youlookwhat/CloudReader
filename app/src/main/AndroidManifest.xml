@@ -35,23 +35,23 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.movie.TestActivity"
+            android:name=".ui.douban.TestActivity"
             android:screenOrientation="portrait"
             android:theme="@style/MyScrollPage" />
         <activity
-            android:name=".ui.movie.SlideActivity"
+            android:name=".ui.douban.SlideActivity"
             android:screenOrientation="portrait"
             android:theme="@style/MyScrollPage" />
         <activity
-            android:name=".ui.movie.SlideScrollViewActivity"
+            android:name=".ui.douban.SlideScrollViewActivity"
             android:screenOrientation="portrait"
             android:theme="@style/MyScrollPage" />
         <activity
-            android:name=".ui.movie.SlideShadeViewActivity"
+            android:name=".ui.douban.SlideShadeViewActivity"
             android:screenOrientation="portrait"
             android:theme="@style/MyScrollPage" />
         <activity
-            android:name=".ui.movie.MovieDetailActivity"
+            android:name=".ui.douban.MovieDetailActivity"
             android:screenOrientation="portrait"
             android:theme="@style/MyScrollPage" />
         <activity
@@ -64,10 +64,10 @@
             android:hardwareAccelerated="true"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.movie.DoubanTopActivity"
+            android:name=".ui.douban.DoubanTopActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.movie.OneMovieDetailActivity"
+            android:name=".ui.douban.OneMovieDetailActivity"
             android:screenOrientation="portrait"
             android:theme="@style/MyScrollPage" />
         <activity
@@ -81,13 +81,13 @@
             android:name=".ui.menu.NavAboutActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.wan.child.BookDetailActivity"
+            android:name=".ui.douban.BookDetailActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".ui.menu.NavDownloadActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.menu.LoginActivity"
+            android:name=".ui.wan.child.LoginActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".ui.wan.child.ArticleListActivity"

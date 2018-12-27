@@ -1,8 +1,13 @@
 package com.example.jingbin.cloudreader.viewmodel.gank;
 
+import android.app.Application;
+import android.arch.lifecycle.AndroidViewModel;
+import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
+import android.support.annotation.NonNull;
 
 import com.example.http.HttpUtils;
+import com.example.jingbin.cloudreader.bean.CollectUrlBean;
 import com.example.jingbin.cloudreader.bean.GankIoDataBean;
 import com.example.jingbin.cloudreader.data.model.GankOtherModel;
 import com.example.jingbin.cloudreader.http.RequestImpl;
@@ -22,10 +27,9 @@ import rx.schedulers.Schedulers;
  * @Description 福利页面ViewModel
  */
 
-public class WelfareViewModel extends ViewModel {
+public class WelfareViewModel extends AndroidViewModel {
 
     private final GankOtherModel mModel;
-    private WelfareNavigator navigator;
     private int mPage = 1;
 
     /**
@@ -40,51 +44,41 @@ public class WelfareViewModel extends ViewModel {
      * 传递给Activity数据集合
      */
     private ArrayList<ArrayList<String>> allList = new ArrayList<>();
+    private final MutableLiveData<ArrayList<ArrayList<String>>> allListData = new MutableLiveData<>();
 
-    public void setNavigator(WelfareNavigator navigator) {
-        this.navigator = navigator;
-    }
-
-    public WelfareViewModel() {
+    public WelfareViewModel(@NonNull Application application) {
+        super(application);
         mModel = new GankOtherModel();
     }
 
-    public void loadWelfareData() {
+    public MutableLiveData<ArrayList<ArrayList<String>>> getImageAndTitle() {
+        return allListData;
+    }
+
+    public MutableLiveData<GankIoDataBean> loadWelfareData() {
+        final MutableLiveData<GankIoDataBean> data = new MutableLiveData<>();
         mModel.setData("福利", mPage, HttpUtils.per_page_more);
         mModel.getGankIoData(new RequestImpl() {
             @Override
             public void loadSuccess(Object object) {
-                navigator.showLoadSuccessView();
-
                 GankIoDataBean gankIoDataBean = (GankIoDataBean) object;
-                if (mPage == 1) {
-                    if (gankIoDataBean == null || gankIoDataBean.getResults() == null || gankIoDataBean.getResults().size() <= 0) {
-                        navigator.showLoadFailedView();
-                        return;
-                    }
-                } else {
-                    if (gankIoDataBean == null || gankIoDataBean.getResults() == null || gankIoDataBean.getResults().size() <= 0) {
-                        navigator.showListNoMoreLoading();
-                        return;
-                    }
-                }
                 handleImageList(gankIoDataBean);
-                navigator.showAdapterView(gankIoDataBean);
+                data.setValue(gankIoDataBean);
             }
 
             @Override
             public void loadFailed() {
-                navigator.showLoadFailedView();
                 if (mPage > 1) {
                     mPage--;
                 }
+                data.setValue(null);
             }
 
             @Override
             public void addSubscription(Subscription subscription) {
-                navigator.addRxSubscription(subscription);
             }
         });
+        return data;
     }
 
     /**
@@ -114,10 +108,9 @@ public class WelfareViewModel extends ViewModel {
                 .subscribe(new Action1<ArrayList<ArrayList<String>>>() {
                     @Override
                     public void call(ArrayList<ArrayList<String>> arrayLists) {
-                        navigator.setImageList(arrayLists);
+                        allListData.setValue(arrayLists);
                     }
                 });
-        navigator.addRxSubscription(subscribe);
     }
 
     public int getPage() {
@@ -130,11 +123,10 @@ public class WelfareViewModel extends ViewModel {
 
     public void onDestroy() {
         imgList.clear();
-        imageTitleList.clear();
-        allList.clear();
         imgList = null;
+        imageTitleList.clear();
         imageTitleList = null;
+        allList.clear();
         allList = null;
-        navigator = null;
     }
 }

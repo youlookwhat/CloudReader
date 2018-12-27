@@ -1,11 +1,9 @@
 package com.example.jingbin.cloudreader.ui.wan.child;
 
 import android.arch.lifecycle.Observer;
-import android.arch.lifecycle.ViewModelProviders;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.text.TextUtils;
 import android.view.View;
@@ -33,15 +31,14 @@ import java.util.List;
  * 玩安卓首页
  *
  * @author jingbin
- *         Updated on 18/02/07...18/12/05
+ *         Updated on 18/02/07...18/12/22
  */
-public class BannerFragment extends BaseFragment<FragmentWanAndroidBinding> {
+public class BannerFragment extends BaseFragment<WanAndroidListViewModel, FragmentWanAndroidBinding> {
 
     private boolean mIsPrepared;
     private boolean mIsFirst = true;
     private WanAndroidAdapter mAdapter;
     private HeaderWanAndroidBinding androidBinding;
-    private WanAndroidListViewModel viewModel;
     private boolean isLoadBanner = false;
 
     @Override
@@ -57,7 +54,6 @@ public class BannerFragment extends BaseFragment<FragmentWanAndroidBinding> {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         showContentView();
-        viewModel = ViewModelProviders.of(this).get(WanAndroidListViewModel.class);
         initRefreshView();
 
         // 准备就绪

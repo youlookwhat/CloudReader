@@ -1,4 +1,4 @@
-package com.example.jingbin.cloudreader.ui.movie;
+package com.example.jingbin.cloudreader.ui.douban;
 
 import android.app.Activity;
 import android.content.Context;
@@ -24,6 +24,7 @@ import com.example.jingbin.cloudreader.view.test.StatusBarUtils;
 /**
  * （已使用：{@link OneMovieDetailActivity} 替代）
  */
+@Deprecated
 public class SlideActivity extends AppCompatActivity {
 
     private ActivitySlideBinding binding;

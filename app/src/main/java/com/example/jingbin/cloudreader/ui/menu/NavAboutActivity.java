@@ -15,11 +15,12 @@ import com.example.jingbin.cloudreader.utils.CommonUtils;
 import com.example.jingbin.cloudreader.utils.PerfectClickListener;
 import com.example.jingbin.cloudreader.utils.UpdateUtil;
 import com.example.jingbin.cloudreader.view.webview.WebViewActivity;
+import com.example.jingbin.cloudreader.viewmodel.menu.NoViewModel;
 
 /**
  * @author jingbin
  */
-public class NavAboutActivity extends BaseActivity<ActivityNavAboutBinding> {
+public class NavAboutActivity extends BaseActivity<NoViewModel, ActivityNavAboutBinding> {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

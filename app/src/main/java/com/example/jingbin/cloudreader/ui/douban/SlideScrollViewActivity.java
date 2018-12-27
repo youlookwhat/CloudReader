@@ -1,4 +1,4 @@
-package com.example.jingbin.cloudreader.ui.movie;
+package com.example.jingbin.cloudreader.ui.douban;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -37,6 +37,7 @@ import static com.example.jingbin.cloudreader.view.statusbar.StatusBarUtil.getSt
  * （已使用：{@link OneMovieDetailActivity} 替代）
  * 暂时的电影详情页 2016-11-29
  */
+@Deprecated
 public class SlideScrollViewActivity extends AppCompatActivity {
 
     private RelativeLayout rlHead;

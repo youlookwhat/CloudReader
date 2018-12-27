@@ -6,7 +6,7 @@
         android:id="@+id/activity_slide"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context="com.example.jingbin.cloudreader.ui.movie.SlideActivity">
+        tools:context="com.example.jingbin.cloudreader.ui.douban.SlideActivity">
 
         <com.example.jingbin.cloudreader.view.DiscoverScrollView
             android:id="@+id/scrollView"
@@ -19,7 +19,7 @@
                 android:layout_height="wrap_content"
                 android:background="@color/colorWhite"
                 android:orientation="vertical"
-                tools:context="com.example.jingbin.cloudreader.ui.movie.MovieDetailActivity">
+                tools:context="com.example.jingbin.cloudreader.ui.douban.MovieDetailActivity">
 
 
                 <!--高度为下面布局的高度+titlebar(56dp)的高度-->

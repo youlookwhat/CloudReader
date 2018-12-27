@@ -1,6 +1,5 @@
-package com.example.jingbin.cloudreader.ui.menu;
+package com.example.jingbin.cloudreader.ui.wan.child;
 
-import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,9 +15,7 @@ import com.example.jingbin.cloudreader.viewmodel.menu.LoginViewModel;
  *
  * @author jingbin
  */
-public class LoginActivity extends BaseActivity<ActivityLoginBinding> {
-
-    private LoginViewModel loginViewModel;
+public class LoginActivity extends BaseActivity<LoginViewModel, ActivityLoginBinding> {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,16 +23,15 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding> {
         setContentView(R.layout.activity_login);
         setTitle("玩安卓登录");
         showContentView();
-        loginViewModel = ViewModelProviders.of(this).get(LoginViewModel.class);
-        bindingView.setViewModel(loginViewModel);
+        bindingView.setViewModel(viewModel);
     }
 
     public void register(View view) {
-        loginViewModel.register().observe(this, this::loadSuccess);
+        viewModel.register().observe(this, this::loadSuccess);
     }
 
     public void login(View view) {
-        loginViewModel.login().observe(this, this::loadSuccess);
+        viewModel.login().observe(this, this::loadSuccess);
     }
 
     /**

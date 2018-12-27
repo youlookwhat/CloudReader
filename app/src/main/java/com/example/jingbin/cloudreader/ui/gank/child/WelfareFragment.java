@@ -1,5 +1,6 @@
 package com.example.jingbin.cloudreader.ui.gank.child;
 
+import android.arch.lifecycle.Observer;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.StaggeredGridLayoutManager;
@@ -10,20 +11,17 @@ import com.example.jingbin.cloudreader.base.BaseFragment;
 import com.example.jingbin.cloudreader.bean.GankIoDataBean;
 import com.example.jingbin.cloudreader.databinding.FragmentWelfareBinding;
 import com.example.jingbin.cloudreader.view.viewbigimage.ViewBigImageActivity;
-import com.example.jingbin.cloudreader.viewmodel.gank.WelfareNavigator;
 import com.example.jingbin.cloudreader.viewmodel.gank.WelfareViewModel;
 import com.example.xrecyclerview.XRecyclerView;
 
 import java.util.ArrayList;
-
-import rx.Subscription;
 
 /**
  * 福利
  *
  * @author jingbin
  */
-public class WelfareFragment extends BaseFragment<FragmentWelfareBinding> implements WelfareNavigator {
+public class WelfareFragment extends BaseFragment<WelfareViewModel, FragmentWelfareBinding> {
 
     private static final String TAG = "WelfareFragment";
     private WelfareAdapter mWelfareAdapter;
@@ -31,17 +29,27 @@ public class WelfareFragment extends BaseFragment<FragmentWelfareBinding> implem
     private boolean isFirst = true;
     private ArrayList<String> imgList = new ArrayList<>();
     private ArrayList<String> imgTitleList = new ArrayList<>();
-    private WelfareViewModel viewModel;
+
+    @Override
+    public int setContent() {
+        return R.layout.fragment_welfare;
+    }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        viewModel = new WelfareViewModel();
-        viewModel.setNavigator(this);
-
         initRecycleView();
         isPrepared = true;
+    }
+
+
+    @Override
+    protected void loadData() {
+        if (!mIsVisible || !isPrepared || !isFirst) {
+            return;
+        }
+        loadWelfareData();
     }
 
     private void initRecycleView() {
@@ -62,81 +70,54 @@ public class WelfareFragment extends BaseFragment<FragmentWelfareBinding> implem
                 int page = viewModel.getPage();
                 page++;
                 viewModel.setPage(page);
-                viewModel.loadWelfareData();
+                loadWelfareData();
             }
         });
         mWelfareAdapter.setOnItemClickListener((resultsBean, position) -> {
             ViewBigImageActivity.startImageList(getContext(), position, imgList, imgTitleList);
         });
+        viewModel.getImageAndTitle().observe(this, new Observer<ArrayList<ArrayList<String>>>() {
+            @Override
+            public void onChanged(@Nullable ArrayList<ArrayList<String>> arrayLists) {
+                if (arrayLists != null && arrayLists.size() == 2) {
+                    imgList.addAll(arrayLists.get(0));
+                    imgTitleList.addAll(arrayLists.get(1));
+                }
+            }
+        });
     }
 
-    @Override
-    protected void loadData() {
-        if (!mIsVisible || !isPrepared || !isFirst) {
-            return;
-        }
-        viewModel.loadWelfareData();
-    }
+    private void loadWelfareData() {
+        viewModel.loadWelfareData().observe(this, new Observer<GankIoDataBean>() {
+            @Override
+            public void onChanged(@Nullable GankIoDataBean bean) {
+                if (bean != null && bean.getResults() != null && bean.getResults().size() > 0) {
+                    if (viewModel.getPage() == 1) {
+                        showContentView();
+                        mWelfareAdapter.clear();
+                    }
+                    mWelfareAdapter.addAll(bean.getResults());
+                    mWelfareAdapter.notifyDataSetChanged();
+                    bindingView.xrvWelfare.refreshComplete();
 
-    @Override
-    public int setContent() {
-        return R.layout.fragment_welfare;
+                    if (isFirst) {
+                        isFirst = false;
+                    }
+                } else {
+                    bindingView.xrvWelfare.refreshComplete();
+                    if (mWelfareAdapter.getItemCount() == 0) {
+                        showError();
+                    } else {
+                        bindingView.xrvWelfare.noMoreLoading();
+                    }
+                }
+            }
+        });
     }
 
     @Override
     protected void onRefresh() {
-        viewModel.loadWelfareData();
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-    }
-
-    @Override
-    public void showLoadSuccessView() {
-        showContentView();
-    }
-
-    @Override
-    public void showAdapterView(GankIoDataBean gankIoDataBean) {
-        if (viewModel.getPage() == 1) {
-            mWelfareAdapter.clear();
-        }
-        mWelfareAdapter.addAll(gankIoDataBean.getResults());
-        mWelfareAdapter.notifyDataSetChanged();
-        bindingView.xrvWelfare.refreshComplete();
-
-        if (isFirst) {
-            // 显示成功后就不是第一次了，不再刷新
-            isFirst = false;
-        }
-    }
-
-    @Override
-    public void showListNoMoreLoading() {
-        bindingView.xrvWelfare.noMoreLoading();
-    }
-
-    @Override
-    public void showLoadFailedView() {
-        bindingView.xrvWelfare.refreshComplete();
-        if (mWelfareAdapter.getItemCount() == 0) {
-            showError();
-        }
-    }
-
-    @Override
-    public void addRxSubscription(Subscription subscription) {
-        addSubscription(subscription);
-    }
-
-    @Override
-    public void setImageList(ArrayList<ArrayList<String>> arrayLists) {
-        if (arrayLists != null && arrayLists.size() == 2) {
-            imgList.addAll(arrayLists.get(0));
-            imgTitleList.addAll(arrayLists.get(1));
-        }
+        loadWelfareData();
     }
 
     @Override

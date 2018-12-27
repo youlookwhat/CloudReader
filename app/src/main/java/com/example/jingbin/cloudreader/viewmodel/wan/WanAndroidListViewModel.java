@@ -1,10 +1,11 @@
 package com.example.jingbin.cloudreader.viewmodel.wan;
 
+import android.app.Application;
 import android.arch.lifecycle.MutableLiveData;
+import android.support.annotation.NonNull;
 
 import com.example.jingbin.cloudreader.base.BaseListViewModel;
 import com.example.jingbin.cloudreader.bean.wanandroid.HomeListBean;
-import com.example.jingbin.cloudreader.bean.wanandroid.TreeBean;
 import com.example.jingbin.cloudreader.bean.wanandroid.WanAndroidBannerBean;
 import com.example.jingbin.cloudreader.http.HttpClient;
 
@@ -12,7 +13,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import rx.Observer;
-import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
@@ -23,6 +23,10 @@ import rx.schedulers.Schedulers;
  */
 
 public class WanAndroidListViewModel extends BaseListViewModel {
+
+    public WanAndroidListViewModel(@NonNull Application application) {
+        super(application);
+    }
 
     public MutableLiveData<WanAndroidBannerBean> getWanAndroidBanner() {
         final MutableLiveData<WanAndroidBannerBean> data = new MutableLiveData<>();
@@ -78,10 +82,10 @@ public class WanAndroidListViewModel extends BaseListViewModel {
 
                     @Override
                     public void onError(Throwable e) {
-                        listData.setValue(null);
                         if (mPage > 0) {
                             mPage--;
                         }
+                        listData.setValue(null);
                     }
 
                     @Override

@@ -1,14 +1,14 @@
 package com.example.jingbin.cloudreader.viewmodel.wan;
 
+import android.app.Application;
 import android.arch.lifecycle.MutableLiveData;
+import android.support.annotation.NonNull;
 
 import com.example.jingbin.cloudreader.base.BaseListViewModel;
 import com.example.jingbin.cloudreader.bean.wanandroid.HomeListBean;
-import com.example.jingbin.cloudreader.bean.wanandroid.WanAndroidBannerBean;
 import com.example.jingbin.cloudreader.http.HttpClient;
 
 import rx.Observer;
-import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
@@ -19,6 +19,10 @@ import rx.schedulers.Schedulers;
  */
 
 public class ArticleListViewModel extends BaseListViewModel {
+
+    public ArticleListViewModel(@NonNull Application application) {
+        super(application);
+    }
 
     /**
      * 我的收藏
@@ -34,10 +38,10 @@ public class ArticleListViewModel extends BaseListViewModel {
 
                     @Override
                     public void onError(Throwable e) {
-                        data.setValue(null);
                         if (mPage > 0) {
                             mPage--;
                         }
+                        data.setValue(null);
                     }
 
                     @Override

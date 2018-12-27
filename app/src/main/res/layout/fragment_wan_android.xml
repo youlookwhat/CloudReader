@@ -5,7 +5,7 @@
         android:id="@+id/srl_wan"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context="com.example.jingbin.cloudreader.ui.wan.child.BookCustomFragment">
+        tools:context="com.example.jingbin.cloudreader.ui.douban.BookCustomFragment">
 
         <com.example.xrecyclerview.XRecyclerView
             android:id="@+id/xrv_wan"

@@ -8,9 +8,8 @@ import android.support.v4.app.Fragment;
 import com.example.jingbin.cloudreader.R;
 import com.example.jingbin.cloudreader.base.BaseActivity;
 import com.example.jingbin.cloudreader.databinding.ActivityMyCollectBinding;
-import com.example.jingbin.cloudreader.ui.menu.CollectArticleFragment;
-import com.example.jingbin.cloudreader.ui.menu.CollectLinkFragment;
 import com.example.jingbin.cloudreader.view.MyFragmentPagerAdapter;
+import com.example.jingbin.cloudreader.viewmodel.menu.NoViewModel;
 
 import java.util.ArrayList;
 
@@ -19,7 +18,7 @@ import java.util.ArrayList;
  *
  * @author jingbin
  */
-public class MyCollectActivity extends BaseActivity<ActivityMyCollectBinding> {
+public class MyCollectActivity extends BaseActivity<NoViewModel, ActivityMyCollectBinding> {
 
     private ArrayList<String> mTitleList = new ArrayList<>(4);
     private ArrayList<Fragment> mFragments = new ArrayList<>(4);
@@ -33,7 +32,7 @@ public class MyCollectActivity extends BaseActivity<ActivityMyCollectBinding> {
         initFragmentList();
         MyFragmentPagerAdapter myAdapter = new MyFragmentPagerAdapter(getSupportFragmentManager(), mFragments, mTitleList);
         bindingView.vpMyCollect.setAdapter(myAdapter);
-        bindingView.vpMyCollect.setOffscreenPageLimit(3);
+        bindingView.vpMyCollect.setOffscreenPageLimit(2);
         myAdapter.notifyDataSetChanged();
         bindingView.tabMyCollect.setupWithViewPager(bindingView.vpMyCollect);
         showContentView();
@@ -44,11 +43,9 @@ public class MyCollectActivity extends BaseActivity<ActivityMyCollectBinding> {
         mTitleList.add("文章");
         mTitleList.add("网址");
         mTitleList.add("段子");
-        mTitleList.add("书籍");
         mFragments.add(CollectArticleFragment.newInstance());
         mFragments.add(CollectLinkFragment.newInstance());
         mFragments.add(JokeFragment.newInstance("段子"));
-        mFragments.add(BookListFragment.newInstance("沟通"));
     }
 
     @Override

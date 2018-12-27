@@ -1,5 +1,6 @@
 package com.example.jingbin.cloudreader.ui.wan.child;
 
+import android.arch.lifecycle.Observer;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -12,6 +13,7 @@ import com.example.jingbin.cloudreader.base.BaseFragment;
 import com.example.jingbin.cloudreader.bean.wanandroid.DuanZiBean;
 import com.example.jingbin.cloudreader.databinding.FragmentWanAndroidBinding;
 import com.example.jingbin.cloudreader.utils.CommonUtils;
+import com.example.jingbin.cloudreader.viewmodel.menu.NoViewModel;
 import com.example.jingbin.cloudreader.viewmodel.wan.JokeViewModel;
 import com.example.jingbin.cloudreader.viewmodel.wan.WanNavigator;
 import com.example.xrecyclerview.XRecyclerView;
@@ -23,16 +25,15 @@ import rx.Subscription;
 
 /**
  * @author jingbin
- *         Updated by jingbin on 18/04/19.
+ *         Updated by jingbin on 18/12/23.
  */
-public class JokeFragment extends BaseFragment<FragmentWanAndroidBinding> implements WanNavigator.JokeNavigator {
+public class JokeFragment extends BaseFragment<JokeViewModel, FragmentWanAndroidBinding> {
 
     private static final String TYPE = "param1";
     private String mType = "综合";
     private boolean mIsPrepared;
     private boolean mIsFirst = true;
     private JokeAdapter mAdapter;
-    private JokeViewModel viewModel;
 
     @Override
     public int setContent() {
@@ -63,21 +64,21 @@ public class JokeFragment extends BaseFragment<FragmentWanAndroidBinding> implem
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        viewModel = new JokeViewModel();
-        viewModel.setNavigator(this);
         initRefreshView();
 
         // 准备就绪
         mIsPrepared = true;
-        /**
-         * 因为启动时先走loadData()再走onActivityCreated，
-         * 所以此处要额外调用load(),不然最初不会加载内容
-         */
         loadData();
     }
 
     private void initRefreshView() {
         bindingView.srlWan.setColorSchemeColors(CommonUtils.getColor(R.color.colorTheme));
+        bindingView.xrvWan.setLayoutManager(new LinearLayoutManager(getActivity()));
+        bindingView.xrvWan.setPullRefreshEnabled(false);
+        bindingView.xrvWan.clearHeader();
+        mAdapter = new JokeAdapter();
+        bindingView.xrvWan.setAdapter(mAdapter);
+
         bindingView.srlWan.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -90,12 +91,6 @@ public class JokeFragment extends BaseFragment<FragmentWanAndroidBinding> implem
                 }, 100);
             }
         });
-        bindingView.xrvWan.setLayoutManager(new LinearLayoutManager(getActivity()));
-        bindingView.xrvWan.setPullRefreshEnabled(false);
-        bindingView.xrvWan.clearHeader();
-        mAdapter = new JokeAdapter();
-        bindingView.xrvWan.setAdapter(mAdapter);
-
         bindingView.xrvWan.setLoadingListener(new XRecyclerView.LoadingListener() {
             @Override
             public void onRefresh() {
@@ -107,10 +102,37 @@ public class JokeFragment extends BaseFragment<FragmentWanAndroidBinding> implem
                 int page = viewModel.getPage();
                 viewModel.setPage(++page);
                 viewModel.setRefreshBK(false);
-                loadCustomData();
+                viewModel.showQSBKList();
             }
         });
+        viewModel.getData().observe(this, new Observer<List<DuanZiBean>>() {
+            @Override
+            public void onChanged(@Nullable List<DuanZiBean> duanZiBeans) {
+                showContentView();
+                if (bindingView.srlWan.isRefreshing()) {
+                    bindingView.srlWan.setRefreshing(false);
+                }
+                if (duanZiBeans != null && duanZiBeans.size() > 0) {
+                    if (viewModel.isRefreshBK()) {
+                        mAdapter.clear();
+                    }
+                    mAdapter.addAll(duanZiBeans);
+                    mAdapter.notifyDataSetChanged();
+                    bindingView.xrvWan.refreshComplete();
 
+                    if (mIsFirst) {
+                        mIsFirst = false;
+                    }
+
+                } else {
+                    if (viewModel.isRefreshBK()) {
+                        showError();
+                    } else {
+                        bindingView.xrvWan.refreshComplete();
+                    }
+                }
+            }
+        });
     }
 
     @Override
@@ -120,64 +142,12 @@ public class JokeFragment extends BaseFragment<FragmentWanAndroidBinding> implem
         }
 
         bindingView.srlWan.setRefreshing(true);
-        bindingView.srlWan.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                loadCustomData();
-            }
-        }, 100);
-    }
-
-    private void loadCustomData() {
-        viewModel.showQSBKList();
+        bindingView.srlWan.postDelayed(() -> viewModel.showQSBKList(), 100);
     }
 
     @Override
     protected void onRefresh() {
         bindingView.srlWan.setRefreshing(true);
-        loadCustomData();
-    }
-
-    @Override
-    public void loadListFailure() {
-        showContentView();
-        if (bindingView.srlWan.isRefreshing()) {
-            bindingView.srlWan.setRefreshing(false);
-        }
-        if (viewModel.isRefreshBK()) {
-            showError();
-        } else {
-            bindingView.xrvWan.refreshComplete();
-        }
-    }
-
-    @Override
-    public void showAdapterView(List<DuanZiBean> bean) {
-        if (viewModel.isRefreshBK()) {
-            mAdapter.clear();
-        }
-        mAdapter.addAll(bean);
-        mAdapter.notifyDataSetChanged();
-        bindingView.xrvWan.refreshComplete();
-
-        if (mIsFirst) {
-            mIsFirst = false;
-        }
-    }
-
-    @Override
-    public void showListNoMoreLoading() {
-        bindingView.xrvWan.noMoreLoading();
-    }
-
-    @Override
-    public void showLoadSuccessView() {
-        showContentView();
-        bindingView.srlWan.setRefreshing(false);
-    }
-
-    @Override
-    public void addRxSubscription(Subscription subscription) {
-        addSubscription(subscription);
+        viewModel.showQSBKList();
     }
 }

@@ -1,5 +1,6 @@
 package com.example.jingbin.cloudreader.utils;
 
+import android.app.Activity;
 import android.app.ActivityManager;
 import android.content.ClipboardManager;
 import android.content.Context;
@@ -9,7 +10,10 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
+import android.util.Log;
+import android.view.View;
 import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
 
 import com.example.jingbin.cloudreader.app.CloudReaderApplication;
@@ -187,4 +191,23 @@ public class BaseTools {
             return false;
         }
     }
+
+    /**
+     * 隐藏软键盘
+     *
+     * @param activity 要隐藏软键盘的activity
+     */
+    public static void hideSoftKeyBoard(Activity activity) {
+
+        final View v = activity.getWindow().peekDecorView();
+        if (v != null && v.getWindowToken() != null) {
+            try {
+                ((InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(activity.getCurrentFocus()
+                        .getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+            } catch (Exception e) {
+                Log.w("TAG", e.toString());
+            }
+        }
+    }
+
 }

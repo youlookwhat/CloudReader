@@ -1,7 +1,12 @@
 package com.example.jingbin.cloudreader.viewmodel.wan;
 
+import android.app.Application;
+import android.arch.lifecycle.MutableLiveData;
+import android.support.annotation.NonNull;
+
 import com.example.jingbin.cloudreader.base.BaseListViewModel;
 import com.example.jingbin.cloudreader.bean.CollectUrlBean;
+import com.example.jingbin.cloudreader.bean.book.BookBean;
 import com.example.jingbin.cloudreader.http.HttpClient;
 
 import rx.Observer;
@@ -17,14 +22,13 @@ import rx.schedulers.Schedulers;
 
 public class CollectLinkModel extends BaseListViewModel {
 
-    private WanNavigator.CollectUrlNavigator navigator;
-
-    public CollectLinkModel(WanNavigator.CollectUrlNavigator navigator) {
-        this.navigator = navigator;
+    public CollectLinkModel(@NonNull Application application) {
+        super(application);
     }
 
-    public void getCollectUrlList() {
-        Subscription subscribe = HttpClient.Builder.getWanAndroidServer().getCollectUrlList()
+    public MutableLiveData<CollectUrlBean> getCollectUrlList() {
+        final MutableLiveData<CollectUrlBean> data = new MutableLiveData<>();
+        HttpClient.Builder.getWanAndroidServer().getCollectUrlList()
                 .subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<CollectUrlBean>() {
                     @Override
@@ -33,23 +37,14 @@ public class CollectLinkModel extends BaseListViewModel {
 
                     @Override
                     public void onError(Throwable e) {
-                        navigator.loadFailure();
+                        data.setValue(null);
                     }
 
                     @Override
                     public void onNext(CollectUrlBean bean) {
-                        navigator.showLoadSuccessView();
-                        if (bean == null || bean.getData() == null || bean.getData().size() <= 0) {
-                            navigator.loadFailure();
-                            return;
-                        }
-                        navigator.showAdapterView(bean);
+                        data.setValue(bean);
                     }
                 });
-        navigator.addRxSubscription(subscribe);
-    }
-
-    public void onDestroy() {
-        navigator = null;
+        return data;
     }
 }

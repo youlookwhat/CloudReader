@@ -1,7 +1,6 @@
-package com.example.jingbin.cloudreader.ui.menu;
+package com.example.jingbin.cloudreader.ui.wan.child;
 
 import android.arch.lifecycle.Observer;
-import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -22,13 +21,12 @@ import com.example.xrecyclerview.XRecyclerView;
  * @date 2018/09/27.
  * @description 文章
  */
-public class CollectArticleFragment extends BaseFragment<FragmentWanAndroidBinding> {
+public class CollectArticleFragment extends BaseFragment<ArticleListViewModel,FragmentWanAndroidBinding> {
 
     private boolean mIsPrepared;
     private boolean mIsFirst = true;
     private FragmentActivity activity;
     private WanAndroidAdapter mAdapter;
-    private ArticleListViewModel viewModel;
 
     @Override
     public int setContent() {
@@ -56,7 +54,6 @@ public class CollectArticleFragment extends BaseFragment<FragmentWanAndroidBindi
 
         showContentView();
         initRefreshView();
-        viewModel = ViewModelProviders.of(this).get(ArticleListViewModel.class);
         mAdapter.setCollectList();
         // 准备就绪
         mIsPrepared = true;

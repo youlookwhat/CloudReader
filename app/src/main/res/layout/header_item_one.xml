@@ -5,17 +5,16 @@
 
         <variable
             name="view"
-            type="com.example.jingbin.cloudreader.ui.movie.OneFragment" />
+            type="com.example.jingbin.cloudreader.ui.douban.OneFragment" />
 
         <import type="com.example.jingbin.cloudreader.app.ConstantsImageUrl" />
 
     </data>
 
-
+    <!--android:background="@color/color_page_bg"-->
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/color_page_bg"
         android:gravity="bottom"
         android:orientation="vertical">
 
