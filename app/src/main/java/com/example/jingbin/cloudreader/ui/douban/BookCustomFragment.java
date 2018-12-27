@@ -1,4 +1,4 @@
-package com.example.jingbin.cloudreader.ui.wan.child;
+package com.example.jingbin.cloudreader.ui.douban;
 
 import android.content.Context;
 import android.os.Bundle;

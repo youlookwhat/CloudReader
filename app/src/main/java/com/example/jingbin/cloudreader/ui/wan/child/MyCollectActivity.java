@@ -8,8 +8,6 @@ import android.support.v4.app.Fragment;
 import com.example.jingbin.cloudreader.R;
 import com.example.jingbin.cloudreader.base.BaseActivity;
 import com.example.jingbin.cloudreader.databinding.ActivityMyCollectBinding;
-import com.example.jingbin.cloudreader.ui.menu.CollectArticleFragment;
-import com.example.jingbin.cloudreader.ui.menu.CollectLinkFragment;
 import com.example.jingbin.cloudreader.view.MyFragmentPagerAdapter;
 import com.example.jingbin.cloudreader.viewmodel.menu.NoViewModel;
 

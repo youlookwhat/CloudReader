@@ -1,4 +1,4 @@
-package com.example.jingbin.cloudreader.ui.movie;
+package com.example.jingbin.cloudreader.ui.douban;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -8,20 +8,10 @@ import android.support.v4.app.Fragment;
 import com.example.jingbin.cloudreader.R;
 import com.example.jingbin.cloudreader.base.BaseFragment;
 import com.example.jingbin.cloudreader.databinding.FragmentGankBinding;
-import com.example.jingbin.cloudreader.http.rx.RxBus;
-import com.example.jingbin.cloudreader.http.rx.RxCodeConstants;
-import com.example.jingbin.cloudreader.ui.gank.child.AndroidFragment;
-import com.example.jingbin.cloudreader.ui.gank.child.CustomFragment;
-import com.example.jingbin.cloudreader.ui.gank.child.EverydayFragment;
-import com.example.jingbin.cloudreader.ui.gank.child.WelfareFragment;
-import com.example.jingbin.cloudreader.ui.wan.child.BookListFragment;
 import com.example.jingbin.cloudreader.view.MyFragmentPagerAdapter;
 import com.example.jingbin.cloudreader.viewmodel.menu.NoViewModel;
 
 import java.util.ArrayList;
-
-import rx.Subscription;
-import rx.functions.Action1;
 
 /**
  * Created by jingbin on 18/12/27.

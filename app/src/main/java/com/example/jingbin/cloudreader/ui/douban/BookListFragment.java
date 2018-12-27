@@ -1,4 +1,4 @@
-package com.example.jingbin.cloudreader.ui.wan.child;
+package com.example.jingbin.cloudreader.ui.douban;
 
 import android.content.Context;
 import android.databinding.DataBindingUtil;
@@ -8,7 +8,6 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.view.inputmethod.EditorInfo;
-import android.widget.Toast;
 
 import com.example.jingbin.cloudreader.R;
 import com.example.jingbin.cloudreader.adapter.WanBookAdapter;
@@ -16,18 +15,11 @@ import com.example.jingbin.cloudreader.base.BaseFragment;
 import com.example.jingbin.cloudreader.bean.book.BookBean;
 import com.example.jingbin.cloudreader.databinding.FragmentWanAndroidBinding;
 import com.example.jingbin.cloudreader.databinding.HeaderItemBookBinding;
-import com.example.jingbin.cloudreader.http.HttpClient;
 import com.example.jingbin.cloudreader.utils.BaseTools;
 import com.example.jingbin.cloudreader.utils.CommonUtils;
 import com.example.jingbin.cloudreader.utils.DebugUtil;
-import com.example.jingbin.cloudreader.viewmodel.menu.NoViewModel;
 import com.example.jingbin.cloudreader.viewmodel.movie.BookListViewModel;
 import com.example.xrecyclerview.XRecyclerView;
-
-import rx.Observer;
-import rx.Subscription;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
 
 /**
  * @author jingbin

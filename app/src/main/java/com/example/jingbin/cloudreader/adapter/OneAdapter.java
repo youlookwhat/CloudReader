@@ -11,7 +11,7 @@ import com.example.jingbin.cloudreader.base.baseadapter.BaseRecyclerViewAdapter;
 import com.example.jingbin.cloudreader.base.baseadapter.BaseRecyclerViewHolder;
 import com.example.jingbin.cloudreader.bean.moviechild.SubjectsBean;
 import com.example.jingbin.cloudreader.databinding.ItemOneBinding;
-import com.example.jingbin.cloudreader.ui.movie.OneMovieDetailActivity;
+import com.example.jingbin.cloudreader.ui.douban.OneMovieDetailActivity;
 import com.example.jingbin.cloudreader.utils.PerfectClickListener;
 import com.nineoldandroids.view.ViewHelper;
 import com.nineoldandroids.view.ViewPropertyAnimator;

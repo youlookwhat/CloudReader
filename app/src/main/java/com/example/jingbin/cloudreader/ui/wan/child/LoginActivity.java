@@ -1,4 +1,4 @@
-package com.example.jingbin.cloudreader.ui.menu;
+package com.example.jingbin.cloudreader.ui.wan.child;
 
 import android.content.Context;
 import android.content.Intent;

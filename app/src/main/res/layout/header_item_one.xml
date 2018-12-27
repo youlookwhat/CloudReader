@@ -5,7 +5,7 @@
 
         <variable
             name="view"
-            type="com.example.jingbin.cloudreader.ui.movie.OneFragment" />
+            type="com.example.jingbin.cloudreader.ui.douban.OneFragment" />
 
         <import type="com.example.jingbin.cloudreader.app.ConstantsImageUrl" />
 

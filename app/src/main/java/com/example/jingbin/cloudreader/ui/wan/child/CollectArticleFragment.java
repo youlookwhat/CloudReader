@@ -1,4 +1,4 @@
-package com.example.jingbin.cloudreader.ui.menu;
+package com.example.jingbin.cloudreader.ui.wan.child;
 
 import android.arch.lifecycle.Observer;
 import android.content.Context;
@@ -8,31 +8,25 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.LinearLayoutManager;
 
 import com.example.jingbin.cloudreader.R;
-import com.example.jingbin.cloudreader.adapter.CollectUrlAdapter;
+import com.example.jingbin.cloudreader.adapter.WanAndroidAdapter;
 import com.example.jingbin.cloudreader.base.BaseFragment;
-import com.example.jingbin.cloudreader.bean.CollectUrlBean;
+import com.example.jingbin.cloudreader.bean.wanandroid.HomeListBean;
 import com.example.jingbin.cloudreader.databinding.FragmentWanAndroidBinding;
 import com.example.jingbin.cloudreader.utils.CommonUtils;
-import com.example.jingbin.cloudreader.utils.ToastUtil;
-import com.example.jingbin.cloudreader.viewmodel.wan.CollectLinkModel;
-import com.example.jingbin.cloudreader.viewmodel.wan.WanNavigator;
+import com.example.jingbin.cloudreader.viewmodel.wan.ArticleListViewModel;
 import com.example.xrecyclerview.XRecyclerView;
-
-import java.util.List;
-
-import rx.Subscription;
 
 /**
  * @author jingbin
  * @date 2018/09/27.
- * @description 网址
+ * @description 文章
  */
-public class CollectLinkFragment extends BaseFragment<CollectLinkModel, FragmentWanAndroidBinding> {
+public class CollectArticleFragment extends BaseFragment<ArticleListViewModel,FragmentWanAndroidBinding> {
 
     private boolean mIsPrepared;
     private boolean mIsFirst = true;
     private FragmentActivity activity;
-    private CollectUrlAdapter mAdapter;
+    private WanAndroidAdapter mAdapter;
 
     @Override
     public int setContent() {
@@ -45,8 +39,8 @@ public class CollectLinkFragment extends BaseFragment<CollectLinkModel, Fragment
         activity = getActivity();
     }
 
-    public static CollectLinkFragment newInstance() {
-        return new CollectLinkFragment();
+    public static CollectArticleFragment newInstance() {
+        return new CollectArticleFragment();
     }
 
     @Override
@@ -57,22 +51,41 @@ public class CollectLinkFragment extends BaseFragment<CollectLinkModel, Fragment
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+
         showContentView();
         initRefreshView();
-
+        mAdapter.setCollectList();
         // 准备就绪
         mIsPrepared = true;
         loadData();
     }
+
 
     private void initRefreshView() {
         bindingView.srlWan.setColorSchemeColors(CommonUtils.getColor(R.color.colorTheme));
         bindingView.xrvWan.setLayoutManager(new LinearLayoutManager(activity));
         bindingView.xrvWan.setPullRefreshEnabled(false);
         bindingView.xrvWan.clearHeader();
-        mAdapter = new CollectUrlAdapter(activity);
+        mAdapter = new WanAndroidAdapter(activity);
         bindingView.xrvWan.setAdapter(mAdapter);
-        bindingView.srlWan.setOnRefreshListener(() -> bindingView.srlWan.postDelayed(this::getCollectUrlList, 300));
+        bindingView.srlWan.setOnRefreshListener(() -> bindingView.srlWan.postDelayed(() -> {
+            bindingView.xrvWan.reset();
+            viewModel.setPage(0);
+            getCollectList();
+        }, 300));
+        bindingView.xrvWan.setLoadingListener(new XRecyclerView.LoadingListener() {
+            @Override
+            public void onRefresh() {
+
+            }
+
+            @Override
+            public void onLoadMore() {
+                int page = viewModel.getPage();
+                viewModel.setPage(++page);
+                getCollectList();
+            }
+        });
     }
 
     @Override
@@ -82,36 +95,43 @@ public class CollectLinkFragment extends BaseFragment<CollectLinkModel, Fragment
         }
 
         bindingView.srlWan.setRefreshing(true);
-        bindingView.srlWan.postDelayed(this::getCollectUrlList, 150);
+        bindingView.srlWan.postDelayed(this::getCollectList, 150);
     }
 
-    private void getCollectUrlList() {
-        viewModel.getCollectUrlList().observe(this, new Observer<CollectUrlBean>() {
+    private void getCollectList() {
+        viewModel.getCollectList().observe(this, new Observer<HomeListBean>() {
             @Override
-            public void onChanged(@Nullable CollectUrlBean bean) {
+            public void onChanged(@Nullable HomeListBean homeListBean) {
                 showContentView();
                 if (bindingView.srlWan.isRefreshing()) {
                     bindingView.srlWan.setRefreshing(false);
                 }
-                if (bean != null && bean.getData() != null && bean.getData().size() > 0) {
-                    mAdapter.clear();
-                    mAdapter.addAll(bean.getData());
+
+                if (homeListBean != null) {
+                    if (viewModel.getPage() == 0) {
+                        mAdapter.clear();
+                    }
+                    mAdapter.addAll(homeListBean.getData().getDatas());
                     mAdapter.notifyDataSetChanged();
                     bindingView.xrvWan.refreshComplete();
-                    bindingView.xrvWan.noMoreLoading();
 
                     mIsFirst = false;
                 } else {
-                    bindingView.xrvWan.refreshComplete();
-                    ToastUtil.showToastLong("还没有收藏网址哦~");
+                    if (viewModel.getPage() == 0) {
+                        showError();
+                    } else {
+                        bindingView.xrvWan.refreshComplete();
+                        bindingView.xrvWan.noMoreLoading();
+                    }
                 }
             }
         });
     }
 
+
     @Override
     protected void onRefresh() {
         bindingView.srlWan.setRefreshing(true);
-        getCollectUrlList();
+        getCollectList();
     }
 }
