@@ -5,12 +5,15 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -23,6 +26,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.http.utils.CheckNetwork;
+import com.example.jingbin.cloudreader.MainActivity;
 import com.example.jingbin.cloudreader.R;
 import com.example.jingbin.cloudreader.app.Constants;
 import com.example.jingbin.cloudreader.data.UserUtil;
@@ -30,10 +34,12 @@ import com.example.jingbin.cloudreader.data.model.CollectModel;
 import com.example.jingbin.cloudreader.utils.BaseTools;
 import com.example.jingbin.cloudreader.utils.CommonUtils;
 import com.example.jingbin.cloudreader.utils.DialogBuild;
+import com.example.jingbin.cloudreader.utils.RxSaveImage;
 import com.example.jingbin.cloudreader.utils.SPUtils;
 import com.example.jingbin.cloudreader.utils.ShareUtils;
 import com.example.jingbin.cloudreader.utils.ToastUtil;
 import com.example.jingbin.cloudreader.view.statusbar.StatusBarUtil;
+import com.example.jingbin.cloudreader.view.viewbigimage.ViewBigImageActivity;
 import com.example.jingbin.cloudreader.view.webview.config.FullscreenHolder;
 import com.example.jingbin.cloudreader.view.webview.config.IWebPageView;
 import com.example.jingbin.cloudreader.view.webview.config.ImageClickInterface;
@@ -74,6 +80,7 @@ public class WebViewActivity extends AppCompatActivity implements IWebPageView {
         initTitle();
         initWebView();
         webView.loadUrl(mUrl);
+        getDataFromBrowser(getIntent());
     }
 
     private void getIntentData() {
@@ -121,11 +128,7 @@ public class WebViewActivity extends AppCompatActivity implements IWebPageView {
         switch (item.getItemId()) {
             case android.R.id.home:
                 // 返回键
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                    finishAfterTransition();
-                } else {
-                    finish();
-                }
+                handleFinish();
                 break;
             case R.id.actionbar_share:
                 // 分享到
@@ -228,6 +231,12 @@ public class WebViewActivity extends AppCompatActivity implements IWebPageView {
         // 与js交互
         webView.addJavascriptInterface(new ImageClickInterface(this), "injectedObject");
         webView.setWebViewClient(new MyWebViewClient(this));
+        webView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                return handleLongImage();
+            }
+        });
     }
 
     @Override
@@ -320,6 +329,75 @@ public class WebViewActivity extends AppCompatActivity implements IWebPageView {
         }
     }
 
+    /**
+     * 使用singleTask启动模式的Activity在系统中只会存在一个实例。
+     * 如果这个实例已经存在，intent就会通过onNewIntent传递到这个Activity。
+     * 否则新的Activity实例被创建。
+     */
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        getDataFromBrowser(intent);
+    }
+
+    /**
+     * 作为三方浏览器打开
+     * Scheme: https
+     * host: www.jianshu.com
+     * path: /p/1cbaf784c29c
+     * url = scheme + "://" + host + path;
+     */
+    private void getDataFromBrowser(Intent intent) {
+        Uri data = intent.getData();
+        if (data != null) {
+            try {
+                String scheme = data.getScheme();
+                String host = data.getHost();
+                String path = data.getPath();
+//                String text = "Scheme: " + scheme + "\n" + "host: " + host + "\n" + "path: " + path;
+//                Log.e("data", text);
+                String url = scheme + "://" + host + path;
+                webView.loadUrl(url);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    /**
+     * 长按图片事件处理
+     */
+    private boolean handleLongImage() {
+        final WebView.HitTestResult hitTestResult = webView.getHitTestResult();
+        // 如果是图片类型或者是带有图片链接的类型
+        if (hitTestResult.getType() == WebView.HitTestResult.IMAGE_TYPE ||
+                hitTestResult.getType() == WebView.HitTestResult.SRC_IMAGE_ANCHOR_TYPE) {
+            // 弹出保存图片的对话框
+            new AlertDialog.Builder(WebViewActivity.this)
+                    .setItems(new String[]{"查看大图", "保存图片到相册"}, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            String picUrl = hitTestResult.getExtra();
+                            //获取图片
+//                            Log.e("picUrl", picUrl);
+                            switch (which) {
+                                case 0:
+                                    ViewBigImageActivity.start(WebViewActivity.this, picUrl, picUrl);
+                                    break;
+                                case 1:
+                                    RxSaveImage.saveImageToGallery(WebViewActivity.this, picUrl, picUrl);
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
+                    })
+                    .show();
+            return true;
+        }
+        return false;
+    }
+
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
@@ -335,14 +413,24 @@ public class WebViewActivity extends AppCompatActivity implements IWebPageView {
 
                 //退出网页
             } else {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                    finishAfterTransition();
-                } else {
-                    finish();
-                }
+                handleFinish();
             }
         }
         return false;
+    }
+
+    /**
+     * 直接通过三方浏览器打开时，回退到首页
+     */
+    public void handleFinish() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            finishAfterTransition();
+        } else {
+            finish();
+        }
+        if (!MainActivity.isLaunch) {
+            MainActivity.start(this);
+        }
     }
 
     @Override

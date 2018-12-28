@@ -1,7 +1,9 @@
 package com.example.jingbin.cloudreader;
 
 import android.content.ClipboardManager;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -61,6 +63,7 @@ import rx.subscriptions.CompositeSubscription;
  */
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, ViewPager.OnPageChangeListener {
 
+    public static boolean isLaunch;
     private FrameLayout llTitleMenu;
     private Toolbar toolbar;
     private NavigationView navView;
@@ -77,7 +80,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_main);
-
+        isLaunch = true;
         initStatusView();
         initId();
         initRxBus();
@@ -402,5 +405,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (this.mCompositeSubscription != null && mCompositeSubscription.hasSubscriptions()) {
             this.mCompositeSubscription.unsubscribe();
         }
+        isLaunch = false;
+    }
+
+    public static void start(Context context) {
+        context.startActivity(new Intent(context, MainActivity.class));
     }
 }

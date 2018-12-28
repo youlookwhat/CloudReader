@@ -139,7 +139,6 @@ public class ViewBigImageActivity extends FragmentActivity implements OnPageChan
                 return;
             }
 
-            ToastUtil.showToast("开始下载图片");
             if (isApp) {
                 // 本地图片
                 ToastUtil.showToast("图片已存在");
