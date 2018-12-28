@@ -135,28 +135,12 @@ public class CustomFragment extends BaseFragment<CustomViewModel, FragmentCustom
                         switch (which) {
                             case R.id.gank_all:
                                 if (isOtherType("全部")) {
-                                    txName.setText("全部");
-                                    mType = "all";// 全部传 all
-                                    viewModel.setType(mType);
-                                    viewModel.setPage(1);
-                                    adapter.clear();
-                                    bindingView.xrvCustom.reset();
-                                    SPUtils.putString(GANK_CALA, "全部");
-                                    showLoading();
-                                    loadCustomData();
+                                    changeContent(txName, "全部");
                                 }
                                 break;
                             case R.id.gank_ios:
                                 if (isOtherType("IOS")) {
-                                    txName.setText("IOS");
-                                    mType = "iOS";// 这里有严格大小写
-                                    viewModel.setType(mType);
-                                    viewModel.setPage(1);
-                                    adapter.clear();
-                                    bindingView.xrvCustom.reset();
-                                    SPUtils.putString(GANK_CALA, "IOS");
-                                    showLoading();
-                                    loadCustomData();
+                                    changeContent(txName, "IOS");
                                 }
                                 break;
                             case R.id.gank_qian:
@@ -195,12 +179,24 @@ public class CustomFragment extends BaseFragment<CustomViewModel, FragmentCustom
     }
 
     private void changeContent(TextView textView, String content) {
-        textView.setText(content);
-        mType = content;
+        if ("全部".equals(content)) {
+            textView.setText("全部");
+            // 全部传 all
+            mType = "all";
+
+        } else if ("IOS".equals(content)) {
+            textView.setText("IOS");
+            // 这里有严格大小写
+            mType = "iOS";
+
+        } else {
+            textView.setText(content);
+            mType = content;
+        }
+        // 重置XRecyclerView状态，解决 如出现刷新到底无内容再切换其他类别后，无法上拉加载的情况
+        bindingView.xrvCustom.reset();
         viewModel.setType(mType);
         viewModel.setPage(1);
-        adapter.clear();
-        bindingView.xrvCustom.reset();
         SPUtils.putString(GANK_CALA, content);
         showLoading();
         loadCustomData();
@@ -212,8 +208,6 @@ public class CustomFragment extends BaseFragment<CustomViewModel, FragmentCustom
             ToastUtil.showToast("当前已经是" + selectType + "分类");
             return false;
         } else {
-            // 重置XRecyclerView状态，解决 如出现刷新到底无内容再切换其他类别后，无法上拉加载的情况
-            bindingView.xrvCustom.reset();
             return true;
         }
     }

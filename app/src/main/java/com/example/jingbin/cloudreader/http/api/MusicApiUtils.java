@@ -3,9 +3,6 @@ package com.example.jingbin.cloudreader.http.api;
 import java.util.List;
 import java.util.Random;
 
-/**
- * Created by forezp on 16/10/1.
- */
 public class MusicApiUtils {
 
 
