@@ -65,6 +65,12 @@ If you have any questions, please write to [the issue][21] of making you don't u
 　
 
 ### Version
+#### V2.5.0（12-28）
+ - 1、[规范] 所有页面mvvm架构修正
+ - 2、[优化] 将电影和书籍放置在一块
+ - 3、[新增] 可作为三方浏览器打开外部链接
+ - 4、[修复] 修复部分兼容性bug
+
 #### V2.2（12-05）
  - 1、[新增] 进入首页可以获取剪切板的链接
  - 2、[规范] 玩安卓模块mvvm修正
@@ -198,7 +204,7 @@ limitations under the License.
 [2]:https://www.apache.org/licenses/LICENSE-2.0.html
 [3]:https://img.shields.io/badge/API-19%2B-red.svg?style=flat
 [4]:https://android-arsenal.com/api?level=19
-[30]:https://img.shields.io/badge/release-2.2-red.svg
+[30]:https://img.shields.io/badge/release-2.5.0-red.svg
 [31]:https://github.com/youlookwhat/CloudReader/releases
 [32]:https://img.shields.io/badge/PRs-welcome-brightgreen.svg
 [33]:https://github.com/youlookwhat/CloudReader/pulls
