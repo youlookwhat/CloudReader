@@ -76,6 +76,7 @@ public class JokeFragment extends BaseFragment<JokeViewModel, FragmentWanAndroid
         bindingView.xrvWan.setLayoutManager(new LinearLayoutManager(getActivity()));
         bindingView.xrvWan.setPullRefreshEnabled(false);
         bindingView.xrvWan.clearHeader();
+        bindingView.xrvWan.setItemAnimator(null);
         mAdapter = new JokeAdapter();
         bindingView.xrvWan.setAdapter(mAdapter);
 
@@ -113,11 +114,12 @@ public class JokeFragment extends BaseFragment<JokeViewModel, FragmentWanAndroid
                     bindingView.srlWan.setRefreshing(false);
                 }
                 if (duanZiBeans != null && duanZiBeans.size() > 0) {
+                    int positionStart = mAdapter.getItemCount() + 1;
                     if (viewModel.isRefreshBK()) {
                         mAdapter.clear();
                     }
                     mAdapter.addAll(duanZiBeans);
-                    mAdapter.notifyDataSetChanged();
+                    mAdapter.notifyItemRangeChanged(positionStart, duanZiBeans.size());
                     bindingView.xrvWan.refreshComplete();
 
                     if (mIsFirst) {

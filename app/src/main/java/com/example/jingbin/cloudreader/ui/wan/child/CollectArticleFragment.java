@@ -108,11 +108,12 @@ public class CollectArticleFragment extends BaseFragment<ArticleListViewModel, F
                 }
 
                 if (homeListBean != null) {
+                    int positionStart = mAdapter.getItemCount() + 1;
                     if (viewModel.getPage() == 0) {
                         mAdapter.clear();
                     }
                     mAdapter.addAll(homeListBean.getData().getDatas());
-                    mAdapter.notifyDataSetChanged();
+                    mAdapter.notifyItemRangeChanged(positionStart, homeListBean.getData().getDatas().size());
                     bindingView.xrvWan.refreshComplete();
 
                     mIsFirst = false;
@@ -120,7 +121,6 @@ public class CollectArticleFragment extends BaseFragment<ArticleListViewModel, F
                     if (viewModel.getPage() == 0) {
                         showError();
                     } else {
-                        bindingView.xrvWan.refreshComplete();
                         bindingView.xrvWan.noMoreLoading();
                     }
                 }

@@ -49,6 +49,7 @@ public class ArticleListActivity extends BaseActivity<WanAndroidListViewModel, F
         bindingView.xrvWan.setLayoutManager(new LinearLayoutManager(this));
         bindingView.xrvWan.setPullRefreshEnabled(false);
         bindingView.xrvWan.clearHeader();
+        bindingView.xrvWan.setItemAnimator(null);
         mAdapter = new WanAndroidAdapter(this);
         bindingView.xrvWan.setAdapter(mAdapter);
         bindingView.srlWan.setOnRefreshListener(() -> bindingView.srlWan.postDelayed(() -> {
@@ -78,11 +79,12 @@ public class ArticleListActivity extends BaseActivity<WanAndroidListViewModel, F
         }
 
         if (homeListBean != null) {
+            int positionStart = mAdapter.getItemCount() + 1;
             if (viewModel.getPage() == 0) {
                 mAdapter.clear();
             }
             mAdapter.addAll(homeListBean.getData().getDatas());
-            mAdapter.notifyDataSetChanged();
+            mAdapter.notifyItemRangeChanged(positionStart, homeListBean.getData().getDatas().size());
             bindingView.xrvWan.refreshComplete();
 
         } else {
