@@ -12,6 +12,7 @@ import com.example.jingbin.cloudreader.adapter.DouBanTopAdapter;
 import com.example.jingbin.cloudreader.base.BaseActivity;
 import com.example.jingbin.cloudreader.bean.HotMovieBean;
 import com.example.jingbin.cloudreader.databinding.ActivityDoubanTopBinding;
+import com.example.jingbin.cloudreader.utils.DebugUtil;
 import com.example.jingbin.cloudreader.viewmodel.movie.DoubanTopViewModel;
 import com.example.xrecyclerview.XRecyclerView;
 
@@ -36,6 +37,7 @@ public class DoubanTopActivity extends BaseActivity<DoubanTopViewModel, Activity
         mDouBanTopAdapter = new DouBanTopAdapter(DoubanTopActivity.this);
         bindingView.xrvTop.setLayoutManager(new StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL));
         bindingView.xrvTop.setPullRefreshEnabled(false);
+        bindingView.xrvTop.setItemAnimator(null);
         bindingView.xrvTop.clearHeader();
         bindingView.xrvTop.setLoadingMoreEnabled(true);
         bindingView.xrvTop.setAdapter(mDouBanTopAdapter);
@@ -56,14 +58,16 @@ public class DoubanTopActivity extends BaseActivity<DoubanTopViewModel, Activity
         viewModel.getHotMovie().observe(this, new Observer<HotMovieBean>() {
             @Override
             public void onChanged(@Nullable HotMovieBean bean) {
+                int positionStart = mDouBanTopAdapter.getItemCount() + 1;
                 if (bean != null && bean.getSubjects() != null && bean.getSubjects().size() > 0) {
                     if (viewModel.getStart() == 0) {
                         showContentView();
                         mDouBanTopAdapter.clear();
+                        positionStart = 0;
                     }
                     bindingView.xrvTop.refreshComplete();
                     mDouBanTopAdapter.addAll(bean.getSubjects());
-                    mDouBanTopAdapter.notifyDataSetChanged();
+                    mDouBanTopAdapter.notifyItemRangeChanged(positionStart, bean.getSubjects().size());
                 } else {
                     if (mDouBanTopAdapter.getItemCount() == 0) {
                         showError();

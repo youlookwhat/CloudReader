@@ -1,5 +1,6 @@
 package com.example.jingbin.cloudreader.view.webview;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -34,6 +35,7 @@ import com.example.jingbin.cloudreader.data.model.CollectModel;
 import com.example.jingbin.cloudreader.utils.BaseTools;
 import com.example.jingbin.cloudreader.utils.CommonUtils;
 import com.example.jingbin.cloudreader.utils.DialogBuild;
+import com.example.jingbin.cloudreader.utils.PermissionHandler;
 import com.example.jingbin.cloudreader.utils.RxSaveImage;
 import com.example.jingbin.cloudreader.utils.SPUtils;
 import com.example.jingbin.cloudreader.utils.ShareUtils;
@@ -385,6 +387,9 @@ public class WebViewActivity extends AppCompatActivity implements IWebPageView {
                                     ViewBigImageActivity.start(WebViewActivity.this, picUrl, picUrl);
                                     break;
                                 case 1:
+                                    if (!PermissionHandler.isHandlePermission(WebViewActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+                                        return;
+                                    }
                                     RxSaveImage.saveImageToGallery(WebViewActivity.this, picUrl, picUrl);
                                     break;
                                 default:

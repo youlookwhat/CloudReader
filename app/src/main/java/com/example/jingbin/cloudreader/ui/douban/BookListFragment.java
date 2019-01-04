@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.inputmethod.EditorInfo;
 
 import com.example.jingbin.cloudreader.R;
@@ -77,15 +78,18 @@ public class BookListFragment extends BaseFragment<BookListViewModel, FragmentWa
 
     private void initRefreshView() {
         bindingView.srlWan.setColorSchemeColors(CommonUtils.getColor(R.color.colorTheme));
+        mBookAdapter = new WanBookAdapter();
+        HeaderItemBookBinding oneBinding = DataBindingUtil.inflate(getLayoutInflater(), R.layout.header_item_book, null, false);
+        oneBinding.setViewModel(viewModel);
         GridLayoutManager mLayoutManager = new GridLayoutManager(getActivity(), 3);
         bindingView.xrvWan.setLayoutManager(mLayoutManager);
         bindingView.xrvWan.setPullRefreshEnabled(false);
+        // 去掉显示动画
+        bindingView.xrvWan.setItemAnimator(null);
         bindingView.xrvWan.clearHeader();
-        mBookAdapter = new WanBookAdapter();
-        bindingView.xrvWan.setAdapter(mBookAdapter);
-        HeaderItemBookBinding oneBinding = DataBindingUtil.inflate(getLayoutInflater(), R.layout.header_item_book, null, false);
+        bindingView.xrvWan.setHasFixedSize(true);
         viewModel.bookType.set(mType);
-        oneBinding.setViewModel(viewModel);
+        bindingView.xrvWan.setAdapter(mBookAdapter);
         bindingView.xrvWan.addHeaderView(oneBinding.getRoot());
         mBookAdapter.setOnClickListener((bean, view) -> BookDetailActivity.start(activity, bean, view));
         /** 处理键盘搜索键 */
@@ -139,6 +143,8 @@ public class BookListFragment extends BaseFragment<BookListViewModel, FragmentWa
         viewModel.getBook().observe(this, new android.arch.lifecycle.Observer<BookBean>() {
             @Override
             public void onChanged(@Nullable BookBean bookBean) {
+                // +2 一个刷新头布局 一个自己新增的头布局
+                int positionStart = mBookAdapter.getItemCount() + 2;
                 if (bindingView.srlWan.isRefreshing()) {
                     bindingView.srlWan.setRefreshing(false);
                 }
@@ -146,16 +152,28 @@ public class BookListFragment extends BaseFragment<BookListViewModel, FragmentWa
                     if (viewModel.getStart() == 0) {
                         showContentView();
                         mBookAdapter.clear();
+                        positionStart = 0;
                     }
                     mBookAdapter.addAll(bookBean.getBooks());
-                    mBookAdapter.notifyDataSetChanged();
+                    if (viewModel.getStart() == 0) {
+                        /**
+                         * 由于外层的 SwipeRefreshLayout 引起的
+                         * java.lang.IllegalArgumentException: itemView may not be null
+                         * 所以 第一次显示 使用 notifyItemRangeChanged
+                         */
+                        mBookAdapter.notifyDataSetChanged();
+                    } else {
+                        mBookAdapter.notifyItemRangeChanged(positionStart, bookBean.getBooks().size());
+                    }
                     bindingView.xrvWan.refreshComplete();
-                    mIsFirst = false;
+                    if (mIsFirst) {
+                        mIsFirst = false;
+                    }
                 } else {
                     if (mBookAdapter.getItemCount() == 0) {
                         showError();
                     } else {
-                        bindingView.xrvWan.refreshComplete();
+                        bindingView.xrvWan.noMoreLoading();
                     }
                 }
             }

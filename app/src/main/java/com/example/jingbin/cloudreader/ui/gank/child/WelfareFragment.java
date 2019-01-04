@@ -10,11 +10,13 @@ import com.example.jingbin.cloudreader.adapter.WelfareAdapter;
 import com.example.jingbin.cloudreader.base.BaseFragment;
 import com.example.jingbin.cloudreader.bean.GankIoDataBean;
 import com.example.jingbin.cloudreader.databinding.FragmentWelfareBinding;
+import com.example.jingbin.cloudreader.utils.DebugUtil;
 import com.example.jingbin.cloudreader.view.viewbigimage.ViewBigImageActivity;
 import com.example.jingbin.cloudreader.viewmodel.gank.WelfareViewModel;
 import com.example.xrecyclerview.XRecyclerView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 福利
@@ -58,6 +60,7 @@ public class WelfareFragment extends BaseFragment<WelfareViewModel, FragmentWelf
         mWelfareAdapter = new WelfareAdapter();
         //构造器中，第一个参数表示列数或者行数，第二个参数表示滑动方向,瀑布流
         bindingView.xrvWelfare.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
+        bindingView.xrvWelfare.setHasFixedSize(true);
         bindingView.xrvWelfare.setAdapter(mWelfareAdapter);
         bindingView.xrvWelfare.setLoadingListener(new XRecyclerView.LoadingListener() {
             @Override
@@ -91,13 +94,18 @@ public class WelfareFragment extends BaseFragment<WelfareViewModel, FragmentWelf
         viewModel.loadWelfareData().observe(this, new Observer<GankIoDataBean>() {
             @Override
             public void onChanged(@Nullable GankIoDataBean bean) {
+                // +1 是因为本身的rv带有一个刷新头布局
+                int positionStart = mWelfareAdapter.getItemCount() + 1;
+
                 if (bean != null && bean.getResults() != null && bean.getResults().size() > 0) {
                     if (viewModel.getPage() == 1) {
                         showContentView();
                         mWelfareAdapter.clear();
+                        positionStart = 0;
                     }
                     mWelfareAdapter.addAll(bean.getResults());
-                    mWelfareAdapter.notifyDataSetChanged();
+                    // 去掉传统的 notifyDataSetChanged()
+                    mWelfareAdapter.notifyItemRangeChanged(positionStart, bean.getResults().size());
                     bindingView.xrvWelfare.refreshComplete();
 
                     if (isFirst) {

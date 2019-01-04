@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
+import android.view.animation.AlphaAnimation;
 import android.widget.TextView;
 
 import com.cocosw.bottomsheet.BottomSheet;
@@ -71,6 +72,8 @@ public class CustomFragment extends BaseFragment<CustomViewModel, FragmentCustom
         bindingView.xrvCustom.setPullRefreshEnabled(false);
         // 去掉刷新头
         bindingView.xrvCustom.clearHeader();
+        // 去掉显示动画
+        bindingView.xrvCustom.setItemAnimator(null);
         adapter = new GankAndroidAdapter();
         View mHeaderView = View.inflate(getContext(), R.layout.header_item_gank_custom, null);
         bindingView.xrvCustom.addHeaderView(mHeaderView);
@@ -96,16 +99,18 @@ public class CustomFragment extends BaseFragment<CustomViewModel, FragmentCustom
         viewModel.loadCustomData().observe(this, new Observer<GankIoDataBean>() {
             @Override
             public void onChanged(@Nullable GankIoDataBean bean) {
+                int positionStart = adapter.getItemCount() + 2;
                 if (bean != null && bean.getResults() != null && bean.getResults().size() > 0) {
                     if (viewModel.getPage() == 1) {
                         showContentView();
                         boolean isAll = "全部".equals(SPUtils.getString(GANK_CALA, "全部"));
                         adapter.setAllType(isAll);
                         adapter.clear();
+                        positionStart = 0;
                     }
 
                     adapter.addAll(bean.getResults());
-                    adapter.notifyDataSetChanged();
+                    adapter.notifyItemRangeChanged(positionStart, bean.getResults().size());
                     bindingView.xrvCustom.refreshComplete();
                     if (mIsFirst) {
                         mIsFirst = false;
