@@ -143,28 +143,18 @@ public class BookListFragment extends BaseFragment<BookListViewModel, FragmentWa
         viewModel.getBook().observe(this, new android.arch.lifecycle.Observer<BookBean>() {
             @Override
             public void onChanged(@Nullable BookBean bookBean) {
-                // +2 一个刷新头布局 一个自己新增的头布局
-                int positionStart = mBookAdapter.getItemCount() + 2;
                 if (bindingView.srlWan.isRefreshing()) {
                     bindingView.srlWan.setRefreshing(false);
                 }
                 if (bookBean != null && bookBean.getBooks() != null && bookBean.getBooks().size() > 0) {
+                    // +2 一个刷新头布局 一个自己新增的头布局
+                    int positionStart = mBookAdapter.getItemCount() + 2;
                     if (viewModel.getStart() == 0) {
                         showContentView();
                         mBookAdapter.clear();
-                        positionStart = 0;
                     }
                     mBookAdapter.addAll(bookBean.getBooks());
-                    if (viewModel.getStart() == 0) {
-                        /**
-                         * 由于外层的 SwipeRefreshLayout 引起的
-                         * java.lang.IllegalArgumentException: itemView may not be null
-                         * 所以 第一次显示 使用 notifyItemRangeChanged
-                         */
-                        mBookAdapter.notifyDataSetChanged();
-                    } else {
-                        mBookAdapter.notifyItemRangeChanged(positionStart, bookBean.getBooks().size());
-                    }
+                    mBookAdapter.notifyItemRangeChanged(positionStart, bookBean.getBooks().size());
                     bindingView.xrvWan.refreshComplete();
                     if (mIsFirst) {
                         mIsFirst = false;

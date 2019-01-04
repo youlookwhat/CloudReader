@@ -66,6 +66,7 @@ public class BannerFragment extends BaseFragment<WanAndroidListViewModel, Fragme
         bindingView.xrvWan.setLayoutManager(new LinearLayoutManager(getActivity()));
         bindingView.xrvWan.setPullRefreshEnabled(false);
         bindingView.xrvWan.clearHeader();
+        bindingView.xrvWan.setItemAnimator(null);
         mAdapter = new WanAndroidAdapter(getActivity());
         mAdapter.setNoImage();
         bindingView.xrvWan.setAdapter(mAdapter);
@@ -168,17 +169,22 @@ public class BannerFragment extends BaseFragment<WanAndroidListViewModel, Fragme
         viewModel.getHomeList(null).observe(this, new Observer<HomeListBean>() {
             @Override
             public void onChanged(@Nullable HomeListBean homeListBean) {
-                showContentView();
                 if (bindingView.srlWan.isRefreshing()) {
                     bindingView.srlWan.setRefreshing(false);
                 }
 
-                if (homeListBean != null) {
+                if (homeListBean != null
+                        && homeListBean.getData() != null
+                        && homeListBean.getData().getDatas() != null
+                        && homeListBean.getData().getDatas().size() > 0) {
+                    //  一个刷新头布局 一个header
+                    int positionStart = mAdapter.getItemCount() + 2;
                     if (viewModel.getPage() == 0) {
+                        showContentView();
                         mAdapter.clear();
                     }
                     mAdapter.addAll(homeListBean.getData().getDatas());
-                    mAdapter.notifyDataSetChanged();
+                    mAdapter.notifyItemRangeChanged(positionStart, homeListBean.getData().getDatas().size());
                     bindingView.xrvWan.refreshComplete();
 
                     if (viewModel.getPage() == 0) {

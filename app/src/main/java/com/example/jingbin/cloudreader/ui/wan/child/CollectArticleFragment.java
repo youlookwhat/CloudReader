@@ -21,7 +21,7 @@ import com.example.xrecyclerview.XRecyclerView;
  * @date 2018/09/27.
  * @description 文章
  */
-public class CollectArticleFragment extends BaseFragment<ArticleListViewModel,FragmentWanAndroidBinding> {
+public class CollectArticleFragment extends BaseFragment<ArticleListViewModel, FragmentWanAndroidBinding> {
 
     private boolean mIsPrepared;
     private boolean mIsFirst = true;

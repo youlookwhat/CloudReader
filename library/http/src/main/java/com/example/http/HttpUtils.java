@@ -125,7 +125,7 @@ public class HttpUtils {
     private OkHttpClient getUnsafeOkHttpClient() {
         try {
             // Install the all-trusting trust manager TLS
-            SSLContext sslContext = SSLContext.getInstance("SSL");
+            SSLContext sslContext = SSLContext.getInstance("TLS");
             sslContext.init(null, trustAllCerts, new SecureRandom());
             //cache url
             File httpCacheDirectory = new File(context.getCacheDir(), "responses");

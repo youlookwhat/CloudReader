@@ -94,14 +94,12 @@ public class WelfareFragment extends BaseFragment<WelfareViewModel, FragmentWelf
         viewModel.loadWelfareData().observe(this, new Observer<GankIoDataBean>() {
             @Override
             public void onChanged(@Nullable GankIoDataBean bean) {
-                // +1 是因为本身的rv带有一个刷新头布局
-                int positionStart = mWelfareAdapter.getItemCount() + 1;
-
                 if (bean != null && bean.getResults() != null && bean.getResults().size() > 0) {
+                    // +1 是因为本身的rv带有一个刷新头布局
+                    int positionStart = mWelfareAdapter.getItemCount() + 1;
                     if (viewModel.getPage() == 1) {
                         showContentView();
                         mWelfareAdapter.clear();
-                        positionStart = 0;
                     }
                     mWelfareAdapter.addAll(bean.getResults());
                     // 去掉传统的 notifyDataSetChanged()

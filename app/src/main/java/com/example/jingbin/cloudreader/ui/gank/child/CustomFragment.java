@@ -99,14 +99,13 @@ public class CustomFragment extends BaseFragment<CustomViewModel, FragmentCustom
         viewModel.loadCustomData().observe(this, new Observer<GankIoDataBean>() {
             @Override
             public void onChanged(@Nullable GankIoDataBean bean) {
-                int positionStart = adapter.getItemCount() + 2;
                 if (bean != null && bean.getResults() != null && bean.getResults().size() > 0) {
+                    int positionStart = adapter.getItemCount() + 2;
                     if (viewModel.getPage() == 1) {
                         showContentView();
                         boolean isAll = "全部".equals(SPUtils.getString(GANK_CALA, "全部"));
                         adapter.setAllType(isAll);
                         adapter.clear();
-                        positionStart = 0;
                     }
 
                     adapter.addAll(bean.getResults());

@@ -74,6 +74,7 @@ public class AndroidFragment extends BaseFragment<BigAndroidViewModel, FragmentA
 
     private void initRecyclerView() {
         adapter = new GankAndroidAdapter();
+        bindingView.xrvAndroid.setItemAnimator(null);
         bindingView.xrvAndroid.setLayoutManager(new LinearLayoutManager(activity));
         bindingView.xrvAndroid.setLoadingListener(new XRecyclerView.LoadingListener() {
             @Override
@@ -96,12 +97,13 @@ public class AndroidFragment extends BaseFragment<BigAndroidViewModel, FragmentA
     private void loadAndroidData() {
         viewModel.loadAndroidData().observe(this, bean -> {
             if (bean != null && bean.getResults() != null && bean.getResults().size() > 0) {
+                int positionStart = adapter.getItemCount() + 1;
                 if (viewModel.getPage() == 1) {
                     showContentView();
                     adapter.clear();
                 }
                 adapter.addAll(bean.getResults());
-                adapter.notifyDataSetChanged();
+                adapter.notifyItemRangeChanged(positionStart, bean.getResults().size());
                 bindingView.xrvAndroid.refreshComplete();
                 if (mIsFirst) {
                     mIsFirst = false;
