@@ -116,7 +116,7 @@ public class JokeFragment extends BaseFragment<JokeViewModel, FragmentWanAndroid
                 if (duanZiBeans != null && duanZiBeans.size() > 0) {
                     if (viewModel.isRefreshBK()) {
                         mAdapter.clear();
-                        mAdapter.notifyItemRangeRemoved(1, mAdapter.getItemCount());
+                        mAdapter.notifyDataSetChanged();
                     }
                     int positionStart = mAdapter.getItemCount() + 1;
                     mAdapter.addAll(duanZiBeans);

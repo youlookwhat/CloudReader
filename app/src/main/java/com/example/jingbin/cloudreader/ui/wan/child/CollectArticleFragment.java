@@ -125,7 +125,7 @@ public class CollectArticleFragment extends BaseFragment<ArticleListViewModel, F
                     if (viewModel.getPage() == 0) {
                         showContentView();
                         mAdapter.clear();
-                        mAdapter.notifyItemRangeRemoved(1, mAdapter.getItemCount());
+                        mAdapter.notifyDataSetChanged();
                     }
                     int positionStart = mAdapter.getItemCount() + 1;
                     mAdapter.addAll(homeListBean.getData().getDatas());

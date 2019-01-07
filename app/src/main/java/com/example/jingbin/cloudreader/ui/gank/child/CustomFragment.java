@@ -105,7 +105,7 @@ public class CustomFragment extends BaseFragment<CustomViewModel, FragmentCustom
                         boolean isAll = "全部".equals(SPUtils.getString(GANK_CALA, "全部"));
                         adapter.setAllType(isAll);
                         adapter.clear();
-                        adapter.notifyItemRangeRemoved(2, adapter.getItemCount());
+                        adapter.notifyDataSetChanged();
                     }
 
                     int positionStart = adapter.getItemCount() + 2;

@@ -180,7 +180,7 @@ public class BannerFragment extends BaseFragment<WanAndroidListViewModel, Fragme
                     if (viewModel.getPage() == 0) {
                         showContentView();
                         mAdapter.clear();
-                        mAdapter.notifyItemRangeRemoved(2, mAdapter.getItemCount());
+                        mAdapter.notifyDataSetChanged();
                     }
                     //  一个刷新头布局 一个header
                     int positionStart = mAdapter.getItemCount() + 2;

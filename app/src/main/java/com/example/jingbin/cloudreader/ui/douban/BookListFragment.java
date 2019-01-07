@@ -94,9 +94,9 @@ public class BookListFragment extends BaseFragment<BookListViewModel, FragmentWa
         /** 处理键盘搜索键 */
         oneBinding.etTypeName.setOnEditorActionListener((textView, actionId, keyEvent) -> {
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                bindingView.xrvWan.reset();
-                viewModel.setStart(0);
                 BaseTools.hideSoftKeyBoard(activity);
+                viewModel.setStart(0);
+                bindingView.xrvWan.reset();
                 getBook();
             }
             return false;
@@ -153,17 +153,18 @@ public class BookListFragment extends BaseFragment<BookListViewModel, FragmentWa
                     if (viewModel.getStart() == 0) {
                         showContentView();
                         mBookAdapter.clear();
-                        // 1. 需要加 解决：java.lang.IllegalArgumentException: Scrapped or attached views may not be recycled. isScrap:false isAttached:true
-                        mBookAdapter.notifyItemRangeRemoved(2, mBookAdapter.getItemCount());
+                        /**
+                         * 1.
+                         * 使用 mBookAdapter.notifyItemRangeRemoved(2, mBookAdapter.getItemCount());
+                         * 当数据不足一屏时会报错: java.lang.IllegalArgumentException: Scrapped or attached views may not be recycled. isScrap:false isAttached:true
+                         *
+                         * 2.setItemAnimator(null);
+                         * */
+                        mBookAdapter.notifyDataSetChanged();
                     }
                     // +2 一个刷新头布局 一个自己新增的头布局
                     int positionStart = mBookAdapter.getItemCount() + 2;
                     mBookAdapter.addAll(bookBean.getBooks());
-                    /**
-                     * 如果 positionStart 超过了集合的size，Invalid item position 21(offset:21)
-                     * 如果要结合下拉刷新，需加上
-                     * 2.setItemAnimator(null);
-                     * */
                     mBookAdapter.notifyItemRangeInserted(positionStart, bookBean.getBooks().size());
                     bindingView.xrvWan.refreshComplete();
                     if (mIsFirst) {

@@ -100,7 +100,7 @@ public class AndroidFragment extends BaseFragment<BigAndroidViewModel, FragmentA
                 if (viewModel.getPage() == 1) {
                     showContentView();
                     adapter.clear();
-                    adapter.notifyItemRangeRemoved(1, adapter.getItemCount());
+                    adapter.notifyDataSetChanged();
                 }
                 int positionStart = adapter.getItemCount() + 1;
                 adapter.addAll(bean.getResults());
