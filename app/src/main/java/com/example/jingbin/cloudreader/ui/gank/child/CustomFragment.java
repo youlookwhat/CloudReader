@@ -100,16 +100,17 @@ public class CustomFragment extends BaseFragment<CustomViewModel, FragmentCustom
             @Override
             public void onChanged(@Nullable GankIoDataBean bean) {
                 if (bean != null && bean.getResults() != null && bean.getResults().size() > 0) {
-                    int positionStart = adapter.getItemCount() + 2;
                     if (viewModel.getPage() == 1) {
                         showContentView();
                         boolean isAll = "全部".equals(SPUtils.getString(GANK_CALA, "全部"));
                         adapter.setAllType(isAll);
                         adapter.clear();
+                        adapter.notifyItemRangeRemoved(2, adapter.getItemCount());
                     }
 
+                    int positionStart = adapter.getItemCount() + 2;
                     adapter.addAll(bean.getResults());
-                    adapter.notifyItemRangeChanged(positionStart, bean.getResults().size());
+                    adapter.notifyItemRangeInserted(positionStart, bean.getResults().size());
                     bindingView.xrvCustom.refreshComplete();
                     if (mIsFirst) {
                         mIsFirst = false;

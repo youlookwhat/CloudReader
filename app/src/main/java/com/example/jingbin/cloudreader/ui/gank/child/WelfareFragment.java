@@ -61,6 +61,7 @@ public class WelfareFragment extends BaseFragment<WelfareViewModel, FragmentWelf
         //构造器中，第一个参数表示列数或者行数，第二个参数表示滑动方向,瀑布流
         bindingView.xrvWelfare.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
         bindingView.xrvWelfare.setHasFixedSize(true);
+        bindingView.xrvWelfare.setItemAnimator(null);
         bindingView.xrvWelfare.setAdapter(mWelfareAdapter);
         bindingView.xrvWelfare.setLoadingListener(new XRecyclerView.LoadingListener() {
             @Override
@@ -96,14 +97,14 @@ public class WelfareFragment extends BaseFragment<WelfareViewModel, FragmentWelf
             public void onChanged(@Nullable GankIoDataBean bean) {
                 if (bean != null && bean.getResults() != null && bean.getResults().size() > 0) {
                     // +1 是因为本身的rv带有一个刷新头布局
-                    int positionStart = mWelfareAdapter.getItemCount() + 1;
                     if (viewModel.getPage() == 1) {
                         showContentView();
                         mWelfareAdapter.clear();
                     }
+                    int positionStart = mWelfareAdapter.getItemCount() + 1;
                     mWelfareAdapter.addAll(bean.getResults());
                     // 去掉传统的 notifyDataSetChanged()
-                    mWelfareAdapter.notifyItemRangeChanged(positionStart, bean.getResults().size());
+                    mWelfareAdapter.notifyItemRangeInserted(positionStart, bean.getResults().size());
                     bindingView.xrvWelfare.refreshComplete();
 
                     if (isFirst) {

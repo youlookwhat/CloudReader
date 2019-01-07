@@ -59,14 +59,14 @@ public class DoubanTopActivity extends BaseActivity<DoubanTopViewModel, Activity
             @Override
             public void onChanged(@Nullable HotMovieBean bean) {
                 if (bean != null && bean.getSubjects() != null && bean.getSubjects().size() > 0) {
-                    int positionStart = mDouBanTopAdapter.getItemCount() + 1;
                     if (viewModel.getStart() == 0) {
                         showContentView();
                         mDouBanTopAdapter.clear();
                     }
-                    bindingView.xrvTop.refreshComplete();
+                    int positionStart = mDouBanTopAdapter.getItemCount() + 1;
                     mDouBanTopAdapter.addAll(bean.getSubjects());
-                    mDouBanTopAdapter.notifyItemRangeChanged(positionStart, bean.getSubjects().size());
+                    mDouBanTopAdapter.notifyItemRangeInserted(positionStart, bean.getSubjects().size());
+                    bindingView.xrvTop.refreshComplete();
                 } else {
                     if (mDouBanTopAdapter.getItemCount() == 0) {
                         showError();

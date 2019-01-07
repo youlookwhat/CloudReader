@@ -5,6 +5,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 
 import com.example.jingbin.cloudreader.R;
@@ -65,14 +66,26 @@ public class CollectArticleFragment extends BaseFragment<ArticleListViewModel, F
         bindingView.srlWan.setColorSchemeColors(CommonUtils.getColor(R.color.colorTheme));
         bindingView.xrvWan.setLayoutManager(new LinearLayoutManager(activity));
         bindingView.xrvWan.setPullRefreshEnabled(false);
+        // 不设置 下拉刷新时上拉会崩溃
+        bindingView.xrvWan.setItemAnimator(null);
         bindingView.xrvWan.clearHeader();
         mAdapter = new WanAndroidAdapter(activity);
         bindingView.xrvWan.setAdapter(mAdapter);
-        bindingView.srlWan.setOnRefreshListener(() -> bindingView.srlWan.postDelayed(() -> {
-            bindingView.xrvWan.reset();
-            viewModel.setPage(0);
-            getCollectList();
-        }, 300));
+        bindingView.srlWan.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                if (!bindingView.xrvWan.isLoadingData()) {
+                    bindingView.xrvWan.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            bindingView.xrvWan.reset();
+                            viewModel.setPage(0);
+                            getCollectList();
+                        }
+                    }, 150);
+                }
+            }
+        });
         bindingView.xrvWan.setLoadingListener(new XRecyclerView.LoadingListener() {
             @Override
             public void onRefresh() {
@@ -81,9 +94,11 @@ public class CollectArticleFragment extends BaseFragment<ArticleListViewModel, F
 
             @Override
             public void onLoadMore() {
-                int page = viewModel.getPage();
-                viewModel.setPage(++page);
-                getCollectList();
+                if (!bindingView.srlWan.isRefreshing()) {
+                    int page = viewModel.getPage();
+                    viewModel.setPage(++page);
+                    getCollectList();
+                }
             }
         });
     }
@@ -102,21 +117,24 @@ public class CollectArticleFragment extends BaseFragment<ArticleListViewModel, F
         viewModel.getCollectList().observe(this, new Observer<HomeListBean>() {
             @Override
             public void onChanged(@Nullable HomeListBean homeListBean) {
-                showContentView();
                 if (bindingView.srlWan.isRefreshing()) {
                     bindingView.srlWan.setRefreshing(false);
                 }
 
                 if (homeListBean != null) {
-                    int positionStart = mAdapter.getItemCount() + 1;
                     if (viewModel.getPage() == 0) {
+                        showContentView();
                         mAdapter.clear();
+                        mAdapter.notifyItemRangeRemoved(1, mAdapter.getItemCount());
                     }
+                    int positionStart = mAdapter.getItemCount() + 1;
                     mAdapter.addAll(homeListBean.getData().getDatas());
-                    mAdapter.notifyItemRangeChanged(positionStart, homeListBean.getData().getDatas().size());
+                    mAdapter.notifyItemRangeInserted(positionStart, homeListBean.getData().getDatas().size());
                     bindingView.xrvWan.refreshComplete();
 
-                    mIsFirst = false;
+                    if (mIsFirst) {
+                        mIsFirst = false;
+                    }
                 } else {
                     if (viewModel.getPage() == 0) {
                         showError();

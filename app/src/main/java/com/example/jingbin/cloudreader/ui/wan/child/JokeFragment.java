@@ -114,12 +114,13 @@ public class JokeFragment extends BaseFragment<JokeViewModel, FragmentWanAndroid
                     bindingView.srlWan.setRefreshing(false);
                 }
                 if (duanZiBeans != null && duanZiBeans.size() > 0) {
-                    int positionStart = mAdapter.getItemCount() + 1;
                     if (viewModel.isRefreshBK()) {
                         mAdapter.clear();
+                        mAdapter.notifyItemRangeRemoved(1, mAdapter.getItemCount());
                     }
+                    int positionStart = mAdapter.getItemCount() + 1;
                     mAdapter.addAll(duanZiBeans);
-                    mAdapter.notifyItemRangeChanged(positionStart, duanZiBeans.size());
+                    mAdapter.notifyItemRangeInserted(positionStart, duanZiBeans.size());
                     bindingView.xrvWan.refreshComplete();
 
                     if (mIsFirst) {

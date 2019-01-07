@@ -177,14 +177,15 @@ public class BannerFragment extends BaseFragment<WanAndroidListViewModel, Fragme
                         && homeListBean.getData() != null
                         && homeListBean.getData().getDatas() != null
                         && homeListBean.getData().getDatas().size() > 0) {
-                    //  一个刷新头布局 一个header
-                    int positionStart = mAdapter.getItemCount() + 2;
                     if (viewModel.getPage() == 0) {
                         showContentView();
                         mAdapter.clear();
+                        mAdapter.notifyItemRangeRemoved(2, mAdapter.getItemCount());
                     }
+                    //  一个刷新头布局 一个header
+                    int positionStart = mAdapter.getItemCount() + 2;
                     mAdapter.addAll(homeListBean.getData().getDatas());
-                    mAdapter.notifyItemRangeChanged(positionStart, homeListBean.getData().getDatas().size());
+                    mAdapter.notifyItemRangeInserted(positionStart, homeListBean.getData().getDatas().size());
                     bindingView.xrvWan.refreshComplete();
 
                     if (viewModel.getPage() == 0) {

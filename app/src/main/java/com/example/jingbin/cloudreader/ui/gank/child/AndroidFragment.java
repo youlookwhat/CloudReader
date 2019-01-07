@@ -97,13 +97,14 @@ public class AndroidFragment extends BaseFragment<BigAndroidViewModel, FragmentA
     private void loadAndroidData() {
         viewModel.loadAndroidData().observe(this, bean -> {
             if (bean != null && bean.getResults() != null && bean.getResults().size() > 0) {
-                int positionStart = adapter.getItemCount() + 1;
                 if (viewModel.getPage() == 1) {
                     showContentView();
                     adapter.clear();
+                    adapter.notifyItemRangeRemoved(1, adapter.getItemCount());
                 }
+                int positionStart = adapter.getItemCount() + 1;
                 adapter.addAll(bean.getResults());
-                adapter.notifyItemRangeChanged(positionStart, bean.getResults().size());
+                adapter.notifyItemRangeInserted(positionStart, bean.getResults().size());
                 bindingView.xrvAndroid.refreshComplete();
                 if (mIsFirst) {
                     mIsFirst = false;

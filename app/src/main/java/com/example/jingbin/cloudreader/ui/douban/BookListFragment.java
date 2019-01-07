@@ -83,7 +83,7 @@ public class BookListFragment extends BaseFragment<BookListViewModel, FragmentWa
         GridLayoutManager mLayoutManager = new GridLayoutManager(getActivity(), 3);
         bindingView.xrvWan.setLayoutManager(mLayoutManager);
         bindingView.xrvWan.setPullRefreshEnabled(false);
-        // 去掉显示动画
+        // 去掉显示动画 不设置 下拉刷新时上拉会崩溃
         bindingView.xrvWan.setItemAnimator(null);
         bindingView.xrvWan.clearHeader();
         bindingView.xrvWan.setHasFixedSize(true);
@@ -150,16 +150,20 @@ public class BookListFragment extends BaseFragment<BookListViewModel, FragmentWa
                     bindingView.srlWan.setRefreshing(false);
                 }
                 if (bookBean != null && bookBean.getBooks() != null && bookBean.getBooks().size() > 0) {
-                    // +2 一个刷新头布局 一个自己新增的头布局
-                    int positionStart = mBookAdapter.getItemCount() + 2;
                     if (viewModel.getStart() == 0) {
                         showContentView();
                         mBookAdapter.clear();
-                        // 需要加 解决：java.lang.IllegalArgumentException: Scrapped or attached views may not be recycled. isScrap:false isAttached:true
-                        mBookAdapter.notifyItemRangeRemoved(2, positionStart - 2);
+                        // 1. 需要加 解决：java.lang.IllegalArgumentException: Scrapped or attached views may not be recycled. isScrap:false isAttached:true
+                        mBookAdapter.notifyItemRangeRemoved(2, mBookAdapter.getItemCount());
                     }
+                    // +2 一个刷新头布局 一个自己新增的头布局
+                    int positionStart = mBookAdapter.getItemCount() + 2;
                     mBookAdapter.addAll(bookBean.getBooks());
-                    // 如果 positionStart 超过了集合的size，Invalid item position 21(offset:21)
+                    /**
+                     * 如果 positionStart 超过了集合的size，Invalid item position 21(offset:21)
+                     * 如果要结合下拉刷新，需加上
+                     * 2.setItemAnimator(null);
+                     * */
                     mBookAdapter.notifyItemRangeInserted(positionStart, bookBean.getBooks().size());
                     bindingView.xrvWan.refreshComplete();
                     if (mIsFirst) {
