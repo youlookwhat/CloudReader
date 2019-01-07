@@ -7,11 +7,10 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.inputmethod.EditorInfo;
 
 import com.example.jingbin.cloudreader.R;
-import com.example.jingbin.cloudreader.adapter.WanBookAdapter;
+import com.example.jingbin.cloudreader.adapter.DouBookAdapter;
 import com.example.jingbin.cloudreader.base.BaseFragment;
 import com.example.jingbin.cloudreader.bean.book.BookBean;
 import com.example.jingbin.cloudreader.databinding.FragmentWanAndroidBinding;
@@ -32,7 +31,7 @@ public class BookListFragment extends BaseFragment<BookListViewModel, FragmentWa
     private String mType = "综合";
     private boolean mIsPrepared;
     private boolean mIsFirst = true;
-    private WanBookAdapter mBookAdapter;
+    private DouBookAdapter mBookAdapter;
     private FragmentActivity activity;
 
     @Override
@@ -78,7 +77,7 @@ public class BookListFragment extends BaseFragment<BookListViewModel, FragmentWa
 
     private void initRefreshView() {
         bindingView.srlWan.setColorSchemeColors(CommonUtils.getColor(R.color.colorTheme));
-        mBookAdapter = new WanBookAdapter();
+        mBookAdapter = new DouBookAdapter();
         HeaderItemBookBinding oneBinding = DataBindingUtil.inflate(getLayoutInflater(), R.layout.header_item_book, null, false);
         oneBinding.setViewModel(viewModel);
         GridLayoutManager mLayoutManager = new GridLayoutManager(getActivity(), 3);
@@ -105,11 +104,13 @@ public class BookListFragment extends BaseFragment<BookListViewModel, FragmentWa
         bindingView.srlWan.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                bindingView.srlWan.postDelayed(() -> {
-                    viewModel.setStart(0);
-                    bindingView.xrvWan.reset();
-                    getBook();
-                }, 300);
+                if (!bindingView.xrvWan.isLoadingData()) {
+                    bindingView.srlWan.postDelayed(() -> {
+                        viewModel.setStart(0);
+                        bindingView.xrvWan.reset();
+                        getBook();
+                    }, 150);
+                }
 
             }
         });
@@ -121,8 +122,10 @@ public class BookListFragment extends BaseFragment<BookListViewModel, FragmentWa
 
             @Override
             public void onLoadMore() {
-                viewModel.handleNextStart();
-                getBook();
+                if (!bindingView.srlWan.isRefreshing()) {
+                    viewModel.handleNextStart();
+                    getBook();
+                }
             }
         });
     }
@@ -135,7 +138,7 @@ public class BookListFragment extends BaseFragment<BookListViewModel, FragmentWa
         }
 
         bindingView.srlWan.setRefreshing(true);
-        bindingView.srlWan.postDelayed(this::getBook, 500);
+        bindingView.srlWan.postDelayed(this::getBook, 300);
         DebugUtil.error("-----setRefreshing");
     }
 
@@ -152,9 +155,12 @@ public class BookListFragment extends BaseFragment<BookListViewModel, FragmentWa
                     if (viewModel.getStart() == 0) {
                         showContentView();
                         mBookAdapter.clear();
+                        // 需要加 解决：java.lang.IllegalArgumentException: Scrapped or attached views may not be recycled. isScrap:false isAttached:true
+                        mBookAdapter.notifyItemRangeRemoved(2, positionStart - 2);
                     }
                     mBookAdapter.addAll(bookBean.getBooks());
-                    mBookAdapter.notifyItemRangeChanged(positionStart, bookBean.getBooks().size());
+                    // 如果 positionStart 超过了集合的size，Invalid item position 21(offset:21)
+                    mBookAdapter.notifyItemRangeInserted(positionStart, bookBean.getBooks().size());
                     bindingView.xrvWan.refreshComplete();
                     if (mIsFirst) {
                         mIsFirst = false;

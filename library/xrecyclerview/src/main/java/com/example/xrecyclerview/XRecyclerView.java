@@ -360,4 +360,11 @@ public class XRecyclerView extends RecyclerView {
             ((LoadingMoreFooter) footView).reSet();
         }
     }
+
+    /**
+     * 是否在刷新数据
+     */
+    public boolean isLoadingData() {
+        return isLoadingData;
+    }
 }

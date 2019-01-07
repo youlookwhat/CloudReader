@@ -12,6 +12,7 @@ import com.example.jingbin.cloudreader.base.baseadapter.BaseRecyclerViewAdapter;
 import com.example.jingbin.cloudreader.base.baseadapter.BaseRecyclerViewHolder;
 import com.example.jingbin.cloudreader.bean.book.BooksBean;
 import com.example.jingbin.cloudreader.databinding.ItemBookBinding;
+import com.example.jingbin.cloudreader.utils.DebugUtil;
 import com.example.jingbin.cloudreader.utils.DensityUtil;
 import com.example.jingbin.cloudreader.utils.DialogBuild;
 import com.example.jingbin.cloudreader.utils.PerfectClickListener;
@@ -24,11 +25,11 @@ import javax.xml.transform.Templates;
  * Created by jingbin on 2016/11/25.
  */
 
-public class WanBookAdapter extends BaseRecyclerViewAdapter<BooksBean> {
+public class DouBookAdapter extends BaseRecyclerViewAdapter<BooksBean> {
 
     private int width;
 
-    public WanBookAdapter() {
+    public DouBookAdapter() {
         int px = DensityUtil.dip2px(48);
         width = (DensityUtil.getDisplayWidth() - px) / 3;
     }
@@ -49,6 +50,7 @@ public class WanBookAdapter extends BaseRecyclerViewAdapter<BooksBean> {
         public void onBindViewHolder(final BooksBean book, final int position) {
             if (book != null) {
                 binding.setBean(book);
+                DebugUtil.error(position + "----url:" + book.getImages().getLarge());
                 DensityUtil.formatHeight(binding.ivTopPhoto, width, 0.703f, 1);
                 binding.cvTopBook.setOnClickListener(new PerfectClickListener() {
                     @Override
