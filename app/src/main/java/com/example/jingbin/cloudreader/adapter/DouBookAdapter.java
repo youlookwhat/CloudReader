@@ -50,7 +50,7 @@ public class DouBookAdapter extends BaseRecyclerViewAdapter<BooksBean> {
         public void onBindViewHolder(final BooksBean book, final int position) {
             if (book != null) {
                 binding.setBean(book);
-                DebugUtil.error(position + "----url:" + book.getImages().getLarge());
+//                DebugUtil.error(position + "----url:" + book.getImages().getLarge());
                 DensityUtil.formatHeight(binding.ivTopPhoto, width, 0.703f, 1);
                 binding.cvTopBook.setOnClickListener(new PerfectClickListener() {
                     @Override
@@ -58,30 +58,6 @@ public class DouBookAdapter extends BaseRecyclerViewAdapter<BooksBean> {
                         if (listener != null) {
                             listener.onClick(book, binding.ivTopPhoto);
                         }
-                    }
-                });
-                binding.cvTopBook.setOnLongClickListener(new View.OnLongClickListener() {
-                    @Override
-                    public boolean onLongClick(View v) {
-                        List<String> author = book.getAuthor();
-                        String authorOne = "";
-                        if (author != null && author.size() > 0) {
-                            authorOne = author.get(0);
-                        }
-                        String title = "";
-                        if (!TextUtils.isEmpty(authorOne)) {
-                            title = authorOne + "： ";
-                        }
-                        title = title + "《" + book.getTitle() + "》";
-                        DialogBuild.showCustom(v, title, "查看详情", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                if (listener != null) {
-                                    listener.onClick(book, binding.ivTopPhoto);
-                                }
-                            }
-                        });
-                        return false;
                     }
                 });
             }
