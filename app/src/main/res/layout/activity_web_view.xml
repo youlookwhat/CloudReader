@@ -38,7 +38,8 @@
                 android:singleLine="true"
                 android:textColor="@color/colorWhite"
                 android:textSize="18sp"
-                android:visibility="visible" />
+                android:visibility="visible"
+                tools:text="@string/app_name" />
 
         </android.support.v7.widget.Toolbar>
 
