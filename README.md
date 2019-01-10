@@ -68,7 +68,7 @@ If you have any questions, please write to [the issue][21] of making you don't u
 #### V2.5.0（12-28）
  - 1、[规范] 所有页面mvvm架构修正
  - 2、[优化] 将电影和书籍放置在一块
- - 3、[新增] 可作为三方浏览器打开外部链接
+ - 3、[新增] 可[作为三方浏览器打开外部链接](https://www.jianshu.com/p/272bfb6c0779)
  - 4、[修复] 修复部分兼容性bug
 
 #### V2.2（12-05）
