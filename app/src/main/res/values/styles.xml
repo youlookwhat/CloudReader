@@ -48,6 +48,11 @@
         <item name="android:windowAnimationStyle">@style/default_animation_down</item>
     </style>
 
+    <!--过渡图-->
+    <style name="SplashTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowBackground">@drawable/layer_splash</item>
+        <item name="android:windowFullscreen">true</item>
+    </style>
 
     <!--查看大图页面，全屏显示-->
     <style name="ViewBigPicTheme" parent="Theme.AppCompat.Light.NoActionBar">

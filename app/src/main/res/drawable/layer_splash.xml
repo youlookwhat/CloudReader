@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- 背景颜色 -->
+    <item android:drawable="@color/colorWhite" />
+
+    <item>
+        <!-- 图片 如果尺寸不一致，那么周围的填充色就是背景色  设置后水平和纵向拉伸-->
+        <bitmap
+            android:gravity="fill_vertical|fill_horizontal"
+            android:src="@drawable/img_transition_default" />
+    </item>
+</layer-list>

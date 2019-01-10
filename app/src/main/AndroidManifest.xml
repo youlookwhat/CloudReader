@@ -27,7 +27,7 @@
         <activity
             android:name=".ui.TransitionActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/ViewBigPicTheme">
+            android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
