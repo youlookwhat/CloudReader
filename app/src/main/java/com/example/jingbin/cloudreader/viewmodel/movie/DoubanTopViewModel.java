@@ -21,20 +21,11 @@ public class DoubanTopViewModel extends AndroidViewModel {
     private int mStart = 0;
     private int mCount = 21;
     private OneRepository oneRepo;
-//    private OnMovieLoadListener loadListener;
 
     public DoubanTopViewModel(@NonNull Application application) {
         super(application);
         this.oneRepo = new OneRepository();
     }
-
-//    public void setOnMovieLoadListener(OnMovieLoadListener loadListener) {
-//        this.loadListener = loadListener;
-//    }
-//
-//    public void onDestroy() {
-//        loadListener = null;
-//    }
 
     public MutableLiveData<HotMovieBean> getHotMovie() {
         final MutableLiveData<HotMovieBean> data = new MutableLiveData<>();
@@ -42,17 +33,11 @@ public class DoubanTopViewModel extends AndroidViewModel {
             @Override
             public void onSuccess(HotMovieBean hotMovieBean) {
                 data.setValue(hotMovieBean);
-//                if (loadListener != null) {
-//                    loadListener.onSuccess(hotMovieBean);
-//                }
             }
 
             @Override
             public void onFailure() {
                 data.setValue(null);
-//                if (loadListener != null) {
-//                    loadListener.onFailure();
-//                }
             }
         });
         return data;

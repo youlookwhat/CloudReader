@@ -131,7 +131,7 @@ public class OneFragment extends BaseFragment<OneViewModel, FragmentOneBinding> 
     }
 
     private void initRecyclerView() {
-        LinearLayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
+        LinearLayoutManager mLayoutManager = new LinearLayoutManager(activity);
         mLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         bindingView.listOne.setLayoutManager(mLayoutManager);
         // 加上这两行代码，下拉出提示才不会产生出现刷新头的bug，不加拉不下来

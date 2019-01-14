@@ -14,7 +14,7 @@ import java.util.List;
  * 豆瓣热映item详情
  */
 
-public class SubjectsBean extends BaseObservable implements Serializable{
+public class SubjectsBean extends BaseObservable implements Serializable {
     /**
      * rating : {"max":10,"average":6.9,"stars":"35","min":0}
      * genres : ["剧情","喜剧"]

@@ -1,6 +1,5 @@
 package com.example.jingbin.cloudreader.adapter;
 
-import android.app.Activity;
 import android.content.DialogInterface;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,7 +9,6 @@ import com.example.jingbin.cloudreader.base.baseadapter.BaseRecyclerViewAdapter;
 import com.example.jingbin.cloudreader.base.baseadapter.BaseRecyclerViewHolder;
 import com.example.jingbin.cloudreader.bean.moviechild.SubjectsBean;
 import com.example.jingbin.cloudreader.databinding.ItemDoubanTopBinding;
-import com.example.jingbin.cloudreader.ui.douban.OneMovieDetailActivity;
 import com.example.jingbin.cloudreader.utils.DensityUtil;
 import com.example.jingbin.cloudreader.utils.DialogBuild;
 import com.example.jingbin.cloudreader.utils.PerfectClickListener;
@@ -21,11 +19,9 @@ import com.example.jingbin.cloudreader.utils.PerfectClickListener;
 
 public class DouBanTopAdapter extends BaseRecyclerViewAdapter<SubjectsBean> {
 
-    private Activity activity;
     private int width;
 
-    public DouBanTopAdapter(Activity activity) {
-        this.activity = activity;
+    public DouBanTopAdapter() {
         int px = DensityUtil.dip2px(36);
         width = (DensityUtil.getDisplayWidth() - px) / 3;
     }
@@ -48,7 +44,9 @@ public class DouBanTopAdapter extends BaseRecyclerViewAdapter<SubjectsBean> {
             binding.cvTopMovie.setOnClickListener(new PerfectClickListener() {
                 @Override
                 protected void onNoDoubleClick(View v) {
-                    OneMovieDetailActivity.start(activity, bean, binding.ivTopPhoto);
+                    if (listener != null) {
+                        listener.onClick(bean, binding.ivTopPhoto);
+                    }
                 }
             });
             binding.cvTopMovie.setOnLongClickListener(new View.OnLongClickListener() {
@@ -58,7 +56,9 @@ public class DouBanTopAdapter extends BaseRecyclerViewAdapter<SubjectsBean> {
                     DialogBuild.showCustom(v, title, "查看详情", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            OneMovieDetailActivity.start(activity, bean, binding.ivTopPhoto);
+                            if (listener != null) {
+                                listener.onClick(bean, binding.ivTopPhoto);
+                            }
                         }
                     });
                     return false;
@@ -66,5 +66,11 @@ public class DouBanTopAdapter extends BaseRecyclerViewAdapter<SubjectsBean> {
             });
 
         }
+    }
+
+    private UpcomingAdapter.OnClickInterface listener;
+
+    public void setListener(UpcomingAdapter.OnClickInterface listener) {
+        this.listener = listener;
     }
 }

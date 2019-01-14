@@ -95,6 +95,12 @@ public interface HttpClient {
     Observable<HotMovieBean> getHotMovie();
 
     /**
+     * 豆瓣即将上映电影
+     */
+    @GET("v2/movie/coming_soon")
+    Observable<HotMovieBean> getComingSoon(@Query("start") int start, @Query("count") int count);
+
+    /**
      * 获取电影详情
      *
      * @param id 电影bean里的id

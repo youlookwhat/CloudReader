@@ -46,17 +46,19 @@ public class GankFragment extends BaseFragment<NoViewModel, FragmentGankBinding>
         if (!mIsPrepared || !mIsVisible || !mIsFirst) {
             return;
         }
-        initFragmentList();
-        MyFragmentPagerAdapter myAdapter = new MyFragmentPagerAdapter(getChildFragmentManager(), mFragments, mTitleList);
-        bindingView.vpGank.setAdapter(myAdapter);
-        myAdapter.notifyDataSetChanged();
-        // 左右预加载页面的个数
-        bindingView.vpGank.setOffscreenPageLimit(3);
-        bindingView.tabGank.setTabMode(TabLayout.MODE_FIXED);
-        bindingView.tabGank.setupWithViewPager(bindingView.vpGank);
-        // item点击跳转
-        initRxBus();
-        mIsFirst = false;
+        bindingView.vpGank.postDelayed(() -> {
+            initFragmentList();
+            MyFragmentPagerAdapter myAdapter = new MyFragmentPagerAdapter(getChildFragmentManager(), mFragments, mTitleList);
+            bindingView.vpGank.setAdapter(myAdapter);
+            myAdapter.notifyDataSetChanged();
+            // 左右预加载页面的个数
+            bindingView.vpGank.setOffscreenPageLimit(3);
+            bindingView.tabGank.setTabMode(TabLayout.MODE_FIXED);
+            bindingView.tabGank.setupWithViewPager(bindingView.vpGank);
+            // item点击跳转
+            initRxBus();
+            mIsFirst = false;
+        }, 150);
     }
 
     @Override

@@ -37,13 +37,16 @@ public class DoubanFragment extends BaseFragment<NoViewModel, FragmentGankBindin
         if (!mIsPrepared || !mIsVisible || !mIsFirst) {
             return;
         }
-        initFragmentList();
-        MyFragmentPagerAdapter myAdapter = new MyFragmentPagerAdapter(getChildFragmentManager(), mFragments, mTitleList);
-        bindingView.vpGank.setAdapter(myAdapter);
-        myAdapter.notifyDataSetChanged();
-        bindingView.tabGank.setTabMode(TabLayout.MODE_FIXED);
-        bindingView.tabGank.setupWithViewPager(bindingView.vpGank);
-        mIsFirst = false;
+        bindingView.vpGank.postDelayed(() -> {
+            initFragmentList();
+            MyFragmentPagerAdapter myAdapter = new MyFragmentPagerAdapter(getChildFragmentManager(), mFragments, mTitleList);
+            bindingView.vpGank.setAdapter(myAdapter);
+            myAdapter.notifyDataSetChanged();
+            bindingView.vpGank.setOffscreenPageLimit(2);
+            bindingView.tabGank.setTabMode(TabLayout.MODE_FIXED);
+            bindingView.tabGank.setupWithViewPager(bindingView.vpGank);
+            mIsFirst = false;
+        }, 150);
     }
 
     @Override
@@ -53,9 +56,11 @@ public class DoubanFragment extends BaseFragment<NoViewModel, FragmentGankBindin
 
     private void initFragmentList() {
         mTitleList.clear();
-        mTitleList.add("电影");
+        mTitleList.add("热映榜");
+        mTitleList.add("即将上映");
         mTitleList.add("书籍");
         mFragments.add(new OneFragment());
+        mFragments.add(UpcomingFragment.newInstance("即将上映"));
         mFragments.add(BookListFragment.newInstance("沟通"));
     }
 
