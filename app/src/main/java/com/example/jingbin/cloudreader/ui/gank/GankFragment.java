@@ -58,7 +58,7 @@ public class GankFragment extends BaseFragment<NoViewModel, FragmentGankBinding>
             // item点击跳转
             initRxBus();
             mIsFirst = false;
-        }, 150);
+        }, 120);
     }
 
     @Override

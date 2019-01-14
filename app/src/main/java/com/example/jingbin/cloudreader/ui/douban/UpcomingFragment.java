@@ -119,7 +119,7 @@ public class UpcomingFragment extends BaseFragment<UpcomingViewModel, FragmentWa
         }
 
         bindingView.srlWan.setRefreshing(true);
-        bindingView.srlWan.postDelayed(this::getComingSoon, 300);
+        bindingView.srlWan.postDelayed(this::getComingSoon, 150);
     }
 
     private void getComingSoon() {

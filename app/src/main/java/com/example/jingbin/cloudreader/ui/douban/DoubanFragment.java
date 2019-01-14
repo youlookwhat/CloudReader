@@ -46,7 +46,7 @@ public class DoubanFragment extends BaseFragment<NoViewModel, FragmentGankBindin
             bindingView.tabGank.setTabMode(TabLayout.MODE_FIXED);
             bindingView.tabGank.setupWithViewPager(bindingView.vpGank);
             mIsFirst = false;
-        }, 150);
+        }, 120);
     }
 
     @Override

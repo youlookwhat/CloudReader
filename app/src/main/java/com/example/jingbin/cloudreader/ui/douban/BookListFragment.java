@@ -138,7 +138,7 @@ public class BookListFragment extends BaseFragment<BookListViewModel, FragmentWa
         }
 
         bindingView.srlWan.setRefreshing(true);
-        bindingView.srlWan.postDelayed(this::getBook, 300);
+        bindingView.srlWan.postDelayed(this::getBook, 150);
         DebugUtil.error("-----setRefreshing");
     }
 
