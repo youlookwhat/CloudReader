@@ -7,6 +7,7 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import com.example.jingbin.cloudreader.R;
 import com.example.jingbin.cloudreader.base.BaseActivity;
@@ -55,9 +56,13 @@ public class NavDeedBackActivity extends BaseActivity<NoViewModel, ActivityNavDe
                     }
                     break;
                 case R.id.tv_email:
-                    Intent data = new Intent(Intent.ACTION_SENDTO);
-                    data.setData(Uri.parse("mailto:jingbin127@163.com"));
-                    startActivity(data);
+                    try {
+                        Intent data = new Intent(Intent.ACTION_SENDTO);
+                        data.setData(Uri.parse("mailto:jingbin127@163.com"));
+                        startActivity(data);
+                    } catch (Exception e) {
+                        ToastUtil.showToastLong("请先安装邮箱~");
+                    }
                     break;
                 case R.id.tv_jianshu:
                     WebViewActivity.loadUrl(v.getContext(), CommonUtils.getString(R.string.string_url_jianshu), "简书");

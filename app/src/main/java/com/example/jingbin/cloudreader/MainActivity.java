@@ -359,8 +359,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 WebViewActivity.loadUrl(MainActivity.this, formatUrl, "加载中..");
-                                // 清除剪切板内容
-                                manager.setText(null);
+                                // 清空剪贴板
+                                manager.setPrimaryClip(null);
                             }
                         });
                     }
