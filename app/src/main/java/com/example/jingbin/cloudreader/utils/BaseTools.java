@@ -151,10 +151,46 @@ public class BaseTools {
      * @param content 复制的文本
      */
     public static void copy(String content) {
-        // 得到剪贴板管理器
-        ClipboardManager cmb = (ClipboardManager) CloudReaderApplication.getInstance().getSystemService(Context.CLIPBOARD_SERVICE);
-        cmb.setText(content.trim());
+        if (!TextUtils.isEmpty(content)) {
+            // 得到剪贴板管理器
+            ClipboardManager cmb = (ClipboardManager) CloudReaderApplication.getInstance().getSystemService(Context.CLIPBOARD_SERVICE);
+            cmb.setText(content.trim());
+        }
     }
+
+    /**
+     * 获取系统剪切板内容
+     */
+    public static String getClipContent() {
+        ClipboardManager manager = (ClipboardManager) CloudReaderApplication.getInstance().getSystemService(Context.CLIPBOARD_SERVICE);
+        if (manager != null) {
+            if (manager.hasPrimaryClip() && manager.getPrimaryClip().getItemCount() > 0) {
+                CharSequence addedText = manager.getPrimaryClip().getItemAt(0).getText();
+                String addedTextString = String.valueOf(addedText);
+                if (!TextUtils.isEmpty(addedTextString)) {
+                    return StringFormatUtil.formatUrl(String.valueOf(addedText));
+                }
+            }
+        }
+        return "";
+    }
+
+    /**
+     * 清空剪切板内容
+     */
+    public static void clearClipboard() {
+        ClipboardManager manager = (ClipboardManager) CloudReaderApplication.getInstance().getSystemService(Context.CLIPBOARD_SERVICE);
+        if (manager != null) {
+            try {
+                // 清空剪贴板
+                manager.setPrimaryClip(null);
+                manager.setText(null);
+            } catch (Exception e) {
+                DebugUtil.error(e.getMessage());
+            }
+        }
+    }
+
 
     /**
      * 使用浏览器打开链接
