@@ -4,6 +4,7 @@ import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.TabLayout;
 import android.support.v7.widget.LinearLayoutManager;
 
 import com.example.jingbin.cloudreader.MainActivity;
@@ -17,7 +18,9 @@ import com.example.jingbin.cloudreader.databinding.HeaderItemOneBinding;
 import com.example.jingbin.cloudreader.http.cache.ACache;
 import com.example.jingbin.cloudreader.utils.SPUtils;
 import com.example.jingbin.cloudreader.utils.TimeUtil;
+import com.example.jingbin.cloudreader.utils.ToastUtil;
 import com.example.jingbin.cloudreader.viewmodel.movie.OneViewModel;
+import com.example.xrecyclerview.XRecyclerView;
 
 /**
  * @author jingbin
@@ -34,6 +37,7 @@ public class OneFragment extends BaseFragment<OneViewModel, FragmentOneBinding> 
     private MainActivity activity;
     private HotMovieBean mHotMovieBean;
     private OneAdapter oneAdapter;
+    private HeaderItemOneBinding oneBinding;
 
     @Override
     public int setContent() {
@@ -55,6 +59,59 @@ public class OneFragment extends BaseFragment<OneViewModel, FragmentOneBinding> 
         mHotMovieBean = (HotMovieBean) aCache.getAsObject(Constants.ONE_HOT_MOVIE);
         isPrepared = true;
         loadData();
+    }
+
+    private void initRecyclerView() {
+        oneBinding = DataBindingUtil.inflate(getLayoutInflater(), R.layout.header_item_one, null, false);
+        oneBinding.setView(this);
+        bindingView.listOne.setLayoutManager(new LinearLayoutManager(activity));
+        bindingView.listOne.setPullRefreshEnabled(false);
+        bindingView.listOne.clearHeader();
+        bindingView.listOne.setItemAnimator(null);
+        bindingView.listOne.addHeaderView(oneBinding.getRoot());
+        oneAdapter = new OneAdapter(activity);
+        bindingView.listOne.setAdapter(oneAdapter);
+        bindingView.listOne.setLoadingListener(new XRecyclerView.LoadingListener() {
+            @Override
+            public void onRefresh() {
+
+            }
+
+            @Override
+            public void onLoadMore() {
+                if (oneBinding.tlMovie.getSelectedTabPosition() == 1) {
+                    viewModel.handleNextStart();
+                    loadComingSoonMovie();
+                } else {
+                    bindingView.listOne.noMoreLoading();
+                }
+            }
+        });
+        oneBinding.tlMovie.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                int tabPosition = oneBinding.tlMovie.getSelectedTabPosition();
+                if (tabPosition == 0) {
+                    viewModel.setStart(0);
+                    bindingView.listOne.reset();
+                    loadHotMovie();
+                } else {
+                    viewModel.setStart(0);
+                    bindingView.listOne.reset();
+                    loadComingSoonMovie();
+                }
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
     }
 
     /**
@@ -99,53 +156,66 @@ public class OneFragment extends BaseFragment<OneViewModel, FragmentOneBinding> 
     }
 
     private void loadHotMovie() {
-        viewModel.getHotMovie().observe(this, hotMovieBean -> {
-            showContentView();
-            if (hotMovieBean != null && hotMovieBean.getSubjects() != null) {
-                setAdapter(hotMovieBean);
+        viewModel.getHotMovie().observe(this, this::showContent);
+    }
 
+    private void loadComingSoonMovie() {
+        viewModel.getComingSoon().observe(this, this::showContent);
+    }
+
+    private void showContent(HotMovieBean movieBean) {
+        showContentView();
+        if (movieBean != null && movieBean.getSubjects() != null && movieBean.getSubjects().size() > 0) {
+            if (oneBinding.tlMovie.getSelectedTabPosition() == 0) {
+                setAdapter(movieBean);
                 aCache.remove(Constants.ONE_HOT_MOVIE);
-                aCache.put(Constants.ONE_HOT_MOVIE, hotMovieBean);
+                aCache.put(Constants.ONE_HOT_MOVIE, movieBean);
                 // 保存请求的日期
                 SPUtils.putString("one_data", TimeUtil.getData());
                 // 刷新结束
                 mIsLoading = false;
             } else {
+                if (viewModel.getStart() == 0) {
+                    oneAdapter.clear();
+                    oneAdapter.notifyDataSetChanged();
+                }
+                // +2 一个刷新头布局 一个自己新增的头布局
+                int positionStart = oneAdapter.getItemCount() + 2;
+                oneAdapter.addAll(movieBean.getSubjects());
+                oneAdapter.notifyItemRangeInserted(positionStart, movieBean.getSubjects().size());
+                bindingView.listOne.refreshComplete();
+            }
+        } else {
+            bindingView.listOne.refreshComplete();
+            if (oneBinding.tlMovie.getSelectedTabPosition() == 0) {
                 if (mHotMovieBean != null) {
                     setAdapter(mHotMovieBean);
+                } else if (oneAdapter.getItemCount() == 0) {
+                    showError();
+                }
+            } else {
+                if (viewModel.getStart() == 0) {
+                    ToastUtil.showToastLong("没有即将上映的电影数据~");
+                    oneBinding.tlMovie.setScrollPosition(0, 0, true);
+                    oneBinding.tlMovie.getTabAt(0).select();
+                }
+                if (oneAdapter.getItemCount() == 0) {
+                    showError();
                 } else {
-                    if (oneAdapter.getItemCount() == 0) {
-                        showError();
-                    }
+                    bindingView.listOne.noMoreLoading();
                 }
             }
-        });
+        }
     }
 
     private void setAdapter(HotMovieBean hotMovieBean) {
         oneAdapter.clear();
         oneAdapter.addAll(hotMovieBean.getSubjects());
         oneAdapter.notifyDataSetChanged();
-
-        isFirst = false;
-    }
-
-    private void initRecyclerView() {
-        LinearLayoutManager mLayoutManager = new LinearLayoutManager(activity);
-        mLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-        bindingView.listOne.setLayoutManager(mLayoutManager);
-        // 加上这两行代码，下拉出提示才不会产生出现刷新头的bug，不加拉不下来
-        bindingView.listOne.setPullRefreshEnabled(false);
-        bindingView.listOne.clearHeader();
-        bindingView.listOne.setLoadingMoreEnabled(false);
-        // 需加，不然滑动不流畅
-        bindingView.listOne.setNestedScrollingEnabled(false);
-        bindingView.listOne.setHasFixedSize(false);
-        HeaderItemOneBinding oneBinding = DataBindingUtil.inflate(getLayoutInflater(), R.layout.header_item_one, null, false);
-        oneBinding.setView(this);
-        bindingView.listOne.addHeaderView(oneBinding.getRoot());
-        oneAdapter = new OneAdapter(activity);
-        bindingView.listOne.setAdapter(oneAdapter);
+        bindingView.listOne.refreshComplete();
+        if (isFirst) {
+            isFirst = false;
+        }
     }
 
     /**
@@ -156,12 +226,7 @@ public class OneFragment extends BaseFragment<OneViewModel, FragmentOneBinding> 
         synchronized (this) {
             if (!mIsLoading) {
                 mIsLoading = true;
-                bindingView.listOne.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        loadHotMovie();
-                    }
-                }, 150);
+                bindingView.listOne.postDelayed(this::onRefresh, 150);
             }
         }
     }
@@ -172,7 +237,11 @@ public class OneFragment extends BaseFragment<OneViewModel, FragmentOneBinding> 
 
     @Override
     protected void onRefresh() {
-        loadHotMovie();
+        if (oneBinding.tlMovie.getSelectedTabPosition() == 0) {
+            loadHotMovie();
+        } else {
+            loadComingSoonMovie();
+        }
     }
 
     /**

@@ -169,4 +169,8 @@
         </item>
     </style>
 
+    <!--tab文字大小-->
+    <style name="MyTabLayoutTextAppearance" parent="TextAppearance.AppCompat.Widget.ActionBar.Title.Inverse">
+        <item name="android:textSize">16sp</item>
+    </style>
 </resources>

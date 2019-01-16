@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -15,7 +16,7 @@
     </data>
 
     <!--android:background="@drawable/ripple_one_item_bg"-->
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/ll_one_item"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -32,11 +33,12 @@
 
             <ImageView
                 android:id="@+id/iv_one_photo"
-                android:layout_width="100dp"
-                android:layout_height="132dp"
-                android:layout_marginRight="12dp"
+                android:layout_width="90dp"
+                android:layout_height="127dp"
+                android:layout_marginEnd="12dp"
                 android:scaleType="fitXY"
-                android:showMovieImg="@{subjectsBean.images.large}" />
+                android:showMovieImg="@{subjectsBean.images.large}"
+                tools:src="@drawable/img_default_movie" />
             <!--android:defaultPicType="@{0}"-->
             <!--android:displayFadeImage="@{subjectsBean.images.large}"-->
 
@@ -44,7 +46,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginRight="12dp"
+                android:layout_marginEnd="12dp"
                 android:orientation="vertical">
 
                 <!--电影名-->
@@ -57,7 +59,7 @@
                     android:maxLines="1"
                     android:text="@{subjectsBean.title}"
                     android:textColor="@color/colorContent"
-                    android:textSize="17sp"
+                    android:textSize="16sp"
                     android:textStyle="bold" />
 
                 <!--导演-->
@@ -76,7 +78,8 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="导演：" />
+                            android:text="导演："
+                            android:textSize="13sp" />
 
                         <View
                             android:layout_width="28dp"
@@ -92,7 +95,8 @@
                         android:layout_height="wrap_content"
                         android:ellipsize="end"
                         android:maxLines="1"
-                        android:text="@{StringFormatUtil.formatName(subjectsBean.directors)}" />
+                        android:text="@{StringFormatUtil.formatName(subjectsBean.directors)}"
+                        android:textSize="13sp" />
                 </LinearLayout>
 
                 <!--主演-->
@@ -104,7 +108,8 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="主演：" />
+                        android:text="主演："
+                        android:textSize="13sp" />
 
                     <TextView
                         android:id="@+id/tv_one_casts"
@@ -112,7 +117,8 @@
                         android:layout_height="wrap_content"
                         android:ellipsize="end"
                         android:maxLines="2"
-                        android:text="@{StringFormatUtil.formatName(subjectsBean.casts)}" />
+                        android:text="@{StringFormatUtil.formatName(subjectsBean.casts)}"
+                        android:textSize="13sp" />
 
                 </LinearLayout>
 
@@ -124,7 +130,8 @@
                     android:layout_marginTop="2dp"
                     android:ellipsize="end"
                     android:maxLines="1"
-                    android:text='@{@string/string_type+StringFormatUtil.formatGenres(subjectsBean.genres)}' />
+                    android:text='@{@string/string_type+StringFormatUtil.formatGenres(subjectsBean.genres)}'
+                    android:textSize="13sp" />
 
                 <TextView
                     android:id="@+id/tv_one_rating_rate"
@@ -132,7 +139,8 @@
                     android:layout_height="wrap_content"
                     android:ellipsize="end"
                     android:maxLines="1"
-                    android:text='@{@string/string_rating+subjectsBean.rating.average}' />
+                    android:text='@{@string/string_rating+subjectsBean.rating.average}'
+                    android:textSize="13sp" />
             </LinearLayout>
 
         </LinearLayout>
@@ -141,8 +149,9 @@
             android:id="@+id/view_color"
             android:layout_width="match_parent"
             android:layout_height="1px"
-            android:layout_marginLeft="112dp"
+            android:layout_below="@+id/ll_item"
+            android:layout_marginStart="95dp"
             android:layout_marginTop="5dp"
             android:background="@{CommonUtils.randomColor()}" />
-    </LinearLayout>
+    </RelativeLayout>
 </layout>

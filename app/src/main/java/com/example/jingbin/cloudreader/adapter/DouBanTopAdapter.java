@@ -3,6 +3,7 @@ package com.example.jingbin.cloudreader.adapter;
 import android.content.DialogInterface;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.example.jingbin.cloudreader.R;
 import com.example.jingbin.cloudreader.base.baseadapter.BaseRecyclerViewAdapter;
@@ -68,9 +69,13 @@ public class DouBanTopAdapter extends BaseRecyclerViewAdapter<SubjectsBean> {
         }
     }
 
-    private UpcomingAdapter.OnClickInterface listener;
+    private OnClickListener listener;
 
-    public void setListener(UpcomingAdapter.OnClickInterface listener) {
+    public interface OnClickListener {
+        void onClick(SubjectsBean bean, ImageView imageView);
+    }
+
+    public void setListener(OnClickListener listener) {
         this.listener = listener;
     }
 }
