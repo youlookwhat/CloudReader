@@ -46,6 +46,7 @@ import com.example.jingbin.cloudreader.utils.ImageLoadUtil;
 import com.example.jingbin.cloudreader.utils.PerfectClickListener;
 import com.example.jingbin.cloudreader.utils.SPUtils;
 import com.example.jingbin.cloudreader.utils.StringFormatUtil;
+import com.example.jingbin.cloudreader.utils.UpdateUtil;
 import com.example.jingbin.cloudreader.view.MyFragmentPagerAdapter;
 import com.example.jingbin.cloudreader.view.OnLoginListener;
 import com.example.jingbin.cloudreader.view.statusbar.StatusBarUtil;
@@ -91,6 +92,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         initContentFragment();
         initDrawerLayout();
         initListener();
+        UpdateUtil.check(this, false);
     }
 
     private void initStatusView() {

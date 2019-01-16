@@ -68,7 +68,6 @@ public class EverydayFragment extends BaseFragment<EverydayViewModel, FragmentEv
         showContentView();
         initAnimation();
         initRecyclerView();
-        UpdateUtil.check(getActivity(), false);
 
         mIsPrepared = true;
         /**
