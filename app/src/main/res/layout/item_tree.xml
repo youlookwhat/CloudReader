@@ -6,7 +6,7 @@
 
         <variable
             name="bean"
-            type="com.example.jingbin.cloudreader.bean.wanandroid.TreeBean.DataBean" />
+            type="com.example.jingbin.cloudreader.bean.wanandroid.TreeItemBean" />
 
         <import type="android.text.Html" />
     </data>

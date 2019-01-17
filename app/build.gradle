@@ -7,8 +7,8 @@ android {
         applicationId "com.example.jingbin.cloudreader"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 26
-        versionName "2.6.0"
+        versionCode 27
+        versionName "2.7.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         renderscriptTargetApi 19
         renderscriptSupportModeEnabled true
@@ -73,6 +73,7 @@ dependencies {
     implementation "com.android.support:design:$rootProject.supportLibraryVersion"
     implementation "com.android.support:support-v4:$rootProject.supportLibraryVersion"
     implementation "com.android.support:cardview-v7:$rootProject.supportLibraryVersion"
+    implementation "com.android.support.constraint:constraint-layout:1.1.2"
     // Room
     implementation "android.arch.persistence.room:runtime:$rootProject.roomVersion"
     annotationProcessor "android.arch.persistence.room:compiler:$rootProject.roomVersion"

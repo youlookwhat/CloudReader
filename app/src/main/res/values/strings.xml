@@ -86,4 +86,5 @@
     <string name="string_url_wanandroid">http://www.wanandroid.com/index</string>
     <!--每日推荐-->
     <string name="string_url_trending">https://github.com/trending</string>
+    <string name="string_tree_category_size">共%s个子分类</string>
 </resources>

@@ -76,14 +76,26 @@
 
     <!--titlebar 标题-->
     <style name="ToolBar.Title" parent="@style/TextAppearance.Widget.AppCompat.Toolbar.Title">
-        <item name="android:textSize">18.0sp</item>
+        <item name="android:textSize">17sp</item>
         <item name="android:textColor">@color/colorWhite</item>
     </style>
 
     <!--titlebar 副标题-->
     <style name="Toolbar.SubTitle" parent="@style/TextAppearance.Widget.AppCompat.Toolbar.Subtitle">
-        <item name="android:textSize">9.0sp</item>
+        <item name="android:textSize">9sp</item>
         <item name="android:textColor">#99ffffff</item>
+    </style>
+
+    <!--分类详情 - 标题收起时的字体颜色-->
+    <style name="collapsing_title_style_collapsed" parent="TextAppearance.AppCompat.Title">
+        <item name="android:textSize">17sp</item>
+        <item name="android:textColor">@color/colorWhite</item>
+    </style>
+    <!--分类详情 - 标题展开时的字体颜色-->
+    <style name="collapsing_title_style_expanded" parent="TextAppearance.AppCompat.Title">
+        <item name="android:textSize">17sp</item>
+        <item name="android:textColor">@color/colorWhite</item>
+
     </style>
 
 
