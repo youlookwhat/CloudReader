@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="adapter"
+            type="com.example.jingbin.cloudreader.adapter.CategoryArticleAdapter" />
+
+        <variable
+            name="bean"
+            type="com.example.jingbin.cloudreader.bean.wanandroid.ArticlesBean" />
+
+        <import type="android.text.Html" />
+
+        <import type="android.text.TextUtils" />
+
+        <import type="android.view.View" />
+    </data>
+
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/ll_item_top"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:foreground="?attr/selectableItemBackgroundBorderless"
+        android:onClick="@{()->adapter.openDetail(bean)}"
+        android:padding="8dp">
+
+
+        <ImageView
+            android:id="@+id/iv_image"
+            android:layout_width="60dp"
+            android:layout_height="78dp"
+            android:defaultPicType="@{1}"
+            android:displayFadeImage="@{bean.envelopePic}"
+            android:scaleType="centerCrop"
+            android:visibility='@{TextUtils.isEmpty(bean.envelopePic)?View.GONE:View.VISIBLE}'
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:background="@color/colorLine" />
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="7dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:ellipsize="end"
+            android:lineSpacingExtra="4dp"
+            android:maxLines="2"
+            android:paddingRight="8dp"
+            android:text="@{Html.fromHtml(bean.title)}"
+            android:textColor="@color/colorContent"
+            android:textSize="14sp"
+            app:layout_constraintStart_toEndOf="@+id/iv_image"
+            app:layout_constraintTop_toTopOf="@+id/iv_image"
+            tools:text="支付宝" />
+
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="13dp"
+            android:text="@{bean.niceDate}"
+            android:textColor="@color/colorSubtitle"
+            android:textSize="11sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/tv_title"
+            app:layout_constraintTop_toBottomOf="@+id/tv_title"
+            tools:text="2010-10-10" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{@string/string_dian + bean.author}"
+            android:textColor="@color/colorSubtitle"
+            android:textSize="11sp"
+            app:layout_constraintStart_toEndOf="@+id/textView2"
+            app:layout_constraintTop_toTopOf="@+id/textView2"
+            tools:text="jingbin" />
+
+        <CheckBox
+            android:id="@+id/vb_collect"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="3dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:button="@drawable/selector_collect_check"
+            android:checked="@{bean.collect}"
+            android:gravity="center"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+    </android.support.constraint.ConstraintLayout>
+
+</layout>

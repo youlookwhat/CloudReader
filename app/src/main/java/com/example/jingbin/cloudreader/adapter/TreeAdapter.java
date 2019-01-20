@@ -11,7 +11,6 @@ import com.example.jingbin.cloudreader.base.baseadapter.BaseRecyclerViewAdapter;
 import com.example.jingbin.cloudreader.base.baseadapter.BaseRecyclerViewHolder;
 import com.example.jingbin.cloudreader.bean.wanandroid.TreeItemBean;
 import com.example.jingbin.cloudreader.databinding.ItemTreeBinding;
-import com.example.jingbin.cloudreader.ui.wan.child.ArticleListActivity;
 import com.example.jingbin.cloudreader.ui.wan.child.CategoryDetailActivity;
 import com.zhy.view.flowlayout.FlowLayout;
 import com.zhy.view.flowlayout.TagAdapter;
@@ -69,8 +68,7 @@ public class TreeAdapter extends BaseRecyclerViewAdapter<TreeItemBean> {
         });
         flowlayoutHot.setOnTagClickListener((view, position, parent) -> {
             TreeItemBean.ChildrenBean childrenBean = children.get(position);
-            ArticleListActivity.start(view.getContext(), childrenBean.getId(), childrenBean.getName());
-//            CategoryDetailActivity.start(view.getContext(), childrenBean.getId(), childrenBean.getName(), dataBean);
+            CategoryDetailActivity.start(view.getContext(), childrenBean.getId(), dataBean);
             return true;
         });
     }

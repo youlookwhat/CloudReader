@@ -2,7 +2,8 @@ package com.example.jingbin.cloudreader.view;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentStatePagerAdapter;
+import android.text.Html;
 import android.view.ViewGroup;
 
 import java.util.List;
@@ -11,7 +12,7 @@ import java.util.List;
  * Created by jingbin on 2016/12/6.
  */
 
-public class MyFragmentPagerAdapter extends FragmentPagerAdapter {
+public class MyFragmentPagerAdapter extends FragmentStatePagerAdapter {
 
     private List<?> mFragment;
     private List<String> mTitleList;
@@ -55,7 +56,7 @@ public class MyFragmentPagerAdapter extends FragmentPagerAdapter {
     @Override
     public CharSequence getPageTitle(int position) {
         if (mTitleList != null && position < mTitleList.size()) {
-            return mTitleList.get(position);
+            return Html.fromHtml(mTitleList.get(position));
         } else {
             return "";
         }

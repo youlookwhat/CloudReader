@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ripple xmlns:android="http://schemas.android.com/apk/res/android"
-    android:color="@color/tabBackground"
+    android:color="@color/colorWhite"
     android:radius="30dp"/>

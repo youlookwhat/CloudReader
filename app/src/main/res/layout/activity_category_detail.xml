@@ -29,9 +29,8 @@
                 app:collapsedTitleGravity="left"
                 app:collapsedTitleTextAppearance="@style/collapsing_title_style_collapsed"
                 app:contentScrim="@color/colorTheme"
-                app:expandedTitleGravity="left|bottom"
-                app:expandedTitleMarginBottom="72dp"
-                app:expandedTitleMarginStart="92dp"
+                app:expandedTitleGravity="bottom|center"
+                app:expandedTitleMarginBottom="82dp"
                 app:expandedTitleTextAppearance="@style/collapsing_title_style_expanded"
                 app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
@@ -51,9 +50,12 @@
                     android:id="@+id/tv_category_num"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="bottom"
-                    android:layout_marginBottom="40dp"
-                    android:layout_marginStart="92dp"
+                    android:layout_gravity="bottom|center"
+                    android:layout_marginBottom="50dp"
+                    android:shadowColor="#44000000"
+                    android:shadowDx="0"
+                    android:shadowDy="8.0"
+                    android:shadowRadius="4.0"
                     android:text="@{String.format(@string/string_tree_category_size, treeItemBean.children.size)}"
                     android:textColor="@color/colorWhite"
                     android:textSize="12sp"
@@ -69,20 +71,13 @@
                     app:contentInsetEnd="?attr/actionBarSize"
                     app:contentInsetLeft="0dp"
                     app:contentInsetStart="0dp"
+                    app:contentInsetStartWithNavigation="0dp"
                     app:layout_collapseMode="pin"
+                    app:navigationIcon="@drawable/icon_back"
                     app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
                     app:title="@{treeItemBean.name}"
-                    app:titleTextColor="@color/colorTabTextNormal">
+                    app:titleTextColor="@color/colorTabTextNormal" />
 
-                    <ImageView
-                        android:id="@+id/btnBack"
-                        android:layout_width="?attr/actionBarSize"
-                        android:layout_height="?attr/actionBarSize"
-                        android:background="@drawable/ripple_category_back"
-                        android:scaleType="center"
-                        android:src="@drawable/icon_back" />
-
-                </android.support.v7.widget.Toolbar>
 
             </android.support.design.widget.CollapsingToolbarLayout>
 

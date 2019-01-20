@@ -98,6 +98,7 @@ dependencies {
     implementation 'com.android.support:multidex:1.0.3'
     implementation 'me.drakeet.support:toastcompat:1.1.0'
     implementation 'com.hyman:flowlayout-lib:1.1.2'
+    implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.41'
     // leakcanary
 //    debugImplementation 'com.squareup.leakcanary:leakcanary-android:1.6.1'
 //    releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.6.1'
