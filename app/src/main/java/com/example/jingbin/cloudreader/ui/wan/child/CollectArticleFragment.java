@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.LinearLayoutManager;
 
 import com.example.jingbin.cloudreader.R;
 import com.example.jingbin.cloudreader.adapter.WanAndroidAdapter;
@@ -14,6 +13,7 @@ import com.example.jingbin.cloudreader.base.BaseFragment;
 import com.example.jingbin.cloudreader.bean.wanandroid.HomeListBean;
 import com.example.jingbin.cloudreader.databinding.FragmentWanAndroidBinding;
 import com.example.jingbin.cloudreader.utils.CommonUtils;
+import com.example.jingbin.cloudreader.utils.RefreshHelper;
 import com.example.jingbin.cloudreader.viewmodel.wan.ArticleListViewModel;
 import com.example.xrecyclerview.XRecyclerView;
 
@@ -63,12 +63,8 @@ public class CollectArticleFragment extends BaseFragment<ArticleListViewModel, F
 
 
     private void initRefreshView() {
+        RefreshHelper.init(bindingView.xrvWan);
         bindingView.srlWan.setColorSchemeColors(CommonUtils.getColor(R.color.colorTheme));
-        bindingView.xrvWan.setLayoutManager(new LinearLayoutManager(activity));
-        bindingView.xrvWan.setPullRefreshEnabled(false);
-        // 不设置 下拉刷新时上拉会崩溃
-        bindingView.xrvWan.setItemAnimator(null);
-        bindingView.xrvWan.clearHeader();
         mAdapter = new WanAndroidAdapter(activity);
         bindingView.xrvWan.setAdapter(mAdapter);
         bindingView.srlWan.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {

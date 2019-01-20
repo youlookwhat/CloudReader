@@ -4,7 +4,6 @@ import android.arch.lifecycle.Observer;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.widget.LinearLayoutManager;
 import android.text.TextUtils;
 import android.view.View;
 
@@ -19,6 +18,7 @@ import com.example.jingbin.cloudreader.utils.CommonUtils;
 import com.example.jingbin.cloudreader.utils.DensityUtil;
 import com.example.jingbin.cloudreader.utils.GlideImageLoader;
 import com.example.jingbin.cloudreader.utils.ImageLoadUtil;
+import com.example.jingbin.cloudreader.utils.RefreshHelper;
 import com.example.jingbin.cloudreader.view.webview.WebViewActivity;
 import com.example.jingbin.cloudreader.viewmodel.wan.WanAndroidListViewModel;
 import com.example.xrecyclerview.XRecyclerView;
@@ -62,15 +62,12 @@ public class BannerFragment extends BaseFragment<WanAndroidListViewModel, Fragme
     }
 
     private void initRefreshView() {
+        RefreshHelper.init(bindingView.xrvWan);
+        androidBinding = DataBindingUtil.inflate(getLayoutInflater(), R.layout.header_wan_android, null, false);
         bindingView.srlWan.setColorSchemeColors(CommonUtils.getColor(R.color.colorTheme));
-        bindingView.xrvWan.setLayoutManager(new LinearLayoutManager(getActivity()));
-        bindingView.xrvWan.setPullRefreshEnabled(false);
-        bindingView.xrvWan.clearHeader();
-        bindingView.xrvWan.setItemAnimator(null);
         mAdapter = new WanAndroidAdapter(getActivity());
         mAdapter.setNoImage();
         bindingView.xrvWan.setAdapter(mAdapter);
-        androidBinding = DataBindingUtil.inflate(getLayoutInflater(), R.layout.header_wan_android, null, false);
         bindingView.xrvWan.addHeaderView(androidBinding.getRoot());
         DensityUtil.formatBannerHeight(androidBinding.banner, androidBinding.llBannerImage);
         bindingView.srlWan.setOnRefreshListener(this::swipeRefresh);

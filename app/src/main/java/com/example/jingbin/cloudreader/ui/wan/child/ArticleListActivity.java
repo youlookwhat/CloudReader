@@ -3,7 +3,6 @@ package com.example.jingbin.cloudreader.ui.wan.child;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
 
 import com.example.jingbin.cloudreader.R;
 import com.example.jingbin.cloudreader.adapter.WanAndroidAdapter;
@@ -11,6 +10,7 @@ import com.example.jingbin.cloudreader.base.BaseActivity;
 import com.example.jingbin.cloudreader.bean.wanandroid.HomeListBean;
 import com.example.jingbin.cloudreader.databinding.FragmentWanAndroidBinding;
 import com.example.jingbin.cloudreader.utils.CommonUtils;
+import com.example.jingbin.cloudreader.utils.RefreshHelper;
 import com.example.jingbin.cloudreader.viewmodel.wan.WanAndroidListViewModel;
 import com.example.xrecyclerview.XRecyclerView;
 
@@ -45,11 +45,8 @@ public class ArticleListActivity extends BaseActivity<WanAndroidListViewModel, F
     }
 
     private void initRefreshView() {
+        RefreshHelper.init(bindingView.xrvWan);
         bindingView.srlWan.setColorSchemeColors(CommonUtils.getColor(R.color.colorTheme));
-        bindingView.xrvWan.setLayoutManager(new LinearLayoutManager(this));
-        bindingView.xrvWan.setPullRefreshEnabled(false);
-        bindingView.xrvWan.clearHeader();
-        bindingView.xrvWan.setItemAnimator(null);
         mAdapter = new WanAndroidAdapter(this);
         bindingView.xrvWan.setAdapter(mAdapter);
         bindingView.srlWan.setOnRefreshListener(() -> bindingView.srlWan.postDelayed(() -> {
