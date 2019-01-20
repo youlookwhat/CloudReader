@@ -44,18 +44,17 @@
 
         <TextView
             android:id="@+id/tv_title"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="7dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:ellipsize="end"
             android:lineSpacingExtra="4dp"
             android:maxLines="2"
-            android:paddingRight="8dp"
             android:text="@{Html.fromHtml(bean.title)}"
             android:textColor="@color/colorContent"
             android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/iv_image"
             app:layout_constraintTop_toTopOf="@+id/iv_image"
             tools:text="支付宝" />
