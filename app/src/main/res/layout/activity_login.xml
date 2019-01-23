@@ -65,7 +65,8 @@
                 android:gravity="center_horizontal"
                 android:orientation="horizontal">
 
-                <android.support.v7.widget.AppCompatButton
+                <!--android 4.4 AppCompatButton Could not find a method register(View) in the activity class-->
+                <Button
                     style="@style/Widget.AppCompat.Button.Colored"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -79,7 +80,7 @@
                     style="@style/Widget.AppCompat.Button.Colored"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
+                    android:layout_marginStart="20dp"
                     android:layout_weight="1"
                     android:onClick="login"
                     android:text="登陆"

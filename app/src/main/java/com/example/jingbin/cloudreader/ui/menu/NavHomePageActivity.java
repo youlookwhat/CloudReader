@@ -13,6 +13,9 @@ import com.example.jingbin.cloudreader.utils.ShareUtils;
 import com.example.jingbin.cloudreader.utils.StatusBarUtil;
 import com.example.jingbin.cloudreader.utils.ToolbarHelper;
 
+/**
+ * @author jingbin
+ */
 public class NavHomePageActivity extends AppCompatActivity {
 
     @Override

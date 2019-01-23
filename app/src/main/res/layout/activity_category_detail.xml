@@ -18,8 +18,7 @@
         <android.support.design.widget.AppBarLayout
             android:id="@+id/appbar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/colorWhite">
+            android:layout_height="wrap_content">
 
             <android.support.design.widget.CollapsingToolbarLayout
                 android:id="@+id/collapsing"
@@ -85,6 +84,7 @@
                 android:id="@+id/tabLayout"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
+                android:background="@color/colorWhite"
                 app:tabGravity="center"
                 app:tabIndicatorColor="@color/colorTheme"
                 app:tabIndicatorHeight="2dp"

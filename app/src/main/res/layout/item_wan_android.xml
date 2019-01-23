@@ -20,8 +20,8 @@
         <import type="android.view.View" />
     </data>
 
+    <!--如果有点击事件，则内部的水波纹不能扩散-->
     <android.support.constraint.ConstraintLayout
-        android:id="@+id/ll_item_top"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:foreground="?attr/selectableItemBackgroundBorderless"
@@ -42,22 +42,23 @@
                 android:id="@+id/iv_new"
                 android:layout_width="40dp"
                 android:layout_height="25dp"
+                android:background="?selectableItemBackgroundBorderless"
                 android:src="@drawable/icon_new"
                 android:visibility="@{bean.fresh?View.VISIBLE:View.GONE}" />
 
             <TextView
-                android:id="@+id/textView4"
+                android:id="@+id/tv_tag_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
-                android:background="?android:attr/selectableItemBackground"
+                android:background="?selectableItemBackgroundBorderless"
                 android:onClick="@{()->adapter.openArticleList(bean)}"
                 android:paddingBottom="2dp"
                 android:paddingLeft="7dp"
                 android:paddingRight="7dp"
                 android:paddingTop="2dp"
                 android:text='@{TextUtils.isEmpty(bean.chapterName)?@string/string_empty:Html.fromHtml(bean.chapterName)}'
-                android:textColor="@color/colorContent"
+                android:textColor="@color/colorSubtitle"
                 android:textSize="13sp"
                 android:visibility="@{adapter.isNoShowChapterName?View.GONE:View.VISIBLE}"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -93,11 +94,11 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/iv_image"
             app:layout_constraintTop_toTopOf="@+id/iv_image"
-            tools:text="支付宝支付宝支付宝支付宝支付宝支付宝支付宝支付宝支付宝" />
+            tools:text="一款基于网易云音乐UI，使用玩安卓、Gank.Io及豆瓣api开发的符合Google.." />
 
 
         <TextView
-            android:id="@+id/textView2"
+            android:id="@+id/tv_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="13dp"
@@ -116,8 +117,8 @@
             android:text="@{@string/string_dian + bean.author}"
             android:textColor="@color/colorSubtitle"
             android:textSize="11sp"
-            app:layout_constraintStart_toEndOf="@+id/textView2"
-            app:layout_constraintTop_toTopOf="@+id/textView2"
+            app:layout_constraintStart_toEndOf="@+id/tv_time"
+            app:layout_constraintTop_toTopOf="@+id/tv_time"
             tools:text=" · jingbin" />
 
         <CheckBox
@@ -128,7 +129,7 @@
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
             android:layout_marginTop="3dp"
-            android:background="?attr/selectableItemBackgroundBorderless"
+            android:background="?selectableItemBackgroundBorderless"
             android:button="@drawable/selector_collect_check"
             android:checked="@{bean.collect}"
             android:gravity="center"

@@ -93,7 +93,7 @@
     </style>
     <!--分类详情 - 标题展开时的字体颜色-->
     <style name="collapsing_title_style_expanded" parent="TextAppearance.AppCompat.Title">
-        <item name="android:textSize">17sp</item>
+        <item name="android:textSize">20sp</item>
         <item name="android:textColor">@color/colorWhite</item>
 
     </style>
