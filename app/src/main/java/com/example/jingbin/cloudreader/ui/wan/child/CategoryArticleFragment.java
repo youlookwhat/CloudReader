@@ -21,7 +21,7 @@ import com.example.jingbin.cloudreader.viewmodel.wan.WanAndroidListViewModel;
 /**
  * @author jingbin
  * @date 2019/01/18.
- * @description 体系类别页面
+ * @description 体系类别详情页面
  */
 public class CategoryArticleFragment extends BaseFragment<WanAndroidListViewModel, FragmentCategoryArticleBinding> {
 
@@ -102,7 +102,6 @@ public class CategoryArticleFragment extends BaseFragment<WanAndroidListViewMode
                     mAdapter.addData(homeListBean.getData().getDatas());
                     mAdapter.notifyItemRangeInserted(positionStart, homeListBean.getData().getDatas().size());
                     mAdapter.loadMoreComplete();
-//                    bindingView.setNoLine(true);
                 } else {
                     if (viewModel.getPage() == 0) {
                         showError();

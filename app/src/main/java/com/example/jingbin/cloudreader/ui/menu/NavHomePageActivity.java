@@ -10,15 +10,21 @@ import android.view.View;
 import com.example.jingbin.cloudreader.R;
 import com.example.jingbin.cloudreader.databinding.ActivityNavHomePageBinding;
 import com.example.jingbin.cloudreader.utils.ShareUtils;
+import com.example.jingbin.cloudreader.utils.StatusBarUtil;
+import com.example.jingbin.cloudreader.utils.ToolbarHelper;
 
 public class NavHomePageActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // 4.4 标题透明
+        StatusBarUtil.setTranslucentStatus(this);
         ActivityNavHomePageBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_nav_home_page);
         // 解决7.0以上系统 滑动到顶部 标题裁减一半的问题
-        setSupportActionBar(binding.detailToolbar);
+//        setSupportActionBar(binding.detailToolbar);
+        ToolbarHelper.initFullBar(binding.detailToolbar, this);
+        binding.detailToolbar.setNavigationIcon(null);
 
         binding.fabShare.setOnClickListener(new View.OnClickListener() {
             @Override

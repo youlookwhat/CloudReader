@@ -25,6 +25,7 @@
         android:layout_height="wrap_content"
         android:background="@drawable/ripple_joke_item_bg"
         android:orientation="vertical"
+        android:paddingBottom="10dp"
         android:paddingLeft="8dp"
         android:paddingRight="8dp"
         android:paddingTop="8dp">
@@ -68,8 +69,8 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="58dp"
-            android:layout_marginRight="5dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginStart="58dp"
             android:lineSpacingExtra="4dp"
             android:text="@{bean.content}"
             android:textColor="@color/colorContent"
@@ -79,17 +80,12 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="58dp"
+            android:layout_marginStart="58dp"
             android:layout_marginTop="25dp"
             android:text="@{@string/string_joke + bean.categoryName}"
             android:textSize="12sp"
-            android:visibility="@{TextUtils.isEmpty(bean.categoryName) ? View.GONE : View.VISIBLE}" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1px"
-            android:layout_marginTop="13dp"
-            android:background="@color/colorLine" />
+            android:visibility="@{TextUtils.isEmpty(bean.categoryName) ? View.GONE : View.VISIBLE}"
+            tools:text="匿名用户" />
 
     </LinearLayout>
 </layout>

@@ -19,15 +19,13 @@
         <import type="android.view.View" />
     </data>
 
-    <RelativeLayout
+    <android.support.constraint.ConstraintLayout
         android:id="@+id/rl_item_link"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="?attr/selectableItemBackground"
         android:onClick="@{()->adapter.openDetail(bean)}"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        android:paddingTop="10dp">
+        android:padding="10dp">
 
         <TextView
             android:id="@+id/tv_title"
@@ -40,11 +38,5 @@
             android:textColor="@color/colorContent"
             tools:text="MMKV——基于 mmap 的高性能通用 key-value 组件MMKV——基于 mmap 的高性能通用 key-value 组件" />
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1px"
-            android:layout_below="@+id/tv_title"
-            android:layout_marginTop="10dp"
-            android:background="@color/colorHomeLine" />
-    </RelativeLayout>
+    </android.support.constraint.ConstraintLayout>
 </layout>

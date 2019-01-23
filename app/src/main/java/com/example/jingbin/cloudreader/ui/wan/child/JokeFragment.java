@@ -13,6 +13,7 @@ import com.example.jingbin.cloudreader.base.BaseFragment;
 import com.example.jingbin.cloudreader.bean.wanandroid.DuanZiBean;
 import com.example.jingbin.cloudreader.databinding.FragmentWanAndroidBinding;
 import com.example.jingbin.cloudreader.utils.CommonUtils;
+import com.example.jingbin.cloudreader.utils.RefreshHelper;
 import com.example.jingbin.cloudreader.viewmodel.menu.NoViewModel;
 import com.example.jingbin.cloudreader.viewmodel.wan.JokeViewModel;
 import com.example.jingbin.cloudreader.viewmodel.wan.WanNavigator;
@@ -72,11 +73,8 @@ public class JokeFragment extends BaseFragment<JokeViewModel, FragmentWanAndroid
     }
 
     private void initRefreshView() {
+        RefreshHelper.init(bindingView.xrvWan);
         bindingView.srlWan.setColorSchemeColors(CommonUtils.getColor(R.color.colorTheme));
-        bindingView.xrvWan.setLayoutManager(new LinearLayoutManager(getActivity()));
-        bindingView.xrvWan.setPullRefreshEnabled(false);
-        bindingView.xrvWan.clearHeader();
-        bindingView.xrvWan.setItemAnimator(null);
         mAdapter = new JokeAdapter();
         bindingView.xrvWan.setAdapter(mAdapter);
 
