@@ -40,18 +40,18 @@ If you have any questions, please write to [the issue][21] of making you don't u
 * 6、高仿网易云音乐歌单详情页。                                    
 * 7、RxBus代替EventBus进行组件之间通讯。                                    
 * 8、``ToolBar``的全方面使用。                                    
-* 9、``Glide``加载监听，获取缓存，圆角图片，高斯模糊。                                    
+* 9、``Glide``加载监听，获取缓存，圆形图片，高斯模糊。                                    
 * 10、水波纹点击效果详细使用与适配。                                    
 * 11、``Room``的基本使用。
 * 12、基于``DataBinding``的``ViewHolder``。                                    
 * 13、基于``DataBinding``的``BaseActivity``和``BaseFragment``。                                    
 * 14、``Fragment``懒加载模式。                                    
 * 15、``SwipeRefreshLayout``结合``RecyclerView``下拉刷新上拉加载。                                    
-* 16、``CoordinatorLayout``+``Behavior``实现标题栏渐变。                                                                       
+* 16、``CoordinatorLayout``+``Behavior``实现标题栏渐变和滑动置顶。                                                                       
 
 
 ## See Detail
-> [项目介绍详情](https://github.com/youlookwhat/CloudReader/blob/master/file/Introduction.md) | [细节优化详情](https://github.com/youlookwhat/CloudReader/wiki) | [**版本更新详情(V2.5.0)**](http://jingbin.me/2016/12/30/%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97-%E4%BA%91%E9%98%85/)
+> [项目介绍详情](https://github.com/youlookwhat/CloudReader/blob/master/file/Introduction.md) | [细节优化详情](https://github.com/youlookwhat/CloudReader/wiki) | [**版本更新详情(V2.7.0)**](http://jingbin.me/2016/12/30/%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97-%E4%BA%91%E9%98%85/)
 
 ### Download
 　[火速跳转](https://fir.im/cloudreader)                                    
@@ -65,6 +65,10 @@ If you have any questions, please write to [the issue][21] of making you don't u
 　
 
 ### Version
+#### V2.7.0（2019-02-14）
+ - 1、[新增] 知识体系详情页
+ - 2、[优化] 项目主页优化
+
 #### V2.6.0（2019-01-16）
  - 1、[新增] 豆瓣即将上映电影数据
  - 2、[优化] 启动白屏问题优化
