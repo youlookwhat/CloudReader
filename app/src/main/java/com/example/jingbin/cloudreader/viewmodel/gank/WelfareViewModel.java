@@ -3,23 +3,23 @@ package com.example.jingbin.cloudreader.viewmodel.gank;
 import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.MutableLiveData;
-import android.arch.lifecycle.ViewModel;
 import android.support.annotation.NonNull;
 
 import com.example.http.HttpUtils;
-import com.example.jingbin.cloudreader.bean.CollectUrlBean;
 import com.example.jingbin.cloudreader.bean.GankIoDataBean;
 import com.example.jingbin.cloudreader.data.model.GankOtherModel;
 import com.example.jingbin.cloudreader.http.RequestImpl;
 
 import java.util.ArrayList;
 
-import rx.Observable;
-import rx.Subscription;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Action1;
-import rx.functions.Func1;
-import rx.schedulers.Schedulers;
+import io.reactivex.Observable;
+import io.reactivex.ObservableEmitter;
+import io.reactivex.ObservableOnSubscribe;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Schedulers;
+
 
 /**
  * @author jingbin
@@ -75,7 +75,7 @@ public class WelfareViewModel extends AndroidViewModel {
             }
 
             @Override
-            public void addSubscription(Subscription subscription) {
+            public void addSubscription(Disposable subscription) {
             }
         });
         return data;
@@ -87,10 +87,10 @@ public class WelfareViewModel extends AndroidViewModel {
      * @param gankIoDataBean 原数据
      */
     private void handleImageList(GankIoDataBean gankIoDataBean) {
-        Subscription subscribe = Observable.just(gankIoDataBean)
-                .map(new Func1<GankIoDataBean, ArrayList<ArrayList<String>>>() {
+        Observable
+                .create(new ObservableOnSubscribe<ArrayList<ArrayList<String>>>() {
                     @Override
-                    public ArrayList<ArrayList<String>> call(GankIoDataBean gankIoDataBean) {
+                    public void subscribe(ObservableEmitter<ArrayList<ArrayList<String>>> emitter) throws Exception {
                         imgList.clear();
                         imageTitleList.clear();
                         for (int i = 0; i < gankIoDataBean.getResults().size(); i++) {
@@ -100,17 +100,19 @@ public class WelfareViewModel extends AndroidViewModel {
                         allList.clear();
                         allList.add(imgList);
                         allList.add(imageTitleList);
-                        return allList;
+                        emitter.onNext(allList);
                     }
                 })
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Action1<ArrayList<ArrayList<String>>>() {
+                .subscribe(new Consumer<ArrayList<ArrayList<String>>>() {
                     @Override
-                    public void call(ArrayList<ArrayList<String>> arrayLists) {
+                    public void accept(ArrayList<ArrayList<String>> arrayLists) throws Exception {
                         allListData.setValue(arrayLists);
                     }
                 });
+
+
     }
 
     public int getPage() {

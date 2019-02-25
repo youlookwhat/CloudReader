@@ -8,19 +8,13 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.example.jingbin.cloudreader.R;
-import com.example.jingbin.cloudreader.bean.wanandroid.LoginBean;
 import com.example.jingbin.cloudreader.data.UserUtil;
 import com.example.jingbin.cloudreader.data.model.LoginModel;
 import com.example.jingbin.cloudreader.data.room.Injection;
 import com.example.jingbin.cloudreader.data.room.User;
 import com.example.jingbin.cloudreader.data.room.UserDataCallback;
-import com.example.jingbin.cloudreader.http.HttpClient;
 import com.example.jingbin.cloudreader.view.OnLoginListener;
 
-import rx.Observer;
-import rx.Subscription;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
 
 /**
  * @author jingbin

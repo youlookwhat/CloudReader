@@ -6,13 +6,11 @@ import android.arch.lifecycle.MutableLiveData;
 import android.support.annotation.NonNull;
 
 import com.example.jingbin.cloudreader.bean.HotMovieBean;
-import com.example.jingbin.cloudreader.bean.book.BookBean;
-import com.example.jingbin.cloudreader.data.model.OneRepository;
 import com.example.jingbin.cloudreader.http.HttpClient;
 
-import rx.Observer;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Schedulers;
 
 /**
  * @author jingbin
@@ -33,19 +31,15 @@ public class UpcomingViewModel extends AndroidViewModel {
         HttpClient.Builder.getDouBanService().getComingSoon(mStart, mCount)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<HotMovieBean>() {
+                .subscribe(new Consumer<HotMovieBean>() {
                     @Override
-                    public void onCompleted() {
+                    public void accept(HotMovieBean hotMovieBean) throws Exception {
+                        data.setValue(hotMovieBean);
                     }
-
+                }, new Consumer<Throwable>() {
                     @Override
-                    public void onError(Throwable e) {
+                    public void accept(@NonNull Throwable throwable) throws Exception {
                         data.setValue(null);
-                    }
-
-                    @Override
-                    public void onNext(HotMovieBean bookBean) {
-                        data.setValue(bookBean);
                     }
                 });
         return data;

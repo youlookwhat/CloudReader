@@ -18,13 +18,14 @@ import com.example.jingbin.cloudreader.bean.wanandroid.QsbkListBean;
 import com.example.jingbin.cloudreader.bean.wanandroid.TreeBean;
 import com.example.jingbin.cloudreader.bean.wanandroid.WanAndroidBannerBean;
 
+import io.reactivex.Flowable;
+import io.reactivex.Observable;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
-import rx.Observable;
 
 /**
  * @author jingbin
@@ -98,7 +99,7 @@ public interface HttpClient {
      * 豆瓣即将上映电影
      */
     @GET("v2/movie/coming_soon")
-    Observable<HotMovieBean> getComingSoon(@Query("start") int start, @Query("count") int count);
+    Flowable<HotMovieBean> getComingSoon(@Query("start") int start, @Query("count") int count);
 
     /**
      * 获取电影详情
@@ -174,7 +175,7 @@ public interface HttpClient {
      * 退出
      */
     @GET("user/logout/json")
-    Observable<LoginBean> logout();
+    Flowable<LoginBean> logout();
 
 
     /**
@@ -183,7 +184,7 @@ public interface HttpClient {
      * @param page 页码
      */
     @GET("lg/collect/list/{page}/json")
-    Observable<HomeListBean> getCollectList(@Path("page") int page);
+    Flowable<HomeListBean> getCollectList(@Path("page") int page);
 
     /**
      * 收藏本站文章，errorCode返回0为成功
@@ -191,7 +192,7 @@ public interface HttpClient {
      * @param id 文章id
      */
     @POST("lg/collect/{id}/json")
-    Observable<HomeListBean> collect(@Path("id") int id);
+    Flowable<HomeListBean> collect(@Path("id") int id);
 
     /**
      * 取消收藏(首页文章列表)
@@ -199,7 +200,7 @@ public interface HttpClient {
      * @param id 文章id
      */
     @POST("lg/uncollect_originId/{id}/json")
-    Observable<HomeListBean> unCollectOrigin(@Path("id") int id);
+    Flowable<HomeListBean> unCollectOrigin(@Path("id") int id);
 
     /**
      * 取消收藏，我的收藏页面（该页面包含自己录入的内容）
@@ -211,7 +212,7 @@ public interface HttpClient {
      */
     @FormUrlEncoded
     @POST("lg/uncollect/{id}/json")
-    Observable<HomeListBean> unCollect(@Path("id") int id, @Field("originId") int originId);
+    Flowable<HomeListBean> unCollect(@Path("id") int id, @Field("originId") int originId);
 
     /**
      * 体系数据
@@ -227,7 +228,7 @@ public interface HttpClient {
      */
     @FormUrlEncoded
     @POST("lg/collect/addtool/json")
-    Observable<HomeListBean> collectUrl(@Field("name") String name, @Field("link") String link);
+    Flowable<HomeListBean> collectUrl(@Field("name") String name, @Field("link") String link);
 
     /**
      * 编辑收藏网站
@@ -237,7 +238,7 @@ public interface HttpClient {
      */
     @FormUrlEncoded
     @POST("lg/collect/updatetool/json")
-    Observable<HomeListBean> updateUrl(@Field("id") int id, @Field("name") String name, @Field("link") String link);
+    Flowable<HomeListBean> updateUrl(@Field("id") int id, @Field("name") String name, @Field("link") String link);
 
     /**
      * 删除收藏网站
@@ -246,17 +247,17 @@ public interface HttpClient {
      */
     @FormUrlEncoded
     @POST("lg/collect/deletetool/json")
-    Observable<HomeListBean> unCollectUrl(@Field("id") int id);
+    Flowable<HomeListBean> unCollectUrl(@Field("id") int id);
 
     /**
      * 收藏网站列表
      */
     @GET("lg/collect/usertools/json")
-    Observable<CollectUrlBean> getCollectUrlList();
+    Flowable<CollectUrlBean> getCollectUrlList();
 
     /**
      * 导航数据
      */
     @GET("navi/json")
-    Observable<NaviJsonBean> getNaviJson();
+    Flowable<NaviJsonBean> getNaviJson();
 }

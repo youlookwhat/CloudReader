@@ -10,7 +10,7 @@ import com.example.jingbin.cloudreader.bean.GankIoDataBean;
 import com.example.jingbin.cloudreader.data.model.GankOtherModel;
 import com.example.jingbin.cloudreader.http.RequestImpl;
 
-import rx.Subscription;
+import io.reactivex.disposables.Disposable;
 
 /**
  * @author jingbin
@@ -59,7 +59,7 @@ public class BigAndroidViewModel extends AndroidViewModel {
             }
 
             @Override
-            public void addSubscription(Subscription subscription) {
+            public void addSubscription(Disposable subscription) {
             }
         });
         return data;

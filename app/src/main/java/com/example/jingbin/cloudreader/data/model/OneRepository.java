@@ -6,9 +6,9 @@ import com.example.jingbin.cloudreader.bean.HotMovieBean;
 import com.example.jingbin.cloudreader.http.HttpClient;
 import com.example.jingbin.cloudreader.viewmodel.movie.OnMovieLoadListener;
 
-import rx.Observer;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Schedulers;
 
 /**
  * @author jingbin
@@ -20,21 +20,18 @@ public class OneRepository {
     public MutableLiveData<HotMovieBean> getHotMovie() {
         final MutableLiveData<HotMovieBean> data = new MutableLiveData<>();
         HttpClient.Builder.getDouBanService().getHotMovie().subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread()).subscribe(new Observer<HotMovieBean>() {
-            @Override
-            public void onCompleted() {
-            }
+                .observeOn(AndroidSchedulers.mainThread()).subscribe(new Consumer<HotMovieBean>() {
 
             @Override
-            public void onError(Throwable e) {
-                data.setValue(null);
-            }
-
-            @Override
-            public void onNext(HotMovieBean hotMovieBean) {
+            public void accept(HotMovieBean hotMovieBean) throws Exception {
                 if (hotMovieBean != null) {
                     data.setValue(hotMovieBean);
                 }
+            }
+        }, new Consumer<Throwable>() {
+            @Override
+            public void accept(Throwable throwable) throws Exception {
+                data.setValue(null);
             }
         });
         return data;
@@ -42,24 +39,21 @@ public class OneRepository {
 
     public void getMovieTop250(int start, int count, OnMovieLoadListener loadListener) {
         HttpClient.Builder.getDouBanService().getMovieTop250(start, count).subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread()).subscribe(new Observer<HotMovieBean>() {
+                .observeOn(AndroidSchedulers.mainThread()).subscribe(new Consumer<HotMovieBean>() {
             @Override
-            public void onCompleted() {
-            }
-
-            @Override
-            public void onError(Throwable e) {
-                if (loadListener != null) {
-                    loadListener.onFailure();
-                }
-            }
-
-            @Override
-            public void onNext(HotMovieBean hotMovieBean) {
+            public void accept(HotMovieBean hotMovieBean) throws Exception {
                 if (hotMovieBean != null) {
                     if (loadListener != null) {
                         loadListener.onSuccess(hotMovieBean);
                     }
+                }
+            }
+
+        }, new Consumer<Throwable>() {
+            @Override
+            public void accept(Throwable throwable) throws Exception {
+                if (loadListener != null) {
+                    loadListener.onFailure();
                 }
             }
         });

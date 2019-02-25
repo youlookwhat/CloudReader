@@ -8,9 +8,9 @@ import android.support.annotation.NonNull;
 import com.example.jingbin.cloudreader.bean.wanandroid.NaviJsonBean;
 import com.example.jingbin.cloudreader.http.HttpClient;
 
-import rx.Observer;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Schedulers;
 
 /**
  * @author jingbin
@@ -29,18 +29,9 @@ public class NaviViewModel extends AndroidViewModel {
         HttpClient.Builder.getWanAndroidServer().getNaviJson()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<NaviJsonBean>() {
+                .subscribe(new Consumer<NaviJsonBean>() {
                     @Override
-                    public void onCompleted() {
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        data.setValue(null);
-                    }
-
-                    @Override
-                    public void onNext(NaviJsonBean naviJsonBean) {
+                    public void accept(NaviJsonBean naviJsonBean) throws Exception {
                         if (naviJsonBean != null
                                 && naviJsonBean.getData() != null
                                 && naviJsonBean.getData().size() > 0) {
@@ -49,6 +40,11 @@ public class NaviViewModel extends AndroidViewModel {
                         } else {
                             data.setValue(null);
                         }
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+                        data.setValue(null);
                     }
                 });
         return data;

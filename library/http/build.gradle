@@ -26,18 +26,18 @@ dependencies {
     testImplementation "junit:junit:$rootProject.ext.junitVersion"
     implementation "com.android.support:appcompat-v7:$rootProject.supportLibraryVersion"
     // 网络请求
-    implementation 'com.google.code.gson:gson:2.8.2'
+    implementation 'com.google.code.gson:gson:2.8.5'
     implementation 'com.squareup.retrofit2:retrofit:2.4.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
     implementation 'com.squareup.okhttp3:okhttp:3.10.0'
     implementation 'com.squareup.okhttp3:logging-interceptor:3.9.1'
     implementation 'com.squareup.okio:okio:1.14.0'
     // 用于链式调用
+    api "io.reactivex.rxjava2:rxjava:2.2.7"
+    api 'io.reactivex.rxjava2:rxandroid:2.0.1'
     api 'io.reactivex:rxandroid:1.2.1'
-    // 使用adapter-rxjava 将 compile 替换为 implementation 会报错
-    // 因为implementation只能用在本项目中，主app项目不能引用 https://www.jianshu.com/p/f34c179bc9d0
-    api 'com.squareup.retrofit2:adapter-rxjava:2.4.0'
-    //    api 'com.squareup.retrofit2:adapter-rxjava2:2.4.0'
+    // 使用adapter-rxjava 将 compile 替换为 implementation 会报错 因为implementation只能用在本项目中，主app项目不能引用
+    api 'com.squareup.retrofit2:adapter-rxjava2:2.4.0'
     // add cookie
     implementation files('libs/commons-lang-2.6.jar')
 }

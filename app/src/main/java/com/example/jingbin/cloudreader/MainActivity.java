@@ -52,6 +52,9 @@ import com.example.jingbin.cloudreader.view.webview.WebViewActivity;
 
 import java.util.ArrayList;
 
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Consumer;
 import rx.Subscription;
 import rx.subscriptions.CompositeSubscription;
 
@@ -73,7 +76,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private ImageView ivTitleTwo;
     private ImageView ivTitleOne;
     private ImageView ivTitleThree;
-    private CompositeSubscription mCompositeSubscription;
+    private CompositeDisposable mCompositeDisposable;
     private NavHeaderMainBinding bind;
 
     @Override
@@ -377,23 +380,28 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
      * 每日推荐点击"新电影热映榜"跳转
      */
     private void initRxBus() {
-        Subscription subscribe = RxBus.getDefault().toObservable(RxCodeConstants.JUMP_TYPE_TO_ONE, RxBusBaseMessage.class)
-                .subscribe(integer -> setCurrentItem(2));
+        Disposable subscribe = RxBus.getDefault().toObservable(RxCodeConstants.JUMP_TYPE_TO_ONE, RxBusBaseMessage.class)
+                .subscribe(new Consumer<RxBusBaseMessage>() {
+                    @Override
+                    public void accept(RxBusBaseMessage rxBusBaseMessage) throws Exception {
+                        setCurrentItem(2);
+                    }
+                });
         addSubscription(subscribe);
     }
 
-    public void addSubscription(Subscription s) {
-        if (this.mCompositeSubscription == null) {
-            this.mCompositeSubscription = new CompositeSubscription();
+    public void addSubscription(Disposable s) {
+        if (this.mCompositeDisposable == null) {
+            this.mCompositeDisposable = new CompositeDisposable();
         }
-        this.mCompositeSubscription.add(s);
+        this.mCompositeDisposable.add(s);
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        if (this.mCompositeSubscription != null && mCompositeSubscription.hasSubscriptions()) {
-            this.mCompositeSubscription.unsubscribe();
+        if (this.mCompositeDisposable != null && !mCompositeDisposable.isDisposed()) {
+            this.mCompositeDisposable.clear();
         }
         isLaunch = false;
     }

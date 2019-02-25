@@ -21,10 +21,11 @@ import com.example.jingbin.cloudreader.utils.CommonUtils;
 import com.example.jingbin.cloudreader.utils.StringFormatUtil;
 import com.example.jingbin.cloudreader.view.webview.WebViewActivity;
 
-import rx.Observer;
-import rx.Subscription;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
+import io.reactivex.Observer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
+
 
 /**
  * 最新的电影详情页：
@@ -79,18 +80,24 @@ public class OneMovieDetailActivity extends BaseHeaderActivity<HeaderSlideShapeB
     }
 
     private void loadMovieDetail() {
-        Subscription get = HttpClient.Builder.getDouBanService().getMovieDetail(subjectsBean.getId())
+        HttpClient.Builder.getDouBanService().getMovieDetail(subjectsBean.getId())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<MovieDetailBean>() {
-                    @Override
-                    public void onCompleted() {
-                        showContentView();
-                    }
 
                     @Override
                     public void onError(Throwable e) {
                         showError();
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        showContentView();
+                    }
+
+                    @Override
+                    public void onSubscribe(Disposable d) {
+                        addSubscription(d);
                     }
 
                     @Override
@@ -109,8 +116,6 @@ public class OneMovieDetailActivity extends BaseHeaderActivity<HeaderSlideShapeB
                         transformData(movieDetailBean);
                     }
                 });
-        addSubscription(get);
-
     }
 
     /**

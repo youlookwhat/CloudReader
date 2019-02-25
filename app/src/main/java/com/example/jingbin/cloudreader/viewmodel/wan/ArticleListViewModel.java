@@ -8,9 +8,10 @@ import com.example.jingbin.cloudreader.base.BaseListViewModel;
 import com.example.jingbin.cloudreader.bean.wanandroid.HomeListBean;
 import com.example.jingbin.cloudreader.http.HttpClient;
 
-import rx.Observer;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Schedulers;
+
 
 /**
  * @author jingbin
@@ -31,21 +32,9 @@ public class ArticleListViewModel extends BaseListViewModel {
         final MutableLiveData<HomeListBean> data = new MutableLiveData<>();
         HttpClient.Builder.getWanAndroidServer().getCollectList(mPage)
                 .subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<HomeListBean>() {
+                .subscribe(new Consumer<HomeListBean>() {
                     @Override
-                    public void onCompleted() {
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        if (mPage > 0) {
-                            mPage--;
-                        }
-                        data.setValue(null);
-                    }
-
-                    @Override
-                    public void onNext(HomeListBean bean) {
+                    public void accept(HomeListBean bean) throws Exception {
                         if (bean == null
                                 || bean.getData() == null
                                 || bean.getData().getDatas() == null
@@ -54,6 +43,14 @@ public class ArticleListViewModel extends BaseListViewModel {
                         } else {
                             data.setValue(bean);
                         }
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+                        if (mPage > 0) {
+                            mPage--;
+                        }
+                        data.setValue(null);
                     }
                 });
         return data;

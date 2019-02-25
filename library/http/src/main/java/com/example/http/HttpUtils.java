@@ -38,13 +38,13 @@ import okhttp3.Request;
 import okhttp3.Response;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
-import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * Created by jingbin on 2017/2/14.
+ * updated by jingbin on 2019/2/25.
  * 网络请求工具类
- * <p>
  * 豆瓣api:
  * 问题：API限制为每分钟40次，一不小心就超了，马上KEY就被封,用不带KEY的API，每分钟只有可怜的10次。
  * 返回：code:112（rate_limit_exceeded2 IP 访问速度限制）
@@ -59,7 +59,6 @@ public class HttpUtils {
     private Gson gson;
     private Context context;
     private IpmlTokenGetListener listener;
-    private boolean debug;
     // gankio、豆瓣、（轮播图）
     public final static String API_GANKIO = "https://gank.io/api/";
     public final static String API_DOUBAN = "Https://api.douban.com/";
@@ -84,9 +83,8 @@ public class HttpUtils {
         return instance;
     }
 
-    public void init(Context context, boolean debug) {
+    public void init(Context context) {
         this.context = context;
-        this.debug = debug;
         HttpHead.init(context);
     }
 
@@ -97,7 +95,7 @@ public class HttpUtils {
         builder.baseUrl(apiUrl);//设置远程地址
         builder.addConverterFactory(new NullOnEmptyConverterFactory());
         builder.addConverterFactory(GsonConverterFactory.create(getGson()));
-        builder.addCallAdapterFactory(RxJavaCallAdapterFactory.create());
+        builder.addCallAdapterFactory(RxJava2CallAdapterFactory.create());
         return builder;
     }
 
@@ -146,7 +144,9 @@ public class HttpUtils {
             // 添加缓存，无网访问时会拿缓存,只会缓存get请求
             okBuilder.addInterceptor(new AddCacheInterceptor(context));
             okBuilder.cache(cache);
-            okBuilder.addInterceptor(getInterceptor());
+            okBuilder.addInterceptor(new HttpLoggingInterceptor()
+                    .setLevel(BuildConfig.DEBUG ?
+                            HttpLoggingInterceptor.Level.BODY : HttpLoggingInterceptor.Level.NONE));
             okBuilder.hostnameVerifier(new HostnameVerifier() {
                 @SuppressLint("BadHostnameVerifier")
                 @Override
@@ -154,7 +154,6 @@ public class HttpUtils {
                     return true;
                 }
             });
-
             return okBuilder.build();
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -190,16 +189,6 @@ public class HttpUtils {
             }
             return chain.proceed(builder.build());
         }
-    }
-
-    private HttpLoggingInterceptor getInterceptor() {
-        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
-        if (debug) {
-            interceptor.setLevel(HttpLoggingInterceptor.Level.BODY); // 测试
-        } else {
-            interceptor.setLevel(HttpLoggingInterceptor.Level.NONE); // 打包
-        }
-        return interceptor;
     }
 
     private class AddCacheInterceptor implements Interceptor {

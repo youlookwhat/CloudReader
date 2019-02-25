@@ -8,9 +8,10 @@ import android.support.annotation.NonNull;
 import com.example.jingbin.cloudreader.bean.wanandroid.TreeBean;
 import com.example.jingbin.cloudreader.http.HttpClient;
 
-import rx.Observer;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Schedulers;
+
 
 /**
  * @author jingbin
@@ -30,19 +31,15 @@ public class TreeViewModel extends AndroidViewModel {
         HttpClient.Builder.getWanAndroidServer().getTree()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<TreeBean>() {
+                .subscribe(new Consumer<TreeBean>() {
                     @Override
-                    public void onCompleted() {
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        data.setValue(null);
-                    }
-
-                    @Override
-                    public void onNext(TreeBean treeBean) {
+                    public void accept(TreeBean treeBean) throws Exception {
                         data.setValue(treeBean);
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+                        data.setValue(null);
                     }
                 });
         return data;

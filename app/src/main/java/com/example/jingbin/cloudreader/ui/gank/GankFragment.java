@@ -19,8 +19,8 @@ import com.example.jingbin.cloudreader.viewmodel.menu.NoViewModel;
 
 import java.util.ArrayList;
 
-import rx.Subscription;
-import rx.functions.Action1;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Consumer;
 
 /**
  * Created by jingbin on 16/11/21.
@@ -82,10 +82,10 @@ public class GankFragment extends BaseFragment<NoViewModel, FragmentGankBinding>
      * 每日推荐点击"更多"跳转
      */
     private void initRxBus() {
-        Subscription subscription = RxBus.getDefault().toObservable(RxCodeConstants.JUMP_TYPE, Integer.class)
-                .subscribe(new Action1<Integer>() {
+        Disposable subscribe = RxBus.getDefault().toObservable(RxCodeConstants.JUMP_TYPE, Integer.class)
+                .subscribe(new Consumer<Integer>() {
                     @Override
-                    public void call(Integer integer) {
+                    public void accept(Integer integer) throws Exception {
                         if (integer == 0) {
                             bindingView.vpGank.setCurrentItem(3);
                         } else if (integer == 1) {
@@ -95,6 +95,6 @@ public class GankFragment extends BaseFragment<NoViewModel, FragmentGankBinding>
                         }
                     }
                 });
-        addSubscription(subscription);
+        addSubscription(subscribe);
     }
 }

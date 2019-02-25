@@ -1,14 +1,13 @@
 package com.example.jingbin.cloudreader.data.model;
 
 import com.example.jingbin.cloudreader.bean.wanandroid.LoginBean;
-import com.example.jingbin.cloudreader.data.UserUtil;
-import com.example.jingbin.cloudreader.data.room.Injection;
 import com.example.jingbin.cloudreader.http.HttpClient;
 import com.example.jingbin.cloudreader.utils.ToastUtil;
 
-import rx.Observer;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Schedulers;
+
 
 /**
  * Created by jingbin on 2018/11/8.
@@ -25,18 +24,9 @@ public class LoginModel {
         HttpClient.Builder.getWanAndroidServer().logout()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<LoginBean>() {
+                .subscribe(new Consumer<LoginBean>() {
                     @Override
-                    public void onCompleted() {
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        ToastUtil.showToastLong("退出失败");
-                    }
-
-                    @Override
-                    public void onNext(LoginBean bean) {
+                    public void accept(LoginBean bean) throws Exception {
                         if (bean != null && bean.getErrorCode() == 0) {
                             if (listener != null) {
                                 listener.logout();
@@ -46,6 +36,11 @@ public class LoginModel {
                                 ToastUtil.showToastLong(bean.getErrorMsg());
                             }
                         }
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+                        ToastUtil.showToastLong("退出失败");
                     }
                 });
     }

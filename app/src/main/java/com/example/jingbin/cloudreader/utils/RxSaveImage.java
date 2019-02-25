@@ -38,12 +38,13 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 
-import rx.Observable;
-import rx.Subscriber;
-import rx.Subscription;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
+import io.reactivex.ObservableEmitter;
+import io.reactivex.ObservableOnSubscribe;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
+import io.reactivex.Observable;
 
 /**
  * 保存图片，重复插入图片提示已存在
@@ -53,19 +54,19 @@ import rx.schedulers.Schedulers;
 public class RxSaveImage {
 
     private static Observable<String> saveImageAndGetPathObservable(Activity context, String url, String title) {
-        return Observable.unsafeCreate(new Observable.OnSubscribe<String>() {
+        return Observable.create(new ObservableOnSubscribe<String>() {
             @Override
-            public void call(Subscriber<? super String> subscriber) {
+            public void subscribe(ObservableEmitter<String> emitter) throws Exception {
                 // 检查路径
                 if (TextUtils.isEmpty(url) || TextUtils.isEmpty(title)) {
-                    subscriber.onError(new Exception("请检查图片路径"));
+                    emitter.onError(new Exception("请检查图片路径"));
                 }
                 // 检查图片是否已存在
                 File appDir = new File(Environment.getExternalStorageDirectory(), "云阅相册");
                 if (appDir.exists()) {
                     File file = new File(appDir, getFileName(url, title));
                     if (file.exists()) {
-                        subscriber.onError(new Exception("图片已存在"));
+                        emitter.onError(new Exception("图片已存在"));
                     }
                 }
                 // 没有目录创建目录
@@ -89,14 +90,14 @@ public class RxSaveImage {
                         Intent scannerIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, uri);
                         context.sendBroadcast(scannerIntent);
                     } else {
-                        subscriber.onError(new Exception("无法下载到图片"));
+                        emitter.onError(new Exception("无法下载到图片"));
                     }
 
                 } catch (Exception e) {
-                    subscriber.onError(e);
+                    emitter.onError(e);
                 }
-                subscriber.onNext("");
-                subscriber.onCompleted();
+                emitter.onNext("");
+                emitter.onComplete();
             }
         }).subscribeOn(Schedulers.io());
     }
@@ -105,7 +106,7 @@ public class RxSaveImage {
     public static void saveImageToGallery(Activity context, String mImageUrl, String mImageTitle) {
         ToastUtil.showToast("开始下载图片");
         // @formatter:off
-        Subscription s = RxSaveImage.saveImageAndGetPathObservable(context, mImageUrl, mImageTitle)
+        RxSaveImage.saveImageAndGetPathObservable(context, mImageUrl, mImageTitle)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(uri -> {
                     File appDir = new File(Environment.getExternalStorageDirectory(), "云阅相册");
@@ -113,8 +114,6 @@ public class RxSaveImage {
                             appDir.getAbsolutePath());
                     ToastUtil.showToastLong(msg);
                 }, error -> ToastUtil.showToastLong(error.getMessage()));
-        // @formatter:on
-//        addSubscription(s);
     }
 
     /**

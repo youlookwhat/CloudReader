@@ -12,6 +12,7 @@ import com.example.jingbin.cloudreader.data.model.JokeModel;
 
 import java.util.List;
 
+import io.reactivex.disposables.Disposable;
 import rx.Subscription;
 
 /**
@@ -53,7 +54,7 @@ public class JokeViewModel extends AndroidViewModel {
         }
 
         @Override
-        public void addSubscription(Subscription subscription) {
+        public void addSubscription(Disposable subscription) {
         }
     };
 

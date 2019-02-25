@@ -21,6 +21,7 @@ import com.example.jingbin.cloudreader.utils.TimeUtil;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.reactivex.disposables.Disposable;
 import rx.Subscription;
 
 /**
@@ -151,7 +152,7 @@ public class EverydayViewModel extends AndroidViewModel {
             }
 
             @Override
-            public void addSubscription(Subscription subscription) {
+            public void addSubscription(Disposable subscription) {
             }
         });
     }
@@ -189,7 +190,7 @@ public class EverydayViewModel extends AndroidViewModel {
             }
 
             @Override
-            public void addSubscription(Subscription subscription) {
+            public void addSubscription(Disposable subscription) {
             }
         });
     }

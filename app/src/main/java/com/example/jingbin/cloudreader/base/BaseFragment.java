@@ -19,14 +19,9 @@ import android.widget.RelativeLayout;
 
 import com.example.jingbin.cloudreader.R;
 import com.example.jingbin.cloudreader.utils.ClassUtil;
-import com.example.jingbin.cloudreader.utils.PerfectClickListener;
-import com.example.jingbin.cloudreader.viewmodel.menu.NoViewModel;
 
-import java.lang.reflect.ParameterizedType;
-import java.lang.reflect.Type;
-
-import rx.Subscription;
-import rx.subscriptions.CompositeSubscription;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.disposables.Disposable;
 
 /**
  * 是没有title的Fragment
@@ -47,7 +42,7 @@ public abstract class BaseFragment<VM extends AndroidViewModel, SV extends ViewD
     protected RelativeLayout mContainer;
     // 动画
     private AnimationDrawable mAnimationDrawable;
-    private CompositeSubscription mCompositeSubscription;
+    private CompositeDisposable mCompositeDisposable;
 
     @Nullable
     @Override
@@ -200,24 +195,24 @@ public abstract class BaseFragment<VM extends AndroidViewModel, SV extends ViewD
         }
     }
 
-    public void addSubscription(Subscription s) {
-        if (this.mCompositeSubscription == null) {
-            this.mCompositeSubscription = new CompositeSubscription();
+    public void addSubscription(Disposable disposable) {
+        if (this.mCompositeDisposable == null) {
+            this.mCompositeDisposable = new CompositeDisposable();
         }
-        this.mCompositeSubscription.add(s);
+        this.mCompositeDisposable.add(disposable);
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        if (this.mCompositeSubscription != null && mCompositeSubscription.hasSubscriptions()) {
-            this.mCompositeSubscription.unsubscribe();
+        if (this.mCompositeDisposable != null && !mCompositeDisposable.isDisposed()) {
+            this.mCompositeDisposable.clear();
         }
     }
 
-    public void removeSubscription() {
-        if (this.mCompositeSubscription != null && mCompositeSubscription.hasSubscriptions()) {
-            this.mCompositeSubscription.unsubscribe();
+    public void removeDisposable() {
+        if (this.mCompositeDisposable != null && !mCompositeDisposable.isDisposed()) {
+            this.mCompositeDisposable.dispose();
         }
     }
 }

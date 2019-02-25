@@ -24,14 +24,14 @@ import com.example.jingbin.cloudreader.utils.CommonUtils;
 import com.example.jingbin.cloudreader.utils.PerfectClickListener;
 import com.example.jingbin.cloudreader.view.statusbar.StatusBarUtil;
 
-import rx.Subscription;
-import rx.subscriptions.CompositeSubscription;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.disposables.Disposable;
 
 /**
  * @author jingbin
  * @date 16/12/10
  */
-public abstract class BaseActivity<VM extends AndroidViewModel,SV extends ViewDataBinding> extends AppCompatActivity {
+public abstract class BaseActivity<VM extends AndroidViewModel, SV extends ViewDataBinding> extends AppCompatActivity {
 
     // ViewModel
     protected VM viewModel;
@@ -41,7 +41,7 @@ public abstract class BaseActivity<VM extends AndroidViewModel,SV extends ViewDa
     private View loadingView;
     private ActivityBaseBinding mBaseBinding;
     private AnimationDrawable mAnimationDrawable;
-    private CompositeSubscription mCompositeSubscription;
+    private CompositeDisposable mCompositeDisposable;
 
     protected <T extends View> T getView(int id) {
         return (T) findViewById(id);
@@ -185,24 +185,25 @@ public abstract class BaseActivity<VM extends AndroidViewModel,SV extends ViewDa
 
     }
 
-    public void addSubscription(Subscription s) {
-        if (this.mCompositeSubscription == null) {
-            this.mCompositeSubscription = new CompositeSubscription();
+    public void addSubscription(Disposable s) {
+        if (this.mCompositeDisposable == null) {
+            this.mCompositeDisposable = new CompositeDisposable();
         }
-        this.mCompositeSubscription.add(s);
+        this.mCompositeDisposable.add(s);
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        if (this.mCompositeSubscription != null && mCompositeSubscription.hasSubscriptions()) {
-            this.mCompositeSubscription.unsubscribe();
+        if (this.mCompositeDisposable != null && !mCompositeDisposable.isDisposed()) {
+            // clear 和 dispose的区别是：  disposed = true;
+            this.mCompositeDisposable.clear();
         }
     }
 
-    public void removeSubscription() {
-        if (this.mCompositeSubscription != null && mCompositeSubscription.hasSubscriptions()) {
-            this.mCompositeSubscription.unsubscribe();
+    public void removeDisposable() {
+        if (this.mCompositeDisposable != null && !mCompositeDisposable.isDisposed()) {
+            this.mCompositeDisposable.dispose();
         }
     }
 }

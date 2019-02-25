@@ -7,10 +7,10 @@ import com.example.jingbin.cloudreader.BuildConfig;
 import com.example.jingbin.cloudreader.bean.UpdateBean;
 import com.example.jingbin.cloudreader.http.HttpClient;
 
-import rx.Observer;
-import rx.Subscription;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Schedulers;
+
 
 /**
  * @author jingbin
@@ -30,24 +30,12 @@ public class UpdateUtil {
      */
     public static void check(final Activity activity, final boolean isShowToast) {
 
-        Subscription get = HttpClient.Builder.getFirServer().checkUpdate("58677918ca87a8490d000395", UPDATE_TOKEN)
+        HttpClient.Builder.getFirServer().checkUpdate("58677918ca87a8490d000395", UPDATE_TOKEN)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<UpdateBean>() {
+                .subscribe(new Consumer<UpdateBean>() {
                     @Override
-                    public void onCompleted() {
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        if (isShowToast) {
-                            ToastUtil.showToastLong("已是最新版本~");
-                        }
-                    }
-
-                    @Override
-                    public void onNext(final UpdateBean updateBean) {
-
+                    public void accept(UpdateBean updateBean) throws Exception {
                         if (Integer.valueOf(updateBean.getVersion()) <= BuildConfig.VERSION_CODE) {
                             if (isShowToast) {
                                 ToastUtil.showToastLong("已是最新版本~");
@@ -68,7 +56,13 @@ public class UpdateUtil {
                         builder.setPositiveButton("立即下载", (dialogInterface, i) -> BaseTools.openLink(activity, updateBean.getInstallUrl()));
                         builder.show();
                     }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+                        if (isShowToast) {
+                            ToastUtil.showToastLong("已是最新版本~");
+                        }
+                    }
                 });
-//        addSubscription(get);
     }
 }

@@ -19,10 +19,11 @@ import com.example.jingbin.cloudreader.utils.CommonUtils;
 import com.example.jingbin.cloudreader.utils.DebugUtil;
 import com.example.jingbin.cloudreader.viewmodel.menu.NoViewModel;
 
-import rx.Observer;
-import rx.Subscription;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
+import io.reactivex.Observer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
+
 
 /**
  * 已废弃，使用{@link BookListFragment}，替代
@@ -134,17 +135,10 @@ public class BookCustomFragment extends BaseFragment<NoViewModel, FragmentBookCu
 
     private void loadCustomData() {
 
-        Subscription get = HttpClient.Builder.getDouBanService().getBook(mType, mStart, mCount)
+        HttpClient.Builder.getDouBanService().getBook(mType, mStart, mCount)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<BookBean>() {
-                    @Override
-                    public void onCompleted() {
-                        showContentView();
-                        if (bindingView.srlBook.isRefreshing()) {
-                            bindingView.srlBook.setRefreshing(false);
-                        }
-                    }
 
                     @Override
                     public void onError(Throwable e) {
@@ -155,6 +149,19 @@ public class BookCustomFragment extends BaseFragment<NoViewModel, FragmentBookCu
                         if (mStart == 0) {
                             showError();
                         }
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        showContentView();
+                        if (bindingView.srlBook.isRefreshing()) {
+                            bindingView.srlBook.setRefreshing(false);
+                        }
+                    }
+
+                    @Override
+                    public void onSubscribe(Disposable d) {
+                        addSubscription(d);
                     }
 
                     @Override
@@ -187,7 +194,6 @@ public class BookCustomFragment extends BaseFragment<NoViewModel, FragmentBookCu
                         }
                     }
                 });
-        addSubscription(get);
     }
 
 

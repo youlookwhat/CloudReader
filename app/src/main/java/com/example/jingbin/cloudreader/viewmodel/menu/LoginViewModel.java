@@ -15,10 +15,11 @@ import com.example.jingbin.cloudreader.data.room.Injection;
 import com.example.jingbin.cloudreader.http.HttpClient;
 import com.example.jingbin.cloudreader.utils.ToastUtil;
 
-import rx.Observer;
-import rx.Subscription;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
+import io.reactivex.Observer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Schedulers;
+
 
 /**
  * @author jingbin
@@ -45,17 +46,9 @@ public class LoginViewModel extends AndroidViewModel {
         HttpClient.Builder.getWanAndroidServer().register(username.get(), password.get(), password.get())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<LoginBean>() {
+                .subscribe(new Consumer<LoginBean>() {
                     @Override
-                    public void onCompleted() {
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                    }
-
-                    @Override
-                    public void onNext(LoginBean bean) {
+                    public void accept(LoginBean bean) throws Exception {
                         if (bean != null && bean.getData() != null) {
                             // 存入数据库
                             Injection.get().addData(bean.getData());
@@ -81,17 +74,9 @@ public class LoginViewModel extends AndroidViewModel {
         HttpClient.Builder.getWanAndroidServer().login(username.get(), password.get())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<LoginBean>() {
+                .subscribe(new Consumer<LoginBean>() {
                     @Override
-                    public void onCompleted() {
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                    }
-
-                    @Override
-                    public void onNext(LoginBean bean) {
+                    public void accept(LoginBean bean) throws Exception {
                         if (bean != null && bean.getData() != null) {
                             Injection.get().addData(bean.getData());
                             UserUtil.handleLoginSuccess();

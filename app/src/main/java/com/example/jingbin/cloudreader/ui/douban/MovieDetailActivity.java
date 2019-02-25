@@ -38,11 +38,11 @@ import com.example.jingbin.cloudreader.view.statusbar.StatusBarUtil;
 import com.example.jingbin.cloudreader.view.test.StatusBarUtils;
 import com.example.jingbin.cloudreader.view.webview.WebViewActivity;
 
+import io.reactivex.Observer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 import jp.wasabeef.glide.transformations.BlurTransformation;
-import rx.Observer;
-import rx.Subscription;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
 
 import static com.example.jingbin.cloudreader.view.statusbar.StatusBarUtil.getStatusBarHeight;
 
@@ -90,18 +90,23 @@ public class MovieDetailActivity extends AppCompatActivity {
 //        binding.include.tvOneCity.setText("制片国家/地区：");
 //        binding.include.tvOneDay.setText("上映日期：");
 //        binding.tvOneTitle.setText("");
-        Subscription get = HttpClient.Builder.getDouBanService().getMovieDetail(subjectsBean.getId())
+        HttpClient.Builder.getDouBanService().getMovieDetail(subjectsBean.getId())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<MovieDetailBean>() {
-                    @Override
-                    public void onCompleted() {
-
-                    }
 
                     @Override
                     public void onError(Throwable e) {
 
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+
+                    @Override
+                    public void onSubscribe(Disposable d) {
                     }
 
                     @Override

@@ -17,13 +17,15 @@ import com.example.jingbin.cloudreader.http.HttpClient;
 import com.example.jingbin.cloudreader.utils.CommonUtils;
 import com.example.jingbin.cloudreader.view.webview.WebViewActivity;
 
-import rx.Observer;
-import rx.Subscription;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
+import io.reactivex.Observer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
+
 
 /**
  * 书籍详情
+ *
  * @author jingbin
  */
 public class BookDetailActivity extends BaseHeaderActivity<HeaderBookDetailBinding, ActivityBookDetailBinding> {
@@ -60,30 +62,33 @@ public class BookDetailActivity extends BaseHeaderActivity<HeaderBookDetailBindi
     }
 
     private void loadBookDetail() {
-        Subscription get = HttpClient.Builder.getDouBanService().getBookDetail(booksBean.getId())
+        HttpClient.Builder.getDouBanService().getBookDetail(booksBean.getId())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<BookDetailBean>() {
-                    @Override
-                    public void onCompleted() {
-                        showContentView();
-                    }
-
                     @Override
                     public void onError(Throwable e) {
                         showError();
                     }
 
                     @Override
-                    public void onNext(final BookDetailBean bookDetailBean) {
+                    public void onComplete() {
+                        showContentView();
+                    }
 
+                    @Override
+                    public void onSubscribe(Disposable d) {
+                        addSubscription(d);
+                    }
+
+                    @Override
+                    public void onNext(final BookDetailBean bookDetailBean) {
                         mBookDetailUrl = bookDetailBean.getAlt();
                         mBookDetailName = bookDetailBean.getTitle();
                         bindingContentView.setBookDetailBean(bookDetailBean);
                         bindingContentView.executePendingBindings();
                     }
                 });
-        addSubscription(get);
     }
 
     @Override

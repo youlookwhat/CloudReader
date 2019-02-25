@@ -39,9 +39,9 @@ import com.example.jingbin.cloudreader.view.test.StatusBarUtils;
 
 import java.lang.reflect.Method;
 
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.disposables.Disposable;
 import jp.wasabeef.glide.transformations.BlurTransformation;
-import rx.Subscription;
-import rx.subscriptions.CompositeSubscription;
 
 
 /**
@@ -67,7 +67,7 @@ public abstract class BaseHeaderActivity<HV extends ViewDataBinding, SV extends 
     // 清除动画，防止内存泄漏
     private CustomChangeBounds changeBounds;
     private AnimationDrawable mAnimationDrawable;
-    private CompositeSubscription mCompositeSubscription;
+    private CompositeDisposable mCompositeDisposable;
 
     protected <T extends View> T getView(int id) {
         return (T) findViewById(id);
@@ -440,17 +440,17 @@ public abstract class BaseHeaderActivity<HV extends ViewDataBinding, SV extends 
 
     }
 
-    public void addSubscription(Subscription s) {
-        if (this.mCompositeSubscription == null) {
-            this.mCompositeSubscription = new CompositeSubscription();
+    public void addSubscription(Disposable s) {
+        if (this.mCompositeDisposable == null) {
+            this.mCompositeDisposable = new CompositeDisposable();
         }
-        this.mCompositeSubscription.add(s);
+        this.mCompositeDisposable.add(s);
     }
 
     @Override
     public void onDestroy() {
-        if (this.mCompositeSubscription != null && mCompositeSubscription.hasSubscriptions()) {
-            this.mCompositeSubscription.unsubscribe();
+        if (this.mCompositeDisposable != null && !mCompositeDisposable.isDisposed()) {
+            this.mCompositeDisposable.clear();
         }
         if (changeBounds != null) {
             changeBounds.addListener(null);
@@ -467,9 +467,9 @@ public abstract class BaseHeaderActivity<HV extends ViewDataBinding, SV extends 
         super.onDestroy();
     }
 
-    public void removeSubscription() {
-        if (this.mCompositeSubscription != null && mCompositeSubscription.hasSubscriptions()) {
-            this.mCompositeSubscription.unsubscribe();
+    public void removeDisposable() {
+        if (this.mCompositeDisposable != null && !mCompositeDisposable.isDisposed()) {
+            this.mCompositeDisposable.dispose();
         }
     }
 }

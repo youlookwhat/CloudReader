@@ -1,6 +1,6 @@
 package com.example.jingbin.cloudreader.http;
 
-import rx.Subscription;
+import io.reactivex.disposables.Disposable;
 
 /**
  * Created by jingbin on 2017/1/17.
@@ -12,5 +12,5 @@ public interface RequestImpl {
 
     void loadFailed();
 
-    void addSubscription(Subscription subscription);
+    void addSubscription(Disposable subscription);
 }

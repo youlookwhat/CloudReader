@@ -4,6 +4,7 @@ import com.example.jingbin.cloudreader.bean.wanandroid.DuanZiBean;
 
 import java.util.List;
 
+import io.reactivex.disposables.Disposable;
 import rx.Subscription;
 
 /**
@@ -20,7 +21,7 @@ public interface WanNavigator {
 
         void loadFailed();
 
-        void addSubscription(Subscription subscription);
+        void addSubscription(Disposable disposable);
 
     }
 

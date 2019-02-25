@@ -12,9 +12,11 @@ import com.example.jingbin.cloudreader.http.HttpClient;
 import java.util.ArrayList;
 import java.util.List;
 
-import rx.Observer;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
+import io.reactivex.Observer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Schedulers;
 
 /**
  * @author jingbin
@@ -32,18 +34,10 @@ public class WanAndroidListViewModel extends BaseListViewModel {
         final MutableLiveData<WanAndroidBannerBean> data = new MutableLiveData<>();
         HttpClient.Builder.getWanAndroidServer().getWanAndroidBanner()
                 .subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<WanAndroidBannerBean>() {
-                    @Override
-                    public void onCompleted() {
-                    }
+                .subscribe(new Consumer<WanAndroidBannerBean>() {
 
                     @Override
-                    public void onError(Throwable e) {
-                        data.setValue(null);
-                    }
-
-                    @Override
-                    public void onNext(WanAndroidBannerBean wanAndroidBannerBean) {
+                    public void accept(WanAndroidBannerBean wanAndroidBannerBean) throws Exception {
                         ArrayList<String> mBannerImages = new ArrayList<String>();
                         ArrayList<String> mBannerTitles = new ArrayList<String>();
                         if (wanAndroidBannerBean != null
@@ -64,6 +58,11 @@ public class WanAndroidListViewModel extends BaseListViewModel {
                             data.setValue(null);
                         }
                     }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+                        data.setValue(null);
+                    }
                 });
         return data;
     }
@@ -75,21 +74,9 @@ public class WanAndroidListViewModel extends BaseListViewModel {
         final MutableLiveData<HomeListBean> listData = new MutableLiveData<>();
         HttpClient.Builder.getWanAndroidServer().getHomeList(mPage, cid)
                 .subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<HomeListBean>() {
+                .subscribe(new Consumer<HomeListBean>() {
                     @Override
-                    public void onCompleted() {
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        if (mPage > 0) {
-                            mPage--;
-                        }
-                        listData.setValue(null);
-                    }
-
-                    @Override
-                    public void onNext(HomeListBean bean) {
+                    public void accept(HomeListBean bean) throws Exception {
                         if (bean == null
                                 || bean.getData() == null
                                 || bean.getData().getDatas() == null
@@ -98,6 +85,14 @@ public class WanAndroidListViewModel extends BaseListViewModel {
                         } else {
                             listData.setValue(bean);
                         }
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+                        if (mPage > 0) {
+                            mPage--;
+                        }
+                        listData.setValue(null);
                     }
                 });
         return listData;

@@ -14,12 +14,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import rx.Observable;
-import rx.Observer;
-import rx.Subscription;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Func1;
-import rx.schedulers.Schedulers;
+import io.reactivex.Observable;
+import io.reactivex.Observer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Consumer;
+import io.reactivex.functions.Function;
+import io.reactivex.schedulers.Schedulers;
 
 /**
  * Created by jingbin on 2016/12/1.
@@ -44,29 +45,25 @@ public class EverydayModel {
      * 轮播图
      */
     public void showBannerPage(final RequestImpl listener) {
-        Subscription subscription = HttpClient.Builder.getTingServer().getFrontpage()
+        Disposable subscribe = HttpClient.Builder.getTingServer().getFrontpage()
                 .observeOn(AndroidSchedulers.mainThread()).subscribeOn(Schedulers.io())
-                .subscribe(new Observer<FrontpageBean>() {
+                .subscribe(new Consumer<FrontpageBean>() {
                     @Override
-                    public void onCompleted() {
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        if (listener != null) {
-                            listener.loadFailed();
-                        }
-                    }
-
-                    @Override
-                    public void onNext(FrontpageBean frontpageBean) {
+                    public void accept(FrontpageBean frontpageBean) throws Exception {
                         if (listener != null) {
                             listener.loadSuccess(frontpageBean);
                         }
                     }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+                        if (listener != null) {
+                            listener.loadFailed();
+                        }
+                    }
                 });
         if (listener != null) {
-            listener.addSubscription(subscription);
+            listener.addSubscription(subscribe);
         }
     }
 
@@ -77,9 +74,10 @@ public class EverydayModel {
         SPUtils.putString(HOME_ONE, "");
         SPUtils.putString(HOME_TWO, "");
         SPUtils.putString(HOME_SIX, "");
-        Func1<GankIoDayBean, Observable<List<List<AndroidBean>>>> func1 = new Func1<GankIoDayBean, Observable<List<List<AndroidBean>>>>() {
+        Function<GankIoDayBean, Observable<List<List<AndroidBean>>>> function = new Function<GankIoDayBean, Observable<List<List<AndroidBean>>>>() {
+
             @Override
-            public Observable<List<List<AndroidBean>>> call(GankIoDayBean gankIoDayBean) {
+            public Observable<List<List<AndroidBean>>> apply(GankIoDayBean gankIoDayBean) throws Exception {
 
                 List<List<AndroidBean>> lists = new ArrayList<>();
                 GankIoDayBean.ResultsBean results = gankIoDayBean.getResults();
@@ -114,13 +112,20 @@ public class EverydayModel {
         };
 
         Observer<List<List<AndroidBean>>> observer = new Observer<List<List<AndroidBean>>>() {
-            @Override
-            public void onCompleted() {
-            }
 
             @Override
             public void onError(Throwable e) {
                 listener.loadFailed();
+            }
+
+            @Override
+            public void onComplete() {
+
+            }
+
+            @Override
+            public void onSubscribe(Disposable d) {
+                listener.addSubscription(d);
             }
 
             @Override
@@ -129,12 +134,12 @@ public class EverydayModel {
             }
         };
 
-        Subscription subscription = HttpClient.Builder.getGankIOServer().getGankIoDay(year, month, day)
-                .flatMap(func1)
+        HttpClient.Builder.getGankIOServer().getGankIoDay(year, month, day)
+                .flatMap(function)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(observer);
-        listener.addSubscription(subscription);
+//        listener.addSubscription(disposable);
     }
 
     // subList没有实现序列化！缓存时会出错！

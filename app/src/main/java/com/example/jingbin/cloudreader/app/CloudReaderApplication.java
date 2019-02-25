@@ -29,7 +29,7 @@ public class CloudReaderApplication extends MultiDexApplication{
 //            return;
 //        }
 //        LeakCanary.install(this);
-        HttpUtils.getInstance().init(this, DebugUtil.DEBUG);
+        HttpUtils.getInstance().init(this);
         CrashReport.initCrashReport(getApplicationContext(), "3977b2d86f", DebugUtil.DEBUG);
 
         initTextSize();

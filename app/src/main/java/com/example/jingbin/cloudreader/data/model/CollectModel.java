@@ -4,10 +4,10 @@ import com.example.jingbin.cloudreader.bean.wanandroid.HomeListBean;
 import com.example.jingbin.cloudreader.http.HttpClient;
 import com.example.jingbin.cloudreader.viewmodel.wan.WanNavigator;
 
-import rx.Observer;
-import rx.Subscription;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Schedulers;
+
 
 /**
  * @author jingbin
@@ -21,25 +21,22 @@ public class CollectModel {
      * 收藏
      */
     public void collect(int id, WanNavigator.OnCollectNavigator navigator) {
-        Subscription subscribe = HttpClient.Builder.getWanAndroidServer().collect(id)
+        HttpClient.Builder.getWanAndroidServer().collect(id)
                 .subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<HomeListBean>() {
+                .subscribe(new Consumer<HomeListBean>() {
                     @Override
-                    public void onCompleted() {
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        navigator.onFailure();
-                    }
-
-                    @Override
-                    public void onNext(HomeListBean bean) {
-                        if (bean != null && bean.getErrorCode() == 0) {
+                    public void accept(HomeListBean homeListBean) throws Exception {
+                        if (homeListBean != null && homeListBean.getErrorCode() == 0) {
                             navigator.onSuccess();
                         } else {
                             navigator.onFailure();
                         }
+                    }
+
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+                        navigator.onFailure();
                     }
                 });
     }
@@ -61,25 +58,21 @@ public class CollectModel {
      * 取消收藏
      */
     private void unCollect(int id, WanNavigator.OnCollectNavigator navigator) {
-        Subscription subscribe = HttpClient.Builder.getWanAndroidServer().unCollectOrigin(id)
+        HttpClient.Builder.getWanAndroidServer().unCollectOrigin(id)
                 .subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<HomeListBean>() {
+                .subscribe(new Consumer<HomeListBean>() {
                     @Override
-                    public void onCompleted() {
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        navigator.onFailure();
-                    }
-
-                    @Override
-                    public void onNext(HomeListBean bean) {
-                        if (bean != null && bean.getErrorCode() == 0) {
+                    public void accept(HomeListBean homeListBean) throws Exception {
+                        if (homeListBean != null && homeListBean.getErrorCode() == 0) {
                             navigator.onSuccess();
                         } else {
                             navigator.onFailure();
                         }
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+
                     }
                 });
     }
@@ -88,25 +81,21 @@ public class CollectModel {
      * 取消收藏，我的收藏页
      */
     private void unCollect(int id, int originId, WanNavigator.OnCollectNavigator navigator) {
-        Subscription subscribe = HttpClient.Builder.getWanAndroidServer().unCollect(id, originId)
+        HttpClient.Builder.getWanAndroidServer().unCollect(id, originId)
                 .subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<HomeListBean>() {
+                .subscribe(new Consumer<HomeListBean>() {
                     @Override
-                    public void onCompleted() {
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        navigator.onFailure();
-                    }
-
-                    @Override
-                    public void onNext(HomeListBean bean) {
+                    public void accept(HomeListBean bean) throws Exception {
                         if (bean != null && bean.getErrorCode() == 0) {
                             navigator.onSuccess();
                         } else {
                             navigator.onFailure();
                         }
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+                        navigator.onFailure();
                     }
                 });
     }
@@ -117,23 +106,19 @@ public class CollectModel {
     public void collectUrl(String name, String link, WanNavigator.OnCollectNavigator navigator) {
         HttpClient.Builder.getWanAndroidServer().collectUrl(name, link)
                 .subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<HomeListBean>() {
+                .subscribe(new Consumer<HomeListBean>() {
                     @Override
-                    public void onCompleted() {
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        navigator.onFailure();
-                    }
-
-                    @Override
-                    public void onNext(HomeListBean bean) {
+                    public void accept(HomeListBean bean) throws Exception {
                         if (bean != null && bean.getErrorCode() == 0) {
                             navigator.onSuccess();
                         } else {
                             navigator.onFailure();
                         }
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+                        navigator.onFailure();
                     }
                 });
     }
@@ -144,23 +129,19 @@ public class CollectModel {
     public void unCollectUrl(int id, WanNavigator.OnCollectNavigator navigator) {
         HttpClient.Builder.getWanAndroidServer().unCollectUrl(id)
                 .subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<HomeListBean>() {
+                .subscribe(new Consumer<HomeListBean>() {
                     @Override
-                    public void onCompleted() {
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        navigator.onFailure();
-                    }
-
-                    @Override
-                    public void onNext(HomeListBean bean) {
+                    public void accept(HomeListBean bean) throws Exception {
                         if (bean != null && bean.getErrorCode() == 0) {
                             navigator.onSuccess();
                         } else {
                             navigator.onFailure();
                         }
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+                        navigator.onFailure();
                     }
                 });
     }
@@ -169,25 +150,21 @@ public class CollectModel {
      * 编辑收藏网站
      */
     public void updateUrl(int id, String name, String link, WanNavigator.OnCollectNavigator navigator) {
-        HttpClient.Builder.getWanAndroidServer().updateUrl(id,name,link)
+        HttpClient.Builder.getWanAndroidServer().updateUrl(id, name, link)
                 .subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<HomeListBean>() {
+                .subscribe(new Consumer<HomeListBean>() {
                     @Override
-                    public void onCompleted() {
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        navigator.onFailure();
-                    }
-
-                    @Override
-                    public void onNext(HomeListBean bean) {
+                    public void accept(HomeListBean bean) throws Exception {
                         if (bean != null && bean.getErrorCode() == 0) {
                             navigator.onSuccess();
                         } else {
                             navigator.onFailure();
                         }
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+                        navigator.onFailure();
                     }
                 });
     }

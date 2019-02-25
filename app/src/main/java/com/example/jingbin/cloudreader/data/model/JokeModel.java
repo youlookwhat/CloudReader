@@ -10,12 +10,13 @@ import com.example.jingbin.cloudreader.viewmodel.wan.WanNavigator;
 import java.util.ArrayList;
 import java.util.List;
 
-import rx.Observable;
-import rx.Observer;
-import rx.Subscription;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Func1;
-import rx.schedulers.Schedulers;
+import io.reactivex.Observable;
+import io.reactivex.Observer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Function;
+import io.reactivex.schedulers.Schedulers;
+
 
 /**
  * @author jingbin
@@ -26,9 +27,9 @@ import rx.schedulers.Schedulers;
 public class JokeModel {
 
     public void showQSBKList(final WanNavigator.JokeModelNavigator listener, int page) {
-        Func1<QsbkListBean, Observable<List<DuanZiBean>>> func1 = new Func1<QsbkListBean, Observable<List<DuanZiBean>>>() {
+        Function<QsbkListBean, Observable<List<DuanZiBean>>> func1 = new Function<QsbkListBean, Observable<List<DuanZiBean>>>() {
             @Override
-            public Observable<List<DuanZiBean>> call(QsbkListBean bean) {
+            public Observable<List<DuanZiBean>> apply(QsbkListBean bean) {
 
                 List<DuanZiBean> lists = new ArrayList<>();
                 if (bean != null && bean.getItems() != null && bean.getItems().size() > 0) {
@@ -47,10 +48,10 @@ public class JokeModel {
                             String thumb = user.getThumb();
                             if (!TextUtils.isEmpty(thumb)) {
                                 if (!thumb.contains("http")) {
-                                    StringBuilder stringBuffer = new StringBuilder();
-                                    stringBuffer.append("http:");
-                                    stringBuffer.append(thumb);
-                                    duanZiBean.setAvatarUrl(stringBuffer.toString());
+                                    StringBuilder stringBuilder = new StringBuilder();
+                                    stringBuilder.append("http:");
+                                    stringBuilder.append(thumb);
+                                    duanZiBean.setAvatarUrl(stringBuilder.toString());
                                 } else {
                                     duanZiBean.setAvatarUrl(thumb);
                                 }
@@ -65,13 +66,20 @@ public class JokeModel {
         };
 
         Observer<List<DuanZiBean>> observer = new Observer<List<DuanZiBean>>() {
-            @Override
-            public void onCompleted() {
-            }
 
             @Override
             public void onError(Throwable e) {
                 listener.loadFailed();
+            }
+
+            @Override
+            public void onComplete() {
+
+            }
+
+            @Override
+            public void onSubscribe(Disposable d) {
+                listener.addSubscription(d);
             }
 
             @Override
@@ -80,11 +88,10 @@ public class JokeModel {
             }
         };
 
-        Subscription subscription = HttpClient.Builder.getQSBKServer().getQsbkList(page)
+        HttpClient.Builder.getQSBKServer().getQsbkList(page)
                 .flatMap(func1)
                 .subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
                 .subscribe(observer);
-        listener.addSubscription(subscription);
     }
 
 }

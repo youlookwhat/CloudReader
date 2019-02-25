@@ -4,10 +4,11 @@ import com.example.jingbin.cloudreader.bean.GankIoDataBean;
 import com.example.jingbin.cloudreader.http.HttpClient;
 import com.example.jingbin.cloudreader.http.RequestImpl;
 
-import rx.Observer;
-import rx.Subscription;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
+import io.reactivex.Observer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
+
 
 /**
  * Created by jingbin on 2017/1/17.
@@ -20,21 +21,18 @@ public class GankOtherModel {
 
     private String id;
     private int page;
-    private int per_page;
+    private int perPage;
 
-    public void setData(String id, int page, int per_page) {
+    public void setData(String id, int page, int perPage) {
         this.id = id;
         this.page = page;
-        this.per_page = per_page;
+        this.perPage = perPage;
     }
 
     public void getGankIoData(final RequestImpl listener) {
-        Subscription subscription = HttpClient.Builder.getGankIOServer().getGankIoData(id, page, per_page)
+        HttpClient.Builder.getGankIOServer().getGankIoData(id, page, perPage)
                 .subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<GankIoDataBean>() {
-                    @Override
-                    public void onCompleted() {
-                    }
 
                     @Override
                     public void onError(Throwable e) {
@@ -43,11 +41,20 @@ public class GankOtherModel {
                     }
 
                     @Override
+                    public void onComplete() {
+
+                    }
+
+                    @Override
+                    public void onSubscribe(Disposable d) {
+                        listener.addSubscription(d);
+                    }
+
+                    @Override
                     public void onNext(GankIoDataBean gankIoDataBean) {
                         listener.loadSuccess(gankIoDataBean);
 
                     }
                 });
-        listener.addSubscription(subscription);
     }
 }

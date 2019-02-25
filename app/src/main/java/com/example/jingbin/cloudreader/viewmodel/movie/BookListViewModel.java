@@ -19,10 +19,10 @@ import com.example.jingbin.cloudreader.data.model.OneRepository;
 import com.example.jingbin.cloudreader.http.HttpClient;
 import com.example.jingbin.cloudreader.http.RequestImpl;
 
-import rx.Observer;
-import rx.Subscription;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Schedulers;
+
 
 /**
  * @author jingbin
@@ -55,19 +55,15 @@ public class BookListViewModel extends AndroidViewModel {
         HttpClient.Builder.getDouBanService().getBook(bookType.get(), mStart, mCount)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<BookBean>() {
+                .subscribe(new Consumer<BookBean>() {
                     @Override
-                    public void onCompleted() {
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        data.setValue(null);
-                    }
-
-                    @Override
-                    public void onNext(BookBean bookBean) {
+                    public void accept(BookBean bookBean) throws Exception {
                         data.setValue(bookBean);
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+                        data.setValue(null);
                     }
                 });
         return data;
