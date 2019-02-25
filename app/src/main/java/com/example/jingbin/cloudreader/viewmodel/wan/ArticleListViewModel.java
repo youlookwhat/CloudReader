@@ -1,5 +1,6 @@
 package com.example.jingbin.cloudreader.viewmodel.wan;
 
+import android.annotation.SuppressLint;
 import android.app.Application;
 import android.arch.lifecycle.MutableLiveData;
 import android.support.annotation.NonNull;
@@ -9,6 +10,7 @@ import com.example.jingbin.cloudreader.bean.wanandroid.HomeListBean;
 import com.example.jingbin.cloudreader.http.HttpClient;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
@@ -28,6 +30,7 @@ public class ArticleListViewModel extends BaseListViewModel {
     /**
      * 我的收藏
      */
+    @SuppressLint("CheckResult")
     public MutableLiveData<HomeListBean> getCollectList() {
         final MutableLiveData<HomeListBean> data = new MutableLiveData<>();
         HttpClient.Builder.getWanAndroidServer().getCollectList(mPage)

@@ -1,5 +1,6 @@
 package com.example.jingbin.cloudreader.viewmodel.movie;
 
+import android.annotation.SuppressLint;
 import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.MutableLiveData;
@@ -26,6 +27,7 @@ public class UpcomingViewModel extends AndroidViewModel {
         super(application);
     }
 
+    @SuppressLint("CheckResult")
     public MutableLiveData<HotMovieBean> getComingSoon() {
         final MutableLiveData<HotMovieBean> data = new MutableLiveData<>();
         HttpClient.Builder.getDouBanService().getComingSoon(mStart, mCount)

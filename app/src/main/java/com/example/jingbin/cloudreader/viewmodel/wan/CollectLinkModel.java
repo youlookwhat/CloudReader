@@ -1,5 +1,6 @@
 package com.example.jingbin.cloudreader.viewmodel.wan;
 
+import android.annotation.SuppressLint;
 import android.app.Application;
 import android.arch.lifecycle.MutableLiveData;
 import android.support.annotation.NonNull;
@@ -24,6 +25,7 @@ public class CollectLinkModel extends BaseListViewModel {
         super(application);
     }
 
+    @SuppressLint("CheckResult")
     public MutableLiveData<CollectUrlBean> getCollectUrlList() {
         final MutableLiveData<CollectUrlBean> data = new MutableLiveData<>();
         HttpClient.Builder.getWanAndroidServer().getCollectUrlList()

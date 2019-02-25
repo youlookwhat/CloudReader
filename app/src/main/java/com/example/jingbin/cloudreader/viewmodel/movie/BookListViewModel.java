@@ -1,5 +1,6 @@
 package com.example.jingbin.cloudreader.viewmodel.movie;
 
+import android.annotation.SuppressLint;
 import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.LiveData;
@@ -50,6 +51,7 @@ public class BookListViewModel extends AndroidViewModel {
         return mStart;
     }
 
+    @SuppressLint("CheckResult")
     public MutableLiveData<BookBean> getBook() {
         final MutableLiveData<BookBean> data = new MutableLiveData<>();
         HttpClient.Builder.getDouBanService().getBook(bookType.get(), mStart, mCount)

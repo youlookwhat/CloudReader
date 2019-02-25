@@ -1,5 +1,6 @@
 package com.example.jingbin.cloudreader.viewmodel.gank;
 
+import android.annotation.SuppressLint;
 import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.MutableLiveData;
@@ -86,6 +87,7 @@ public class WelfareViewModel extends AndroidViewModel {
      *
      * @param gankIoDataBean 原数据
      */
+    @SuppressLint("CheckResult")
     private void handleImageList(GankIoDataBean gankIoDataBean) {
         Observable
                 .create(new ObservableOnSubscribe<ArrayList<ArrayList<String>>>() {

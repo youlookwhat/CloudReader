@@ -1,5 +1,6 @@
 package com.example.jingbin.cloudreader.viewmodel.wan;
 
+import android.annotation.SuppressLint;
 import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.MutableLiveData;
@@ -24,6 +25,7 @@ public class NaviViewModel extends AndroidViewModel {
         super(application);
     }
 
+    @SuppressLint("CheckResult")
     public MutableLiveData<NaviJsonBean> getNaviJson() {
         final MutableLiveData<NaviJsonBean> data = new MutableLiveData<>();
         HttpClient.Builder.getWanAndroidServer().getNaviJson()

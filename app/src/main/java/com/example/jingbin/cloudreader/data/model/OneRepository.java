@@ -1,5 +1,6 @@
 package com.example.jingbin.cloudreader.data.model;
 
+import android.annotation.SuppressLint;
 import android.arch.lifecycle.MutableLiveData;
 
 import com.example.jingbin.cloudreader.bean.HotMovieBean;
@@ -15,6 +16,7 @@ import io.reactivex.schedulers.Schedulers;
  * @data 2017/12/14
  * @Description 电影部分
  */
+@SuppressLint("CheckResult")
 public class OneRepository {
 
     public MutableLiveData<HotMovieBean> getHotMovie() {

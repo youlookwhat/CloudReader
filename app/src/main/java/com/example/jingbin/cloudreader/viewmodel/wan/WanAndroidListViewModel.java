@@ -1,5 +1,6 @@
 package com.example.jingbin.cloudreader.viewmodel.wan;
 
+import android.annotation.SuppressLint;
 import android.app.Application;
 import android.arch.lifecycle.MutableLiveData;
 import android.support.annotation.NonNull;
@@ -30,6 +31,7 @@ public class WanAndroidListViewModel extends BaseListViewModel {
         super(application);
     }
 
+    @SuppressLint("CheckResult")
     public MutableLiveData<WanAndroidBannerBean> getWanAndroidBanner() {
         final MutableLiveData<WanAndroidBannerBean> data = new MutableLiveData<>();
         HttpClient.Builder.getWanAndroidServer().getWanAndroidBanner()
@@ -70,6 +72,7 @@ public class WanAndroidListViewModel extends BaseListViewModel {
     /**
      * @param cid 体系id
      */
+    @SuppressLint("CheckResult")
     public MutableLiveData<HomeListBean> getHomeList(Integer cid) {
         final MutableLiveData<HomeListBean> listData = new MutableLiveData<>();
         HttpClient.Builder.getWanAndroidServer().getHomeList(mPage, cid)

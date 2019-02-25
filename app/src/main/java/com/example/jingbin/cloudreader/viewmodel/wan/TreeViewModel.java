@@ -1,5 +1,6 @@
 package com.example.jingbin.cloudreader.viewmodel.wan;
 
+import android.annotation.SuppressLint;
 import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.MutableLiveData;
@@ -26,6 +27,7 @@ public class TreeViewModel extends AndroidViewModel {
         super(application);
     }
 
+    @SuppressLint("CheckResult")
     public MutableLiveData<TreeBean> getTree() {
         final MutableLiveData<TreeBean> data = new MutableLiveData<>();
         HttpClient.Builder.getWanAndroidServer().getTree()
