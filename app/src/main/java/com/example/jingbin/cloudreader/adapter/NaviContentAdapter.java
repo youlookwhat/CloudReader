@@ -59,6 +59,7 @@ public class NaviContentAdapter extends BaseRecyclerViewAdapter<NaviJsonBean.Dat
     }
 
     private void showTagView(TagFlowLayout flowlayoutHot, final List<ArticlesBean> beanList) {
+        flowlayoutHot.removeAllViews();
         flowlayoutHot.setAdapter(new TagAdapter<ArticlesBean>(beanList) {
             @Override
             public View getView(FlowLayout parent, int position, ArticlesBean bean) {

@@ -6,10 +6,9 @@ import io.reactivex.functions.Function;
 import io.reactivex.functions.Predicate;
 import io.reactivex.subjects.PublishSubject;
 import io.reactivex.subjects.Subject;
-import rx.functions.Func1;
 
 /**
- * Created by jingbin on 16/5/17.
+ * Created by jingbin on 19/02/25.
  */
 public class RxBus {
     /**
@@ -97,19 +96,5 @@ public class RxBus {
     public boolean hasObservers() {
         return _bus.hasObservers();
     }
-//
-//    return _bus.ofType(RxBusBaseMessage.class)
-//            .filter(new Func1<RxBusBaseMessage,Boolean>() {
-//        @Override
-//        public Boolean call(RxBusBaseMessage o) {
-//            //过滤code和eventType都相同的事件
-//            return o.getCode() == code && eventType.isInstance(o.getObject());
-//        }
-//    }).map(new Func1<RxBusBaseMessage,Object>() {
-//        @Override
-//        public Object call(RxBusBaseMessage o) {
-//            return o.getObject();
-//        }
-//    }).cast(eventType);
 
 }
