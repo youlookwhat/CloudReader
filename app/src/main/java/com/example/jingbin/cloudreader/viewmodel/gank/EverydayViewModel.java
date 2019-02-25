@@ -3,7 +3,6 @@ package com.example.jingbin.cloudreader.viewmodel.gank;
 import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.MutableLiveData;
-import android.arch.lifecycle.ViewModel;
 import android.support.annotation.NonNull;
 
 import com.example.jingbin.cloudreader.app.CloudReaderApplication;
@@ -11,7 +10,6 @@ import com.example.jingbin.cloudreader.app.Constants;
 import com.example.jingbin.cloudreader.bean.AndroidBean;
 import com.example.jingbin.cloudreader.bean.BannerItemBean;
 import com.example.jingbin.cloudreader.bean.FrontpageBean;
-import com.example.jingbin.cloudreader.bean.GankIoDataBean;
 import com.example.jingbin.cloudreader.data.model.EverydayModel;
 import com.example.jingbin.cloudreader.http.RequestImpl;
 import com.example.jingbin.cloudreader.http.cache.ACache;
@@ -22,7 +20,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import io.reactivex.disposables.Disposable;
-import rx.Subscription;
 
 /**
  * @author jingbin

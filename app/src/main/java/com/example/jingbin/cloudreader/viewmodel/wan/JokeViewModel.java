@@ -3,17 +3,14 @@ package com.example.jingbin.cloudreader.viewmodel.wan;
 import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.MutableLiveData;
-import android.arch.lifecycle.ViewModel;
 import android.support.annotation.NonNull;
 
-import com.example.jingbin.cloudreader.bean.CollectUrlBean;
 import com.example.jingbin.cloudreader.bean.wanandroid.DuanZiBean;
 import com.example.jingbin.cloudreader.data.model.JokeModel;
 
 import java.util.List;
 
 import io.reactivex.disposables.Disposable;
-import rx.Subscription;
 
 /**
  * @author jingbin

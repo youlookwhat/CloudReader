@@ -55,8 +55,6 @@ import java.util.ArrayList;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
-import rx.Subscription;
-import rx.subscriptions.CompositeSubscription;
 
 
 /**

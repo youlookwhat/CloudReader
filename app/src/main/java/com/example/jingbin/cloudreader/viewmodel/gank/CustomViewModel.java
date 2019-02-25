@@ -11,7 +11,6 @@ import com.example.jingbin.cloudreader.data.model.GankOtherModel;
 import com.example.jingbin.cloudreader.http.RequestImpl;
 
 import io.reactivex.disposables.Disposable;
-import rx.Subscription;
 
 /**
  * 干货订制页面ViewModel

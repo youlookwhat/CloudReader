@@ -35,8 +35,9 @@ dependencies {
     // 用于链式调用
     api "io.reactivex.rxjava2:rxjava:2.2.7"
     api 'io.reactivex.rxjava2:rxandroid:2.0.1'
-    api 'io.reactivex:rxandroid:1.2.1'
-    // 使用adapter-rxjava 将 compile 替换为 implementation 会报错 因为implementation只能用在本项目中，主app项目不能引用
+    // import rx.Subscription;
+    // api 'io.reactivex:rxandroid:1.2.1'
+    // 将 compile 替换为 implementation 会报错 为implementation只能用在本项目中，主app项目不能引用
     api 'com.squareup.retrofit2:adapter-rxjava2:2.4.0'
     // add cookie
     implementation files('libs/commons-lang-2.6.jar')
