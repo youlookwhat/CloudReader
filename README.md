@@ -6,11 +6,11 @@
 [![API][3]][4]
 [![PRs Welcome][32]][33]
 
-> Netease cloud music Ui && Retrofit + RxJava + MVVM-databinding && wanandroid、Gank.Io、Douban Api 
+> Netease cloud music Ui && Retrofit2 + RxJava2 + MVVM-databinding && wanandroid、Gank.Io、Douban Api 
 
 
 ## Introduce
-一款基于网易云音乐UI，使用wanandroid、GankIo及豆瓣api开发的符合Google Material Desgin阅读类的开源项目。项目采取的是Retrofit + RxJava + MVVM-DataBinding架构开发。
+一款基于网易云音乐UI，使用wanandroid、GankIo及豆瓣api开发的符合Google Material Desgin阅读类的开源项目。项目采取的是Retrofit2 + RxJava2 + MVVM-DataBinding架构开发。
 
 A netease cloud music based UI, using wanandroid、Gank.Io and douban API development accord with Google Material Desgin reading class open source projects.
 
