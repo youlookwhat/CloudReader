@@ -19,6 +19,7 @@
 
 package com.example.jingbin.cloudreader.utils;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -103,6 +104,7 @@ public class RxSaveImage {
     }
 
 
+    @SuppressLint("CheckResult")
     public static void saveImageToGallery(Activity context, String mImageUrl, String mImageTitle) {
         ToastUtil.showToast("开始下载图片");
         // @formatter:off
