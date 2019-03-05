@@ -78,9 +78,13 @@ public class BannerFragment extends BaseFragment<WanAndroidListViewModel, Fragme
 
             @Override
             public void onLoadMore() {
-                int page = viewModel.getPage();
-                viewModel.setPage(++page);
-                getHomeList();
+                if (!bindingView.srlWan.isRefreshing()){
+                    int page = viewModel.getPage();
+                    viewModel.setPage(++page);
+                    getHomeList();
+                } else {
+                    bindingView.xrvWan.refreshComplete();
+                }
             }
         });
         viewModel.getWanAndroidBanner().observe(this, new Observer<WanAndroidBannerBean>() {

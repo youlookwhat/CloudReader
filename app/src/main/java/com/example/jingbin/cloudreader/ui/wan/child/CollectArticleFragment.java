@@ -94,6 +94,8 @@ public class CollectArticleFragment extends BaseFragment<ArticleListViewModel, F
                     int page = viewModel.getPage();
                     viewModel.setPage(++page);
                     getCollectList();
+                } else {
+                    bindingView.xrvWan.refreshComplete();
                 }
             }
         });

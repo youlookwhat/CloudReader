@@ -125,6 +125,8 @@ public class BookListFragment extends BaseFragment<BookListViewModel, FragmentWa
                 if (!bindingView.srlWan.isRefreshing()) {
                     viewModel.handleNextStart();
                     getBook();
+                } else {
+                    bindingView.xrvWan.refreshComplete();
                 }
             }
         });
