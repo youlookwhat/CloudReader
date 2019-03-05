@@ -3,6 +3,8 @@ package com.example.jingbin.cloudreader;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -359,6 +361,27 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             });
         }
     }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        if (newConfig.fontScale != 1) {
+            getResources();
+        }
+    }
+
+    /**
+     * 禁止改变字体大小
+     */
+    @Override
+    public Resources getResources() {
+        Resources res = super.getResources();
+        Configuration config = new Configuration();
+        config.setToDefaults();
+        res.updateConfiguration(config, res.getDisplayMetrics());
+        return res;
+    }
+
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {

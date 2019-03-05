@@ -2,6 +2,8 @@ package com.example.jingbin.cloudreader.base;
 
 import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.databinding.DataBindingUtil;
 import android.databinding.ViewDataBinding;
 import android.graphics.drawable.AnimationDrawable;
@@ -190,6 +192,26 @@ public abstract class BaseActivity<VM extends AndroidViewModel, SV extends ViewD
             this.mCompositeDisposable = new CompositeDisposable();
         }
         this.mCompositeDisposable.add(s);
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        if (newConfig.fontScale != 1) {
+            getResources();
+        }
+    }
+
+    /**
+     * 禁止改变字体大小
+     */
+    @Override
+    public Resources getResources() {
+        Resources res = super.getResources();
+        Configuration config = new Configuration();
+        config.setToDefaults();
+        res.updateConfiguration(config, res.getDisplayMetrics());
+        return res;
     }
 
     @Override
