@@ -1,6 +1,7 @@
 package com.example.jingbin.cloudreader.adapter;
 
 import android.content.Context;
+import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
 import android.text.Html;
 import android.view.Gravity;
@@ -31,12 +32,6 @@ import java.util.List;
 public class NaviContentAdapter extends BaseRecyclerViewAdapter<NaviJsonBean.DataBean> {
 
 
-    private Context activity;
-
-    public NaviContentAdapter(Context activity) {
-        this.activity = activity;
-    }
-
     @NonNull
     @Override
     public BaseRecyclerViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -63,7 +58,8 @@ public class NaviContentAdapter extends BaseRecyclerViewAdapter<NaviJsonBean.Dat
         flowlayoutHot.setAdapter(new TagAdapter<ArticlesBean>(beanList) {
             @Override
             public View getView(FlowLayout parent, int position, ArticlesBean bean) {
-                TextView textView = getTextView();
+                TextView textView = (TextView) View.inflate(parent.getContext(), R.layout.layout_navi_tag, null);
+                textView.setTextColor(CommonUtils.randomColor());
                 textView.setText(Html.fromHtml(bean.getTitle()));
                 return textView;
             }
@@ -75,20 +71,6 @@ public class NaviContentAdapter extends BaseRecyclerViewAdapter<NaviJsonBean.Dat
                 return true;
             }
         });
-    }
-
-    private TextView getTextView() {
-        final TextView hotText = new TextView(activity);
-        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-        hotText.setLayoutParams(lp);
-        hotText.setTextSize(13);
-        int left, top, right, bottom;
-        hotText.setMaxLines(1);
-        left = top = right = bottom = DensityUtil.dip2px(5);
-        hotText.setBackgroundResource(R.drawable.shape_navi_tag);
-        hotText.setGravity(Gravity.CENTER);
-        lp.setMargins(left, top, right, bottom);
-        return hotText;
     }
 
 }

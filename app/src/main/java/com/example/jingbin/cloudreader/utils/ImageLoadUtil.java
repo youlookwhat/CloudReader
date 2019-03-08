@@ -69,8 +69,8 @@ public class ImageLoadUtil {
 
         Glide.with(imageView.getContext()).load(url)
                 .asBitmap()
-                .placeholder(R.drawable.img_one_bi_one)
-                .error(R.drawable.img_one_bi_one)
+                .placeholder(R.drawable.shape_bg_loading)
+                .error(R.drawable.shape_bg_loading)
 //                .skipMemoryCache(true) //跳过内存缓存
 //                .crossFade(1000)
 //                .diskCacheStrategy(DiskCacheStrategy.SOURCE)// 缓存图片源文件（解决加载gif内存溢出问题）

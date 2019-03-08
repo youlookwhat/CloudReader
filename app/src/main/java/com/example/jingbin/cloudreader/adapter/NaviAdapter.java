@@ -36,25 +36,12 @@ public class NaviAdapter extends BaseRecyclerViewAdapter<NaviJsonBean.DataBean> 
                 binding.tvTitle.setSelected(dataBean.isSelected());
                 binding.setBean(dataBean);
                 binding.tvTitle.setOnClickListener(v -> {
-                    setSelected(position);
                     if (listener != null) {
                         listener.onSelected(position);
                     }
                 });
             }
         }
-    }
-
-    public void setSelected(int position) {
-        List<NaviJsonBean.DataBean> data = getData();
-        for (int i = 0; i < data.size(); i++) {
-            if (i == position) {
-                data.get(i).setSelected(true);
-            } else {
-                data.get(i).setSelected(false);
-            }
-        }
-        notifyDataSetChanged();
     }
 
     private OnSelectListener listener;

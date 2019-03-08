@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 
 import com.example.jingbin.cloudreader.R;
 import com.example.jingbin.cloudreader.adapter.NaviAdapter;
@@ -20,14 +21,15 @@ import com.example.jingbin.cloudreader.viewmodel.wan.NaviViewModel;
  * @date 2018/10/8.
  * @description 导航数据
  */
-public class NaviFragment extends BaseFragment<NaviViewModel,FragmentNaviBinding> {
+public class NaviFragment extends BaseFragment<NaviViewModel, FragmentNaviBinding> {
 
     private boolean mIsPrepared;
     private boolean mIsFirst = true;
     private NaviAdapter mNaviAdapter;
     private NaviContentAdapter mContentAdapter;
     private FragmentActivity activity;
-    private int oldPosition = 0;
+    private int currentPosition = 0;
+    private LinearLayoutManager layoutManager;
 
     @Override
     public int setContent() {
@@ -55,19 +57,21 @@ public class NaviFragment extends BaseFragment<NaviViewModel,FragmentNaviBinding
     }
 
     private void initRefreshView() {
-        LinearLayoutManager layoutManager = new LinearLayoutManager(activity);
+        layoutManager = new LinearLayoutManager(activity);
         bindingView.xrvNavi.setLayoutManager(layoutManager);
         mNaviAdapter = new NaviAdapter();
         bindingView.xrvNavi.setAdapter(mNaviAdapter);
 
         LinearLayoutManager layoutManager2 = new LinearLayoutManager(activity);
         bindingView.xrvNaviDetail.setLayoutManager(layoutManager2);
-        mContentAdapter = new NaviContentAdapter(activity);
+        mContentAdapter = new NaviContentAdapter();
         bindingView.xrvNaviDetail.setAdapter(mContentAdapter);
 
         mNaviAdapter.setOnSelectListener(new NaviAdapter.OnSelectListener() {
             @Override
             public void onSelected(int position) {
+                selectItem(position);
+                moveToCenter(position);
                 layoutManager2.scrollToPositionWithOffset(position, 0);
             }
         });
@@ -75,11 +79,10 @@ public class NaviFragment extends BaseFragment<NaviViewModel,FragmentNaviBinding
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
-                int firstPosition = layoutManager2.findFirstVisibleItemPosition();
-                if (oldPosition != firstPosition) {
-                    bindingView.xrvNavi.smoothScrollToPosition(firstPosition);
-                    mNaviAdapter.setSelected(firstPosition);
-                    oldPosition = firstPosition;
+                int itemPosition = layoutManager2.findFirstVisibleItemPosition();
+                if (currentPosition != itemPosition) {
+                    selectItem(itemPosition);
+                    moveToCenter(itemPosition);
                 }
             }
         });
@@ -105,7 +108,7 @@ public class NaviFragment extends BaseFragment<NaviViewModel,FragmentNaviBinding
                     mNaviAdapter.clear();
                     mNaviAdapter.addAll(naviJsonBean.getData());
                     mNaviAdapter.notifyDataSetChanged();
-                    mNaviAdapter.setSelected(0);
+                    selectItem(0);
 
                     mContentAdapter.clear();
                     mContentAdapter.addAll(naviJsonBean.getData());
@@ -117,6 +120,30 @@ public class NaviFragment extends BaseFragment<NaviViewModel,FragmentNaviBinding
                 }
             }
         });
+    }
+
+    private void selectItem(int position) {
+        if (position < 0 || mNaviAdapter.getData().size() < position) {
+            return;
+        }
+        mNaviAdapter.getData().get(currentPosition).setSelected(false);
+        mNaviAdapter.notifyItemChanged(currentPosition);
+        currentPosition = position;
+        mNaviAdapter.getData().get(position).setSelected(true);
+        mNaviAdapter.notifyItemChanged(position);
+    }
+
+    /**
+     * 将当前选中的item居中
+     */
+    private void moveToCenter(int position) {
+        //将点击的position转换为当前屏幕上可见的item的位置以便于计算距离顶部的高度，从而进行移动居中
+        View childAt = bindingView.xrvNavi.getChildAt(position - layoutManager.findFirstVisibleItemPosition());
+        if (childAt != null) {
+            int y = (childAt.getTop() - bindingView.xrvNavi.getHeight() / 2);
+            bindingView.xrvNavi.smoothScrollBy(0, y);
+        }
+
     }
 
     @Override
