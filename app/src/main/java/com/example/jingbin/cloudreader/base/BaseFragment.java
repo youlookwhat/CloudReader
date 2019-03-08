@@ -19,12 +19,15 @@ import android.widget.RelativeLayout;
 
 import com.example.jingbin.cloudreader.R;
 import com.example.jingbin.cloudreader.utils.ClassUtil;
+import com.example.jingbin.cloudreader.utils.PerfectClickListener;
 
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 
 /**
  * 是没有title的Fragment
+ *
+ * @author jingbin
  */
 public abstract class BaseFragment<VM extends AndroidViewModel, SV extends ViewDataBinding> extends Fragment {
 
@@ -37,9 +40,7 @@ public abstract class BaseFragment<VM extends AndroidViewModel, SV extends ViewD
     // 加载中
     private View loadingView;
     // 加载失败
-    private LinearLayout mRefresh;
-    // 内容布局
-    protected RelativeLayout mContainer;
+    private View errorView;
     // 动画
     private AnimationDrawable mAnimationDrawable;
     private CompositeDisposable mCompositeDisposable;
@@ -51,7 +52,7 @@ public abstract class BaseFragment<VM extends AndroidViewModel, SV extends ViewD
         bindingView = DataBindingUtil.inflate(getActivity().getLayoutInflater(), setContent(), null, false);
         RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
         bindingView.getRoot().setLayoutParams(params);
-        mContainer = ll.findViewById(R.id.container);
+        RelativeLayout mContainer = ll.findViewById(R.id.container);
         mContainer.addView(bindingView.getRoot());
         return ll;
     }
@@ -99,15 +100,6 @@ public abstract class BaseFragment<VM extends AndroidViewModel, SV extends ViewD
         if (!mAnimationDrawable.isRunning()) {
             mAnimationDrawable.start();
         }
-        mRefresh = getView(R.id.ll_error_refresh);
-        // 点击加载失败布局
-        mRefresh.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showLoading();
-                onRefresh();
-            }
-        });
         bindingView.getRoot().setVisibility(View.GONE);
         initViewModel();
     }
@@ -152,8 +144,8 @@ public abstract class BaseFragment<VM extends AndroidViewModel, SV extends ViewD
         if (bindingView.getRoot().getVisibility() != View.GONE) {
             bindingView.getRoot().setVisibility(View.GONE);
         }
-        if (mRefresh.getVisibility() != View.GONE) {
-            mRefresh.setVisibility(View.GONE);
+        if (errorView != null) {
+            errorView.setVisibility(View.GONE);
         }
     }
 
@@ -168,8 +160,8 @@ public abstract class BaseFragment<VM extends AndroidViewModel, SV extends ViewD
         if (mAnimationDrawable.isRunning()) {
             mAnimationDrawable.stop();
         }
-        if (mRefresh.getVisibility() != View.GONE) {
-            mRefresh.setVisibility(View.GONE);
+        if (errorView != null) {
+            errorView.setVisibility(View.GONE);
         }
         if (bindingView.getRoot().getVisibility() != View.VISIBLE) {
             bindingView.getRoot().setVisibility(View.VISIBLE);
@@ -187,8 +179,19 @@ public abstract class BaseFragment<VM extends AndroidViewModel, SV extends ViewD
         if (mAnimationDrawable.isRunning()) {
             mAnimationDrawable.stop();
         }
-        if (mRefresh.getVisibility() != View.VISIBLE) {
-            mRefresh.setVisibility(View.VISIBLE);
+        if (errorView == null) {
+            ViewStub viewStub = getView(R.id.vs_error_refresh);
+            errorView = viewStub.inflate();
+            // 点击加载失败布局
+            errorView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    showLoading();
+                    onRefresh();
+                }
+            });
+        } else {
+            errorView.setVisibility(View.VISIBLE);
         }
         if (bindingView.getRoot().getVisibility() != View.GONE) {
             bindingView.getRoot().setVisibility(View.GONE);

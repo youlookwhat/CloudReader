@@ -39,7 +39,7 @@ public abstract class BaseActivity<VM extends AndroidViewModel, SV extends ViewD
     protected VM viewModel;
     // 布局view
     protected SV bindingView;
-    private View refresh;
+    private View errorView;
     private View loadingView;
     private ActivityBaseBinding mBaseBinding;
     private AnimationDrawable mAnimationDrawable;
@@ -70,7 +70,6 @@ public abstract class BaseActivity<VM extends AndroidViewModel, SV extends ViewD
         // 设置透明状态栏，兼容4.4
         StatusBarUtil.setColor(this, CommonUtils.getColor(R.color.colorTheme), 0);
         loadingView = ((ViewStub) findViewById(R.id.vs_loading)).inflate();
-        refresh = getView(R.id.ll_error_refresh);
         ImageView img = loadingView.findViewById(R.id.img_progress);
 
         // 加载动画
@@ -81,14 +80,6 @@ public abstract class BaseActivity<VM extends AndroidViewModel, SV extends ViewD
         }
 
         setToolBar();
-        // 点击加载失败布局
-        refresh.setOnClickListener(new PerfectClickListener() {
-            @Override
-            protected void onNoDoubleClick(View v) {
-                showLoading();
-                onRefresh();
-            }
-        });
         bindingView.getRoot().setVisibility(View.GONE);
         initViewModel();
     }
@@ -143,8 +134,8 @@ public abstract class BaseActivity<VM extends AndroidViewModel, SV extends ViewD
         if (bindingView.getRoot().getVisibility() != View.GONE) {
             bindingView.getRoot().setVisibility(View.GONE);
         }
-        if (refresh.getVisibility() != View.GONE) {
-            refresh.setVisibility(View.GONE);
+        if (errorView != null) {
+            errorView.setVisibility(View.GONE);
         }
     }
 
@@ -156,8 +147,8 @@ public abstract class BaseActivity<VM extends AndroidViewModel, SV extends ViewD
         if (mAnimationDrawable.isRunning()) {
             mAnimationDrawable.stop();
         }
-        if (refresh.getVisibility() != View.GONE) {
-            refresh.setVisibility(View.GONE);
+        if (errorView != null) {
+            errorView.setVisibility(View.GONE);
         }
         if (bindingView.getRoot().getVisibility() != View.VISIBLE) {
             bindingView.getRoot().setVisibility(View.VISIBLE);
@@ -172,8 +163,19 @@ public abstract class BaseActivity<VM extends AndroidViewModel, SV extends ViewD
         if (mAnimationDrawable.isRunning()) {
             mAnimationDrawable.stop();
         }
-        if (refresh.getVisibility() != View.VISIBLE) {
-            refresh.setVisibility(View.VISIBLE);
+        if (errorView == null) {
+            ViewStub viewStub = (ViewStub) findViewById(R.id.vs_error_refresh);
+            errorView = viewStub.inflate();
+            // 点击加载失败布局
+            errorView.setOnClickListener(new PerfectClickListener() {
+                @Override
+                protected void onNoDoubleClick(View v) {
+                    showLoading();
+                    onRefresh();
+                }
+            });
+        } else {
+            errorView.setVisibility(View.VISIBLE);
         }
         if (bindingView.getRoot().getVisibility() != View.GONE) {
             bindingView.getRoot().setVisibility(View.GONE);
