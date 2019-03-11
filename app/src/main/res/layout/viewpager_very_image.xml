@@ -4,11 +4,10 @@
     android:layout_height="fill_parent"
     android:background="#ff000000">
 
-    <uk.co.senab.photoview.PhotoView
+    <com.github.chrisbanes.photoview.PhotoView
         android:id="@+id/zoom_image_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
-
 
     <ProgressBar
         android:id="@+id/loading"

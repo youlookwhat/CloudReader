@@ -67,7 +67,6 @@ dependencies {
     })
     implementation project(path: ':library:xrecyclerview')
     implementation project(path: ':library:http')
-    implementation project(path: ':library:zoomlibrary')
     testImplementation "junit:junit:$rootProject.ext.junitVersion"
     implementation "com.android.support:appcompat-v7:$rootProject.supportLibraryVersion"
     implementation "com.android.support:design:$rootProject.supportLibraryVersion"
@@ -94,6 +93,7 @@ dependencies {
     implementation 'me.drakeet.support:toastcompat:1.1.0'
     implementation 'com.hyman:flowlayout-lib:1.1.2'
     implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.41'
+    implementation 'com.github.chrisbanes:PhotoView:2.1.4'
     // leakcanary
 //    debugImplementation 'com.squareup.leakcanary:leakcanary-android:1.6.1'
 //    releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.6.1'

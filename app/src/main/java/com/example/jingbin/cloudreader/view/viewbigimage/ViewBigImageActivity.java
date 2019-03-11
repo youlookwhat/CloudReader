@@ -25,12 +25,11 @@ import com.example.jingbin.cloudreader.R;
 import com.example.jingbin.cloudreader.utils.PermissionHandler;
 import com.example.jingbin.cloudreader.utils.RxSaveImage;
 import com.example.jingbin.cloudreader.utils.ToastUtil;
+import com.github.chrisbanes.photoview.OnPhotoTapListener;
+import com.github.chrisbanes.photoview.PhotoView;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import uk.co.senab.photoview.PhotoView;
-import uk.co.senab.photoview.PhotoViewAttacher;
 
 
 /**
@@ -38,7 +37,7 @@ import uk.co.senab.photoview.PhotoViewAttacher;
  *
  * @author jingbin
  */
-public class ViewBigImageActivity extends FragmentActivity implements OnPageChangeListener, PhotoViewAttacher.OnPhotoTapListener {
+public class ViewBigImageActivity extends FragmentActivity implements OnPageChangeListener, OnPhotoTapListener {
 
     /**
      * 保存图片
@@ -147,6 +146,11 @@ public class ViewBigImageActivity extends FragmentActivity implements OnPageChan
                 RxSaveImage.saveImageToGallery(this, imageList.get(page), imageTitles.get(page));
             }
         });
+    }
+
+    @Override
+    public void onPhotoTap(ImageView view, float x, float y) {
+        finish();
     }
 
     /**
@@ -291,16 +295,6 @@ public class ViewBigImageActivity extends FragmentActivity implements OnPageChan
     public void onPageSelected(int arg0) {
         veryImageViewpagerText.setText((arg0 + 1) + " / " + imageList.size());
         page = arg0;
-    }
-
-    @Override
-    public void onPhotoTap(View view, float x, float y) {
-        finish();
-    }
-
-    @Override
-    public void onOutsidePhotoTap() {
-        finish();
     }
 
     @Override
