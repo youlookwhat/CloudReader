@@ -16,6 +16,8 @@
 #   public *;
 #}
 
+-keep public class *extends java.lang.annotation.Annotation {}
+
 # bugly
 -dontwarn com.tencent.bugly.**
 -keep public class com.tencent.bugly.**{*;}
