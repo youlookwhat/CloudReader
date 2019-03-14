@@ -79,6 +79,9 @@
             android:name=".ui.douban.DoubanTopActivity"
             android:screenOrientation="portrait" />
         <activity
+            android:name=".ui.douban.BookTypeActivity"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".ui.douban.OneMovieDetailActivity"
             android:screenOrientation="portrait"
             android:theme="@style/MyScrollPage" />
@@ -109,6 +112,9 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".ui.wan.child.CategoryDetailActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.menu.SearchActivity"
             android:screenOrientation="portrait" />
     </application>
 

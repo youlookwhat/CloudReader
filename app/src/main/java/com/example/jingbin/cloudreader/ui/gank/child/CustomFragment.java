@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
-import android.view.animation.AlphaAnimation;
 import android.widget.TextView;
 
 import com.cocosw.bottomsheet.BottomSheet;
@@ -16,7 +15,7 @@ import com.example.jingbin.cloudreader.bean.GankIoDataBean;
 import com.example.jingbin.cloudreader.databinding.FragmentCustomBinding;
 import com.example.jingbin.cloudreader.utils.SPUtils;
 import com.example.jingbin.cloudreader.utils.ToastUtil;
-import com.example.jingbin.cloudreader.viewmodel.gank.CustomViewModel;
+import com.example.jingbin.cloudreader.viewmodel.gank.GankViewModel;
 import com.example.xrecyclerview.XRecyclerView;
 
 import static com.example.jingbin.cloudreader.app.Constants.GANK_CALA;
@@ -25,7 +24,7 @@ import static com.example.jingbin.cloudreader.app.Constants.GANK_CALA;
  * @author jingbin
  * @data 2018-12-22
  */
-public class CustomFragment extends BaseFragment<CustomViewModel, FragmentCustomBinding> {
+public class CustomFragment extends BaseFragment<GankViewModel, FragmentCustomBinding> {
 
     private String mType = "all";
     private boolean mIsPrepared;
@@ -96,7 +95,7 @@ public class CustomFragment extends BaseFragment<CustomViewModel, FragmentCustom
     }
 
     private void loadCustomData() {
-        viewModel.loadCustomData().observe(this, new Observer<GankIoDataBean>() {
+        viewModel.loadGankData().observe(this, new Observer<GankIoDataBean>() {
             @Override
             public void onChanged(@Nullable GankIoDataBean bean) {
                 if (bean != null && bean.getResults() != null && bean.getResults().size() > 0) {

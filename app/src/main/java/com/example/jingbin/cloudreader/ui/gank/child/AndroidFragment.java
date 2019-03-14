@@ -10,13 +10,13 @@ import com.example.jingbin.cloudreader.R;
 import com.example.jingbin.cloudreader.adapter.GankAndroidAdapter;
 import com.example.jingbin.cloudreader.base.BaseFragment;
 import com.example.jingbin.cloudreader.databinding.FragmentAndroidBinding;
-import com.example.jingbin.cloudreader.viewmodel.gank.BigAndroidViewModel;
+import com.example.jingbin.cloudreader.viewmodel.gank.GankViewModel;
 import com.example.xrecyclerview.XRecyclerView;
 
 /**
  * 大安卓 fragment
  */
-public class AndroidFragment extends BaseFragment<BigAndroidViewModel, FragmentAndroidBinding> {
+public class AndroidFragment extends BaseFragment<GankViewModel, FragmentAndroidBinding> {
 
     private static final String TAG = "AndroidFragment";
     private static final String TYPE = "mType";
@@ -95,7 +95,7 @@ public class AndroidFragment extends BaseFragment<BigAndroidViewModel, FragmentA
     }
 
     private void loadAndroidData() {
-        viewModel.loadAndroidData().observe(this, bean -> {
+        viewModel.loadGankData().observe(this, bean -> {
             if (bean != null && bean.getResults() != null && bean.getResults().size() > 0) {
                 if (viewModel.getPage() == 1) {
                     showContentView();

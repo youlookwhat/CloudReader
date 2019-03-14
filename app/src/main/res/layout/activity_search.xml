@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/colorTheme"
+            app:contentInsetStartWithNavigation="0dp"
+            app:layout_collapseMode="pin"
+            app:navigationIcon="@drawable/icon_back"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+            <!--android:colorControlActivated="@color/colorWhite"-->
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <android.support.v7.widget.AppCompatEditText
+                    android:id="@+id/et_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="47dp"
+                    android:layout_marginEnd="10dp"
+                    android:background="@drawable/shape_edit_line"
+                    android:hint="输入搜索内容"
+                    android:imeOptions="actionSearch"
+                    android:inputType="text"
+                    android:paddingEnd="50dp"
+                    android:textColor="#bbffffff"
+                    android:textColorHint="#77ffffff"
+                    android:textCursorDrawable="@drawable/shape_edit_cursor"
+                    android:textSize="17sp" />
+
+                <ImageView
+                    android:id="@+id/iv_clear"
+                    android:layout_width="38dp"
+                    android:layout_height="38dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="15dp"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:padding="5dp"
+                    android:src="@drawable/actionbar_cha"
+                    android:visibility="gone" />
+            </RelativeLayout>
+
+        </android.support.v7.widget.Toolbar>
+
+
+        <android.support.design.widget.TabLayout
+            android:id="@+id/tl_search"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:background="@color/colorTheme"
+            app:tabGravity="center"
+            app:tabIndicatorColor="@color/colorWhite"
+            app:tabMode="fixed"
+            app:tabSelectedTextColor="@color/colorWhite"
+            app:tabTextAppearance="@style/MyTabLayoutTextAppearance"
+            app:tabTextColor="@color/colorWhiteHalf">
+
+            <android.support.design.widget.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="玩安卓"
+                android:textColor="@color/colorWhite"
+                android:textSize="14sp" />
+
+            <android.support.design.widget.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="干货 | 安卓"
+                android:textColor="@color/colorWhite"
+                android:textSize="14sp" />
+
+            <android.support.design.widget.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="干货 | 全部"
+                android:textColor="@color/colorWhite"
+                android:textSize="14sp" />
+
+            <android.support.design.widget.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="网页"
+                android:textColor="@color/colorWhite"
+                android:textSize="14sp" />
+        </android.support.design.widget.TabLayout>
+
+        <!--<com.example.xrecyclerview.XRecyclerView-->
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbarAlwaysDrawVerticalTrack="true"
+            android:scrollbarFadeDuration="1"
+            android:scrollbarSize="4dp"
+            android:scrollbars="vertical" />
+    </LinearLayout>
+
+</layout>

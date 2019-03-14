@@ -260,4 +260,17 @@ public interface HttpClient {
      */
     @GET("navi/json")
     Flowable<NaviJsonBean> getNaviJson();
+
+    /**
+     * 玩安卓 搜索
+     */
+    @FormUrlEncoded
+    @POST("article/query/{page}/json")
+    Flowable<HomeListBean> searchWan(@Path("page") int page, @Field("k") String k);
+
+    /**
+     * 干货集中营 搜索
+     */
+    @GET("search/query/{keyWord}/category/{type}/count/20/page/{p} ")
+    Flowable<GankIoDataBean> searchGank(@Path("p") int p, @Path("type") String type, @Path("keyWord") String keyWord);
 }

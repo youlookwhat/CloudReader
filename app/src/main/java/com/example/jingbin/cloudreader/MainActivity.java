@@ -37,6 +37,7 @@ import com.example.jingbin.cloudreader.ui.menu.NavAboutActivity;
 import com.example.jingbin.cloudreader.ui.menu.NavDeedBackActivity;
 import com.example.jingbin.cloudreader.ui.menu.NavDownloadActivity;
 import com.example.jingbin.cloudreader.ui.menu.NavHomePageActivity;
+import com.example.jingbin.cloudreader.ui.menu.SearchActivity;
 import com.example.jingbin.cloudreader.ui.wan.WanFragment;
 import com.example.jingbin.cloudreader.ui.wan.child.LoginActivity;
 import com.example.jingbin.cloudreader.ui.wan.child.MyCollectActivity;
@@ -303,6 +304,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch (item.getItemId()) {
             case R.id.action_search:
 //                Toast.makeText(this, "搜索", Toast.LENGTH_SHORT).show();
+                SearchActivity.start(this);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

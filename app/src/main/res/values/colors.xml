@@ -9,6 +9,7 @@
     <color name="color_page_bg">#F1F3F4</color>
 
     <color name="colorWhite">#ffffffff</color>
+    <color name="colorWhiteHalf">#bbffffff</color>
 
     <!--主页tab背景-->
     <color name="colorTabBg">#ffffffff</color>

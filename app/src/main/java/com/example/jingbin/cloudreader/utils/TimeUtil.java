@@ -1,5 +1,6 @@
 package com.example.jingbin.cloudreader.utils;
 
+import android.text.TextUtils;
 import android.text.format.Time;
 
 import java.text.ParseException;
@@ -228,6 +229,9 @@ public class TimeUtil {
      * @return
      */
     public static String getTranslateTime(String time) {
+        if (TextUtils.isEmpty(time)) {
+            return "";
+        }
         SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
         // 在主页面中设置当天时间
         Date nowTime = new Date();

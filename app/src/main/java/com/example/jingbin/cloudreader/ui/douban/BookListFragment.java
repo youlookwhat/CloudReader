@@ -1,13 +1,16 @@
 package com.example.jingbin.cloudreader.ui.douban;
 
 import android.content.Context;
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
+import android.view.View;
 import android.view.inputmethod.EditorInfo;
+import android.widget.CompoundButton;
 
 import com.example.jingbin.cloudreader.R;
 import com.example.jingbin.cloudreader.adapter.DouBookAdapter;
@@ -23,7 +26,7 @@ import com.example.xrecyclerview.XRecyclerView;
 
 /**
  * @author jingbin
- *         Updated by jingbin on 18/12/27.
+ * Updated by jingbin on 18/12/27.
  */
 public class BookListFragment extends BaseFragment<BookListViewModel, FragmentWanAndroidBinding> {
 
@@ -33,6 +36,7 @@ public class BookListFragment extends BaseFragment<BookListViewModel, FragmentWa
     private boolean mIsFirst = true;
     private DouBookAdapter mBookAdapter;
     private FragmentActivity activity;
+    private HeaderItemBookBinding oneBinding;
 
     @Override
     public int setContent() {
@@ -78,29 +82,19 @@ public class BookListFragment extends BaseFragment<BookListViewModel, FragmentWa
     private void initRefreshView() {
         bindingView.srlWan.setColorSchemeColors(CommonUtils.getColor(R.color.colorTheme));
         mBookAdapter = new DouBookAdapter();
-        HeaderItemBookBinding oneBinding = DataBindingUtil.inflate(getLayoutInflater(), R.layout.header_item_book, null, false);
+        oneBinding = DataBindingUtil.inflate(getLayoutInflater(), R.layout.header_item_book, null, false);
         oneBinding.setViewModel(viewModel);
         GridLayoutManager mLayoutManager = new GridLayoutManager(getActivity(), 3);
         bindingView.xrvWan.setLayoutManager(mLayoutManager);
         bindingView.xrvWan.setPullRefreshEnabled(false);
-        // 去掉显示动画 不设置 下拉刷新时上拉会崩溃
         bindingView.xrvWan.setItemAnimator(null);
         bindingView.xrvWan.clearHeader();
         bindingView.xrvWan.setHasFixedSize(true);
         viewModel.bookType.set(mType);
         bindingView.xrvWan.setAdapter(mBookAdapter);
         bindingView.xrvWan.addHeaderView(oneBinding.getRoot());
+        initHeaderView(oneBinding);
         mBookAdapter.setOnClickListener((bean, view) -> BookDetailActivity.start(activity, bean, view));
-        /** 处理键盘搜索键 */
-        oneBinding.etTypeName.setOnEditorActionListener((textView, actionId, keyEvent) -> {
-            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                BaseTools.hideSoftKeyBoard(activity);
-                viewModel.setStart(0);
-                bindingView.xrvWan.reset();
-                getBook();
-            }
-            return false;
-        });
         bindingView.srlWan.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -132,6 +126,24 @@ public class BookListFragment extends BaseFragment<BookListViewModel, FragmentWa
         });
     }
 
+    private void initHeaderView(HeaderItemBookBinding binding) {
+        binding.rb1.setOnCheckedChangeListener((buttonView, isChecked) -> refresh(isChecked, binding.rb1.getText().toString()));
+        binding.rb2.setOnCheckedChangeListener((buttonView, isChecked) -> refresh(isChecked, binding.rb2.getText().toString()));
+        binding.rb3.setOnCheckedChangeListener((buttonView, isChecked) -> refresh(isChecked, binding.rb3.getText().toString()));
+        binding.rb4.setOnCheckedChangeListener((buttonView, isChecked) -> refresh(isChecked, binding.rb4.getText().toString()));
+        binding.llTypeBook.setOnClickListener(v -> BookTypeActivity.start(this, viewModel.bookType.get()));
+    }
+
+    private void refresh(boolean isChecked, String mType) {
+        if (isChecked) {
+            bindingView.srlWan.setRefreshing(true);
+            bindingView.xrvWan.reset();
+            viewModel.setStart(0);
+            viewModel.bookType.set(mType);
+            getBook();
+        }
+    }
+
     @Override
     protected void loadData() {
         DebugUtil.error("-----loadData");
@@ -155,13 +167,6 @@ public class BookListFragment extends BaseFragment<BookListViewModel, FragmentWa
                     if (viewModel.getStart() == 0) {
                         showContentView();
                         mBookAdapter.clear();
-                        /**
-                         * 1.
-                         * 使用 mBookAdapter.notifyItemRangeRemoved(2, mBookAdapter.getItemCount());
-                         * 当数据不足一屏时会报错: java.lang.IllegalArgumentException: Scrapped or attached views may not be recycled. isScrap:false isAttached:true
-                         *
-                         * 2.setItemAnimator(null);
-                         * */
                         mBookAdapter.notifyDataSetChanged();
                     }
                     // +2 一个刷新头布局 一个自己新增的头布局
@@ -181,6 +186,16 @@ public class BookListFragment extends BaseFragment<BookListViewModel, FragmentWa
                 }
             }
         });
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (data != null && requestCode == 520) {
+            String type = data.getStringExtra("type");
+            refresh(true, type);
+            oneBinding.rgAll.clearCheck();
+        }
     }
 
     @Override

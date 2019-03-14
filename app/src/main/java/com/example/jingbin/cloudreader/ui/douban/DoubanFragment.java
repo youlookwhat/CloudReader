@@ -58,7 +58,7 @@ public class DoubanFragment extends BaseFragment<NoViewModel, FragmentGankBindin
         mTitleList.add("电影");
         mTitleList.add("书籍");
         mFragments.add(new OneFragment());
-        mFragments.add(BookListFragment.newInstance("沟通"));
+        mFragments.add(BookListFragment.newInstance("综合"));
     }
 
 }
