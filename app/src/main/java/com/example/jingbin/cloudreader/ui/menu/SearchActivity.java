@@ -109,7 +109,7 @@ public class SearchActivity extends AppCompatActivity {
             }
         });
         binding.etContent.setOnEditorActionListener((textView, actionId, keyEvent) -> {
-            if (binding.tlSearch.getSelectedTabPosition() == 3 && actionId == EditorInfo.IME_ACTION_SEARCH) {
+            if (!TextUtils.isEmpty(keyWord) && binding.tlSearch.getSelectedTabPosition() == 3 && actionId == EditorInfo.IME_ACTION_SEARCH) {
                 /**
                  * www.baidu.com
                  * http://www.baidu.com
