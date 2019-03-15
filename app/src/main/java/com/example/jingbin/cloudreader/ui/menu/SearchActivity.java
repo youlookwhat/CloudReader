@@ -95,10 +95,12 @@ public class SearchActivity extends AppCompatActivity {
                  */
                 if (Patterns.WEB_URL.matcher(keyWord).matches() || URLUtil.isValidUrl(keyWord)) {
                     if (!TextUtils.isEmpty(keyWord)) {
-                        if (keyWord.startsWith("www")) {
-                            keyWord = "http://" + keyWord;
-                        } else if (!keyWord.startsWith("http://www")) {
-                            keyWord = "http://www." + keyWord;
+                        if (!keyWord.startsWith("http")) {
+                            if (keyWord.startsWith("www")) {
+                                keyWord = "http://" + keyWord;
+                            } else {
+                                keyWord = "http://www." + keyWord;
+                            }
                         }
                         BaseTools.hideSoftKeyBoard(this);
                         WebViewActivity.loadUrl(this, keyWord, "加载中...");
