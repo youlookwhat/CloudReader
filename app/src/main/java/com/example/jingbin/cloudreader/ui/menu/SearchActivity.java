@@ -15,9 +15,12 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.util.Patterns;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
+import android.webkit.URLUtil;
 
+import com.example.jingbin.cloudreader.MainActivity;
 import com.example.jingbin.cloudreader.R;
 import com.example.jingbin.cloudreader.adapter.CategoryArticleAdapter;
 import com.example.jingbin.cloudreader.adapter.GankAndroidSearchAdapter;
@@ -27,6 +30,7 @@ import com.example.jingbin.cloudreader.databinding.ActivitySearchBinding;
 import com.example.jingbin.cloudreader.utils.BaseTools;
 import com.example.jingbin.cloudreader.utils.CommonUtils;
 import com.example.jingbin.cloudreader.utils.DebugUtil;
+import com.example.jingbin.cloudreader.utils.ToastUtil;
 import com.example.jingbin.cloudreader.view.MyDividerItemDecoration;
 import com.example.jingbin.cloudreader.view.statusbar.StatusBarUtil;
 import com.example.jingbin.cloudreader.view.webview.WebViewActivity;
@@ -67,7 +71,7 @@ public class SearchActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                String content = binding.etContent.getText().toString();
+                String content = binding.etContent.getText().toString().trim();
                 if (!TextUtils.isEmpty(content)) {
                     binding.ivClear.setVisibility(View.VISIBLE);
                     keyWord = content;
@@ -84,12 +88,40 @@ public class SearchActivity extends AppCompatActivity {
         });
         binding.etContent.setOnEditorActionListener((textView, actionId, keyEvent) -> {
             if (binding.tlSearch.getSelectedTabPosition() == 3 && actionId == EditorInfo.IME_ACTION_SEARCH) {
+                /**
+                 * www.baidu.com
+                 * http://www.baidu.com
+                 * youtube.com等
+                 */
+                if (Patterns.WEB_URL.matcher(keyWord).matches() || URLUtil.isValidUrl(keyWord)) {
+                    if (!TextUtils.isEmpty(keyWord)) {
+                        if (keyWord.startsWith("www")) {
+                            keyWord = "http://" + keyWord;
+                        } else if (!keyWord.startsWith("http://www")) {
+                            keyWord = "http://www." + keyWord;
+                        }
+                        BaseTools.hideSoftKeyBoard(this);
+                        WebViewActivity.loadUrl(this, keyWord, "加载中...");
+                    }
+                } else {
+                    ToastUtil.showToast("请输入正确的链接~");
+                }
+            } else {
                 BaseTools.hideSoftKeyBoard(this);
-                WebViewActivity.loadUrl(this, keyWord, "");
             }
             return false;
         });
-        binding.ivClear.setOnClickListener(v -> binding.etContent.setText(""));
+        binding.ivClear.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                keyWord = "";
+                binding.etContent.setText("");
+                binding.etContent.setFocusable(true);
+                binding.etContent.setFocusableInTouchMode(true);
+                binding.etContent.requestFocus();
+                BaseTools.showSoftKeyBoard(SearchActivity.this, binding.etContent);
+            }
+        });
 
 
         binding.tlSearch.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
@@ -150,7 +182,6 @@ public class SearchActivity extends AppCompatActivity {
             binding.recyclerView.addItemDecoration(itemDecoration);
             binding.recyclerView.setAdapter(mAdapter);
         }
-        load();
         mAdapter.setOnLoadMoreListener(() -> {
             int position2 = binding.tlSearch.getSelectedTabPosition();
             if (position2 == 0) {
@@ -164,7 +195,9 @@ public class SearchActivity extends AppCompatActivity {
             }
 
         }, binding.recyclerView);
-        load();
+        if (!TextUtils.isEmpty(keyWord)) {
+            load();
+        }
     }
 
     private void initRefreshView() {
@@ -232,7 +265,6 @@ public class SearchActivity extends AppCompatActivity {
                 }
                 mAdapter.loadMoreComplete();
             } else {
-                DebugUtil.error("33333");
                 if (viewModel.getGankPage() != 1) {
                     mAdapter.loadMoreEnd();
                 } else {

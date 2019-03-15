@@ -70,31 +70,30 @@
                 android:layout_height="wrap_content"
                 android:text="玩安卓"
                 android:textColor="@color/colorWhite"
-                android:textSize="14sp" />
+                android:textSize="12sp" />
 
             <android.support.design.widget.TabItem
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="干货 | 安卓"
                 android:textColor="@color/colorWhite"
-                android:textSize="14sp" />
+                android:textSize="12sp" />
 
             <android.support.design.widget.TabItem
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="干货 | 全部"
                 android:textColor="@color/colorWhite"
-                android:textSize="14sp" />
+                android:textSize="12sp" />
 
             <android.support.design.widget.TabItem
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="网页"
                 android:textColor="@color/colorWhite"
-                android:textSize="14sp" />
+                android:textSize="12sp" />
         </android.support.design.widget.TabLayout>
 
-        <!--<com.example.xrecyclerview.XRecyclerView-->
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recyclerView"
             android:layout_width="match_parent"
