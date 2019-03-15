@@ -13,19 +13,21 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.text.Editable;
+import android.text.Html;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Patterns;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.webkit.URLUtil;
+import android.widget.TextView;
 
-import com.example.jingbin.cloudreader.MainActivity;
 import com.example.jingbin.cloudreader.R;
 import com.example.jingbin.cloudreader.adapter.CategoryArticleAdapter;
 import com.example.jingbin.cloudreader.adapter.GankAndroidSearchAdapter;
 import com.example.jingbin.cloudreader.base.refreshadapter.JQuickAdapter;
 import com.example.jingbin.cloudreader.bean.wanandroid.HomeListBean;
+import com.example.jingbin.cloudreader.bean.wanandroid.SearchTagBean;
 import com.example.jingbin.cloudreader.databinding.ActivitySearchBinding;
 import com.example.jingbin.cloudreader.utils.BaseTools;
 import com.example.jingbin.cloudreader.utils.CommonUtils;
@@ -35,7 +37,11 @@ import com.example.jingbin.cloudreader.view.MyDividerItemDecoration;
 import com.example.jingbin.cloudreader.view.statusbar.StatusBarUtil;
 import com.example.jingbin.cloudreader.view.webview.WebViewActivity;
 import com.example.jingbin.cloudreader.viewmodel.wan.SearchViewModel;
+import com.zhy.view.flowlayout.FlowLayout;
+import com.zhy.view.flowlayout.TagAdapter;
+import com.zhy.view.flowlayout.TagFlowLayout;
 
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -56,8 +62,24 @@ public class SearchActivity extends AppCompatActivity {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_search);
         StatusBarUtil.setColor(this, CommonUtils.getColor(R.color.colorTheme), 0);
         viewModel = ViewModelProviders.of(this).get(SearchViewModel.class);
+        binding.setViewModel(viewModel);
         initRefreshView();
         initView();
+        initData();
+    }
+
+    private void initData() {
+        viewModel.getHotkey().observe(this, new Observer<List<SearchTagBean.DataBean>>() {
+            @Override
+            public void onChanged(@Nullable List<SearchTagBean.DataBean> dataBeans) {
+                if (dataBeans != null && dataBeans.size() > 0) {
+                    showHotTagView(true);
+                    showTagView(binding.tflSearch, dataBeans);
+                } else {
+                    showHotTagView(false);
+                }
+            }
+        });
     }
 
     protected void initView() {
@@ -121,6 +143,7 @@ public class SearchActivity extends AppCompatActivity {
                 binding.etContent.setFocusable(true);
                 binding.etContent.setFocusableInTouchMode(true);
                 binding.etContent.requestFocus();
+                showHotTagView(true);
                 BaseTools.showSoftKeyBoard(SearchActivity.this, binding.etContent);
             }
         });
@@ -228,6 +251,7 @@ public class SearchActivity extends AppCompatActivity {
                         && homeListBean.getData() != null
                         && homeListBean.getData().getDatas() != null
                         && homeListBean.getData().getDatas().size() > 0) {
+                    showHotTagView(false);
                     if (viewModel.getPage() == 0) {
                         mAdapter.getData().clear();
                         mAdapter.notifyDataSetChanged();
@@ -251,6 +275,7 @@ public class SearchActivity extends AppCompatActivity {
     private void loadGankData() {
         viewModel.loadGankData(keyWord).observe(this, bean -> {
             if (bean != null && bean.getResults() != null && bean.getResults().size() > 0) {
+                showHotTagView(false);
                 if (viewModel.getGankPage() == 1) {
                     mAdapter.getData().clear();
                     mAdapter.notifyDataSetChanged();
@@ -276,6 +301,37 @@ public class SearchActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    private void showTagView(TagFlowLayout flowlayoutHot, final List<SearchTagBean.DataBean> beanList) {
+        flowlayoutHot.removeAllViews();
+        flowlayoutHot.setAdapter(new TagAdapter<SearchTagBean.DataBean>(beanList) {
+            @Override
+            public View getView(FlowLayout parent, int position, SearchTagBean.DataBean bean) {
+                TextView textView = (TextView) View.inflate(parent.getContext(), R.layout.layout_navi_tag, null);
+                textView.setText(Html.fromHtml(bean.getName()));
+                return textView;
+            }
+        });
+        flowlayoutHot.setOnTagClickListener(new TagFlowLayout.OnTagClickListener() {
+            @Override
+            public boolean onTagClick(View view, int position, FlowLayout parent) {
+                viewModel.keyWord.set(beanList.get(position).getName());
+                binding.etContent.setText(beanList.get(position).getName());
+                BaseTools.hideSoftKeyBoard(SearchActivity.this);
+                return true;
+            }
+        });
+    }
+
+    private void showHotTagView(boolean isShow) {
+        if (isShow) {
+            binding.llSearchTag.setVisibility(View.VISIBLE);
+            binding.recyclerView.setVisibility(View.GONE);
+        } else {
+            binding.recyclerView.setVisibility(View.VISIBLE);
+            binding.llSearchTag.setVisibility(View.GONE);
+        }
     }
 
     public static void start(Context mContext) {

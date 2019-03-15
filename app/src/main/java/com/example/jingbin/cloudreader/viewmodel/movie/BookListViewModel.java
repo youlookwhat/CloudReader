@@ -75,12 +75,4 @@ public class BookListViewModel extends AndroidViewModel {
         mStart += mCount;
     }
 
-    @BindingAdapter("android:textSelection")
-    public static void textSelection(AppCompatEditText tv, ObservableField<String> value) {
-        if (!TextUtils.isEmpty(tv.getText())) {
-//            tv.setText(value.get());
-            // Set the cursor to the end of the text
-            tv.setSelection(tv.getText().length());
-        }
-    }
 }

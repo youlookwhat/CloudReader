@@ -15,6 +15,7 @@ import com.example.jingbin.cloudreader.bean.wanandroid.HomeListBean;
 import com.example.jingbin.cloudreader.bean.wanandroid.LoginBean;
 import com.example.jingbin.cloudreader.bean.wanandroid.NaviJsonBean;
 import com.example.jingbin.cloudreader.bean.wanandroid.QsbkListBean;
+import com.example.jingbin.cloudreader.bean.wanandroid.SearchTagBean;
 import com.example.jingbin.cloudreader.bean.wanandroid.TreeBean;
 import com.example.jingbin.cloudreader.bean.wanandroid.WanAndroidBannerBean;
 
@@ -267,6 +268,12 @@ public interface HttpClient {
     @FormUrlEncoded
     @POST("article/query/{page}/json")
     Flowable<HomeListBean> searchWan(@Path("page") int page, @Field("k") String k);
+
+    /**
+     *  搜索热词
+     */
+    @GET("hotkey/json")
+    Flowable<SearchTagBean> getHotkey();
 
     /**
      * 干货集中营 搜索
