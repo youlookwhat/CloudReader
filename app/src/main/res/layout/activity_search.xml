@@ -43,6 +43,7 @@
                     android:textColor="#bbffffff"
                     android:textColorHint="#77ffffff"
                     android:textCursorDrawable="@drawable/shape_edit_cursor"
+                    android:text='@={viewModel.keyWord}'
                     android:textSelection='@{viewModel.keyWord}'
                     android:textSize="17sp" />
 

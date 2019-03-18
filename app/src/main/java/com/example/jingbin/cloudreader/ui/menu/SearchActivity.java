@@ -317,7 +317,6 @@ public class SearchActivity extends AppCompatActivity {
             @Override
             public boolean onTagClick(View view, int position, FlowLayout parent) {
                 viewModel.keyWord.set(beanList.get(position).getName());
-                binding.etContent.setText(beanList.get(position).getName());
                 BaseTools.hideSoftKeyBoard(SearchActivity.this);
                 return true;
             }
