@@ -32,6 +32,7 @@ import com.example.jingbin.cloudreader.http.rx.RxBus;
 import com.example.jingbin.cloudreader.http.rx.RxBusBaseMessage;
 import com.example.jingbin.cloudreader.http.rx.RxCodeConstants;
 import com.example.jingbin.cloudreader.ui.douban.DoubanFragment;
+import com.example.jingbin.cloudreader.ui.douban.OneFragment;
 import com.example.jingbin.cloudreader.ui.gank.GankFragment;
 import com.example.jingbin.cloudreader.ui.menu.NavAboutActivity;
 import com.example.jingbin.cloudreader.ui.menu.NavDeedBackActivity;
@@ -148,7 +149,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         ArrayList<Fragment> mFragmentList = new ArrayList<>();
         mFragmentList.add(new WanFragment());
         mFragmentList.add(new GankFragment());
-        mFragmentList.add(new DoubanFragment());
+        // new DoubanFragment() 含有书籍但其Api已失效
+        mFragmentList.add(new OneFragment());
         // 注意使用的是：getSupportFragmentManager
         MyFragmentPagerAdapter adapter = new MyFragmentPagerAdapter(getSupportFragmentManager(), mFragmentList);
         vpContent.setAdapter(adapter);
