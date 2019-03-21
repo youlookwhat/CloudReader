@@ -71,6 +71,9 @@ public class WanAndroidAdapter extends BaseRecyclerViewAdapter<ArticlesBean> {
         @Override
         public void onBindViewHolder(final ArticlesBean bean, final int position) {
             if (bean != null) {
+                if (isCollectList) {
+                    bean.setCollect(true);
+                }
                 binding.setBean(bean);
                 binding.setAdapter(WanAndroidAdapter.this);
                 if (!TextUtils.isEmpty(bean.getEnvelopePic()) && !isNoImage) {
