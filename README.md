@@ -51,7 +51,7 @@ If you have any questions, please write to [the issue][21] of making you don't u
 
 
 ## See Detail
-> [项目介绍详情](https://github.com/youlookwhat/CloudReader/blob/master/file/Introduction.md) | [细节优化详情](https://github.com/youlookwhat/CloudReader/wiki) | [**版本更新详情(V2.7.5)**](http://jingbin.me/2016/12/30/%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97-%E4%BA%91%E9%98%85/)
+> [项目介绍详情](https://github.com/youlookwhat/CloudReader/blob/master/file/Introduction.md) | [细节优化详情](https://github.com/youlookwhat/CloudReader/wiki) | [**版本更新详情(V2.8.0)**](http://jingbin.me/2016/12/30/%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97-%E4%BA%91%E9%98%85/)
 
 ### Download
 　[火速跳转](https://fir.im/cloudreader)                                    
@@ -65,12 +65,17 @@ If you have any questions, please write to [the issue][21] of making you don't u
 　
 
 ### Version
+#### V2.8.0（2019-03-21）
+ - 1、[新增] 搜索页面
+ - 2、[修复] 隐藏书籍分类页面(api失效)
+ - 3、[修复] 修复收藏页面星星未选中的bug
+
 #### V2.7.5（2019-03-13）
- - 1、[升级]玩android接口升级为https
- - 2、[升级]RxJava2.x升级
- - 3、[优化]设置不能修改字体
- - 4、[优化]优化导航数据等页面
- - 5、[修复]代码优化及修改部分bug
+ - 1、[升级] 玩android接口升级为https
+ - 2、[升级] RxJava2.x升级
+ - 3、[优化] 设置不能修改字体
+ - 4、[优化] 优化导航数据等页面
+ - 5、[修复] 代码优化及修改部分bug
 
 #### V2.7.0（2019-02-14）
  - 1、[新增] 知识体系详情页
@@ -221,7 +226,7 @@ limitations under the License.
 [2]:https://www.apache.org/licenses/LICENSE-2.0.html
 [3]:https://img.shields.io/badge/API-19%2B-red.svg?style=flat
 [4]:https://android-arsenal.com/api?level=19
-[30]:https://img.shields.io/badge/release-2.7.5-red.svg
+[30]:https://img.shields.io/badge/release-2.8.0-red.svg
 [31]:https://github.com/youlookwhat/CloudReader/releases
 [32]:https://img.shields.io/badge/PRs-welcome-brightgreen.svg
 [33]:https://github.com/youlookwhat/CloudReader/pulls
