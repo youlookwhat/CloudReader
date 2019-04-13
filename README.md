@@ -17,6 +17,7 @@ A netease cloud music based UI, using wanandroid、Gank.Io and douban API develo
 ## Screenshots
 
 ![](https://raw.githubusercontent.com/youlookwhat/CloudReader/master/file/images.png)
+![](https://raw.githubusercontent.com/youlookwhat/CloudReader/master/file/images2.png)
 
 <!--<img width="173" height=“274” src="https://github.com/youlookwhat/CloudReader/blob/master/file/page_book_01.png"></img>
 <img width="173" height=“274” src="https://github.com/youlookwhat/CloudReader/blob/master/file/page_gank_00.png"></img>
