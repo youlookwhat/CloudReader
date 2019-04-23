@@ -2,6 +2,7 @@ package com.example.jingbin.cloudreader.utils;
 
 import android.app.Activity;
 import android.app.ActivityManager;
+import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
@@ -155,6 +156,10 @@ public class BaseTools {
             // 得到剪贴板管理器
             ClipboardManager cmb = (ClipboardManager) CloudReaderApplication.getInstance().getSystemService(Context.CLIPBOARD_SERVICE);
             cmb.setText(content.trim());
+            // 创建一个剪贴数据集，包含一个普通文本数据条目（需要复制的数据）
+            ClipData clipData = ClipData.newPlainText(null, content);
+            // 把数据集设置（复制）到剪贴板
+            cmb.setPrimaryClip(clipData);
         }
     }
 
@@ -177,13 +182,14 @@ public class BaseTools {
 
     /**
      * 清空剪切板内容
+     * 加上  manager.setText(null);  不然小米3Android6.0 清空无效
+     * 因为api过期使用最新注意使用 manager.getPrimaryClip()，不然小米3Android6.0 清空无效
      */
     public static void clearClipboard() {
         ClipboardManager manager = (ClipboardManager) CloudReaderApplication.getInstance().getSystemService(Context.CLIPBOARD_SERVICE);
         if (manager != null) {
             try {
-                // 清空剪贴板
-                manager.setPrimaryClip(null);
+                manager.setPrimaryClip(manager.getPrimaryClip());
                 manager.setText(null);
             } catch (Exception e) {
                 DebugUtil.error(e.getMessage());
@@ -251,6 +257,35 @@ public class BaseTools {
      */
     public static void showSoftKeyBoard(Activity activity, View view) {
         ((InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE)).showSoftInput(view, 0);
+    }
+
+    /**
+     * 发起添加群流程。群号：Android 云阅交流群(727379132) 的 key 为： jSdY9xxzZ7xXG55_V8OUb8ds_YT6JjAn
+     * 调用 joinQQGroup(jSdY9xxzZ7xXG55_V8OUb8ds_YT6JjAn) 即可发起手Q客户端申请加群 Android 云阅交流群(727379132)
+     *
+     * @param key 由官网生成的key
+     */
+    public static void joinQQGroup(Context context, String key) {
+        Intent intent = new Intent();
+        intent.setData(Uri.parse("mqqopensdkapi://bizAgent/qm/qr?url=http%3A%2F%2Fqm.qq.com%2Fcgi-bin%2Fqm%2Fqr%3Ffrom%3Dapp%26p%3Dandroid%26k%3D" + key));
+        // 此Flag可根据具体产品需要自定义，如设置，则在加群界面按返回，返回手Q主界面，不设置，按返回会返回到呼起产品界面    //intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        try {
+            context.startActivity(intent);
+        } catch (Exception e) {
+            // 未安装手Q或安装的版本不支持
+            ToastUtil.showToastLong("未安装手Q或安装的版本不支持~");
+        }
+    }
+
+    public static void joinQQChat(Context context, String qqNumber) {
+        Intent intent = new Intent();
+        intent.setData(Uri.parse("mqqwpa://im/chat?chat_type=wpa&uin=" + qqNumber));
+        try {
+            context.startActivity(intent);
+        } catch (Exception e) {
+            // 未安装手Q或安装的版本不支持
+            ToastUtil.showToastLong("未安装手Q或安装的版本不支持~");
+        }
     }
 
 }
