@@ -82,24 +82,24 @@ public class EverydayFragment extends BaseFragment<EverydayViewModel, FragmentEv
         if (!mIsVisible || !mIsPrepared) {
             return;
         }
-        bindingView.xrvEveryday.postDelayed(() -> viewModel.loadData(), 150);
+        bindingView.recyclerView.postDelayed(() -> viewModel.loadData(), 150);
     }
 
     private void initRecyclerView() {
         mHeaderBinding = DataBindingUtil.inflate(LayoutInflater.from(getContext()), R.layout.header_item_everyday, null, false);
         FooterItemEverydayBinding mFooterBinding = DataBindingUtil.inflate(LayoutInflater.from(getContext()), R.layout.footer_item_everyday, null, false);
-        bindingView.xrvEveryday.setPullRefreshEnabled(false);
-        bindingView.xrvEveryday.setLoadingMoreEnabled(false);
-        bindingView.xrvEveryday.addHeaderView(mHeaderBinding.getRoot());
-        bindingView.xrvEveryday.addFootView(mFooterBinding.getRoot(), true);
-        bindingView.xrvEveryday.noMoreLoading();
-        bindingView.xrvEveryday.setLayoutManager(new LinearLayoutManager(getContext()));
+        bindingView.recyclerView.setPullRefreshEnabled(false);
+        bindingView.recyclerView.setLoadingMoreEnabled(false);
+        bindingView.recyclerView.addHeaderView(mHeaderBinding.getRoot());
+        bindingView.recyclerView.addFootView(mFooterBinding.getRoot(), true);
+        bindingView.recyclerView.noMoreLoading();
+        bindingView.recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         // 需加，不然滑动不流畅
-        bindingView.xrvEveryday.setNestedScrollingEnabled(false);
-        bindingView.xrvEveryday.setHasFixedSize(false);
-        bindingView.xrvEveryday.setItemAnimator(new DefaultItemAnimator());
+        bindingView.recyclerView.setNestedScrollingEnabled(false);
+        bindingView.recyclerView.setHasFixedSize(false);
+        bindingView.recyclerView.setItemAnimator(new DefaultItemAnimator());
         mEverydayAdapter = new EverydayAdapter();
-        bindingView.xrvEveryday.setAdapter(mEverydayAdapter);
+        bindingView.recyclerView.setAdapter(mEverydayAdapter);
 
         // 显示日期,去掉第一位的"0"
         String day = getTodayTime().get(2);
@@ -144,7 +144,7 @@ public class EverydayFragment extends BaseFragment<EverydayViewModel, FragmentEv
                     mEverydayAdapter.clear();
                     mEverydayAdapter.addAll(lists);
                     mEverydayAdapter.notifyDataSetChanged();
-                    bindingView.xrvEveryday.refreshComplete();
+                    bindingView.recyclerView.refreshComplete();
                 } else {
                     showError();
                 }
@@ -178,7 +178,7 @@ public class EverydayFragment extends BaseFragment<EverydayViewModel, FragmentEv
     public void onResume() {
         super.onResume();
         // 失去焦点，否则RecyclerView第一个item会回到顶部
-        bindingView.xrvEveryday.setFocusable(false);
+        bindingView.recyclerView.setFocusable(false);
         // 开始图片请求
         Glide.with(getActivity()).resumeRequests();
         if (isLoadBanner) {
@@ -214,11 +214,11 @@ public class EverydayFragment extends BaseFragment<EverydayViewModel, FragmentEv
     private void showRotaLoading(Boolean isLoading) {
         if (isLoading != null && isLoading) {
             bindingView.llLoading.setVisibility(View.VISIBLE);
-            bindingView.xrvEveryday.setVisibility(View.GONE);
+            bindingView.recyclerView.setVisibility(View.GONE);
             animation.startNow();
         } else {
             bindingView.llLoading.setVisibility(View.GONE);
-            bindingView.xrvEveryday.setVisibility(View.VISIBLE);
+            bindingView.recyclerView.setVisibility(View.VISIBLE);
             animation.cancel();
         }
     }

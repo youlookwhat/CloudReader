@@ -24,4 +24,6 @@ public class Constants {
     public static String IS_LOGIN = "is_login";
     // 是否第一次收藏网址
     public static String IS_FIRST_COLLECTURL = "isFirstCollectUrl";
+    // 问题反馈消息提示
+    public static String MESSAGE_READ_TIP = "message_read_tip";
 }

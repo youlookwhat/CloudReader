@@ -6,6 +6,8 @@
         <variable
             name="listener"
             type="com.example.jingbin.cloudreader.MainActivity" />
+
+        <import type="android.view.View" />
     </data>
 
     <android.support.v4.widget.NestedScrollView
@@ -33,10 +35,10 @@
                     android:background="#4000"
                     android:gravity="bottom"
                     android:orientation="vertical"
-                    android:paddingBottom="@dimen/activity_vertical_margin"
                     android:paddingLeft="@dimen/activity_horizontal_margin"
+                    android:paddingTop="@dimen/activity_vertical_margin"
                     android:paddingRight="@dimen/activity_horizontal_margin"
-                    android:paddingTop="@dimen/activity_vertical_margin">
+                    android:paddingBottom="@dimen/activity_vertical_margin">
 
                     <ImageView
                         android:id="@+id/iv_avatar"
@@ -67,10 +69,10 @@
                             android:layout_marginLeft="6dp"
                             android:background="@drawable/shape_bg_level"
                             android:gravity="center"
-                            android:paddingBottom="1dp"
                             android:paddingLeft="6dp"
-                            android:paddingRight="6dp"
                             android:paddingTop="1dp"
+                            android:paddingRight="6dp"
+                            android:paddingBottom="1dp"
                             android:text="Lv.10"
                             android:textColor="@color/colorWhite"
                             android:textSize="10sp"
@@ -162,6 +164,13 @@
                     android:textColor="@color/colorContent"
                     android:textSize="15sp" />
 
+                <ImageView
+                    android:id="@+id/iv_no_read"
+                    android:layout_width="9dp"
+                    android:layout_height="9dp"
+                    android:layout_marginLeft="15dp"
+                    android:src="@drawable/shape_no_read"
+                    android:visibility="@{listener.isReadOk?View.GONE:View.VISIBLE}" />
             </LinearLayout>
 
             <LinearLayout

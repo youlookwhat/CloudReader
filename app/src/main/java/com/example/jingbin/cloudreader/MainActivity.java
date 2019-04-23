@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.databinding.DataBindingUtil;
+import android.databinding.ObservableField;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -14,6 +15,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.KeyEvent;
@@ -53,6 +55,7 @@ import com.example.jingbin.cloudreader.view.MyFragmentPagerAdapter;
 import com.example.jingbin.cloudreader.view.OnLoginListener;
 import com.example.jingbin.cloudreader.view.statusbar.StatusBarUtil;
 import com.example.jingbin.cloudreader.view.webview.WebViewActivity;
+import com.example.xrecyclerview.XRecyclerView;
 
 import java.util.ArrayList;
 
@@ -80,6 +83,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private ImageView ivTitleThree;
     private CompositeDisposable mCompositeDisposable;
     private NavHeaderMainBinding bind;
+    public ObservableField<Boolean> isReadOk = new ObservableField<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -132,6 +136,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         bind = DataBindingUtil.bind(headerView);
         bind.setListener(this);
         bind.dayNightSwitch.setChecked(SPUtils.getNightMode());
+        isReadOk.set(SPUtils.isRead());
 
         ImageLoadUtil.displayCircle(bind.ivAvatar, ConstantsImageUrl.IC_AVATAR);
         bind.llNavExit.setOnClickListener(this);
@@ -182,6 +187,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         break;
                     case R.id.ll_nav_deedback:// 问题反馈
                         NavDeedBackActivity.start(MainActivity.this);
+                        if (isReadOk.get() != null && !isReadOk.get().booleanValue()) {
+                            SPUtils.setRead(true);
+                            isReadOk.set(true);
+                        }
                         break;
                     case R.id.ll_nav_about:// 关于云阅
                         NavAboutActivity.start(MainActivity.this);
