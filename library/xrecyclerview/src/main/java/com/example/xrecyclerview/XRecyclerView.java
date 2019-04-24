@@ -346,7 +346,7 @@ public class XRecyclerView extends RecyclerView {
             ConnectivityManager mConnectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
             NetworkInfo mNetworkInfo = mConnectivityManager.getActiveNetworkInfo();
             if (mNetworkInfo != null) {
-                return mNetworkInfo.isAvailable();
+                return mNetworkInfo.isConnected();
             }
         }
         return false;

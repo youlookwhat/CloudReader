@@ -1,13 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <TextView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/tv_tag"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:background="@drawable/home_adjust_background"
-    android:textColor="@color/colorContent"
+    android:background="@drawable/selector_bg_tree_tag"
+    android:textColor="@color/colorTabText"
     android:textSize="12sp"
     tools:text="title" />
-
-    <!--android:background="@drawable/shape_tree_tag"-->

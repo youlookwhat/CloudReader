@@ -100,7 +100,6 @@ public class WrapAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             adapterCount = adapter.getItemCount();
             if (adjPosition < adapterCount) {
                 adapter.onBindViewHolder(holder, adjPosition);
-                return;
             }
         }
     }
