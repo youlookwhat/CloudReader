@@ -15,7 +15,6 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.KeyEvent;
@@ -33,7 +32,6 @@ import com.example.jingbin.cloudreader.databinding.NavHeaderMainBinding;
 import com.example.jingbin.cloudreader.http.rx.RxBus;
 import com.example.jingbin.cloudreader.http.rx.RxBusBaseMessage;
 import com.example.jingbin.cloudreader.http.rx.RxCodeConstants;
-import com.example.jingbin.cloudreader.ui.douban.DoubanFragment;
 import com.example.jingbin.cloudreader.ui.douban.OneFragment;
 import com.example.jingbin.cloudreader.ui.gank.GankFragment;
 import com.example.jingbin.cloudreader.ui.menu.NavAboutActivity;
@@ -55,7 +53,6 @@ import com.example.jingbin.cloudreader.view.MyFragmentPagerAdapter;
 import com.example.jingbin.cloudreader.view.OnLoginListener;
 import com.example.jingbin.cloudreader.view.statusbar.StatusBarUtil;
 import com.example.jingbin.cloudreader.view.webview.WebViewActivity;
-import com.example.xrecyclerview.XRecyclerView;
 
 import java.util.ArrayList;
 

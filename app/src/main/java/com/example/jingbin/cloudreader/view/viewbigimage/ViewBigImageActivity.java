@@ -3,6 +3,8 @@ package com.example.jingbin.cloudreader.view.viewbigimage;
 import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -12,6 +14,7 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,13 +23,18 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.RequestBuilder;
 import com.bumptech.glide.load.DataSource;
 import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.target.Target;
+import com.bumptech.glide.request.transition.Transition;
 import com.example.http.utils.CheckNetwork;
 import com.example.jingbin.cloudreader.R;
+import com.example.jingbin.cloudreader.utils.DebugUtil;
+import com.example.jingbin.cloudreader.utils.DensityUtil;
 import com.example.jingbin.cloudreader.utils.PermissionHandler;
 import com.example.jingbin.cloudreader.utils.RxSaveImage;
 import com.example.jingbin.cloudreader.utils.ToastUtil;
@@ -211,7 +219,7 @@ public class ViewBigImageActivity extends FragmentActivity implements OnPageChan
         public Object instantiateItem(@NonNull ViewGroup container, int position) {
             View view = inflater.inflate(R.layout.viewpager_very_image, container, false);
             final PhotoView zoomImageView = view.findViewById(R.id.zoom_image_view);
-            final ProgressBar spinner = view.findViewById(R.id.loading);
+            final ProgressBar progressBar = view.findViewById(R.id.loading);
             // 保存网络图片的路径
             String adapterImageEntity = (String) getItem(position);
             String imageUrl;
@@ -222,10 +230,10 @@ public class ViewBigImageActivity extends FragmentActivity implements OnPageChan
                 imageUrl = adapterImageEntity;
             }
 
-            spinner.setVisibility(View.VISIBLE);
-            spinner.setClickable(false);
+            progressBar.setVisibility(View.VISIBLE);
+            progressBar.setClickable(false);
+
             Glide.with(ViewBigImageActivity.this).load(imageUrl)
-//                    .crossFade(700)
                     .transition(DrawableTransitionOptions.withCrossFade(700))
                     .listener(new RequestListener<Drawable>() {
                         @Override
@@ -235,16 +243,15 @@ public class ViewBigImageActivity extends FragmentActivity implements OnPageChan
 
                         @Override
                         public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
-                            spinner.setVisibility(View.GONE);
+                            progressBar.setVisibility(View.GONE);
 
-                            /**这里应该是加载成功后图片的高*/
-                            int height = zoomImageView.getHeight();
-
+                            /**这里应该是加载成功后图片的高,最大为屏幕的高*/
+                            int height = resource.getIntrinsicHeight();
                             int wHeight = getWindowManager().getDefaultDisplay().getHeight();
-                            if (height > wHeight) {
-                                zoomImageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-                            } else {
+                            if (height < wHeight) {
                                 zoomImageView.setScaleType(ImageView.ScaleType.FIT_CENTER);
+                            } else {
+                                zoomImageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
                             }
                             return false;
                         }
