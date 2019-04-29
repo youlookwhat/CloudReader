@@ -5,19 +5,12 @@
 
     <data>
 
-        <!--调用静态方法-->
-        <import type="java.lang.String" />
-
         <import type="com.example.jingbin.cloudreader.utils.StringFormatUtil" />
         <!--引用bean-->
         <variable
             name="booksBean"
             type="com.example.jingbin.cloudreader.bean.book.BooksBean" />
 
-        <!--引用bean-->
-        <!--<variable-->
-        <!--name="bookDetailBean"-->
-        <!--type="com.example.jingbin.cloudreader.bean.book.BookDetailBean" />-->
     </data>
 
     <RelativeLayout
@@ -39,9 +32,9 @@
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
             android:orientation="vertical"
-            android:paddingBottom="40dp"
             android:paddingLeft="20dp"
-            android:paddingTop="95dp">
+            android:paddingTop="95dp"
+            android:paddingBottom="40dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -69,8 +62,8 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="2dp"
                         android:layout_marginTop="2dp"
+                        android:layout_marginBottom="2dp"
                         android:orientation="horizontal">
 
                         <LinearLayout
@@ -156,8 +149,8 @@
                         android:id="@+id/tv_one_genres"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="2dp"
                         android:layout_marginTop="2dp"
+                        android:layout_marginBottom="2dp"
                         android:ellipsize="end"
                         android:text='@{@string/string_publisher+booksBean.publisher}'
                         android:textColor="@color/colorWhite" />
