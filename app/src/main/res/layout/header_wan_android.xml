@@ -2,48 +2,23 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <RelativeLayout
+    <RelativeLayout xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/rl_banner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <com.youth.banner.Banner xmlns:app="http://schemas.android.com/apk/res-auto"
+        <me.jingbin.sbanner.SBannerView
             android:id="@+id/banner"
-            android:layout_width="200dp"
-            android:layout_height="150dp"
-            app:delay_time="5000"
-            app:image_scale_type="center_crop"
-            app:indicator_drawable_selected="@drawable/banner_red"
-            app:indicator_drawable_unselected="@drawable/banner_grey"
-            app:indicator_height="9dp"
-            app:indicator_margin="3dp"
-            app:indicator_width="9dp"
-            app:is_auto_play="true"
-            app:title_height="28dp"
-            app:title_textsize="12sp"
-            tools:background="@color/colorLine" />
-
-        <LinearLayout
-            android:id="@+id/ll_banner_image"
             android:layout_width="match_parent"
             android:layout_height="150dp"
-            android:layout_toRightOf="@+id/banner"
-            android:orientation="vertical">
+            app:indicator_height="8dp"
+            app:indicator_margin="8dp"
+            app:indicator_padding="5dp"
+            app:indicator_width="8dp"
+            app:is_back_loop="false"
+            app:page_left_margin="80dp"
+            app:page_right_margin="80dp"
+            tools:background="@color/colorLine" />
 
-            <ImageView
-                android:id="@+id/iv_banner_one"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                tools:background="@color/colorLine" />
-
-            <ImageView
-                android:id="@+id/iv_banner_two"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                tools:background="@color/colorLine" />
-
-        </LinearLayout>
     </RelativeLayout>
 </layout>

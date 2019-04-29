@@ -63,3 +63,6 @@
 
 # for DexGuard only
 -keepresourcexmlelements manifest/application/meta-data@value=GlideModule
+
+# me.jingbin.sbanner.SBannerView
+-keep class me.jingbin.sbanner.** {*;}

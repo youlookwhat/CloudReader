@@ -1,15 +1,24 @@
 package com.example.jingbin.cloudreader.ui.wan.child;
 
 import android.arch.lifecycle.Observer;
+import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.jingbin.cloudreader.R;
 import com.example.jingbin.cloudreader.adapter.WanAndroidAdapter;
 import com.example.jingbin.cloudreader.base.BaseFragment;
+import com.example.jingbin.cloudreader.bean.BannerItemBean;
 import com.example.jingbin.cloudreader.bean.wanandroid.HomeListBean;
 import com.example.jingbin.cloudreader.bean.wanandroid.WanAndroidBannerBean;
 import com.example.jingbin.cloudreader.databinding.FragmentWanAndroidBinding;
@@ -18,7 +27,9 @@ import com.example.jingbin.cloudreader.utils.CommonUtils;
 import com.example.jingbin.cloudreader.utils.DensityUtil;
 import com.example.jingbin.cloudreader.utils.GlideImageLoader;
 import com.example.jingbin.cloudreader.utils.GlideUtil;
+import com.example.jingbin.cloudreader.utils.PerfectClickListener;
 import com.example.jingbin.cloudreader.utils.RefreshHelper;
+import com.example.jingbin.cloudreader.utils.TimeUtil;
 import com.example.jingbin.cloudreader.view.webview.WebViewActivity;
 import com.example.jingbin.cloudreader.viewmodel.wan.WanAndroidListViewModel;
 import com.example.xrecyclerview.XRecyclerView;
@@ -27,11 +38,17 @@ import com.youth.banner.BannerConfig;
 import java.util.ArrayList;
 import java.util.List;
 
+import me.jingbin.sbanner.config.OnBannerClickListener;
+import me.jingbin.sbanner.config.ScaleRightTransformer;
+import me.jingbin.sbanner.holder.BannerViewHolder;
+import me.jingbin.sbanner.holder.HolderCreator;
+
+
 /**
  * 玩安卓首页
  *
  * @author jingbin
- *         Updated on 18/02/07...18/12/22
+ * Updated on 18/02/07...18/12/22
  */
 public class BannerFragment extends BaseFragment<WanAndroidListViewModel, FragmentWanAndroidBinding> {
 
@@ -69,7 +86,11 @@ public class BannerFragment extends BaseFragment<WanAndroidListViewModel, Fragme
         mAdapter.setNoImage();
         bindingView.xrvWan.setAdapter(mAdapter);
         bindingView.xrvWan.addHeaderView(androidBinding.getRoot());
-        DensityUtil.formatBannerHeight(androidBinding.banner, androidBinding.llBannerImage);
+        int width = DensityUtil.getDisplayWidth() - DensityUtil.dip2px(160);
+        float height = width / 1.8f;
+        RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, (int) height);
+        androidBinding.banner.setLayoutParams(lp);
+
         bindingView.srlWan.setOnRefreshListener(this::swipeRefresh);
         bindingView.xrvWan.setLoadingListener(new XRecyclerView.LoadingListener() {
             @Override
@@ -78,7 +99,7 @@ public class BannerFragment extends BaseFragment<WanAndroidListViewModel, Fragme
 
             @Override
             public void onLoadMore() {
-                if (!bindingView.srlWan.isRefreshing()){
+                if (!bindingView.srlWan.isRefreshing()) {
                     int page = viewModel.getPage();
                     viewModel.setPage(++page);
                     getHomeList();
@@ -116,28 +137,43 @@ public class BannerFragment extends BaseFragment<WanAndroidListViewModel, Fragme
      */
     public void showBannerView(ArrayList<String> bannerImages, ArrayList<String> mBannerTitle, List<WanAndroidBannerBean.DataBean> result) {
         androidBinding.rlBanner.setVisibility(View.VISIBLE);
-        androidBinding.banner.setBannerTitles(mBannerTitle);
-        androidBinding.banner.setBannerStyle(BannerConfig.NUM_INDICATOR_TITLE);
-        androidBinding.banner.setImages(bannerImages).setImageLoader(new GlideImageLoader()).start();
-        androidBinding.banner.setOnBannerListener(position -> {
-            if (result.get(position) != null && !TextUtils.isEmpty(result.get(position).getUrl())) {
-                WebViewActivity.loadUrl(getContext(), result.get(position).getUrl(), result.get(position).getTitle());
-            }
-        });
-        int size = bannerImages.size();
-        int position1 = 0;
-        int position2 = 0;
-        if (size > 1) {
-            position1 = size - 2;
-            position2 = size - 1;
-        }
-        GlideUtil.displayFadeImage(androidBinding.ivBannerOne, bannerImages.get(position1), 3);
-        GlideUtil.displayFadeImage(androidBinding.ivBannerTwo, bannerImages.get(position2), 3);
-        int finalPosition = position1;
-        int finalPosition2 = position2;
-        androidBinding.ivBannerOne.setOnClickListener(v -> WebViewActivity.loadUrl(getContext(), result.get(finalPosition).getUrl(), result.get(finalPosition).getTitle()));
-        androidBinding.ivBannerTwo.setOnClickListener(v -> WebViewActivity.loadUrl(getContext(), result.get(finalPosition2).getUrl(), result.get(finalPosition2).getTitle()));
+        androidBinding.banner
+                .setAutoPlay(true)
+                .setIndicatorRes(R.drawable.banner_red, R.drawable.banner_grey)
+                .setBannerAnimation(ScaleRightTransformer.class)
+                .setDelayTime(5000)
+                .setPages(result, CustomViewHolder::new)
+                .start();
         isLoadBanner = true;
+    }
+
+
+    class CustomViewHolder implements BannerViewHolder<WanAndroidBannerBean.DataBean> {
+
+        private ImageView imageView;
+
+        @Override
+        public View createView(Context context) {
+            View view = LayoutInflater.from(context).inflate(R.layout.item_banner_wanandroid, null);
+            imageView = view.findViewById(R.id.iv_banner);
+            return view;
+        }
+
+        @Override
+        public void onBind(Context context, int position, WanAndroidBannerBean.DataBean data) {
+            if (data != null) {
+                int width = DensityUtil.getDisplayWidth() - DensityUtil.dip2px(160);
+//                float height = width / 1.8f;
+                DensityUtil.formatHeight(imageView, width, 1.8f, 3);
+                GlideUtil.displayEspImage(data.getImagePath(), imageView, 3);
+                imageView.setOnClickListener(new PerfectClickListener() {
+                    @Override
+                    protected void onNoDoubleClick(View v) {
+                        WebViewActivity.loadUrl(getContext(), data.getUrl(), data.getTitle());
+                    }
+                });
+            }
+        }
     }
 
     @Override
