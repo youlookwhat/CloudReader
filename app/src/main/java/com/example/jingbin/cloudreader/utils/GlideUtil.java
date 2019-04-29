@@ -15,7 +15,8 @@ import static com.bumptech.glide.request.RequestOptions.bitmapTransform;
 
 
 /**
- * Created by jingbin on 2016/11/26.
+ * @author jingbin
+ * @date 2019/04/29
  */
 
 public class GlideUtil {
