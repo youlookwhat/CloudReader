@@ -7,6 +7,7 @@ import android.databinding.DataBindingUtil;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -17,7 +18,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.resource.drawable.GlideDrawable;
+import com.bumptech.glide.load.DataSource;
+import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 import com.example.jingbin.cloudreader.R;
@@ -30,6 +32,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import jp.wasabeef.glide.transformations.BlurTransformation;
+
+import static com.bumptech.glide.request.RequestOptions.bitmapTransform;
 
 /**
  * （已使用：{@link OneMovieDetailActivity} 替代）
@@ -65,20 +69,21 @@ public class TestActivity extends AppCompatActivity {
             Glide.with(this).load(subjectsBean.getImages().getLarge())
                     .error(R.drawable.stackblur_default)
 //                .placeholder(R.drawable.stackblur_default)
-                    .bitmapTransform(new BlurTransformation(this, 12, 5)).listener(new RequestListener<String, GlideDrawable>() {
-                @Override
-                public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
-                    return false;
-                }
+                    .apply(bitmapTransform(new BlurTransformation(25, 5)))
+                    .listener(new RequestListener<Drawable>() {
+                        @Override
+                        public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
+                            return false;
+                        }
 
-                @Override
-                public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
-                    mToolbar.setBackgroundColor(Color.TRANSPARENT);
-                    binding.ivTitleBg.setImageAlpha(0);
-                    binding.ivTitleBg.setVisibility(View.VISIBLE);
-                    return false;
-                }
-            }).into(binding.ivTitleBg);
+                        @Override
+                        public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
+                            mToolbar.setBackgroundColor(Color.TRANSPARENT);
+                            binding.ivTitleBg.setImageAlpha(0);
+                            binding.ivTitleBg.setVisibility(View.VISIBLE);
+                            return false;
+                        }
+                    }).into(binding.ivTitleBg);
         }
     }
 

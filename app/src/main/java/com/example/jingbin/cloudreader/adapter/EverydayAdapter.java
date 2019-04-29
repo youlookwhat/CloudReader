@@ -12,6 +12,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.example.jingbin.cloudreader.R;
 import com.example.jingbin.cloudreader.app.CloudReaderApplication;
 import com.example.jingbin.cloudreader.base.baseadapter.BaseRecyclerViewAdapter;
@@ -138,7 +139,7 @@ public class EverydayAdapter extends BaseRecyclerViewAdapter<List<AndroidBean>> 
 //                ImageLoadUtil.displayEspImage(object.get(0).getUrl(), binding.ivOnePhoto, 1);
                 Glide.with(binding.ivOnePhoto.getContext())
                         .load(object.get(0).getUrl())
-                        .crossFade(1500)
+                        .transition(DrawableTransitionOptions.withCrossFade(1500))
                         .placeholder(R.drawable.img_two_bi_one)
                         .error(R.drawable.img_two_bi_one)
                         .into(binding.ivOnePhoto);

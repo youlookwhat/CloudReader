@@ -3,8 +3,11 @@ package com.example.jingbin.cloudreader.view.viewbigimage;
 import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -17,7 +20,9 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.resource.drawable.GlideDrawable;
+import com.bumptech.glide.load.DataSource;
+import com.bumptech.glide.load.engine.GlideException;
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 import com.example.http.utils.CheckNetwork;
@@ -220,18 +225,16 @@ public class ViewBigImageActivity extends FragmentActivity implements OnPageChan
             spinner.setVisibility(View.VISIBLE);
             spinner.setClickable(false);
             Glide.with(ViewBigImageActivity.this).load(imageUrl)
-                    .crossFade(700)
-                    .listener(new RequestListener<String, GlideDrawable>() {
+//                    .crossFade(700)
+                    .transition(DrawableTransitionOptions.withCrossFade(700))
+                    .listener(new RequestListener<Drawable>() {
                         @Override
-                        public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
-                            ToastUtil.showToast("资源加载异常");
-                            spinner.setVisibility(View.GONE);
+                        public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
                             return false;
                         }
 
-                        //这个用于监听图片是否加载完成
                         @Override
-                        public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
+                        public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
                             spinner.setVisibility(View.GONE);
 
                             /**这里应该是加载成功后图片的高*/

@@ -5,9 +5,17 @@ import android.databinding.BindingAdapter;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.CenterCrop;
+import com.bumptech.glide.load.resource.bitmap.CircleCrop;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
+import com.bumptech.glide.request.target.DrawableImageViewTarget;
 import com.example.jingbin.cloudreader.R;
 
 import jp.wasabeef.glide.transformations.BlurTransformation;
+
+import static com.bumptech.glide.request.RequestOptions.bitmapTransform;
+
 
 /**
  * Created by jingbin on 2016/11/26.
@@ -40,7 +48,8 @@ public class ImageLoadUtil {
                 .load(imageUrl)
                 .placeholder(getMusicDefaultPic(imgNumber))
                 .error(getMusicDefaultPic(imgNumber))
-                .crossFade(1500)
+//                .crossFade(1500)
+                .transition(DrawableTransitionOptions.withCrossFade(1500))
                 .into(imageView);
     }
 
@@ -67,8 +76,9 @@ public class ImageLoadUtil {
      */
     public static void displayGif(String url, ImageView imageView) {
 
-        Glide.with(imageView.getContext()).load(url)
+        Glide.with(imageView.getContext())
                 .asBitmap()
+                .load(url)
                 .placeholder(R.drawable.shape_bg_loading)
                 .error(R.drawable.shape_bg_loading)
 //                .skipMemoryCache(true) //跳过内存缓存
@@ -85,7 +95,7 @@ public class ImageLoadUtil {
     public static void displayEspImage(String url, ImageView imageView, int type) {
         Glide.with(imageView.getContext())
                 .load(url)
-                .crossFade(500)
+                .transition(DrawableTransitionOptions.withCrossFade(500))
                 .placeholder(getDefaultPic(type))
                 .error(getDefaultPic(type))
                 .into(imageView);
@@ -114,10 +124,11 @@ public class ImageLoadUtil {
         // "23":模糊度；"4":图片缩放4倍后再进行模糊
         Glide.with(context)
                 .load(url)
+                .transition(DrawableTransitionOptions.withCrossFade())
                 .error(R.drawable.stackblur_default)
                 .placeholder(R.drawable.stackblur_default)
-                .crossFade(500)
-                .bitmapTransform(new BlurTransformation(context, 23, 4))
+                .transition(DrawableTransitionOptions.withCrossFade(500))
+                .apply(bitmapTransform(new BlurTransformation(50, 8)))
                 .into(imageView);
     }
 
@@ -128,9 +139,12 @@ public class ImageLoadUtil {
     public static void displayCircle(ImageView imageView, String imageUrl) {
         Glide.with(imageView.getContext())
                 .load(imageUrl)
-                .crossFade(500)
+                .transition(DrawableTransitionOptions.withCrossFade(500))
                 .error(R.drawable.ic_avatar_default)
-                .transform(new GlideCircleTransform(imageView.getContext()))
+                .transforms(new CircleCrop())
+//                .transform(new GlideCircleTransform())
+//                .transforms(new RoundedCorners(20))
+//                .transforms(new CenterCrop(), new RoundedCorners(20))
                 .into(imageView);
     }
 
@@ -152,7 +166,7 @@ public class ImageLoadUtil {
     public static void showImg(ImageView imageView, String url) {
         Glide.with(imageView.getContext())
                 .load(url)
-                .crossFade(500)
+                .transition(DrawableTransitionOptions.withCrossFade(500))
                 .error(getDefaultPic(0))
                 .into(imageView);
     }
@@ -164,7 +178,7 @@ public class ImageLoadUtil {
     public static void showMovieImg(ImageView imageView, String url) {
         Glide.with(imageView.getContext())
                 .load(url)
-                .crossFade(500)
+                .transition(DrawableTransitionOptions.withCrossFade(500))
                 .override((int) CommonUtils.getDimens(R.dimen.movie_detail_width), (int) CommonUtils.getDimens(R.dimen.movie_detail_height))
                 .placeholder(getDefaultPic(0))
                 .error(getDefaultPic(0))
@@ -178,7 +192,7 @@ public class ImageLoadUtil {
     public static void showBookImg(ImageView imageView, String url) {
         Glide.with(imageView.getContext())
                 .load(url)
-                .crossFade(500)
+                .transition(DrawableTransitionOptions.withCrossFade(500))
                 .override((int) CommonUtils.getDimens(R.dimen.book_detail_width), (int) CommonUtils.getDimens(R.dimen.book_detail_height))
                 .placeholder(getDefaultPic(2))
                 .error(getDefaultPic(2))
@@ -203,7 +217,7 @@ public class ImageLoadUtil {
                 .load(imageUrl)
                 .placeholder(getMusicDefaultPic(imgType))
                 .error(getMusicDefaultPic(imgType))
-                .crossFade(1500)
+                .transition(DrawableTransitionOptions.withCrossFade(1500))
                 .into(imageView);
     }
 }
