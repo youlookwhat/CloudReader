@@ -45,7 +45,7 @@ import com.example.jingbin.cloudreader.ui.wan.child.MyCollectActivity;
 import com.example.jingbin.cloudreader.utils.BaseTools;
 import com.example.jingbin.cloudreader.utils.CommonUtils;
 import com.example.jingbin.cloudreader.utils.DialogBuild;
-import com.example.jingbin.cloudreader.utils.ImageLoadUtil;
+import com.example.jingbin.cloudreader.utils.GlideUtil;
 import com.example.jingbin.cloudreader.utils.PerfectClickListener;
 import com.example.jingbin.cloudreader.utils.SPUtils;
 import com.example.jingbin.cloudreader.utils.UpdateUtil;
@@ -135,7 +135,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         bind.dayNightSwitch.setChecked(SPUtils.getNightMode());
         isReadOk.set(SPUtils.isRead());
 
-        ImageLoadUtil.displayCircle(bind.ivAvatar, ConstantsImageUrl.IC_AVATAR);
+        GlideUtil.displayCircle(bind.ivAvatar, ConstantsImageUrl.IC_AVATAR);
         bind.llNavExit.setOnClickListener(this);
         bind.ivAvatar.setOnClickListener(this);
 

@@ -18,16 +18,16 @@ import static com.bumptech.glide.request.RequestOptions.bitmapTransform;
  * Created by jingbin on 2016/11/26.
  */
 
-public class ImageLoadUtil {
+public class GlideUtil {
 
-    private static ImageLoadUtil instance;
+    private static GlideUtil instance;
 
-    private ImageLoadUtil() {
+    private GlideUtil() {
     }
 
-    public static ImageLoadUtil getInstance() {
+    public static GlideUtil getInstance() {
         if (instance == null) {
-            instance = new ImageLoadUtil();
+            instance = new GlideUtil();
         }
         return instance;
     }
@@ -45,7 +45,6 @@ public class ImageLoadUtil {
                 .load(imageUrl)
                 .placeholder(getMusicDefaultPic(imgNumber))
                 .error(getMusicDefaultPic(imgNumber))
-//                .crossFade(1500)
                 .transition(DrawableTransitionOptions.withCrossFade(1500))
                 .into(imageView);
     }

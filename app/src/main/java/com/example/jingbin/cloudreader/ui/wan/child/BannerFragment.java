@@ -17,7 +17,7 @@ import com.example.jingbin.cloudreader.databinding.HeaderWanAndroidBinding;
 import com.example.jingbin.cloudreader.utils.CommonUtils;
 import com.example.jingbin.cloudreader.utils.DensityUtil;
 import com.example.jingbin.cloudreader.utils.GlideImageLoader;
-import com.example.jingbin.cloudreader.utils.ImageLoadUtil;
+import com.example.jingbin.cloudreader.utils.GlideUtil;
 import com.example.jingbin.cloudreader.utils.RefreshHelper;
 import com.example.jingbin.cloudreader.view.webview.WebViewActivity;
 import com.example.jingbin.cloudreader.viewmodel.wan.WanAndroidListViewModel;
@@ -131,8 +131,8 @@ public class BannerFragment extends BaseFragment<WanAndroidListViewModel, Fragme
             position1 = size - 2;
             position2 = size - 1;
         }
-        ImageLoadUtil.displayFadeImage(androidBinding.ivBannerOne, bannerImages.get(position1), 3);
-        ImageLoadUtil.displayFadeImage(androidBinding.ivBannerTwo, bannerImages.get(position2), 3);
+        GlideUtil.displayFadeImage(androidBinding.ivBannerOne, bannerImages.get(position1), 3);
+        GlideUtil.displayFadeImage(androidBinding.ivBannerTwo, bannerImages.get(position2), 3);
         int finalPosition = position1;
         int finalPosition2 = position2;
         androidBinding.ivBannerOne.setOnClickListener(v -> WebViewActivity.loadUrl(getContext(), result.get(finalPosition).getUrl(), result.get(finalPosition).getTitle()));

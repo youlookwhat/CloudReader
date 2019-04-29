@@ -26,7 +26,7 @@ import com.example.jingbin.cloudreader.http.rx.RxBus;
 import com.example.jingbin.cloudreader.http.rx.RxCodeConstants;
 import com.example.jingbin.cloudreader.utils.DensityUtil;
 import com.example.jingbin.cloudreader.utils.DialogBuild;
-import com.example.jingbin.cloudreader.utils.ImageLoadUtil;
+import com.example.jingbin.cloudreader.utils.GlideUtil;
 import com.example.jingbin.cloudreader.utils.PerfectClickListener;
 import com.example.jingbin.cloudreader.view.webview.WebViewActivity;
 
@@ -203,7 +203,7 @@ public class EverydayAdapter extends BaseRecyclerViewAdapter<List<AndroidBean>> 
 
     private void displayRandomImg(int imgNumber, int position, ImageView imageView, List<AndroidBean> object) {
 //        DebugUtil.error("-----Image_url: "+object.get(position).getImage_url());
-        ImageLoadUtil.displayRandom(imgNumber, object.get(position).getImage_url(), imageView);
+        GlideUtil.displayRandom(imgNumber, object.get(position).getImage_url(), imageView);
     }
 
 
