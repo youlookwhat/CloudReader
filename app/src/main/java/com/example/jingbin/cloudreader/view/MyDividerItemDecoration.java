@@ -20,6 +20,9 @@ import android.widget.LinearLayout;
 /**
  * 可以取消底部分割线的ItemDecoration
  * copied from DividerItemDecoration
+ * mIsShowBottomDivider  false 不显示底部分割线
+ * mIsShowFirstDivider   false 不显示第一个item的分割线
+ * mIsShowSecondDivider  false 不显示第二个item的分割线
  *
  * @author Ethan Lee
  */
@@ -31,6 +34,8 @@ public class MyDividerItemDecoration extends RecyclerView.ItemDecoration {
     private static final int[] ATTRS = new int[]{android.R.attr.listDivider};
     private Drawable mDivider;
     private boolean mIsShowBottomDivider;
+    private boolean mIsShowFirstDivider;
+    private boolean mIsShowSecondDivider;
     /**
      * Current orientation. Either {@link #HORIZONTAL} or {@link #VERTICAL}.
      */
@@ -46,9 +51,16 @@ public class MyDividerItemDecoration extends RecyclerView.ItemDecoration {
      *                            {@link #VERTICAL}.
      * @param isShowBottomDivider true show bottom divider false not show bottom divider
      */
-    public MyDividerItemDecoration(Context context, int orientation, boolean
-            isShowBottomDivider) {
+    public MyDividerItemDecoration(Context context, int orientation, boolean isShowBottomDivider) {
+        this(context, orientation, isShowBottomDivider, true, true);
+    }
+
+    public MyDividerItemDecoration(Context context, int orientation,
+                                   boolean isShowBottomDivider, boolean isShowFirstDivider, boolean isShowSecondDivider) {
         mIsShowBottomDivider = isShowBottomDivider;
+        mIsShowFirstDivider = isShowFirstDivider;
+        mIsShowSecondDivider = isShowSecondDivider;
+
         final TypedArray a = context.obtainStyledAttributes(ATTRS);
         mDivider = a.getDrawable(0);
         if (mDivider == null) {
@@ -117,7 +129,15 @@ public class MyDividerItemDecoration extends RecyclerView.ItemDecoration {
         for (int i = 0; i < childCount; i++) {
             final View child = parent.getChildAt(i);
             final int childRealPosition = parent.getChildAdapterPosition(child);
-            //mIsShowBottomDivider false的时候不绘制最后一个view的divider
+            // mIsShowFirstDivider false绘制第一个view的divider
+            if (childRealPosition == 0 && !mIsShowFirstDivider) {
+                continue;
+            }
+            // mIsShowSecondDivider false绘制第二个view的divider
+            if (childRealPosition == 1 && !mIsShowSecondDivider) {
+                continue;
+            }
+            // mIsShowBottomDivider false的时候不绘制最后一个view的divider
             if (mIsShowBottomDivider || childRealPosition < lastPosition) {
                 parent.getDecoratedBoundsWithMargins(child, mBounds);
                 final int bottom = mBounds.bottom + Math.round(child.getTranslationY());
@@ -149,6 +169,14 @@ public class MyDividerItemDecoration extends RecyclerView.ItemDecoration {
         for (int i = 0; i < childCount; i++) {
             final View child = parent.getChildAt(i);
             final int childRealPosition = parent.getChildAdapterPosition(child);
+            // mIsShowFirstDivider false绘制第一个view的divider
+            if (childRealPosition == 0 && !mIsShowFirstDivider) {
+                continue;
+            }
+            // mIsShowSecondDivider false绘制第二个view的divider
+            if (childRealPosition == 1 && !mIsShowSecondDivider) {
+                continue;
+            }
             //mIsShowBottomDivider false的时候不绘制最后一个view的divider
             if (mIsShowBottomDivider || childRealPosition < lastPosition) {
                 parent.getLayoutManager().getDecoratedBoundsWithMargins(child, mBounds);

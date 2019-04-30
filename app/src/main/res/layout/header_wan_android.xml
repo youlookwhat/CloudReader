@@ -13,7 +13,7 @@
             android:layout_height="150dp"
             app:indicator_height="8dp"
             app:indicator_margin="8dp"
-            app:indicator_padding="5dp"
+            app:indicator_padding="2dp"
             app:indicator_width="8dp"
             app:is_back_loop="false"
             app:page_left_margin="80dp"

@@ -45,7 +45,7 @@ public class ArticleListActivity extends BaseActivity<WanAndroidListViewModel, F
     }
 
     private void initRefreshView() {
-        RefreshHelper.init(bindingView.xrvWan);
+        RefreshHelper.init(bindingView.xrvWan, false);
         bindingView.srlWan.setColorSchemeColors(CommonUtils.getColor(R.color.colorTheme));
         mAdapter = new WanAndroidAdapter(this);
         bindingView.xrvWan.setAdapter(mAdapter);

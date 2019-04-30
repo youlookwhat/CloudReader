@@ -4,44 +4,33 @@ import android.arch.lifecycle.Observer;
 import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
-import android.os.CountDownTimer;
 import android.support.annotation.Nullable;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.jingbin.cloudreader.R;
 import com.example.jingbin.cloudreader.adapter.WanAndroidAdapter;
 import com.example.jingbin.cloudreader.base.BaseFragment;
-import com.example.jingbin.cloudreader.bean.BannerItemBean;
 import com.example.jingbin.cloudreader.bean.wanandroid.HomeListBean;
 import com.example.jingbin.cloudreader.bean.wanandroid.WanAndroidBannerBean;
 import com.example.jingbin.cloudreader.databinding.FragmentWanAndroidBinding;
 import com.example.jingbin.cloudreader.databinding.HeaderWanAndroidBinding;
 import com.example.jingbin.cloudreader.utils.CommonUtils;
 import com.example.jingbin.cloudreader.utils.DensityUtil;
-import com.example.jingbin.cloudreader.utils.GlideImageLoader;
 import com.example.jingbin.cloudreader.utils.GlideUtil;
 import com.example.jingbin.cloudreader.utils.PerfectClickListener;
 import com.example.jingbin.cloudreader.utils.RefreshHelper;
-import com.example.jingbin.cloudreader.utils.TimeUtil;
 import com.example.jingbin.cloudreader.view.webview.WebViewActivity;
 import com.example.jingbin.cloudreader.viewmodel.wan.WanAndroidListViewModel;
 import com.example.xrecyclerview.XRecyclerView;
-import com.youth.banner.BannerConfig;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import me.jingbin.sbanner.config.OnBannerClickListener;
 import me.jingbin.sbanner.config.ScaleRightTransformer;
 import me.jingbin.sbanner.holder.BannerViewHolder;
-import me.jingbin.sbanner.holder.HolderCreator;
 
 
 /**
@@ -57,6 +46,8 @@ public class BannerFragment extends BaseFragment<WanAndroidListViewModel, Fragme
     private WanAndroidAdapter mAdapter;
     private HeaderWanAndroidBinding androidBinding;
     private boolean isLoadBanner = false;
+    // banner图的宽
+    private int width;
 
     @Override
     public int setContent() {
@@ -79,14 +70,14 @@ public class BannerFragment extends BaseFragment<WanAndroidListViewModel, Fragme
     }
 
     private void initRefreshView() {
-        RefreshHelper.init(bindingView.xrvWan);
+        RefreshHelper.init(bindingView.xrvWan, false, false);
         androidBinding = DataBindingUtil.inflate(getLayoutInflater(), R.layout.header_wan_android, null, false);
         bindingView.srlWan.setColorSchemeColors(CommonUtils.getColor(R.color.colorTheme));
         mAdapter = new WanAndroidAdapter(getActivity());
         mAdapter.setNoImage();
         bindingView.xrvWan.setAdapter(mAdapter);
         bindingView.xrvWan.addHeaderView(androidBinding.getRoot());
-        int width = DensityUtil.getDisplayWidth() - DensityUtil.dip2px(160);
+        width = DensityUtil.getDisplayWidth() - DensityUtil.dip2px(160);
         float height = width / 1.8f;
         RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, (int) height);
         androidBinding.banner.setLayoutParams(lp);
@@ -112,7 +103,7 @@ public class BannerFragment extends BaseFragment<WanAndroidListViewModel, Fragme
             @Override
             public void onChanged(@Nullable WanAndroidBannerBean bean) {
                 if (bean != null) {
-                    showBannerView(bean.getmBannerImages(), bean.getmBannerTitles(), bean.getData());
+                    showBannerView(bean.getData());
                     androidBinding.rlBanner.setVisibility(View.VISIBLE);
                 } else {
                     androidBinding.rlBanner.setVisibility(View.GONE);
@@ -135,7 +126,7 @@ public class BannerFragment extends BaseFragment<WanAndroidListViewModel, Fragme
     /**
      * 设置banner图
      */
-    public void showBannerView(ArrayList<String> bannerImages, ArrayList<String> mBannerTitle, List<WanAndroidBannerBean.DataBean> result) {
+    public void showBannerView(List<WanAndroidBannerBean.DataBean> result) {
         androidBinding.rlBanner.setVisibility(View.VISIBLE);
         androidBinding.banner
                 .setAutoPlay(true)
@@ -162,8 +153,6 @@ public class BannerFragment extends BaseFragment<WanAndroidListViewModel, Fragme
         @Override
         public void onBind(Context context, int position, WanAndroidBannerBean.DataBean data) {
             if (data != null) {
-                int width = DensityUtil.getDisplayWidth() - DensityUtil.dip2px(160);
-//                float height = width / 1.8f;
                 DensityUtil.formatHeight(imageView, width, 1.8f, 3);
                 GlideUtil.displayEspImage(data.getImagePath(), imageView, 3);
                 imageView.setOnClickListener(new PerfectClickListener() {

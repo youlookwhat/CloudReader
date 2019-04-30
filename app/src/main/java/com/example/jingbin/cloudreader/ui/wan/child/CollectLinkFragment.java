@@ -5,7 +5,6 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
-import android.support.v7.widget.LinearLayoutManager;
 
 import com.example.jingbin.cloudreader.R;
 import com.example.jingbin.cloudreader.adapter.CollectUrlAdapter;
@@ -62,7 +61,7 @@ public class CollectLinkFragment extends BaseFragment<CollectLinkModel, Fragment
 
     private void initRefreshView() {
         bindingView.srlWan.setColorSchemeColors(CommonUtils.getColor(R.color.colorTheme));
-        RefreshHelper.init(bindingView.xrvWan);
+        RefreshHelper.init(bindingView.xrvWan, false);
         mAdapter = new CollectUrlAdapter(activity);
         bindingView.xrvWan.setAdapter(mAdapter);
         bindingView.srlWan.setOnRefreshListener(() -> bindingView.srlWan.postDelayed(this::getCollectUrlList, 300));

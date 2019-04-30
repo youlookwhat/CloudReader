@@ -63,7 +63,7 @@ public class CollectArticleFragment extends BaseFragment<ArticleListViewModel, F
 
 
     private void initRefreshView() {
-        RefreshHelper.init(bindingView.xrvWan);
+        RefreshHelper.init(bindingView.xrvWan, false);
         bindingView.srlWan.setColorSchemeColors(CommonUtils.getColor(R.color.colorTheme));
         mAdapter = new WanAndroidAdapter(activity);
         bindingView.xrvWan.setAdapter(mAdapter);

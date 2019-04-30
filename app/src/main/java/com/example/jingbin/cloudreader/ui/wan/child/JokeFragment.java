@@ -21,7 +21,7 @@ import java.util.Random;
 
 /**
  * @author jingbin
- *         Updated by jingbin on 18/12/23.
+ * Updated by jingbin on 18/12/23.
  */
 public class JokeFragment extends BaseFragment<JokeViewModel, FragmentWanAndroidBinding> {
 
@@ -68,7 +68,7 @@ public class JokeFragment extends BaseFragment<JokeViewModel, FragmentWanAndroid
     }
 
     private void initRefreshView() {
-        RefreshHelper.init(bindingView.xrvWan);
+        RefreshHelper.init(bindingView.xrvWan, false);
         bindingView.srlWan.setColorSchemeColors(CommonUtils.getColor(R.color.colorTheme));
         mAdapter = new JokeAdapter();
         bindingView.xrvWan.setAdapter(mAdapter);

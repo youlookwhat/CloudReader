@@ -16,10 +16,15 @@
             app:tabSelectedTextColor="@color/colorTheme"
             app:tabTextColor="@color/colorTabText" />
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@color/colorHomeLine" />
+
         <android.support.v4.view.ViewPager
             android:id="@+id/vp_my_collect"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent" />
 
     </LinearLayout>
 </layout>

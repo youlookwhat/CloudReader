@@ -10,12 +10,9 @@ import com.example.jingbin.cloudreader.bean.wanandroid.HomeListBean;
 import com.example.jingbin.cloudreader.bean.wanandroid.WanAndroidBannerBean;
 import com.example.jingbin.cloudreader.http.HttpClient;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
@@ -40,20 +37,11 @@ public class WanAndroidListViewModel extends BaseListViewModel {
 
                     @Override
                     public void accept(WanAndroidBannerBean wanAndroidBannerBean) throws Exception {
-                        ArrayList<String> mBannerImages = new ArrayList<String>();
-                        ArrayList<String> mBannerTitles = new ArrayList<String>();
                         if (wanAndroidBannerBean != null
                                 && wanAndroidBannerBean.getData() != null
                                 && wanAndroidBannerBean.getData().size() > 0) {
                             List<WanAndroidBannerBean.DataBean> result = wanAndroidBannerBean.getData();
                             if (result != null && result.size() > 0) {
-                                for (int i = 0; i < result.size(); i++) {
-                                    //获取所有图片
-                                    mBannerImages.add(result.get(i).getImagePath());
-                                    mBannerTitles.add(result.get(i).getTitle());
-                                }
-                                wanAndroidBannerBean.setmBannerImages(mBannerImages);
-                                wanAndroidBannerBean.setmBannerTitles(mBannerTitles);
                                 data.setValue(wanAndroidBannerBean);
                             }
                         } else {
