@@ -78,14 +78,12 @@ public class TreeFragment extends BaseFragment<TreeViewModel,FragmentWanAndroidB
 
     @Override
     protected void loadData() {
-        DebugUtil.error("-----loadData");
         if (!mIsPrepared || !mIsVisible || !mIsFirst) {
             return;
         }
 
         bindingView.srlWan.setRefreshing(true);
         bindingView.srlWan.postDelayed(this::getTree, 150);
-        DebugUtil.error("-----setRefreshing");
     }
 
     private void getTree() {

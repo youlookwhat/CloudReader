@@ -19,6 +19,7 @@ import com.example.jingbin.cloudreader.bean.wanandroid.WanAndroidBannerBean;
 import com.example.jingbin.cloudreader.databinding.FragmentWanAndroidBinding;
 import com.example.jingbin.cloudreader.databinding.HeaderWanAndroidBinding;
 import com.example.jingbin.cloudreader.utils.CommonUtils;
+import com.example.jingbin.cloudreader.utils.DebugUtil;
 import com.example.jingbin.cloudreader.utils.DensityUtil;
 import com.example.jingbin.cloudreader.utils.GlideUtil;
 import com.example.jingbin.cloudreader.utils.PerfectClickListener;
@@ -167,6 +168,9 @@ public class BannerFragment extends BaseFragment<WanAndroidListViewModel, Fragme
 
     @Override
     protected void loadData() {
+        if (mIsPrepared && isLoadBanner) {
+            onResume();
+        }
         if (!mIsPrepared || !mIsVisible || !mIsFirst) {
             return;
         }
@@ -179,6 +183,13 @@ public class BannerFragment extends BaseFragment<WanAndroidListViewModel, Fragme
         super.onResume();
         if (isLoadBanner) {
             androidBinding.banner.startAutoPlay();
+        }
+    }
+
+    @Override
+    protected void onInvisible() {
+        if (mIsPrepared && isLoadBanner) {
+            onPause();
         }
     }
 

@@ -14,7 +14,6 @@ import android.view.animation.Animation;
 import android.view.animation.LinearInterpolator;
 import android.view.animation.RotateAnimation;
 
-import com.bumptech.glide.Glide;
 import com.example.jingbin.cloudreader.R;
 import com.example.jingbin.cloudreader.adapter.EverydayAdapter;
 import com.example.jingbin.cloudreader.base.BaseFragment;
@@ -26,10 +25,10 @@ import com.example.jingbin.cloudreader.databinding.HeaderItemEverydayBinding;
 import com.example.jingbin.cloudreader.http.rx.RxBus;
 import com.example.jingbin.cloudreader.http.rx.RxBusBaseMessage;
 import com.example.jingbin.cloudreader.http.rx.RxCodeConstants;
+import com.example.jingbin.cloudreader.utils.DebugUtil;
 import com.example.jingbin.cloudreader.utils.DensityUtil;
 import com.example.jingbin.cloudreader.utils.GlideImageLoader;
 import com.example.jingbin.cloudreader.utils.PerfectClickListener;
-import com.example.jingbin.cloudreader.utils.UpdateUtil;
 import com.example.jingbin.cloudreader.view.webview.WebViewActivity;
 import com.example.jingbin.cloudreader.viewmodel.gank.EverydayViewModel;
 
@@ -79,6 +78,9 @@ public class EverydayFragment extends BaseFragment<EverydayViewModel, FragmentEv
 
     @Override
     protected void loadData() {
+        if (mIsPrepared && isLoadBanner) {
+            onResume();
+        }
         if (!mIsVisible || !mIsPrepared) {
             return;
         }
@@ -179,18 +181,21 @@ public class EverydayFragment extends BaseFragment<EverydayViewModel, FragmentEv
         super.onResume();
         // 失去焦点，否则RecyclerView第一个item会回到顶部
         bindingView.recyclerView.setFocusable(false);
-        // 开始图片请求
-        Glide.with(getActivity()).resumeRequests();
         if (isLoadBanner) {
             mHeaderBinding.banner.startAutoPlay();
         }
     }
 
     @Override
+    protected void onInvisible() {
+        if (mIsPrepared && isLoadBanner) {
+            onPause();
+        }
+    }
+
+    @Override
     public void onPause() {
         super.onPause();
-        // 停止全部图片请求 跟随着Activity
-        Glide.with(getActivity()).pauseRequests();
         // 不可见时轮播图停止滚动
         if (isLoadBanner) {
             mHeaderBinding.banner.stopAutoPlay();
