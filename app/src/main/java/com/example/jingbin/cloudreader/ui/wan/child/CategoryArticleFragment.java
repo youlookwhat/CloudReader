@@ -95,12 +95,12 @@ public class CategoryArticleFragment extends BaseFragment<WanAndroidListViewMode
                         && homeListBean.getData().getDatas() != null
                         && homeListBean.getData().getDatas().size() > 0) {
                     if (viewModel.getPage() == 0) {
-                        mAdapter.getData().clear();
-                        mAdapter.notifyDataSetChanged();
+                        mAdapter.setNewData(homeListBean.getData().getDatas());
+                        // 设置后不满一屏幕不加载
+                        // mAdapter.disableLoadMoreIfNotFullPage();
+                    } else {
+                        mAdapter.addData(homeListBean.getData().getDatas());
                     }
-                    int positionStart = mAdapter.getItemCount() + 1;
-                    mAdapter.addData(homeListBean.getData().getDatas());
-                    mAdapter.notifyItemRangeInserted(positionStart, homeListBean.getData().getDatas().size());
                     mAdapter.loadMoreComplete();
                 } else {
                     if (viewModel.getPage() == 0) {
@@ -123,5 +123,9 @@ public class CategoryArticleFragment extends BaseFragment<WanAndroidListViewMode
     public void onDestroy() {
         super.onDestroy();
         viewModel.setPage(0);
+        if (mAdapter != null) {
+            mAdapter.getData().clear();
+            mAdapter = null;
+        }
     }
 }
