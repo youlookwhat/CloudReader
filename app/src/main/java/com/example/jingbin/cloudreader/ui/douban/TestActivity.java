@@ -23,17 +23,15 @@ import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 import com.example.jingbin.cloudreader.R;
+import com.example.jingbin.cloudreader.adapter.MovieDetailPersonAdapter;
 import com.example.jingbin.cloudreader.bean.moviechild.SubjectsBean;
 import com.example.jingbin.cloudreader.databinding.ActivityTestBinding;
-import com.example.jingbin.cloudreader.adapter.MovieDetailPersonAdapter;
 import com.example.jingbin.cloudreader.view.test.StatusBarUtils;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import jp.wasabeef.glide.transformations.BlurTransformation;
-
-import static com.bumptech.glide.request.RequestOptions.bitmapTransform;
 
 /**
  * （已使用：{@link OneMovieDetailActivity} 替代）
@@ -69,7 +67,7 @@ public class TestActivity extends AppCompatActivity {
             Glide.with(this).load(subjectsBean.getImages().getLarge())
                     .error(R.drawable.stackblur_default)
 //                .placeholder(R.drawable.stackblur_default)
-                    .apply(bitmapTransform(new BlurTransformation(25, 5)))
+                    .transform(new BlurTransformation(25, 5))
                     .listener(new RequestListener<Drawable>() {
                         @Override
                         public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {

@@ -45,8 +45,6 @@ import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 import jp.wasabeef.glide.transformations.BlurTransformation;
 
-import static com.bumptech.glide.request.RequestOptions.bitmapTransform;
-
 
 /**
  * Created by jingbin on 16/12/12.
@@ -331,7 +329,7 @@ public abstract class BaseHeaderActivity<HV extends ViewDataBinding, SV extends 
             // 高斯模糊背景 原来 参数：12,5  23,4
             Glide.with(this).load(imgUrl)
                     .error(R.drawable.stackblur_default)
-                    .apply(bitmapTransform(new BlurTransformation( 50, 8)))
+                    .transform(new BlurTransformation(50, 8))
                     .listener(new RequestListener<Drawable>() {
                         @Override
                         public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {

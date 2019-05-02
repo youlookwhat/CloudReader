@@ -11,8 +11,6 @@ import com.example.jingbin.cloudreader.R;
 
 import jp.wasabeef.glide.transformations.BlurTransformation;
 
-import static com.bumptech.glide.request.RequestOptions.bitmapTransform;
-
 
 /**
  * @author jingbin
@@ -125,7 +123,7 @@ public class GlideUtil {
                 .error(R.drawable.stackblur_default)
                 .placeholder(R.drawable.stackblur_default)
                 .transition(DrawableTransitionOptions.withCrossFade(500))
-                .apply(bitmapTransform(new BlurTransformation(50, 8)))
+                .transform(new BlurTransformation(50, 8))
                 .into(imageView);
     }
 
@@ -138,10 +136,11 @@ public class GlideUtil {
                 .load(imageUrl)
                 .transition(DrawableTransitionOptions.withCrossFade(500))
                 .error(R.drawable.ic_avatar_default)
-                .transforms(new CircleCrop())
+                .transform(new CircleCrop())
+//                .apply(bitmapTransform(new CircleCrop()))
 //                .transform(new GlideCircleTransform())
-//                .transforms(new RoundedCorners(20))
-//                .transforms(new CenterCrop(), new RoundedCorners(20))
+//                .transform(new RoundedCorners(20))
+//                .transform(new CenterCrop(), new RoundedCorners(20))
                 .into(imageView);
     }
 

@@ -36,7 +36,6 @@ import com.example.jingbin.cloudreader.view.test.StatusBarUtils;
 
 import jp.wasabeef.glide.transformations.BlurTransformation;
 
-import static com.bumptech.glide.request.RequestOptions.bitmapTransform;
 import static com.example.jingbin.cloudreader.view.statusbar.StatusBarUtil.getStatusBarHeight;
 
 /**
@@ -111,7 +110,7 @@ public class SlideShadeViewActivity extends AppCompatActivity {
             // 高斯模糊背景 原来 参数：12,5  23,4
             Glide.with(this).load(subjectsBean.getImages().getLarge())
                     .error(R.drawable.stackblur_default)
-                    .apply(bitmapTransform(new BlurTransformation( 25, 5)))
+                    .transform(new BlurTransformation(25, 5))
                     .listener(new RequestListener<Drawable>() {
                         @Override
                         public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
