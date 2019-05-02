@@ -72,7 +72,7 @@ public class CategoryArticleFragment extends BaseFragment<WanAndroidListViewMode
         mAdapter = new CategoryArticleAdapter(activity);
         mAdapter.bindToRecyclerView(bindingView.recyclerView, true);
         MyDividerItemDecoration itemDecoration = new MyDividerItemDecoration(bindingView.recyclerView.getContext(), DividerItemDecoration.VERTICAL, false);
-        itemDecoration.setDrawable(ContextCompat.getDrawable(bindingView.recyclerView.getContext(), R.drawable.shape_line));
+        itemDecoration.setDrawable(ContextCompat.getDrawable(activity, R.drawable.shape_line));
         bindingView.recyclerView.addItemDecoration(itemDecoration);
 
         mAdapter.setOnLoadMoreListener(new BaseQuickAdapter.RequestLoadMoreListener() {
@@ -95,12 +95,12 @@ public class CategoryArticleFragment extends BaseFragment<WanAndroidListViewMode
                         && homeListBean.getData().getDatas() != null
                         && homeListBean.getData().getDatas().size() > 0) {
                     if (viewModel.getPage() == 0) {
-                        mAdapter.setNewData(homeListBean.getData().getDatas());
+                        mAdapter.getData().clear();
+//                        mAdapter.setNewData(homeListBean.getData().getDatas());
                         // 设置后不满一屏幕不加载
                         // mAdapter.disableLoadMoreIfNotFullPage();
-                    } else {
-                        mAdapter.addData(homeListBean.getData().getDatas());
                     }
+                    mAdapter.addData(homeListBean.getData().getDatas());
                     mAdapter.loadMoreComplete();
                 } else {
                     if (viewModel.getPage() == 0) {
