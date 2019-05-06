@@ -54,7 +54,7 @@ If you have any questions, please write to [the issue][21] of making you don't u
 
 
 ## See Detail
-> [项目介绍详情](https://github.com/youlookwhat/CloudReader/blob/master/file/Introduction.md) | [细节优化详情](https://github.com/youlookwhat/CloudReader/wiki) | [**版本更新详情(V2.8.0)**](http://jingbin.me/2016/12/30/%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97-%E4%BA%91%E9%98%85/)
+> [项目介绍详情](https://github.com/youlookwhat/CloudReader/blob/master/file/Introduction.md) | [细节优化详情](https://github.com/youlookwhat/CloudReader/wiki) | [**版本更新详情(V2.8.5)**](http://jingbin.me/2016/12/30/%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97-%E4%BA%91%E9%98%85/)
 
 ### Download
 　[火速跳转](https://fir.im/cloudreader)  
@@ -69,6 +69,12 @@ If you have any questions, please write to [the issue][21] of making you don't u
 　
 
 ### Version
+#### V2.8.5（2019-05-06）
+ - 1、[新增] 问题反馈内加入QQ群
+ - 2、[升级] glide升级到4.9.0
+ - 3、[优化] ui部分优化
+ - 4、[修复] 修复若干bug
+
 #### V2.8.0（2019-03-21）
  - 1、[新增] 搜索页面
  - 2、[修复] 隐藏书籍分类页面(api失效)
@@ -104,6 +110,7 @@ If you have any questions, please write to [the issue][21] of making you don't u
  - 4、[优化] 电影、书籍和玩安卓首页等item点击效果
  - 5、[修复] 保存图片权限问题、上拉加载逻辑问题
 
+<!-- 
 #### V2.0（10-26）
  - 1、[新增] 知识体系页面
  - 2、[新增] 导航数据页面
@@ -113,7 +120,6 @@ If you have any questions, please write to [the issue][21] of making you don't u
  - 6、[修复] 段子头像显示不全修复
  - 7、[优化] 首页ui及部分图片显示比例优化
 
-<!-- 
 #### V1.9.4（05-21）
  - 1、[修复] 修复干货订制点击“选择分类”崩溃的bug
  - 2、[新增] 干货订制页面长按item增加[水波纹扩散效果](https://jingbin.me/2018/05/20/Android%20%E6%B0%B4%E6%B3%A2%E7%BA%B9%E6%95%88%E6%9E%9C%E7%9A%84%E6%8E%A2%E7%A9%B6/)
@@ -233,7 +239,7 @@ limitations under the License.
 [2]:https://www.apache.org/licenses/LICENSE-2.0.html
 [3]:https://img.shields.io/badge/API-19%2B-red.svg?style=flat
 [4]:https://android-arsenal.com/api?level=19
-[30]:https://img.shields.io/badge/release-2.8.0-red.svg
+[30]:https://img.shields.io/badge/release-2.8.5-red.svg
 [31]:https://github.com/youlookwhat/CloudReader/releases
 [32]:https://img.shields.io/badge/PRs-welcome-brightgreen.svg
 [33]:https://github.com/youlookwhat/CloudReader/pulls
