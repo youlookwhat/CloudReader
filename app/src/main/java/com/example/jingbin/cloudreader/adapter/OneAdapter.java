@@ -82,7 +82,6 @@ public class OneAdapter extends BaseRecyclerViewAdapter<SubjectsBean> {
 //                            MovieDetailActivity.start(activity, positionData, binding.ivOnePhoto);
 //                            OneMovieDetailActivity.start(activity, positionData, binding.ivOnePhoto);
 
-//                            TestActivity.start(activity, positionData, binding.ivOnePhoto);
 //                            activity.overridePendingTransition(R.anim.push_fade_out, R.anim.push_fade_in);
 //                        } else {
 //                            SlideScrollViewActivity.start(activity, positionData, binding.ivOnePhoto);
@@ -92,7 +91,6 @@ public class OneAdapter extends BaseRecyclerViewAdapter<SubjectsBean> {
 
                         // 这个可以
 //                        SlideScrollViewActivity.start(activity, positionData, binding.ivOnePhoto);
-//                        TestActivity.start(activity,positionData,binding.ivOnePhoto);
 //                        v.getContext().startActivity(new Intent(v.getContext(), SlideScrollViewActivity.class));
 
 //                        SlideShadeViewActivity.start(activity, positionData, binding.ivOnePhoto);

@@ -8,8 +8,7 @@
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <!-- bugly start -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /> <!-- bugly start -->
     <uses-permission android:name="android.permission.READ_LOGS" />
 
     <application
@@ -35,14 +34,6 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.douban.TestActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/MyScrollPage" />
-        <activity
-            android:name=".ui.douban.SlideActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/MyScrollPage" />
-        <activity
             android:name=".ui.douban.SlideScrollViewActivity"
             android:screenOrientation="portrait"
             android:theme="@style/MyScrollPage" />
@@ -64,16 +55,14 @@
             android:hardwareAccelerated="true"
             android:launchMode="singleTask"
             android:screenOrientation="portrait">
-
             <intent-filter tools:ignore="AppLinkUrlError">
                 <action android:name="android.intent.action.VIEW" />
 
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
-                <!--使用http，则只能打开http开头的网页-->
+                <!-- 使用http，则只能打开http开头的网页 -->
                 <data android:scheme="https" />
             </intent-filter>
-
         </activity>
         <activity
             android:name=".ui.douban.DoubanTopActivity"
