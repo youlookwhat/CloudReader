@@ -329,7 +329,7 @@ public abstract class BaseHeaderActivity<HV extends ViewDataBinding, SV extends 
             // 高斯模糊背景 原来 参数：12,5  23,4
             Glide.with(this).load(imgUrl)
                     .error(R.drawable.stackblur_default)
-                    .transform(new BlurTransformation(50, 8))
+                    .transform(new BlurTransformation(40, 8))
                     .listener(new RequestListener<Drawable>() {
                         @Override
                         public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {

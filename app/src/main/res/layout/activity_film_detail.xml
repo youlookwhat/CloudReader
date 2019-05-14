@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <data>
+
+        <!--调用静态方法-->
+        <import type="com.example.jingbin.cloudreader.utils.StringFormatUtil" />
+
+        <!--引用bean-->
+        <variable
+            name="bean"
+            type="com.example.jingbin.cloudreader.bean.FilmDetailBasicBean" />
+
+    </data>
+
+
+    <FrameLayout xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/activity_one_movie_detail"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context="com.example.jingbin.cloudreader.ui.douban.FilmDetailActivity">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <!--又名-->
+            <TextView
+                android:id="@+id/tv_one_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="12dp"
+                android:text='@{bean.commonSpecial}'
+                android:textColor="@color/colorTitle" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp">
+
+                <View
+                    android:layout_width="2dp"
+                    android:layout_height="18dp"
+                    android:background="@color/colorTheme" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:text="简介"
+                    android:textColor="@color/colorContent"
+                    android:textSize="17sp" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:lineSpacingExtra="7dp"
+                android:padding="12dp"
+                android:text="@{bean.content}"
+                android:textColor="@color/colorTitle"
+                android:textSize="15sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingTop="10dp"
+                android:paddingBottom="5dp">
+
+                <View
+                    android:layout_width="2dp"
+                    android:layout_height="18dp"
+                    android:background="@color/colorTheme" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:text="演职员"
+                    android:textColor="@color/colorContent"
+                    android:textSize="17sp" />
+
+            </LinearLayout>
+
+            <!--导演&演员-->
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/xrv_cast"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingTop="10dp"
+                android:paddingBottom="5dp">
+
+                <View
+                    android:layout_width="2dp"
+                    android:layout_height="18dp"
+                    android:background="@color/colorTheme" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:text="预告片"
+                    android:textColor="@color/colorContent"
+                    android:textSize="17sp" />
+
+            </LinearLayout>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/xrv_video"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:visibility="gone" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingTop="10dp"
+                android:paddingBottom="5dp">
+
+                <View
+                    android:layout_width="2dp"
+                    android:layout_height="18dp"
+                    android:background="@color/colorTheme" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:text="剧照"
+                    android:textColor="@color/colorContent"
+                    android:textSize="17sp" />
+
+            </LinearLayout>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/xrv_images"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginBottom="30dp"
+                android:visibility="gone" />
+        </LinearLayout>
+
+
+    </FrameLayout>
+</layout>

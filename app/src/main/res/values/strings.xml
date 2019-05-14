@@ -70,6 +70,7 @@
     <string name="string_rating">评分：</string>
     <string name="string_rating_num">人评分</string>
     <string name="string_type">类型：</string>
+    <string name="string_film_date">上映日期：</string>
     <string name="string_publisher">出版社：</string>
     <string name="string_joke">------</string>
     <string name="no_name_joke">匿名用户</string>

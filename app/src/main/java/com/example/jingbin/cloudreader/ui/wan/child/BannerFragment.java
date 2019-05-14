@@ -104,8 +104,8 @@ public class BannerFragment extends BaseFragment<WanAndroidListViewModel, Fragme
             @Override
             public void onChanged(@Nullable WanAndroidBannerBean bean) {
                 if (bean != null) {
-                    showBannerView(bean.getData());
                     androidBinding.rlBanner.setVisibility(View.VISIBLE);
+                    showBannerView(bean.getData());
                 } else {
                     androidBinding.rlBanner.setVisibility(View.GONE);
                 }
@@ -130,7 +130,7 @@ public class BannerFragment extends BaseFragment<WanAndroidListViewModel, Fragme
     public void showBannerView(List<WanAndroidBannerBean.DataBean> result) {
         androidBinding.rlBanner.setVisibility(View.VISIBLE);
         androidBinding.banner
-                .setAutoPlay(true)
+                .setAutoPlay(false)
                 .setIndicatorRes(R.drawable.banner_red, R.drawable.banner_grey)
                 .setBannerAnimation(ScaleRightTransformer.class)
                 .setDelayTime(5000)
@@ -225,7 +225,10 @@ public class BannerFragment extends BaseFragment<WanAndroidListViewModel, Fragme
                     mAdapter.notifyItemRangeInserted(positionStart, homeListBean.getData().getDatas().size());
                     bindingView.xrvWan.refreshComplete();
 
-                    if (viewModel.getPage() == 0) {
+                    if (mIsFirst && viewModel.getPage() == 0) {
+                        if (isLoadBanner) {
+                            androidBinding.banner.setAutoPlay(true).startAutoPlay();
+                        }
                         mIsFirst = false;
                     }
                 } else {

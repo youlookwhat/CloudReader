@@ -3,11 +3,14 @@ package com.example.jingbin.cloudreader.http;
 import com.example.http.HttpUtils;
 import com.example.http.utils.BuildFactory;
 import com.example.jingbin.cloudreader.bean.CollectUrlBean;
+import com.example.jingbin.cloudreader.bean.FilmDetailBasicBean;
+import com.example.jingbin.cloudreader.bean.FilmDetailBean;
 import com.example.jingbin.cloudreader.bean.FrontpageBean;
 import com.example.jingbin.cloudreader.bean.GankIoDataBean;
 import com.example.jingbin.cloudreader.bean.GankIoDayBean;
 import com.example.jingbin.cloudreader.bean.HotMovieBean;
 import com.example.jingbin.cloudreader.bean.MovieDetailBean;
+import com.example.jingbin.cloudreader.bean.MtimeFilmeBean;
 import com.example.jingbin.cloudreader.bean.UpdateBean;
 import com.example.jingbin.cloudreader.bean.book.BookBean;
 import com.example.jingbin.cloudreader.bean.book.BookDetailBean;
@@ -58,6 +61,10 @@ public interface HttpClient {
 
         public static HttpClient getQSBKServer() {
             return BuildFactory.getInstance().create(HttpClient.class, HttpUtils.API_QSBK);
+        }
+
+        public static HttpClient getMtimeServer() {
+            return BuildFactory.getInstance().create(HttpClient.class, HttpUtils.API_MTIME);
         }
     }
 
@@ -270,7 +277,7 @@ public interface HttpClient {
     Flowable<HomeListBean> searchWan(@Path("page") int page, @Field("k") String k);
 
     /**
-     *  搜索热词
+     * 搜索热词
      */
     @GET("hotkey/json")
     Flowable<SearchTagBean> getHotkey();
@@ -278,6 +285,20 @@ public interface HttpClient {
     /**
      * 干货集中营 搜索
      */
-    @GET("search/query/{keyWord}/category/{type}/count/20/page/{p} ")
+    @GET("search/query/{keyWord}/category/{type}/count/20/page/{p}")
     Flowable<GankIoDataBean> searchGank(@Path("p") int p, @Path("type") String type, @Path("keyWord") String keyWord);
+
+    /**
+     * 豆瓣热映电影，每日更新
+     */
+    @GET("Showtime/LocationMovies.api?locationId=561")
+    Observable<MtimeFilmeBean> getHotFilm();
+
+    /**
+     * 获取电影详情
+     *
+     * @param movieId 电影bean里的id
+     */
+    @GET("movie/detail.api?locationId=561")
+    Observable<FilmDetailBasicBean> getFilmDetail(@Query("movieId") int movieId);
 }

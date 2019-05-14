@@ -5,6 +5,7 @@ import com.example.http.HttpUtils;
 import static com.example.http.HttpUtils.API_DOUBAN;
 import static com.example.http.HttpUtils.API_FIR;
 import static com.example.http.HttpUtils.API_GANKIO;
+import static com.example.http.HttpUtils.API_MTIME;
 import static com.example.http.HttpUtils.API_QSBK;
 import static com.example.http.HttpUtils.API_TING;
 import static com.example.http.HttpUtils.API_WAN_ANDROID;
@@ -23,8 +24,8 @@ public class BuildFactory {
     private Object dongtingHttps;
     private Object firHttps;
     private Object wanAndroidHttps;
-    private Object nhdzHttps;
     private Object qsbkHttps;
+    private Object mtimeHttps;
 
     public static BuildFactory getInstance() {
         if (instance == null) {
@@ -94,6 +95,15 @@ public class BuildFactory {
                     }
                 }
                 return (T) qsbkHttps;
+            case API_MTIME:
+                if (mtimeHttps == null) {
+                    synchronized (BuildFactory.class) {
+                        if (mtimeHttps == null) {
+                            mtimeHttps = HttpUtils.getInstance().getBuilder(type).build().create(a);
+                        }
+                    }
+                }
+                return (T) mtimeHttps;
             default:
                 if (gankHttps == null) {
                     synchronized (BuildFactory.class) {
