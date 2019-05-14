@@ -67,6 +67,7 @@ public class HttpUtils {
     public final static String API_WAN_ANDROID = "https://www.wanandroid.com/";
     public final static String API_QSBK = "http://m2.qiushibaike.com/";
     public final static String API_MTIME = "https://api-m.mtime.cn/";
+    public final static String API_MTIME_TICKET = "https://ticket-api-m.mtime.cn/";
     /**
      * 分页数据，每页的数量
      */

@@ -1,5 +1,7 @@
 package com.example.jingbin.cloudreader.bean;
 
+import android.text.TextUtils;
+
 import java.util.List;
 
 public class FilmDetailBasicBean {

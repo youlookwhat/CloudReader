@@ -1,5 +1,7 @@
 package com.example.jingbin.cloudreader.bean;
 
+import android.text.TextUtils;
+
 import java.util.List;
 
 public class FilmDetailBean {
@@ -137,7 +139,7 @@ public class FilmDetailBean {
             private String bigImage;
             private String commentSpecial;
             private CommunityBean community;
-            private DirectorBean director;
+            private ActorsBean director;
             private int hotRanking;
             private String img;
             private boolean is3D;
@@ -205,11 +207,11 @@ public class FilmDetailBean {
                 this.community = community;
             }
 
-            public DirectorBean getDirector() {
+            public ActorsBean getDirector() {
                 return director;
             }
 
-            public void setDirector(DirectorBean director) {
+            public void setDirector(ActorsBean director) {
                 this.director = director;
             }
 
@@ -491,8 +493,7 @@ public class FilmDetailBean {
             public static class CommunityBean {
             }
 
-            public static class DirectorBean {
-            }
+
 
             public static class QuizGameBean {
             }
@@ -504,7 +505,7 @@ public class FilmDetailBean {
                  */
 
                 private int count;
-                private List<ListBean> list;
+                private List<ImageListBean> list;
 
                 public int getCount() {
                     return count;
@@ -514,39 +515,15 @@ public class FilmDetailBean {
                     this.count = count;
                 }
 
-                public List<ListBean> getList() {
+                public List<ImageListBean> getList() {
                     return list;
                 }
 
-                public void setList(List<ListBean> list) {
+                public void setList(List<ImageListBean> list) {
                     this.list = list;
                 }
 
-                public static class ListBean {
-                    /**
-                     * imgId : 7530837
-                     * imgUrl : http://img5.mtime.cn/pi/2019/03/29/095718.20503556_1280X720X2.jpg
-                     */
 
-                    private int imgId;
-                    private String imgUrl;
-
-                    public int getImgId() {
-                        return imgId;
-                    }
-
-                    public void setImgId(int imgId) {
-                        this.imgId = imgId;
-                    }
-
-                    public String getImgUrl() {
-                        return imgUrl;
-                    }
-
-                    public void setImgUrl(String imgUrl) {
-                        this.imgUrl = imgUrl;
-                    }
-                }
             }
 
             public static class StyleBean {
@@ -621,7 +598,27 @@ public class FilmDetailBean {
                 }
 
                 public String getImg() {
-                    return img;
+                    if (!TextUtils.isEmpty(img)) {
+                        if (img.contains("_")) {
+                            int indexOf = img.indexOf("_");
+                            int endIndex = 0;
+                            if (img.toLowerCase().contains(".jpg")) {
+                                endIndex = img.indexOf(".jpg");
+                            } else if (img.toLowerCase().contains(".png")) {
+                                endIndex = img.indexOf(".png");
+                            }
+                            if (endIndex == 0) {
+                                return img;
+                            } else {
+                                String substring = img.substring(indexOf, endIndex);
+                                return img.replace(substring, "");
+                            }
+                        } else {
+                            return img;
+                        }
+                    } else {
+                        return "";
+                    }
                 }
 
                 public void setImg(String img) {
@@ -661,71 +658,7 @@ public class FilmDetailBean {
                 }
             }
 
-            public static class ActorsBean {
-                /**
-                 * actorId : 912602
-                 * img : http://img31.mtime.cn/ph/2014/03/15/134919.70417685_1280X720X2.jpg
-                 * name : 小罗伯特·唐尼
-                 * nameEn : Robert Downey Jr.
-                 * roleImg :
-                 * roleName : 托尼·斯塔克 / 钢铁侠
-                 */
 
-                private int actorId;
-                private String img;
-                private String name;
-                private String nameEn;
-                private String roleImg;
-                private String roleName;
-
-                public int getActorId() {
-                    return actorId;
-                }
-
-                public void setActorId(int actorId) {
-                    this.actorId = actorId;
-                }
-
-                public String getImg() {
-                    return img;
-                }
-
-                public void setImg(String img) {
-                    this.img = img;
-                }
-
-                public String getName() {
-                    return name;
-                }
-
-                public void setName(String name) {
-                    this.name = name;
-                }
-
-                public String getNameEn() {
-                    return nameEn;
-                }
-
-                public void setNameEn(String nameEn) {
-                    this.nameEn = nameEn;
-                }
-
-                public String getRoleImg() {
-                    return roleImg;
-                }
-
-                public void setRoleImg(String roleImg) {
-                    this.roleImg = roleImg;
-                }
-
-                public String getRoleName() {
-                    return roleName;
-                }
-
-                public void setRoleName(String roleName) {
-                    this.roleName = roleName;
-                }
-            }
         }
 
         public static class BoxOfficeBean {
@@ -995,6 +928,98 @@ public class FilmDetailBean {
                     this.name = name;
                 }
             }
+        }
+    }
+
+    public static class ActorsBean {
+        /**
+         * actorId : 912602
+         * img : http://img31.mtime.cn/ph/2014/03/15/134919.70417685_1280X720X2.jpg
+         * name : 小罗伯特·唐尼
+         * nameEn : Robert Downey Jr.
+         * roleImg :
+         * roleName : 托尼·斯塔克 / 钢铁侠
+         */
+
+        private int actorId;
+        private String img;
+        private String name;
+        private String nameEn;
+        private String roleImg;
+        private String roleName;
+
+        public int getActorId() {
+            return actorId;
+        }
+
+        public void setActorId(int actorId) {
+            this.actorId = actorId;
+        }
+
+        public String getImg() {
+            return img;
+        }
+
+        public void setImg(String img) {
+            this.img = img;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public String getNameEn() {
+            return nameEn;
+        }
+
+        public void setNameEn(String nameEn) {
+            this.nameEn = nameEn;
+        }
+
+        public String getRoleImg() {
+            return roleImg;
+        }
+
+        public void setRoleImg(String roleImg) {
+            this.roleImg = roleImg;
+        }
+
+        public String getRoleName() {
+            return roleName;
+        }
+
+        public void setRoleName(String roleName) {
+            this.roleName = roleName;
+        }
+    }
+
+    public static class ImageListBean {
+        /**
+         * imgId : 7530837
+         * imgUrl : http://img5.mtime.cn/pi/2019/03/29/095718.20503556_1280X720X2.jpg
+         */
+
+        private int imgId;
+        private String imgUrl;
+
+        public int getImgId() {
+            return imgId;
+        }
+
+        public void setImgId(int imgId) {
+            this.imgId = imgId;
+        }
+
+        public String getImgUrl() {
+            return imgUrl;
+        }
+
+        public void setImgUrl(String imgUrl) {
+            this.imgUrl = imgUrl;
         }
     }
 }

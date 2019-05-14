@@ -23,6 +23,7 @@ import com.example.jingbin.cloudreader.databinding.ActivityFilmDetailBinding;
 import com.example.jingbin.cloudreader.databinding.HeaderFilmDetailBinding;
 import com.example.jingbin.cloudreader.http.HttpClient;
 import com.example.jingbin.cloudreader.utils.CommonUtils;
+import com.example.jingbin.cloudreader.utils.DensityUtil;
 import com.example.jingbin.cloudreader.view.webview.WebViewActivity;
 
 import java.util.List;
@@ -60,7 +61,7 @@ public class FilmDetailActivity extends BaseHeaderActivity<HeaderFilmDetailBindi
         bindingHeaderView.setSubjectsBean(subjectsBean);
         bindingHeaderView.executePendingBindings();
 
-        loadMovieDetail();
+        bindingContentView.tvOneTitle.postDelayed(this::loadMovieDetail, 300);
     }
 
     @Override
@@ -87,10 +88,10 @@ public class FilmDetailActivity extends BaseHeaderActivity<HeaderFilmDetailBindi
     }
 
     private void loadMovieDetail() {
-        HttpClient.Builder.getMtimeServer().getFilmDetail(subjectsBean.getId())
+        HttpClient.Builder.getMtimeTicketServer().getFilmDetail(subjectsBean.getId())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<FilmDetailBasicBean>() {
+                .subscribe(new Observer<FilmDetailBean>() {
 
                     @Override
                     public void onError(Throwable e) {
@@ -108,22 +109,27 @@ public class FilmDetailActivity extends BaseHeaderActivity<HeaderFilmDetailBindi
                     }
 
                     @Override
-                    public void onNext(final FilmDetailBasicBean bean) {
+                    public void onNext(final FilmDetailBean bean) {
                         if (bean != null) {
-                            FilmDetailBasicBean.ReleaseBean release = bean.getRelease();
-                            if (release != null) {
+                            FilmDetailBean.FilmDetailDataBean.BasicBean basic = bean.getData().getBasic();
+//                            FilmDetailBasicBean.ReleaseBean release = bean.getRelease();
+//                            if (release != null) {
 //                                String text = release.getDate() + "(" + release.getLocation() + ")";
-                                // 上映日期
-                                bindingHeaderView.tvOneDate.setText(String.format("上映日期：%s", release.getDate()));
-                            }
-                            bindingHeaderView.tvOneTime.setText(String.format("片长：%s", bean.getRunTime()));
-                            bindingHeaderView.tvOneRatingNumber.setText(String.format("%s人评分", bean.getScoreCount()));
-                            bindingContentView.setBean(bean);
+                            // 上映日期
+                            bindingHeaderView.tvOneDate.setText(String.format("上映日期：%s", basic.getReleaseDate()));
+//                            }
+                            bindingHeaderView.tvOneTime.setText(String.format("片长：%s", basic.getMins()));
+                            bindingHeaderView.tvOneRatingNumber.setText(String.format("%s人评分", basic.getPersonCount()));
+                            bindingContentView.setBean(basic);
+                            bindingContentView.setBoxOffice(bean.getData().getBoxOffice());
+                            bindingContentView.setVideo(bean.getData().getBasic().getVideo());
+                            DensityUtil.formatHeight(bindingContentView.ivVideo, DensityUtil.getDisplayWidth() - DensityUtil.dip2px(40), (640f / 360), 1);
+                            DensityUtil.setViewMargin(bindingContentView.ivVideo, true, 20, 20, 10, 10);
                             bindingContentView.executePendingBindings();
 
 //                            mMoreUrl = bean.getUrl();
-                            mMoreUrl = bean.getVideo();
-                            mMovieName = bean.getTitleCn();
+//                            mMoreUrl = bean.getVideo();
+//                            mMovieName = bean.getTitleCn();
 
                             transformData(bean);
                         }
@@ -134,34 +140,31 @@ public class FilmDetailActivity extends BaseHeaderActivity<HeaderFilmDetailBindi
     /**
      * 异步线程转换数据
      */
-    private void transformData(final FilmDetailBasicBean bean) {
-        if (bean.getActorList() != null && bean.getActorList().size() > 0) {
-            FilmDetailBasicBean.DirectorBean director = bean.getDirector();
+    private void transformData(final FilmDetailBean bean) {
+        if (bean.getData().getBasic().getActors() != null && bean.getData().getBasic().getActors().size() > 0) {
+            FilmDetailBean.ActorsBean director = bean.getData().getBasic().getDirector();
             if (director != null) {
-                FilmDetailBasicBean.ActorListBean listBean = new FilmDetailBasicBean.ActorListBean();
-                listBean.setActor(director.getDirectorName());
-                listBean.setActorEn(director.getDirectorNameEn());
-                listBean.setActorImg(director.getDirectorImg());
-                listBean.setRoleName("导演");
-                bean.getActorList().add(0, listBean);
+                director.setRoleName("导演");
+                bean.getData().getBasic().getActors().add(0, director);
             }
-            setAdapter(bean.getActorList());
+            setAdapter(bean.getData().getBasic().getActors());
         }
-        if (bean.getImages() != null && bean.getImages().size() > 0) {
-            setImageAdapter(bean.getImages());
-        }
-        if (bean.getVideos() != null && bean.getVideos().size() > 0) {
-            setVideoAdapter(bean.getVideos());
-        }
+
+//        if (bean.getImages() != null && bean.getImages().size() > 0) {
+        setImageAdapter(bean.getData().getBasic().getStageImg().getList());
+//        }
+//        if (bean.getVideos() != null && bean.getVideos().size() > 0) {
+//            setVideoAdapter(bean.getVideos());
+//        }
     }
 
     /**
      * 设置导演&演员adapter
      */
-    private void setAdapter(List<FilmDetailBasicBean.ActorListBean> listBeans) {
+    private void setAdapter(List<FilmDetailBean.ActorsBean> listBeans) {
         bindingContentView.xrvCast.setVisibility(View.VISIBLE);
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(FilmDetailActivity.this);
-        mLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        mLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         bindingContentView.xrvCast.setLayoutManager(mLayoutManager);
         // 需加，不然滑动不流畅
         bindingContentView.xrvCast.setNestedScrollingEnabled(false);
@@ -190,7 +193,7 @@ public class FilmDetailActivity extends BaseHeaderActivity<HeaderFilmDetailBindi
         bindingContentView.xrvVideo.setFocusableInTouchMode(false);
     }
 
-    private void setImageAdapter(List<String> listBeans) {
+    private void setImageAdapter(List<FilmDetailBean.ImageListBean> listBeans) {
         bindingContentView.xrvImages.setVisibility(View.VISIBLE);
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(FilmDetailActivity.this);
         mLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);

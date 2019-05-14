@@ -66,6 +66,10 @@ public interface HttpClient {
         public static HttpClient getMtimeServer() {
             return BuildFactory.getInstance().create(HttpClient.class, HttpUtils.API_MTIME);
         }
+
+        public static HttpClient getMtimeTicketServer() {
+            return BuildFactory.getInstance().create(HttpClient.class, HttpUtils.API_MTIME_TICKET);
+        }
     }
 
     /**
@@ -296,9 +300,9 @@ public interface HttpClient {
 
     /**
      * 获取电影详情
-     *
+     * FilmDetailBasicBean
      * @param movieId 电影bean里的id
      */
     @GET("movie/detail.api?locationId=561")
-    Observable<FilmDetailBasicBean> getFilmDetail(@Query("movieId") int movieId);
+    Observable<FilmDetailBean> getFilmDetail(@Query("movieId") int movieId);
 }
