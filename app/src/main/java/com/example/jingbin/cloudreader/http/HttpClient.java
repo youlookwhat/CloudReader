@@ -3,6 +3,7 @@ package com.example.jingbin.cloudreader.http;
 import com.example.http.HttpUtils;
 import com.example.http.utils.BuildFactory;
 import com.example.jingbin.cloudreader.bean.CollectUrlBean;
+import com.example.jingbin.cloudreader.bean.ComingFilmBean;
 import com.example.jingbin.cloudreader.bean.FilmDetailBasicBean;
 import com.example.jingbin.cloudreader.bean.FilmDetailBean;
 import com.example.jingbin.cloudreader.bean.FrontpageBean;
@@ -293,14 +294,21 @@ public interface HttpClient {
     Flowable<GankIoDataBean> searchGank(@Path("p") int p, @Path("type") String type, @Path("keyWord") String keyWord);
 
     /**
-     * 豆瓣热映电影，每日更新
+     * 时光网热映电影
      */
     @GET("Showtime/LocationMovies.api?locationId=561")
     Observable<MtimeFilmeBean> getHotFilm();
 
     /**
+     * 时光网即将上映电影
+     */
+    @GET("Movie/MovieComingNew.api?locationId=561")
+    Observable<ComingFilmBean> getComingFilm();
+
+    /**
      * 获取电影详情
-     * FilmDetailBasicBean
+     * FilmDetailBasicBean 561为武汉地区
+     *
      * @param movieId 电影bean里的id
      */
     @GET("movie/detail.api?locationId=561")

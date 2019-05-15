@@ -7,6 +7,7 @@ import android.arch.lifecycle.MutableLiveData;
 import android.databinding.ObservableField;
 import android.support.annotation.NonNull;
 
+import com.example.jingbin.cloudreader.bean.ComingFilmBean;
 import com.example.jingbin.cloudreader.bean.MtimeFilmeBean;
 import com.example.jingbin.cloudreader.bean.book.BookBean;
 import com.example.jingbin.cloudreader.http.HttpClient;
@@ -75,6 +76,26 @@ public class FilmViewModel extends AndroidViewModel {
                 .subscribe(new Consumer<MtimeFilmeBean>() {
                     @Override
                     public void accept(MtimeFilmeBean bookBean) throws Exception {
+                        data.setValue(bookBean);
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+                        data.setValue(null);
+                    }
+                });
+        return data;
+    }
+
+    @SuppressLint("CheckResult")
+    public MutableLiveData<ComingFilmBean> getComingFilm() {
+        final MutableLiveData<ComingFilmBean> data = new MutableLiveData<>();
+        HttpClient.Builder.getMtimeServer().getComingFilm()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<ComingFilmBean>() {
+                    @Override
+                    public void accept(ComingFilmBean bookBean) throws Exception {
                         data.setValue(bookBean);
                     }
                 }, new Consumer<Throwable>() {
