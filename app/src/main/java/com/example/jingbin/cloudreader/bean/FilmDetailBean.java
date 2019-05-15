@@ -192,7 +192,11 @@ public class FilmDetailBean {
             }
 
             public String getCommentSpecial() {
-                return commentSpecial;
+                if (!TextUtils.isEmpty(commentSpecial)) {
+                    return "“ " + commentSpecial + " ”";
+                } else {
+                    return "";
+                }
             }
 
             public void setCommentSpecial(String commentSpecial) {
@@ -492,7 +496,6 @@ public class FilmDetailBean {
 
             public static class CommunityBean {
             }
-
 
 
             public static class QuizGameBean {

@@ -11,8 +11,9 @@ import me.drakeet.support.toast.ToastCompat;
 
 /**
  * Created by jingbin on 2016/12/14.
- * 单例Toast
+ * 单例Toast，兼容索尼部分手机不弹提示的问题，和vivo7.1.1部分手机崩溃问题
  * An Android library to hook and fix Toast BadTokenException
+ * https://github.com/PureWriter/ToastCompat
  */
 
 public class ToastUtil {

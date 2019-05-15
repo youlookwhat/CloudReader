@@ -163,7 +163,7 @@ public class GlideUtil {
         Glide.with(imageView.getContext())
                 .load(url)
                 .transition(DrawableTransitionOptions.withCrossFade(500))
-                .error(getDefaultPic(0))
+                .error(getDefaultPic(3))
                 .into(imageView);
     }
 

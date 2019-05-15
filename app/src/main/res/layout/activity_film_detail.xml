@@ -4,7 +4,14 @@
 
     <data>
 
-        <!--引用bean-->
+        <import type="android.text.TextUtils" />
+
+        <import type="android.view.View" />
+
+        <variable
+            name="listener"
+            type="com.example.jingbin.cloudreader.ui.douban.FilmDetailActivity" />
+
         <variable
             name="bean"
             type="com.example.jingbin.cloudreader.bean.FilmDetailBean.FilmDetailDataBean.BasicBean" />
@@ -33,14 +40,15 @@
             <!--又名-->
             <TextView
                 android:id="@+id/tv_one_title"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:background="@color/colorSmallRed"
                 android:padding="5dp"
                 android:text='@{bean.commentSpecial}'
                 android:textColor="@color/colorTitle"
-                tools:text="超级英雄们共谋大计战灭霸" />
+                android:textStyle="bold|italic"
+                android:visibility="@{TextUtils.isEmpty(bean.commentSpecial)?View.GONE:View.VISIBLE}"
+                tools:text="“超级英雄们共谋大计战灭霸”" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -79,7 +87,8 @@
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
                 android:paddingTop="10dp"
-                android:paddingBottom="5dp">
+                android:paddingBottom="5dp"
+                android:visibility="@{listener.isShowActor?View.VISIBLE:View.GONE}">
 
                 <View
                     android:layout_width="2dp"
@@ -102,7 +111,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
-                android:visibility="gone" />
+                android:visibility="@{listener.isShowActor?View.VISIBLE:View.GONE}" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -110,7 +119,8 @@
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
                 android:paddingTop="10dp"
-                android:paddingBottom="5dp">
+                android:paddingBottom="5dp"
+                android:visibility="@{listener.isShowBoxOffice?View.VISIBLE:View.GONE}">
 
                 <View
                     android:layout_width="2dp"
@@ -133,7 +143,8 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:background="@color/colorSmallRed"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:visibility="@{listener.isShowBoxOffice?View.VISIBLE:View.GONE}">
 
                 <LinearLayout
                     android:layout_width="0dp"
@@ -223,7 +234,8 @@
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
                 android:paddingTop="10dp"
-                android:paddingBottom="5dp">
+                android:paddingBottom="5dp"
+                android:visibility="@{listener.isShowVideo?View.VISIBLE:View.GONE}">
 
                 <View
                     android:layout_width="2dp"
@@ -245,19 +257,13 @@
                 android:id="@+id/iv_video"
                 android:layout_width="match_parent"
                 android:layout_height="120dp"
-                android:layout_marginTop="10dp"
                 android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
                 android:layout_marginRight="20dp"
                 android:scaleType="centerCrop"
                 android:showImg='@{video.img}'
+                android:visibility="@{listener.isShowVideo?View.VISIBLE:View.GONE}"
                 tools:background="@color/color_page_bg" />
-
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/xrv_video"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:visibility="gone" />
 
             <LinearLayout
                 android:layout_width="match_parent"
