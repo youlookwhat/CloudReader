@@ -7,6 +7,7 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.text.TextUtils;
 import android.widget.ImageView;
 
 import com.example.jingbin.cloudreader.R;
@@ -21,6 +22,13 @@ import com.example.jingbin.cloudreader.utils.CommonUtils;
 import com.example.jingbin.cloudreader.utils.DebugUtil;
 import com.example.jingbin.cloudreader.viewmodel.movie.FilmViewModel;
 import com.example.xrecyclerview.XRecyclerView;
+
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * @author jingbin
@@ -92,6 +100,13 @@ public class FilmComingFragment extends BaseFragment<FilmViewModel, FragmentWanA
                 filmItemBean.setTEn(bean.getReleaseDate());
                 filmItemBean.setMovieType(bean.getType());
                 filmItemBean.setImg(bean.getImage());
+                filmItemBean.setLocationName(bean.getLocationName());
+                String actor1 = bean.getActor1();
+                String actor2 = bean.getActor2();
+                if (!TextUtils.isEmpty(actor2)) {
+                    actor1 = actor1 + " / " + actor2;
+                }
+                filmItemBean.setActors(actor1);
                 FilmDetailActivity.start(activity, filmItemBean, imageView);
             }
         });
@@ -147,9 +162,17 @@ public class FilmComingFragment extends BaseFragment<FilmViewModel, FragmentWanA
                     }
                     // +1 一个刷新头布局
                     int positionStart = adapter.getItemCount() + 1;
-                    adapter.addAll(bookBean.getAttention());
-                    adapter.addAll(bookBean.getMoviecomings());
-                    adapter.notifyItemRangeInserted(positionStart, bookBean.getMoviecomings().size());
+
+                    ArrayList<ComingFilmBean.MoviecomingsBean> beans = new ArrayList<>();
+                    beans.addAll(bookBean.getAttention());
+                    beans.addAll(bookBean.getMoviecomings());
+                    // 用HashSet 根据id去重 https://www.cnblogs.com/woshimrf/p/java-list-distinct.html
+                    Set<ComingFilmBean.MoviecomingsBean> set = new LinkedHashSet<>(beans);
+                    beans.clear();
+                    beans.addAll(set);
+
+                    adapter.addAll(beans);
+                    adapter.notifyItemRangeInserted(positionStart, beans.size());
                     bindingView.xrvWan.refreshComplete();
                     if (mIsFirst) {
                         mIsFirst = false;

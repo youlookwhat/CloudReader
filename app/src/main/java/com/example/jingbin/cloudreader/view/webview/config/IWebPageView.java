@@ -35,5 +35,8 @@ public interface IWebPageView {
 
     void hindVideoFullView();
 
-
+    /**
+     * 得到网页标题
+     */
+    void setTitle(String title);
 }

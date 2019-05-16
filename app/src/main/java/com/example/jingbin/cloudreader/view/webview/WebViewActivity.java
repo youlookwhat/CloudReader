@@ -74,6 +74,7 @@ public class WebViewActivity extends AppCompatActivity implements IWebPageView {
     private String mUrl;
     // 可滚动的title 使用简单 没有渐变效果，文字两旁有阴影
     private TextView tvGunTitle;
+    private boolean isTitleFix;
     private CollectModel collectModel;
 
     @Override
@@ -91,6 +92,7 @@ public class WebViewActivity extends AppCompatActivity implements IWebPageView {
         if (getIntent() != null) {
             mTitle = getIntent().getStringExtra("mTitle");
             mUrl = getIntent().getStringExtra("mUrl");
+            isTitleFix = getIntent().getBooleanExtra("isTitleFix", false);
         }
     }
 
@@ -114,7 +116,7 @@ public class WebViewActivity extends AppCompatActivity implements IWebPageView {
         }
         mTitleToolBar.setOverflowIcon(ContextCompat.getDrawable(this, R.drawable.actionbar_more));
         tvGunTitle.postDelayed(() -> tvGunTitle.setSelected(true), 1900);
-        setTitle(mTitle);
+        tvGunTitle.setText(mTitle);
     }
 
     @Override
@@ -123,8 +125,12 @@ public class WebViewActivity extends AppCompatActivity implements IWebPageView {
         return true;
     }
 
+    @Override
     public void setTitle(String mTitle) {
-        tvGunTitle.setText(mTitle);
+        if (!isTitleFix) {
+            tvGunTitle.setText(mTitle);
+            this.mTitle = mTitle;
+        }
     }
 
     @Override
@@ -136,7 +142,7 @@ public class WebViewActivity extends AppCompatActivity implements IWebPageView {
                 break;
             case R.id.actionbar_share:
                 // 分享到
-                String shareText = mWebChromeClient.getTitle() + webView.getUrl() + " (分享自云阅)";
+                String shareText = mTitle + webView.getUrl() + " (分享自云阅)";
                 ShareUtils.share(WebViewActivity.this, shareText);
                 break;
             case R.id.actionbar_cope:
@@ -178,7 +184,7 @@ public class WebViewActivity extends AppCompatActivity implements IWebPageView {
         if (collectModel == null) {
             collectModel = new CollectModel();
         }
-        collectModel.collectUrl(webView.getTitle(), webView.getUrl(), new WanNavigator.OnCollectNavigator() {
+        collectModel.collectUrl(mTitle, webView.getUrl(), new WanNavigator.OnCollectNavigator() {
             @Override
             public void onSuccess() {
                 ToastUtil.showToastLong("收藏网址成功");
@@ -520,13 +526,27 @@ public class WebViewActivity extends AppCompatActivity implements IWebPageView {
      * @param mTitle   title
      */
     public static void loadUrl(Context mContext, String mUrl, String mTitle) {
+        loadUrl(mContext, mUrl, mTitle, false);
+    }
+
+    /**
+     * 打开网页:
+     *
+     * @param mContext     上下文
+     * @param mUrl         要加载的网页url
+     * @param mTitle       title
+     * @param isTitleFixed title是否固定
+     */
+    public static void loadUrl(Context mContext, String mUrl, String mTitle, boolean isTitleFixed) {
         if (CheckNetwork.isNetworkConnected(mContext)) {
             Intent intent = new Intent(mContext, WebViewActivity.class);
             intent.putExtra("mUrl", mUrl);
+            intent.putExtra("isTitleFix", isTitleFixed);
             intent.putExtra("mTitle", mTitle == null ? "" : mTitle);
             mContext.startActivity(intent);
         } else {
             ToastUtil.showToastLong("当前网络不可用，请检查你的网络设置");
         }
     }
+
 }

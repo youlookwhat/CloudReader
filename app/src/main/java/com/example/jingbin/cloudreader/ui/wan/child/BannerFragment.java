@@ -38,7 +38,7 @@ import me.jingbin.sbanner.holder.BannerViewHolder;
  * 玩安卓首页
  *
  * @author jingbin
- * Updated on 18/02/07...18/12/22
+ * Updated on 18/02/07...19/05/16
  */
 public class BannerFragment extends BaseFragment<WanAndroidListViewModel, FragmentWanAndroidBinding> {
 
@@ -130,12 +130,12 @@ public class BannerFragment extends BaseFragment<WanAndroidListViewModel, Fragme
     public void showBannerView(List<WanAndroidBannerBean.DataBean> result) {
         androidBinding.rlBanner.setVisibility(View.VISIBLE);
         androidBinding.banner
-                .setAutoPlay(false)
                 .setIndicatorRes(R.drawable.banner_red, R.drawable.banner_grey)
                 .setBannerAnimation(ScaleRightTransformer.class)
                 .setDelayTime(5000)
                 .setPages(result, CustomViewHolder::new)
                 .start();
+        androidBinding.banner.stopAutoPlay();
         isLoadBanner = true;
     }
 
@@ -227,7 +227,7 @@ public class BannerFragment extends BaseFragment<WanAndroidListViewModel, Fragme
 
                     if (mIsFirst && viewModel.getPage() == 0) {
                         if (isLoadBanner) {
-                            androidBinding.banner.setAutoPlay(true).startAutoPlay();
+                            androidBinding.banner.startAutoPlay();
                         }
                         mIsFirst = false;
                     }
@@ -247,5 +247,18 @@ public class BannerFragment extends BaseFragment<WanAndroidListViewModel, Fragme
     protected void onRefresh() {
         bindingView.srlWan.setRefreshing(true);
         getHomeList();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (isLoadBanner) {
+            androidBinding.banner.stopAutoPlay();
+            androidBinding.banner.releaseBanner();
+        }
+        if (mAdapter != null) {
+            mAdapter.clear();
+            mAdapter = null;
+        }
     }
 }

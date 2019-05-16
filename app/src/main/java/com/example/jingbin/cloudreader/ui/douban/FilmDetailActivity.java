@@ -22,6 +22,7 @@ import com.example.jingbin.cloudreader.databinding.HeaderFilmDetailBinding;
 import com.example.jingbin.cloudreader.http.HttpClient;
 import com.example.jingbin.cloudreader.utils.CommonUtils;
 import com.example.jingbin.cloudreader.utils.DensityUtil;
+import com.example.jingbin.cloudreader.utils.ToastUtil;
 import com.example.jingbin.cloudreader.view.webview.WebViewActivity;
 
 import java.util.List;
@@ -41,7 +42,7 @@ public class FilmDetailActivity extends BaseHeaderActivity<HeaderFilmDetailBindi
 
     private FilmItemBean filmItemBean;
     private String mMoreUrl;
-    private String mMovieName;
+    private String mMoreTitle;
     public ObservableField<Boolean> isShowActor = new ObservableField<>();
     public ObservableField<Boolean> isShowBoxOffice = new ObservableField<>();
     public ObservableField<Boolean> isShowVideo = new ObservableField<>();
@@ -67,7 +68,11 @@ public class FilmDetailActivity extends BaseHeaderActivity<HeaderFilmDetailBindi
 
     @Override
     protected void setTitleClickMore() {
-        WebViewActivity.loadUrl(this, mMoreUrl, mMovieName);
+        if (!TextUtils.isEmpty(mMoreUrl)) {
+            WebViewActivity.loadUrl(this, mMoreUrl, mMoreTitle);
+        } else {
+            ToastUtil.showToast("抱歉，暂无更多~");
+        }
     }
 
     @Override
@@ -114,9 +119,10 @@ public class FilmDetailActivity extends BaseHeaderActivity<HeaderFilmDetailBindi
                         if (bean != null && bean.getData() != null) {
                             if (bean.getData().getBasic() != null) {
                                 FilmDetailBean.FilmDetailDataBean.BasicBean basic = bean.getData().getBasic();
+                                bindingHeaderView.tvOneRatingRate.setText(String.format("评分：%s", basic.getOverallRating()));
+                                bindingHeaderView.tvOneRatingNumber.setText(String.format("%s人评分", basic.getPersonCount()));
                                 bindingHeaderView.tvOneDate.setText(String.format("上映日期：%s %s", basic.getReleaseDate(), basic.getReleaseArea()));
                                 bindingHeaderView.tvOneTime.setText(String.format("片长：%s", basic.getMins()));
-                                bindingHeaderView.tvOneRatingNumber.setText(String.format("%s人评分", basic.getPersonCount()));
                                 bindingContentView.setBean(basic);
 
                                 transformData(bean);
@@ -129,6 +135,10 @@ public class FilmDetailActivity extends BaseHeaderActivity<HeaderFilmDetailBindi
                                 bindingContentView.setBoxOffice(bean.getData().getBoxOffice());
                             } else {
                                 isShowBoxOffice.set(false);
+                            }
+                            if (bean.getData().getRelated() != null && !TextUtils.isEmpty(bean.getData().getRelated().getRelatedUrl())) {
+                                mMoreUrl = bean.getData().getRelated().getRelatedUrl();
+                                mMoreTitle = "加载中...";
                             }
                             bindingContentView.executePendingBindings();
                         }
@@ -159,10 +169,7 @@ public class FilmDetailActivity extends BaseHeaderActivity<HeaderFilmDetailBindi
             bindingContentView.setVideo(video);
             DensityUtil.formatHeight(bindingContentView.ivVideo, DensityUtil.getDisplayWidth() - DensityUtil.dip2px(40), (640f / 360), 1);
             DensityUtil.setViewMargin(bindingContentView.ivVideo, true, 20, 20, 10, 10);
-
-            mMoreUrl = video.getUrl();
-            mMovieName = video.getTitle();
-            bindingContentView.ivVideo.setOnClickListener(view -> WebViewActivity.loadUrl(this, mMoreUrl, mMovieName));
+            bindingContentView.ivVideo.setOnClickListener(view -> WebViewActivity.loadUrl(this, video.getHightUrl(), video.getTitle(), true));
         } else {
             isShowVideo.set(false);
         }
@@ -172,10 +179,12 @@ public class FilmDetailActivity extends BaseHeaderActivity<HeaderFilmDetailBindi
                 && bean.getData().getBasic().getStageImg().getList().size() > 0) {
             setImageAdapter(bean.getData().getBasic().getStageImg().getList());
         }
+
+
     }
 
     /**
-     * 设置导演&演员adapter
+     * 演职员
      */
     private void setAdapter(List<FilmDetailBean.ActorsBean> listBeans) {
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(FilmDetailActivity.this);
@@ -192,6 +201,9 @@ public class FilmDetailActivity extends BaseHeaderActivity<HeaderFilmDetailBindi
         bindingContentView.xrvCast.setFocusableInTouchMode(false);
     }
 
+    /**
+     * 剧照
+     */
     private void setImageAdapter(List<FilmDetailBean.ImageListBean> listBeans) {
         bindingContentView.xrvImages.setVisibility(View.VISIBLE);
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(FilmDetailActivity.this);
@@ -213,6 +225,14 @@ public class FilmDetailActivity extends BaseHeaderActivity<HeaderFilmDetailBindi
         loadMovieDetail();
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (filmItemBean != null) {
+            filmItemBean = null;
+        }
+    }
+
     /**
      * @param context      activity
      * @param positionData bean
@@ -222,8 +242,7 @@ public class FilmDetailActivity extends BaseHeaderActivity<HeaderFilmDetailBindi
         Intent intent = new Intent(context, FilmDetailActivity.class);
         intent.putExtra("bean", positionData);
         ActivityOptionsCompat options =
-                ActivityOptionsCompat.makeSceneTransitionAnimation(context,
-                        imageView, CommonUtils.getString(R.string.transition_movie_img));//与xml文件对应
+                ActivityOptionsCompat.makeSceneTransitionAnimation(context, imageView, CommonUtils.getString(R.string.transition_movie_img));//与xml文件对应
         ActivityCompat.startActivity(context, intent, options.toBundle());
     }
 

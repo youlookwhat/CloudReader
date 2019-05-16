@@ -1,6 +1,9 @@
 package com.example.jingbin.cloudreader.bean;
 
+import com.example.jingbin.cloudreader.data.room.User;
+
 import java.util.List;
+import java.util.Objects;
 
 /**
  * @author jingbin
@@ -381,6 +384,22 @@ public class ComingFilmBean {
             this.videos = videos;
         }
 
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) {
+                return true;
+            }
+            if (o == null || getClass() != o.getClass()) {
+                return false;
+            }
+            ComingFilmBean.MoviecomingsBean bean = (ComingFilmBean.MoviecomingsBean) o;
+            return Objects.equals(id, bean.id);
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(id);
+        }
     }
 
     public static class VideosBean {

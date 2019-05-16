@@ -1,12 +1,14 @@
 package com.example.jingbin.cloudreader.bean.moviechild;
 
+import android.text.TextUtils;
+
 import java.io.Serializable;
 import java.util.List;
 
 /**
  * @author jingbin
  */
-public class FilmItemBean  implements Serializable {
+public class FilmItemBean implements Serializable {
 
 
     /**
@@ -67,6 +69,8 @@ public class FilmItemBean  implements Serializable {
     private boolean isNew;
     private int movieId;
     private String movieType;
+    // 制片国家
+    private String locationName;
     private double r;
     private String rd;
     private int sC;
@@ -76,6 +80,18 @@ public class FilmItemBean  implements Serializable {
     private int wantedCount;
     private String year;
     private List<VersionsBean> versions;
+
+    public String getLocationName() {
+        if (!TextUtils.isEmpty(locationName)) {
+            return "制片国家：" + locationName;
+        } else {
+            return "";
+        }
+    }
+
+    public void setLocationName(String locationName) {
+        this.locationName = locationName;
+    }
 
     public String getAN1() {
         return aN1;
@@ -277,7 +293,7 @@ public class FilmItemBean  implements Serializable {
         this.versions = versions;
     }
 
-    public static class VersionsBean implements Serializable{
+    public static class VersionsBean implements Serializable {
         /**
          * enum : 2
          * version : 3D
