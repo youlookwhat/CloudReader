@@ -1,4 +1,4 @@
-package com.example.jingbin.cloudreader.ui.douban;
+package com.example.jingbin.cloudreader.ui.film;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -8,16 +8,18 @@ import android.support.v4.app.Fragment;
 import com.example.jingbin.cloudreader.R;
 import com.example.jingbin.cloudreader.base.BaseFragment;
 import com.example.jingbin.cloudreader.databinding.FragmentGankBinding;
+import com.example.jingbin.cloudreader.ui.film.child.FilmComingFragment;
+import com.example.jingbin.cloudreader.ui.film.child.FilmShowingFragment;
 import com.example.jingbin.cloudreader.view.MyFragmentPagerAdapter;
 import com.example.jingbin.cloudreader.viewmodel.menu.NoViewModel;
 
 import java.util.ArrayList;
 
 /**
- * Created by jingbin on 18/12/27.
- * 展示电影和书籍的页面
+ * Created by jingbin on 19/05/16.
+ * 展示热映榜和即将上映的页面
  */
-public class DoubanFragment extends BaseFragment<NoViewModel, FragmentGankBinding> {
+public class FilmFragment extends BaseFragment<NoViewModel, FragmentGankBinding> {
 
     private ArrayList<String> mTitleList = new ArrayList<>(2);
     private ArrayList<Fragment> mFragments = new ArrayList<>(2);

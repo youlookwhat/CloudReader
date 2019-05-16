@@ -1,6 +1,5 @@
 package com.example.jingbin.cloudreader.adapter;
 
-import android.content.DialogInterface;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -9,12 +8,8 @@ import com.example.jingbin.cloudreader.R;
 import com.example.jingbin.cloudreader.base.baseadapter.BaseRecyclerViewAdapter;
 import com.example.jingbin.cloudreader.base.baseadapter.BaseRecyclerViewHolder;
 import com.example.jingbin.cloudreader.bean.ComingFilmBean;
-import com.example.jingbin.cloudreader.bean.moviechild.SubjectsBean;
-import com.example.jingbin.cloudreader.databinding.ItemDoubanTopBinding;
 import com.example.jingbin.cloudreader.databinding.ItemFilmComingBinding;
-import com.example.jingbin.cloudreader.ui.douban.FilmDetailActivity;
 import com.example.jingbin.cloudreader.utils.DensityUtil;
-import com.example.jingbin.cloudreader.utils.DialogBuild;
 import com.example.jingbin.cloudreader.utils.PerfectClickListener;
 
 /**

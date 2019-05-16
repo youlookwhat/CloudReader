@@ -1,4 +1,4 @@
-package com.example.jingbin.cloudreader.ui.douban;
+package com.example.jingbin.cloudreader.ui.film.child;
 
 import android.app.Activity;
 import android.content.Intent;

@@ -77,7 +77,7 @@
             android:theme="@style/MyScrollPage" />
 
         <activity
-            android:name=".ui.douban.FilmDetailActivity"
+            android:name=".ui.film.child.FilmDetailActivity"
             android:screenOrientation="portrait"
             android:theme="@style/MyScrollPage" />
 

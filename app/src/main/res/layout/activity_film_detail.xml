@@ -10,7 +10,7 @@
 
         <variable
             name="listener"
-            type="com.example.jingbin.cloudreader.ui.douban.FilmDetailActivity" />
+            type="com.example.jingbin.cloudreader.ui.film.child.FilmDetailActivity" />
 
         <variable
             name="bean"
@@ -30,7 +30,7 @@
         android:id="@+id/activity_one_movie_detail"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context="com.example.jingbin.cloudreader.ui.douban.FilmDetailActivity">
+        tools:context="com.example.jingbin.cloudreader.ui.film.child.FilmDetailActivity">
 
         <LinearLayout
             android:layout_width="match_parent"
