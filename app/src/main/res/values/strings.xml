@@ -22,8 +22,8 @@
     <string name="string_empty">""</string>
     <string name="github_issues">您好，很希望得到您的意见，由于没有线上反馈系统，您可以在GitHub的Issues处说明问题原因，也可以通过以下方式联系我，我将根据情况尽量处理哦 ~</string>
     <string name="string_about">由于网易云音乐用了很久，特别喜爱它的界面风格，所以仿写了它的UI。如构成侵权请及时通知我修改或删除。
-        \n\n 大部分数据使用的是鸿洋的玩安卓、代码家的干货集中营和豆瓣APIV2.0，一切数据解释权都归鸿洋、代码家和豆瓣所有。
-        \n\n 干货每日推荐每天12：30更新，如没有内容则取缓存。电影热映榜每日零点更新。
+        \n\n 大部分数据使用的是鸿洋的玩安卓、代码家的干货集中营和时光网，一切数据解释权都归鸿洋、代码家和时光网所有。
+        \n\n 干货每日推荐每天12：30更新，如没有内容则取缓存。应用已使用离线缓存，断网时可得到上一次请求到的数据。
         \n\n 整体采用Retrofit+RxJava+MvvM-DataBinding框架。
         \n\n 我的GitHub：https://github.com/youlookwhat
         \n\n 项目完全开源，如果你觉得不错，请帮忙Star一下吧，或帮忙分享给你的朋友，这是给我们最大的动力与支持，非常感谢！
@@ -35,13 +35,11 @@
     </string>
 
     <string name="string_lib">
-           xrecyclerview
-        \n zoomlibrary
-        \n android.arch.lifecycle:extensions:1.1.1
+           android.arch.lifecycle:extensions:1.1.1
         \n android.arch.lifecycle:reactivestreams:1.1.1
-        \n com.android.support:appcompat-v7:27.1.1
-        \n com.android.support:design:27.1.1
-        \n com.android.support:cardview-v7:27.1.1
+        \n com.android.support:appcompat-v7:28.0.0
+        \n com.android.support:design:28.0.0
+        \n com.android.support:cardview-v7:28.0.0
         \n com.google.code.gson:gson:2.8.5
         \n com.squareup.retrofit2:retrofit:2.4.0
         \n com.squareup.retrofit2:converter-gson:2.3.0
@@ -53,8 +51,10 @@
         \n io.reactivex.rxjava2:rxandroid:2.0.1
         \n com.nineoldandroids:library:2.4.0
         \n jp.wasabeef:glide-transformations:2.0.1
+        \n com.jcodecraeer:xrecyclerview:1.5.9
         \n com.youth.banner:banner:1.4.10
-        \n com.daimajia.slider:library:1.1.5@aar
+        \n com.github.chrisbanes:PhotoView:2.1.4
+        \n com.github.youlookwhat:SBannerView:1.1.1
         \n com.cocosw:bottomsheet:1.3.1@aar
         \n com.google.zxing:core:3.3.0
         \n android.arch.persistence.room:runtime
@@ -87,6 +87,7 @@
     <string name="string_url_jianshu">http://www.jianshu.com/users/e43c6e979831/latest_articles</string>
     <string name="string_url_gankio">http://gank.io/api</string>
     <string name="string_url_douban">https://developers.douban.com/wiki/?title=terms</string>
+    <string name="string_url_mtime">http://www.mtime.com/</string>
     <!--更新日志-->
     <string name="string_url_update_log">http://jingbin.me/2016/12/30/%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97-%E4%BA%91%E9%98%85/</string>
     <!--问题归纳-->

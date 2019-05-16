@@ -94,7 +94,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/iv_image"
             app:layout_constraintTop_toTopOf="@+id/iv_image"
-            tools:text="一款基于网易云音乐UI，使用玩安卓、Gank.Io及豆瓣api开发的符合Google.." />
+            tools:text="一款基于网易云音乐UI，使用玩安卓、Gank.Io及时光网api开发的符合Google.." />
 
 
         <TextView

@@ -63,8 +63,8 @@ public class NavAboutActivity extends BaseActivity<NoViewModel, ActivityNavAbout
                     title = "干货集中营";
                     break;
                 case R.id.tv_douban:
-                    url = CommonUtils.getString(R.string.string_url_douban);
-                    title = "豆瓣开发者服务使用条款";
+                    url = CommonUtils.getString(R.string.string_url_mtime);
+                    title = "时光网";
                     break;
                 case R.id.tv_about_star:
                     url = CommonUtils.getString(R.string.string_url_cloudreader);

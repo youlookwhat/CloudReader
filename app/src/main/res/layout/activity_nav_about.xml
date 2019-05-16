@@ -122,6 +122,35 @@
                     android:textSize="13sp" />
 
                 <TextView
+                    android:id="@+id/tv_douban"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="时光网"
+                    android:textColor="@color/colorContent"
+                    android:textSize="13sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="》"
+                    android:textColor="@color/colorContent"
+                    android:textSize="13sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="《"
+                    android:textColor="@color/colorContent"
+                    android:textSize="13sp" />
+
+                <TextView
                     android:id="@+id/tv_wanandroid"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -155,35 +184,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="代码家 · 干货集中营"
-                    android:textColor="@color/colorContent"
-                    android:textSize="13sp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="》"
-                    android:textColor="@color/colorContent"
-                    android:textSize="13sp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="《"
-                    android:textColor="@color/colorContent"
-                    android:textSize="13sp" />
-
-                <TextView
-                    android:id="@+id/tv_douban"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="豆瓣开发者服务使用条款"
                     android:textColor="@color/colorContent"
                     android:textSize="13sp" />
 

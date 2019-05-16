@@ -45,11 +45,6 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * Created by jingbin on 2017/2/14.
  * updated by jingbin on 2019/2/25.
  * 网络请求工具类
- * 豆瓣api:
- * 问题：API限制为每分钟40次，一不小心就超了，马上KEY就被封,用不带KEY的API，每分钟只有可怜的10次。
- * 返回：code:112（rate_limit_exceeded2 IP 访问速度限制）
- * 解决：1.使用每分钟访问次数限制（客户端）2.更换ip (更换wifi)
- * 豆瓣开发者服务使用条款: https://developers.douban.com/wiki/?title=terms
  * 使用时请在"CloudReaderApplication"下初始化。
  */
 
@@ -59,7 +54,7 @@ public class HttpUtils {
     private Gson gson;
     private Context context;
     private IpmlTokenGetListener listener;
-    // gankio、豆瓣、（轮播图）
+    // wanandroid、gankio、时光网
     public final static String API_GANKIO = "https://gank.io/api/";
     public final static String API_DOUBAN = "Https://api.douban.com/";
     public final static String API_TING = "https://tingapi.ting.baidu.com/v1/restserver/";

@@ -6,13 +6,13 @@
 [![API][3]][4]
 [![PRs Welcome][32]][33]
 
-> Netease cloud music Ui && Retrofit2 + RxJava2 + MVVM-databinding && wanandroid、Gank.Io、Douban Api 
+> Netease cloud music Ui && Retrofit2 + RxJava2 + MVVM-databinding && wanandroid、Gank.Io、mtime Api 
 
 
 ## Introduce
-一款基于网易云音乐UI，使用wanandroid、GankIo及豆瓣api开发的符合Google Material Desgin阅读类的开源项目。项目采取的是Retrofit2 + RxJava2 + MVVM-DataBinding架构开发。
+一款基于网易云音乐UI，使用wanandroid、GankIo及时光网api开发的符合Google Material Desgin阅读类的开源项目。项目采取的是Retrofit2 + RxJava2 + MVVM-DataBinding架构开发。
 
-A netease cloud music based UI, using wanandroid、Gank.Io and douban API development accord with Google Material Desgin reading class open source projects.
+A netease cloud music based UI, using wanandroid、Gank.Io and mtime API development accord with Google Material Desgin reading class open source projects.
 
 ## Screenshots
 
@@ -36,7 +36,7 @@ If you have any questions, please write to [the issue][21] of making you don't u
 
 ## Features 特性
 * 1、基本遵循Google Material Design设计风格。                                    
-* 2、玩安卓、干货集中营与豆瓣电影书籍内容。                                    
+* 2、玩安卓、干货集中营与时光网电影内容。
 * 3、MvvM-DataBinding的项目应用。                                    
 * 4、``NavigationView``搭配``DrawerLayout``的具体使用。                                    
 * 5、透明状态栏使用与版本适配。                                    
@@ -194,13 +194,13 @@ If you have any questions, please write to [the issue][21] of making you don't u
  
  - 图片来源：[iconfont][6]、UI工程师[Sandawang](https://github.com/Sandawang)和网易云音乐App。
 
- - 主要数据来源：[Gank.Io][9]、[豆瓣Api][10]、[wanandroid][27]。
+ - 主要数据来源：[Gank.Io][9]、[时光网][10]、[wanandroid][27]。
 
  - 使用到的开源库：[glide][11]、[bottomsheet][12]、[nineoldandroids][13]、[rxandroid][14]等等。
 
  
 ### Statement
-感谢[网易云音乐App](https://play.google.com/store/apps/details?id=com.netease.cloudmusic)提供参考，附上[《网易云音乐Android 3.0视觉设计规范文档》](http://www.25xt.com/appdesign/12385.html)。本人是网易云音乐的粉丝，使用了其中的部分素材，并非攻击，如构成侵权请及时通知我修改或删除。大部分数据来自于干货集中营和豆瓣APIV2.0，一切数据解释权都归代码家和豆瓣所有。
+感谢[网易云音乐App](https://play.google.com/store/apps/details?id=com.netease.cloudmusic)提供参考，附上[《网易云音乐Android 3.0视觉设计规范文档》](http://www.25xt.com/appdesign/12385.html)。本人是网易云音乐的粉丝，使用了其中的部分素材，并非攻击，如构成侵权请及时通知我修改或删除。大部分数据来自于干货集中营和时光网，一切数据解释权都归代码家和豆瓣所有。
  
 ## End
 > 注意：此开源项目仅做学习交流使用，如用到实际项目还需多考虑其他因素，请多多斟酌。如果你觉得不错，对你有帮助，欢迎点个star，follow，也可以帮忙分享给你更多的朋友，或给点赞赏，这是给我们最大的动力与支持。
@@ -251,7 +251,7 @@ limitations under the License.
 [7]:https://github.com/GiitSmile/ImitateNetEasyCloud
 [8]:https://github.com/forezp/banya
 [9]:https://gank.io/api
-[10]:https://developers.douban.com/wiki/?title=terms
+[10]:http://www.mtime.com
 [11]:https://github.com/bumptech/glide
 [12]:https://github.com/Flipboard/bottomsheet
 [13]:https://github.com/JakeWharton/NineOldAndroids
