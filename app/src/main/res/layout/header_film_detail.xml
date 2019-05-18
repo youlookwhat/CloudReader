@@ -6,6 +6,9 @@
 
     <data>
 
+        <import type="android.text.TextUtils" />
+
+        <import type="android.view.View" />
         <!--调用静态方法-->
         <import type="com.example.jingbin.cloudreader.utils.StringFormatUtil" />
         <!--引用bean-->
@@ -13,10 +16,6 @@
             name="subjectsBean"
             type="com.example.jingbin.cloudreader.bean.moviechild.FilmItemBean" />
 
-        <!--引用bean-->
-        <!--<variable-->
-        <!--name="movieDetailBean"-->
-        <!--type="com.example.jingbin.cloudreader.bean.MovieDetailBean" />-->
     </data>
 
     <RelativeLayout
@@ -41,7 +40,7 @@
             android:orientation="vertical"
             android:paddingLeft="20dp"
             android:paddingTop="95dp"
-            android:paddingBottom="40dp">
+            android:paddingBottom="10dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -194,7 +193,8 @@
                         android:layout_marginBottom="2dp"
                         android:ellipsize="end"
                         android:text='@{subjectsBean.locationName}'
-                        android:textColor="@color/colorWhite" />
+                        android:textColor="@color/colorWhite"
+                        android:visibility="@{TextUtils.isEmpty(subjectsBean.locationName)?View.GONE:View.VISIBLE}" />
                     <!--android:text='@{@string/string_film_date+subjectsBean.rd}'-->
                 </LinearLayout>
 

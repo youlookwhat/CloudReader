@@ -135,12 +135,9 @@ public class FilmDetailBean {
              * video : {"count":51,"hightUrl":"https://vfx.mtime.cn/Video/2019/03/14/mp4/190314223540373995.mp4","img":"http://img5.mtime.cn/mg/2019/03/14/223956.68342218_235X132X4.jpg","title":"复仇者联盟4 剧场版中文预告","url":"https://vfx.mtime.cn/Video/2019/03/14/mp4/190314223540373995_480.mp4","videoId":74055,"videoSourceType":1}
              */
 
-            private AwardBean award;
             private String bigImage;
             private String commentSpecial;
-            private CommunityBean community;
             private ActorsBean director;
-            private int hotRanking;
             private String img;
             private boolean is3D;
             private boolean isDMAX;
@@ -152,17 +149,14 @@ public class FilmDetailBean {
             private String message;
             private String mins;
             private int movieId;
-            private int movieStatus;
             private String name;
             private String nameEn;
             private double overallRating;
             private int personCount;
-            private QuizGameBean quizGame;
             private String releaseArea;
             private String releaseDate;
             private boolean sensitiveStatus;
             private int showCinemaCount;
-            private int showDay;
             private int showtimeCount;
             private StageImgBean stageImg;
             private String story;
@@ -172,16 +166,7 @@ public class FilmDetailBean {
             private String url;
             private VideoBean video;
             private List<ActorsBean> actors;
-            private List<?> festivals;
             private List<String> type;
-
-            public AwardBean getAward() {
-                return award;
-            }
-
-            public void setAward(AwardBean award) {
-                this.award = award;
-            }
 
             public String getBigImage() {
                 return bigImage;
@@ -203,28 +188,12 @@ public class FilmDetailBean {
                 this.commentSpecial = commentSpecial;
             }
 
-            public CommunityBean getCommunity() {
-                return community;
-            }
-
-            public void setCommunity(CommunityBean community) {
-                this.community = community;
-            }
-
             public ActorsBean getDirector() {
                 return director;
             }
 
             public void setDirector(ActorsBean director) {
                 this.director = director;
-            }
-
-            public int getHotRanking() {
-                return hotRanking;
-            }
-
-            public void setHotRanking(int hotRanking) {
-                this.hotRanking = hotRanking;
             }
 
             public String getImg() {
@@ -315,13 +284,6 @@ public class FilmDetailBean {
                 this.movieId = movieId;
             }
 
-            public int getMovieStatus() {
-                return movieStatus;
-            }
-
-            public void setMovieStatus(int movieStatus) {
-                this.movieStatus = movieStatus;
-            }
 
             public String getName() {
                 return name;
@@ -355,14 +317,6 @@ public class FilmDetailBean {
                 this.personCount = personCount;
             }
 
-            public QuizGameBean getQuizGame() {
-                return quizGame;
-            }
-
-            public void setQuizGame(QuizGameBean quizGame) {
-                this.quizGame = quizGame;
-            }
-
             public String getReleaseArea() {
                 return releaseArea;
             }
@@ -393,14 +347,6 @@ public class FilmDetailBean {
 
             public void setShowCinemaCount(int showCinemaCount) {
                 this.showCinemaCount = showCinemaCount;
-            }
-
-            public int getShowDay() {
-                return showDay;
-            }
-
-            public void setShowDay(int showDay) {
-                this.showDay = showDay;
             }
 
             public int getShowtimeCount() {
@@ -475,30 +421,12 @@ public class FilmDetailBean {
                 this.actors = actors;
             }
 
-            public List<?> getFestivals() {
-                return festivals;
-            }
-
-            public void setFestivals(List<?> festivals) {
-                this.festivals = festivals;
-            }
-
             public List<String> getType() {
                 return type;
             }
 
             public void setType(List<String> type) {
                 this.type = type;
-            }
-
-            public static class AwardBean {
-            }
-
-            public static class CommunityBean {
-            }
-
-
-            public static class QuizGameBean {
             }
 
             public static class StageImgBean {
@@ -678,7 +606,7 @@ public class FilmDetailBean {
 
             private int movieId;
             private int ranking;
-            private int todayBox;
+            private long todayBox;
             private String todayBoxDes;
             private String todayBoxDesUnit;
             private long totalBox;
@@ -701,11 +629,11 @@ public class FilmDetailBean {
                 this.ranking = ranking;
             }
 
-            public int getTodayBox() {
+            public long getTodayBox() {
                 return todayBox;
             }
 
-            public void setTodayBox(int todayBox) {
+            public void setTodayBox(long todayBox) {
                 this.todayBox = todayBox;
             }
 
@@ -761,7 +689,6 @@ public class FilmDetailBean {
              */
 
             private int goodsCount;
-            private int relateId;
             private String relatedUrl;
             private int type;
             private List<GoodsListBean> goodsList;
@@ -772,14 +699,6 @@ public class FilmDetailBean {
 
             public void setGoodsCount(int goodsCount) {
                 this.goodsCount = goodsCount;
-            }
-
-            public int getRelateId() {
-                return relateId;
-            }
-
-            public void setRelateId(int relateId) {
-                this.relateId = relateId;
             }
 
             public String getRelatedUrl() {
@@ -829,9 +748,7 @@ public class FilmDetailBean {
                 private String iconText;
                 private String image;
                 private String longName;
-                private int marketPrice;
                 private String marketPriceFormat;
-                private int minSalePrice;
                 private String minSalePriceFormat;
                 private String name;
 
@@ -891,13 +808,6 @@ public class FilmDetailBean {
                     this.longName = longName;
                 }
 
-                public int getMarketPrice() {
-                    return marketPrice;
-                }
-
-                public void setMarketPrice(int marketPrice) {
-                    this.marketPrice = marketPrice;
-                }
 
                 public String getMarketPriceFormat() {
                     return marketPriceFormat;
@@ -905,14 +815,6 @@ public class FilmDetailBean {
 
                 public void setMarketPriceFormat(String marketPriceFormat) {
                     this.marketPriceFormat = marketPriceFormat;
-                }
-
-                public int getMinSalePrice() {
-                    return minSalePrice;
-                }
-
-                public void setMinSalePrice(int minSalePrice) {
-                    this.minSalePrice = minSalePrice;
                 }
 
                 public String getMinSalePriceFormat() {
@@ -944,20 +846,11 @@ public class FilmDetailBean {
          * roleName : 托尼·斯塔克 / 钢铁侠
          */
 
-        private int actorId;
         private String img;
         private String name;
         private String nameEn;
         private String roleImg;
         private String roleName;
-
-        public int getActorId() {
-            return actorId;
-        }
-
-        public void setActorId(int actorId) {
-            this.actorId = actorId;
-        }
 
         public String getImg() {
             return img;
