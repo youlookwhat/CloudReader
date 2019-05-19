@@ -269,6 +269,9 @@ public class FilmDetailBean {
             }
 
             public String getMins() {
+                if (TextUtils.isEmpty(mins)) {
+                    return "未知";
+                }
                 return mins;
             }
 
