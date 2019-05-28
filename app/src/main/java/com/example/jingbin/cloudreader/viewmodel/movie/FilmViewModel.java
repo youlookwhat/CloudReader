@@ -2,17 +2,18 @@ package com.example.jingbin.cloudreader.viewmodel.movie;
 
 import android.annotation.SuppressLint;
 import android.app.Application;
-import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.MutableLiveData;
 import android.databinding.ObservableField;
 import android.support.annotation.NonNull;
 
+import com.example.jingbin.cloudreader.base.BaseViewModel;
 import com.example.jingbin.cloudreader.bean.ComingFilmBean;
 import com.example.jingbin.cloudreader.bean.MtimeFilmeBean;
 import com.example.jingbin.cloudreader.bean.book.BookBean;
 import com.example.jingbin.cloudreader.http.HttpClient;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
@@ -22,7 +23,7 @@ import io.reactivex.schedulers.Schedulers;
  * @data 2019/05/14
  */
 
-public class FilmViewModel extends AndroidViewModel {
+public class FilmViewModel extends BaseViewModel {
 
     // 开始请求的角标
     private int mStart = 0;
@@ -43,10 +44,9 @@ public class FilmViewModel extends AndroidViewModel {
         return mStart;
     }
 
-    @SuppressLint("CheckResult")
     public MutableLiveData<BookBean> getBook() {
         final MutableLiveData<BookBean> data = new MutableLiveData<>();
-        HttpClient.Builder.getDouBanService().getBook(bookType.get(), mStart, mCount)
+        Disposable subscribe = HttpClient.Builder.getDouBanService().getBook(bookType.get(), mStart, mCount)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<BookBean>() {
@@ -60,6 +60,7 @@ public class FilmViewModel extends AndroidViewModel {
                         data.setValue(null);
                     }
                 });
+        addDisposable(subscribe);
         return data;
     }
 
@@ -67,10 +68,9 @@ public class FilmViewModel extends AndroidViewModel {
         mStart += mCount;
     }
 
-    @SuppressLint("CheckResult")
     public MutableLiveData<MtimeFilmeBean> getHotFilm() {
         final MutableLiveData<MtimeFilmeBean> data = new MutableLiveData<>();
-        HttpClient.Builder.getMtimeServer().getHotFilm()
+        Disposable subscribe = HttpClient.Builder.getMtimeServer().getHotFilm()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<MtimeFilmeBean>() {
@@ -84,13 +84,13 @@ public class FilmViewModel extends AndroidViewModel {
                         data.setValue(null);
                     }
                 });
+        addDisposable(subscribe);
         return data;
     }
 
-    @SuppressLint("CheckResult")
     public MutableLiveData<ComingFilmBean> getComingFilm() {
         final MutableLiveData<ComingFilmBean> data = new MutableLiveData<>();
-        HttpClient.Builder.getMtimeServer().getComingFilm()
+        Disposable subscribe = HttpClient.Builder.getMtimeServer().getComingFilm()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<ComingFilmBean>() {
@@ -104,6 +104,7 @@ public class FilmViewModel extends AndroidViewModel {
                         data.setValue(null);
                     }
                 });
+        addDisposable(subscribe);
         return data;
     }
 }

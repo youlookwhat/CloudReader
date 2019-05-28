@@ -1,6 +1,5 @@
 package com.example.jingbin.cloudreader.viewmodel.wan;
 
-import android.annotation.SuppressLint;
 import android.app.Application;
 import android.arch.lifecycle.MutableLiveData;
 import android.databinding.BindingAdapter;
@@ -9,14 +8,11 @@ import android.support.annotation.NonNull;
 import android.support.v7.widget.AppCompatEditText;
 import android.text.TextUtils;
 
-import com.example.http.HttpUtils;
 import com.example.jingbin.cloudreader.base.BaseListViewModel;
 import com.example.jingbin.cloudreader.bean.GankIoDataBean;
-import com.example.jingbin.cloudreader.bean.wanandroid.DuanZiBean;
 import com.example.jingbin.cloudreader.bean.wanandroid.HomeListBean;
 import com.example.jingbin.cloudreader.bean.wanandroid.SearchTagBean;
 import com.example.jingbin.cloudreader.http.HttpClient;
-import com.example.jingbin.cloudreader.http.RequestImpl;
 
 import java.util.List;
 
@@ -49,10 +45,9 @@ public class SearchViewModel extends BaseListViewModel {
     /**
      * 搜索
      */
-    @SuppressLint("CheckResult")
     public MutableLiveData<HomeListBean> searchWan(String keyWord) {
         final MutableLiveData<HomeListBean> data = new MutableLiveData<>();
-        HttpClient.Builder.getWanAndroidServer().searchWan(mPage, keyWord)
+        Disposable subscribe = HttpClient.Builder.getWanAndroidServer().searchWan(mPage, keyWord)
                 .subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<HomeListBean>() {
                     @Override
@@ -75,13 +70,13 @@ public class SearchViewModel extends BaseListViewModel {
                         data.setValue(null);
                     }
                 });
+        addDisposable(subscribe);
         return data;
     }
 
-    @SuppressLint("CheckResult")
     public MutableLiveData<GankIoDataBean> loadGankData(String keyWord) {
         final MutableLiveData<GankIoDataBean> data = new MutableLiveData<>();
-        HttpClient.Builder.getGankIOServer().searchGank(gankPage, mType, keyWord)
+        Disposable subscribe = HttpClient.Builder.getGankIOServer().searchGank(gankPage, mType, keyWord)
                 .subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<GankIoDataBean>() {
                     @Override
@@ -103,6 +98,7 @@ public class SearchViewModel extends BaseListViewModel {
                         data.setValue(null);
                     }
                 });
+        addDisposable(subscribe);
         return data;
     }
 
@@ -119,10 +115,9 @@ public class SearchViewModel extends BaseListViewModel {
     }
 
 
-    @SuppressLint("CheckResult")
     public MutableLiveData<List<SearchTagBean.DataBean>> getHotkey() {
         final MutableLiveData<List<SearchTagBean.DataBean>> data = new MutableLiveData<>();
-        HttpClient.Builder.getWanAndroidServer().getHotkey()
+        Disposable subscribe = HttpClient.Builder.getWanAndroidServer().getHotkey()
                 .subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<SearchTagBean>() {
                     @Override
@@ -144,6 +139,7 @@ public class SearchViewModel extends BaseListViewModel {
                         data.setValue(null);
                     }
                 });
+        addDisposable(subscribe);
         return data;
     }
 

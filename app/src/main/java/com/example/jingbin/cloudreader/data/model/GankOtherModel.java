@@ -53,7 +53,6 @@ public class GankOtherModel {
                     @Override
                     public void onNext(GankIoDataBean gankIoDataBean) {
                         listener.loadSuccess(gankIoDataBean);
-
                     }
                 });
     }

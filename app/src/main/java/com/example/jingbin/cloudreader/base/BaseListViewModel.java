@@ -1,7 +1,6 @@
 package com.example.jingbin.cloudreader.base;
 
 import android.app.Application;
-import android.arch.lifecycle.AndroidViewModel;
 import android.support.annotation.NonNull;
 
 /**
@@ -10,7 +9,7 @@ import android.support.annotation.NonNull;
  * @Description 有列表的页面
  */
 
-public class BaseListViewModel extends AndroidViewModel {
+public class BaseListViewModel extends BaseViewModel {
 
     public int mPage = 0;
 

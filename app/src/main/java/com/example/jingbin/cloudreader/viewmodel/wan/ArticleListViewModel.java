@@ -1,6 +1,5 @@
 package com.example.jingbin.cloudreader.viewmodel.wan;
 
-import android.annotation.SuppressLint;
 import android.app.Application;
 import android.arch.lifecycle.MutableLiveData;
 import android.support.annotation.NonNull;
@@ -30,10 +29,9 @@ public class ArticleListViewModel extends BaseListViewModel {
     /**
      * 我的收藏
      */
-    @SuppressLint("CheckResult")
     public MutableLiveData<HomeListBean> getCollectList() {
         final MutableLiveData<HomeListBean> data = new MutableLiveData<>();
-        HttpClient.Builder.getWanAndroidServer().getCollectList(mPage)
+        Disposable subscribe = HttpClient.Builder.getWanAndroidServer().getCollectList(mPage)
                 .subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<HomeListBean>() {
                     @Override
@@ -56,6 +54,7 @@ public class ArticleListViewModel extends BaseListViewModel {
                         data.setValue(null);
                     }
                 });
+        addDisposable(subscribe);
         return data;
     }
 }

@@ -1,6 +1,5 @@
 package com.example.jingbin.cloudreader.viewmodel.wan;
 
-import android.annotation.SuppressLint;
 import android.app.Application;
 import android.arch.lifecycle.MutableLiveData;
 import android.support.annotation.NonNull;
@@ -13,6 +12,7 @@ import com.example.jingbin.cloudreader.http.HttpClient;
 import java.util.List;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
@@ -28,21 +28,20 @@ public class WanAndroidListViewModel extends BaseListViewModel {
         super(application);
     }
 
-    @SuppressLint("CheckResult")
     public MutableLiveData<WanAndroidBannerBean> getWanAndroidBanner() {
         final MutableLiveData<WanAndroidBannerBean> data = new MutableLiveData<>();
-        HttpClient.Builder.getWanAndroidServer().getWanAndroidBanner()
+        Disposable subscribe = HttpClient.Builder.getWanAndroidServer().getWanAndroidBanner()
                 .subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<WanAndroidBannerBean>() {
 
                     @Override
-                    public void accept(WanAndroidBannerBean wanAndroidBannerBean) throws Exception {
-                        if (wanAndroidBannerBean != null
-                                && wanAndroidBannerBean.getData() != null
-                                && wanAndroidBannerBean.getData().size() > 0) {
-                            List<WanAndroidBannerBean.DataBean> result = wanAndroidBannerBean.getData();
+                    public void accept(WanAndroidBannerBean bannerBean) throws Exception {
+                        if (bannerBean != null
+                                && bannerBean.getData() != null
+                                && bannerBean.getData().size() > 0) {
+                            List<WanAndroidBannerBean.DataBean> result = bannerBean.getData();
                             if (result != null && result.size() > 0) {
-                                data.setValue(wanAndroidBannerBean);
+                                data.setValue(bannerBean);
                             }
                         } else {
                             data.setValue(null);
@@ -54,16 +53,16 @@ public class WanAndroidListViewModel extends BaseListViewModel {
                         data.setValue(null);
                     }
                 });
+        addDisposable(subscribe);
         return data;
     }
 
     /**
      * @param cid 体系id
      */
-    @SuppressLint("CheckResult")
     public MutableLiveData<HomeListBean> getHomeList(Integer cid) {
         final MutableLiveData<HomeListBean> listData = new MutableLiveData<>();
-        HttpClient.Builder.getWanAndroidServer().getHomeList(mPage, cid)
+        Disposable subscribe = HttpClient.Builder.getWanAndroidServer().getHomeList(mPage, cid)
                 .subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<HomeListBean>() {
                     @Override
@@ -86,6 +85,7 @@ public class WanAndroidListViewModel extends BaseListViewModel {
                         listData.setValue(null);
                     }
                 });
+        addDisposable(subscribe);
         return listData;
     }
 

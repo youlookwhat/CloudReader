@@ -2,14 +2,15 @@ package com.example.jingbin.cloudreader.viewmodel.wan;
 
 import android.annotation.SuppressLint;
 import android.app.Application;
-import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.MutableLiveData;
 import android.support.annotation.NonNull;
 
+import com.example.jingbin.cloudreader.base.BaseViewModel;
 import com.example.jingbin.cloudreader.bean.wanandroid.NaviJsonBean;
 import com.example.jingbin.cloudreader.http.HttpClient;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
@@ -19,16 +20,15 @@ import io.reactivex.schedulers.Schedulers;
  * @Description wanandroid导航数据的ViewModel
  */
 
-public class NaviViewModel extends AndroidViewModel {
+public class NaviViewModel extends BaseViewModel {
 
     public NaviViewModel(@NonNull Application application) {
         super(application);
     }
 
-    @SuppressLint("CheckResult")
     public MutableLiveData<NaviJsonBean> getNaviJson() {
         final MutableLiveData<NaviJsonBean> data = new MutableLiveData<>();
-        HttpClient.Builder.getWanAndroidServer().getNaviJson()
+        Disposable subscribe = HttpClient.Builder.getWanAndroidServer().getNaviJson()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<NaviJsonBean>() {
@@ -49,6 +49,7 @@ public class NaviViewModel extends AndroidViewModel {
                         data.setValue(null);
                     }
                 });
+        addDisposable(subscribe);
         return data;
     }
 }

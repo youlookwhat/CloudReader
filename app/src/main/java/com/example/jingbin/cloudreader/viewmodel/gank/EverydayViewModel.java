@@ -7,6 +7,7 @@ import android.support.annotation.NonNull;
 
 import com.example.jingbin.cloudreader.app.CloudReaderApplication;
 import com.example.jingbin.cloudreader.app.Constants;
+import com.example.jingbin.cloudreader.base.BaseViewModel;
 import com.example.jingbin.cloudreader.bean.AndroidBean;
 import com.example.jingbin.cloudreader.bean.BannerItemBean;
 import com.example.jingbin.cloudreader.bean.FrontpageBean;
@@ -25,7 +26,7 @@ import io.reactivex.disposables.Disposable;
  * @author jingbin
  * @data 2017/12/15
  */
-public class EverydayViewModel extends AndroidViewModel {
+public class EverydayViewModel extends BaseViewModel {
 
     private EverydayModel mEverydayModel;
     private ACache maCache;
@@ -150,6 +151,7 @@ public class EverydayViewModel extends AndroidViewModel {
 
             @Override
             public void addSubscription(Disposable subscription) {
+                addDisposable(subscription);
             }
         });
     }
@@ -188,6 +190,7 @@ public class EverydayViewModel extends AndroidViewModel {
 
             @Override
             public void addSubscription(Disposable subscription) {
+                addDisposable(subscription);
             }
         });
     }
@@ -259,7 +262,9 @@ public class EverydayViewModel extends AndroidViewModel {
         return list;
     }
 
-    public void onDestroy() {
+    @Override
+    protected void onCleared() {
+        super.onCleared();
         isHaveData = false;
         mEverydayModel = null;
         if (mLists != null) {

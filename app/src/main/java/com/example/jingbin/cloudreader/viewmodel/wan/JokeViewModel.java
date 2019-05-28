@@ -1,10 +1,10 @@
 package com.example.jingbin.cloudreader.viewmodel.wan;
 
 import android.app.Application;
-import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.MutableLiveData;
 import android.support.annotation.NonNull;
 
+import com.example.jingbin.cloudreader.base.BaseViewModel;
 import com.example.jingbin.cloudreader.bean.wanandroid.DuanZiBean;
 import com.example.jingbin.cloudreader.data.model.JokeModel;
 
@@ -18,7 +18,7 @@ import io.reactivex.disposables.Disposable;
  * @Description 玩安卓ViewModel
  */
 
-public class JokeViewModel extends AndroidViewModel {
+public class JokeViewModel extends BaseViewModel {
 
     private final JokeModel mModel;
     private int mPage = 1;
@@ -52,6 +52,7 @@ public class JokeViewModel extends AndroidViewModel {
 
         @Override
         public void addSubscription(Disposable subscription) {
+            addDisposable(subscription);
         }
     };
 

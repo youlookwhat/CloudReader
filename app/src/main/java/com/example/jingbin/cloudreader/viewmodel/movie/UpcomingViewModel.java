@@ -1,15 +1,15 @@
 package com.example.jingbin.cloudreader.viewmodel.movie;
 
-import android.annotation.SuppressLint;
 import android.app.Application;
-import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.MutableLiveData;
 import android.support.annotation.NonNull;
 
+import com.example.jingbin.cloudreader.base.BaseViewModel;
 import com.example.jingbin.cloudreader.bean.HotMovieBean;
 import com.example.jingbin.cloudreader.http.HttpClient;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
@@ -18,7 +18,7 @@ import io.reactivex.schedulers.Schedulers;
  * @data 2019/01/14
  */
 
-public class UpcomingViewModel extends AndroidViewModel {
+public class UpcomingViewModel extends BaseViewModel {
 
     private int mStart = 0;
     private int mCount = 21;
@@ -27,10 +27,9 @@ public class UpcomingViewModel extends AndroidViewModel {
         super(application);
     }
 
-    @SuppressLint("CheckResult")
     public MutableLiveData<HotMovieBean> getComingSoon() {
         final MutableLiveData<HotMovieBean> data = new MutableLiveData<>();
-        HttpClient.Builder.getDouBanService().getComingSoon(mStart, mCount)
+        Disposable subscribe = HttpClient.Builder.getDouBanService().getComingSoon(mStart, mCount)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<HotMovieBean>() {
@@ -44,6 +43,7 @@ public class UpcomingViewModel extends AndroidViewModel {
                         data.setValue(null);
                     }
                 });
+        addDisposable(subscribe);
         return data;
     }
 

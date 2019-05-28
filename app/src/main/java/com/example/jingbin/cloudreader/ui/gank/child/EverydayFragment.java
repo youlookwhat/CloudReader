@@ -234,10 +234,4 @@ public class EverydayFragment extends BaseFragment<EverydayViewModel, FragmentEv
         viewModel.loadData();
     }
 
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        viewModel.onDestroy();
-    }
-
 }

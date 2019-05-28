@@ -2,20 +2,21 @@ package com.example.jingbin.cloudreader.viewmodel.menu;
 
 import android.annotation.SuppressLint;
 import android.app.Application;
-import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.MutableLiveData;
 import android.databinding.ObservableField;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
 
+import com.example.jingbin.cloudreader.base.BaseViewModel;
 import com.example.jingbin.cloudreader.bean.wanandroid.LoginBean;
 import com.example.jingbin.cloudreader.data.UserUtil;
 import com.example.jingbin.cloudreader.data.room.Injection;
 import com.example.jingbin.cloudreader.http.HttpClient;
 import com.example.jingbin.cloudreader.utils.ToastUtil;
 
+import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.functions.Consumer;
+import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
 
@@ -24,8 +25,7 @@ import io.reactivex.schedulers.Schedulers;
  * @data 2018/5/7
  * @Description wanandroid登录的ViewModel
  */
-@SuppressLint("CheckResult")
-public class LoginViewModel extends AndroidViewModel {
+public class LoginViewModel extends BaseViewModel {
 
     public final ObservableField<String> username = new ObservableField<>();
 
@@ -44,9 +44,14 @@ public class LoginViewModel extends AndroidViewModel {
         HttpClient.Builder.getWanAndroidServer().register(username.get(), password.get(), password.get())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Consumer<LoginBean>() {
+                .subscribe(new Observer<LoginBean>() {
                     @Override
-                    public void accept(LoginBean bean) throws Exception {
+                    public void onSubscribe(Disposable d) {
+                        addDisposable(d);
+                    }
+
+                    @Override
+                    public void onNext(LoginBean bean) {
                         if (bean != null && bean.getData() != null) {
                             // 存入数据库
                             Injection.get().addData(bean.getData());
@@ -58,6 +63,16 @@ public class LoginViewModel extends AndroidViewModel {
                             }
                             data.setValue(false);
                         }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        data.setValue(false);
+                    }
+
+                    @Override
+                    public void onComplete() {
+
                     }
                 });
         return data;
@@ -72,9 +87,14 @@ public class LoginViewModel extends AndroidViewModel {
         HttpClient.Builder.getWanAndroidServer().login(username.get(), password.get())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Consumer<LoginBean>() {
+                .subscribe(new Observer<LoginBean>() {
                     @Override
-                    public void accept(LoginBean bean) throws Exception {
+                    public void onSubscribe(Disposable d) {
+                        addDisposable(d);
+                    }
+
+                    @Override
+                    public void onNext(LoginBean bean) {
                         if (bean != null && bean.getData() != null) {
                             Injection.get().addData(bean.getData());
                             UserUtil.handleLoginSuccess();
@@ -85,6 +105,16 @@ public class LoginViewModel extends AndroidViewModel {
                             }
                             data.setValue(false);
                         }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        data.setValue(false);
+                    }
+
+                    @Override
+                    public void onComplete() {
+
                     }
                 });
         return data;

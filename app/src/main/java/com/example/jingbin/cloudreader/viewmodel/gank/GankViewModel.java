@@ -1,11 +1,11 @@
 package com.example.jingbin.cloudreader.viewmodel.gank;
 
 import android.app.Application;
-import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.MutableLiveData;
 import android.support.annotation.NonNull;
 
 import com.example.http.HttpUtils;
+import com.example.jingbin.cloudreader.base.BaseViewModel;
 import com.example.jingbin.cloudreader.bean.GankIoDataBean;
 import com.example.jingbin.cloudreader.data.model.GankOtherModel;
 import com.example.jingbin.cloudreader.http.RequestImpl;
@@ -19,7 +19,7 @@ import io.reactivex.disposables.Disposable;
  * @data 2019/3/14
  */
 
-public class GankViewModel extends AndroidViewModel {
+public class GankViewModel extends BaseViewModel {
 
     private final GankOtherModel mModel;
     private int mPage = 1;
@@ -48,7 +48,8 @@ public class GankViewModel extends AndroidViewModel {
             }
 
             @Override
-            public void addSubscription(Disposable subscription) {
+            public void addSubscription(Disposable disposable) {
+                addDisposable(disposable);
             }
         });
         return data;

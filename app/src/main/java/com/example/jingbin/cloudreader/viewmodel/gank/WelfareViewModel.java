@@ -1,12 +1,11 @@
 package com.example.jingbin.cloudreader.viewmodel.gank;
 
-import android.annotation.SuppressLint;
 import android.app.Application;
-import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.MutableLiveData;
 import android.support.annotation.NonNull;
 
 import com.example.http.HttpUtils;
+import com.example.jingbin.cloudreader.base.BaseViewModel;
 import com.example.jingbin.cloudreader.bean.GankIoDataBean;
 import com.example.jingbin.cloudreader.data.model.GankOtherModel;
 import com.example.jingbin.cloudreader.http.RequestImpl;
@@ -16,9 +15,9 @@ import java.util.ArrayList;
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
+import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
 
@@ -28,7 +27,7 @@ import io.reactivex.schedulers.Schedulers;
  * @Description 福利页面ViewModel
  */
 
-public class WelfareViewModel extends AndroidViewModel {
+public class WelfareViewModel extends BaseViewModel {
 
     private final GankOtherModel mModel;
     private int mPage = 1;
@@ -76,7 +75,8 @@ public class WelfareViewModel extends AndroidViewModel {
             }
 
             @Override
-            public void addSubscription(Disposable subscription) {
+            public void addSubscription(Disposable disposable) {
+                addDisposable(disposable);
             }
         });
         return data;
@@ -87,7 +87,6 @@ public class WelfareViewModel extends AndroidViewModel {
      *
      * @param gankIoDataBean 原数据
      */
-    @SuppressLint("CheckResult")
     private void handleImageList(GankIoDataBean gankIoDataBean) {
         Observable
                 .create(new ObservableOnSubscribe<ArrayList<ArrayList<String>>>() {
@@ -107,14 +106,27 @@ public class WelfareViewModel extends AndroidViewModel {
                 })
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Consumer<ArrayList<ArrayList<String>>>() {
+                .subscribe(new Observer<ArrayList<ArrayList<String>>>() {
                     @Override
-                    public void accept(ArrayList<ArrayList<String>> arrayLists) throws Exception {
+                    public void onSubscribe(Disposable d) {
+                        addDisposable(d);
+                    }
+
+                    @Override
+                    public void onNext(ArrayList<ArrayList<String>> arrayLists) {
                         allListData.setValue(arrayLists);
                     }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        allListData.setValue(null);
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
                 });
-
-
     }
 
     public int getPage() {

@@ -1,11 +1,10 @@
 package com.example.jingbin.cloudreader.viewmodel.movie;
 
 import android.app.Application;
-import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.MutableLiveData;
-import android.arch.lifecycle.ViewModel;
 import android.support.annotation.NonNull;
 
+import com.example.jingbin.cloudreader.base.BaseViewModel;
 import com.example.jingbin.cloudreader.bean.HotMovieBean;
 import com.example.jingbin.cloudreader.data.model.OneRepository;
 
@@ -16,7 +15,7 @@ import com.example.jingbin.cloudreader.data.model.OneRepository;
  * 我们推荐Google的Dagger 2库在Android应用程序中实现依赖注入。Dagger 2通过遍历依赖关系树来自动构造对象，并为依赖关系提供编译时间保证。
  */
 
-public class DoubanTopViewModel extends AndroidViewModel {
+public class DoubanTopViewModel extends BaseViewModel {
 
     private int mStart = 0;
     private int mCount = 21;

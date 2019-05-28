@@ -1,15 +1,15 @@
 package com.example.jingbin.cloudreader.viewmodel.wan;
 
-import android.annotation.SuppressLint;
 import android.app.Application;
-import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.MutableLiveData;
 import android.support.annotation.NonNull;
 
+import com.example.jingbin.cloudreader.base.BaseViewModel;
 import com.example.jingbin.cloudreader.bean.wanandroid.TreeBean;
 import com.example.jingbin.cloudreader.http.HttpClient;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
@@ -20,17 +20,16 @@ import io.reactivex.schedulers.Schedulers;
  * @Description wanandroid知识体系的ViewModel
  */
 
-public class TreeViewModel extends AndroidViewModel {
+public class TreeViewModel extends BaseViewModel {
 
 
     public TreeViewModel(@NonNull Application application) {
         super(application);
     }
 
-    @SuppressLint("CheckResult")
     public MutableLiveData<TreeBean> getTree() {
         final MutableLiveData<TreeBean> data = new MutableLiveData<>();
-        HttpClient.Builder.getWanAndroidServer().getTree()
+        Disposable subscribe = HttpClient.Builder.getWanAndroidServer().getTree()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<TreeBean>() {
@@ -44,6 +43,7 @@ public class TreeViewModel extends AndroidViewModel {
                         data.setValue(null);
                     }
                 });
+        addDisposable(subscribe);
         return data;
     }
 }

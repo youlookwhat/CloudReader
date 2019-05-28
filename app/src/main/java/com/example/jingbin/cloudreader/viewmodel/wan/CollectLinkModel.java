@@ -1,6 +1,5 @@
 package com.example.jingbin.cloudreader.viewmodel.wan;
 
-import android.annotation.SuppressLint;
 import android.app.Application;
 import android.arch.lifecycle.MutableLiveData;
 import android.support.annotation.NonNull;
@@ -10,6 +9,7 @@ import com.example.jingbin.cloudreader.bean.CollectUrlBean;
 import com.example.jingbin.cloudreader.http.HttpClient;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
 
@@ -25,12 +25,12 @@ public class CollectLinkModel extends BaseListViewModel {
         super(application);
     }
 
-    @SuppressLint("CheckResult")
     public MutableLiveData<CollectUrlBean> getCollectUrlList() {
         final MutableLiveData<CollectUrlBean> data = new MutableLiveData<>();
-        HttpClient.Builder.getWanAndroidServer().getCollectUrlList()
+        Disposable subscribe = HttpClient.Builder.getWanAndroidServer().getCollectUrlList()
                 .subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
                 .subscribe(data::setValue, throwable -> data.setValue(null));
+        addDisposable(subscribe);
         return data;
     }
 }
