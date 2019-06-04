@@ -19,7 +19,9 @@
         android:label="@string/app_name"
         android:largeHeap="true"
         android:theme="@style/AppTheme"
-        tools:replace="android:allowBackup">
+        android:usesCleartextTraffic="true"
+        tools:replace="android:allowBackup"
+        tools:targetApi="m">
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTask"
