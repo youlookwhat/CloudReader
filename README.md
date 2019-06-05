@@ -54,7 +54,7 @@ If you have any questions, please write to [the issue][21] of making you don't u
 
 
 ## See Detail
-> [项目介绍详情](https://github.com/youlookwhat/CloudReader/blob/master/file/Introduction.md) | [细节优化详情](https://github.com/youlookwhat/CloudReader/wiki) | [**版本更新详情(V2.9.0)**](http://jingbin.me/2016/12/30/%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97-%E4%BA%91%E9%98%85/)
+> [项目介绍详情](https://github.com/youlookwhat/CloudReader/blob/master/file/Introduction.md) | [细节优化详情](https://github.com/youlookwhat/CloudReader/wiki) | [**版本更新详情(V2.9.1)**](http://jingbin.me/2016/12/30/%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97-%E4%BA%91%E9%98%85/)
 
 ### Download
 　[火速跳转](https://fir.im/cloudreader)  
@@ -69,6 +69,11 @@ If you have any questions, please write to [the issue][21] of making you don't u
 　
 
 ### Version
+#### V2.9.1（2019-06-05）
+ - 1、[新增] BaseViewModel释放资源
+ - 2、[修复] 适配Android9.0不允许http连接的问题
+ - 3、[优化] 电影详情页等其他页面ui优化
+
 #### V2.9.0（2019-05-16）
  - 1、[新增] 时光网电影模块
  - 2、[修复] 隐藏豆瓣电影页面(api失效)
@@ -244,7 +249,7 @@ limitations under the License.
 [2]:https://www.apache.org/licenses/LICENSE-2.0.html
 [3]:https://img.shields.io/badge/API-19%2B-red.svg?style=flat
 [4]:https://android-arsenal.com/api?level=19
-[30]:https://img.shields.io/badge/release-2.8.5-red.svg
+[30]:https://img.shields.io/badge/release-2.9.1-red.svg
 [31]:https://github.com/youlookwhat/CloudReader/releases
 [32]:https://img.shields.io/badge/PRs-welcome-brightgreen.svg
 [33]:https://github.com/youlookwhat/CloudReader/pulls
