@@ -157,7 +157,7 @@ public abstract class BaseFragment<VM extends AndroidViewModel, SV extends ViewD
             loadingView.setVisibility(View.GONE);
         }
         // 停止动画
-        if (mAnimationDrawable.isRunning()) {
+        if (mAnimationDrawable != null && mAnimationDrawable.isRunning()) {
             mAnimationDrawable.stop();
         }
         if (errorView != null) {
@@ -176,7 +176,7 @@ public abstract class BaseFragment<VM extends AndroidViewModel, SV extends ViewD
             loadingView.setVisibility(View.GONE);
         }
         // 停止动画
-        if (mAnimationDrawable.isRunning()) {
+        if (mAnimationDrawable != null && mAnimationDrawable.isRunning()) {
             mAnimationDrawable.stop();
         }
         if (errorView == null) {

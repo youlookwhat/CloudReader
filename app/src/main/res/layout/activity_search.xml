@@ -10,9 +10,9 @@
             type="com.example.jingbin.cloudreader.viewmodel.wan.SearchViewModel" />
     </data>
 
-    <LinearLayout
+    <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical">
 
         <android.support.v7.widget.Toolbar
@@ -22,6 +22,8 @@
             android:background="@color/colorTheme"
             app:contentInsetStartWithNavigation="0dp"
             app:layout_collapseMode="pin"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             app:navigationIcon="@drawable/icon_back"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
             <!--android:colorControlActivated="@color/colorWhite"-->
@@ -40,10 +42,10 @@
                     android:imeOptions="actionSearch"
                     android:inputType="text"
                     android:paddingEnd="50dp"
+                    android:text='@={viewModel.keyWord}'
                     android:textColor="#bbffffff"
                     android:textColorHint="#77ffffff"
                     android:textCursorDrawable="@drawable/shape_edit_cursor"
-                    android:text='@={viewModel.keyWord}'
                     android:textSelection='@{viewModel.keyWord}'
                     android:textSize="17sp" />
 
@@ -68,6 +70,7 @@
             android:layout_width="match_parent"
             android:layout_height="30dp"
             android:background="@color/colorTheme"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar"
             app:tabGravity="center"
             app:tabIndicatorColor="@color/colorWhite"
             app:tabMode="fixed"
@@ -106,12 +109,14 @@
 
         <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tl_search">
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/recyclerView"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:scrollbarAlwaysDrawVerticalTrack="true"
                 android:scrollbarFadeDuration="1"
                 android:scrollbarSize="4dp"
@@ -144,6 +149,6 @@
             </LinearLayout>
 
         </FrameLayout>
-    </LinearLayout>
+    </android.support.constraint.ConstraintLayout>
 
 </layout>

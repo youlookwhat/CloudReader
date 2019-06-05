@@ -253,17 +253,28 @@
             </LinearLayout>
 
             <!--640*360-->
-            <ImageView
-                android:id="@+id/iv_video"
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="120dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginRight="20dp"
-                android:scaleType="centerCrop"
-                android:showImg='@{video.img}'
-                android:visibility="@{listener.isShowVideo?View.VISIBLE:View.GONE}"
-                tools:background="@color/color_page_bg" />
+                android:layout_height="wrap_content"
+                android:visibility="@{listener.isShowVideo?View.VISIBLE:View.GONE}">
+
+                <ImageView
+                    android:id="@+id/iv_video"
+                    android:layout_width="match_parent"
+                    android:layout_height="120dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="20dp"
+                    android:scaleType="centerCrop"
+                    android:showImg='@{video.img}'
+                    tools:background="@color/color_page_bg" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:src="@drawable/icon_film_play" />
+            </FrameLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"

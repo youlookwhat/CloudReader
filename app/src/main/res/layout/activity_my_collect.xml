@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <LinearLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+    <android.support.constraint.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
@@ -10,6 +10,8 @@
             android:id="@+id/tab_my_collect"
             android:layout_width="wrap_content"
             android:layout_height="38dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             app:tabBackground="?android:attr/selectableItemBackground"
             app:tabIndicatorColor="@color/colorTheme"
             app:tabMode="scrollable"
@@ -17,14 +19,18 @@
             app:tabTextColor="@color/colorTabText" />
 
         <View
+            android:id="@+id/view_line"
             android:layout_width="match_parent"
             android:layout_height="1px"
-            android:background="@color/colorHomeLine" />
+            android:background="@color/colorHomeLine"
+            app:layout_constraintTop_toBottomOf="@+id/tab_my_collect" />
 
         <android.support.v4.view.ViewPager
             android:id="@+id/vp_my_collect"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view_line" />
 
-    </LinearLayout>
+    </android.support.constraint.ConstraintLayout>
 </layout>
