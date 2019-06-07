@@ -99,17 +99,7 @@ public class HomeFragment extends BaseFragment<WanAndroidListViewModel, Fragment
                 }
             }
         });
-        viewModel.getWanAndroidBanner().observe(this, new Observer<WanAndroidBannerBean>() {
-            @Override
-            public void onChanged(@Nullable WanAndroidBannerBean bean) {
-                if (bean != null) {
-                    androidBinding.rlBanner.setVisibility(View.VISIBLE);
-                    showBannerView(bean.getData());
-                } else {
-                    androidBinding.rlBanner.setVisibility(View.GONE);
-                }
-            }
-        });
+        viewModel.getWanAndroidBanner().observe(this, observer);
     }
 
     /**
@@ -122,6 +112,18 @@ public class HomeFragment extends BaseFragment<WanAndroidListViewModel, Fragment
             getHomeList();
         }, 350);
     }
+
+    private Observer<WanAndroidBannerBean> observer = new Observer<WanAndroidBannerBean>() {
+        @Override
+        public void onChanged(@Nullable WanAndroidBannerBean bean) {
+            if (bean != null) {
+                androidBinding.rlBanner.setVisibility(View.VISIBLE);
+                showBannerView(bean.getData());
+            } else {
+                androidBinding.rlBanner.setVisibility(View.GONE);
+            }
+        }
+    };
 
     /**
      * 设置banner图
@@ -244,7 +246,10 @@ public class HomeFragment extends BaseFragment<WanAndroidListViewModel, Fragment
     @Override
     protected void onRefresh() {
         bindingView.srlWan.setRefreshing(true);
-        getHomeList();
+        if (!isLoadBanner) {
+            viewModel.getWanAndroidBanner().observe(this, observer);
+        }
+        bindingView.srlWan.postDelayed(this::getHomeList, 500);
     }
 
     @Override

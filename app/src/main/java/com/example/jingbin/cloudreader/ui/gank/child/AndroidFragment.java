@@ -110,9 +110,7 @@ public class AndroidFragment extends BaseFragment<GankViewModel, FragmentAndroid
                     mIsFirst = false;
                 }
             } else {
-                bindingView.xrvAndroid.refreshComplete();
-                // 注意：这里不能写成 mPage == 1，否则会一直显示错误页面
-                if (adapter.getItemCount() == 0) {
+                if (viewModel.getPage() == 1) {
                     showError();
                 } else {
                     bindingView.xrvAndroid.noMoreLoading();

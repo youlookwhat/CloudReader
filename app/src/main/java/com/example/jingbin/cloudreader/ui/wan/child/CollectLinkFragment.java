@@ -5,6 +5,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
+import android.text.TextUtils;
 
 import com.example.jingbin.cloudreader.R;
 import com.example.jingbin.cloudreader.adapter.CollectUrlAdapter;
@@ -85,17 +86,25 @@ public class CollectLinkFragment extends BaseFragment<CollectLinkModel, Fragment
                 if (bindingView.srlWan.isRefreshing()) {
                     bindingView.srlWan.setRefreshing(false);
                 }
-                if (bean != null && bean.getData() != null && bean.getData().size() > 0) {
-                    mAdapter.clear();
-                    mAdapter.addAll(bean.getData());
-                    mAdapter.notifyDataSetChanged();
-                    bindingView.xrvWan.refreshComplete();
-                    bindingView.xrvWan.noMoreLoading();
+                if (bean != null) {
+                    if (bean.getData() != null && bean.getData().size() > 0) {
+                        mAdapter.clear();
+                        mAdapter.addAll(bean.getData());
+                        mAdapter.notifyDataSetChanged();
+                        bindingView.xrvWan.refreshComplete();
+                        bindingView.xrvWan.noMoreLoading();
 
-                    mIsFirst = false;
+                        mIsFirst = false;
+                    } else {
+                        bindingView.xrvWan.refreshComplete();
+                        if (!TextUtils.isEmpty(bean.getErrorMsg())) {
+                            ToastUtil.showToastLong(bean.getErrorMsg());
+                        } else {
+                            ToastUtil.showToastLong("还没有收藏网址哦~");
+                        }
+                    }
                 } else {
-                    bindingView.xrvWan.refreshComplete();
-                    ToastUtil.showToastLong("还没有收藏网址哦~");
+                    showError();
                 }
             }
         });

@@ -1,6 +1,5 @@
 package com.example.jingbin.cloudreader.viewmodel.movie;
 
-import android.annotation.SuppressLint;
 import android.app.Application;
 import android.arch.lifecycle.MutableLiveData;
 import android.databinding.ObservableField;

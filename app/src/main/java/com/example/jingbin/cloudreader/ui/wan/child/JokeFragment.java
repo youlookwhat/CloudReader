@@ -121,7 +121,7 @@ public class JokeFragment extends BaseFragment<JokeViewModel, FragmentWanAndroid
                     }
 
                 } else {
-                    if (viewModel.isRefreshBK()) {
+                    if (!viewModel.isRefreshBK()) {
                         showError();
                     } else {
                         bindingView.xrvWan.refreshComplete();
