@@ -65,8 +65,8 @@
                     android:id="@+id/toolbar"
                     android:layout_width="match_parent"
                     android:layout_height="?attr/actionBarSize"
-                    android:paddingEnd="?attr/actionBarSize"
                     android:paddingStart="0dp"
+                    android:paddingEnd="?attr/actionBarSize"
                     app:contentInsetEnd="?attr/actionBarSize"
                     app:contentInsetLeft="0dp"
                     app:contentInsetStart="0dp"
@@ -75,6 +75,7 @@
                     app:navigationIcon="@drawable/icon_back"
                     app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
                     app:title="@{treeItemBean.name}"
+                    app:titleMarginStart="0dp"
                     app:titleTextColor="@color/colorTabTextNormal" />
 
 

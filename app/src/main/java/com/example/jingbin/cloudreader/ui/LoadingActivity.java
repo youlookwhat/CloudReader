@@ -13,7 +13,9 @@ import com.example.jingbin.cloudreader.R;
  *
  * @author jingbin
  */
-public class TransitionActivity extends FragmentActivity {
+public class LoadingActivity extends FragmentActivity {
+
+    private Handler handler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,10 +25,11 @@ public class TransitionActivity extends FragmentActivity {
             finish();
             return;
         }
-        new Handler().postDelayed(new Runnable() {
+        handler = new Handler();
+        handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                startActivity(new Intent(TransitionActivity.this, MainActivity.class));
+                startActivity(new Intent(LoadingActivity.this, MainActivity.class));
                 overridePendingTransition(R.anim.screen_zoom_in, R.anim.screen_zoom_out);
                 finish();
             }
@@ -35,6 +38,7 @@ public class TransitionActivity extends FragmentActivity {
 
     @Override
     protected void onDestroy() {
+        handler = null;
         super.onDestroy();
     }
 }

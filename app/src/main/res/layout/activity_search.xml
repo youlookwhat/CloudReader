@@ -25,7 +25,8 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:navigationIcon="@drawable/icon_back"
-            app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+            app:titleMarginStart="0dp">
             <!--android:colorControlActivated="@color/colorWhite"-->
 
             <RelativeLayout

@@ -28,7 +28,7 @@
             android:screenOrientation="portrait"
             android:theme="@style/MyScrollPage" />
         <activity
-            android:name=".ui.TransitionActivity"
+            android:name=".ui.LoadingActivity"
             android:screenOrientation="portrait"
             android:theme="@style/SplashTheme">
             <intent-filter>

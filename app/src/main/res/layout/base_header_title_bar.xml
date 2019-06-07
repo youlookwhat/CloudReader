@@ -24,6 +24,7 @@
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
             app:subtitleTextAppearance="@style/Toolbar.SubTitle"
             app:theme="@style/ToolbarStyle"
+            app:titleMarginStart="0dp"
             app:titleTextAppearance="@style/ToolBar.Title">
 
         </android.support.v7.widget.Toolbar>

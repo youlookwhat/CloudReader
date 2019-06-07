@@ -9,8 +9,6 @@ import com.example.jingbin.cloudreader.bean.wanandroid.HomeListBean;
 import com.example.jingbin.cloudreader.bean.wanandroid.WanAndroidBannerBean;
 import com.example.jingbin.cloudreader.http.HttpClient;
 
-import java.util.List;
-
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
@@ -39,10 +37,7 @@ public class WanAndroidListViewModel extends BaseListViewModel {
                         if (bannerBean != null
                                 && bannerBean.getData() != null
                                 && bannerBean.getData().size() > 0) {
-                            List<WanAndroidBannerBean.DataBean> result = bannerBean.getData();
-                            if (result != null && result.size() > 0) {
-                                data.setValue(bannerBean);
-                            }
+                            data.setValue(bannerBean);
                         } else {
                             data.setValue(null);
                         }

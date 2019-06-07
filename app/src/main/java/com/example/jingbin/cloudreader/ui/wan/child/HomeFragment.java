@@ -19,7 +19,6 @@ import com.example.jingbin.cloudreader.bean.wanandroid.WanAndroidBannerBean;
 import com.example.jingbin.cloudreader.databinding.FragmentWanAndroidBinding;
 import com.example.jingbin.cloudreader.databinding.HeaderWanAndroidBinding;
 import com.example.jingbin.cloudreader.utils.CommonUtils;
-import com.example.jingbin.cloudreader.utils.DebugUtil;
 import com.example.jingbin.cloudreader.utils.DensityUtil;
 import com.example.jingbin.cloudreader.utils.GlideUtil;
 import com.example.jingbin.cloudreader.utils.PerfectClickListener;
@@ -40,7 +39,7 @@ import me.jingbin.sbanner.holder.BannerViewHolder;
  * @author jingbin
  * Updated on 18/02/07...19/05/16
  */
-public class BannerFragment extends BaseFragment<WanAndroidListViewModel, FragmentWanAndroidBinding> {
+public class HomeFragment extends BaseFragment<WanAndroidListViewModel, FragmentWanAndroidBinding> {
 
     private boolean mIsPrepared;
     private boolean mIsFirst = true;
@@ -55,8 +54,8 @@ public class BannerFragment extends BaseFragment<WanAndroidListViewModel, Fragme
         return R.layout.fragment_wan_android;
     }
 
-    public static BannerFragment newInstance() {
-        return new BannerFragment();
+    public static HomeFragment newInstance() {
+        return new HomeFragment();
     }
 
     @Override
@@ -128,7 +127,6 @@ public class BannerFragment extends BaseFragment<WanAndroidListViewModel, Fragme
      * 设置banner图
      */
     public void showBannerView(List<WanAndroidBannerBean.DataBean> result) {
-        androidBinding.rlBanner.setVisibility(View.VISIBLE);
         androidBinding.banner
                 .setIndicatorRes(R.drawable.banner_red, R.drawable.banner_grey)
                 .setBannerAnimation(ScaleRightTransformer.class)
