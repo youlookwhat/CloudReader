@@ -33,7 +33,6 @@ import com.bumptech.glide.request.target.Target;
 import com.example.jingbin.cloudreader.R;
 import com.example.jingbin.cloudreader.databinding.BaseHeaderTitleBarBinding;
 import com.example.jingbin.cloudreader.utils.CommonUtils;
-import com.example.jingbin.cloudreader.utils.PerfectClickListener;
 import com.example.jingbin.cloudreader.view.CustomChangeBounds;
 import com.example.jingbin.cloudreader.view.MyNestedScrollView;
 import com.example.jingbin.cloudreader.view.statusbar.StatusBarUtil;
@@ -61,7 +60,7 @@ public abstract class BaseHeaderActivity<HV extends ViewDataBinding, SV extends 
     // 内容布局view
     protected SV bindingContentView;
     private View loadingView;
-    private View refreshView;
+    private View errorView;
     // 滑动多少距离后标题不透明
     private int slidingDistance;
     // 这个是高斯图背景的高度
@@ -96,14 +95,12 @@ public abstract class BaseHeaderActivity<HV extends ViewDataBinding, SV extends 
         bindingTitleView.getRoot().setLayoutParams(titleParams);
         RelativeLayout mTitleContainer = (RelativeLayout) ll.findViewById(R.id.title_container);
         mTitleContainer.addView(bindingTitleView.getRoot());
-        getWindow().setContentView(ll);
 
         // header
         RelativeLayout.LayoutParams headerParams = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         bindingHeaderView.getRoot().setLayoutParams(headerParams);
         RelativeLayout mHeaderContainer = (RelativeLayout) ll.findViewById(R.id.header_container);
         mHeaderContainer.addView(bindingHeaderView.getRoot());
-        getWindow().setContentView(ll);
 
         // content
         RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
@@ -113,8 +110,6 @@ public abstract class BaseHeaderActivity<HV extends ViewDataBinding, SV extends 
         getWindow().setContentView(ll);
 
         loadingView = ((ViewStub) getView(R.id.vs_loading)).inflate();
-        refreshView = ((ViewStub) getView(R.id.vs_error_refresh)).inflate();
-        refreshView.setVisibility(View.GONE);
 
         // 设置自定义元素共享切换动画
 //        setMotion(setHeaderPicView(), false);
@@ -132,16 +127,7 @@ public abstract class BaseHeaderActivity<HV extends ViewDataBinding, SV extends 
         if (!mAnimationDrawable.isRunning()) {
             mAnimationDrawable.start();
         }
-        // 点击加载失败布局
-        refreshView.setOnClickListener(new PerfectClickListener() {
-            @Override
-            protected void onNoDoubleClick(View v) {
-                showLoading();
-                onRefresh();
-            }
-        });
         bindingContentView.getRoot().setVisibility(View.GONE);
-
     }
 
 
@@ -241,12 +227,9 @@ public abstract class BaseHeaderActivity<HV extends ViewDataBinding, SV extends 
             }
         });
         bindingTitleView.tbBaseTitle.setOnMenuItemClickListener(item -> {
-            switch (item.getItemId()) {
-                case R.id.actionbar_more:// 更多信息
-                    setTitleClickMore();
-                    break;
-                default:
-                    break;
+            if (item.getItemId() == R.id.actionbar_more) {
+                // 更多信息
+                setTitleClickMore();
             }
             return false;
         });
@@ -396,8 +379,8 @@ public abstract class BaseHeaderActivity<HV extends ViewDataBinding, SV extends 
         if (bindingContentView.getRoot().getVisibility() != View.GONE) {
             bindingContentView.getRoot().setVisibility(View.GONE);
         }
-        if (refreshView != null && refreshView.getVisibility() != View.GONE) {
-            refreshView.setVisibility(View.GONE);
+        if (errorView != null && errorView.getVisibility() != View.GONE) {
+            errorView.setVisibility(View.GONE);
         }
     }
 
@@ -409,8 +392,8 @@ public abstract class BaseHeaderActivity<HV extends ViewDataBinding, SV extends 
         if (mAnimationDrawable.isRunning()) {
             mAnimationDrawable.stop();
         }
-        if (refreshView != null && refreshView.getVisibility() != View.GONE) {
-            refreshView.setVisibility(View.GONE);
+        if (errorView != null && errorView.getVisibility() != View.GONE) {
+            errorView.setVisibility(View.GONE);
         }
         if (bindingContentView.getRoot().getVisibility() != View.VISIBLE) {
             bindingContentView.getRoot().setVisibility(View.VISIBLE);
@@ -425,8 +408,19 @@ public abstract class BaseHeaderActivity<HV extends ViewDataBinding, SV extends 
         if (mAnimationDrawable.isRunning()) {
             mAnimationDrawable.stop();
         }
-        if (refreshView != null && refreshView.getVisibility() != View.VISIBLE) {
-            refreshView.setVisibility(View.VISIBLE);
+        if (errorView == null) {
+            ViewStub viewStub = (ViewStub) findViewById(R.id.vs_error_refresh);
+            errorView = viewStub.inflate();
+            // 点击加载失败布局
+            errorView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    showLoading();
+                    onRefresh();
+                }
+            });
+        } else {
+            errorView.setVisibility(View.VISIBLE);
         }
         if (bindingContentView.getRoot().getVisibility() != View.GONE) {
             bindingContentView.getRoot().setVisibility(View.GONE);

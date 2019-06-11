@@ -167,9 +167,9 @@ public abstract class BaseActivity<VM extends AndroidViewModel, SV extends ViewD
             ViewStub viewStub = (ViewStub) findViewById(R.id.vs_error_refresh);
             errorView = viewStub.inflate();
             // 点击加载失败布局
-            errorView.setOnClickListener(new PerfectClickListener() {
+            errorView.setOnClickListener(new View.OnClickListener() {
                 @Override
-                protected void onNoDoubleClick(View v) {
+                public void onClick(View v) {
                     showLoading();
                     onRefresh();
                 }
