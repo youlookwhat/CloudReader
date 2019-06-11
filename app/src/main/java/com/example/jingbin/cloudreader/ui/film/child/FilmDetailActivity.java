@@ -63,7 +63,7 @@ public class FilmDetailActivity extends BaseHeaderActivity<HeaderFilmDetailBindi
         bindingContentView.setListener(this);
         bindingHeaderView.executePendingBindings();
 
-        bindingContentView.tvOneTitle.postDelayed(this::loadMovieDetail, 500);
+        bindingContentView.tvOneTitle.postDelayed(this::loadMovieDetail, 450);
     }
 
     @Override
