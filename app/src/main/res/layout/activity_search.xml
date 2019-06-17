@@ -128,6 +128,7 @@
                 android:id="@+id/cl_search_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
@@ -137,6 +138,7 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:visibility="visible"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
 
@@ -154,11 +156,13 @@
 
                     <com.zhy.view.flowlayout.TagFlowLayout
                         android:id="@+id/tfl_search"
-                        android:layout_width="match_parent"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="17dp"
                         android:layout_marginTop="5dp"
                         android:layout_marginEnd="10dp"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/tv_title1" />
 
                 </android.support.constraint.ConstraintLayout>
@@ -200,6 +204,8 @@
                         android:layout_marginStart="17dp"
                         android:layout_marginTop="5dp"
                         android:layout_marginEnd="10dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/tv_title2" />
 
                 </android.support.constraint.ConstraintLayout>

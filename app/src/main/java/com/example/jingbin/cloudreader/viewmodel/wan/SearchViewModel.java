@@ -164,6 +164,9 @@ public class SearchViewModel extends BaseListViewModel {
                     searchHistory.remove(keyword);
                 }
                 searchHistory.add(0, keyword);
+                if (searchHistory.size() > 12) {
+                    searchHistory.remove(searchHistory.size() - 1);
+                }
             }
             if (gson == null) {
                 gson = new Gson();
