@@ -5,7 +5,7 @@
 
         <variable
             name="listener"
-            type="com.example.jingbin.cloudreader.MainActivity" />
+            type="com.example.jingbin.cloudreader.ui.MainActivity" />
 
         <import type="android.view.View" />
     </data>

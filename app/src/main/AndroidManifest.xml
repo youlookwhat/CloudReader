@@ -23,7 +23,7 @@
         tools:replace="android:allowBackup"
         tools:targetApi="m">
         <activity
-            android:name=".MainActivity"
+            android:name=".ui.MainActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:theme="@style/MyScrollPage" />

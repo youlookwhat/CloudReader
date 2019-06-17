@@ -1,4 +1,4 @@
-package com.example.jingbin.cloudreader;
+package com.example.jingbin.cloudreader.ui;
 
 import android.content.Context;
 import android.content.DialogInterface;
@@ -25,6 +25,7 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 
+import com.example.jingbin.cloudreader.R;
 import com.example.jingbin.cloudreader.app.ConstantsImageUrl;
 import com.example.jingbin.cloudreader.data.UserUtil;
 import com.example.jingbin.cloudreader.databinding.ActivityMainBinding;
