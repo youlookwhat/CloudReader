@@ -13,7 +13,12 @@ import com.example.jingbin.cloudreader.bean.GankIoDataBean;
 import com.example.jingbin.cloudreader.bean.wanandroid.HomeListBean;
 import com.example.jingbin.cloudreader.bean.wanandroid.SearchTagBean;
 import com.example.jingbin.cloudreader.http.HttpClient;
+import com.example.jingbin.cloudreader.http.cache.ACache;
+import com.example.jingbin.cloudreader.utils.SPUtils;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -30,13 +35,16 @@ import io.reactivex.schedulers.Schedulers;
 
 public class SearchViewModel extends BaseListViewModel {
 
+    private final static String SEARCH_HISTORY = "search_history";
     public final ObservableField<String> keyWord = new ObservableField<>();
-
+    public final MutableLiveData<List<String>> history = new MutableLiveData<>();
+    private List<String> searchHistory;
     /**
      * 干货集中营的page 从1开始
      */
     private int gankPage = 1;
     private String mType;
+    private Gson gson;
 
     public SearchViewModel(@NonNull Application application) {
         super(application);
@@ -143,6 +151,64 @@ public class SearchViewModel extends BaseListViewModel {
         return data;
     }
 
+    /**
+     * 保存成历史搜索
+     */
+    public void saveSearch(String keyword) {
+        if (!TextUtils.isEmpty(keyword)) {
+            if (searchHistory == null) {
+                searchHistory = getSearchHistory();
+            }
+            if (searchHistory != null) {
+                if (searchHistory.size() > 0) {
+                    searchHistory.remove(keyword);
+                }
+                searchHistory.add(0, keyword);
+            }
+            if (gson == null) {
+                gson = new Gson();
+            }
+            SPUtils.putString(SEARCH_HISTORY, gson.toJson(searchHistory));
+            history.setValue(searchHistory);
+        }
+    }
+
+    /**
+     * 清空历史记录
+     */
+    public void clearHistory() {
+        SPUtils.putString(SEARCH_HISTORY, "");
+        if (searchHistory != null) {
+            searchHistory.clear();
+        }
+        history.setValue(null);
+    }
+
+    /**
+     * 获得历史记录
+     */
+    public void getHistoryData() {
+        history.setValue(getSearchHistory());
+    }
+
+    private List<String> getSearchHistory() {
+        try {
+            String details = SPUtils.getString(SEARCH_HISTORY, "");
+            if (!TextUtils.isEmpty(details)) {
+                if (gson == null) {
+                    gson = new Gson();
+                }
+                return gson.fromJson(details, new TypeToken<List<String>>() {
+                }.getType());
+            } else {
+                return new ArrayList<String>();
+            }
+        } catch (Exception e) {
+            return new ArrayList<String>();
+        }
+    }
+
+
     @BindingAdapter("android:textSelection")
     public static void textSelection(AppCompatEditText tv, ObservableField<String> value) {
         if (!TextUtils.isEmpty(tv.getText())) {
@@ -151,4 +217,15 @@ public class SearchViewModel extends BaseListViewModel {
             tv.setSelection(tv.getText().length());
         }
     }
+
+    @Override
+    protected void onCleared() {
+        super.onCleared();
+        gson = null;
+        if (searchHistory != null) {
+            searchHistory.clear();
+            searchHistory = null;
+        }
+    }
+
 }

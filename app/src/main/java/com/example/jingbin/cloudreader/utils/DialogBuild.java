@@ -5,6 +5,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.AppCompatEditText;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.jingbin.cloudreader.R;
@@ -27,13 +28,24 @@ public class DialogBuild {
     /**
      * 显示自定义布局
      */
-    public static void showCustom(View v, String content, String buttonText,DialogInterface.OnClickListener clickListener) {
+    public static void showCustom(View v, String content, String buttonText, DialogInterface.OnClickListener clickListener) {
         AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
         View view = View.inflate(v.getContext(), R.layout.title_douban_top, null);
         TextView titleTop = view.findViewById(R.id.title_top);
         titleTop.setText(content);
         builder.setView(view);
         builder.setPositiveButton(buttonText, clickListener);
+        builder.show();
+    }
+
+    public static void showCustom(View v, String content, String positiveText, String negativeText, DialogInterface.OnClickListener clickListener) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
+        View view = View.inflate(v.getContext(), R.layout.title_douban_top, null);
+        TextView titleTop = view.findViewById(R.id.title_top);
+        titleTop.setText(content);
+        builder.setView(view);
+        builder.setPositiveButton(positiveText, clickListener);
+        builder.setNegativeButton(negativeText, null);
         builder.show();
     }
 

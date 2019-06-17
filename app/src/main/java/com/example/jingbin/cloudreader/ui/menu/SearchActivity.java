@@ -3,6 +3,7 @@ package com.example.jingbin.cloudreader.ui.menu;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
@@ -32,8 +33,10 @@ import com.example.jingbin.cloudreader.databinding.ActivitySearchBinding;
 import com.example.jingbin.cloudreader.utils.BaseTools;
 import com.example.jingbin.cloudreader.utils.CommonUtils;
 import com.example.jingbin.cloudreader.utils.DebugUtil;
+import com.example.jingbin.cloudreader.utils.DialogBuild;
 import com.example.jingbin.cloudreader.utils.ToastUtil;
 import com.example.jingbin.cloudreader.view.MyDividerItemDecoration;
+import com.example.jingbin.cloudreader.view.OnDataListener;
 import com.example.jingbin.cloudreader.view.statusbar.StatusBarUtil;
 import com.example.jingbin.cloudreader.view.webview.WebViewActivity;
 import com.example.jingbin.cloudreader.viewmodel.wan.SearchViewModel;
@@ -41,6 +44,7 @@ import com.zhy.view.flowlayout.FlowLayout;
 import com.zhy.view.flowlayout.TagAdapter;
 import com.zhy.view.flowlayout.TagFlowLayout;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
@@ -73,18 +77,31 @@ public class SearchActivity extends AppCompatActivity {
             @Override
             public void onChanged(@Nullable List<SearchTagBean.DataBean> dataBeans) {
                 if (dataBeans != null && dataBeans.size() > 0) {
-                    showHotTagView(true);
+                    binding.clSearchTag.setVisibility(View.VISIBLE);
                     showTagView(binding.tflSearch, dataBeans);
                 } else {
-                    showHotTagView(false);
+                    binding.clSearchTag.setVisibility(View.GONE);
                 }
             }
         });
+        viewModel.history.observe(this, new Observer<List<String>>() {
+            @Override
+            public void onChanged(@Nullable List<String> strings) {
+                if (strings != null && strings.size() > 0) {
+                    binding.clHistoryTag.setVisibility(View.VISIBLE);
+                    showTagView(binding.tflSearchHistory, strings);
+                } else {
+                    binding.clHistoryTag.setVisibility(View.GONE);
+                }
+            }
+        });
+        viewModel.getHistoryData();
     }
 
     protected void initView() {
         setSupportActionBar(binding.toolbar);
         binding.toolbar.setNavigationOnClickListener(v -> finish());
+        binding.ivHistoryDelete.setOnClickListener(v -> DialogBuild.showCustom(v, "确认清空全部历史记录?", "清空", "取消", (dialog, which) -> viewModel.clearHistory()));
         binding.etContent.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -109,29 +126,33 @@ public class SearchActivity extends AppCompatActivity {
             }
         });
         binding.etContent.setOnEditorActionListener((textView, actionId, keyEvent) -> {
-            if (!TextUtils.isEmpty(keyWord) && binding.tlSearch.getSelectedTabPosition() == 3 && actionId == EditorInfo.IME_ACTION_SEARCH) {
-                /**
-                 * www.baidu.com
-                 * http://www.baidu.com
-                 * youtube.com等
-                 */
-                if (Patterns.WEB_URL.matcher(keyWord).matches() || URLUtil.isValidUrl(keyWord)) {
-                    if (!TextUtils.isEmpty(keyWord)) {
-                        if (!keyWord.startsWith("http")) {
-                            if (keyWord.startsWith("www")) {
-                                keyWord = "http://" + keyWord;
-                            } else {
-                                keyWord = "http://www." + keyWord;
+            BaseTools.hideSoftKeyBoard(this);
+            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                if (!TextUtils.isEmpty(keyWord) && binding.tlSearch.getSelectedTabPosition() == 3) {
+                    /**
+                     * www.baidu.com
+                     * http://www.baidu.com
+                     * youtube.com等
+                     */
+                    if (Patterns.WEB_URL.matcher(keyWord).matches() || URLUtil.isValidUrl(keyWord)) {
+                        if (!TextUtils.isEmpty(keyWord)) {
+                            if (!keyWord.startsWith("http")) {
+                                if (keyWord.startsWith("www")) {
+                                    keyWord = "http://" + keyWord;
+                                } else {
+                                    keyWord = "http://www." + keyWord;
+                                }
                             }
+                            BaseTools.hideSoftKeyBoard(this);
+                            WebViewActivity.loadUrl(this, keyWord, "加载中...");
+                            viewModel.saveSearch(keyWord);
                         }
-                        BaseTools.hideSoftKeyBoard(this);
-                        WebViewActivity.loadUrl(this, keyWord, "加载中...");
+                    } else {
+                        ToastUtil.showToast("请输入正确的链接~");
                     }
                 } else {
-                    ToastUtil.showToast("请输入正确的链接~");
+                    viewModel.saveSearch(keyWord);
                 }
-            } else {
-                BaseTools.hideSoftKeyBoard(this);
             }
             return false;
         });
@@ -143,11 +164,10 @@ public class SearchActivity extends AppCompatActivity {
                 binding.etContent.setFocusable(true);
                 binding.etContent.setFocusableInTouchMode(true);
                 binding.etContent.requestFocus();
-                showHotTagView(true);
+                showLayoutView(true);
                 BaseTools.showSoftKeyBoard(SearchActivity.this, binding.etContent);
             }
         });
-
 
         binding.tlSearch.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
@@ -251,7 +271,7 @@ public class SearchActivity extends AppCompatActivity {
                         && homeListBean.getData() != null
                         && homeListBean.getData().getDatas() != null
                         && homeListBean.getData().getDatas().size() > 0) {
-                    showHotTagView(false);
+                    showLayoutView(false);
                     if (viewModel.getPage() == 0) {
                         mAdapter.getData().clear();
                         mAdapter.notifyDataSetChanged();
@@ -275,7 +295,7 @@ public class SearchActivity extends AppCompatActivity {
     private void loadGankData() {
         viewModel.loadGankData(keyWord).observe(this, bean -> {
             if (bean != null && bean.getResults() != null && bean.getResults().size() > 0) {
-                showHotTagView(false);
+                showLayoutView(false);
                 if (viewModel.getGankPage() == 1) {
                     mAdapter.getData().clear();
                     mAdapter.notifyDataSetChanged();
@@ -303,33 +323,49 @@ public class SearchActivity extends AppCompatActivity {
         });
     }
 
-    private void showTagView(TagFlowLayout flowlayoutHot, final List<SearchTagBean.DataBean> beanList) {
-        flowlayoutHot.removeAllViews();
-        flowlayoutHot.setAdapter(new TagAdapter<SearchTagBean.DataBean>(beanList) {
+    /**
+     * 显示热门搜索或历史搜索标签
+     */
+    private <T> void showTagView(TagFlowLayout flowLayout, final List<T> beanList) {
+        flowLayout.removeAllViews();
+        flowLayout.setAdapter(new TagAdapter<T>(beanList) {
             @Override
-            public View getView(FlowLayout parent, int position, SearchTagBean.DataBean bean) {
+            public View getView(FlowLayout parent, int position, T bean) {
                 TextView textView = (TextView) View.inflate(parent.getContext(), R.layout.layout_navi_tag, null);
-                textView.setText(Html.fromHtml(bean.getName()));
+                if (bean instanceof String) {
+                    textView.setText(Html.fromHtml((String) bean));
+                } else if (bean instanceof SearchTagBean.DataBean) {
+                    SearchTagBean.DataBean dataBean = (SearchTagBean.DataBean) bean;
+                    textView.setText(Html.fromHtml(dataBean.getName()));
+                }
                 return textView;
             }
         });
-        flowlayoutHot.setOnTagClickListener(new TagFlowLayout.OnTagClickListener() {
+        flowLayout.setOnTagClickListener(new TagFlowLayout.OnTagClickListener() {
             @Override
             public boolean onTagClick(View view, int position, FlowLayout parent) {
-                viewModel.keyWord.set(beanList.get(position).getName());
+                String name = "";
+                if (beanList.get(position) instanceof String) {
+                    name = (String) beanList.get(position);
+                } else if (beanList.get(position) instanceof SearchTagBean.DataBean) {
+                    SearchTagBean.DataBean dataBean = (SearchTagBean.DataBean) beanList.get(position);
+                    name = dataBean.getName();
+                }
+                viewModel.keyWord.set(name);
+                viewModel.saveSearch(name);
                 BaseTools.hideSoftKeyBoard(SearchActivity.this);
                 return true;
             }
         });
     }
 
-    private void showHotTagView(boolean isShow) {
+    private void showLayoutView(boolean isShow) {
         if (isShow) {
-            binding.llSearchTag.setVisibility(View.VISIBLE);
+            binding.clSearchLayout.setVisibility(View.VISIBLE);
             binding.recyclerView.setVisibility(View.GONE);
         } else {
             binding.recyclerView.setVisibility(View.VISIBLE);
-            binding.llSearchTag.setVisibility(View.GONE);
+            binding.clSearchLayout.setVisibility(View.GONE);
         }
     }
 

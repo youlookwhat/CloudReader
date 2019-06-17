@@ -26,7 +26,7 @@ dependencies {
     testImplementation "junit:junit:$rootProject.ext.junitVersion"
     implementation "com.android.support:appcompat-v7:$rootProject.supportLibraryVersion"
     // 网络请求
-    implementation 'com.google.code.gson:gson:2.8.5'
+    api 'com.google.code.gson:gson:2.8.5'
     implementation 'com.squareup.retrofit2:retrofit:2.4.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
     implementation 'com.squareup.okhttp3:okhttp:3.10.0'
