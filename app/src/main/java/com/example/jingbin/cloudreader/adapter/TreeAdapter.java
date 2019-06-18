@@ -9,9 +9,12 @@ import android.widget.TextView;
 import com.example.jingbin.cloudreader.R;
 import com.example.jingbin.cloudreader.base.baseadapter.BaseRecyclerViewAdapter;
 import com.example.jingbin.cloudreader.base.baseadapter.BaseRecyclerViewHolder;
+import com.example.jingbin.cloudreader.bean.wanandroid.SearchTagBean;
 import com.example.jingbin.cloudreader.bean.wanandroid.TreeItemBean;
 import com.example.jingbin.cloudreader.databinding.ItemTreeBinding;
+import com.example.jingbin.cloudreader.ui.menu.SearchActivity;
 import com.example.jingbin.cloudreader.ui.wan.child.CategoryDetailActivity;
+import com.example.jingbin.cloudreader.utils.BaseTools;
 import com.zhy.view.flowlayout.FlowLayout;
 import com.zhy.view.flowlayout.TagAdapter;
 import com.zhy.view.flowlayout.TagFlowLayout;
@@ -48,7 +51,7 @@ public class TreeAdapter extends BaseRecyclerViewAdapter<TreeItemBean> {
                 binding.setBean(dataBean);
                 List<TreeItemBean.ChildrenBean> children = dataBean.getChildren();
                 if (children != null && children.size() > 0) {
-                    showTreeView(binding.tflTree, children, dataBean);
+                    showTreeView(binding.flTree, children, dataBean);
                 }
             }
         }
@@ -57,19 +60,19 @@ public class TreeAdapter extends BaseRecyclerViewAdapter<TreeItemBean> {
     /**
      * 显示标签
      */
-    private void showTreeView(TagFlowLayout flowlayoutHot, final List<TreeItemBean.ChildrenBean> children, TreeItemBean dataBean) {
-        flowlayoutHot.setAdapter(new TagAdapter<TreeItemBean.ChildrenBean>(children) {
-            @Override
-            public View getView(FlowLayout parent, int position, TreeItemBean.ChildrenBean o) {
-                TextView textView = (TextView) View.inflate(parent.getContext(), R.layout.layout_tree_tag, null);
-                textView.setText(Html.fromHtml(o.getName()));
-                return textView;
-            }
-        });
-        flowlayoutHot.setOnTagClickListener((view, position, parent) -> {
-            TreeItemBean.ChildrenBean childrenBean = children.get(position);
-            CategoryDetailActivity.start(view.getContext(), childrenBean.getId(), dataBean);
-            return true;
-        });
+    private void showTreeView(android.support.design.internal.FlowLayout flowLayout, final List<TreeItemBean.ChildrenBean> children, TreeItemBean dataBean) {
+        flowLayout.removeAllViews();
+        for (int i = 0; i < children.size(); i++) {
+            TreeItemBean.ChildrenBean childrenBean = children.get(i);
+            TextView textView = (TextView) View.inflate(flowLayout.getContext(), R.layout.layout_tree_tag, null);
+            textView.setText(Html.fromHtml(childrenBean.getName()));
+            flowLayout.addView(textView);
+            textView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    CategoryDetailActivity.start(view.getContext(), childrenBean.getId(), dataBean);
+                }
+            });
+        }
     }
 }

@@ -70,17 +70,6 @@ public class SearchActivity extends AppCompatActivity {
     }
 
     private void initData() {
-        viewModel.getHotkey().observe(this, new Observer<List<SearchTagBean.DataBean>>() {
-            @Override
-            public void onChanged(@Nullable List<SearchTagBean.DataBean> dataBeans) {
-                if (dataBeans != null && dataBeans.size() > 0) {
-                    binding.clSearchTag.setVisibility(View.VISIBLE);
-                    showTagView(binding.tflSearch, dataBeans);
-                } else {
-                    binding.clSearchTag.setVisibility(View.GONE);
-                }
-            }
-        });
         viewModel.history.observe(this, new Observer<List<String>>() {
             @Override
             public void onChanged(@Nullable List<String> strings) {
@@ -92,7 +81,18 @@ public class SearchActivity extends AppCompatActivity {
                 }
             }
         });
-        viewModel.getHistoryData();
+        viewModel.getHotkey().observe(this, new Observer<List<SearchTagBean.DataBean>>() {
+            @Override
+            public void onChanged(@Nullable List<SearchTagBean.DataBean> dataBeans) {
+                if (dataBeans != null && dataBeans.size() > 0) {
+                    binding.clSearchTag.setVisibility(View.VISIBLE);
+                    showTagView(binding.tflSearch, dataBeans);
+                } else {
+                    binding.clSearchTag.setVisibility(View.GONE);
+                }
+                viewModel.getHistoryData();
+            }
+        });
     }
 
     protected void initView() {
@@ -187,7 +187,6 @@ public class SearchActivity extends AppCompatActivity {
 
     private void load() {
         int tabPosition = binding.tlSearch.getSelectedTabPosition();
-        DebugUtil.error("tabPosition:" + tabPosition);
         switch (tabPosition) {
             case 0:
                 viewModel.setPage(0);
@@ -323,46 +322,43 @@ public class SearchActivity extends AppCompatActivity {
     /**
      * 显示热门搜索或历史搜索标签
      */
-    private <T> void showTagView(TagFlowLayout flowLayout, final List<T> beanList) {
+    private <T> void showTagView(android.support.design.internal.FlowLayout flowLayout, final List<T> beanList) {
         flowLayout.removeAllViews();
-        flowLayout.setAdapter(new TagAdapter<T>(beanList) {
-            @Override
-            public View getView(FlowLayout parent, int position, T bean) {
-                TextView textView = (TextView) View.inflate(parent.getContext(), R.layout.layout_navi_tag, null);
-                if (bean instanceof String) {
-                    textView.setText(Html.fromHtml((String) bean));
-                } else if (bean instanceof SearchTagBean.DataBean) {
-                    SearchTagBean.DataBean dataBean = (SearchTagBean.DataBean) bean;
-                    textView.setText(Html.fromHtml(dataBean.getName()));
-                }
-                return textView;
+        for (int i = 0; i < beanList.size(); i++) {
+            TextView textView = (TextView) View.inflate(flowLayout.getContext(), R.layout.layout_navi_tag, null);
+            T bean = beanList.get(i);
+            if (bean instanceof String) {
+                textView.setText(Html.fromHtml((String) bean));
+            } else if (bean instanceof SearchTagBean.DataBean) {
+                SearchTagBean.DataBean dataBean = (SearchTagBean.DataBean) bean;
+                textView.setText(Html.fromHtml(dataBean.getName()));
             }
-        });
-        flowLayout.setOnTagClickListener(new TagFlowLayout.OnTagClickListener() {
-            @Override
-            public boolean onTagClick(View view, int position, FlowLayout parent) {
-                String name = "";
-                if (beanList.get(position) instanceof String) {
-                    name = (String) beanList.get(position);
-                } else if (beanList.get(position) instanceof SearchTagBean.DataBean) {
-                    SearchTagBean.DataBean dataBean = (SearchTagBean.DataBean) beanList.get(position);
-                    name = dataBean.getName();
+            flowLayout.addView(textView);
+            textView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    String name = "";
+                    if (bean instanceof String) {
+                        name = (String) bean;
+                    } else if (bean instanceof SearchTagBean.DataBean) {
+                        SearchTagBean.DataBean dataBean = (SearchTagBean.DataBean) bean;
+                        name = dataBean.getName();
+                    }
+                    viewModel.keyWord.set(name);
+                    viewModel.saveSearch(name);
+                    BaseTools.hideSoftKeyBoard(SearchActivity.this);
                 }
-                viewModel.keyWord.set(name);
-                viewModel.saveSearch(name);
-                BaseTools.hideSoftKeyBoard(SearchActivity.this);
-                return true;
-            }
-        });
+            });
+        }
     }
 
     private void showLayoutView(boolean isShow) {
         if (isShow) {
-            binding.clSearchLayout.setVisibility(View.VISIBLE);
+            binding.nsSearchLayout.setVisibility(View.VISIBLE);
             binding.recyclerView.setVisibility(View.GONE);
         } else {
             binding.recyclerView.setVisibility(View.VISIBLE);
-            binding.clSearchLayout.setVisibility(View.GONE);
+            binding.nsSearchLayout.setVisibility(View.GONE);
         }
     }
 
