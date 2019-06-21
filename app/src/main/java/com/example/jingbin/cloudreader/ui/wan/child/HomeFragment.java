@@ -99,7 +99,6 @@ public class HomeFragment extends BaseFragment<WanAndroidListViewModel, Fragment
                 }
             }
         });
-        viewModel.getWanAndroidBanner().observe(this, observer);
     }
 
     /**
@@ -109,36 +108,27 @@ public class HomeFragment extends BaseFragment<WanAndroidListViewModel, Fragment
         bindingView.srlWan.postDelayed(() -> {
             viewModel.setPage(0);
             bindingView.xrvWan.reset();
-            getHomeList();
+            getWanAndroidBanner();
         }, 350);
     }
-
-    private Observer<WanAndroidBannerBean> observer = new Observer<WanAndroidBannerBean>() {
-        @Override
-        public void onChanged(@Nullable WanAndroidBannerBean bean) {
-            if (bean != null) {
-                androidBinding.rlBanner.setVisibility(View.VISIBLE);
-                showBannerView(bean.getData());
-            } else {
-                androidBinding.rlBanner.setVisibility(View.GONE);
-            }
-        }
-    };
 
     /**
      * 设置banner图
      */
     public void showBannerView(List<WanAndroidBannerBean.DataBean> result) {
-        androidBinding.banner
-                .setIndicatorRes(R.drawable.banner_red, R.drawable.banner_grey)
-                .setBannerAnimation(ScaleRightTransformer.class)
-                .setDelayTime(5000)
-                .setPages(result, CustomViewHolder::new)
-                .start();
-        androidBinding.banner.stopAutoPlay();
-        isLoadBanner = true;
+        if (!isLoadBanner) {
+            androidBinding.banner
+                    .setIndicatorRes(R.drawable.banner_red, R.drawable.banner_grey)
+                    .setBannerAnimation(ScaleRightTransformer.class)
+                    .setDelayTime(5000)
+                    .setPages(result, CustomViewHolder::new)
+                    .start();
+            androidBinding.banner.stopAutoPlay();
+            isLoadBanner = true;
+        } else {
+            androidBinding.banner.update(result);
+        }
     }
-
 
     class CustomViewHolder implements BannerViewHolder<WanAndroidBannerBean.DataBean> {
 
@@ -175,7 +165,7 @@ public class HomeFragment extends BaseFragment<WanAndroidListViewModel, Fragment
             return;
         }
         bindingView.srlWan.setRefreshing(true);
-        bindingView.srlWan.postDelayed(this::getHomeList, 500);
+        bindingView.srlWan.postDelayed(this::getWanAndroidBanner, 500);
     }
 
     @Override
@@ -200,6 +190,21 @@ public class HomeFragment extends BaseFragment<WanAndroidListViewModel, Fragment
         if (isLoadBanner) {
             androidBinding.banner.stopAutoPlay();
         }
+    }
+
+    public void getWanAndroidBanner() {
+        viewModel.getWanAndroidBanner().observe(this, new Observer<WanAndroidBannerBean>() {
+            @Override
+            public void onChanged(@Nullable WanAndroidBannerBean bean) {
+                if (bean != null) {
+                    androidBinding.rlBanner.setVisibility(View.VISIBLE);
+                    showBannerView(bean.getData());
+                } else {
+                    androidBinding.rlBanner.setVisibility(View.GONE);
+                }
+                getHomeList();
+            }
+        });
     }
 
     private void getHomeList() {
@@ -247,9 +252,10 @@ public class HomeFragment extends BaseFragment<WanAndroidListViewModel, Fragment
     protected void onRefresh() {
         bindingView.srlWan.setRefreshing(true);
         if (!isLoadBanner) {
-            viewModel.getWanAndroidBanner().observe(this, observer);
+            getWanAndroidBanner();
+        } else {
+            bindingView.srlWan.postDelayed(this::getHomeList, 500);
         }
-        bindingView.srlWan.postDelayed(this::getHomeList, 500);
     }
 
     @Override
@@ -258,6 +264,7 @@ public class HomeFragment extends BaseFragment<WanAndroidListViewModel, Fragment
         if (isLoadBanner) {
             androidBinding.banner.stopAutoPlay();
             androidBinding.banner.releaseBanner();
+            isLoadBanner = false;
         }
         if (mAdapter != null) {
             mAdapter.clear();
