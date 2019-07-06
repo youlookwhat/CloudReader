@@ -16,14 +16,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewStub;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.jingbin.cloudreader.R;
 import com.example.jingbin.cloudreader.utils.ClassUtil;
-import com.example.jingbin.cloudreader.utils.DebugUtil;
-import com.example.jingbin.cloudreader.utils.PerfectClickListener;
 
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
