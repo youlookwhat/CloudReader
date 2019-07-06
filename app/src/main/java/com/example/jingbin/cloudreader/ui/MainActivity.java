@@ -435,6 +435,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             this.mCompositeDisposable.clear();
         }
         isLaunch = false;
+        // 杀死该应用进程 需要权限
+        android.os.Process.killProcess(android.os.Process.myPid());
     }
 
     public static void start(Context context) {

@@ -1,7 +1,9 @@
 package com.example.jingbin.cloudreader.base;
 
+import android.app.Activity;
 import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.databinding.ViewDataBinding;
 import android.graphics.drawable.AnimationDrawable;
@@ -16,9 +18,11 @@ import android.view.ViewStub;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.example.jingbin.cloudreader.R;
 import com.example.jingbin.cloudreader.utils.ClassUtil;
+import com.example.jingbin.cloudreader.utils.DebugUtil;
 import com.example.jingbin.cloudreader.utils.PerfectClickListener;
 
 import io.reactivex.disposables.CompositeDisposable;
@@ -41,15 +45,25 @@ public abstract class BaseFragment<VM extends AndroidViewModel, SV extends ViewD
     private View loadingView;
     // 加载失败
     private View errorView;
+    // 空布局
+    private View emptyView;
     // 动画
     private AnimationDrawable mAnimationDrawable;
     private CompositeDisposable mCompositeDisposable;
+
+    private Activity activity;
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        activity = (Activity) context;
+    }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View ll = inflater.inflate(R.layout.fragment_base, null);
-        bindingView = DataBindingUtil.inflate(getActivity().getLayoutInflater(), setContent(), null, false);
+        bindingView = DataBindingUtil.inflate(activity.getLayoutInflater(), setContent(), null, false);
         RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
         bindingView.getRoot().setLayoutParams(params);
         RelativeLayout mContainer = ll.findViewById(R.id.container);
@@ -91,7 +105,7 @@ public abstract class BaseFragment<VM extends AndroidViewModel, SV extends ViewD
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        loadingView = ((ViewStub) getView(R.id.vs_loading)).inflate();
+        loadingView = ((ViewStub) activity.findViewById(R.id.vs_loading)).inflate();
         ImageView img = loadingView.findViewById(R.id.img_progress);
 
         // 加载动画
@@ -147,12 +161,18 @@ public abstract class BaseFragment<VM extends AndroidViewModel, SV extends ViewD
         if (errorView != null) {
             errorView.setVisibility(View.GONE);
         }
+        if (emptyView != null && emptyView.getVisibility() != View.GONE) {
+            emptyView.setVisibility(View.GONE);
+        }
     }
 
     /**
      * 加载完成的状态
      */
     protected void showContentView() {
+        if (bindingView.getRoot().getVisibility() != View.VISIBLE) {
+            bindingView.getRoot().setVisibility(View.VISIBLE);
+        }
         if (loadingView != null && loadingView.getVisibility() != View.GONE) {
             loadingView.setVisibility(View.GONE);
         }
@@ -163,8 +183,8 @@ public abstract class BaseFragment<VM extends AndroidViewModel, SV extends ViewD
         if (errorView != null) {
             errorView.setVisibility(View.GONE);
         }
-        if (bindingView.getRoot().getVisibility() != View.VISIBLE) {
-            bindingView.getRoot().setVisibility(View.VISIBLE);
+        if (emptyView != null && emptyView.getVisibility() != View.GONE) {
+            emptyView.setVisibility(View.GONE);
         }
     }
 
@@ -172,15 +192,8 @@ public abstract class BaseFragment<VM extends AndroidViewModel, SV extends ViewD
      * 加载失败点击重新加载的状态
      */
     protected void showError() {
-        if (loadingView != null && loadingView.getVisibility() != View.GONE) {
-            loadingView.setVisibility(View.GONE);
-        }
-        // 停止动画
-        if (mAnimationDrawable != null && mAnimationDrawable.isRunning()) {
-            mAnimationDrawable.stop();
-        }
-        if (errorView == null) {
-            ViewStub viewStub = getView(R.id.vs_error_refresh);
+        ViewStub viewStub = getView(R.id.vs_error_refresh);
+        if (viewStub != null) {
             errorView = viewStub.inflate();
             // 点击加载失败布局
             errorView.setOnClickListener(new View.OnClickListener() {
@@ -190,10 +203,47 @@ public abstract class BaseFragment<VM extends AndroidViewModel, SV extends ViewD
                     onRefresh();
                 }
             });
-        } else {
+        }
+        if (errorView != null) {
             errorView.setVisibility(View.VISIBLE);
         }
+        if (loadingView != null && loadingView.getVisibility() != View.GONE) {
+            loadingView.setVisibility(View.GONE);
+        }
+        // 停止动画
+        if (mAnimationDrawable != null && mAnimationDrawable.isRunning()) {
+            mAnimationDrawable.stop();
+        }
         if (bindingView.getRoot().getVisibility() != View.GONE) {
+            bindingView.getRoot().setVisibility(View.GONE);
+        }
+        if (emptyView != null && emptyView.getVisibility() != View.GONE) {
+            emptyView.setVisibility(View.GONE);
+        }
+    }
+
+    protected void showEmptyView(String text) {
+        // 需要这样处理，否则二次显示会失败
+        ViewStub viewStub = getView(R.id.vs_empty);
+        if (viewStub != null) {
+            emptyView = viewStub.inflate();
+            ((TextView) emptyView.findViewById(R.id.tv_tip_empty)).setText(text);
+        }
+        if (emptyView != null) {
+            emptyView.setVisibility(View.VISIBLE);
+        }
+
+        if (loadingView != null && loadingView.getVisibility() != View.GONE) {
+            loadingView.setVisibility(View.GONE);
+        }
+        // 停止动画
+        if (mAnimationDrawable != null && mAnimationDrawable.isRunning()) {
+            mAnimationDrawable.stop();
+        }
+        if (errorView != null) {
+            errorView.setVisibility(View.GONE);
+        }
+        if (bindingView != null && bindingView.getRoot().getVisibility() != View.GONE) {
             bindingView.getRoot().setVisibility(View.GONE);
         }
     }

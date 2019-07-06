@@ -23,5 +23,13 @@
             android:inflatedId="@+id/panel_import"
             android:layout="@layout/layout_loading_view" />
 
+        <!--数据为空-->
+        <ViewStub
+            android:id="@+id/vs_empty"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout="@layout/layout_loading_empty" />
+
     </RelativeLayout>
 </layout>
