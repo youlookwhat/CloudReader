@@ -7,7 +7,7 @@ import android.support.v4.app.Fragment;
 
 import com.example.jingbin.cloudreader.R;
 import com.example.jingbin.cloudreader.base.BaseFragment;
-import com.example.jingbin.cloudreader.databinding.FragmentGankBinding;
+import com.example.jingbin.cloudreader.databinding.FragmentContentBinding;
 import com.example.jingbin.cloudreader.ui.film.child.FilmComingFragment;
 import com.example.jingbin.cloudreader.ui.film.child.FilmShowingFragment;
 import com.example.jingbin.cloudreader.view.MyFragmentPagerAdapter;
@@ -19,7 +19,7 @@ import java.util.ArrayList;
  * Created by jingbin on 19/05/16.
  * 展示热映榜和即将上映的页面
  */
-public class FilmFragment extends BaseFragment<NoViewModel, FragmentGankBinding> {
+public class FilmFragment extends BaseFragment<NoViewModel, FragmentContentBinding> {
 
     private ArrayList<String> mTitleList = new ArrayList<>(2);
     private ArrayList<Fragment> mFragments = new ArrayList<>(2);
@@ -30,7 +30,6 @@ public class FilmFragment extends BaseFragment<NoViewModel, FragmentGankBinding>
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        showContentView();
         mIsPrepared = true;
     }
 
@@ -40,6 +39,7 @@ public class FilmFragment extends BaseFragment<NoViewModel, FragmentGankBinding>
             return;
         }
         bindingView.vpGank.postDelayed(() -> {
+            showContentView();
             initFragmentList();
             MyFragmentPagerAdapter myAdapter = new MyFragmentPagerAdapter(getChildFragmentManager(), mFragments, mTitleList);
             bindingView.vpGank.setAdapter(myAdapter);
@@ -52,7 +52,7 @@ public class FilmFragment extends BaseFragment<NoViewModel, FragmentGankBinding>
 
     @Override
     public int setContent() {
-        return R.layout.fragment_gank;
+        return R.layout.fragment_content;
     }
 
     private void initFragmentList() {

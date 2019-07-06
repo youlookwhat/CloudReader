@@ -185,4 +185,18 @@
     <style name="MyTabLayoutTextAppearance" parent="TextAppearance.AppCompat.Widget.ActionBar.Title.Inverse">
         <item name="android:textSize">16sp</item>
     </style>
+
+    <!--TabLayout 格式   app:tabGravity -->
+    <style name="tabLayoutStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">38dp</item>
+        <item name="android:background">@color/colorWhite</item>
+        <item name="android:textSize">12sp</item>
+        <item name="tabIndicator">@drawable/shape_tab_indicator</item>
+        <item name="tabMode">fixed</item>
+        <item name="tabSelectedTextColor">@color/colorTabTextCheck</item>
+        <item name="tabTextColor">@color/colorTabTextNormal</item>
+        <item name="tabBackground">@drawable/ripple_tab_bg</item>
+    </style>
+
 </resources>

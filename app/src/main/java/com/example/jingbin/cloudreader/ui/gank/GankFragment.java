@@ -2,12 +2,11 @@ package com.example.jingbin.cloudreader.ui.gank;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 
 import com.example.jingbin.cloudreader.R;
 import com.example.jingbin.cloudreader.base.BaseFragment;
-import com.example.jingbin.cloudreader.databinding.FragmentGankBinding;
+import com.example.jingbin.cloudreader.databinding.FragmentContentBinding;
 import com.example.jingbin.cloudreader.http.rx.RxBus;
 import com.example.jingbin.cloudreader.http.rx.RxCodeConstants;
 import com.example.jingbin.cloudreader.ui.gank.child.AndroidFragment;
@@ -26,7 +25,7 @@ import io.reactivex.functions.Consumer;
  * Created by jingbin on 16/11/21.
  * 展示干货的页面
  */
-public class GankFragment extends BaseFragment<NoViewModel, FragmentGankBinding> {
+public class GankFragment extends BaseFragment<NoViewModel, FragmentContentBinding> {
 
     private ArrayList<String> mTitleList = new ArrayList<>(4);
     private ArrayList<Fragment> mFragments = new ArrayList<>(4);
@@ -37,7 +36,6 @@ public class GankFragment extends BaseFragment<NoViewModel, FragmentGankBinding>
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        showContentView();
         mIsPrepared = true;
     }
 
@@ -47,13 +45,13 @@ public class GankFragment extends BaseFragment<NoViewModel, FragmentGankBinding>
             return;
         }
         bindingView.vpGank.postDelayed(() -> {
+            showContentView();
             initFragmentList();
             MyFragmentPagerAdapter myAdapter = new MyFragmentPagerAdapter(getChildFragmentManager(), mFragments, mTitleList);
             bindingView.vpGank.setAdapter(myAdapter);
             myAdapter.notifyDataSetChanged();
             // 左右预加载页面的个数
             bindingView.vpGank.setOffscreenPageLimit(3);
-            bindingView.tabGank.setTabMode(TabLayout.MODE_FIXED);
             bindingView.tabGank.setupWithViewPager(bindingView.vpGank);
             // item点击跳转
             initRxBus();
@@ -63,7 +61,7 @@ public class GankFragment extends BaseFragment<NoViewModel, FragmentGankBinding>
 
     @Override
     public int setContent() {
-        return R.layout.fragment_gank;
+        return R.layout.fragment_content;
     }
 
     private void initFragmentList() {
