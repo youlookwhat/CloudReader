@@ -9,6 +9,7 @@ import com.example.jingbin.cloudreader.bean.wanandroid.HomeListBean;
 import com.example.jingbin.cloudreader.bean.wanandroid.WanAndroidBannerBean;
 import com.example.jingbin.cloudreader.http.HttpClient;
 
+import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
@@ -57,30 +58,29 @@ public class WanAndroidListViewModel extends BaseListViewModel {
      */
     public MutableLiveData<HomeListBean> getHomeList(Integer cid) {
         final MutableLiveData<HomeListBean> listData = new MutableLiveData<>();
-        Disposable subscribe = HttpClient.Builder.getWanAndroidServer().getHomeList(mPage, cid)
+        HttpClient.Builder.getWanAndroidServer().getHomeList(mPage, cid)
                 .subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Consumer<HomeListBean>() {
+                .subscribe(new Observer<HomeListBean>() {
                     @Override
-                    public void accept(HomeListBean bean) throws Exception {
-                        if (bean == null
-                                || bean.getData() == null
-                                || bean.getData().getDatas() == null
-                                || bean.getData().getDatas().size() <= 0) {
-                            listData.setValue(null);
-                        } else {
-                            listData.setValue(bean);
-                        }
+                    public void onSubscribe(Disposable d) {
+                        addDisposable(d);
                     }
-                }, new Consumer<Throwable>() {
+
                     @Override
-                    public void accept(Throwable throwable) throws Exception {
-                        if (mPage > 0) {
-                            mPage--;
-                        }
+                    public void onNext(HomeListBean homeListBean) {
+                        listData.setValue(homeListBean);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
                         listData.setValue(null);
                     }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
                 });
-        addDisposable(subscribe);
         return listData;
     }
 

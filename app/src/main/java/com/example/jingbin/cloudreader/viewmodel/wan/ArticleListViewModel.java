@@ -36,14 +36,7 @@ public class ArticleListViewModel extends BaseListViewModel {
                 .subscribe(new Consumer<HomeListBean>() {
                     @Override
                     public void accept(HomeListBean bean) throws Exception {
-                        if (bean == null
-                                || bean.getData() == null
-                                || bean.getData().getDatas() == null
-                                || bean.getData().getDatas().size() <= 0) {
-                            data.setValue(null);
-                        } else {
-                            data.setValue(bean);
-                        }
+                        data.setValue(bean);
                     }
                 }, new Consumer<Throwable>() {
                     @Override

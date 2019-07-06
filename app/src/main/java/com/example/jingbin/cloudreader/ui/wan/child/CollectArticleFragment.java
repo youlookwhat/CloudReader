@@ -118,27 +118,29 @@ public class CollectArticleFragment extends BaseFragment<ArticleListViewModel, F
                 if (bindingView.srlWan.isRefreshing()) {
                     bindingView.srlWan.setRefreshing(false);
                 }
-
                 if (homeListBean != null) {
-                    if (viewModel.getPage() == 0) {
-                        showContentView();
-                        mAdapter.clear();
-                        mAdapter.notifyDataSetChanged();
+                    if (homeListBean.getData() != null && homeListBean.getData().getDatas() != null && homeListBean.getData().getDatas().size() > 0) {
+                        if (viewModel.getPage() == 0) {
+                            showContentView();
+                            mAdapter.clear();
+                            mAdapter.notifyDataSetChanged();
+                        }
+                        int positionStart = mAdapter.getItemCount() + 1;
+                        mAdapter.addAll(homeListBean.getData().getDatas());
+                        mAdapter.notifyItemRangeInserted(positionStart, homeListBean.getData().getDatas().size());
+                        bindingView.xrvWan.refreshComplete();
+                    } else {
+                        if (viewModel.getPage() == 0) {
+                            showEmptyView("你还没有收藏文章哦~");
+                        } else {
+                            bindingView.xrvWan.noMoreLoading();
+                        }
                     }
-                    int positionStart = mAdapter.getItemCount() + 1;
-                    mAdapter.addAll(homeListBean.getData().getDatas());
-                    mAdapter.notifyItemRangeInserted(positionStart, homeListBean.getData().getDatas().size());
-                    bindingView.xrvWan.refreshComplete();
-
                     if (mIsFirst) {
                         mIsFirst = false;
                     }
                 } else {
-                    if (viewModel.getPage() == 0) {
-                        showError();
-                    } else {
-                        bindingView.xrvWan.noMoreLoading();
-                    }
+                    showError();
                 }
             }
         });
