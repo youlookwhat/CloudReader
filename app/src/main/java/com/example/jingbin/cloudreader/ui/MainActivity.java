@@ -64,8 +64,10 @@ import io.reactivex.functions.Consumer;
 
 /**
  * Created by jingbin on 16/11/21.
- * Link to:https://github.com/youlookwhat/CloudReader
- * Contact me:http://www.jianshu.com/u/e43c6e979831
+ *
+ * <a href="https://github.com/youlookwhat">Follow me</a>
+ * <a href="https://github.com/youlookwhat/CloudReader">source code</a>
+ * <a href="http://www.jianshu.com/u/e43c6e979831">Contact me</a>
  */
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, ViewPager.OnPageChangeListener {
 
@@ -309,14 +311,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.action_search:
-//                Toast.makeText(this, "搜索", Toast.LENGTH_SHORT).show();
-                SearchActivity.start(this);
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
+        if (item.getItemId() == R.id.action_search) {
+            SearchActivity.start(this);
+            return true;
         }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override

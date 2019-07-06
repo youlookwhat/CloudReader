@@ -66,7 +66,6 @@ public class HttpUtils {
     /**
      * 分页数据，每页的数量
      */
-    public static int per_page = 10;
     public static int per_page_more = 20;
 
     public static HttpUtils getInstance() {

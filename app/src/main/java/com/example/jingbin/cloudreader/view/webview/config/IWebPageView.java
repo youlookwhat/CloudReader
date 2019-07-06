@@ -7,13 +7,19 @@ import android.view.View;
  */
 public interface IWebPageView {
 
-    // 隐藏进度条
+    /**
+     * 隐藏进度条
+     */
     void hindProgressBar();
 
-    // 显示webview
+    /**
+     * 显示webview
+     */
     void showWebView();
 
-    // 隐藏webview
+    /**
+     * 隐藏webview
+     */
     void hindWebView();
 
     /**
@@ -31,8 +37,14 @@ public interface IWebPageView {
      */
     void fullViewAddView(View view);
 
+    /**
+     * 显示视频全屏布局
+     */
     void showVideoFullView();
 
+    /**
+     * 隐藏视频全屏布局
+     */
     void hindVideoFullView();
 
     /**
