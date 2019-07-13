@@ -59,13 +59,13 @@ public abstract class BaseFragment<VM extends AndroidViewModel, SV extends ViewD
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View ll = inflater.inflate(R.layout.fragment_base, null);
+        View inflate = inflater.inflate(R.layout.fragment_base, null);
         bindingView = DataBindingUtil.inflate(activity.getLayoutInflater(), setContent(), null, false);
         RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
         bindingView.getRoot().setLayoutParams(params);
-        RelativeLayout mContainer = ll.findViewById(R.id.container);
+        RelativeLayout mContainer = inflate.findViewById(R.id.container);
         mContainer.addView(bindingView.getRoot());
-        return ll;
+        return inflate;
     }
 
     /**

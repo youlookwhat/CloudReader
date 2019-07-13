@@ -141,7 +141,7 @@ public class WebViewActivity extends AppCompatActivity implements IWebPageView {
                 break;
             case R.id.actionbar_share:
                 // 分享到
-                String shareText = mTitle + webView.getUrl() + " (分享自云阅)";
+                String shareText = mTitle + " " + webView.getUrl() + " (分享自云阅 https://fir.im/cloudreader)";
                 ShareUtils.share(WebViewActivity.this, shareText);
                 break;
             case R.id.actionbar_cope:
