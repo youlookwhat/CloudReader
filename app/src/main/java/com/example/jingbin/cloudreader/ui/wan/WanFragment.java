@@ -8,7 +8,7 @@ import com.example.jingbin.cloudreader.R;
 import com.example.jingbin.cloudreader.base.BaseFragment;
 import com.example.jingbin.cloudreader.databinding.FragmentContentBinding;
 import com.example.jingbin.cloudreader.ui.wan.child.HomeFragment;
-import com.example.jingbin.cloudreader.ui.wan.child.NaviFragment;
+import com.example.jingbin.cloudreader.ui.wan.child.NavigationFragment;
 import com.example.jingbin.cloudreader.ui.wan.child.TreeFragment;
 import com.example.jingbin.cloudreader.view.MyFragmentPagerAdapter;
 import com.example.jingbin.cloudreader.viewmodel.menu.NoViewModel;
@@ -55,6 +55,6 @@ public class WanFragment extends BaseFragment<NoViewModel, FragmentContentBindin
         mTitleList.add("导航数据");
         mFragments.add(HomeFragment.newInstance());
         mFragments.add(TreeFragment.newInstance());
-        mFragments.add(NaviFragment.newInstance());
+        mFragments.add(NavigationFragment.newInstance());
     }
 }

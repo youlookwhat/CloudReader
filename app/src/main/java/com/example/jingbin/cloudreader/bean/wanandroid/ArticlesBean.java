@@ -48,6 +48,16 @@ public class ArticlesBean {
     private int zan;
     private boolean fresh;
     private boolean isShowImage = true;
+    // 分类name
+    private String navigationName;
+
+    public String getNavigationName() {
+        return navigationName;
+    }
+
+    public void setNavigationName(String navigationName) {
+        this.navigationName = navigationName;
+    }
 
     public boolean isShowImage() {
         return isShowImage;

@@ -206,6 +206,8 @@
                             app:layout_constraintRight_toRightOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
+                        <!--TagFlowLayout 如果两行则右边会有显示不全 使用了margin的原因-->
+                        <!--一定要使用 match_parent-->
                         <android.support.design.internal.FlowLayout
                             android:id="@+id/tfl_search_history"
                             android:layout_width="match_parent"

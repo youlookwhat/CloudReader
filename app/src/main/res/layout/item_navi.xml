@@ -17,6 +17,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/select_navi_bg"
+        android:foreground="?attr/selectableItemBackgroundBorderless"
+        android:gravity="center"
         android:padding="8dp"
         android:text="@{Html.fromHtml(bean.name)}"
         android:textColor="@color/select_navi_text"

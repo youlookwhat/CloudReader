@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="bean"
+            type="com.example.jingbin.cloudreader.bean.wanandroid.ArticlesBean" />
+
+        <import type="android.text.Html" />
+    </data>
+
+    <TextView
+        android:id="@+id/tv_navi_tag"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/selectableItemBackground"
+        android:gravity="center"
+        android:paddingLeft="12dp"
+        android:paddingTop="@dimen/dp_10"
+        android:paddingRight="12dp"
+        android:paddingBottom="@dimen/dp_10"
+        android:text="@{Html.fromHtml(bean.title)}"
+        android:textSize="13sp"
+        tools:text="title" />
+
+
+</layout>
