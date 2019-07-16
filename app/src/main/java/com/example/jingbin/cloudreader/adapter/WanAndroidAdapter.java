@@ -58,8 +58,8 @@ public class WanAndroidAdapter extends BaseRecyclerViewAdapter<ArticlesBean> {
         this.isNoShowChapterName = true;
     }
 
-    public void setNoImage() {
-        this.isNoImage = true;
+    public void setNoImage(boolean isNoImage) {
+        this.isNoImage = isNoImage;
     }
 
     private class ViewHolder extends BaseRecyclerViewHolder<ArticlesBean, ItemWanAndroidBinding> {

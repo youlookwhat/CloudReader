@@ -8,7 +8,6 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
@@ -76,13 +75,14 @@ public class HomeFragment extends BaseFragment<WanAndroidListViewModel, Fragment
         headerBinding = DataBindingUtil.inflate(getLayoutInflater(), R.layout.header_wan_android, null, false);
         bindingView.srlWan.setColorSchemeColors(CommonUtils.getColor(R.color.colorTheme));
         mAdapter = new WanAndroidAdapter(getActivity());
-//        mAdapter.setNoImage();
         bindingView.xrvWan.setAdapter(mAdapter);
+        mAdapter.setNoImage(true);
         bindingView.xrvWan.addHeaderView(headerBinding.getRoot());
         width = DensityUtil.getDisplayWidth() - DensityUtil.dip2px(160);
         float height = width / 1.8f;
         RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, (int) height);
         headerBinding.banner.setLayoutParams(lp);
+        headerBinding.radioGroup.setVisibility(View.INVISIBLE);
 
         headerBinding.rb1.setOnCheckedChangeListener((buttonView, isChecked) -> refresh(isChecked, true));
         headerBinding.rb2.setOnCheckedChangeListener((buttonView, isChecked) -> refresh(isChecked, false));
@@ -114,6 +114,7 @@ public class HomeFragment extends BaseFragment<WanAndroidListViewModel, Fragment
             bindingView.srlWan.setRefreshing(true);
             viewModel.setPage(0);
             bindingView.xrvWan.reset();
+            mAdapter.setNoImage(isArticle);
             if (isArticle) {
                 getHomeArticleList();
             } else {
@@ -129,6 +130,7 @@ public class HomeFragment extends BaseFragment<WanAndroidListViewModel, Fragment
         bindingView.srlWan.postDelayed(() -> {
             viewModel.setPage(0);
             bindingView.xrvWan.reset();
+            mAdapter.setNoImage(isArticle);
             if (headerBinding.rb1.isChecked()) {
                 getHomeArticleList();
             } else {
@@ -227,6 +229,7 @@ public class HomeFragment extends BaseFragment<WanAndroidListViewModel, Fragment
                 } else {
                     headerBinding.rlBanner.setVisibility(View.GONE);
                 }
+                headerBinding.radioGroup.setVisibility(View.VISIBLE);
                 getHomeArticleList();
             }
         });
@@ -284,11 +287,7 @@ public class HomeFragment extends BaseFragment<WanAndroidListViewModel, Fragment
     @Override
     protected void onRefresh() {
         bindingView.srlWan.setRefreshing(true);
-        if (!isLoadBanner) {
-            getWanAndroidBanner();
-        } else {
-            bindingView.srlWan.postDelayed(this::getHomeArticleList, 500);
-        }
+        getWanAndroidBanner();
     }
 
     @Override

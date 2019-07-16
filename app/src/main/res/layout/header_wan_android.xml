@@ -21,13 +21,20 @@
             tools:background="@color/colorLine" />
 
         <RadioGroup
-            android:id="@+id/rg_all"
+            android:id="@+id/radioGroup"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/banner"
             android:layout_centerVertical="true"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
             android:gravity="center_vertical"
             android:orientation="horizontal">
+
+            <View
+                android:layout_width="2dp"
+                android:layout_height="17dp"
+                android:background="@color/colorTheme" />
 
             <android.support.v7.widget.AppCompatRadioButton
                 android:id="@+id/rb_1"
