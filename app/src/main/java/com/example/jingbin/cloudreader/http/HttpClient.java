@@ -313,4 +313,13 @@ public interface HttpClient {
      */
     @GET("movie/detail.api?locationId=561")
     Observable<FilmDetailBean> getFilmDetail(@Query("movieId") int movieId);
+
+    /**
+     * 玩安卓，首页第二tab 项目；列表
+     *
+     * @param page 页码，从0开始
+     */
+    @GET("article/listproject/{page}/json")
+    Observable<HomeListBean> getProjectList(@Path("page") int page);
+
 }

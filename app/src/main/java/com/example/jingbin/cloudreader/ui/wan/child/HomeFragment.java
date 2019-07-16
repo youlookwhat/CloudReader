@@ -8,6 +8,7 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
@@ -44,7 +45,8 @@ public class HomeFragment extends BaseFragment<WanAndroidListViewModel, Fragment
     private boolean mIsPrepared;
     private boolean mIsFirst = true;
     private WanAndroidAdapter mAdapter;
-    private HeaderWanAndroidBinding androidBinding;
+    private HeaderWanAndroidBinding headerBinding;
+    private boolean isArticle = true;
     private boolean isLoadBanner = false;
     // banner图的宽
     private int width;
@@ -71,17 +73,19 @@ public class HomeFragment extends BaseFragment<WanAndroidListViewModel, Fragment
 
     private void initRefreshView() {
         RefreshHelper.init(bindingView.xrvWan, false, false);
-        androidBinding = DataBindingUtil.inflate(getLayoutInflater(), R.layout.header_wan_android, null, false);
+        headerBinding = DataBindingUtil.inflate(getLayoutInflater(), R.layout.header_wan_android, null, false);
         bindingView.srlWan.setColorSchemeColors(CommonUtils.getColor(R.color.colorTheme));
         mAdapter = new WanAndroidAdapter(getActivity());
-        mAdapter.setNoImage();
+//        mAdapter.setNoImage();
         bindingView.xrvWan.setAdapter(mAdapter);
-        bindingView.xrvWan.addHeaderView(androidBinding.getRoot());
+        bindingView.xrvWan.addHeaderView(headerBinding.getRoot());
         width = DensityUtil.getDisplayWidth() - DensityUtil.dip2px(160);
         float height = width / 1.8f;
         RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, (int) height);
-        androidBinding.banner.setLayoutParams(lp);
+        headerBinding.banner.setLayoutParams(lp);
 
+        headerBinding.rb1.setOnCheckedChangeListener((buttonView, isChecked) -> refresh(isChecked, true));
+        headerBinding.rb2.setOnCheckedChangeListener((buttonView, isChecked) -> refresh(isChecked, false));
         bindingView.srlWan.setOnRefreshListener(this::swipeRefresh);
         bindingView.xrvWan.setLoadingListener(new XRecyclerView.LoadingListener() {
             @Override
@@ -93,12 +97,29 @@ public class HomeFragment extends BaseFragment<WanAndroidListViewModel, Fragment
                 if (!bindingView.srlWan.isRefreshing()) {
                     int page = viewModel.getPage();
                     viewModel.setPage(++page);
-                    getHomeList();
+                    if (headerBinding.rb1.isChecked()) {
+                        getHomeArticleList();
+                    } else {
+                        getHomeProjectList();
+                    }
                 } else {
                     bindingView.xrvWan.refreshComplete();
                 }
             }
         });
+    }
+
+    private void refresh(boolean isChecked, boolean isArticle) {
+        if (isChecked) {
+            bindingView.srlWan.setRefreshing(true);
+            viewModel.setPage(0);
+            bindingView.xrvWan.reset();
+            if (isArticle) {
+                getHomeArticleList();
+            } else {
+                getHomeProjectList();
+            }
+        }
     }
 
     /**
@@ -108,7 +129,11 @@ public class HomeFragment extends BaseFragment<WanAndroidListViewModel, Fragment
         bindingView.srlWan.postDelayed(() -> {
             viewModel.setPage(0);
             bindingView.xrvWan.reset();
-            getWanAndroidBanner();
+            if (headerBinding.rb1.isChecked()) {
+                getHomeArticleList();
+            } else {
+                getHomeProjectList();
+            }
         }, 350);
     }
 
@@ -117,16 +142,16 @@ public class HomeFragment extends BaseFragment<WanAndroidListViewModel, Fragment
      */
     public void showBannerView(List<WanAndroidBannerBean.DataBean> result) {
         if (!isLoadBanner) {
-            androidBinding.banner
+            headerBinding.banner
                     .setIndicatorRes(R.drawable.banner_red, R.drawable.banner_grey)
                     .setBannerAnimation(ScaleRightTransformer.class)
                     .setDelayTime(5000)
                     .setPages(result, CustomViewHolder::new)
                     .start();
-            androidBinding.banner.stopAutoPlay();
+            headerBinding.banner.stopAutoPlay();
             isLoadBanner = true;
         } else {
-            androidBinding.banner.update(result);
+            headerBinding.banner.update(result);
         }
     }
 
@@ -172,7 +197,7 @@ public class HomeFragment extends BaseFragment<WanAndroidListViewModel, Fragment
     public void onResume() {
         super.onResume();
         if (isLoadBanner) {
-            androidBinding.banner.startAutoPlay();
+            headerBinding.banner.startAutoPlay();
         }
     }
 
@@ -188,7 +213,7 @@ public class HomeFragment extends BaseFragment<WanAndroidListViewModel, Fragment
         super.onPause();
         // 不可见时轮播图停止滚动
         if (isLoadBanner) {
-            androidBinding.banner.stopAutoPlay();
+            headerBinding.banner.stopAutoPlay();
         }
     }
 
@@ -197,56 +222,64 @@ public class HomeFragment extends BaseFragment<WanAndroidListViewModel, Fragment
             @Override
             public void onChanged(@Nullable WanAndroidBannerBean bean) {
                 if (bean != null) {
-                    androidBinding.rlBanner.setVisibility(View.VISIBLE);
+                    headerBinding.rlBanner.setVisibility(View.VISIBLE);
                     showBannerView(bean.getData());
                 } else {
-                    androidBinding.rlBanner.setVisibility(View.GONE);
+                    headerBinding.rlBanner.setVisibility(View.GONE);
                 }
-                getHomeList();
+                getHomeArticleList();
             }
         });
     }
 
-    private void getHomeList() {
-        viewModel.getHomeList(null).observe(this, new Observer<HomeListBean>() {
-            @Override
-            public void onChanged(@Nullable HomeListBean homeListBean) {
-                if (bindingView.srlWan.isRefreshing()) {
-                    bindingView.srlWan.setRefreshing(false);
-                }
+    private void getHomeArticleList() {
+        viewModel.getHomeArticleList(null).observe(this, observer);
+    }
 
-                if (homeListBean != null
-                        && homeListBean.getData() != null
-                        && homeListBean.getData().getDatas() != null
-                        && homeListBean.getData().getDatas().size() > 0) {
-                    if (viewModel.getPage() == 0) {
-                        showContentView();
-                        mAdapter.clear();
-                        mAdapter.notifyDataSetChanged();
-                    }
+    private void getHomeProjectList() {
+        viewModel.getHomeProjectList().observe(this, observer);
+    }
+
+    private Observer<HomeListBean> observer = new Observer<HomeListBean>() {
+        @Override
+        public void onChanged(@Nullable HomeListBean homeListBean) {
+            if (bindingView.srlWan.isRefreshing()) {
+                bindingView.srlWan.setRefreshing(false);
+            }
+
+            if (homeListBean != null
+                    && homeListBean.getData() != null
+                    && homeListBean.getData().getDatas() != null
+                    && homeListBean.getData().getDatas().size() > 0) {
+                if (viewModel.getPage() == 0) {
+                    showContentView();
+                    mAdapter.clear();
+                    mAdapter.addAll(homeListBean.getData().getDatas());
+                    mAdapter.notifyDataSetChanged();
+                } else {
                     //  一个刷新头布局 一个header
                     int positionStart = mAdapter.getItemCount() + 2;
                     mAdapter.addAll(homeListBean.getData().getDatas());
                     mAdapter.notifyItemRangeInserted(positionStart, homeListBean.getData().getDatas().size());
                     bindingView.xrvWan.refreshComplete();
+                }
 
-                    if (mIsFirst && viewModel.getPage() == 0) {
-                        if (isLoadBanner) {
-                            androidBinding.banner.startAutoPlay();
-                        }
-                        mIsFirst = false;
+                if (mIsFirst && viewModel.getPage() == 0) {
+                    if (isLoadBanner) {
+                        headerBinding.banner.startAutoPlay();
                     }
+                    mIsFirst = false;
+                }
+            } else {
+                if (viewModel.getPage() == 0) {
+                    showError();
                 } else {
-                    if (viewModel.getPage() == 0) {
-                        showError();
-                    } else {
-                        bindingView.xrvWan.refreshComplete();
-                        bindingView.xrvWan.noMoreLoading();
-                    }
+                    bindingView.xrvWan.refreshComplete();
+                    bindingView.xrvWan.noMoreLoading();
                 }
             }
-        });
-    }
+        }
+    };
 
     @Override
     protected void onRefresh() {
@@ -254,7 +287,7 @@ public class HomeFragment extends BaseFragment<WanAndroidListViewModel, Fragment
         if (!isLoadBanner) {
             getWanAndroidBanner();
         } else {
-            bindingView.srlWan.postDelayed(this::getHomeList, 500);
+            bindingView.srlWan.postDelayed(this::getHomeArticleList, 500);
         }
     }
 
@@ -262,8 +295,8 @@ public class HomeFragment extends BaseFragment<WanAndroidListViewModel, Fragment
     public void onDestroy() {
         super.onDestroy();
         if (isLoadBanner) {
-            androidBinding.banner.stopAutoPlay();
-            androidBinding.banner.releaseBanner();
+            headerBinding.banner.stopAutoPlay();
+            headerBinding.banner.releaseBanner();
             isLoadBanner = false;
         }
         if (mAdapter != null) {

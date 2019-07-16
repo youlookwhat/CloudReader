@@ -20,5 +20,41 @@
             app:page_right_margin="80dp"
             tools:background="@color/colorLine" />
 
+        <RadioGroup
+            android:id="@+id/rg_all"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/banner"
+            android:layout_centerVertical="true"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <android.support.v7.widget.AppCompatRadioButton
+                android:id="@+id/rb_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="?attr/selectableItemBackground"
+                android:button="@null"
+                android:checked="true"
+                android:padding="10dp"
+                android:text="最新博文"
+                android:textColor="@color/select_home_text" />
+
+            <View
+                android:layout_width="1px"
+                android:layout_height="20dp"
+                android:background="@color/colorHomeLine" />
+
+            <android.support.v7.widget.AppCompatRadioButton
+                android:id="@+id/rb_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="?attr/selectableItemBackground"
+                android:button="@null"
+                android:padding="10dp"
+                android:text="最新项目"
+                android:textColor="@color/select_home_text" />
+        </RadioGroup>
+
     </RelativeLayout>
 </layout>

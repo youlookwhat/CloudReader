@@ -56,7 +56,7 @@ public class WanAndroidListViewModel extends BaseListViewModel {
     /**
      * @param cid 体系id
      */
-    public MutableLiveData<HomeListBean> getHomeList(Integer cid) {
+    public MutableLiveData<HomeListBean> getHomeArticleList(Integer cid) {
         final MutableLiveData<HomeListBean> listData = new MutableLiveData<>();
         HttpClient.Builder.getWanAndroidServer().getHomeList(mPage, cid)
                 .subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
@@ -84,4 +84,31 @@ public class WanAndroidListViewModel extends BaseListViewModel {
         return listData;
     }
 
+    public MutableLiveData<HomeListBean> getHomeProjectList() {
+        final MutableLiveData<HomeListBean> listData = new MutableLiveData<>();
+        HttpClient.Builder.getWanAndroidServer().getProjectList(mPage)
+                .subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<HomeListBean>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+                        addDisposable(d);
+                    }
+
+                    @Override
+                    public void onNext(HomeListBean homeListBean) {
+                        listData.setValue(homeListBean);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        listData.setValue(null);
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+        return listData;
+    }
 }

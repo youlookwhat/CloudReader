@@ -111,7 +111,7 @@ public class CategoryArticleFragment extends BaseFragment<WanAndroidListViewMode
     }
 
     private void getHomeList() {
-        viewModel.getHomeList(categoryId).observe(this, new Observer<HomeListBean>() {
+        viewModel.getHomeArticleList(categoryId).observe(this, new Observer<HomeListBean>() {
             @Override
             public void onChanged(@Nullable HomeListBean homeListBean) {
                 if (homeListBean != null) {

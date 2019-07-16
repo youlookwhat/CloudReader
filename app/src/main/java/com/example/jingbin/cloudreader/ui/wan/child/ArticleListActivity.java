@@ -41,7 +41,7 @@ public class ArticleListActivity extends BaseActivity<WanAndroidListViewModel, F
     }
 
     private void loadData() {
-        viewModel.getHomeList(cid).observe(this, this::showContent);
+        viewModel.getHomeArticleList(cid).observe(this, this::showContent);
     }
 
     private void initRefreshView() {
