@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <TextView xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/tv_tag"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/selector_bg_tag"
+        android:textColor="@color/select_navi_text"
+        android:textSize="12sp"
+        tools:text="title" />
+
+</layout>

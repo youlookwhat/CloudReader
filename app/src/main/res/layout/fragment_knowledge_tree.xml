@@ -26,72 +26,48 @@
                     android:id="@+id/tv_tree_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="一级分类："
+                    android:layout_marginTop="10dp"
+                    android:text="一级分类"
                     android:textColor="@color/colorContent"
-                    android:textSize="17sp"
+                    android:textSize="15sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-
-                <!--<android.support.design.chip.ChipGroup-->
-                <!--android:id="@+id/fl_tree"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--app:chipSpacing="8dp"-->
-                <!--app:chipSpacingHorizontal="8dp"-->
-                <!--app:chipSpacingVertical="8dp"-->
-                <!--app:layout_constraintEnd_toEndOf="parent"-->
-                <!--app:layout_constraintStart_toStartOf="parent"-->
-                <!--app:layout_constraintTop_toBottomOf="@+id/tv_tree_title"-->
-                <!--app:singleSelection="true" />-->
-                <android.support.design.internal.FlowLayout
+                <com.zhy.view.flowlayout.TagFlowLayout xmlns:zhy="http://schemas.android.com/apk/res-auto"
                     android:id="@+id/fl_tree"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="15dp"
                     android:layout_marginTop="10dp"
                     android:layout_marginEnd="10dp"
-                    app:itemSpacing="8dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tv_tree_title"
-                    app:lineSpacing="8dp" />
+                    zhy:max_select="1" />
 
                 <TextView
                     android:id="@+id/tv_tree_title_two"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
-                    android:text="二级分类："
+                    android:text="二级分类"
                     android:textColor="@color/colorContent"
-                    android:textSize="17sp"
+                    android:textSize="15sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/fl_tree" />
 
-                <!--<android.support.design.chip.ChipGroup-->
-                <!--android:id="@+id/fl_tree_two"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--app:chipSpacing="25dp"-->
-                <!--app:chipSpacingHorizontal="35dp"-->
-                <!--app:chipSpacingVertical="10dp"-->
-                <!--app:layout_constraintEnd_toEndOf="parent"-->
-                <!--app:layout_constraintStart_toStartOf="parent"-->
-                <!--app:layout_constraintTop_toBottomOf="@+id/tv_tree_title_two"-->
-                <!--app:singleSelection="true" />-->
-
-                <android.support.design.internal.FlowLayout
+                <com.zhy.view.flowlayout.TagFlowLayout xmlns:zhy="http://schemas.android.com/apk/res-auto"
                     android:id="@+id/fl_tree_two"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="15dp"
                     android:layout_marginTop="10dp"
                     android:layout_marginEnd="10dp"
-                    app:itemSpacing="8dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tv_tree_title_two"
-                    app:lineSpacing="8dp" />
+                    zhy:max_select="1" />
+
             </android.support.constraint.ConstraintLayout>
         </android.support.v4.widget.NestedScrollView>
     </FrameLayout>

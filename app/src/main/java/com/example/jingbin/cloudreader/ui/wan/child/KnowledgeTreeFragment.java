@@ -6,7 +6,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
 import android.text.Html;
 import android.view.View;
-import android.widget.CheckBox;
+import android.widget.TextView;
 
 import com.example.jingbin.cloudreader.R;
 import com.example.jingbin.cloudreader.base.BaseFragment;
@@ -14,6 +14,9 @@ import com.example.jingbin.cloudreader.bean.wanandroid.TreeBean;
 import com.example.jingbin.cloudreader.bean.wanandroid.TreeItemBean;
 import com.example.jingbin.cloudreader.databinding.FragmentKnowledgeTreeBinding;
 import com.example.jingbin.cloudreader.viewmodel.wan.TreeViewModel;
+import com.zhy.view.flowlayout.FlowLayout;
+import com.zhy.view.flowlayout.TagAdapter;
+import com.zhy.view.flowlayout.TagFlowLayout;
 
 import java.util.List;
 
@@ -27,6 +30,7 @@ public class KnowledgeTreeFragment extends BaseFragment<TreeViewModel, FragmentK
     private boolean mIsPrepared;
     private boolean mIsFirst = true;
     private FragmentActivity activity;
+    private int currentPosition = 0;
 
     @Override
     public int setContent() {
@@ -46,14 +50,7 @@ public class KnowledgeTreeFragment extends BaseFragment<TreeViewModel, FragmentK
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        showContentView();
-//        initRefreshView();
-        // 准备就绪
         mIsPrepared = true;
-        /**
-         * 因为启动时先走loadData()再走onActivityCreated，
-         * 所以此处要额外调用load(),不然最初不会加载内容
-         */
         loadData();
     }
 
@@ -63,7 +60,6 @@ public class KnowledgeTreeFragment extends BaseFragment<TreeViewModel, FragmentK
             return;
         }
 
-//        bindingView.srlWan.setRefreshing(true);
         bindingView.flTree.postDelayed(this::getTree, 150);
     }
 
@@ -72,66 +68,79 @@ public class KnowledgeTreeFragment extends BaseFragment<TreeViewModel, FragmentK
             @Override
             public void onChanged(@Nullable TreeBean treeBean) {
                 showContentView();
-//                if (bindingView.srlWan.isRefreshing()) {
-//                    bindingView.srlWan.setRefreshing(false);
-//                }
                 if (treeBean != null
                         && treeBean.getData() != null
                         && treeBean.getData().size() > 0) {
 
                     showTreeView(bindingView.flTree, treeBean.getData());
-//                    showTreeView(bindingView.flTreeTwo,treeBean.getData());
                     showTreeView(bindingView.flTreeTwo, treeBean.getData().get(0).getChildren());
                     mIsFirst = false;
                 } else {
                     if (mIsFirst) {
                         showError();
-                    } else {
-//                        bindingView.xrvWan.refreshComplete();
                     }
                 }
             }
         });
     }
 
-
     /**
      * 显示标签
      */
-    private <T> void showTreeView(android.support.design.internal.FlowLayout flowLayout, final List<T> children) {
-//    private <T> void showTreeView(ChipGroup flowLayout, final List<T> children) {
-        flowLayout.removeAllViews();
-        for (int i = 0; i < children.size(); i++) {
-            CheckBox textView = (CheckBox) View.inflate(flowLayout.getContext(), R.layout.layout_knowledge_tree_tag, null);
-            T bean = children.get(i);
+    private <T> void showTreeView(TagFlowLayout flowLayout, final List<T> children) {
 
-            if (bean instanceof TreeItemBean) {
-                if (i==0){
-                    textView.setChecked(true);
-                } else {
-                    textView.setChecked(false);
-                }
-                TreeItemBean childrenBean = (TreeItemBean) bean;
-                textView.setText(Html.fromHtml(childrenBean.getName()));
-                textView.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        showTreeView(bindingView.flTreeTwo, childrenBean.getChildren());
-//                    CategoryDetailActivity.start(view.getContext(), childrenBean.getId(), dataBean);
+        flowLayout.removeAllViews();
+        flowLayout.setAdapter(new TagAdapter<T>(children) {
+            @Override
+            public View getView(FlowLayout parent, int position, T o) {
+                TextView textView = (TextView) View.inflate(flowLayout.getContext(), R.layout.layout_knowledge_tag, null);
+                T bean = children.get(position);
+                if (bean instanceof TreeItemBean) {
+                    if (position == 0) {
+                        textView.setSelected(true);
+                    } else {
+                        textView.setSelected(false);
                     }
-                });
-            } else if (bean instanceof TreeItemBean.ChildrenBean) {
-                TreeItemBean.ChildrenBean childrenBean = (TreeItemBean.ChildrenBean) bean;
-                textView.setText(Html.fromHtml(childrenBean.getName()));
+                    TreeItemBean childrenBean = (TreeItemBean) bean;
+                    textView.setText(Html.fromHtml(childrenBean.getName()));
+                } else if (bean instanceof TreeItemBean.ChildrenBean) {
+                    TreeItemBean.ChildrenBean childrenBean = (TreeItemBean.ChildrenBean) bean;
+                    textView.setText(Html.fromHtml(childrenBean.getName()));
+                }
+                return textView;
             }
-            flowLayout.addView(textView);
+        });
+        TagAdapter adapter = flowLayout.getAdapter();
+        if (children.get(0) instanceof TreeItemBean) {
+            adapter.setSelectedList(0);
         }
+
+        flowLayout.setOnTagClickListener(new TagFlowLayout.OnTagClickListener() {
+            @Override
+            public boolean onTagClick(View view, int position, FlowLayout parent) {
+                T t = children.get(position);
+                if (t instanceof TreeItemBean) {
+
+                    TreeItemBean childrenBean = (TreeItemBean) t;
+                    if (currentPosition == position) {
+                        adapter.setSelectedList(currentPosition);
+                    } else {
+                        currentPosition = position;
+                        showTreeView(bindingView.flTreeTwo, childrenBean.getChildren());
+                    }
+
+                } else {
+                    TreeItemBean.ChildrenBean childrenBean = (TreeItemBean.ChildrenBean) t;
+//                    CategoryDetailActivity.start(view.getContext(), childrenBean.getId(), dataBean);
+                }
+                return true;
+            }
+        });
     }
 
 
     @Override
     protected void onRefresh() {
-//        bindingView.srlWan.setRefreshing(true);
         getTree();
     }
 }

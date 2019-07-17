@@ -7,9 +7,7 @@ import com.example.jingbin.cloudreader.R;
 import com.example.jingbin.cloudreader.base.baseadapter.BaseRecyclerViewAdapter;
 import com.example.jingbin.cloudreader.base.baseadapter.BaseRecyclerViewHolder;
 import com.example.jingbin.cloudreader.bean.wanandroid.NaviJsonBean;
-import com.example.jingbin.cloudreader.databinding.ItemNaviBinding;
-
-import java.util.List;
+import com.example.jingbin.cloudreader.databinding.ItemNavigationBinding;
 
 /**
  * Created by jingbin on 2018/10/13.
@@ -17,14 +15,13 @@ import java.util.List;
 
 public class NaviAdapter extends BaseRecyclerViewAdapter<NaviJsonBean.DataBean> {
 
-
     @NonNull
     @Override
     public BaseRecyclerViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new ViewHolder(parent, R.layout.item_navi);
+        return new ViewHolder(parent, R.layout.item_navigation);
     }
 
-    private class ViewHolder extends BaseRecyclerViewHolder<NaviJsonBean.DataBean, ItemNaviBinding> {
+    private class ViewHolder extends BaseRecyclerViewHolder<NaviJsonBean.DataBean, ItemNavigationBinding> {
 
         ViewHolder(ViewGroup context, int layoutId) {
             super(context, layoutId);

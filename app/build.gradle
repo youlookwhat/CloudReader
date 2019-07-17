@@ -99,6 +99,7 @@ dependencies {
     // 高斯模糊和圆角等
     implementation 'jp.wasabeef:glide-transformations:4.0.1'
 
+    implementation 'com.hyman:flowlayout-lib:1.1.2'
     implementation 'com.google.zxing:core:3.3.0'
     implementation 'com.nineoldandroids:library:2.4.0'
     implementation 'com.youth.banner:banner:1.4.10'
