@@ -65,10 +65,17 @@ If you have any questions, please write to [the issue][21] of making you don't u
  - [《云阅》一个仿网易云音乐UI，使用Gank.Io及豆瓣Api开发的开源项目][23]
  - [开发中所遇问题归纳（jar包的具体使用等）][24]
  - [App使用中的常见问题][25]
- - [Data Binding 用户指南（Android）][26]
+ - [开源项目CloudReader笔记][26]
 　
 
 ### Version
+#### V2.9.5（2019-07-18）
+ - 1、[新增]首页增加项目分类api
+ - 2、[新增]增加历史搜索记录
+ - 3、[优化]知识体系页ui改版
+ - 4、[优化]导航数据页ui改版
+ - 5、[优化]统一TabLayout指示器样式
+
 #### V2.9.1（2019-06-05）
  - 1、[新增] BaseViewModel释放资源
  - 2、[修复] 适配Android9.0不允许http连接的问题
@@ -204,7 +211,7 @@ If you have any questions, please write to [the issue][21] of making you don't u
  
  - 图片来源：[iconfont][6]、UI工程师[Sandawang](https://github.com/Sandawang)和网易云音乐App。
 
- - 主要数据来源：[Gank.Io][9]、[时光网][10]、[wanandroid][27]。
+ - 主要数据来源：[wanandroid][27]、[Gank.Io][9]、[时光网][10]。
 
  - 使用到的开源库：[glide][11]、[bottomsheet][12]、[nineoldandroids][13]、[rxandroid][14]等等。
 
@@ -249,7 +256,7 @@ limitations under the License.
 [2]:https://www.apache.org/licenses/LICENSE-2.0.html
 [3]:https://img.shields.io/badge/API-19%2B-red.svg?style=flat
 [4]:https://android-arsenal.com/api?level=19
-[30]:https://img.shields.io/badge/release-2.9.1-red.svg
+[30]:https://img.shields.io/badge/release-2.9.5-red.svg
 [31]:https://github.com/youlookwhat/CloudReader/releases
 [32]:https://img.shields.io/badge/PRs-welcome-brightgreen.svg
 [33]:https://github.com/youlookwhat/CloudReader/pulls
@@ -276,5 +283,5 @@ limitations under the License.
 [23]:http://www.jianshu.com/p/69a229fb6e1d
 [24]:http://jingbin.me/2017/11/23/%E5%BC%80%E5%8F%91%E4%B8%AD%E6%89%80%E9%81%87%E9%97%AE%E9%A2%98%E5%BD%92%E7%BA%B3/
 [25]:http://jingbin.me/2016/12/25/%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98-%E4%BA%91%E9%98%85/
-[26]:https://segmentfault.com/a/1190000002876984#articleHeader21
+[26]:https://blog.csdn.net/jingbin_/column/info/34963
 [27]:http://www.wanandroid.com/index
