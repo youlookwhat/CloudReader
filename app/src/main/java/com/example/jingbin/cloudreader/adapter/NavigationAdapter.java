@@ -13,7 +13,7 @@ import com.example.jingbin.cloudreader.databinding.ItemNavigationBinding;
  * Created by jingbin on 2018/10/13.
  */
 
-public class NaviAdapter extends BaseRecyclerViewAdapter<NaviJsonBean.DataBean> {
+public class NavigationAdapter extends BaseRecyclerViewAdapter<NaviJsonBean.DataBean> {
 
     @NonNull
     @Override

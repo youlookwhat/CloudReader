@@ -13,12 +13,14 @@ import com.example.jingbin.cloudreader.base.BaseFragment;
 import com.example.jingbin.cloudreader.bean.wanandroid.TreeBean;
 import com.example.jingbin.cloudreader.bean.wanandroid.TreeItemBean;
 import com.example.jingbin.cloudreader.databinding.FragmentKnowledgeTreeBinding;
+import com.example.jingbin.cloudreader.utils.CommonUtils;
 import com.example.jingbin.cloudreader.viewmodel.wan.TreeViewModel;
 import com.zhy.view.flowlayout.FlowLayout;
 import com.zhy.view.flowlayout.TagAdapter;
 import com.zhy.view.flowlayout.TagFlowLayout;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * @author jingbin
@@ -30,7 +32,7 @@ public class KnowledgeTreeFragment extends BaseFragment<TreeViewModel, FragmentK
     private boolean mIsPrepared;
     private boolean mIsFirst = true;
     private FragmentActivity activity;
-    private int currentPosition = 0;
+    private int firstPosition = 0;
 
     @Override
     public int setContent() {
@@ -59,7 +61,6 @@ public class KnowledgeTreeFragment extends BaseFragment<TreeViewModel, FragmentK
         if (!mIsPrepared || !mIsVisible || !mIsFirst) {
             return;
         }
-
         bindingView.flTree.postDelayed(this::getTree, 150);
     }
 
@@ -67,13 +68,13 @@ public class KnowledgeTreeFragment extends BaseFragment<TreeViewModel, FragmentK
         viewModel.getTree().observe(this, new android.arch.lifecycle.Observer<TreeBean>() {
             @Override
             public void onChanged(@Nullable TreeBean treeBean) {
-                showContentView();
                 if (treeBean != null
                         && treeBean.getData() != null
                         && treeBean.getData().size() > 0) {
 
-                    showTreeView(bindingView.flTree, treeBean.getData());
-                    showTreeView(bindingView.flTreeTwo, treeBean.getData().get(0).getChildren());
+                    showFirstTreeView(bindingView.flTree, treeBean.getData());
+                    showSecondTreeView(bindingView.flTreeTwo, treeBean.getData(), 0);
+                    showContentView();
                     mIsFirst = false;
                 } else {
                     if (mIsFirst) {
@@ -85,59 +86,80 @@ public class KnowledgeTreeFragment extends BaseFragment<TreeViewModel, FragmentK
     }
 
     /**
-     * 显示标签
+     * 显示一级分类 🔥
      */
-    private <T> void showTreeView(TagFlowLayout flowLayout, final List<T> children) {
-
+    private void showFirstTreeView(TagFlowLayout flowLayout, final List<TreeItemBean> children) {
         flowLayout.removeAllViews();
-        flowLayout.setAdapter(new TagAdapter<T>(children) {
+        flowLayout.setAdapter(new TagAdapter<TreeItemBean>(children) {
             @Override
-            public View getView(FlowLayout parent, int position, T o) {
+            public View getView(FlowLayout parent, int position, TreeItemBean bean) {
                 TextView textView = (TextView) View.inflate(flowLayout.getContext(), R.layout.layout_knowledge_tag, null);
-                T bean = children.get(position);
-                if (bean instanceof TreeItemBean) {
-                    if (position == 0) {
-                        textView.setSelected(true);
-                    } else {
-                        textView.setSelected(false);
-                    }
-                    TreeItemBean childrenBean = (TreeItemBean) bean;
-                    textView.setText(Html.fromHtml(childrenBean.getName()));
-                } else if (bean instanceof TreeItemBean.ChildrenBean) {
-                    TreeItemBean.ChildrenBean childrenBean = (TreeItemBean.ChildrenBean) bean;
-                    textView.setText(Html.fromHtml(childrenBean.getName()));
+                if (position == 0) {
+                    textView.setSelected(true);
+                } else {
+                    textView.setSelected(false);
                 }
+                textView.setText(Html.fromHtml(getHotText(bean.getName())));
                 return textView;
             }
         });
         TagAdapter adapter = flowLayout.getAdapter();
-        if (children.get(0) instanceof TreeItemBean) {
-            adapter.setSelectedList(0);
-        }
-
+        adapter.setSelectedList(0);
         flowLayout.setOnTagClickListener(new TagFlowLayout.OnTagClickListener() {
             @Override
             public boolean onTagClick(View view, int position, FlowLayout parent) {
-                T t = children.get(position);
-                if (t instanceof TreeItemBean) {
-
-                    TreeItemBean childrenBean = (TreeItemBean) t;
-                    if (currentPosition == position) {
-                        adapter.setSelectedList(currentPosition);
-                    } else {
-                        currentPosition = position;
-                        showTreeView(bindingView.flTreeTwo, childrenBean.getChildren());
-                    }
-
+                if (firstPosition == position) {
+                    adapter.setSelectedList(firstPosition);
                 } else {
-                    TreeItemBean.ChildrenBean childrenBean = (TreeItemBean.ChildrenBean) t;
-//                    CategoryDetailActivity.start(view.getContext(), childrenBean.getId(), dataBean);
+                    firstPosition = position;
+                    showSecondTreeView(bindingView.flTreeTwo, children, position);
                 }
                 return true;
             }
         });
     }
 
+
+    /**
+     * 显示二级分类
+     */
+    private void showSecondTreeView(TagFlowLayout flowLayout, final List<TreeItemBean> children, int position) {
+        TreeItemBean treeItemBean = children.get(position);
+        if (treeItemBean == null || treeItemBean.getChildren() == null) {
+            return;
+        }
+        flowLayout.removeAllViews();
+        flowLayout.setAdapter(new TagAdapter<TreeItemBean.ChildrenBean>(treeItemBean.getChildren()) {
+            @Override
+            public View getView(FlowLayout parent, int position, TreeItemBean.ChildrenBean bean) {
+                TextView textView = (TextView) View.inflate(flowLayout.getContext(), R.layout.layout_knowledge_tag, null);
+                textView.setBackground(CommonUtils.getDrawable(R.drawable.selector_bg_tag_no_check));
+                textView.setTextColor(CommonUtils.getColor(R.color.colorContent));
+                textView.setText(Html.fromHtml(bean.getName()));
+                return textView;
+            }
+        });
+        flowLayout.setOnTagClickListener(new TagFlowLayout.OnTagClickListener() {
+            @Override
+            public boolean onTagClick(View view, int position, FlowLayout parent) {
+                CategoryDetailActivity.start(view.getContext(), treeItemBean.getChildren().get(position).getId(), treeItemBean);
+                return true;
+            }
+        });
+    }
+
+    private String getHotText(String content) {
+        if ("公众号".equals(content)
+                || "5.+高新技术".equals(content)
+                || "完整开源项目".equals(content)
+                || "项目必备".equals(content)
+                || "开源项目主Tab".equals(content)
+        ) {
+            return "\uD83D\uDD25" + " " + content;
+        } else {
+            return content;
+        }
+    }
 
     @Override
     protected void onRefresh() {

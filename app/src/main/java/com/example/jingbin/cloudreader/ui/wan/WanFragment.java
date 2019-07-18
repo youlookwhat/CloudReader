@@ -54,7 +54,6 @@ public class WanFragment extends BaseFragment<NoViewModel, FragmentContentBindin
         mTitleList.add("知识体系");
         mTitleList.add("导航数据");
         mFragments.add(HomeFragment.newInstance());
-//        mFragments.add(TreeFragment.newInstance());
         mFragments.add(KnowledgeTreeFragment.newInstance());
         mFragments.add(NavigationFragment.newInstance());
     }

@@ -12,7 +12,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.example.jingbin.cloudreader.R;
-import com.example.jingbin.cloudreader.adapter.NaviAdapter;
+import com.example.jingbin.cloudreader.adapter.NavigationAdapter;
 import com.example.jingbin.cloudreader.adapter.NavigationContentAdapter;
 import com.example.jingbin.cloudreader.base.BaseFragment;
 import com.example.jingbin.cloudreader.bean.wanandroid.ArticlesBean;
@@ -31,7 +31,7 @@ public class NavigationFragment extends BaseFragment<NavigationViewModel, Fragme
 
     private boolean mIsPrepared;
     private boolean mIsFirst = true;
-    private NaviAdapter mNaviAdapter;
+    private NavigationAdapter mNaviAdapter;
     private NavigationContentAdapter mContentAdapter;
     private FragmentActivity activity;
     private int currentPosition = 0;
@@ -73,7 +73,7 @@ public class NavigationFragment extends BaseFragment<NavigationViewModel, Fragme
     private void initRefreshView() {
         layoutManager = new LinearLayoutManager(activity);
         bindingView.xrvNavi.setLayoutManager(layoutManager);
-        mNaviAdapter = new NaviAdapter();
+        mNaviAdapter = new NavigationAdapter();
         bindingView.xrvNavi.setAdapter(mNaviAdapter);
 
         GridLayoutManager gridLayoutManager = new GridLayoutManager(activity, 6, GridLayoutManager.VERTICAL, false);
@@ -81,7 +81,7 @@ public class NavigationFragment extends BaseFragment<NavigationViewModel, Fragme
         mContentAdapter = new NavigationContentAdapter();
         bindingView.xrvNaviDetail.setAdapter(mContentAdapter);
 
-        mNaviAdapter.setOnSelectListener(new NaviAdapter.OnSelectListener() {
+        mNaviAdapter.setOnSelectListener(new NavigationAdapter.OnSelectListener() {
             @Override
             public void onSelected(int position) {
                 selectItem(position);

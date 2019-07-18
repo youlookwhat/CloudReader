@@ -22,7 +22,8 @@ import com.example.jingbin.cloudreader.viewmodel.wan.TreeViewModel;
  * @date 2018/09/15.
  * @description 知识体系
  */
-public class TreeFragment extends BaseFragment<TreeViewModel,FragmentWanAndroidBinding> {
+@Deprecated
+public class TreeFragment extends BaseFragment<TreeViewModel, FragmentWanAndroidBinding> {
 
     private boolean mIsPrepared;
     private boolean mIsFirst = true;
