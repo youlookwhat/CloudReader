@@ -2,10 +2,9 @@ package com.example.jingbin.cloudreader.utils;
 
 import android.annotation.SuppressLint;
 import android.text.TextUtils;
-import android.widget.TextClock;
 import android.widget.Toast;
 
-import com.example.jingbin.cloudreader.app.CloudReaderApplication;
+import com.example.jingbin.cloudreader.app.App;
 
 import me.drakeet.support.toast.ToastCompat;
 
@@ -24,10 +23,10 @@ public class ToastUtil {
     public static void showToast(String text) {
         if (!TextUtils.isEmpty(text)) {
             if (mToast == null) {
-                mToast = ToastCompat.makeText(CloudReaderApplication.getInstance(), text, Toast.LENGTH_SHORT);
+                mToast = ToastCompat.makeText(App.getInstance(), text, Toast.LENGTH_SHORT);
             } else {
                 mToast.cancel();
-                mToast = ToastCompat.makeText(CloudReaderApplication.getInstance(), text, Toast.LENGTH_SHORT);
+                mToast = ToastCompat.makeText(App.getInstance(), text, Toast.LENGTH_SHORT);
             }
             mToast.setDuration(Toast.LENGTH_SHORT);
             mToast.setText(text);
@@ -39,10 +38,10 @@ public class ToastUtil {
     public static void showToastLong(String text) {
         if (!TextUtils.isEmpty(text)) {
             if (mToast == null) {
-                mToast = ToastCompat.makeText(CloudReaderApplication.getInstance(), text, Toast.LENGTH_LONG);
+                mToast = ToastCompat.makeText(App.getInstance(), text, Toast.LENGTH_LONG);
             } else {
                 mToast.cancel();
-                mToast = ToastCompat.makeText(CloudReaderApplication.getInstance(), text, Toast.LENGTH_LONG);
+                mToast = ToastCompat.makeText(App.getInstance(), text, Toast.LENGTH_LONG);
             }
             mToast.setDuration(Toast.LENGTH_LONG);
             mToast.setText(text);

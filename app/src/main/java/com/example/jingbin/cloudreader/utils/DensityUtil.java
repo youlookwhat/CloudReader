@@ -9,7 +9,7 @@ import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
-import com.example.jingbin.cloudreader.app.CloudReaderApplication;
+import com.example.jingbin.cloudreader.app.App;
 
 /**
  * Created by Administrator on 2015/10/19.
@@ -20,7 +20,7 @@ public class DensityUtil {
      * 根据手机的分辨率从 dp 的单位 转成为 px(像素)
      */
     public static int dip2px(float dpValue) {
-        final float scale = CloudReaderApplication.getInstance().getResources().getDisplayMetrics().density;
+        final float scale = App.getInstance().getResources().getDisplayMetrics().density;
         return (int) (dpValue * scale + 0.5f);
     }
 
@@ -28,7 +28,7 @@ public class DensityUtil {
      * 根据手机的分辨率从 px(像素) 的单位 转成为 dp
      */
     public static int px2dip(float pxValue) {
-        final float scale = CloudReaderApplication.getInstance().getResources().getDisplayMetrics().density;
+        final float scale = App.getInstance().getResources().getDisplayMetrics().density;
         return (int) (pxValue / scale + 0.5f);
     }
 
@@ -86,7 +86,7 @@ public class DensityUtil {
      * @param marginBottom 下面的dp
      */
     public static void formatHeight(View imageView, float bili, int type, int marginLR, int marginTop, int marginBottom) {
-        WindowManager wm = (WindowManager) CloudReaderApplication.getInstance().getSystemService(Context.WINDOW_SERVICE);
+        WindowManager wm = (WindowManager) App.getInstance().getSystemService(Context.WINDOW_SERVICE);
         int width = wm.getDefaultDisplay().getWidth();
         int height = (int) (width / bili);
         if (type == 1) {
@@ -131,7 +131,7 @@ public class DensityUtil {
      */
     public static int getDisplayWidth() {
         try {
-            WindowManager wm = (WindowManager) CloudReaderApplication.getInstance().getSystemService(Context.WINDOW_SERVICE);
+            WindowManager wm = (WindowManager) App.getInstance().getSystemService(Context.WINDOW_SERVICE);
             return wm.getDefaultDisplay().getWidth();
         } catch (Exception e) {
             return 1080;

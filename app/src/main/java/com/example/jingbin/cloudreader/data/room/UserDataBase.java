@@ -6,7 +6,7 @@ import android.arch.persistence.room.Room;
 import android.arch.persistence.room.RoomDatabase;
 import android.arch.persistence.room.migration.Migration;
 
-import com.example.jingbin.cloudreader.app.CloudReaderApplication;
+import com.example.jingbin.cloudreader.app.App;
 
 
 /**
@@ -36,7 +36,7 @@ public abstract class UserDataBase extends RoomDatabase {
 
     public static UserDataBase getDatabase() {
         if (sInstance == null) {
-            sInstance = Room.databaseBuilder(CloudReaderApplication.getInstance(),
+            sInstance = Room.databaseBuilder(App.getInstance(),
                     UserDataBase.class, "User.db")
                     .addMigrations(MIGRATION_1_2)
                     .build();

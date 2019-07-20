@@ -13,7 +13,7 @@
     <uses-permission android:name="android.permission.KILL_BACKGROUND_PROCESSES" /><!--杀死应用进程-->
 
     <application
-        android:name=".app.CloudReaderApplication"
+        android:name=".app.App"
         android:allowBackup="false"
         android:hardwareAccelerated="true"
         android:icon="@mipmap/ic_launcher"

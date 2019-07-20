@@ -1,11 +1,10 @@
 package com.example.jingbin.cloudreader.viewmodel.gank;
 
 import android.app.Application;
-import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.MutableLiveData;
 import android.support.annotation.NonNull;
 
-import com.example.jingbin.cloudreader.app.CloudReaderApplication;
+import com.example.jingbin.cloudreader.app.App;
 import com.example.jingbin.cloudreader.app.Constants;
 import com.example.jingbin.cloudreader.base.BaseViewModel;
 import com.example.jingbin.cloudreader.bean.AndroidBean;
@@ -59,7 +58,7 @@ public class EverydayViewModel extends BaseViewModel {
 
     public EverydayViewModel(@NonNull Application application) {
         super(application);
-        maCache = ACache.get(CloudReaderApplication.getInstance());
+        maCache = ACache.get(App.getInstance());
         mEverydayModel = new EverydayModel();
         year = getTodayTime().get(0);
         month = getTodayTime().get(1);

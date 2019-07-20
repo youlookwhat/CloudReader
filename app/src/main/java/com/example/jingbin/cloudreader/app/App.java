@@ -10,19 +10,19 @@ import com.tencent.bugly.crashreport.CrashReport;
  * Created by jingbin on 2016/11/22.
  */
 
-public class CloudReaderApplication extends MultiDexApplication {
+public class App extends MultiDexApplication {
 
-    private static CloudReaderApplication cloudReaderApplication;
+    private static App app;
 
-    public static CloudReaderApplication getInstance() {
-        return cloudReaderApplication;
+    public static App getInstance() {
+        return app;
     }
 
     @SuppressWarnings("unused")
     @Override
     public void onCreate() {
         super.onCreate();
-        cloudReaderApplication = this;
+        app = this;
 //        if (LeakCanary.isInAnalyzerProcess(this)) {
 //            return;
 //        }

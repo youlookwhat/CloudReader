@@ -8,7 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewParent;
 
-import com.example.jingbin.cloudreader.app.CloudReaderApplication;
+import com.example.jingbin.cloudreader.app.App;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -42,7 +42,7 @@ public class CommonUtils {
 
 
     public static Drawable getDrawable(int resid) {
-        return ContextCompat.getDrawable(CloudReaderApplication.getInstance(), resid);
+        return ContextCompat.getDrawable(App.getInstance(), resid);
 //        return getResoure().getDrawable(resid);
     }
 
@@ -51,7 +51,7 @@ public class CommonUtils {
     }
 
     public static Resources getResoure() {
-        return CloudReaderApplication.getInstance().getResources();
+        return App.getInstance().getResources();
     }
 
     public static String[] getStringArray(int resid) {
