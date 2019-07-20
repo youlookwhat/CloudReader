@@ -3,10 +3,10 @@
     <!-- 背景颜色 -->
     <item android:drawable="@color/colorWhite" />
 
-    <item>
-        <!-- 图片 如果尺寸不一致，那么周围的填充色就是背景色-->
+    <item android:bottom="50dp">
+        <!-- 图片 clip_horizontal 如果尺寸不一致，那么周围的填充色就是背景色-->
         <bitmap
-            android:gravity="clip_horizontal"
+            android:gravity="bottom"
             android:src="@drawable/img_transition_default" />
     </item>
 </layer-list>
