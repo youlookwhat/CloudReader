@@ -10,7 +10,9 @@
             android:id="@+id/tab_gank"
             style="@style/tabLayoutStyle"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:tabGravity="fill"
+            app:tabMaxWidth="0dp" />
 
         <View
             android:id="@+id/line"

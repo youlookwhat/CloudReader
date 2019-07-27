@@ -20,8 +20,8 @@ import java.util.ArrayList;
  */
 public class MyCollectActivity extends BaseActivity<NoViewModel, ActivityMyCollectBinding> {
 
-    private ArrayList<String> mTitleList = new ArrayList<>(4);
-    private ArrayList<Fragment> mFragments = new ArrayList<>(4);
+    private ArrayList<String> mTitleList = new ArrayList<>(3);
+    private ArrayList<Fragment> mFragments = new ArrayList<>(3);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
