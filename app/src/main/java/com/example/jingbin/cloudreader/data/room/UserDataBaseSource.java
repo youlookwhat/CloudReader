@@ -2,7 +2,6 @@ package com.example.jingbin.cloudreader.data.room;
 
 import android.support.annotation.NonNull;
 
-import com.example.jingbin.cloudreader.utils.AppExecutors;
 import com.example.jingbin.cloudreader.utils.DebugUtil;
 
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.example.jingbin.cloudreader.utils;
+package com.example.jingbin.cloudreader.data.room;
 
 import android.support.annotation.NonNull;
 
