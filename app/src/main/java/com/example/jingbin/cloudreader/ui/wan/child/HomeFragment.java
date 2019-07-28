@@ -45,7 +45,6 @@ public class HomeFragment extends BaseFragment<WanAndroidListViewModel, Fragment
     private boolean mIsFirst = true;
     private WanAndroidAdapter mAdapter;
     private HeaderWanAndroidBinding headerBinding;
-    private boolean isArticle = true;
     private boolean isLoadBanner = false;
     // banner图的宽
     private int width;
@@ -130,7 +129,6 @@ public class HomeFragment extends BaseFragment<WanAndroidListViewModel, Fragment
         bindingView.srlWan.postDelayed(() -> {
             viewModel.setPage(0);
             bindingView.xrvWan.reset();
-            mAdapter.setNoImage(isArticle);
             if (headerBinding.rb1.isChecked()) {
                 getHomeArticleList();
             } else {
