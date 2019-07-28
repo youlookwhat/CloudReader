@@ -388,7 +388,7 @@ public class WebViewActivity extends AppCompatActivity implements IWebPageView {
                 hitTestResult.getType() == WebView.HitTestResult.SRC_IMAGE_ANCHOR_TYPE) {
             // 弹出保存图片的对话框
             new AlertDialog.Builder(WebViewActivity.this)
-                    .setItems(new String[]{"查看大图", "保存图片到相册"}, new DialogInterface.OnClickListener() {
+                    .setItems(new String[]{"发送给朋友", "保存到相册"}, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             String picUrl = hitTestResult.getExtra();
@@ -396,7 +396,7 @@ public class WebViewActivity extends AppCompatActivity implements IWebPageView {
 //                            Log.e("picUrl", picUrl);
                             switch (which) {
                                 case 0:
-                                    ViewBigImageActivity.start(WebViewActivity.this, picUrl, picUrl);
+                                    ShareUtils.shareNetImage(WebViewActivity.this, picUrl);
                                     break;
                                 case 1:
                                     if (!PermissionHandler.isHandlePermission(WebViewActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
