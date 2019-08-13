@@ -108,11 +108,7 @@ public abstract class BaseActivity<VM extends AndroidViewModel, SV extends ViewD
         mBaseBinding.toolBar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                    finishAfterTransition();
-                } else {
-                    onBackPressed();
-                }
+                supportFinishAfterTransition();
             }
         });
     }

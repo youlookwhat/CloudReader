@@ -220,11 +220,7 @@ public abstract class BaseHeaderActivity<HV extends ViewDataBinding, SV extends 
         }
         bindingTitleView.tbBaseTitle.setOverflowIcon(ContextCompat.getDrawable(this, R.drawable.actionbar_more));
         bindingTitleView.tbBaseTitle.setNavigationOnClickListener(v -> {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                finishAfterTransition();
-            } else {
-                finish();
-            }
+            supportFinishAfterTransition();
         });
         bindingTitleView.tbBaseTitle.setOnMenuItemClickListener(item -> {
             if (item.getItemId() == R.id.actionbar_more) {
