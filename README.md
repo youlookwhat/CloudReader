@@ -224,7 +224,13 @@ If you have any questions, please write to [the issue][21] of making you don't u
 > 
 > 捐赠后均会被记录到列表中，可以留下友情链接，起到一定的推广作用。感谢大家的信任，[捐赠列表](https://github.com/youlookwhat/CloudReader/blob/master/file/admire.md)。
 
-![](https://raw.githubusercontent.com/youlookwhat/CloudReader/master/file/Wechat-admire.jpg)
+
+<img src="https://raw.githubusercontent.com/youlookwhat/CloudReader/master/file/Wechat-admire.jpg" width="250" height="250" /><img src="https://raw.githubusercontent.com/youlookwhat/CloudReader/master/file/alipay-admire.jpg" width="250" height="250"/>
+    
+<!--<center class="half">-->
+<!--</center>-->
+
+<!--![](https://raw.githubusercontent.com/youlookwhat/CloudReader/master/file/Wechat-admire.jpg)![](https://raw.githubusercontent.com/youlookwhat/CloudReader/master/file/alipay-admire.jpg)-->
 
 <!--<img width="200" height=“200” src="https://github.com/youlookwhat/CloudReader/blob/master/file/Wechat-admire.jpeg"></img><img width="200" height=“200” src="https://github.com/youlookwhat/CloudReader/blob/master/file/qq_code.JPG"></img>-->
 
