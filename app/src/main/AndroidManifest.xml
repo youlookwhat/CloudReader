@@ -117,6 +117,12 @@
         <activity
             android:name=".ui.menu.SearchActivity"
             android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".view.bigimage.BigImagePagerActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:theme="@style/AppBigImageThem" />
+
     </application>
 
 </manifest>

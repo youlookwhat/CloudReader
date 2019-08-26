@@ -4,8 +4,7 @@
     <android.support.v4.widget.SwipeRefreshLayout xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/srl_wan"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context="com.example.jingbin.cloudreader.ui.douban.BookCustomFragment">
+        android:layout_height="match_parent">
 
         <com.example.xrecyclerview.XRecyclerView
             android:id="@+id/xrv_wan"

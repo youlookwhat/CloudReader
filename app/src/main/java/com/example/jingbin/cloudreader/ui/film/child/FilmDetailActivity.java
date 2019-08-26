@@ -20,6 +20,8 @@ import com.example.jingbin.cloudreader.bean.moviechild.FilmItemBean;
 import com.example.jingbin.cloudreader.databinding.ActivityFilmDetailBinding;
 import com.example.jingbin.cloudreader.databinding.HeaderFilmDetailBinding;
 import com.example.jingbin.cloudreader.http.HttpClient;
+import com.example.jingbin.cloudreader.http.rx.RxBus;
+import com.example.jingbin.cloudreader.http.rx.RxCodeConstants;
 import com.example.jingbin.cloudreader.utils.CommonUtils;
 import com.example.jingbin.cloudreader.utils.DensityUtil;
 import com.example.jingbin.cloudreader.utils.ToastUtil;
@@ -30,6 +32,7 @@ import java.util.List;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
 
@@ -213,16 +216,28 @@ public class FilmDetailActivity extends BaseHeaderActivity<HeaderFilmDetailBindi
         bindingContentView.xrvImages.setNestedScrollingEnabled(false);
         bindingContentView.xrvImages.setHasFixedSize(false);
 
-        FilmDetailImageAdapter mAdapter = new FilmDetailImageAdapter();
+        FilmDetailImageAdapter mAdapter = new FilmDetailImageAdapter(this, listBeans);
         mAdapter.addAll(listBeans);
         bindingContentView.xrvImages.setAdapter(mAdapter);
         bindingContentView.xrvImages.setFocusable(false);
         bindingContentView.xrvImages.setFocusableInTouchMode(false);
+        initRxBus();
     }
 
     @Override
     protected void onRefresh() {
         loadMovieDetail();
+    }
+
+    private void initRxBus() {
+        Disposable subscribe = RxBus.getDefault().toObservable(RxCodeConstants.JUMP_CURRENT_POSITION, Integer.class)
+                .subscribe(new Consumer<Integer>() {
+                    @Override
+                    public void accept(Integer integer) throws Exception {
+                        bindingContentView.xrvImages.smoothScrollToPosition(integer);
+                    }
+                });
+        addSubscription(subscribe);
     }
 
     @Override
