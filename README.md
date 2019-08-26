@@ -54,7 +54,7 @@ If you have any questions, please write to [the issue][21] of making you don't u
 
 
 ## See Detail
-> [项目介绍详情](https://github.com/youlookwhat/CloudReader/blob/master/file/Introduction.md) | [细节优化详情](https://github.com/youlookwhat/CloudReader/wiki) | [**版本更新详情(V2.9.1)**](http://jingbin.me/2016/12/30/%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97-%E4%BA%91%E9%98%85/)
+> [项目介绍详情](https://github.com/youlookwhat/CloudReader/blob/master/file/Introduction.md) | [细节优化详情](https://github.com/youlookwhat/CloudReader/wiki) | [**版本更新详情(V2.9.5)**](http://jingbin.me/2016/12/30/%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97-%E4%BA%91%E9%98%85/)
 
 ### Download
 　[火速跳转](https://fir.im/cloudreader)  
@@ -224,7 +224,7 @@ If you have any questions, please write to [the issue][21] of making you don't u
 > 
 > 捐赠后均会被记录到列表中，可以留下友情链接，起到一定的推广作用。感谢大家的信任，[捐赠列表](https://github.com/youlookwhat/CloudReader/blob/master/file/admire.md)。
 
-![](https://raw.githubusercontent.com/youlookwhat/CloudReader/master/file/Wechat-admire_200.jpg)
+![](https://raw.githubusercontent.com/youlookwhat/CloudReader/master/file/Wechat-admire.jpg)
 
 <!--<img width="200" height=“200” src="https://github.com/youlookwhat/CloudReader/blob/master/file/Wechat-admire.jpeg"></img><img width="200" height=“200” src="https://github.com/youlookwhat/CloudReader/blob/master/file/qq_code.JPG"></img>-->
 
