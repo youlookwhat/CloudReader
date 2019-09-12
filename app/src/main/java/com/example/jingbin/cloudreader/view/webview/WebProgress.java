@@ -1,4 +1,4 @@
-package com.example.jingbin.cloudreader.view.webview.other;
+package com.example.jingbin.cloudreader.view.webview;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -14,12 +14,17 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.view.animation.DecelerateInterpolator;
 import android.view.animation.LinearInterpolator;
+import android.widget.FrameLayout;
 
 /**
- * @author cenxiaozhong
- * @since 1.0.0
+ * web进度条，原作者: cenxiaozhong，在此基础上修改
+ * 优化：
+ * 1. progress同时反返回两次100时出现两次
+ * 2. 当一条进度没跑完，又点击其他链接开始第二次进度时，第二次进度不出现
+ *
+ * @author jingbin
  */
-public class WebIndicator extends BaseIndicatorView implements BaseIndicatorSpec {
+public class WebProgress extends FrameLayout {
 
     /**
      * 进度条颜色
@@ -37,6 +42,10 @@ public class WebIndicator extends BaseIndicatorView implements BaseIndicatorSpec
      * 控件的宽度
      */
     private int mTargetWidth = 0;
+    /**
+     * 控件的高度
+     */
+    private int mTargetHeight;
 
     /**
      * 默认匀速动画最大的时长
@@ -59,7 +68,10 @@ public class WebIndicator extends BaseIndicatorView implements BaseIndicatorSpec
      * 当前加速后减速动画最大时长
      */
     private static int CURRENT_MAX_DECELERATE_SPEED_DURATION = MAX_DECELERATE_SPEED_DURATION;
-
+    /**
+     * 默认的高度
+     */
+    public static int WEB_INDICATOR_DEFAULT_HEIGHT = 3;
     /**
      * 标志当前进度条的状态
      */
@@ -72,28 +84,20 @@ public class WebIndicator extends BaseIndicatorView implements BaseIndicatorSpec
 
     private float mCurrentProgress = 0F;
 
-    /**
-     * 默认的高度
-     */
-    public static int WEB_INDICATOR_DEFAULT_HEIGHT = 2;
-
-    public WebIndicator(Context context) {
+    public WebProgress(Context context) {
         this(context, null);
     }
 
-    public WebIndicator(Context context, @Nullable AttributeSet attrs) {
+    public WebProgress(Context context, @Nullable AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public WebIndicator(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    public WebProgress(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-
         init(context, attrs, defStyleAttr);
-
     }
 
     private void init(Context context, AttributeSet attrs, int defStyleAttr) {
-
         mPaint = new Paint();
         mColor = Color.parseColor("#1aad19");
         mPaint.setAntiAlias(true);
@@ -102,13 +106,7 @@ public class WebIndicator extends BaseIndicatorView implements BaseIndicatorSpec
         mPaint.setStrokeCap(Paint.Cap.SQUARE);
 
         mTargetWidth = context.getResources().getDisplayMetrics().widthPixels;
-        WEB_INDICATOR_DEFAULT_HEIGHT = dip2px(2);
-
-    }
-
-    private int dip2px(float dpValue) {
-        final float scale = getContext().getResources().getDisplayMetrics().density;
-        return (int) (dpValue * scale + 0.5f);
+        mTargetHeight = dip2px(WEB_INDICATOR_DEFAULT_HEIGHT);
     }
 
     public void setColor(int color) {
@@ -133,12 +131,10 @@ public class WebIndicator extends BaseIndicatorView implements BaseIndicatorSpec
             w = w <= getContext().getResources().getDisplayMetrics().widthPixels ? w : getContext().getResources().getDisplayMetrics().widthPixels;
         }
         if (hMode == MeasureSpec.AT_MOST) {
-            h = WEB_INDICATOR_DEFAULT_HEIGHT;
+            h = mTargetHeight;
         }
         this.setMeasuredDimension(w, h);
-
     }
-
 
     @Override
     protected void onDraw(Canvas canvas) {
@@ -150,15 +146,10 @@ public class WebIndicator extends BaseIndicatorView implements BaseIndicatorSpec
         canvas.drawRect(0, 0, mCurrentProgress / 100 * Float.valueOf(this.getWidth()), this.getHeight(), mPaint);
     }
 
-    @Override
     public void show() {
-
-        if (getVisibility() == View.GONE) {
-            this.setVisibility(View.VISIBLE);
-            mCurrentProgress = 0f;
-            startAnim(false);
-        }
-
+        this.setVisibility(View.VISIBLE);
+        mCurrentProgress = 0f;
+        startAnim(false);
     }
 
     @Override
@@ -174,15 +165,12 @@ public class WebIndicator extends BaseIndicatorView implements BaseIndicatorSpec
             float rate = this.mTargetWidth / Float.valueOf(screenWidth);
             CURRENT_MAX_UNIFORM_SPEED_DURATION = (int) (MAX_UNIFORM_SPEED_DURATION * rate);
             CURRENT_MAX_DECELERATE_SPEED_DURATION = (int) (MAX_DECELERATE_SPEED_DURATION * rate);
-
         }
-
     }
 
 
     public void setProgress(float progress) {
-
-        // fix 同时返回两个 100，产生两次进度条的问题；在进度条没有跑完时，又开始新的进度没反应？
+        // fix 同时返回两个 100，产生两次进度条的问题；
         if (TAG == UN_START && progress == 100f) {
             setVisibility(View.GONE);
             return;
@@ -199,17 +187,13 @@ public class WebIndicator extends BaseIndicatorView implements BaseIndicatorSpec
         }
     }
 
-    @Override
     public void hide() {
         TAG = FINISH;
     }
 
-
     private void startAnim(boolean isFinished) {
 
-
         float v = isFinished ? 100 : 95;
-
 
         if (mAnimator != null && mAnimator.isStarted()) {
             mAnimator.cancel();
@@ -235,7 +219,6 @@ public class WebIndicator extends BaseIndicatorView implements BaseIndicatorSpec
                 segment95Animator.setInterpolator(new DecelerateInterpolator());
                 segment95Animator.addUpdateListener(mAnimatorUpdateListener);
             }
-
 
             ObjectAnimator mObjectAnimator = ObjectAnimator.ofFloat(this, "alpha", 1f, 0f);
             mObjectAnimator.setDuration(DO_END_ANIMATION_DURATION);
@@ -265,9 +248,8 @@ public class WebIndicator extends BaseIndicatorView implements BaseIndicatorSpec
         @Override
         public void onAnimationUpdate(ValueAnimator animation) {
             float t = (float) animation.getAnimatedValue();
-            WebIndicator.this.mCurrentProgress = t;
-            WebIndicator.this.invalidate();
-
+            WebProgress.this.mCurrentProgress = t;
+            WebProgress.this.invalidate();
         }
     };
 
@@ -281,7 +263,6 @@ public class WebIndicator extends BaseIndicatorView implements BaseIndicatorSpec
     @Override
     protected void onDetachedFromWindow() {
         super.onDetachedFromWindow();
-
         /**
          * animator cause leak , if not cancel;
          */
@@ -300,7 +281,6 @@ public class WebIndicator extends BaseIndicatorView implements BaseIndicatorSpec
         TAG = UN_START;
     }
 
-    @Override
     public void reset() {
         mCurrentProgress = 0;
         if (mAnimator != null && mAnimator.isStarted()) {
@@ -308,15 +288,33 @@ public class WebIndicator extends BaseIndicatorView implements BaseIndicatorSpec
         }
     }
 
-    @Override
     public void setProgress(int newProgress) {
         setProgress(Float.valueOf(newProgress));
-
     }
 
+    /**
+     * 为单独处理WebView进度条
+     */
+    public void setWebProgress(int newProgress) {
+        if (newProgress == 0) {
+            reset();
+        } else if (newProgress > 0 && newProgress <= 10) {
+            show();
+        } else if (newProgress > 10 && newProgress < 95) {
+            setProgress(newProgress);
+        } else {
+            setProgress(newProgress);
+            hide();
+        }
+    }
 
-    @Override
     public LayoutParams offerLayoutParams() {
-        return new LayoutParams(-1, WEB_INDICATOR_DEFAULT_HEIGHT);
+        return new LayoutParams(-1, mTargetHeight);
     }
+
+    private int dip2px(float dpValue) {
+        final float scale = getContext().getResources().getDisplayMetrics().density;
+        return (int) (dpValue * scale + 0.5f);
+    }
+
 }
