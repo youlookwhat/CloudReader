@@ -118,6 +118,10 @@ public abstract class BaseActivity<VM extends AndroidViewModel, SV extends ViewD
         mBaseBinding.toolBar.setTitle(text);
     }
 
+    public void setNoTitle() {
+        mBaseBinding.toolBar.setVisibility(View.GONE);
+    }
+
     protected void showLoading() {
         if (loadingView != null && loadingView.getVisibility() != View.VISIBLE) {
             loadingView.setVisibility(View.VISIBLE);

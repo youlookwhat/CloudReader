@@ -12,4 +12,6 @@ public class RxCodeConstants {
     public static final int JUMP_TYPE_TO_ONE = 1;
     // 滑动到当前图片的position
     public static final int JUMP_CURRENT_POSITION = 2;
+    // 登录状态处理
+    public static final int LOGIN = 3;
 }

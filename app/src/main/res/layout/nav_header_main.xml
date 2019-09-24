@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
         <variable
-            name="listener"
-            type="com.example.jingbin.cloudreader.ui.MainActivity" />
+            name="viewModel"
+            type="com.example.jingbin.cloudreader.viewmodel.wan.MainViewModel" />
 
         <import type="android.view.View" />
     </data>
@@ -47,19 +48,19 @@
                         android:scaleType="centerCrop" />
 
                     <LinearLayout
+                        android:id="@+id/ll_info"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
-                        android:paddingTop="@dimen/nav_header_vertical_spacing">
+                        android:paddingTop="@dimen/size_16dp">
 
                         <TextView
                             android:id="@+id/tv_username"
-                            android:layout_width="match_parent"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="夕阳无限好"
-                            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                             android:textColor="@color/colorWhite"
-                            android:textSize="17sp" />
+                            android:textSize="17sp"
+                            tools:text="玩安卓登录" />
 
                         <TextView
                             android:id="@+id/tv_level"
@@ -73,10 +74,10 @@
                             android:paddingTop="1dp"
                             android:paddingRight="6dp"
                             android:paddingBottom="1dp"
-                            android:text="Lv.10"
                             android:textColor="@color/colorWhite"
                             android:textSize="10sp"
-                            android:textStyle="italic|bold" />
+                            android:textStyle="italic|bold"
+                            tools:text="Lv.0" />
 
                     </LinearLayout>
 
@@ -170,7 +171,7 @@
                     android:layout_height="9dp"
                     android:layout_marginLeft="15dp"
                     android:src="@drawable/shape_no_read"
-                    android:visibility="@{listener.isReadOk?View.GONE:View.VISIBLE}" />
+                    android:visibility="@{viewModel.isReadOk?View.GONE:View.VISIBLE}" />
             </LinearLayout>
 
             <LinearLayout
@@ -263,7 +264,7 @@
                 android:background="@drawable/ripple_one_item_bg"
                 android:clickable="true"
                 android:gravity="center_vertical"
-                android:onClick="@{listener::onNightModeClick}"
+                android:onClick="onNightModeClick"
                 android:orientation="horizontal"
                 android:paddingLeft="@dimen/activity_horizontal_margin"
                 android:paddingRight="@dimen/activity_horizontal_margin"
@@ -287,7 +288,7 @@
                     android:id="@+id/day_night_switch"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:checked="@{listener.getNightMode}"
+                    android:checked="false"
                     android:clickable="false" />
             </LinearLayout>
 

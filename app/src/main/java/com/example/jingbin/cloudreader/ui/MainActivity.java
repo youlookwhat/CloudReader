@@ -1,5 +1,6 @@
 package com.example.jingbin.cloudreader.ui;
 
+import android.arch.lifecycle.Observer;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -8,6 +9,7 @@ import android.content.res.Resources;
 import android.databinding.DataBindingUtil;
 import android.databinding.ObservableField;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
@@ -18,6 +20,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -27,7 +30,10 @@ import android.widget.ImageView;
 
 import com.example.jingbin.cloudreader.R;
 import com.example.jingbin.cloudreader.app.ConstantsImageUrl;
+import com.example.jingbin.cloudreader.base.BaseActivity;
+import com.example.jingbin.cloudreader.bean.wanandroid.CoinUserInfoBean;
 import com.example.jingbin.cloudreader.data.UserUtil;
+import com.example.jingbin.cloudreader.databinding.ActivityBaseBinding;
 import com.example.jingbin.cloudreader.databinding.ActivityMainBinding;
 import com.example.jingbin.cloudreader.databinding.NavHeaderMainBinding;
 import com.example.jingbin.cloudreader.http.rx.RxBus;
@@ -54,6 +60,7 @@ import com.example.jingbin.cloudreader.view.MyFragmentPagerAdapter;
 import com.example.jingbin.cloudreader.view.OnLoginListener;
 import com.example.jingbin.cloudreader.view.statusbar.StatusBarUtil;
 import com.example.jingbin.cloudreader.view.webview.WebViewActivity;
+import com.example.jingbin.cloudreader.viewmodel.wan.MainViewModel;
 
 import java.util.ArrayList;
 
@@ -69,74 +76,63 @@ import io.reactivex.functions.Consumer;
  * <a href="https://github.com/youlookwhat/CloudReader">source code</a>
  * <a href="http://www.jianshu.com/u/e43c6e979831">Contact me</a>
  */
-public class MainActivity extends AppCompatActivity implements View.OnClickListener, ViewPager.OnPageChangeListener {
+public class MainActivity extends BaseActivity<MainViewModel, ActivityMainBinding> implements View.OnClickListener, ViewPager.OnPageChangeListener {
 
     public static boolean isLaunch;
-    private FrameLayout llTitleMenu;
     private Toolbar toolbar;
-    private NavigationView navView;
-    private DrawerLayout drawerLayout;
     private ViewPager vpContent;
-    private ActivityMainBinding mBinding;
     private ImageView ivTitleTwo;
     private ImageView ivTitleOne;
     private ImageView ivTitleThree;
-    private CompositeDisposable mCompositeDisposable;
     private NavHeaderMainBinding bind;
-    public ObservableField<Boolean> isReadOk = new ObservableField<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_main);
+        setContentView(R.layout.activity_main);
+        showContentView();
         isLaunch = true;
         initStatusView();
-        initId();
-        initRxBus();
-
-        StatusBarUtil.setColorNoTranslucentForDrawerLayout(MainActivity.this, drawerLayout,
-                CommonUtils.getColor(R.color.colorTheme));
         initContentFragment();
         initDrawerLayout();
-        initListener();
-        UpdateUtil.check(this, false);
+        initRxBus();
     }
 
     private void initStatusView() {
-        ViewGroup.LayoutParams layoutParams = mBinding.include.viewStatus.getLayoutParams();
+        setNoTitle();
+        StatusBarUtil.setColorNoTranslucentForDrawerLayout(MainActivity.this, bindingView.drawerLayout, CommonUtils.getColor(R.color.colorTheme));
+        ViewGroup.LayoutParams layoutParams = bindingView.include.viewStatus.getLayoutParams();
         layoutParams.height = StatusBarUtil.getStatusBarHeight(this);
-        mBinding.include.viewStatus.setLayoutParams(layoutParams);
+        bindingView.include.viewStatus.setLayoutParams(layoutParams);
+        initId();
+        UpdateUtil.check(this, false);
     }
 
     private void initId() {
-        drawerLayout = mBinding.drawerLayout;
-        navView = mBinding.navView;
-        toolbar = mBinding.include.toolbar;
-        llTitleMenu = mBinding.include.llTitleMenu;
-        vpContent = mBinding.include.vpContent;
-        ivTitleOne = mBinding.include.ivTitleOne;
-        ivTitleTwo = mBinding.include.ivTitleTwo;
-        ivTitleThree = mBinding.include.ivTitleThree;
-    }
-
-    private void initListener() {
+        toolbar = bindingView.include.toolbar;
+        FrameLayout llTitleMenu = bindingView.include.llTitleMenu;
+        vpContent = bindingView.include.vpContent;
+        ivTitleOne = bindingView.include.ivTitleOne;
+        ivTitleTwo = bindingView.include.ivTitleTwo;
+        ivTitleThree = bindingView.include.ivTitleThree;
         llTitleMenu.setOnClickListener(this);
-        mBinding.include.ivTitleOne.setOnClickListener(this);
-        mBinding.include.ivTitleTwo.setOnClickListener(this);
-        mBinding.include.ivTitleThree.setOnClickListener(this);
+        bindingView.include.ivTitleOne.setOnClickListener(this);
+        bindingView.include.ivTitleTwo.setOnClickListener(this);
+        bindingView.include.ivTitleThree.setOnClickListener(this);
         getClipContent();
     }
+
 
     /**
      * inflateHeaderView 进来的布局要宽一些
      */
     private void initDrawerLayout() {
-        navView.inflateHeaderView(R.layout.nav_header_main);
-        View headerView = navView.getHeaderView(0);
+        bindingView.navView.inflateHeaderView(R.layout.nav_header_main);
+        View headerView = bindingView.navView.getHeaderView(0);
         bind = DataBindingUtil.bind(headerView);
-        bind.setListener(this);
+        bind.setViewModel(viewModel);
         bind.dayNightSwitch.setChecked(SPUtils.getNightMode());
-        isReadOk.set(SPUtils.isRead());
+        viewModel.isReadOk.set(SPUtils.isRead());
 
         GlideUtil.displayCircle(bind.ivAvatar, ConstantsImageUrl.IC_AVATAR);
         bind.llNavExit.setOnClickListener(this);
@@ -148,6 +144,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         bind.llNavAbout.setOnClickListener(listener);
         bind.llNavLogin.setOnClickListener(listener);
         bind.llNavCollect.setOnClickListener(listener);
+        bind.llInfo.setOnClickListener(listener);
+
+        viewModel.getUserInfo();
+        viewModel.getCoin().observe(this, new Observer<CoinUserInfoBean>() {
+            @Override
+            public void onChanged(@Nullable CoinUserInfoBean coinUserInfoBean) {
+                if (coinUserInfoBean != null) {
+                    bind.tvUsername.setText(coinUserInfoBean.getUsername());
+                    bind.tvLevel.setText(String.format("Lv.%s", UserUtil.getLevel(coinUserInfoBean.getCoinCount())));
+                } else {
+                    bind.tvUsername.setText("玩安卓登录");
+                    bind.tvLevel.setText("Lv.0");
+                }
+            }
+        });
     }
 
     private void initContentFragment() {
@@ -175,31 +186,37 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private PerfectClickListener listener = new PerfectClickListener() {
         @Override
         protected void onNoDoubleClick(final View v) {
-            mBinding.drawerLayout.closeDrawer(GravityCompat.START);
-            mBinding.drawerLayout.postDelayed(() -> {
+            bindingView.drawerLayout.closeDrawer(GravityCompat.START);
+            bindingView.drawerLayout.postDelayed(() -> {
                 switch (v.getId()) {
-                    case R.id.ll_nav_homepage:// 主页
+                    case R.id.ll_nav_homepage:
+                        // 主页
                         NavHomePageActivity.startHome(MainActivity.this);
                         break;
-                    case R.id.ll_nav_scan_download://扫码下载
+                    case R.id.ll_nav_scan_download:
+                        //扫码下载
                         NavDownloadActivity.start(MainActivity.this);
                         break;
-                    case R.id.ll_nav_deedback:// 问题反馈
+                    case R.id.ll_nav_deedback:
+                        // 问题反馈
                         NavDeedBackActivity.start(MainActivity.this);
-                        if (isReadOk.get() != null && !isReadOk.get().booleanValue()) {
+                        if (viewModel.isReadOk.get() != null && !viewModel.isReadOk.get().booleanValue()) {
                             SPUtils.setRead(true);
-                            isReadOk.set(true);
+                            viewModel.isReadOk.set(true);
                         }
                         break;
-                    case R.id.ll_nav_about:// 关于云阅
+                    case R.id.ll_nav_about:
+                        // 关于云阅
                         NavAboutActivity.start(MainActivity.this);
                         break;
-                    case R.id.ll_nav_collect:// 玩安卓收藏
+                    case R.id.ll_nav_collect:
+                        // 玩安卓收藏
                         if (UserUtil.isLogin(MainActivity.this)) {
                             MyCollectActivity.start(MainActivity.this);
                         }
                         break;
-                    case R.id.ll_nav_login:// 玩安卓登录
+                    case R.id.ll_nav_login:
+                        // 玩安卓登录
                         DialogBuild.showItems(v, new OnLoginListener() {
                             @Override
                             public void loginWanAndroid() {
@@ -211,6 +228,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                 WebViewActivity.loadUrl(v.getContext(), "https://github.com/login", "登录GitHub账号");
                             }
                         });
+                        break;
+                    case R.id.ll_info:
+                        // 登录
+                        if (!UserUtil.isLogin()) {
+                            LoginActivity.start(MainActivity.this);
+                        }
                         break;
                     default:
                         break;
@@ -224,7 +247,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch (v.getId()) {
             case R.id.ll_title_menu:
                 // 开启菜单
-                drawerLayout.openDrawer(GravityCompat.START);
+                bindingView.drawerLayout.openDrawer(GravityCompat.START);
                 break;
             case R.id.iv_title_two:
                 // 不然cpu会有损耗
@@ -395,8 +418,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
-            if (mBinding.drawerLayout.isDrawerOpen(GravityCompat.START)) {
-                mBinding.drawerLayout.closeDrawer(GravityCompat.START);
+            if (bindingView.drawerLayout.isDrawerOpen(GravityCompat.START)) {
+                bindingView.drawerLayout.closeDrawer(GravityCompat.START);
             } else {
                 // 不退出程序，进入后台
                 moveTaskToBack(true);
@@ -418,21 +441,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     }
                 });
         addSubscription(subscribe);
-    }
-
-    public void addSubscription(Disposable s) {
-        if (this.mCompositeDisposable == null) {
-            this.mCompositeDisposable = new CompositeDisposable();
-        }
-        this.mCompositeDisposable.add(s);
+        Disposable subscribe2 = RxBus.getDefault().toObservable(RxCodeConstants.LOGIN, Boolean.class)
+                .subscribe(new Consumer<Boolean>() {
+                    @Override
+                    public void accept(Boolean isLogin) throws Exception {
+                        if (isLogin) {
+                            viewModel.getUserInfo();
+                        } else {
+                            viewModel.getCoin().setValue(null);
+                        }
+                    }
+                });
+        addSubscription(subscribe2);
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        if (this.mCompositeDisposable != null && !mCompositeDisposable.isDisposed()) {
-            this.mCompositeDisposable.clear();
-        }
         isLaunch = false;
         // 杀死该应用进程 需要权限
         android.os.Process.killProcess(android.os.Process.myPid());

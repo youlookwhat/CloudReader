@@ -14,6 +14,8 @@ import com.example.jingbin.cloudreader.data.model.LoginModel;
 import com.example.jingbin.cloudreader.data.room.Injection;
 import com.example.jingbin.cloudreader.data.room.User;
 import com.example.jingbin.cloudreader.data.room.UserDataCallback;
+import com.example.jingbin.cloudreader.http.rx.RxBus;
+import com.example.jingbin.cloudreader.http.rx.RxCodeConstants;
 import com.example.jingbin.cloudreader.view.OnLoginListener;
 
 
@@ -113,6 +115,7 @@ public class DialogBuild {
                             Injection.get().deleteAllData();
                             UserUtil.handleLoginFailure();
                             ToastUtil.showToastLong("退出成功");
+                            RxBus.getDefault().post(RxCodeConstants.LOGIN, false);
                         });
                     } else {
                         listener.loginWanAndroid();

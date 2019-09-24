@@ -2,9 +2,9 @@ package com.example.jingbin.cloudreader.http;
 
 import com.example.http.HttpUtils;
 import com.example.http.utils.BuildFactory;
+import com.example.jingbin.cloudreader.bean.wanandroid.BaseResultBean;
 import com.example.jingbin.cloudreader.bean.CollectUrlBean;
 import com.example.jingbin.cloudreader.bean.ComingFilmBean;
-import com.example.jingbin.cloudreader.bean.FilmDetailBasicBean;
 import com.example.jingbin.cloudreader.bean.FilmDetailBean;
 import com.example.jingbin.cloudreader.bean.FrontpageBean;
 import com.example.jingbin.cloudreader.bean.GankIoDataBean;
@@ -15,6 +15,7 @@ import com.example.jingbin.cloudreader.bean.MtimeFilmeBean;
 import com.example.jingbin.cloudreader.bean.UpdateBean;
 import com.example.jingbin.cloudreader.bean.book.BookBean;
 import com.example.jingbin.cloudreader.bean.book.BookDetailBean;
+import com.example.jingbin.cloudreader.bean.wanandroid.CoinUserInfoBean;
 import com.example.jingbin.cloudreader.bean.wanandroid.HomeListBean;
 import com.example.jingbin.cloudreader.bean.wanandroid.LoginBean;
 import com.example.jingbin.cloudreader.bean.wanandroid.NaviJsonBean;
@@ -322,4 +323,9 @@ public interface HttpClient {
     @GET("article/listproject/{page}/json")
     Observable<HomeListBean> getProjectList(@Path("page") int page);
 
+    /**
+     * 获取个人积分，需要登录后访问
+     */
+    @GET("lg/coin/userinfo/json")
+    Observable<BaseResultBean<CoinUserInfoBean>> getCoinUserInfo();
 }

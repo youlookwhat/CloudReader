@@ -3,6 +3,7 @@ package com.example.jingbin.cloudreader.data;
 import android.content.Context;
 
 import com.example.jingbin.cloudreader.app.Constants;
+import com.example.jingbin.cloudreader.data.impl.OnUserInfoListener;
 import com.example.jingbin.cloudreader.data.room.Injection;
 import com.example.jingbin.cloudreader.data.room.User;
 import com.example.jingbin.cloudreader.data.room.UserDataCallback;
@@ -19,18 +20,22 @@ import com.example.jingbin.cloudreader.utils.ToastUtil;
 public class UserUtil {
 
     /**
-     * 初始化登录状态
+     * 得到用户信息
      */
-    public static void getLoginStatus() {
+    public static void getUserInfo(OnUserInfoListener listener) {
         Injection.get().getSingleBean(new UserDataCallback() {
             @Override
             public void onDataNotAvailable() {
-                SPUtils.putBoolean(Constants.IS_LOGIN, false);
+                if (listener != null) {
+                    listener.onSuccess(null);
+                }
             }
 
             @Override
             public void getData(User bean) {
-                SPUtils.putBoolean(Constants.IS_LOGIN, true);
+                if (listener != null) {
+                    listener.onSuccess(bean);
+                }
             }
         });
     }
@@ -57,5 +62,16 @@ public class UserUtil {
         } else {
             return true;
         }
+    }
+
+    /**
+     * 是否登录
+     */
+    public static boolean isLogin() {
+        return SPUtils.getBoolean(Constants.IS_LOGIN, false);
+    }
+
+    public static String getLevel(int coinCount) {
+        return String.valueOf(coinCount / 100 + 1);
     }
 }
