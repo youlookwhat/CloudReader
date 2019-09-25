@@ -147,7 +147,7 @@ public class WebViewActivity extends AppCompatActivity implements IWebPageView {
             case R.id.actionbar_cope:
                 // 复制链接
                 BaseTools.copy(webView.getUrl());
-                ToastUtil.showToast("复制成功");
+                ToastUtil.showToast("已复制到剪贴板");
                 break;
             case R.id.actionbar_open:
                 // 打开链接
@@ -184,7 +184,7 @@ public class WebViewActivity extends AppCompatActivity implements IWebPageView {
         collectModel.collectUrl(mTitle, webView.getUrl(), new WanNavigator.OnCollectNavigator() {
             @Override
             public void onSuccess() {
-                ToastUtil.showToastLong("收藏网址成功");
+                ToastUtil.showToastLong("已添加到收藏");
             }
 
             @Override

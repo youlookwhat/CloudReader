@@ -69,7 +69,7 @@ public class DialogBuild {
             switch (which) {
                 case 0:
                     BaseTools.copy(content);
-                    ToastUtil.showToast("复制成功");
+                    ToastUtil.showToast("已复制到剪贴板");
                     break;
                 case 1:
                     ShareUtils.share(v.getContext(), content);
@@ -114,7 +114,7 @@ public class DialogBuild {
                         new LoginModel().logout(() -> {
                             Injection.get().deleteAllData();
                             UserUtil.handleLoginFailure();
-                            ToastUtil.showToastLong("退出成功");
+//                            ToastUtil.showToastLong("退出成功");
                             RxBus.getDefault().post(RxCodeConstants.LOGIN, false);
                         });
                     } else {

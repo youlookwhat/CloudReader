@@ -65,7 +65,7 @@ public class CollectUrlAdapter extends BaseRecyclerViewAdapter<CollectUrlBean.Da
                                                 bean.setName(name);
                                                 bean.setLink(link);
                                                 notifyItemChanged(getAdapterPosition());
-                                                ToastUtil.showToastLong("编辑成功");
+//                                                ToastUtil.showToastLong("编辑成功");
                                             }
 
                                             @Override

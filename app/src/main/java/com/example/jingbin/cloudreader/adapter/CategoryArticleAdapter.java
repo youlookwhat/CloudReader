@@ -64,12 +64,12 @@ public class CategoryArticleAdapter extends JQuickAdapter<ArticlesBean, ItemCate
                                 @Override
                                 public void onSuccess() {
                                     bean.setCollect(true);
-                                    ToastUtil.showToastLong("收藏成功");
+//                                    ToastUtil.showToastLong("收藏成功");
                                 }
 
                                 @Override
                                 public void onFailure() {
-                                    ToastUtil.showToastLong("收藏失败");
+//                                    ToastUtil.showToastLong("收藏失败");
                                     bean.setCollect(false);
                                     notifyItemChanged(helper.getAdapterPosition());
                                 }
