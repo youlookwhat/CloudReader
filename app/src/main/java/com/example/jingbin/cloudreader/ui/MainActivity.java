@@ -153,9 +153,11 @@ public class MainActivity extends BaseActivity<MainViewModel, ActivityMainBindin
                 if (coinUserInfoBean != null) {
                     bind.tvUsername.setText(coinUserInfoBean.getUsername());
                     bind.tvLevel.setText(String.format("Lv.%s", UserUtil.getLevel(coinUserInfoBean.getCoinCount())));
+                    bind.tvRank.setText(String.format("Top.%s", coinUserInfoBean.getRank()));
                 } else {
                     bind.tvUsername.setText("玩安卓登录");
-                    bind.tvLevel.setText("Lv.0");
+                    bind.tvLevel.setText("Lv.1");
+                    bind.tvRank.setText("Top.1");
                 }
             }
         });

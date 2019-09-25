@@ -60,14 +60,14 @@
                             android:layout_height="wrap_content"
                             android:textColor="@color/colorWhite"
                             android:textSize="17sp"
-                            tools:text="玩安卓登录" />
+                            android:text="玩安卓登录" />
 
                         <TextView
                             android:id="@+id/tv_level"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
-                            android:layout_marginLeft="6dp"
+                            android:layout_marginStart="6dp"
                             android:background="@drawable/shape_bg_level"
                             android:gravity="center"
                             android:paddingLeft="6dp"
@@ -77,7 +77,24 @@
                             android:textColor="@color/colorWhite"
                             android:textSize="10sp"
                             android:textStyle="italic|bold"
-                            tools:text="Lv.0" />
+                            android:text="Lv.1" />
+
+                        <TextView
+                            android:id="@+id/tv_rank"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginStart="6dp"
+                            android:background="@drawable/shape_bg_level"
+                            android:gravity="center"
+                            android:paddingLeft="6dp"
+                            android:paddingTop="1dp"
+                            android:paddingRight="6dp"
+                            android:paddingBottom="1dp"
+                            android:textColor="@color/colorWhite"
+                            android:textSize="10sp"
+                            android:textStyle="italic|bold"
+                            android:text="Top.1" />
 
                     </LinearLayout>
 
