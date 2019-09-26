@@ -7,11 +7,11 @@ import android.content.res.Resources;
 import android.databinding.DataBindingUtil;
 import android.databinding.ViewDataBinding;
 import android.graphics.drawable.AnimationDrawable;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -78,7 +78,7 @@ public abstract class BaseActivity<VM extends AndroidViewModel, SV extends ViewD
             mAnimationDrawable.start();
         }
 
-        setToolBar();
+        setToolBar(mBaseBinding.toolBar);
         bindingView.getRoot().setVisibility(View.GONE);
         initViewModel();
     }
@@ -96,8 +96,8 @@ public abstract class BaseActivity<VM extends AndroidViewModel, SV extends ViewD
     /**
      * 设置titlebar
      */
-    protected void setToolBar() {
-        setSupportActionBar(mBaseBinding.toolBar);
+    protected void setToolBar(Toolbar toolbar) {
+        setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             //去除默认Title显示
@@ -105,7 +105,7 @@ public abstract class BaseActivity<VM extends AndroidViewModel, SV extends ViewD
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setHomeAsUpIndicator(R.drawable.icon_back);
         }
-        mBaseBinding.toolBar.setNavigationOnClickListener(new View.OnClickListener() {
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 supportFinishAfterTransition();

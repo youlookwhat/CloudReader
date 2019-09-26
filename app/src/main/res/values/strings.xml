@@ -11,6 +11,7 @@
     <string name="hello_blank_fragment">Hello blank mFragment</string>
     <string name="title_activity_base">BaseActivity</string>
     <string name="actionbar_search">搜索</string>
+    <string name="actionbar_help_coin">积分规则</string>
     <string name="actionbar_more">更多信息</string>
     <string name="actionbar_webview_share">分享</string>
     <string name="actionbar_webview_cope">复制链接</string>
@@ -77,6 +78,7 @@
     <string name="no_name_joke">匿名用户</string>
     <string name="string_dian">&#160;·&#160;</string>
     <string name="string_add">+</string>
+    <string name="string_tree_category_size">共%s个子分类</string>
 
     <!--url-->
     <string name="string_url_cloudreader">https://github.com/youlookwhat/CloudReader</string>
@@ -99,5 +101,6 @@
     <string name="string_url_wanandroid">http://www.wanandroid.com/index</string>
     <!--每日推荐-->
     <string name="string_url_trending">https://github.com/trending</string>
-    <string name="string_tree_category_size">共%s个子分类</string>
+    <!--积分规则-->
+    <string name="string_url_coin_help">https://www.wanandroid.com/blog/show/2653</string>
 </resources>

@@ -7,20 +7,16 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.databinding.DataBindingUtil;
-import android.databinding.ObservableField;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.KeyEvent;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -33,7 +29,6 @@ import com.example.jingbin.cloudreader.app.ConstantsImageUrl;
 import com.example.jingbin.cloudreader.base.BaseActivity;
 import com.example.jingbin.cloudreader.bean.wanandroid.CoinUserInfoBean;
 import com.example.jingbin.cloudreader.data.UserUtil;
-import com.example.jingbin.cloudreader.databinding.ActivityBaseBinding;
 import com.example.jingbin.cloudreader.databinding.ActivityMainBinding;
 import com.example.jingbin.cloudreader.databinding.NavHeaderMainBinding;
 import com.example.jingbin.cloudreader.http.rx.RxBus;
@@ -65,7 +60,6 @@ import com.example.jingbin.cloudreader.viewmodel.wan.MainViewModel;
 
 import java.util.ArrayList;
 
-import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 
@@ -147,6 +141,7 @@ public class MainActivity extends BaseActivity<MainViewModel, ActivityMainBindin
         bind.llNavCollect.setOnClickListener(listener);
         bind.llInfo.setOnClickListener(listener);
         bind.llNavCoin.setOnClickListener(listener);
+        bind.tvRank.setOnClickListener(listener);
 
         viewModel.getUserInfo();
         viewModel.getCoin().observe(this, new Observer<CoinUserInfoBean>() {
@@ -237,12 +232,20 @@ public class MainActivity extends BaseActivity<MainViewModel, ActivityMainBindin
                         // 登录
                         if (!UserUtil.isLogin()) {
                             LoginActivity.start(MainActivity.this);
+                        } else {
+                            MyCoinActivity.start(MainActivity.this);
                         }
                         break;
                     case R.id.ll_nav_coin:
                         // 我的积分
                         if (UserUtil.isLogin(MainActivity.this)) {
                             MyCoinActivity.start(MainActivity.this);
+                        }
+                        break;
+                    case R.id.tv_rank:
+                        // 排行
+                        if (UserUtil.isLogin(MainActivity.this)) {
+                            MyCoinActivity.startRank(MainActivity.this);
                         }
                         break;
                     default:

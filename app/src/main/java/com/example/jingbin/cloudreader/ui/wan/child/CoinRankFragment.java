@@ -22,7 +22,7 @@ import com.example.xrecyclerview.XRecyclerView;
  * @date 2019/09/26.
  * @description 积分详情
  */
-public class CoinDetailFragment extends BaseFragment<CoinListViewModel, FragmentWanAndroidBinding> {
+public class CoinRankFragment extends BaseFragment<CoinListViewModel, FragmentWanAndroidBinding> {
 
     private boolean mIsPrepared;
     private boolean mIsFirst = true;
@@ -40,8 +40,8 @@ public class CoinDetailFragment extends BaseFragment<CoinListViewModel, Fragment
         activity = getActivity();
     }
 
-    public static CoinDetailFragment newInstance() {
-        return new CoinDetailFragment();
+    public static CoinRankFragment newInstance() {
+        return new CoinRankFragment();
     }
 
     @Override
@@ -64,7 +64,7 @@ public class CoinDetailFragment extends BaseFragment<CoinListViewModel, Fragment
     private void initRefreshView() {
         RefreshHelper.init(bindingView.xrvWan, false);
         bindingView.srlWan.setColorSchemeColors(CommonUtils.getColor(R.color.colorTheme));
-        mAdapter = new CoinAdapter(activity,false);
+        mAdapter = new CoinAdapter(activity, true);
         bindingView.xrvWan.setAdapter(mAdapter);
         bindingView.srlWan.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -75,7 +75,7 @@ public class CoinDetailFragment extends BaseFragment<CoinListViewModel, Fragment
                         public void run() {
                             bindingView.xrvWan.reset();
                             viewModel.setPage(1);
-                            getCoinLog();
+                            getCoinRank();
                         }
                     }, 150);
                 }
@@ -92,7 +92,7 @@ public class CoinDetailFragment extends BaseFragment<CoinListViewModel, Fragment
                 if (!bindingView.srlWan.isRefreshing()) {
                     int page = viewModel.getPage();
                     viewModel.setPage(++page);
-                    getCoinLog();
+                    getCoinRank();
                 } else {
                     bindingView.xrvWan.refreshComplete();
                 }
@@ -107,11 +107,11 @@ public class CoinDetailFragment extends BaseFragment<CoinListViewModel, Fragment
         }
 
         bindingView.srlWan.setRefreshing(true);
-        bindingView.srlWan.postDelayed(this::getCoinLog, 150);
+        bindingView.srlWan.postDelayed(this::getCoinRank, 150);
     }
 
-    private void getCoinLog() {
-        viewModel.getCoinLog().observe(this, new Observer<CoinBean>() {
+    private void getCoinRank() {
+        viewModel.getCoinRank().observe(this, new Observer<CoinBean>() {
             @Override
             public void onChanged(@Nullable CoinBean homeListBean) {
                 if (bindingView.srlWan.isRefreshing()) {
@@ -149,6 +149,6 @@ public class CoinDetailFragment extends BaseFragment<CoinListViewModel, Fragment
     @Override
     protected void onRefresh() {
         bindingView.srlWan.setRefreshing(true);
-        getCoinLog();
+        getCoinRank();
     }
 }

@@ -275,7 +275,7 @@
 
             </LinearLayout>
 
-            <LinearLayout
+            <RelativeLayout
                 android:id="@+id/ll_nav_coin"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
@@ -283,32 +283,38 @@
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
                 android:paddingLeft="16dp"
-                android:paddingRight="16dp">
+                android:paddingRight="6dp">
 
                 <ImageView
                     android:id="@+id/iv_icon"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
+                    android:layout_centerVertical="true"
                     android:src="@drawable/ic_nav_coin" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
                     android:layout_marginStart="16dp"
-                    android:text="我的积分"
+                    android:layout_toRightOf="@+id/iv_icon"
+                    android:text="积分系统"
                     android:textColor="@color/colorContent"
                     android:textSize="15sp" />
 
                 <TextView
                     android:id="@+id/tv_rank"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="15dp"
-                    android:textColor="@color/colorBtDialog"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentRight="true"
+                    android:background="?selectableItemBackgroundBorderless"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
                     android:textSize="12sp"
                     tools:text="排名 1" />
 
-            </LinearLayout>
+            </RelativeLayout>
 
             <!--夜间模式，正在完善-->
             <LinearLayout
