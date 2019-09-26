@@ -112,6 +112,9 @@
             android:name=".ui.wan.child.MyCollectActivity"
             android:screenOrientation="portrait" />
         <activity
+            android:name=".ui.wan.child.MyCoinActivity"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".ui.wan.child.CategoryDetailActivity"
             android:screenOrientation="portrait" />
         <activity

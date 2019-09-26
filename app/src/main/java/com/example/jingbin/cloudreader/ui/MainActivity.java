@@ -48,6 +48,7 @@ import com.example.jingbin.cloudreader.ui.menu.NavHomePageActivity;
 import com.example.jingbin.cloudreader.ui.menu.SearchActivity;
 import com.example.jingbin.cloudreader.ui.wan.WanFragment;
 import com.example.jingbin.cloudreader.ui.wan.child.LoginActivity;
+import com.example.jingbin.cloudreader.ui.wan.child.MyCoinActivity;
 import com.example.jingbin.cloudreader.ui.wan.child.MyCollectActivity;
 import com.example.jingbin.cloudreader.utils.BaseTools;
 import com.example.jingbin.cloudreader.utils.CommonUtils;
@@ -145,6 +146,7 @@ public class MainActivity extends BaseActivity<MainViewModel, ActivityMainBindin
         bind.llNavLogin.setOnClickListener(listener);
         bind.llNavCollect.setOnClickListener(listener);
         bind.llInfo.setOnClickListener(listener);
+        bind.llNavCoin.setOnClickListener(listener);
 
         viewModel.getUserInfo();
         viewModel.getCoin().observe(this, new Observer<CoinUserInfoBean>() {
@@ -153,11 +155,11 @@ public class MainActivity extends BaseActivity<MainViewModel, ActivityMainBindin
                 if (coinUserInfoBean != null) {
                     bind.tvUsername.setText(coinUserInfoBean.getUsername());
                     bind.tvLevel.setText(String.format("Lv.%s", UserUtil.getLevel(coinUserInfoBean.getCoinCount())));
-                    bind.tvRank.setText(String.format("Top.%s", coinUserInfoBean.getRank()));
+                    bind.tvRank.setText(String.format("排名 %s", coinUserInfoBean.getRank()));
                 } else {
                     bind.tvUsername.setText("玩安卓登录");
                     bind.tvLevel.setText("Lv.1");
-                    bind.tvRank.setText("Top.1");
+                    bind.tvRank.setText("");
                 }
             }
         });
@@ -235,6 +237,12 @@ public class MainActivity extends BaseActivity<MainViewModel, ActivityMainBindin
                         // 登录
                         if (!UserUtil.isLogin()) {
                             LoginActivity.start(MainActivity.this);
+                        }
+                        break;
+                    case R.id.ll_nav_coin:
+                        // 我的积分
+                        if (UserUtil.isLogin(MainActivity.this)) {
+                            MyCoinActivity.start(MainActivity.this);
                         }
                         break;
                     default:

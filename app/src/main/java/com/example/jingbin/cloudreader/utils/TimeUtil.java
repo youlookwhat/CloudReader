@@ -329,6 +329,16 @@ public class TimeUtil {
         }
     }
 
+    public static String getTime(long timeMilliseconds) {
+        try {
+            SimpleDateFormat sDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            String date = sDateFormat.format(timeMilliseconds);
+            return date;
+        } catch (Exception e) {
+            return getData();
+        }
+    }
+
 
     public static Date getDate() {
         SimpleDateFormat sDateFormat = new SimpleDateFormat("yyyy-MM-dd");

@@ -1,5 +1,6 @@
 package com.example.jingbin.cloudreader.base.baseadapter;
 
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -15,7 +16,7 @@ public abstract class BaseRecyclerViewAdapter<T> extends RecyclerView.Adapter<Ba
     protected OnItemLongClickListener<T> onItemLongClickListener;
 
     @Override
-    public void onBindViewHolder(BaseRecyclerViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull BaseRecyclerViewHolder holder, final int position) {
         holder.onBaseBindViewHolder(data.get(position), position);
 
 //        holder.itemView.setOnClickListener(new PerfectClickListener() {

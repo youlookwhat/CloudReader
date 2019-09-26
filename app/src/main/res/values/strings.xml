@@ -76,6 +76,7 @@
     <string name="string_joke">------</string>
     <string name="no_name_joke">匿名用户</string>
     <string name="string_dian">&#160;·&#160;</string>
+    <string name="string_add">+</string>
 
     <!--url-->
     <string name="string_url_cloudreader">https://github.com/youlookwhat/CloudReader</string>

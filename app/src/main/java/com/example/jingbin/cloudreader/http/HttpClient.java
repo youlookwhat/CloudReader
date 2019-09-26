@@ -2,6 +2,8 @@ package com.example.jingbin.cloudreader.http;
 
 import com.example.http.HttpUtils;
 import com.example.http.utils.BuildFactory;
+import com.example.jingbin.cloudreader.bean.CoinBean;
+import com.example.jingbin.cloudreader.bean.CoinLogBean;
 import com.example.jingbin.cloudreader.bean.wanandroid.BaseResultBean;
 import com.example.jingbin.cloudreader.bean.CollectUrlBean;
 import com.example.jingbin.cloudreader.bean.ComingFilmBean;
@@ -23,6 +25,8 @@ import com.example.jingbin.cloudreader.bean.wanandroid.QsbkListBean;
 import com.example.jingbin.cloudreader.bean.wanandroid.SearchTagBean;
 import com.example.jingbin.cloudreader.bean.wanandroid.TreeBean;
 import com.example.jingbin.cloudreader.bean.wanandroid.WanAndroidBannerBean;
+
+import java.util.List;
 
 import io.reactivex.Flowable;
 import io.reactivex.Observable;
@@ -328,4 +332,16 @@ public interface HttpClient {
      */
     @GET("lg/coin/userinfo/json")
     Observable<BaseResultBean<CoinUserInfoBean>> getCoinUserInfo();
+
+    /**
+     * 获取积分排行
+     */
+    @GET("coin/rank/{page}/json")
+    Observable<BaseResultBean<CoinBean>> getCoinRank(@Path("page") int page);
+
+    /**
+     * 获取积分值变化详情
+     */
+    @GET("lg/coin/list/{page}/json")
+    Observable<BaseResultBean<CoinBean>> getCoinLog(@Path("page") int page);
 }
