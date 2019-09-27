@@ -36,6 +36,10 @@ public class User {
     private int type;
     @ColumnInfo(name = "username")
     private String username;
+    @ColumnInfo(name = "coinCount")
+    private int coinCount;
+    @ColumnInfo(name = "rank")
+    private int rank;
 
 //    @ColumnInfo(name = "collectIds")
 //    private List<Integer> collectIds;
@@ -94,13 +98,31 @@ public class User {
         this.username = username;
     }
 
-    public User(@NonNull int id, String email, String icon, String password, int type, String username) {
+    public User(@NonNull int id, String email, String icon, String password, int type, String username, int coinCount, int rank) {
         this.id = id;
         this.email = email;
         this.icon = icon;
         this.password = password;
         this.type = type;
         this.username = username;
+        this.coinCount = coinCount;
+        this.rank = rank;
+    }
+
+    public int getCoinCount() {
+        return coinCount;
+    }
+
+    public void setCoinCount(int coinCount) {
+        this.coinCount = coinCount;
+    }
+
+    public int getRank() {
+        return rank;
+    }
+
+    public void setRank(int rank) {
+        this.rank = rank;
     }
 
     @Override
@@ -112,6 +134,8 @@ public class User {
                 ", password='" + password + '\'' +
                 ", type=" + type +
                 ", username='" + username + '\'' +
+                ", coinCount=" + coinCount +
+                ", rank=" + rank +
                 '}';
     }
 }

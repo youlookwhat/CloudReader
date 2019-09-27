@@ -40,6 +40,13 @@ public class UserUtil {
         });
     }
 
+    /**
+     * 更新用户信息
+     */
+    public static void setUserInfo(User bean) {
+        Injection.get().addData(bean);
+    }
+
     public static void handleLoginSuccess() {
         SPUtils.putBoolean(Constants.IS_LOGIN, true);
     }
