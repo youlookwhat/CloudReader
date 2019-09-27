@@ -17,6 +17,8 @@
 
         <import type="android.text.TextUtils" />
 
+        <import type="com.example.jingbin.cloudreader.utils.DataUtil" />
+
         <import type="android.view.View" />
     </data>
 
@@ -77,12 +79,12 @@
             android:id="@+id/textView3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{@string/string_dian + bean.author}"
+            android:text="@{DataUtil.getAuthor(bean.author,bean.shareUser)}"
             android:textColor="@color/colorSubtitle"
             android:textSize="11sp"
             app:layout_constraintStart_toEndOf="@+id/textView2"
             app:layout_constraintTop_toTopOf="@+id/textView2"
-            tools:text="jingbin" />
+            tools:text=" · jingbin" />
 
         <CheckBox
             android:id="@+id/vb_collect"
@@ -90,8 +92,8 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"
             android:layout_marginTop="3dp"
+            android:layout_marginRight="5dp"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:button="@drawable/selector_collect_check"
             android:checked="@{bean.collect}"

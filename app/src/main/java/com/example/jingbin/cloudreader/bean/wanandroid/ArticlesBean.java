@@ -50,6 +50,16 @@ public class ArticlesBean {
     private boolean isShowImage = true;
     // 分类name
     private String navigationName;
+    // 可能没有author 有 shareUser
+    private String shareUser;
+
+    public String getShareUser() {
+        return shareUser;
+    }
+
+    public void setShareUser(String shareUser) {
+        this.shareUser = shareUser;
+    }
 
     public String getNavigationName() {
         return navigationName;

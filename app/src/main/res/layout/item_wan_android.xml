@@ -18,6 +18,8 @@
         <import type="android.text.TextUtils" />
 
         <import type="android.view.View" />
+        <!--调用静态方法-->
+        <import type="com.example.jingbin.cloudreader.utils.DataUtil" />
     </data>
 
     <!--如果有点击事件，则内部的水波纹不能扩散-->
@@ -26,9 +28,9 @@
         android:layout_height="wrap_content"
         android:foreground="?attr/selectableItemBackgroundBorderless"
         android:onClick="@{()->adapter.openDetail(bean)}"
-        android:paddingBottom="8dp"
+        android:paddingTop="8dp"
         android:paddingRight="8dp"
-        android:paddingTop="8dp">
+        android:paddingBottom="8dp">
 
         <RelativeLayout
             android:id="@+id/rl_header"
@@ -53,10 +55,10 @@
                 android:layout_alignParentEnd="true"
                 android:background="?selectableItemBackgroundBorderless"
                 android:onClick="@{()->adapter.openArticleList(bean)}"
-                android:paddingBottom="2dp"
                 android:paddingLeft="7dp"
-                android:paddingRight="7dp"
                 android:paddingTop="2dp"
+                android:paddingRight="7dp"
+                android:paddingBottom="2dp"
                 android:text='@{TextUtils.isEmpty(bean.chapterName)?@string/string_empty:Html.fromHtml(bean.chapterName)}'
                 android:textColor="@color/colorSubtitle"
                 android:textSize="13sp"
@@ -114,7 +116,7 @@
             android:id="@+id/textView3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{@string/string_dian + bean.author}"
+            android:text="@{DataUtil.getAuthor(bean.author,bean.shareUser)}"
             android:textColor="@color/colorSubtitle"
             android:textSize="11sp"
             app:layout_constraintStart_toEndOf="@+id/tv_time"
@@ -127,8 +129,8 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"
             android:layout_marginTop="3dp"
+            android:layout_marginRight="5dp"
             android:background="?selectableItemBackgroundBorderless"
             android:button="@drawable/selector_collect_check"
             android:checked="@{bean.collect}"
