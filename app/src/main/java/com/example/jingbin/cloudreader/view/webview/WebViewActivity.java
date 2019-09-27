@@ -132,6 +132,14 @@ public class WebViewActivity extends AppCompatActivity implements IWebPageView {
         }
     }
 
+    /**
+     * 唤起其他app处理
+     */
+    @Override
+    public boolean handleOverrideUrl(String url) {
+        return WebUtil.handleThirdApp(this,mUrl,url);
+    }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {

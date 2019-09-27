@@ -51,4 +51,11 @@ public interface IWebPageView {
      * 得到网页标题
      */
     void setTitle(String title);
+
+    /**
+     * 唤起其他app处理
+     *
+     * @param url
+     */
+    boolean handleOverrideUrl(String url);
 }
