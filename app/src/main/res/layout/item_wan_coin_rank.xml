@@ -13,11 +13,17 @@
             name="bean"
             type="com.example.jingbin.cloudreader.bean.CoinLogBean" />
 
+        <variable
+            name="position"
+            type="Integer" />
+
         <import type="android.text.Html" />
 
         <import type="android.text.TextUtils" />
 
         <import type="android.view.View" />
+
+        <import type="com.example.jingbin.cloudreader.utils.DataUtil" />
     </data>
 
     <!--如果有点击事件，则内部的水波纹不能扩散-->
@@ -30,30 +36,32 @@
         android:paddingTop="10dp"
         android:paddingEnd="15dp"
         android:paddingBottom="10dp">
-        <!--android:text="@{Html.fromHtml(bean.desc)}"-->
 
         <TextView
             android:id="@+id/tv_rank"
-            android:layout_width="wrap_content"
+            android:layout_width="48dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="15dp"
-            android:layout_marginEnd="6dp"
+            android:paddingStart="10dp"
+            android:text="@{DataUtil.getStringValue(position)}"
             android:textColor="@color/colorSubtitle"
             android:textSize="14sp"
             android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="2" />
+            tools:text="2000" />
 
 
         <TextView
             android:id="@+id/tv_name"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
+            android:layout_marginStart="10dp"
             android:layout_marginEnd="6dp"
+            android:text="@{bean.username}"
             android:textColor="@color/colorContent"
             android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/tv_coin"
             app:layout_constraintStart_toEndOf="@+id/tv_rank"
             app:layout_constraintTop_toTopOf="parent"
@@ -63,6 +71,7 @@
             android:id="@+id/tv_coin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="@{DataUtil.getStringValue(bean.coinCount)}"
             android:textColor="@color/colorTheme"
             android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="parent"

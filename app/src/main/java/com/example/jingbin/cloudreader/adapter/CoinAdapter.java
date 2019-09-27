@@ -1,6 +1,8 @@
 package com.example.jingbin.cloudreader.adapter;
 
 import android.app.Activity;
+import android.graphics.Color;
+import android.graphics.Typeface;
 import android.support.annotation.NonNull;
 import android.view.ViewGroup;
 
@@ -10,6 +12,7 @@ import com.example.jingbin.cloudreader.base.baseadapter.BaseRecyclerViewHolder;
 import com.example.jingbin.cloudreader.bean.CoinLogBean;
 import com.example.jingbin.cloudreader.databinding.ItemWanCoinBinding;
 import com.example.jingbin.cloudreader.databinding.ItemWanCoinRankBinding;
+import com.example.jingbin.cloudreader.utils.CommonUtils;
 import com.example.jingbin.cloudreader.utils.TimeUtil;
 
 /**
@@ -44,10 +47,26 @@ public class CoinAdapter extends BaseRecyclerViewAdapter<CoinLogBean> {
 
         @Override
         public void onBindViewHolder(final CoinLogBean bean, final int position) {
+            int adapterPosition = getAdapterPosition();
             binding.setBean(bean);
-            binding.tvRank.setText(getAdapterPosition() + "");
-            binding.tvName.setText(bean.getUsername());
-            binding.tvCoin.setText(bean.getCoinCount() + "");
+            binding.setPosition(getAdapterPosition());
+
+            int color = CommonUtils.getColor(R.color.colorSubtitle);
+            int size = 18;
+            binding.tvRank.setTypeface(Typeface.DEFAULT_BOLD);
+            if (adapterPosition == 1) {
+                color = Color.parseColor("#FF3C02");
+            } else if (adapterPosition == 2) {
+                color = Color.parseColor("#FF8002");
+            } else if (adapterPosition == 3) {
+                color = Color.parseColor("#FFBB02");
+            } else {
+                size = 14;
+                binding.tvRank.setTypeface(Typeface.DEFAULT);
+            }
+            binding.tvRank.setTextSize(size);
+            binding.tvRank.setTextColor(color);
+
         }
     }
 
@@ -60,10 +79,6 @@ public class CoinAdapter extends BaseRecyclerViewAdapter<CoinLogBean> {
         @Override
         public void onBindViewHolder(final CoinLogBean bean, final int position) {
             binding.setBean(bean);
-            String time = TimeUtil.getTime(bean.getDate());
-            binding.tvTitle.setText(bean.getDesc().replace(time, "").trim());
-            binding.tvLogCoin.setText("+" + bean.getCoinCount());
-            binding.tvTime.setText(time);
         }
     }
 

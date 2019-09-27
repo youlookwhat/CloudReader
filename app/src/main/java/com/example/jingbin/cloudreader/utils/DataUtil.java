@@ -21,4 +21,32 @@ public class DataUtil {
         return " · " + name;
     }
 
+    /**
+     * 将int转为String
+     */
+    public static String getStringValue(int value) {
+        return String.valueOf(value);
+    }
+
+    public static String getAdd(int value) {
+        return "+" + value;
+    }
+
+    /**
+     * 时间格式化
+     */
+    public static String getTime(long time) {
+        return TimeUtil.getTime(time);
+    }
+
+    /**
+     * 处理标题
+     */
+    public static String replaceTime(String desc, long time) {
+        if (!TextUtils.isEmpty(desc)) {
+            return desc.replace(TimeUtil.getTime(time), "").trim();
+        } else {
+            return "";
+        }
+    }
 }

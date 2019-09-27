@@ -6,12 +6,14 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.view.View;
 
 import com.example.jingbin.cloudreader.R;
 import com.example.jingbin.cloudreader.adapter.CoinAdapter;
 import com.example.jingbin.cloudreader.base.BaseFragment;
 import com.example.jingbin.cloudreader.bean.CoinBean;
 import com.example.jingbin.cloudreader.databinding.FragmentWanAndroidBinding;
+import com.example.jingbin.cloudreader.databinding.FragmentWanCoinBinding;
 import com.example.jingbin.cloudreader.utils.CommonUtils;
 import com.example.jingbin.cloudreader.utils.RefreshHelper;
 import com.example.jingbin.cloudreader.viewmodel.wan.CoinListViewModel;
@@ -22,7 +24,7 @@ import com.example.xrecyclerview.XRecyclerView;
  * @date 2019/09/26.
  * @description 积分详情
  */
-public class CoinRankFragment extends BaseFragment<CoinListViewModel, FragmentWanAndroidBinding> {
+public class CoinRankFragment extends BaseFragment<CoinListViewModel, FragmentWanCoinBinding> {
 
     private boolean mIsPrepared;
     private boolean mIsFirst = true;
@@ -31,7 +33,7 @@ public class CoinRankFragment extends BaseFragment<CoinListViewModel, FragmentWa
 
     @Override
     public int setContent() {
-        return R.layout.fragment_wan_android;
+        return R.layout.fragment_wan_coin;
     }
 
     @Override
@@ -62,6 +64,7 @@ public class CoinRankFragment extends BaseFragment<CoinListViewModel, FragmentWa
 
 
     private void initRefreshView() {
+        bindingView.tvHeaderCoin.setVisibility(View.GONE);
         RefreshHelper.init(bindingView.xrvWan, false);
         bindingView.srlWan.setColorSchemeColors(CommonUtils.getColor(R.color.colorTheme));
         mAdapter = new CoinAdapter(activity, true);

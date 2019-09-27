@@ -18,6 +18,8 @@
         <import type="android.text.TextUtils" />
 
         <import type="android.view.View" />
+
+        <import type="com.example.jingbin.cloudreader.utils.DataUtil" />
     </data>
 
     <!--如果有点击事件，则内部的水波纹不能扩散-->
@@ -40,6 +42,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="6dp"
             android:lineSpacingExtra="4dp"
+            android:text='@{DataUtil.replaceTime(bean.desc,bean.date)}'
             android:textColor="@color/colorContent"
             android:textSize="14sp"
             app:layout_constraintEnd_toStartOf="@+id/tv_log_coin"
@@ -53,6 +56,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="13dp"
+            android:text='@{DataUtil.getTime(bean.date)}'
             android:textColor="@color/colorSubtitle"
             android:textSize="11sp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -64,7 +68,7 @@
             android:id="@+id/tv_log_coin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text='@{@string/string_add+bean.coinCount}'
+            android:text='@{DataUtil.getAdd(bean.coinCount)}'
             android:textColor="@color/colorTheme"
             android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="parent"

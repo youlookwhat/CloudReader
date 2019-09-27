@@ -11,7 +11,11 @@ import com.example.jingbin.cloudreader.R;
 import com.example.jingbin.cloudreader.adapter.CoinAdapter;
 import com.example.jingbin.cloudreader.base.BaseFragment;
 import com.example.jingbin.cloudreader.bean.CoinBean;
+import com.example.jingbin.cloudreader.data.UserUtil;
+import com.example.jingbin.cloudreader.data.impl.OnUserInfoListener;
+import com.example.jingbin.cloudreader.data.room.User;
 import com.example.jingbin.cloudreader.databinding.FragmentWanAndroidBinding;
+import com.example.jingbin.cloudreader.databinding.FragmentWanCoinBinding;
 import com.example.jingbin.cloudreader.utils.CommonUtils;
 import com.example.jingbin.cloudreader.utils.RefreshHelper;
 import com.example.jingbin.cloudreader.viewmodel.wan.CoinListViewModel;
@@ -22,7 +26,7 @@ import com.example.xrecyclerview.XRecyclerView;
  * @date 2019/09/26.
  * @description 积分详情
  */
-public class CoinDetailFragment extends BaseFragment<CoinListViewModel, FragmentWanAndroidBinding> {
+public class CoinDetailFragment extends BaseFragment<CoinListViewModel, FragmentWanCoinBinding> {
 
     private boolean mIsPrepared;
     private boolean mIsFirst = true;
@@ -31,7 +35,7 @@ public class CoinDetailFragment extends BaseFragment<CoinListViewModel, Fragment
 
     @Override
     public int setContent() {
-        return R.layout.fragment_wan_android;
+        return R.layout.fragment_wan_coin;
     }
 
     @Override
@@ -64,7 +68,7 @@ public class CoinDetailFragment extends BaseFragment<CoinListViewModel, Fragment
     private void initRefreshView() {
         RefreshHelper.init(bindingView.xrvWan, false);
         bindingView.srlWan.setColorSchemeColors(CommonUtils.getColor(R.color.colorTheme));
-        mAdapter = new CoinAdapter(activity,false);
+        mAdapter = new CoinAdapter(activity, false);
         bindingView.xrvWan.setAdapter(mAdapter);
         bindingView.srlWan.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -95,6 +99,14 @@ public class CoinDetailFragment extends BaseFragment<CoinListViewModel, Fragment
                     getCoinLog();
                 } else {
                     bindingView.xrvWan.refreshComplete();
+                }
+            }
+        });
+        UserUtil.getUserInfo(new OnUserInfoListener() {
+            @Override
+            public void onSuccess(User user) {
+                if (user != null) {
+                    bindingView.tvHeaderCoin.setText(String.valueOf(user.getCoinCount()));
                 }
             }
         });

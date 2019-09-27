@@ -12,6 +12,7 @@ import com.example.jingbin.cloudreader.bean.wanandroid.DuanZiBean;
 import com.example.jingbin.cloudreader.data.UserUtil;
 import com.example.jingbin.cloudreader.data.impl.OnUserInfoListener;
 import com.example.jingbin.cloudreader.data.model.JokeModel;
+import com.example.jingbin.cloudreader.data.room.Injection;
 import com.example.jingbin.cloudreader.data.room.User;
 import com.example.jingbin.cloudreader.http.HttpClient;
 
@@ -52,6 +53,17 @@ public class MainViewModel extends BaseViewModel {
                                 CoinUserInfoBean infoBean = bean.getData();
                                 infoBean.setUsername(user.getUsername());
                                 coin.setValue(infoBean);
+
+                                UserUtil.getUserInfo(new OnUserInfoListener() {
+                                    @Override
+                                    public void onSuccess(User user) {
+                                        if (user != null) {
+                                            user.setCoinCount(infoBean.getCoinCount());
+                                            user.setRank(infoBean.getRank());
+                                            UserUtil.setUserInfo(user);
+                                        }
+                                    }
+                                });
                             }
                         }
 

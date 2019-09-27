@@ -33,5 +33,6 @@
     <dimen name="size_7dp">7dp</dimen>
     <dimen name="size_5dp">5dp</dimen>
     <dimen name="size_30dp">30dp</dimen>
+    <dimen name="sp_30">30sp</dimen>
 
 </resources>

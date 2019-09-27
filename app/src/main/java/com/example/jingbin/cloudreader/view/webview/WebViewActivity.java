@@ -249,7 +249,6 @@ public class WebViewActivity extends AppCompatActivity implements IWebPageView {
     @Override
     public void hindProgressBar() {
         mProgressBar.hide();
-//        mProgressBar.setVisibility(View.GONE);
     }
 
     @Override
@@ -282,7 +281,6 @@ public class WebViewActivity extends AppCompatActivity implements IWebPageView {
 
     @Override
     public void startProgress(int newProgress) {
-//        DebugUtil.error("newProgress:" + newProgress);
         mProgressBar.setWebProgress(newProgress);
     }
 
