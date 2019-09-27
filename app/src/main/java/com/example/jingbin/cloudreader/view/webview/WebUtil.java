@@ -32,13 +32,24 @@ public class WebUtil {
      **/
     public static boolean handleThirdApp(Activity activity, String originalUrl, String backUrl) {
         DebugUtil.error("----backUrl:  " + backUrl);
+
+        /**http开头直接跳过*/
+        if (backUrl.startsWith("http")) {
+            // 可能有提示下载Apk文件
+            if (backUrl.contains(".apk")) {
+                startActivity(activity, backUrl);
+                return true;
+            }
+            return false;
+        }
+
         boolean isJump = true;
         if (!TextUtils.isEmpty(originalUrl)) {
             if (backUrl.startsWith("openapp.jdmobile:")// 京东
                     || backUrl.startsWith("zhihu:")// 知乎
                     || backUrl.startsWith("tbopen:")// 淘宝
                     || backUrl.startsWith("vipshop:")//
-                    || backUrl.startsWith("youku:")//
+                    || backUrl.startsWith("youku:")//优酷
                     || backUrl.startsWith("uclink:")// UC
                     || backUrl.startsWith("ucbrowser:")// UC
                     || backUrl.startsWith("alipay:")// 支付宝
