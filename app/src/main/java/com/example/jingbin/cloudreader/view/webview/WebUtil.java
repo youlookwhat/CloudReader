@@ -56,6 +56,11 @@ public class WebUtil {
                     || backUrl.startsWith("newsapp:")//
                     || backUrl.startsWith("sinaweibo:")// 新浪
                     || backUrl.startsWith("suning:")//
+                    || backUrl.startsWith("pinduoduo:")// 拼多多
+                    || backUrl.startsWith("jdmobile:")//京东
+                    || backUrl.startsWith("baiduboxapp:")// 百度
+                    || backUrl.startsWith("alipays:")//支付宝
+                    || backUrl.startsWith("qtt:")//
             ) {
                 isJump = false;
             }
