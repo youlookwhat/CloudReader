@@ -3,8 +3,6 @@ package com.example.jingbin.cloudreader.http;
 import com.example.http.HttpUtils;
 import com.example.http.utils.BuildFactory;
 import com.example.jingbin.cloudreader.bean.CoinBean;
-import com.example.jingbin.cloudreader.bean.CoinLogBean;
-import com.example.jingbin.cloudreader.bean.wanandroid.BaseResultBean;
 import com.example.jingbin.cloudreader.bean.CollectUrlBean;
 import com.example.jingbin.cloudreader.bean.ComingFilmBean;
 import com.example.jingbin.cloudreader.bean.FilmDetailBean;
@@ -17,6 +15,7 @@ import com.example.jingbin.cloudreader.bean.MtimeFilmeBean;
 import com.example.jingbin.cloudreader.bean.UpdateBean;
 import com.example.jingbin.cloudreader.bean.book.BookBean;
 import com.example.jingbin.cloudreader.bean.book.BookDetailBean;
+import com.example.jingbin.cloudreader.bean.wanandroid.BaseResultBean;
 import com.example.jingbin.cloudreader.bean.wanandroid.CoinUserInfoBean;
 import com.example.jingbin.cloudreader.bean.wanandroid.HomeListBean;
 import com.example.jingbin.cloudreader.bean.wanandroid.LoginBean;
@@ -25,6 +24,8 @@ import com.example.jingbin.cloudreader.bean.wanandroid.QsbkListBean;
 import com.example.jingbin.cloudreader.bean.wanandroid.SearchTagBean;
 import com.example.jingbin.cloudreader.bean.wanandroid.TreeBean;
 import com.example.jingbin.cloudreader.bean.wanandroid.WanAndroidBannerBean;
+import com.example.jingbin.cloudreader.bean.wanandroid.WxarticleDetailItemBean;
+import com.example.jingbin.cloudreader.bean.wanandroid.WxarticleItemBean;
 
 import java.util.List;
 
@@ -344,4 +345,18 @@ public interface HttpClient {
      */
     @GET("lg/coin/list/{page}/json")
     Observable<BaseResultBean<CoinBean>> getCoinLog(@Path("page") int page);
+
+    /**
+     * 获取公众号列表
+     */
+    @GET("wxarticle/chapters/json")
+    Observable<BaseResultBean<List<WxarticleItemBean>>> getWxarticle();
+
+    /**
+     * 单个公众号数据
+     *
+     * @param page 1开始
+     */
+    @GET("wxarticle/list/{id}/{page}/json")
+    Observable<BaseResultBean<WxarticleDetailItemBean>> getWxarticleDetail(@Path("id") int id, @Path("page") int page);
 }

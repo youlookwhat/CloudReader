@@ -9,18 +9,19 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.example.jingbin.cloudreader.R;
+import com.example.jingbin.cloudreader.app.Constants;
 import com.example.jingbin.cloudreader.base.BaseFragment;
 import com.example.jingbin.cloudreader.bean.wanandroid.TreeBean;
 import com.example.jingbin.cloudreader.bean.wanandroid.TreeItemBean;
 import com.example.jingbin.cloudreader.databinding.FragmentKnowledgeTreeBinding;
 import com.example.jingbin.cloudreader.utils.CommonUtils;
+import com.example.jingbin.cloudreader.utils.SPUtils;
 import com.example.jingbin.cloudreader.viewmodel.wan.TreeViewModel;
 import com.zhy.view.flowlayout.FlowLayout;
 import com.zhy.view.flowlayout.TagAdapter;
 import com.zhy.view.flowlayout.TagFlowLayout;
 
 import java.util.List;
-import java.util.Set;
 
 /**
  * @author jingbin
@@ -72,8 +73,10 @@ public class KnowledgeTreeFragment extends BaseFragment<TreeViewModel, FragmentK
                         && treeBean.getData() != null
                         && treeBean.getData().size() > 0) {
 
-                    showFirstTreeView(bindingView.flTree, treeBean.getData());
-                    showSecondTreeView(bindingView.flTreeTwo, treeBean.getData(), 0);
+                    int position = SPUtils.getInt(Constants.TREE_POSITION, 0);
+                    firstPosition = position;
+                    showFirstTreeView(bindingView.flTree, treeBean.getData(), position);
+                    showSecondTreeView(bindingView.flTreeTwo, treeBean.getData(), position);
                     showContentView();
                     mIsFirst = false;
                 } else {
@@ -88,13 +91,13 @@ public class KnowledgeTreeFragment extends BaseFragment<TreeViewModel, FragmentK
     /**
      * 显示一级分类 🔥
      */
-    private void showFirstTreeView(TagFlowLayout flowLayout, final List<TreeItemBean> children) {
+    private void showFirstTreeView(TagFlowLayout flowLayout, final List<TreeItemBean> children, int lastPosition) {
         flowLayout.removeAllViews();
         flowLayout.setAdapter(new TagAdapter<TreeItemBean>(children) {
             @Override
             public View getView(FlowLayout parent, int position, TreeItemBean bean) {
                 TextView textView = (TextView) View.inflate(flowLayout.getContext(), R.layout.layout_knowledge_tag, null);
-                if (position == 0) {
+                if (position == lastPosition) {
                     textView.setSelected(true);
                 } else {
                     textView.setSelected(false);
@@ -104,7 +107,7 @@ public class KnowledgeTreeFragment extends BaseFragment<TreeViewModel, FragmentK
             }
         });
         TagAdapter adapter = flowLayout.getAdapter();
-        adapter.setSelectedList(0);
+        adapter.setSelectedList(lastPosition);
         flowLayout.setOnTagClickListener(new TagFlowLayout.OnTagClickListener() {
             @Override
             public boolean onTagClick(View view, int position, FlowLayout parent) {
@@ -114,6 +117,7 @@ public class KnowledgeTreeFragment extends BaseFragment<TreeViewModel, FragmentK
                 } else {
                     firstPosition = position;
                     showSecondTreeView(bindingView.flTreeTwo, children, position);
+                    SPUtils.putInt(Constants.TREE_POSITION, position);
                 }
                 return true;
             }

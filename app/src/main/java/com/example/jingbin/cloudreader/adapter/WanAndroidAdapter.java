@@ -36,6 +36,10 @@ public class WanAndroidAdapter extends BaseRecyclerViewAdapter<ArticlesBean> {
      */
     public boolean isNoShowChapterName = false;
     /**
+     * 不显示作者名字
+     */
+    public boolean isNoShowAuthorName = false;
+    /**
      * 列表中是否显示图片
      */
     private boolean isNoImage = false;
@@ -56,6 +60,10 @@ public class WanAndroidAdapter extends BaseRecyclerViewAdapter<ArticlesBean> {
 
     public void setNoShowChapterName() {
         this.isNoShowChapterName = true;
+    }
+
+    public void setNoShowAuthorName() {
+        isNoShowAuthorName = true;
     }
 
     public void setNoImage(boolean isNoImage) {

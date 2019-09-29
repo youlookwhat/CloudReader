@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="bean"
+            type="com.example.jingbin.cloudreader.bean.wanandroid.WxarticleItemBean" />
+
+        <import type="android.text.Html" />
+    </data>
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/cl_wxarticle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/selectableItemBackground">
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:text="@{bean.name}"
+            android:textColor="@color/select_navi_text"
+            android:textSize="11sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="鸿洋" />
+
+        <View
+            android:layout_marginTop="10dp"
+            android:id="@+id/view_line"
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@color/colorSubtitle"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_title" />
+    </android.support.constraint.ConstraintLayout>
+</layout>

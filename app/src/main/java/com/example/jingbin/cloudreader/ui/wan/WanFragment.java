@@ -10,6 +10,7 @@ import com.example.jingbin.cloudreader.databinding.FragmentContentBinding;
 import com.example.jingbin.cloudreader.ui.wan.child.HomeFragment;
 import com.example.jingbin.cloudreader.ui.wan.child.KnowledgeTreeFragment;
 import com.example.jingbin.cloudreader.ui.wan.child.NavigationFragment;
+import com.example.jingbin.cloudreader.ui.wan.child.WxArticleFragment;
 import com.example.jingbin.cloudreader.view.MyFragmentPagerAdapter;
 import com.example.jingbin.cloudreader.viewmodel.menu.NoViewModel;
 
@@ -21,8 +22,8 @@ import java.util.ArrayList;
  */
 public class WanFragment extends BaseFragment<NoViewModel, FragmentContentBinding> {
 
-    private ArrayList<String> mTitleList = new ArrayList<>(3);
-    private ArrayList<Fragment> mFragments = new ArrayList<>(3);
+    private ArrayList<String> mTitleList = new ArrayList<>(4);
+    private ArrayList<Fragment> mFragments = new ArrayList<>(4);
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
@@ -37,7 +38,7 @@ public class WanFragment extends BaseFragment<NoViewModel, FragmentContentBindin
         MyFragmentPagerAdapter myAdapter = new MyFragmentPagerAdapter(getChildFragmentManager(), mFragments, mTitleList);
         bindingView.vpGank.setAdapter(myAdapter);
         // 左右预加载页面的个数
-        bindingView.vpGank.setOffscreenPageLimit(2);
+        bindingView.vpGank.setOffscreenPageLimit(3);
         myAdapter.notifyDataSetChanged();
         bindingView.tabGank.setupWithViewPager(bindingView.vpGank);
         showContentView();
@@ -51,9 +52,11 @@ public class WanFragment extends BaseFragment<NoViewModel, FragmentContentBindin
     private void initFragmentList() {
         mTitleList.clear();
         mTitleList.add("玩安卓");
-        mTitleList.add("体系");
+        mTitleList.add("公众号");
+        mTitleList.add("知识体系");
         mTitleList.add("导航");
         mFragments.add(HomeFragment.newInstance());
+        mFragments.add(WxArticleFragment.newInstance());
         mFragments.add(KnowledgeTreeFragment.newInstance());
         mFragments.add(NavigationFragment.newInstance());
     }

@@ -26,4 +26,6 @@ public class Constants {
     public static String IS_FIRST_COLLECTURL = "isFirstCollectUrl";
     // 问题反馈消息提示
     public static String MESSAGE_READ_TIP = "message_read_tip";
+    // 知识体系里上一次选中的position
+    public static String TREE_POSITION = "tree_position";
 }

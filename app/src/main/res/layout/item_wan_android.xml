@@ -119,6 +119,7 @@
             android:text="@{DataUtil.getAuthor(bean.author,bean.shareUser)}"
             android:textColor="@color/colorSubtitle"
             android:textSize="11sp"
+            android:visibility="@{adapter.isNoShowAuthorName?View.GONE:View.VISIBLE}"
             app:layout_constraintStart_toEndOf="@+id/tv_time"
             app:layout_constraintTop_toTopOf="@+id/tv_time"
             tools:text=" · jingbin" />
