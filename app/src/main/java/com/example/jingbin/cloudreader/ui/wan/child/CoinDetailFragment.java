@@ -2,10 +2,13 @@ package com.example.jingbin.cloudreader.ui.wan.child;
 
 import android.arch.lifecycle.Observer;
 import android.content.Context;
+import android.databinding.DataBindingUtil;
+import android.databinding.ViewDataBinding;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.view.ViewGroup;
 
 import com.example.jingbin.cloudreader.R;
 import com.example.jingbin.cloudreader.adapter.CoinAdapter;
@@ -15,7 +18,7 @@ import com.example.jingbin.cloudreader.data.UserUtil;
 import com.example.jingbin.cloudreader.data.impl.OnUserInfoListener;
 import com.example.jingbin.cloudreader.data.room.User;
 import com.example.jingbin.cloudreader.databinding.FragmentWanAndroidBinding;
-import com.example.jingbin.cloudreader.databinding.FragmentWanCoinBinding;
+import com.example.jingbin.cloudreader.databinding.HeaderCoinDetailBinding;
 import com.example.jingbin.cloudreader.utils.CommonUtils;
 import com.example.jingbin.cloudreader.utils.RefreshHelper;
 import com.example.jingbin.cloudreader.viewmodel.wan.CoinListViewModel;
@@ -26,16 +29,17 @@ import com.example.xrecyclerview.XRecyclerView;
  * @date 2019/09/26.
  * @description 积分详情
  */
-public class CoinDetailFragment extends BaseFragment<CoinListViewModel, FragmentWanCoinBinding> {
+public class CoinDetailFragment extends BaseFragment<CoinListViewModel, FragmentWanAndroidBinding> {
 
     private boolean mIsPrepared;
     private boolean mIsFirst = true;
     private FragmentActivity activity;
     private CoinAdapter mAdapter;
+    private HeaderCoinDetailBinding headerBinding;
 
     @Override
     public int setContent() {
-        return R.layout.fragment_wan_coin;
+        return R.layout.fragment_wan_android;
     }
 
     @Override
@@ -66,10 +70,12 @@ public class CoinDetailFragment extends BaseFragment<CoinListViewModel, Fragment
 
 
     private void initRefreshView() {
-        RefreshHelper.init(bindingView.xrvWan, false);
+        headerBinding = DataBindingUtil.inflate(getLayoutInflater(), R.layout.header_coin_detail, (ViewGroup) bindingView.xrvWan.getParent(), false);
+        RefreshHelper.init(bindingView.xrvWan, false, false);
         bindingView.srlWan.setColorSchemeColors(CommonUtils.getColor(R.color.colorTheme));
         mAdapter = new CoinAdapter(activity, false);
         bindingView.xrvWan.setAdapter(mAdapter);
+        bindingView.xrvWan.addHeaderView(headerBinding.getRoot());
         bindingView.srlWan.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -106,7 +112,7 @@ public class CoinDetailFragment extends BaseFragment<CoinListViewModel, Fragment
             @Override
             public void onSuccess(User user) {
                 if (user != null) {
-                    bindingView.tvHeaderCoin.setText(String.valueOf(user.getCoinCount()));
+                    headerBinding.tvHeaderCoin.setText(String.valueOf(user.getCoinCount()));
                 }
             }
         });

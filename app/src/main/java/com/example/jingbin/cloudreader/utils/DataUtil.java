@@ -2,6 +2,8 @@ package com.example.jingbin.cloudreader.utils;
 
 import android.text.TextUtils;
 
+import com.example.jingbin.cloudreader.R;
+
 /**
  * @author jingbin
  */
@@ -49,4 +51,16 @@ public class DataUtil {
             return "";
         }
     }
+
+    /**
+     * 我的积分 分享文章的文字颜色区别
+     */
+    public static int getCoinTextColor(String desc) {
+        if (!TextUtils.isEmpty(desc) && desc.contains("分享文章")) {
+            return CommonUtils.getColor(R.color.colorPrimary);
+        } else {
+            return CommonUtils.getColor(R.color.colorTheme);
+        }
+    }
+
 }

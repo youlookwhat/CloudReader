@@ -110,6 +110,7 @@ public class KnowledgeTreeFragment extends BaseFragment<TreeViewModel, FragmentK
             public boolean onTagClick(View view, int position, FlowLayout parent) {
                 if (firstPosition == position) {
                     adapter.setSelectedList(firstPosition);
+                    CategoryDetailActivity.start(view.getContext(), children.get(position).getId(), children.get(position));
                 } else {
                     firstPosition = position;
                     showSecondTreeView(bindingView.flTreeTwo, children, position);

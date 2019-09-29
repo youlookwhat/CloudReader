@@ -32,7 +32,6 @@
         android:paddingTop="8dp"
         android:paddingEnd="15dp"
         android:paddingBottom="8dp">
-        <!--android:text="@{Html.fromHtml(bean.desc)}"-->
 
         <TextView
             android:id="@+id/tv_title"
@@ -69,12 +68,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text='@{DataUtil.getAdd(bean.coinCount)}'
-            android:textColor="@color/colorTheme"
+            android:textColor='@{DataUtil.getCoinTextColor(bean.desc)}'
             android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="+12" />
+            tools:text="+12"
+            tools:textColor="@color/colorTheme" />
 
 
     </android.support.constraint.ConstraintLayout>

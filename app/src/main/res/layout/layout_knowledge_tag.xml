@@ -7,7 +7,7 @@
         android:layout_height="wrap_content"
         android:background="@drawable/selector_bg_tag"
         android:textColor="@color/select_navi_text"
-        android:textSize="12sp"
+        android:textSize="13sp"
         tools:text="title" />
 
 </layout>

@@ -2,18 +2,19 @@ package com.example.jingbin.cloudreader.ui.wan.child;
 
 import android.arch.lifecycle.Observer;
 import android.content.Context;
+import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.view.View;
+import android.view.ViewGroup;
 
 import com.example.jingbin.cloudreader.R;
 import com.example.jingbin.cloudreader.adapter.CoinAdapter;
 import com.example.jingbin.cloudreader.base.BaseFragment;
 import com.example.jingbin.cloudreader.bean.CoinBean;
 import com.example.jingbin.cloudreader.databinding.FragmentWanAndroidBinding;
-import com.example.jingbin.cloudreader.databinding.FragmentWanCoinBinding;
+import com.example.jingbin.cloudreader.databinding.HeaderCoinRankBinding;
 import com.example.jingbin.cloudreader.utils.CommonUtils;
 import com.example.jingbin.cloudreader.utils.RefreshHelper;
 import com.example.jingbin.cloudreader.viewmodel.wan.CoinListViewModel;
@@ -24,16 +25,17 @@ import com.example.xrecyclerview.XRecyclerView;
  * @date 2019/09/26.
  * @description 积分详情
  */
-public class CoinRankFragment extends BaseFragment<CoinListViewModel, FragmentWanCoinBinding> {
+public class CoinRankFragment extends BaseFragment<CoinListViewModel, FragmentWanAndroidBinding> {
 
     private boolean mIsPrepared;
     private boolean mIsFirst = true;
     private FragmentActivity activity;
     private CoinAdapter mAdapter;
+    private HeaderCoinRankBinding headerBinding;
 
     @Override
     public int setContent() {
-        return R.layout.fragment_wan_coin;
+        return R.layout.fragment_wan_android;
     }
 
     @Override
@@ -64,11 +66,12 @@ public class CoinRankFragment extends BaseFragment<CoinListViewModel, FragmentWa
 
 
     private void initRefreshView() {
-        bindingView.tvHeaderCoin.setVisibility(View.GONE);
-        RefreshHelper.init(bindingView.xrvWan, false);
+        headerBinding = DataBindingUtil.inflate(getLayoutInflater(), R.layout.header_coin_rank, (ViewGroup) bindingView.xrvWan.getParent(), false);
+        RefreshHelper.init(bindingView.xrvWan, false, false);
         bindingView.srlWan.setColorSchemeColors(CommonUtils.getColor(R.color.colorTheme));
         mAdapter = new CoinAdapter(activity, true);
         bindingView.xrvWan.setAdapter(mAdapter);
+        bindingView.xrvWan.addHeaderView(headerBinding.getRoot());
         bindingView.srlWan.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -126,6 +129,7 @@ public class CoinRankFragment extends BaseFragment<CoinListViewModel, FragmentWa
                             showContentView();
                             mAdapter.clear();
                             mAdapter.notifyDataSetChanged();
+                            headerBinding.setBean(homeListBean.getDatas().get(0));
                         }
                         int positionStart = mAdapter.getItemCount() + 1;
                         mAdapter.addAll(homeListBean.getDatas());
