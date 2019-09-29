@@ -39,6 +39,7 @@ public class NavDeedBackActivity extends BaseActivity<NoViewModel, ActivityNavDe
         bindingView.tvEmail.setOnClickListener(listener);
         bindingView.tvFaq.setOnClickListener(listener);
         bindingView.tvQqGroup.setOnClickListener(listener);
+        bindingView.tvQqGroupNum.setOnClickListener(listener);
     }
 
     private PerfectClickListener listener = new PerfectClickListener() {
@@ -69,7 +70,10 @@ public class NavDeedBackActivity extends BaseActivity<NoViewModel, ActivityNavDe
                 case R.id.tv_faq:
                     WebViewActivity.loadUrl(v.getContext(), CommonUtils.getString(R.string.string_url_faq), "常见问题归纳");
                     break;
-
+                case R.id.tv_qq_group_num:
+                    BaseTools.copy(bindingView.tvQqGroupNum.getText().toString());
+                    ToastUtil.showToast("已复制到剪贴板");
+                    break;
                 default:
                     break;
             }

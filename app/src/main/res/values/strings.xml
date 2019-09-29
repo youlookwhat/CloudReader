@@ -103,4 +103,6 @@
     <string name="string_url_trending">https://github.com/trending</string>
     <!--积分规则-->
     <string name="string_url_coin_help">https://www.wanandroid.com/blog/show/2653</string>
+    <!--赞赏-->
+    <string name="string_url_admire">https://github.com/youlookwhat/CloudReader/blob/master/file/admire.md</string>
 </resources>

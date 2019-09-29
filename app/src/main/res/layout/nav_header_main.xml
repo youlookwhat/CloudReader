@@ -218,6 +218,43 @@
 
             </LinearLayout>
 
+            <RelativeLayout
+                android:id="@+id/ll_nav_admire"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingLeft="16dp"
+                android:paddingRight="6dp">
+
+                <ImageView
+                    android:id="@+id/iv_icon_admire"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/ic_nav_admire" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_toRightOf="@+id/iv_icon_admire"
+                    android:text="赞赏云阅"
+                    android:textColor="@color/colorContent"
+                    android:textSize="15sp" />
+
+                <ImageView
+                    android:id="@+id/tv_admire"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="20dp"
+                    android:gravity="center_vertical"
+                    android:src="@drawable/ic_nav_admire_right" />
+
+            </RelativeLayout>
+
             <View
                 android:id="@+id/line"
                 android:layout_width="match_parent"

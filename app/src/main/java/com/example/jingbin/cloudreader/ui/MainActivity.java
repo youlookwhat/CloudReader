@@ -37,6 +37,7 @@ import com.example.jingbin.cloudreader.http.rx.RxCodeConstants;
 import com.example.jingbin.cloudreader.ui.film.FilmFragment;
 import com.example.jingbin.cloudreader.ui.gank.GankFragment;
 import com.example.jingbin.cloudreader.ui.menu.NavAboutActivity;
+import com.example.jingbin.cloudreader.ui.menu.NavAdmireActivity;
 import com.example.jingbin.cloudreader.ui.menu.NavDeedBackActivity;
 import com.example.jingbin.cloudreader.ui.menu.NavDownloadActivity;
 import com.example.jingbin.cloudreader.ui.menu.NavHomePageActivity;
@@ -141,6 +142,7 @@ public class MainActivity extends BaseActivity<MainViewModel, ActivityMainBindin
         bind.llNavCollect.setOnClickListener(listener);
         bind.llInfo.setOnClickListener(listener);
         bind.llNavCoin.setOnClickListener(listener);
+        bind.llNavAdmire.setOnClickListener(listener);
         bind.tvRank.setOnClickListener(listener);
 
         viewModel.getUserInfo();
@@ -247,6 +249,9 @@ public class MainActivity extends BaseActivity<MainViewModel, ActivityMainBindin
                         if (UserUtil.isLogin(MainActivity.this)) {
                             MyCoinActivity.startRank(MainActivity.this);
                         }
+                        break;
+                    case R.id.ll_nav_admire:
+                        NavAdmireActivity.start(MainActivity.this);
                         break;
                     default:
                         break;

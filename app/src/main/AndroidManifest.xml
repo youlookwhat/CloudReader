@@ -97,6 +97,9 @@
             android:name=".ui.menu.NavAboutActivity"
             android:screenOrientation="portrait" />
         <activity
+            android:name=".ui.menu.NavAdmireActivity"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".ui.douban.BookDetailActivity"
             android:screenOrientation="portrait" />
         <activity
