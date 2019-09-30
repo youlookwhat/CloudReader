@@ -69,8 +69,6 @@ public class DataUtil {
     public static boolean isShowAdmire() {
         int currentMonthDay = TimeUtil.getCurrentMonthDay();
         String day = TimeUtil.getDay();
-        DebugUtil.error("currentMonthDay:" + currentMonthDay);
-        DebugUtil.error("day:" + currentMonthDay);
         if (Integer.valueOf(day) + 7 > currentMonthDay) {
             return true;
         }
