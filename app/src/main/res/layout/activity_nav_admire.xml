@@ -29,9 +29,7 @@
                     android:autoLink="web"
                     android:lineSpacingExtra="3dp"
                     android:padding="7dp"
-                    android:text="本项目已累计迭代将近三年，期间很多api失效被替换，和增加了玩安卓的将近全部功能，耗费了作者很多心血。\n\n
-如果您认为本软件内容对你确实产生了帮助，或者喜欢云阅，不防小额赞助一下。这样可以增加我维护本软件的动力，迭代更多实用有趣的功能。\n\n
-非常感谢！"
+                    android:text="@string/string_admire"
                     android:textColor="@color/colorContent"
                     android:textIsSelectable="true" />
             </android.support.v7.widget.CardView>

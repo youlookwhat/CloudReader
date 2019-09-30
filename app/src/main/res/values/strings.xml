@@ -105,4 +105,7 @@
     <string name="string_url_coin_help">https://www.wanandroid.com/blog/show/2653</string>
     <!--赞赏-->
     <string name="string_url_admire">https://github.com/youlookwhat/CloudReader/blob/master/file/admire.md</string>
+    <string name="string_admire">本项目已累计迭代将近三年，期间很多api失效被替换，和增加了玩安卓的近全部功能，耗费了作者很多心血。
+        \n\n每月的后 7 天，会在侧边栏放置赞助入口；如果您认为本软件内容对你确实产生了帮助，或者喜欢云阅，不防小额赞助一下。这样可以增加我维护本软件的动力，迭代更多实用有趣的功能。
+        \n\n非常感谢！</string>
 </resources>

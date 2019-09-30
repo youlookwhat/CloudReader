@@ -15,6 +15,7 @@ import com.example.jingbin.cloudreader.data.model.JokeModel;
 import com.example.jingbin.cloudreader.data.room.Injection;
 import com.example.jingbin.cloudreader.data.room.User;
 import com.example.jingbin.cloudreader.http.HttpClient;
+import com.example.jingbin.cloudreader.utils.DataUtil;
 
 import java.util.List;
 
@@ -29,11 +30,15 @@ import io.reactivex.disposables.Disposable;
 
 public class MainViewModel extends BaseViewModel {
 
+    // 问题反馈是否已读
     public ObservableField<Boolean> isReadOk = new ObservableField<>();
+    // 赞赏入口是否开放
+    public ObservableField<Boolean> isShowAdmire = new ObservableField<>();
     private final MutableLiveData<CoinUserInfoBean> coin = new MutableLiveData<>();
 
     public MainViewModel(@NonNull Application application) {
         super(application);
+        isShowAdmire.set(DataUtil.isShowAdmire());
     }
 
     public void getUserInfo() {

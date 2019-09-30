@@ -9,6 +9,8 @@
             type="com.example.jingbin.cloudreader.viewmodel.wan.MainViewModel" />
 
         <import type="android.view.View" />
+
+        <import type="com.example.jingbin.cloudreader.utils.DataUtil" />
     </data>
 
     <android.support.v4.widget.NestedScrollView
@@ -227,7 +229,8 @@
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
                 android:paddingLeft="16dp"
-                android:paddingRight="6dp">
+                android:paddingRight="6dp"
+                android:visibility="@{viewModel.isShowAdmire?View.VISIBLE:View.GONE}">
 
                 <ImageView
                     android:id="@+id/iv_icon_admire"

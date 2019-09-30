@@ -251,6 +251,7 @@ public class MainActivity extends BaseActivity<MainViewModel, ActivityMainBindin
                         }
                         break;
                     case R.id.ll_nav_admire:
+                        // 赞赏
                         NavAdmireActivity.start(MainActivity.this);
                         break;
                     default:

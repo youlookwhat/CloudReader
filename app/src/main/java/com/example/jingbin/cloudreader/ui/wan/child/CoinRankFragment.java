@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.jingbin.cloudreader.R;
@@ -72,6 +73,7 @@ public class CoinRankFragment extends BaseFragment<CoinListViewModel, FragmentWa
         mAdapter = new CoinAdapter(activity, true);
         bindingView.xrvWan.setAdapter(mAdapter);
         bindingView.xrvWan.addHeaderView(headerBinding.getRoot());
+        headerBinding.ivCoinRank.setVisibility(View.INVISIBLE);
         bindingView.srlWan.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -129,6 +131,7 @@ public class CoinRankFragment extends BaseFragment<CoinListViewModel, FragmentWa
                             showContentView();
                             mAdapter.clear();
                             mAdapter.notifyDataSetChanged();
+                            headerBinding.ivCoinRank.setVisibility(View.VISIBLE);
                             headerBinding.setBean(homeListBean.getDatas().get(0));
                         }
                         int positionStart = mAdapter.getItemCount() + 1;

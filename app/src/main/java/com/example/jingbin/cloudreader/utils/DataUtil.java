@@ -63,4 +63,18 @@ public class DataUtil {
         }
     }
 
+    /**
+     * 设置显示赞赏入口
+     */
+    public static boolean isShowAdmire() {
+        int currentMonthDay = TimeUtil.getCurrentMonthDay();
+        String day = TimeUtil.getDay();
+        DebugUtil.error("currentMonthDay:" + currentMonthDay);
+        DebugUtil.error("day:" + currentMonthDay);
+        if (Integer.valueOf(day) + 7 > currentMonthDay) {
+            return true;
+        }
+        return false;
+    }
+
 }
