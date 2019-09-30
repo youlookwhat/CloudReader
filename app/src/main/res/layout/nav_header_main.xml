@@ -9,8 +9,6 @@
             type="com.example.jingbin.cloudreader.viewmodel.wan.MainViewModel" />
 
         <import type="android.view.View" />
-
-        <import type="com.example.jingbin.cloudreader.utils.DataUtil" />
     </data>
 
     <android.support.v4.widget.NestedScrollView
