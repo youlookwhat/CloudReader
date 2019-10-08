@@ -49,6 +49,8 @@ import com.example.jingbin.cloudreader.view.webview.config.MyWebChromeClient;
 import com.example.jingbin.cloudreader.view.webview.config.MyWebViewClient;
 import com.example.jingbin.cloudreader.viewmodel.wan.WanNavigator;
 
+import me.jingbin.library.WebProgress;
+
 /**
  * 网页可以处理:
  * 点击相应控件:拨打电话、发送短信、发送邮件、上传图片、播放视频
@@ -137,7 +139,7 @@ public class WebViewActivity extends AppCompatActivity implements IWebPageView {
      */
     @Override
     public boolean handleOverrideUrl(String url) {
-        return WebUtil.handleThirdApp(this,mUrl,url);
+        return WebUtil.handleThirdApp(this, mUrl, url);
     }
 
     @Override
