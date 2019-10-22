@@ -55,6 +55,7 @@ import com.example.jingbin.cloudreader.utils.SPUtils;
 import com.example.jingbin.cloudreader.utils.UpdateUtil;
 import com.example.jingbin.cloudreader.view.MyFragmentPagerAdapter;
 import com.example.jingbin.cloudreader.view.OnLoginListener;
+import com.example.jingbin.cloudreader.view.OnMyPageChangeListener;
 import com.example.jingbin.cloudreader.view.statusbar.StatusBarUtil;
 import com.example.jingbin.cloudreader.view.webview.WebViewActivity;
 import com.example.jingbin.cloudreader.viewmodel.wan.MainViewModel;
@@ -72,7 +73,7 @@ import io.reactivex.functions.Consumer;
  * <a href="https://github.com/youlookwhat/CloudReader">source code</a>
  * <a href="http://www.jianshu.com/u/e43c6e979831">Contact me</a>
  */
-public class MainActivity extends BaseActivity<MainViewModel, ActivityMainBinding> implements View.OnClickListener, ViewPager.OnPageChangeListener {
+public class MainActivity extends BaseActivity<MainViewModel, ActivityMainBinding> implements View.OnClickListener {
 
     public static boolean isLaunch;
     private Toolbar toolbar;
@@ -88,36 +89,40 @@ public class MainActivity extends BaseActivity<MainViewModel, ActivityMainBindin
         setContentView(R.layout.activity_main);
         showContentView();
         isLaunch = true;
-        initStatusView();
+        initView();
         initContentFragment();
         initDrawerLayout();
         initRxBus();
     }
 
-    private void initStatusView() {
-        setNoTitle();
+    @Override
+    protected void initStatusBar() {
         StatusBarUtil.setColorNoTranslucentForDrawerLayout(MainActivity.this, bindingView.drawerLayout, CommonUtils.getColor(R.color.colorTheme));
         ViewGroup.LayoutParams layoutParams = bindingView.include.viewStatus.getLayoutParams();
         layoutParams.height = StatusBarUtil.getStatusBarHeight(this);
         bindingView.include.viewStatus.setLayoutParams(layoutParams);
-        initId();
-        UpdateUtil.check(this, false);
     }
 
-    private void initId() {
+    private void initView() {
+        setNoTitle();
+        setSupportActionBar(toolbar);
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            //去除默认Title显示
+            actionBar.setDisplayShowTitleEnabled(false);
+        }
         toolbar = bindingView.include.toolbar;
-        FrameLayout llTitleMenu = bindingView.include.llTitleMenu;
         vpContent = bindingView.include.vpContent;
         ivTitleOne = bindingView.include.ivTitleOne;
         ivTitleTwo = bindingView.include.ivTitleTwo;
         ivTitleThree = bindingView.include.ivTitleThree;
-        llTitleMenu.setOnClickListener(this);
+        bindingView.include.llTitleMenu.setOnClickListener(this);
         bindingView.include.ivTitleOne.setOnClickListener(this);
         bindingView.include.ivTitleTwo.setOnClickListener(this);
         bindingView.include.ivTitleThree.setOnClickListener(this);
         getClipContent();
+        UpdateUtil.check(this, false);
     }
-
 
     /**
      * inflateHeaderView 进来的布局要宽一些
@@ -172,14 +177,25 @@ public class MainActivity extends BaseActivity<MainViewModel, ActivityMainBindin
         vpContent.setAdapter(adapter);
         // 设置ViewPager最大缓存的页面个数(cpu消耗少)
         vpContent.setOffscreenPageLimit(2);
-        vpContent.addOnPageChangeListener(this);
+        vpContent.addOnPageChangeListener(new OnMyPageChangeListener() {
 
-        setSupportActionBar(toolbar);
-        ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
-            //去除默认Title显示
-            actionBar.setDisplayShowTitleEnabled(false);
-        }
+            @Override
+            public void onPageSelected(int position) {
+                switch (position) {
+                    case 0:
+                        setCurrentItem(0);
+                        break;
+                    case 1:
+                        setCurrentItem(1);
+                        break;
+                    case 2:
+                        setCurrentItem(2);
+                        break;
+                    default:
+                        break;
+                }
+            }
+        });
         setCurrentItem(0);
     }
 
@@ -358,33 +374,6 @@ public class MainActivity extends BaseActivity<MainViewModel, ActivityMainBindin
             return true;
         }
         return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-    }
-
-    @Override
-    public void onPageSelected(int position) {
-        switch (position) {
-            case 0:
-                setCurrentItem(0);
-                break;
-            case 1:
-                setCurrentItem(1);
-                break;
-            case 2:
-                setCurrentItem(2);
-                break;
-            default:
-                break;
-        }
-    }
-
-    @Override
-    public void onPageScrollStateChanged(int state) {
-
     }
 
     @Override

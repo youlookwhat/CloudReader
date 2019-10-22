@@ -66,8 +66,6 @@ public abstract class BaseActivity<VM extends AndroidViewModel, SV extends ViewD
         mContainer.addView(bindingView.getRoot());
         getWindow().setContentView(mBaseBinding.getRoot());
 
-        // 设置透明状态栏，兼容4.4
-        StatusBarUtil.setColor(this, CommonUtils.getColor(R.color.colorTheme), 0);
         loadingView = ((ViewStub) findViewById(R.id.vs_loading)).inflate();
         ImageView img = loadingView.findViewById(R.id.img_progress);
 
@@ -80,7 +78,13 @@ public abstract class BaseActivity<VM extends AndroidViewModel, SV extends ViewD
 
         setToolBar(mBaseBinding.toolBar);
         bindingView.getRoot().setVisibility(View.GONE);
+        initStatusBar();
         initViewModel();
+    }
+
+    protected void initStatusBar() {
+        // 设置透明状态栏，兼容4.4
+        StatusBarUtil.setColor(this, CommonUtils.getColor(R.color.colorTheme), 0);
     }
 
     /**

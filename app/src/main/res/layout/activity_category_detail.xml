@@ -76,7 +76,8 @@
                     app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
                     app:title="@{treeItemBean.name}"
                     app:titleMarginStart="0dp"
-                    app:titleTextColor="@color/colorTabTextNormal" />
+                    app:titleTextColor="@color/colorTabTextNormal"
+                    tools:title="基础知识" />
 
 
             </android.support.design.widget.CollapsingToolbarLayout>
