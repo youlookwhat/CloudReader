@@ -22,23 +22,23 @@ android {
 
     // ------------------------注释下面代码(签名配置) ↓↓↓↓↓-----------------------------
     signingConfigs {
-        debug {
-            storeFile file(pStoreFile)
-            storePassword pStorePassword
-            keyAlias pKeyAlias
-            keyPassword pKeyPassword
-            v1SigningEnabled true
-            v2SigningEnabled true
-        }
-
-        release {
-            storeFile file(pStoreFile)
-            storePassword pStorePassword
-            keyAlias pKeyAlias
-            keyPassword pKeyPassword
-            v1SigningEnabled true
-            v2SigningEnabled true
-        }
+//        debug {
+//            storeFile file(pStoreFile)
+//            storePassword pStorePassword
+//            keyAlias pKeyAlias
+//            keyPassword pKeyPassword
+//            v1SigningEnabled true
+//            v2SigningEnabled true
+//        }
+//
+//        release {
+//            storeFile file(pStoreFile)
+//            storePassword pStorePassword
+//            keyAlias pKeyAlias
+//            keyPassword pKeyPassword
+//            v1SigningEnabled true
+//            v2SigningEnabled true
+//        }
     }
 
     // gradle assembleRelease
@@ -46,12 +46,12 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            signingConfig signingConfigs.release
+//            signingConfig signingConfigs.release
         }
         debug {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            signingConfig signingConfigs.debug
+          //  signingConfig signingConfigs.debug
         }
     }
     // ------------------------↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑-----------------------------

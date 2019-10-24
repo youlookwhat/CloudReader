@@ -66,3 +66,8 @@
 
 # me.jingbin.sbanner.SBannerView
 -keep class me.jingbin.sbanner.** {*;}
+
+-keep class com.analysys.track.** {
+  public *;
+}
+-dontwarn com.analysys.track.**

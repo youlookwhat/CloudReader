@@ -2,7 +2,7 @@ package com.example.jingbin.cloudreader.app;
 
 import android.support.multidex.MultiDexApplication;
 
-import com.example.http.BuildConfig;
+import com.analysys.track.AnalysysTracker;
 import com.example.http.HttpUtils;
 import com.tencent.bugly.crashreport.CrashReport;
 
@@ -28,8 +28,15 @@ public class App extends MultiDexApplication {
 //        }
 //        LeakCanary.install(this);
         HttpUtils.getInstance().init(this);
-        CrashReport.initCrashReport(getApplicationContext(), "3977b2d86f", BuildConfig.DEBUG);
 
+        CrashReport.initCrashReport(getApplicationContext(), "97876e6b1d", true);
+        CrashReport.enableBugly(true);
+        CrashReport.postCatchedException(new Exception());
+
+        // 设置打开debug模式，上线请置为false
+        AnalysysTracker.setDebugMode(this, false);
+        // 初始化接口:第二个参数填写您在平台申请的appKey,第三个参数填写
+        AnalysysTracker.init(this, "7752552892442721d", "YUNYUE");
     }
 
 }
