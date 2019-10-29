@@ -1,33 +1,19 @@
 package com.example.jingbin.cloudreader.ui.douban;
 
-import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
-import android.graphics.Paint;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
-import android.view.View;
 
-import com.bumptech.glide.Glide;
-import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.jingbin.cloudreader.R;
 import com.example.jingbin.cloudreader.adapter.BookTypeAdapter;
-import com.example.jingbin.cloudreader.adapter.CategoryArticleAdapter;
 import com.example.jingbin.cloudreader.base.BaseActivity;
 import com.example.jingbin.cloudreader.databinding.ActivityBookTypeBinding;
-import com.example.jingbin.cloudreader.databinding.ActivityNavAboutBinding;
 import com.example.jingbin.cloudreader.http.api.BookApiUtils;
-import com.example.jingbin.cloudreader.utils.BaseTools;
-import com.example.jingbin.cloudreader.utils.CommonUtils;
 import com.example.jingbin.cloudreader.utils.DebugUtil;
-import com.example.jingbin.cloudreader.utils.PerfectClickListener;
-import com.example.jingbin.cloudreader.utils.UpdateUtil;
 import com.example.jingbin.cloudreader.view.MyDividerItemDecoration;
-import com.example.jingbin.cloudreader.view.webview.WebViewActivity;
 import com.example.jingbin.cloudreader.viewmodel.menu.NoViewModel;
 
 import java.util.ArrayList;
@@ -77,12 +63,10 @@ public class BookTypeActivity extends BaseActivity<NoViewModel, ActivityBookType
         bindingView.recyclerView.setItemAnimator(null);
         mAdapter = new BookTypeAdapter();
         mAdapter.setType(type);
-        mAdapter.bindToRecyclerView(bindingView.recyclerView, true);
-        mAdapter.setLoaded(false);
-        mAdapter.setEnableLoadMore(false);
         MyDividerItemDecoration itemDecoration = new MyDividerItemDecoration(bindingView.recyclerView.getContext(), DividerItemDecoration.VERTICAL, false);
         itemDecoration.setDrawable(Objects.requireNonNull(ContextCompat.getDrawable(bindingView.recyclerView.getContext(), R.drawable.shape_line)));
         bindingView.recyclerView.addItemDecoration(itemDecoration);
+        bindingView.recyclerView.setAdapter(mAdapter);
         mAdapter.setOnSelectListener(new BookTypeAdapter.OnSelectListener() {
             @Override
             public void onSelected(String type) {

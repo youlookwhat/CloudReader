@@ -9,7 +9,6 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 
-import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.jingbin.cloudreader.R;
 import com.example.jingbin.cloudreader.adapter.CategoryArticleAdapter;
 import com.example.jingbin.cloudreader.base.BaseFragment;
@@ -17,6 +16,8 @@ import com.example.jingbin.cloudreader.bean.wanandroid.HomeListBean;
 import com.example.jingbin.cloudreader.databinding.FragmentCategoryArticleBinding;
 import com.example.jingbin.cloudreader.view.MyDividerItemDecoration;
 import com.example.jingbin.cloudreader.viewmodel.wan.WanAndroidListViewModel;
+
+import me.jingbin.library.ByRecyclerView;
 
 /**
  * @author jingbin
@@ -95,19 +96,19 @@ public class CategoryArticleFragment extends BaseFragment<WanAndroidListViewMode
         bindingView.recyclerView.setLayoutManager(new LinearLayoutManager(activity));
         bindingView.recyclerView.setItemAnimator(null);
         mAdapter = new CategoryArticleAdapter(activity);
-        mAdapter.bindToRecyclerView(bindingView.recyclerView, true);
+        bindingView.recyclerView.setAdapter(mAdapter);
         MyDividerItemDecoration itemDecoration = new MyDividerItemDecoration(bindingView.recyclerView.getContext(), DividerItemDecoration.VERTICAL, false);
         itemDecoration.setDrawable(ContextCompat.getDrawable(activity, R.drawable.shape_line));
         bindingView.recyclerView.addItemDecoration(itemDecoration);
 
-        mAdapter.setOnLoadMoreListener(new BaseQuickAdapter.RequestLoadMoreListener() {
+        bindingView.recyclerView.setOnLoadMoreListener(new ByRecyclerView.OnLoadMoreListener() {
             @Override
-            public void onLoadMoreRequested() {
+            public void onLoadMore() {
                 int page = viewModel.getPage();
                 viewModel.setPage(++page);
                 getHomeList();
             }
-        }, bindingView.recyclerView);
+        });
     }
 
     private void getHomeList() {
@@ -118,18 +119,16 @@ public class CategoryArticleFragment extends BaseFragment<WanAndroidListViewMode
                     if (homeListBean.getData() != null && homeListBean.getData().getDatas() != null && homeListBean.getData().getDatas().size() > 0) {
                         showContentView();
                         if (viewModel.getPage() == 0) {
-                            mAdapter.getData().clear();
-//                        mAdapter.setNewData(homeListBean.getData().getDatas());
-                            // 设置后不满一屏幕不加载
-                            // mAdapter.disableLoadMoreIfNotFullPage();
+                            mAdapter.setNewData(homeListBean.getData().getDatas());
+                        } else {
+                            mAdapter.addData(homeListBean.getData().getDatas());
                         }
-                        mAdapter.addData(homeListBean.getData().getDatas());
-                        mAdapter.loadMoreComplete();
+                        bindingView.recyclerView.loadMoreComplete();
                     } else {
                         if (viewModel.getPage() == 0) {
                             showEmptyView(String.format("未找到与\"%s\"相关的内容", categoryName));
                         } else {
-                            mAdapter.loadMoreEnd();
+                            bindingView.recyclerView.loadMoreEnd();
                         }
                     }
                     if (mIsFirst) {

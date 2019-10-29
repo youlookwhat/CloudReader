@@ -44,7 +44,7 @@
             android:scrollbarSize="3dp"
             android:scrollbarThumbVertical="@color/tabBackground" />
 
-        <me.jingbin.library.WebProgress
+        <me.jingbin.progress.WebProgress
             android:id="@+id/pb_progress"
             style="@style/Widget.AppCompat.ProgressBar.Horizontal"
             android:layout_width="match_parent"

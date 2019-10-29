@@ -25,7 +25,7 @@ import android.widget.TextView;
 import com.example.jingbin.cloudreader.R;
 import com.example.jingbin.cloudreader.adapter.CategoryArticleAdapter;
 import com.example.jingbin.cloudreader.adapter.GankAndroidSearchAdapter;
-import com.example.jingbin.cloudreader.base.refreshadapter.JQuickAdapter;
+import com.example.jingbin.cloudreader.base.refreshadapter.BaseBindingAdapter;
 import com.example.jingbin.cloudreader.bean.wanandroid.HomeListBean;
 import com.example.jingbin.cloudreader.bean.wanandroid.SearchTagBean;
 import com.example.jingbin.cloudreader.databinding.ActivitySearchBinding;
@@ -41,6 +41,8 @@ import com.example.jingbin.cloudreader.viewmodel.wan.SearchViewModel;
 import java.util.List;
 import java.util.Objects;
 
+import me.jingbin.library.ByRecyclerView;
+
 /**
  * 搜索页面
  *
@@ -49,7 +51,7 @@ import java.util.Objects;
 public class SearchActivity extends AppCompatActivity {
 
     private ActivitySearchBinding binding;
-    private JQuickAdapter mAdapter;
+    private BaseBindingAdapter mAdapter;
     private SearchViewModel viewModel;
     private String keyWord;
 
@@ -219,19 +221,22 @@ public class SearchActivity extends AppCompatActivity {
             binding.recyclerView.addItemDecoration(itemDecoration);
             binding.recyclerView.setAdapter(mAdapter);
         }
-        mAdapter.setOnLoadMoreListener(() -> {
-            int position2 = binding.tlSearch.getSelectedTabPosition();
-            if (position2 == 0) {
-                int page = viewModel.getPage();
-                viewModel.setPage(++page);
-                loadWanData();
-            } else if (position2 == 1 || position2 == 2) {
-                int page = viewModel.getGankPage();
-                viewModel.setGankPage(++page);
-                loadGankData();
+        binding.recyclerView.reset();
+        binding.recyclerView.setOnLoadMoreListener(new ByRecyclerView.OnLoadMoreListener() {
+            @Override
+            public void onLoadMore() {
+                int position2 = binding.tlSearch.getSelectedTabPosition();
+                if (position2 == 0) {
+                    int page = viewModel.getPage();
+                    viewModel.setPage(++page);
+                    loadWanData();
+                } else if (position2 == 1 || position2 == 2) {
+                    int page = viewModel.getGankPage();
+                    viewModel.setGankPage(++page);
+                    loadGankData();
+                }
             }
-
-        }, binding.recyclerView);
+        });
         if (!TextUtils.isEmpty(keyWord)) {
             load();
         }
@@ -239,7 +244,6 @@ public class SearchActivity extends AppCompatActivity {
 
     private void initRefreshView() {
         binding.recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        binding.recyclerView.setItemAnimator(null);
         int tabPosition = binding.tlSearch.getSelectedTabPosition();
         switch (tabPosition) {
             case 0:
@@ -252,7 +256,7 @@ public class SearchActivity extends AppCompatActivity {
             default:
                 break;
         }
-        mAdapter.bindToRecyclerView(binding.recyclerView, true);
+        binding.recyclerView.setAdapter(mAdapter);
     }
 
     private void loadWanData() {
@@ -271,10 +275,10 @@ public class SearchActivity extends AppCompatActivity {
                     if (mAdapter instanceof CategoryArticleAdapter) {
                         mAdapter.addData(homeListBean.getData().getDatas());
                     }
-                    mAdapter.loadMoreComplete();
+                    binding.recyclerView.loadMoreComplete();
                 } else {
                     if (viewModel.getPage() != 0) {
-                        mAdapter.loadMoreEnd();
+                        binding.recyclerView.loadMoreEnd();
                     } else {
                         mAdapter.getData().clear();
                         mAdapter.notifyDataSetChanged();
@@ -302,14 +306,14 @@ public class SearchActivity extends AppCompatActivity {
                         adapter.setAllType(false);
                     }
                 }
-                mAdapter.loadMoreComplete();
+                binding.recyclerView.loadMoreComplete();
             } else {
                 if (viewModel.getGankPage() != 1) {
-                    mAdapter.loadMoreEnd();
+                    binding.recyclerView.loadMoreEnd();
                 } else {
                     mAdapter.getData().clear();
                     mAdapter.notifyDataSetChanged();
-                    mAdapter.loadMoreComplete();
+                    binding.recyclerView.loadMoreComplete();
                 }
             }
         });

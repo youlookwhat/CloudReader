@@ -5,13 +5,15 @@
         android:layout_height="match_parent"
         tools:context="com.example.jingbin.cloudreader.ui.wan.child.CategoryArticleFragment">
 
-        <android.support.v7.widget.RecyclerView
+        <me.jingbin.library.ByRecyclerView
             android:id="@+id/recyclerView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scrollbarSize="4dp"
             android:scrollbarThumbVertical="@color/tabBackground"
-            android:scrollbars="vertical" />
+            android:scrollbars="vertical"
+            tools:layoutManager="LinearLayoutManager"
+            tools:listitem="@layout/item_category_article" />
 
     </FrameLayout>
 </layout>

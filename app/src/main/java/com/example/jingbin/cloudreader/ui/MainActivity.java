@@ -21,7 +21,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 
 import com.example.jingbin.cloudreader.R;
@@ -105,13 +104,12 @@ public class MainActivity extends BaseActivity<MainViewModel, ActivityMainBindin
 
     private void initView() {
         setNoTitle();
-        setSupportActionBar(toolbar);
+        setSupportActionBar(bindingView.include.toolbar);
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             //去除默认Title显示
             actionBar.setDisplayShowTitleEnabled(false);
         }
-        toolbar = bindingView.include.toolbar;
         vpContent = bindingView.include.vpContent;
         ivTitleOne = bindingView.include.ivTitleOne;
         ivTitleTwo = bindingView.include.ivTitleTwo;
