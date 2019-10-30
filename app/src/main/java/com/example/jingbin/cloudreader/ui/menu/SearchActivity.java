@@ -221,6 +221,7 @@ public class SearchActivity extends AppCompatActivity {
             binding.recyclerView.addItemDecoration(itemDecoration);
             binding.recyclerView.setAdapter(mAdapter);
         }
+        binding.recyclerView.setItemAnimator(null);
         binding.recyclerView.reset();
         binding.recyclerView.setOnLoadMoreListener(new ByRecyclerView.OnLoadMoreListener() {
             @Override

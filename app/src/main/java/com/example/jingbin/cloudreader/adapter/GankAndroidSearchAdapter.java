@@ -35,7 +35,6 @@ public class GankAndroidSearchAdapter extends BaseBindingAdapter<GankIoDataBean.
     @Override
     protected void bindView(GankIoDataBean.ResultBean object, ItemAndroidBinding binding, int position) {
         if (object != null) {
-            binding.executePendingBindings();
             if (isAll && "福利".equals(object.getType())) {
                 binding.ivAllWelfare.setVisibility(View.VISIBLE);
                 binding.llWelfareOther.setVisibility(View.GONE);

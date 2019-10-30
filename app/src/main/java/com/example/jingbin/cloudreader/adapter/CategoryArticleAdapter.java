@@ -32,6 +32,7 @@ public class CategoryArticleAdapter extends BaseBindingAdapter<ArticlesBean, Ite
     @Override
     protected void bindView(ArticlesBean bean, ItemCategoryArticleBinding binding, int position) {
         if (bean != null) {
+            binding.setAdapter(this);
             binding.setBean(bean);
             binding.executePendingBindings();
             binding.vbCollect.setOnClickListener(new PerfectClickListener() {
@@ -58,12 +59,10 @@ public class CategoryArticleAdapter extends BaseBindingAdapter<ArticlesBean, Ite
                                 @Override
                                 public void onSuccess() {
                                     bean.setCollect(true);
-//                                    ToastUtil.showToastLong("收藏成功");
                                 }
 
                                 @Override
                                 public void onFailure() {
-//                                    ToastUtil.showToastLong("收藏失败");
                                     bean.setCollect(false);
                                     refreshNotifyItemChanged(position);
                                 }

@@ -157,5 +157,6 @@ public class CategoryArticleFragment extends BaseFragment<WanAndroidListViewMode
             mAdapter.getData().clear();
             mAdapter = null;
         }
+        bindingView.recyclerView.destroy();
     }
 }
