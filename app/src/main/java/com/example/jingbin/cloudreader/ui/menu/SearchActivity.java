@@ -222,7 +222,6 @@ public class SearchActivity extends AppCompatActivity {
             binding.recyclerView.setAdapter(mAdapter);
         }
         binding.recyclerView.setItemAnimator(null);
-        binding.recyclerView.reset();
         binding.recyclerView.setOnLoadMoreListener(new ByRecyclerView.OnLoadMoreListener() {
             @Override
             public void onLoadMore() {
