@@ -12,11 +12,12 @@ import com.example.jingbin.cloudreader.R;
 import com.example.jingbin.cloudreader.adapter.GankAndroidAdapter;
 import com.example.jingbin.cloudreader.base.BaseFragment;
 import com.example.jingbin.cloudreader.bean.GankIoDataBean;
-import com.example.jingbin.cloudreader.databinding.FragmentCustomBinding;
+import com.example.jingbin.cloudreader.databinding.FragmentAndroidBinding;
 import com.example.jingbin.cloudreader.utils.SPUtils;
 import com.example.jingbin.cloudreader.utils.ToastUtil;
 import com.example.jingbin.cloudreader.viewmodel.gank.GankViewModel;
-import com.example.xrecyclerview.XRecyclerView;
+
+import me.jingbin.library.ByRecyclerView;
 
 import static com.example.jingbin.cloudreader.app.Constants.GANK_CALA;
 
@@ -24,7 +25,7 @@ import static com.example.jingbin.cloudreader.app.Constants.GANK_CALA;
  * @author jingbin
  * @data 2018-12-22
  */
-public class CustomFragment extends BaseFragment<GankViewModel, FragmentCustomBinding> {
+public class CustomFragment extends BaseFragment<GankViewModel, FragmentAndroidBinding> {
 
     private String mType = "all";
     private boolean mIsPrepared;
@@ -43,7 +44,7 @@ public class CustomFragment extends BaseFragment<GankViewModel, FragmentCustomBi
 
     @Override
     public int setContent() {
-        return R.layout.fragment_custom;
+        return R.layout.fragment_android;
     }
 
     @Override
@@ -67,23 +68,15 @@ public class CustomFragment extends BaseFragment<GankViewModel, FragmentCustomBi
     }
 
     private void initRecyclerView() {
-        // 禁止下拉刷新
-        bindingView.xrvCustom.setPullRefreshEnabled(false);
-        // 去掉刷新头
-        bindingView.xrvCustom.clearHeader();
         // 去掉显示动画
-        bindingView.xrvCustom.setItemAnimator(null);
+        bindingView.xrvAndroid.setItemAnimator(null);
         adapter = new GankAndroidAdapter();
         View mHeaderView = View.inflate(getContext(), R.layout.header_item_gank_custom, null);
-        bindingView.xrvCustom.addHeaderView(mHeaderView);
+        bindingView.xrvAndroid.addHeaderView(mHeaderView);
         initHeader(mHeaderView);
-        bindingView.xrvCustom.setLayoutManager(new LinearLayoutManager(getActivity()));
-        bindingView.xrvCustom.setAdapter(adapter);
-        bindingView.xrvCustom.setLoadingListener(new XRecyclerView.LoadingListener() {
-            @Override
-            public void onRefresh() {
-            }
-
+        bindingView.xrvAndroid.setLayoutManager(new LinearLayoutManager(getActivity()));
+        bindingView.xrvAndroid.setAdapter(adapter);
+        bindingView.xrvAndroid.setOnLoadMoreListener(new ByRecyclerView.OnLoadMoreListener() {
             @Override
             public void onLoadMore() {
                 int page = viewModel.getPage();
@@ -103,14 +96,12 @@ public class CustomFragment extends BaseFragment<GankViewModel, FragmentCustomBi
                         showContentView();
                         boolean isAll = "全部".equals(SPUtils.getString(GANK_CALA, "全部"));
                         adapter.setAllType(isAll);
-                        adapter.clear();
-                        adapter.notifyDataSetChanged();
+                        adapter.setNewData(bean.getResults());
+                    } else {
+                        adapter.addData(bean.getResults());
                     }
 
-                    int positionStart = adapter.getItemCount() + 2;
-                    adapter.addAll(bean.getResults());
-                    adapter.notifyItemRangeInserted(positionStart, bean.getResults().size());
-                    bindingView.xrvCustom.refreshComplete();
+                    bindingView.xrvAndroid.loadMoreComplete();
                     if (mIsFirst) {
                         mIsFirst = false;
                     }
@@ -118,7 +109,7 @@ public class CustomFragment extends BaseFragment<GankViewModel, FragmentCustomBi
                     if (viewModel.getPage() == 1) {
                         showError();
                     } else {
-                        bindingView.xrvCustom.noMoreLoading();
+                        bindingView.xrvAndroid.loadMoreEnd();
                     }
                 }
             }
@@ -195,8 +186,6 @@ public class CustomFragment extends BaseFragment<GankViewModel, FragmentCustomBi
             textView.setText(content);
             mType = content;
         }
-        // 重置XRecyclerView状态，解决 如出现刷新到底无内容再切换其他类别后，无法上拉加载的情况
-        bindingView.xrvCustom.reset();
         viewModel.setType(mType);
         viewModel.setPage(1);
         SPUtils.putString(GANK_CALA, content);

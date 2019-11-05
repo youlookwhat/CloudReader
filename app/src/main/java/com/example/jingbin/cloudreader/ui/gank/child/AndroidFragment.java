@@ -13,6 +13,9 @@ import com.example.jingbin.cloudreader.databinding.FragmentAndroidBinding;
 import com.example.jingbin.cloudreader.viewmodel.gank.GankViewModel;
 import com.example.xrecyclerview.XRecyclerView;
 
+import me.jingbin.library.ByRecyclerView;
+import me.jingbin.library.divider.SpacesItemDecoration;
+
 /**
  * 大安卓 fragment
  */
@@ -76,13 +79,19 @@ public class AndroidFragment extends BaseFragment<GankViewModel, FragmentAndroid
         adapter = new GankAndroidAdapter();
         bindingView.xrvAndroid.setItemAnimator(null);
         bindingView.xrvAndroid.setLayoutManager(new LinearLayoutManager(activity));
-        bindingView.xrvAndroid.setLoadingListener(new XRecyclerView.LoadingListener() {
+        // 加了分割线，滚动条才会置顶
+        SpacesItemDecoration itemDecoration = new SpacesItemDecoration(activity, SpacesItemDecoration.VERTICAL, 1);
+        itemDecoration.setDrawable(R.drawable.shape_transparent);
+        bindingView.xrvAndroid.addItemDecoration(itemDecoration);
+        bindingView.xrvAndroid.setAdapter(adapter);
+        bindingView.xrvAndroid.setOnRefreshListener(new ByRecyclerView.OnRefreshListener() {
             @Override
             public void onRefresh() {
                 viewModel.setPage(1);
                 loadAndroidData();
             }
-
+        });
+        bindingView.xrvAndroid.setOnLoadMoreListener(new ByRecyclerView.OnLoadMoreListener() {
             @Override
             public void onLoadMore() {
                 int page = viewModel.getPage();
@@ -91,7 +100,6 @@ public class AndroidFragment extends BaseFragment<GankViewModel, FragmentAndroid
                 loadAndroidData();
             }
         });
-        bindingView.xrvAndroid.setAdapter(adapter);
     }
 
     private void loadAndroidData() {
@@ -99,13 +107,11 @@ public class AndroidFragment extends BaseFragment<GankViewModel, FragmentAndroid
             if (bean != null && bean.getResults() != null && bean.getResults().size() > 0) {
                 if (viewModel.getPage() == 1) {
                     showContentView();
-                    adapter.clear();
-                    adapter.notifyDataSetChanged();
+                    adapter.setNewData(bean.getResults());
+                } else {
+                    adapter.addData(bean.getResults());
                 }
-                int positionStart = adapter.getItemCount() + 1;
-                adapter.addAll(bean.getResults());
-                adapter.notifyItemRangeInserted(positionStart, bean.getResults().size());
-                bindingView.xrvAndroid.refreshComplete();
+                bindingView.xrvAndroid.loadMoreComplete();
                 if (mIsFirst) {
                     mIsFirst = false;
                 }
@@ -113,7 +119,7 @@ public class AndroidFragment extends BaseFragment<GankViewModel, FragmentAndroid
                 if (viewModel.getPage() == 1) {
                     showError();
                 } else {
-                    bindingView.xrvAndroid.noMoreLoading();
+                    bindingView.xrvAndroid.loadMoreEnd();
                 }
             }
         });

@@ -42,6 +42,7 @@ import java.util.List;
 import java.util.Objects;
 
 import me.jingbin.library.ByRecyclerView;
+import me.jingbin.library.divider.SpacesItemDecoration;
 
 /**
  * 搜索页面
@@ -210,15 +211,16 @@ public class SearchActivity extends AppCompatActivity {
     private void initViewModel(int position) {
         if (position == 0) {
             mAdapter = new CategoryArticleAdapter(this);
-            MyDividerItemDecoration itemDecoration = new MyDividerItemDecoration(binding.recyclerView.getContext(), DividerItemDecoration.VERTICAL, false);
-            itemDecoration.setDrawable(Objects.requireNonNull(ContextCompat.getDrawable(binding.recyclerView.getContext(), R.drawable.shape_line)));
-            binding.recyclerView.addItemDecoration(itemDecoration);
+            if (binding.recyclerView.getItemDecorationCount() > 0) {
+                binding.recyclerView.removeItemDecorationAt(0);
+            }
+            binding.recyclerView.addItemDecoration(new SpacesItemDecoration(this, SpacesItemDecoration.VERTICAL));
             binding.recyclerView.setAdapter(mAdapter);
         } else if (position == 1 || position == 2) {
             mAdapter = new GankAndroidSearchAdapter(this);
-            MyDividerItemDecoration itemDecoration = new MyDividerItemDecoration(binding.recyclerView.getContext(), DividerItemDecoration.VERTICAL, false);
-            itemDecoration.setDrawable(Objects.requireNonNull(ContextCompat.getDrawable(binding.recyclerView.getContext(), R.drawable.shape_remove)));
-            binding.recyclerView.addItemDecoration(itemDecoration);
+            if (binding.recyclerView.getItemDecorationCount() > 0) {
+                binding.recyclerView.removeItemDecorationAt(0);
+            }
             binding.recyclerView.setAdapter(mAdapter);
         }
         binding.recyclerView.setItemAnimator(null);

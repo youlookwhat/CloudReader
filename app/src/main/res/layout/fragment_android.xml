@@ -5,14 +5,14 @@
         android:layout_height="match_parent"
         tools:context="com.example.jingbin.cloudreader.ui.gank.child.AndroidFragment">
 
-        <com.example.xrecyclerview.XRecyclerView
+        <me.jingbin.library.ByRecyclerView
             android:id="@+id/xrv_android"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:scrollbarFadeDuration="1"
-            android:scrollbarSize="4dp"
-            android:scrollbarThumbVertical="@color/tabBackground"
-            android:scrollbars="vertical" />
+            android:layout_height="match_parent"
+            android:scrollbars="vertical"
+            tools:itemCount="5"
+            tools:layoutManager="LinearLayoutManager"
+            tools:listitem="@layout/item_android" />
 
     </FrameLayout>
 </layout>

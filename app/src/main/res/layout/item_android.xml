@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -61,7 +62,8 @@
                     android:lineSpacingExtra="4dp"
                     android:text="@{resultsBean.desc}"
                     android:textColor="@color/colorContent"
-                    android:textSize="15sp" />
+                    android:textSize="15sp"
+                    tools:text="描述" />
 
                 <ImageView
                     android:id="@+id/iv_android_pic"
@@ -89,7 +91,8 @@
                     android:layout_height="wrap_content"
                     android:text='@{TextUtils.isEmpty(resultsBean.who)?@string/no_name:resultsBean.who}'
                     android:textColor="@color/colorSubtitle"
-                    android:textSize="12sp" />
+                    android:textSize="12sp"
+                    tools:text="作者" />
 
                 <TextView
                     android:id="@+id/tv_content_type"
@@ -99,7 +102,9 @@
                     android:text=""
                     android:textColor="@color/colorSubtitle"
                     android:textSize="12sp"
-                    android:visibility="gone" />
+                    android:visibility="gone"
+                    tools:text=" · 类型"
+                    tools:visibility="visible" />
 
                 <TextView
                     android:id="@+id/tv_android_time"
@@ -108,7 +113,9 @@
                     android:layout_alignParentRight="true"
                     android:text='@{TimeUtil.getTranslateTime(resultsBean.publishedAt)}'
                     android:textColor="@color/colorSubtitle"
-                    android:textSize="12sp" />
+                    android:textSize="12sp"
+                    tools:text="10-24"
+                    tools:visibility="visible" />
 
             </RelativeLayout>
 

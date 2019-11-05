@@ -12,7 +12,7 @@
         <item name="colorPrimaryDark">@color/colorTheme</item>
         <item name="colorAccent">@color/colorTheme</item>
         <item name="android:windowAnimationStyle">@style/default_animation</item>
-
+        <item name="android:listDivider">@drawable/shape_line</item>
         <!--默认状态下页面的背景色-->
         <!--<item name="android:windowBackground">@color/color_page_bg</item>-->
         <!--正常状态下字体颜色和icon颜色-->

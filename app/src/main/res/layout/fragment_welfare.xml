@@ -1,17 +1,22 @@
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <FrameLayout xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context="com.example.jingbin.cloudreader.ui.gank.child.WelfareFragment">
 
-        <com.example.xrecyclerview.XRecyclerView
+        <me.jingbin.library.ByRecyclerView
             android:id="@+id/xrv_welfare"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:scrollbarSize="4dp"
             android:scrollbarThumbVertical="@color/tabBackground"
-            android:scrollbars="vertical" />
+            android:scrollbars="vertical"
+            tools:itemCount="6"
+            tools:layoutManager="StaggeredGridLayoutManager"
+            tools:listitem="@layout/item_welfare"
+            tools:spanCount="2" />
 
     </FrameLayout>
 </layout>

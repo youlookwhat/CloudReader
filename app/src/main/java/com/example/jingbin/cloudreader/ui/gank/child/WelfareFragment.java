@@ -4,6 +4,7 @@ import android.arch.lifecycle.Observer;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.view.View;
 
 import com.example.jingbin.cloudreader.R;
 import com.example.jingbin.cloudreader.adapter.WelfareAdapter;
@@ -17,6 +18,8 @@ import com.example.xrecyclerview.XRecyclerView;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import me.jingbin.library.ByRecyclerView;
 
 /**
  * 福利
@@ -45,7 +48,6 @@ public class WelfareFragment extends BaseFragment<WelfareViewModel, FragmentWelf
         isPrepared = true;
     }
 
-
     @Override
     protected void loadData() {
         if (!mIsVisible || !isPrepared || !isFirst) {
@@ -55,20 +57,13 @@ public class WelfareFragment extends BaseFragment<WelfareViewModel, FragmentWelf
     }
 
     private void initRecycleView() {
-        bindingView.xrvWelfare.setPullRefreshEnabled(false);
-        bindingView.xrvWelfare.clearHeader();
         mWelfareAdapter = new WelfareAdapter();
         //构造器中，第一个参数表示列数或者行数，第二个参数表示滑动方向,瀑布流
         bindingView.xrvWelfare.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
         bindingView.xrvWelfare.setHasFixedSize(true);
         bindingView.xrvWelfare.setItemAnimator(null);
         bindingView.xrvWelfare.setAdapter(mWelfareAdapter);
-        bindingView.xrvWelfare.setLoadingListener(new XRecyclerView.LoadingListener() {
-            @Override
-            public void onRefresh() {
-
-            }
-
+        bindingView.xrvWelfare.setOnLoadMoreListener(new ByRecyclerView.OnLoadMoreListener() {
             @Override
             public void onLoadMore() {
                 int page = viewModel.getPage();
@@ -77,8 +72,11 @@ public class WelfareFragment extends BaseFragment<WelfareViewModel, FragmentWelf
                 loadWelfareData();
             }
         });
-        mWelfareAdapter.setOnItemClickListener((resultsBean, position) -> {
-            ViewBigImageActivity.startImageList(getContext(), position, imgList, imgTitleList);
+        bindingView.xrvWelfare.setOnItemClickListener(new ByRecyclerView.OnItemClickListener() {
+            @Override
+            public void onClick(View v, int position) {
+                ViewBigImageActivity.startImageList(getContext(), position, imgList, imgTitleList);
+            }
         });
         viewModel.getImageAndTitle().observe(this, new Observer<ArrayList<ArrayList<String>>>() {
             @Override
@@ -100,22 +98,21 @@ public class WelfareFragment extends BaseFragment<WelfareViewModel, FragmentWelf
                     if (viewModel.getPage() == 1) {
                         showContentView();
                         mWelfareAdapter.clear();
+                        mWelfareAdapter.setNewData(bean.getResults());
+                    } else {
+                        mWelfareAdapter.addData(bean.getResults());
                     }
-                    int positionStart = mWelfareAdapter.getItemCount() + 1;
-                    mWelfareAdapter.addAll(bean.getResults());
-                    // 去掉传统的 notifyDataSetChanged()
-                    mWelfareAdapter.notifyItemRangeInserted(positionStart, bean.getResults().size());
-                    bindingView.xrvWelfare.refreshComplete();
+                    bindingView.xrvWelfare.loadMoreComplete();
 
                     if (isFirst) {
                         isFirst = false;
                     }
                 } else {
-                    bindingView.xrvWelfare.refreshComplete();
+                    bindingView.xrvWelfare.loadMoreComplete();
                     if (mWelfareAdapter.getItemCount() == 0) {
                         showError();
                     } else {
-                        bindingView.xrvWelfare.noMoreLoading();
+                        bindingView.xrvWelfare.loadMoreEnd();
                     }
                 }
             }

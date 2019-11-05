@@ -88,18 +88,12 @@ public class EverydayFragment extends BaseFragment<EverydayViewModel, FragmentEv
 
     private void initRecyclerView() {
         mHeaderBinding = DataBindingUtil.inflate(LayoutInflater.from(getContext()), R.layout.header_item_everyday, null, false);
-        FooterItemEverydayBinding mFooterBinding = DataBindingUtil.inflate(LayoutInflater.from(getContext()), R.layout.footer_item_everyday, null, false);
-        bindingView.recyclerView.setPullRefreshEnabled(false);
-        bindingView.recyclerView.setLoadingMoreEnabled(false);
-        bindingView.recyclerView.addHeaderView(mHeaderBinding.getRoot());
-        bindingView.recyclerView.addFootView(mFooterBinding.getRoot(), true);
-        bindingView.recyclerView.noMoreLoading();
-        bindingView.recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        // 需加，不然滑动不流畅
-        bindingView.recyclerView.setNestedScrollingEnabled(false);
-        bindingView.recyclerView.setHasFixedSize(false);
-        bindingView.recyclerView.setItemAnimator(new DefaultItemAnimator());
         mEverydayAdapter = new EverydayAdapter();
+        bindingView.recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        bindingView.recyclerView.setLoadMoreEnabled(false);
+        bindingView.recyclerView.setHasFixedSize(false);
+        bindingView.recyclerView.addHeaderView(mHeaderBinding.getRoot());
+        bindingView.recyclerView.addFooterView(R.layout.footer_item_everyday);
         bindingView.recyclerView.setAdapter(mEverydayAdapter);
 
         // 显示日期,去掉第一位的"0"
@@ -145,7 +139,7 @@ public class EverydayFragment extends BaseFragment<EverydayViewModel, FragmentEv
                     mEverydayAdapter.clear();
                     mEverydayAdapter.addAll(lists);
                     mEverydayAdapter.notifyDataSetChanged();
-                    bindingView.recyclerView.refreshComplete();
+                    bindingView.recyclerView.loadMoreComplete();
                 } else {
                     showError();
                 }
