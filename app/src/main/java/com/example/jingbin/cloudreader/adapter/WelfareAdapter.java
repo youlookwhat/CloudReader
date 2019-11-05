@@ -1,7 +1,7 @@
 package com.example.jingbin.cloudreader.adapter;
 
 import com.example.jingbin.cloudreader.R;
-import com.example.jingbin.cloudreader.base.refreshadapter.BaseBindingAdapter;
+import com.example.jingbin.cloudreader.base.binding.BaseBindingAdapter;
 import com.example.jingbin.cloudreader.bean.GankIoDataBean;
 import com.example.jingbin.cloudreader.databinding.ItemWelfareBinding;
 import com.example.jingbin.cloudreader.utils.DensityUtil;

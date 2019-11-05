@@ -32,7 +32,7 @@ import com.example.jingbin.cloudreader.utils.DebugUtil;
 import com.example.jingbin.cloudreader.utils.StringFormatUtil;
 import com.example.jingbin.cloudreader.view.MyNestedScrollView;
 import com.example.jingbin.cloudreader.view.statusbar.StatusBarUtil;
-import com.example.jingbin.cloudreader.view.test.StatusBarUtils;
+import com.example.jingbin.cloudreader.view.statue.StatusBarUtils;
 
 import jp.wasabeef.glide.transformations.BlurTransformation;
 

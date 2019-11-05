@@ -36,7 +36,7 @@ import com.example.jingbin.cloudreader.utils.CommonUtils;
 import com.example.jingbin.cloudreader.view.CustomChangeBounds;
 import com.example.jingbin.cloudreader.view.MyNestedScrollView;
 import com.example.jingbin.cloudreader.view.statusbar.StatusBarUtil;
-import com.example.jingbin.cloudreader.view.test.StatusBarUtils;
+import com.example.jingbin.cloudreader.view.statue.StatusBarUtils;
 
 import java.lang.reflect.Method;
 

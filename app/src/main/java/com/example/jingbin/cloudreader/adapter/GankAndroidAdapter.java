@@ -2,13 +2,9 @@ package com.example.jingbin.cloudreader.adapter;
 
 import android.text.TextUtils;
 import android.view.View;
-import android.view.ViewGroup;
 
 import com.example.jingbin.cloudreader.R;
-import com.example.jingbin.cloudreader.base.baseadapter.BaseRecyclerViewAdapter;
-import com.example.jingbin.cloudreader.base.baseadapter.BaseRecyclerViewHolder;
-import com.example.jingbin.cloudreader.base.refreshadapter.BaseBindingAdapter;
-import com.example.jingbin.cloudreader.base.refreshadapter.BaseBindingHolder;
+import com.example.jingbin.cloudreader.base.binding.BaseBindingAdapter;
 import com.example.jingbin.cloudreader.bean.GankIoDataBean;
 import com.example.jingbin.cloudreader.databinding.ItemAndroidBinding;
 import com.example.jingbin.cloudreader.utils.GlideUtil;

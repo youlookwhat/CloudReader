@@ -5,13 +5,12 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 
-import com.example.jingbin.cloudreader.ui.MainActivity;
 import com.example.jingbin.cloudreader.R;
 import com.example.jingbin.cloudreader.adapter.GankAndroidAdapter;
 import com.example.jingbin.cloudreader.base.BaseFragment;
 import com.example.jingbin.cloudreader.databinding.FragmentAndroidBinding;
+import com.example.jingbin.cloudreader.ui.MainActivity;
 import com.example.jingbin.cloudreader.viewmodel.gank.GankViewModel;
-import com.example.xrecyclerview.XRecyclerView;
 
 import me.jingbin.library.ByRecyclerView;
 import me.jingbin.library.divider.SpacesItemDecoration;

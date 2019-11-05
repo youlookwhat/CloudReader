@@ -1,4 +1,4 @@
-package com.example.jingbin.cloudreader.view.test;
+package com.example.jingbin.cloudreader.view.statue;
 
 import android.app.Activity;
 import android.content.Context;

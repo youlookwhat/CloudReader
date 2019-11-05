@@ -3,7 +3,7 @@ package com.example.jingbin.cloudreader.adapter;
 import android.text.TextUtils;
 
 import com.example.jingbin.cloudreader.R;
-import com.example.jingbin.cloudreader.base.refreshadapter.BaseBindingAdapter;
+import com.example.jingbin.cloudreader.base.binding.BaseBindingAdapter;
 import com.example.jingbin.cloudreader.databinding.ItemBookTypeBinding;
 import com.example.jingbin.cloudreader.utils.CommonUtils;
 
