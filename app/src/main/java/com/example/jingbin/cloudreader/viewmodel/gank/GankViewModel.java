@@ -9,6 +9,7 @@ import com.example.jingbin.cloudreader.base.BaseViewModel;
 import com.example.jingbin.cloudreader.bean.GankIoDataBean;
 import com.example.jingbin.cloudreader.data.model.GankOtherModel;
 import com.example.jingbin.cloudreader.http.RequestImpl;
+import com.example.jingbin.cloudreader.utils.DataUtil;
 
 import io.reactivex.disposables.Disposable;
 
@@ -36,7 +37,7 @@ public class GankViewModel extends BaseViewModel {
         mModel.getGankIoData(new RequestImpl() {
             @Override
             public void loadSuccess(Object object) {
-                data.setValue((GankIoDataBean) object);
+                data.setValue(DataUtil.getTrueData((GankIoDataBean) object));
             }
 
             @Override

@@ -8,6 +8,7 @@ import com.example.jingbin.cloudreader.bean.FrontpageBean;
 import com.example.jingbin.cloudreader.bean.GankIoDayBean;
 import com.example.jingbin.cloudreader.http.HttpClient;
 import com.example.jingbin.cloudreader.http.RequestImpl;
+import com.example.jingbin.cloudreader.utils.DataUtil;
 import com.example.jingbin.cloudreader.utils.SPUtils;
 
 import java.util.ArrayList;
@@ -82,8 +83,9 @@ public class EverydayModel {
                 List<List<AndroidBean>> lists = new ArrayList<>();
                 GankIoDayBean.ResultsBean results = gankIoDayBean.getResults();
 
-                if (results.getAndroid() != null && results.getAndroid().size() > 0) {
-                    addUrlList(lists, results.getAndroid(), "Android");
+                List<AndroidBean> androidBeans = DataUtil.getTrueData(results.getAndroid());
+                if (androidBeans != null && androidBeans.size() > 0) {
+                    addUrlList(lists, androidBeans, "Android");
                 }
                 if (results.getWelfare() != null && results.getWelfare().size() > 0) {
                     addUrlList(lists, results.getWelfare(), "福利");
@@ -94,17 +96,20 @@ public class EverydayModel {
                 if (results.getRestMovie() != null && results.getRestMovie().size() > 0) {
                     addUrlList(lists, results.getRestMovie(), "休息视频");
                 }
-                if (results.getResource() != null && results.getResource().size() > 0) {
-                    addUrlList(lists, results.getResource(), "拓展资源");
+                List<AndroidBean> resourceBeans = DataUtil.getTrueData(results.getResource());
+                if (resourceBeans != null && resourceBeans.size() > 0) {
+                    addUrlList(lists, resourceBeans, "拓展资源");
                 }
-                if (results.getRecommend() != null && results.getRecommend().size() > 0) {
-                    addUrlList(lists, results.getRecommend(), "瞎推荐");
+                List<AndroidBean> recommendBeans = DataUtil.getTrueData(results.getRecommend());
+                if (recommendBeans != null && recommendBeans.size() > 0) {
+                    addUrlList(lists, recommendBeans, "瞎推荐");
                 }
                 if (results.getFront() != null && results.getFront().size() > 0) {
                     addUrlList(lists, results.getFront(), "前端");
                 }
-                if (results.getApp() != null && results.getApp().size() > 0) {
-                    addUrlList(lists, results.getApp(), "App");
+                List<AndroidBean> appBean = DataUtil.getTrueData(results.getApp());
+                if (appBean != null && appBean.size() > 0) {
+                    addUrlList(lists, appBean, "App");
                 }
 
                 return Observable.just(lists);

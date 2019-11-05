@@ -3,6 +3,11 @@ package com.example.jingbin.cloudreader.utils;
 import android.text.TextUtils;
 
 import com.example.jingbin.cloudreader.R;
+import com.example.jingbin.cloudreader.bean.AndroidBean;
+import com.example.jingbin.cloudreader.bean.GankIoDataBean;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author jingbin
@@ -75,4 +80,42 @@ public class DataUtil {
         return false;
     }
 
+    /**
+     * 剔除不必要的信息
+     */
+    public static GankIoDataBean getTrueData(GankIoDataBean bean) {
+        GankIoDataBean dataBean = new GankIoDataBean();
+        if (bean != null && bean.getResults() != null && bean.getResults().size() > 0) {
+            List<GankIoDataBean.ResultBean> removeList = new ArrayList<>();
+            List<GankIoDataBean.ResultBean> results = bean.getResults();
+            for (GankIoDataBean.ResultBean resultBean : results) {
+                if (!TextUtils.isEmpty(resultBean.getUrl())
+                        && resultBean.getUrl().contains("yangchong")) {
+                    removeList.add(resultBean);
+                }
+            }
+            results.removeAll(removeList);
+            dataBean.setResults(results);
+        }
+        return dataBean;
+    }
+
+    /**
+     * 剔除不必要的信息
+     */
+    public static List<AndroidBean> getTrueData(List<AndroidBean> list) {
+        ArrayList<AndroidBean> arrayList = new ArrayList<>();
+        if (list != null && list.size() > 0) {
+            List<AndroidBean> removeList = new ArrayList<>();
+            for (AndroidBean resultBean : list) {
+                if (!TextUtils.isEmpty(resultBean.getUrl())
+                        && resultBean.getUrl().contains("yangchong")) {
+                    removeList.add(resultBean);
+                }
+            }
+            list.removeAll(removeList);
+            arrayList.addAll(list);
+        }
+        return arrayList;
+    }
 }
