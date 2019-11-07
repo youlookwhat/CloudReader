@@ -13,10 +13,8 @@ import me.jingbin.library.decoration.SpacesItemDecoration;
 
 /**
  * @author jingbin
- * @data 2019/11/37
- * @description
+ * @data 2019/11/7
  */
-
 public class RefreshHelper {
 
     public static void initStaggeredGrid(ByRecyclerView recyclerView, int spanCount, int spacing) {
