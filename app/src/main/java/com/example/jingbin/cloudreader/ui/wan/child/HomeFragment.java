@@ -77,7 +77,7 @@ public class HomeFragment extends BaseFragment<WanAndroidListViewModel, Fragment
         bindingView.xrvWan.setAdapter(mAdapter);
         mAdapter.setNoImage(true);
         bindingView.xrvWan.addHeaderView(headerBinding.getRoot());
-        width = DensityUtil.getDisplayWidth() - DensityUtil.dip2px(160);
+        width = DensityUtil.getDisplayWidth() - DensityUtil.dip2px(bindingView.xrvWan.getContext(), 160);
         float height = width / 1.8f;
         RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, (int) height);
         headerBinding.banner.setLayoutParams(lp);

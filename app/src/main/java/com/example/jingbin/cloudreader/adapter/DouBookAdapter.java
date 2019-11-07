@@ -19,13 +19,6 @@ import com.example.jingbin.cloudreader.utils.PerfectClickListener;
 
 public class DouBookAdapter extends BaseRecyclerViewAdapter<BooksBean> {
 
-    private int width;
-
-    public DouBookAdapter() {
-        int px = DensityUtil.dip2px(48);
-        width = (DensityUtil.getDisplayWidth() - px) / 3;
-    }
-
     @NonNull
     @Override
     public BaseRecyclerViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -33,9 +26,12 @@ public class DouBookAdapter extends BaseRecyclerViewAdapter<BooksBean> {
     }
 
     private class ViewHolder extends BaseRecyclerViewHolder<BooksBean, ItemBookBinding> {
+        private int width;
 
         ViewHolder(ViewGroup context, int layoutId) {
             super(context, layoutId);
+            int px = DensityUtil.dip2px(context.getContext(), 48);
+            width = (DensityUtil.getDisplayWidth() - px) / 3;
         }
 
         @Override

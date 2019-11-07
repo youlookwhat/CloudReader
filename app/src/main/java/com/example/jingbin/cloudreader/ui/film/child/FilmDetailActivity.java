@@ -170,7 +170,7 @@ public class FilmDetailActivity extends BaseHeaderActivity<HeaderFilmDetailBindi
             isShowVideo.set(true);
             FilmDetailBean.FilmDetailDataBean.BasicBean.VideoBean video = bean.getData().getBasic().getVideo();
             bindingContentView.setVideo(video);
-            DensityUtil.formatHeight(bindingContentView.ivVideo, DensityUtil.getDisplayWidth() - DensityUtil.dip2px(40), (640f / 360), 3);
+            DensityUtil.formatHeight(bindingContentView.ivVideo, DensityUtil.getDisplayWidth() - DensityUtil.dip2px(this, 40), (640f / 360), 3);
             DensityUtil.setViewMargin(bindingContentView.ivVideo, true, 20, 20, 10, 10);
             bindingContentView.ivVideo.setOnClickListener(view -> WebViewActivity.loadUrl(this, video.getHightUrl(), video.getTitle(), true));
         } else {

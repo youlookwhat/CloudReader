@@ -20,22 +20,18 @@ import com.example.jingbin.cloudreader.utils.PerfectClickListener;
 
 public class DouBanTopAdapter extends BaseRecyclerViewAdapter<SubjectsBean> {
 
-    private int width;
-
-    public DouBanTopAdapter() {
-        int px = DensityUtil.dip2px(36);
-        width = (DensityUtil.getDisplayWidth() - px) / 3;
-    }
-
     @Override
     public BaseRecyclerViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         return new ViewHolder(parent, R.layout.item_douban_top);
     }
 
     class ViewHolder extends BaseRecyclerViewHolder<SubjectsBean, ItemDoubanTopBinding> {
+        private int width;
 
         ViewHolder(ViewGroup parent, int layout) {
             super(parent, layout);
+            int px = DensityUtil.dip2px(parent.getContext(), 36);
+            width = (DensityUtil.getDisplayWidth() - px) / 3;
         }
 
         @Override

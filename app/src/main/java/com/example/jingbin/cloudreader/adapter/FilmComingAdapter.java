@@ -18,13 +18,6 @@ import com.example.jingbin.cloudreader.utils.PerfectClickListener;
 
 public class FilmComingAdapter extends BaseRecyclerViewAdapter<ComingFilmBean.MoviecomingsBean> {
 
-    private int width;
-
-    public FilmComingAdapter() {
-        int px = DensityUtil.dip2px(36);
-        width = (DensityUtil.getDisplayWidth() - px) / 3;
-    }
-
     @Override
     public BaseRecyclerViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         return new ViewHolder(parent, R.layout.item_film_coming);
@@ -32,8 +25,12 @@ public class FilmComingAdapter extends BaseRecyclerViewAdapter<ComingFilmBean.Mo
 
     class ViewHolder extends BaseRecyclerViewHolder<ComingFilmBean.MoviecomingsBean, ItemFilmComingBinding> {
 
+        private int width;
+
         ViewHolder(ViewGroup parent, int layout) {
             super(parent, layout);
+            int px = DensityUtil.dip2px(parent.getContext(), 36);
+            width = (DensityUtil.getDisplayWidth() - px) / 3;
         }
 
         @Override

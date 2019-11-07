@@ -12,23 +12,23 @@ import android.widget.RelativeLayout;
 import com.example.jingbin.cloudreader.app.App;
 
 /**
- * Created by Administrator on 2015/10/19.
+ * Created by jingbin on 2015/10/19.
  */
 public class DensityUtil {
 
     /**
      * 根据手机的分辨率从 dp 的单位 转成为 px(像素)
      */
-    public static int dip2px(float dpValue) {
-        final float scale = App.getInstance().getResources().getDisplayMetrics().density;
+    public static int dip2px(Context context, float dpValue) {
+        final float scale = context.getResources().getDisplayMetrics().density;
         return (int) (dpValue * scale + 0.5f);
     }
 
     /**
      * 根据手机的分辨率从 px(像素) 的单位 转成为 dp
      */
-    public static int px2dip(float pxValue) {
-        final float scale = App.getInstance().getResources().getDisplayMetrics().density;
+    public static int px2dip(Context context, float pxValue) {
+        final float scale = context.getResources().getDisplayMetrics().density;
         return (int) (pxValue / scale + 0.5f);
     }
 
@@ -64,10 +64,10 @@ public class DensityUtil {
 
         //根据DP与PX转换计算值
         if (isDp) {
-            leftPx = dip2px(left);
-            rightPx = dip2px(right);
-            topPx = dip2px(top);
-            bottomPx = dip2px(bottom);
+            leftPx = dip2px(view.getContext(), left);
+            rightPx = dip2px(view.getContext(), right);
+            topPx = dip2px(view.getContext(), top);
+            bottomPx = dip2px(view.getContext(), bottom);
         }
         //设置margin
         marginParams.setMargins(leftPx, topPx, rightPx, bottomPx);
@@ -101,7 +101,10 @@ public class DensityUtil {
         }
 
         ViewGroup.MarginLayoutParams layoutParams = (ViewGroup.MarginLayoutParams) imageView.getLayoutParams();
-        layoutParams.setMargins(dip2px(marginLR), dip2px(marginTop), dip2px(marginLR), dip2px(marginBottom));
+        layoutParams.setMargins(dip2px(imageView.getContext(), marginLR),
+                dip2px(imageView.getContext(), marginTop),
+                dip2px(imageView.getContext(), marginLR),
+                dip2px(imageView.getContext(), marginBottom));
     }
 
     /**

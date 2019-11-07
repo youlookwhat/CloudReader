@@ -79,7 +79,7 @@ public class ToolbarHelper {
         if (context.getTheme().resolveAttribute(android.R.attr.actionBarSize, tv, true)) {
             return TypedValue.complexToDimensionPixelSize(tv.data, context.getResources().getDisplayMetrics());
         } else {
-            return DensityUtil.dip2px(48);
+            return DensityUtil.dip2px(context, 48);
         }
     }
 }

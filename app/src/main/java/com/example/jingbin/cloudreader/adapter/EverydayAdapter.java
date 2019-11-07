@@ -154,14 +154,15 @@ public class EverydayAdapter extends BaseRecyclerViewAdapter<List<AndroidBean>> 
     }
 
     private class TwoHolder extends BaseRecyclerViewHolder<List<AndroidBean>, ItemEverydayTwoBinding> {
+        private int imageWidth;
 
         TwoHolder(ViewGroup parent, int title) {
             super(parent, title);
+            imageWidth = (width - DensityUtil.dip2px(parent.getContext(), 3)) / 2;
         }
 
         @Override
         public void onBindViewHolder(List<AndroidBean> object, int position) {
-            int imageWidth = (width - DensityUtil.dip2px(3)) / 2;
             DensityUtil.formatHeight(binding.ivTwoOneOne, imageWidth, 1.75f, 1);
             DensityUtil.formatHeight(binding.ivTwoOneTwo, imageWidth, 1.75f, 1);
             displayRandomImg(2, 0, binding.ivTwoOneOne, object);
@@ -175,13 +176,15 @@ public class EverydayAdapter extends BaseRecyclerViewAdapter<List<AndroidBean>> 
 
     private class ThreeHolder extends BaseRecyclerViewHolder<List<AndroidBean>, ItemEverydayThreeBinding> {
 
+        private int imageWidth;
+
         ThreeHolder(ViewGroup parent, int title) {
             super(parent, title);
+            imageWidth = (width - DensityUtil.dip2px(parent.getContext(), 6)) / 3;
         }
 
         @Override
         public void onBindViewHolder(List<AndroidBean> object, int position) {
-            int imageWidth = (width - DensityUtil.dip2px(6)) / 3;
             DensityUtil.formatHeight(binding.ivThreeOneOne, imageWidth, 1, 1);
             DensityUtil.formatHeight(binding.ivThreeOneTwo, imageWidth, 1, 1);
             DensityUtil.formatHeight(binding.ivThreeOneThree, imageWidth, 1, 1);

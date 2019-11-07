@@ -224,7 +224,7 @@ public class GlideUtil {
     public static void imageUrl(ImageView imageView, String url, int imageWidthDp, int imageHeightDp) {
         Glide.with(imageView.getContext())
                 .load(url)
-                .override(DensityUtil.dip2px(imageWidthDp), DensityUtil.dip2px(imageHeightDp))
+                .override(DensityUtil.dip2px(imageView.getContext(), imageWidthDp), DensityUtil.dip2px(imageView.getContext(), imageHeightDp))
                 .transition(DrawableTransitionOptions.withCrossFade(500))
                 .placeholder(getMusicDefaultPic(4))
                 .centerCrop()
