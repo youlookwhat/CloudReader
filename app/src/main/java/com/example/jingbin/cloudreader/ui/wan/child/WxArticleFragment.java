@@ -71,14 +71,12 @@ public class WxArticleFragment extends BaseFragment<WxArticleViewModel, Fragment
     }
 
     private void initRefreshView() {
-        RefreshHelper.initLinear(bindingView.rvWxarticleList, true);
         LinearLayoutManager layoutManager = new LinearLayoutManager(activity);
         bindingView.rvWxarticle.setLayoutManager(layoutManager);
         wxArticleAdapter = new WxArticleAdapter();
         bindingView.rvWxarticle.setAdapter(wxArticleAdapter);
 
-        LinearLayoutManager layoutManager2 = new LinearLayoutManager(activity);
-        bindingView.rvWxarticleList.setLayoutManager(layoutManager2);
+        RefreshHelper.initLinear(bindingView.rvWxarticleList, true, 1);
         mContentAdapter = new WanAndroidAdapter(activity);
         mContentAdapter.setNoShowChapterName();
         mContentAdapter.setNoShowAuthorName();
@@ -98,6 +96,13 @@ public class WxArticleFragment extends BaseFragment<WxArticleViewModel, Fragment
                 viewModel.getWxarticleDetail(wxArticleId);
             }
         }, 300);
+        bindingView.rvWxarticleList.setOnRefreshListener(new ByRecyclerView.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                viewModel.setPage(1);
+                viewModel.getWxarticleDetail(wxArticleId);
+            }
+        });
         onObserveViewModel();
     }
 
@@ -124,23 +129,15 @@ public class WxArticleFragment extends BaseFragment<WxArticleViewModel, Fragment
                 if (list != null && list.size() > 0) {
                     if (viewModel.getPage() == 1) {
                         showContentView();
-                        mContentAdapter.clear();
-                        mContentAdapter.addAll(list);
-                        mContentAdapter.notifyDataSetChanged();
-                        bindingView.rvWxarticleList.smoothScrollToPosition(0);
+                        mContentAdapter.setNewData(list);
                     } else {
-                        //  一个刷新头布局
-                        int positionStart = mContentAdapter.getItemCount() + 1;
-                        mContentAdapter.addAll(list);
-                        mContentAdapter.notifyItemRangeInserted(positionStart, list.size());
+                        mContentAdapter.addData(list);
                         bindingView.rvWxarticleList.loadMoreComplete();
                     }
 
                 } else {
                     if (viewModel.getPage() == 1) {
-                        mContentAdapter.clear();
-                        mContentAdapter.notifyDataSetChanged();
-                        bindingView.rvWxarticleList.loadMoreComplete();
+                        mContentAdapter.setNewData(null);
                     } else {
                         bindingView.rvWxarticleList.loadMoreEnd();
                     }
@@ -152,10 +149,8 @@ public class WxArticleFragment extends BaseFragment<WxArticleViewModel, Fragment
     private void selectItem(int position) {
         if (position < wxArticleAdapter.getData().size()) {
             wxArticleId = wxArticleAdapter.getData().get(position).getId();
-            viewModel.setPage(1);
-            bindingView.rvWxarticleList.setRefreshing(false);
-            viewModel.getWxarticleDetail(wxArticleId);
             wxArticleAdapter.setId(wxArticleId);
+            bindingView.rvWxarticleList.setRefreshing(true);
         }
         wxArticleAdapter.notifyItemChanged(currentPosition);
         currentPosition = position;
