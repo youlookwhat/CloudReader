@@ -8,8 +8,11 @@ import com.example.jingbin.cloudreader.base.BaseListViewModel;
 import com.example.jingbin.cloudreader.bean.CollectUrlBean;
 import com.example.jingbin.cloudreader.http.HttpClient;
 
+import java.util.Collections;
+
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
 
@@ -29,7 +32,18 @@ public class CollectLinkModel extends BaseListViewModel {
         final MutableLiveData<CollectUrlBean> data = new MutableLiveData<>();
         Disposable subscribe = HttpClient.Builder.getWanAndroidServer().getCollectUrlList()
                 .subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
-                .subscribe(data::setValue, throwable -> data.setValue(null));
+                .subscribe(new Consumer<CollectUrlBean>() {
+                    @Override
+                    public void accept(CollectUrlBean collectUrlBean) throws Exception {
+                        if (collectUrlBean != null && collectUrlBean.getData() != null && collectUrlBean.getData().size() > 0) {
+                            // 对集合中的数据进行倒叙排序
+                            Collections.reverse(collectUrlBean.getData());
+                            data.setValue(collectUrlBean);
+                        } else {
+                            data.setValue(null);
+                        }
+                    }
+                }, throwable -> data.setValue(null));
         addDisposable(subscribe);
         return data;
     }
