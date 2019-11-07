@@ -75,7 +75,6 @@ dependencies {
     androidTestImplementation('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    implementation project(path: ':library:xrecyclerview')
     implementation project(path: ':library:http')
     testImplementation "junit:junit:$rootProject.ext.junitVersion"
     implementation "com.android.support:appcompat-v7:$rootProject.supportLibraryVersion"
@@ -109,7 +108,7 @@ dependencies {
     implementation 'com.github.chrisbanes:PhotoView:2.1.4'
     implementation 'com.github.youlookwhat:SBannerView:1.1.1'
     implementation 'com.github.youlookwhat:WebProgress:1.1.0'
-    implementation 'com.github.youlookwhat:ByRecyclerView:1.0.7-support'
+    implementation 'com.github.youlookwhat:ByRecyclerView:1.0.8-support'
     // leakcanary
 //    debugImplementation 'com.squareup.leakcanary:leakcanary-android:1.6.1'
 //    releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.6.1'
