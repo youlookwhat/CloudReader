@@ -7,7 +7,11 @@
     <string name="action_settings">Settings</string>
     <string name="action_share">分享</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
+    <string name="custom_header_hint_normal">下拉更新</string>
+    <string name="custom_header_hint_release">松开更新</string>
+    <string name="custom_refreshing">更新中…</string>
+    <string name="custom_refresh_done">更新完成</string>
+
     <string name="hello_blank_fragment">Hello blank mFragment</string>
     <string name="title_activity_base">BaseActivity</string>
     <string name="actionbar_search">搜索</string>
