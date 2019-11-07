@@ -62,14 +62,10 @@ public class TreeFragment extends BaseFragment<TreeViewModel, FragmentWanAndroid
     private void initRefreshView() {
         bindingView.srlWan.setColorSchemeColors(CommonUtils.getColor(R.color.colorTheme));
         bindingView.srlWan.setOnRefreshListener(() -> bindingView.srlWan.postDelayed(() -> {
-            bindingView.xrvWan.reset();
             getTree();
         }, 150));
         LinearLayoutManager layoutManager = new LinearLayoutManager(activity);
         bindingView.xrvWan.setLayoutManager(layoutManager);
-        bindingView.xrvWan.setPullRefreshEnabled(false);
-        bindingView.xrvWan.setLoadingMoreEnabled(false);
-        bindingView.xrvWan.clearHeader();
         mTreeAdapter = new TreeAdapter();
         bindingView.xrvWan.setAdapter(mTreeAdapter);
         HeaderItemTreeBinding oneBinding = DataBindingUtil.inflate(getLayoutInflater(), R.layout.header_item_tree, null, false);
@@ -102,14 +98,14 @@ public class TreeFragment extends BaseFragment<TreeViewModel, FragmentWanAndroid
                     mTreeAdapter.clear();
                     mTreeAdapter.addAll(treeBean.getData());
                     mTreeAdapter.notifyDataSetChanged();
-                    bindingView.xrvWan.refreshComplete();
+                    bindingView.xrvWan.loadMoreComplete();
 
                     mIsFirst = false;
                 } else {
                     if (mIsFirst) {
                         showError();
                     } else {
-                        bindingView.xrvWan.refreshComplete();
+                        bindingView.xrvWan.loadMoreComplete();
                     }
                 }
             }

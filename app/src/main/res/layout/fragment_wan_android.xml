@@ -6,7 +6,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <com.example.xrecyclerview.XRecyclerView
+        <me.jingbin.library.ByRecyclerView
             android:id="@+id/xrv_wan"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

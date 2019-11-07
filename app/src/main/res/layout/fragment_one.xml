@@ -22,7 +22,7 @@
         android:scrollbars="vertical"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <com.example.xrecyclerview.XRecyclerView
+        <me.jingbin.library.ByRecyclerView
             android:id="@+id/list_one"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

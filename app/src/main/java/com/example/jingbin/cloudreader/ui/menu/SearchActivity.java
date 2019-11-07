@@ -31,6 +31,7 @@ import com.example.jingbin.cloudreader.utils.BaseTools;
 import com.example.jingbin.cloudreader.utils.CommonUtils;
 import com.example.jingbin.cloudreader.utils.DialogBuild;
 import com.example.jingbin.cloudreader.utils.ToastUtil;
+import com.example.jingbin.cloudreader.view.byview.NeteaseLoadMoreView;
 import com.example.jingbin.cloudreader.view.statusbar.StatusBarUtil;
 import com.example.jingbin.cloudreader.view.webview.WebViewActivity;
 import com.example.jingbin.cloudreader.viewmodel.wan.SearchViewModel;
@@ -38,7 +39,7 @@ import com.example.jingbin.cloudreader.viewmodel.wan.SearchViewModel;
 import java.util.List;
 
 import me.jingbin.library.ByRecyclerView;
-import me.jingbin.library.divider.SpacesItemDecoration;
+import me.jingbin.library.decoration.SpacesItemDecoration;
 
 /**
  * 搜索页面
@@ -242,6 +243,7 @@ public class SearchActivity extends AppCompatActivity {
 
     private void initRefreshView() {
         binding.recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        binding.recyclerView.setLoadingMoreView(new NeteaseLoadMoreView(this));
         int tabPosition = binding.tlSearch.getSelectedTabPosition();
         switch (tabPosition) {
             case 0:

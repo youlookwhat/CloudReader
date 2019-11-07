@@ -5,6 +5,7 @@ import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,10 +26,10 @@ import com.example.jingbin.cloudreader.utils.PerfectClickListener;
 import com.example.jingbin.cloudreader.utils.RefreshHelper;
 import com.example.jingbin.cloudreader.view.webview.WebViewActivity;
 import com.example.jingbin.cloudreader.viewmodel.wan.WanAndroidListViewModel;
-import com.example.xrecyclerview.XRecyclerView;
 
 import java.util.List;
 
+import me.jingbin.library.ByRecyclerView;
 import me.jingbin.sbanner.config.ScaleRightTransformer;
 import me.jingbin.sbanner.holder.BannerViewHolder;
 
@@ -48,6 +49,13 @@ public class HomeFragment extends BaseFragment<WanAndroidListViewModel, Fragment
     private boolean isLoadBanner = false;
     // banner图的宽
     private int width;
+    private FragmentActivity activity;
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        activity = getActivity();
+    }
 
     @Override
     public int setContent() {
@@ -70,7 +78,7 @@ public class HomeFragment extends BaseFragment<WanAndroidListViewModel, Fragment
     }
 
     private void initRefreshView() {
-        RefreshHelper.init(bindingView.xrvWan, false, false);
+        RefreshHelper.initLinear(bindingView.xrvWan, true, 1);
         headerBinding = DataBindingUtil.inflate(getLayoutInflater(), R.layout.header_wan_android, null, false);
         bindingView.srlWan.setColorSchemeColors(CommonUtils.getColor(R.color.colorTheme));
         mAdapter = new WanAndroidAdapter(getActivity());
@@ -86,11 +94,7 @@ public class HomeFragment extends BaseFragment<WanAndroidListViewModel, Fragment
         headerBinding.rb1.setOnCheckedChangeListener((buttonView, isChecked) -> refresh(isChecked, true));
         headerBinding.rb2.setOnCheckedChangeListener((buttonView, isChecked) -> refresh(isChecked, false));
         bindingView.srlWan.setOnRefreshListener(this::swipeRefresh);
-        bindingView.xrvWan.setLoadingListener(new XRecyclerView.LoadingListener() {
-            @Override
-            public void onRefresh() {
-            }
-
+        bindingView.xrvWan.setOnLoadMoreListener(new ByRecyclerView.OnLoadMoreListener() {
             @Override
             public void onLoadMore() {
                 if (!bindingView.srlWan.isRefreshing()) {
@@ -102,17 +106,16 @@ public class HomeFragment extends BaseFragment<WanAndroidListViewModel, Fragment
                         getHomeProjectList();
                     }
                 } else {
-                    bindingView.xrvWan.refreshComplete();
+                    bindingView.xrvWan.loadMoreComplete();
                 }
             }
-        });
+        }, 300);
     }
 
     private void refresh(boolean isChecked, boolean isArticle) {
         if (isChecked) {
             bindingView.srlWan.setRefreshing(true);
             viewModel.setPage(0);
-            bindingView.xrvWan.reset();
             mAdapter.setNoImage(isArticle);
             if (isArticle) {
                 getHomeArticleList();
@@ -128,7 +131,6 @@ public class HomeFragment extends BaseFragment<WanAndroidListViewModel, Fragment
     private void swipeRefresh() {
         bindingView.srlWan.postDelayed(() -> {
             viewModel.setPage(0);
-            bindingView.xrvWan.reset();
             if (headerBinding.rb1.isChecked()) {
                 getHomeArticleList();
             } else {
@@ -254,15 +256,10 @@ public class HomeFragment extends BaseFragment<WanAndroidListViewModel, Fragment
                     && homeListBean.getData().getDatas().size() > 0) {
                 if (viewModel.getPage() == 0) {
                     showContentView();
-                    mAdapter.clear();
-                    mAdapter.addAll(homeListBean.getData().getDatas());
-                    mAdapter.notifyDataSetChanged();
+                    mAdapter.setNewData(homeListBean.getData().getDatas());
                 } else {
-                    //  一个刷新头布局 一个header
-                    int positionStart = mAdapter.getItemCount() + 2;
-                    mAdapter.addAll(homeListBean.getData().getDatas());
-                    mAdapter.notifyItemRangeInserted(positionStart, homeListBean.getData().getDatas().size());
-                    bindingView.xrvWan.refreshComplete();
+                    mAdapter.addData(homeListBean.getData().getDatas());
+                    bindingView.xrvWan.loadMoreComplete();
                 }
 
                 if (mIsFirst && viewModel.getPage() == 0) {
@@ -275,8 +272,7 @@ public class HomeFragment extends BaseFragment<WanAndroidListViewModel, Fragment
                 if (viewModel.getPage() == 0) {
                     showError();
                 } else {
-                    bindingView.xrvWan.refreshComplete();
-                    bindingView.xrvWan.noMoreLoading();
+                    bindingView.xrvWan.loadMoreEnd();
                 }
             }
         }

@@ -62,7 +62,7 @@ public class CollectLinkFragment extends BaseFragment<CollectLinkModel, Fragment
 
     private void initRefreshView() {
         bindingView.srlWan.setColorSchemeColors(CommonUtils.getColor(R.color.colorTheme));
-        RefreshHelper.init(bindingView.xrvWan, false);
+        RefreshHelper.initLinear(bindingView.xrvWan, true).setLoadMoreEnabled(true);
         mAdapter = new CollectUrlAdapter(activity);
         bindingView.xrvWan.setAdapter(mAdapter);
         bindingView.srlWan.setOnRefreshListener(() -> bindingView.srlWan.postDelayed(this::getCollectUrlList, 300));
@@ -91,8 +91,7 @@ public class CollectLinkFragment extends BaseFragment<CollectLinkModel, Fragment
                         mAdapter.clear();
                         mAdapter.addAll(bean.getData());
                         mAdapter.notifyDataSetChanged();
-                        bindingView.xrvWan.refreshComplete();
-                        bindingView.xrvWan.noMoreLoading();
+                        bindingView.xrvWan.loadMoreEnd();
                     } else {
                         showEmptyView("你还没有收藏网址哦~");
                     }

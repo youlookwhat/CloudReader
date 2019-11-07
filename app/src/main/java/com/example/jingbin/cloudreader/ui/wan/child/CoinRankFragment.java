@@ -19,7 +19,8 @@ import com.example.jingbin.cloudreader.databinding.HeaderCoinRankBinding;
 import com.example.jingbin.cloudreader.utils.CommonUtils;
 import com.example.jingbin.cloudreader.utils.RefreshHelper;
 import com.example.jingbin.cloudreader.viewmodel.wan.CoinListViewModel;
-import com.example.xrecyclerview.XRecyclerView;
+
+import me.jingbin.library.ByRecyclerView;
 
 /**
  * @author jingbin
@@ -68,7 +69,7 @@ public class CoinRankFragment extends BaseFragment<CoinListViewModel, FragmentWa
 
     private void initRefreshView() {
         headerBinding = DataBindingUtil.inflate(getLayoutInflater(), R.layout.header_coin_rank, (ViewGroup) bindingView.xrvWan.getParent(), false);
-        RefreshHelper.init(bindingView.xrvWan, false, false);
+        RefreshHelper.initLinear(bindingView.xrvWan, true, 1);
         bindingView.srlWan.setColorSchemeColors(CommonUtils.getColor(R.color.colorTheme));
         mAdapter = new CoinAdapter(activity, true);
         bindingView.xrvWan.setAdapter(mAdapter);
@@ -77,24 +78,16 @@ public class CoinRankFragment extends BaseFragment<CoinListViewModel, FragmentWa
         bindingView.srlWan.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                if (!bindingView.xrvWan.isLoadingData()) {
-                    bindingView.xrvWan.postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            bindingView.xrvWan.reset();
-                            viewModel.setPage(1);
-                            getCoinRank();
-                        }
-                    }, 150);
-                }
+                bindingView.xrvWan.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        viewModel.setPage(1);
+                        getCoinRank();
+                    }
+                }, 150);
             }
         });
-        bindingView.xrvWan.setLoadingListener(new XRecyclerView.LoadingListener() {
-            @Override
-            public void onRefresh() {
-
-            }
-
+        bindingView.xrvWan.setOnLoadMoreListener(new ByRecyclerView.OnLoadMoreListener() {
             @Override
             public void onLoadMore() {
                 if (!bindingView.srlWan.isRefreshing()) {
@@ -102,7 +95,7 @@ public class CoinRankFragment extends BaseFragment<CoinListViewModel, FragmentWa
                     viewModel.setPage(++page);
                     getCoinRank();
                 } else {
-                    bindingView.xrvWan.refreshComplete();
+                    bindingView.xrvWan.loadMoreComplete();
                 }
             }
         });
@@ -137,12 +130,12 @@ public class CoinRankFragment extends BaseFragment<CoinListViewModel, FragmentWa
                         int positionStart = mAdapter.getItemCount() + 1;
                         mAdapter.addAll(homeListBean.getDatas());
                         mAdapter.notifyItemRangeInserted(positionStart, homeListBean.getDatas().size());
-                        bindingView.xrvWan.refreshComplete();
+                        bindingView.xrvWan.loadMoreComplete();
                     } else {
                         if (viewModel.getPage() == 1) {
                             showEmptyView("还没有积分信息哦~");
                         } else {
-                            bindingView.xrvWan.noMoreLoading();
+                            bindingView.xrvWan.loadMoreEnd();
                         }
                     }
                     if (mIsFirst) {

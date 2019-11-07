@@ -10,10 +10,11 @@ import com.example.jingbin.cloudreader.adapter.GankAndroidAdapter;
 import com.example.jingbin.cloudreader.base.BaseFragment;
 import com.example.jingbin.cloudreader.databinding.FragmentAndroidBinding;
 import com.example.jingbin.cloudreader.ui.MainActivity;
+import com.example.jingbin.cloudreader.utils.RefreshHelper;
 import com.example.jingbin.cloudreader.viewmodel.gank.GankViewModel;
 
 import me.jingbin.library.ByRecyclerView;
-import me.jingbin.library.divider.SpacesItemDecoration;
+import me.jingbin.library.decoration.SpacesItemDecoration;
 
 /**
  * 大安卓 fragment
@@ -76,12 +77,10 @@ public class AndroidFragment extends BaseFragment<GankViewModel, FragmentAndroid
 
     private void initRecyclerView() {
         adapter = new GankAndroidAdapter();
-        bindingView.xrvAndroid.setItemAnimator(null);
-        bindingView.xrvAndroid.setLayoutManager(new LinearLayoutManager(activity));
         // 加了分割线，滚动条才会置顶
         SpacesItemDecoration itemDecoration = new SpacesItemDecoration(activity, SpacesItemDecoration.VERTICAL, 1);
         itemDecoration.setDrawable(R.drawable.shape_transparent);
-        bindingView.xrvAndroid.addItemDecoration(itemDecoration);
+        RefreshHelper.initLinear(bindingView.xrvAndroid, false).addItemDecoration(itemDecoration);
         bindingView.xrvAndroid.setAdapter(adapter);
         bindingView.xrvAndroid.setOnRefreshListener(new ByRecyclerView.OnRefreshListener() {
             @Override
@@ -98,7 +97,7 @@ public class AndroidFragment extends BaseFragment<GankViewModel, FragmentAndroid
                 viewModel.setPage(page);
                 loadAndroidData();
             }
-        });
+        }, 300);
     }
 
     private void loadAndroidData() {

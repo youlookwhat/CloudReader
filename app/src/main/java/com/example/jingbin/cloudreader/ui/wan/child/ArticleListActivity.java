@@ -12,7 +12,8 @@ import com.example.jingbin.cloudreader.databinding.FragmentWanAndroidBinding;
 import com.example.jingbin.cloudreader.utils.CommonUtils;
 import com.example.jingbin.cloudreader.utils.RefreshHelper;
 import com.example.jingbin.cloudreader.viewmodel.wan.WanAndroidListViewModel;
-import com.example.xrecyclerview.XRecyclerView;
+
+import me.jingbin.library.ByRecyclerView;
 
 /**
  * 玩安卓分类文章列表
@@ -45,20 +46,15 @@ public class ArticleListActivity extends BaseActivity<WanAndroidListViewModel, F
     }
 
     private void initRefreshView() {
-        RefreshHelper.init(bindingView.xrvWan, false);
+        RefreshHelper.initLinear(bindingView.xrvWan, true);
         bindingView.srlWan.setColorSchemeColors(CommonUtils.getColor(R.color.colorTheme));
         mAdapter = new WanAndroidAdapter(this);
         bindingView.xrvWan.setAdapter(mAdapter);
         bindingView.srlWan.setOnRefreshListener(() -> bindingView.srlWan.postDelayed(() -> {
-            bindingView.xrvWan.reset();
             viewModel.setPage(0);
             loadData();
         }, 500));
-        bindingView.xrvWan.setLoadingListener(new XRecyclerView.LoadingListener() {
-            @Override
-            public void onRefresh() {
-
-            }
+        bindingView.xrvWan.setOnLoadMoreListener(new ByRecyclerView.OnLoadMoreListener() {
 
             @Override
             public void onLoadMore() {
@@ -77,19 +73,17 @@ public class ArticleListActivity extends BaseActivity<WanAndroidListViewModel, F
         if (homeListBean != null) {
             if (viewModel.getPage() == 0) {
                 showContentView();
-                mAdapter.clear();
-                mAdapter.notifyDataSetChanged();
+                mAdapter.setNewData(homeListBean.getData().getDatas());
+            } else {
+                mAdapter.addData(homeListBean.getData().getDatas());
+                bindingView.xrvWan.loadMoreComplete();
             }
-            int positionStart = mAdapter.getItemCount() + 1;
-            mAdapter.addAll(homeListBean.getData().getDatas());
-            mAdapter.notifyItemRangeInserted(positionStart, homeListBean.getData().getDatas().size());
-            bindingView.xrvWan.refreshComplete();
 
         } else {
             if (viewModel.getPage() == 0) {
                 showError();
             } else {
-                bindingView.xrvWan.noMoreLoading();
+                bindingView.xrvWan.loadMoreEnd();
             }
         }
     }

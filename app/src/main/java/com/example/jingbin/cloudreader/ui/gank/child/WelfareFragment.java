@@ -3,7 +3,6 @@ package com.example.jingbin.cloudreader.ui.gank.child;
 import android.arch.lifecycle.Observer;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.View;
 
 import com.example.jingbin.cloudreader.R;
@@ -11,13 +10,11 @@ import com.example.jingbin.cloudreader.adapter.WelfareAdapter;
 import com.example.jingbin.cloudreader.base.BaseFragment;
 import com.example.jingbin.cloudreader.bean.GankIoDataBean;
 import com.example.jingbin.cloudreader.databinding.FragmentWelfareBinding;
-import com.example.jingbin.cloudreader.utils.DebugUtil;
+import com.example.jingbin.cloudreader.utils.RefreshHelper;
 import com.example.jingbin.cloudreader.view.viewbigimage.ViewBigImageActivity;
 import com.example.jingbin.cloudreader.viewmodel.gank.WelfareViewModel;
-import com.example.xrecyclerview.XRecyclerView;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import me.jingbin.library.ByRecyclerView;
 
@@ -58,10 +55,7 @@ public class WelfareFragment extends BaseFragment<WelfareViewModel, FragmentWelf
 
     private void initRecycleView() {
         mWelfareAdapter = new WelfareAdapter();
-        //构造器中，第一个参数表示列数或者行数，第二个参数表示滑动方向,瀑布流
-        bindingView.xrvWelfare.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
-        bindingView.xrvWelfare.setHasFixedSize(true);
-        bindingView.xrvWelfare.setItemAnimator(null);
+        RefreshHelper.initStaggeredGrid(bindingView.xrvWelfare, 2, 12);
         bindingView.xrvWelfare.setAdapter(mWelfareAdapter);
         bindingView.xrvWelfare.setOnLoadMoreListener(new ByRecyclerView.OnLoadMoreListener() {
             @Override
@@ -71,7 +65,7 @@ public class WelfareFragment extends BaseFragment<WelfareViewModel, FragmentWelf
                 viewModel.setPage(page);
                 loadWelfareData();
             }
-        });
+        }, 300);
         bindingView.xrvWelfare.setOnItemClickListener(new ByRecyclerView.OnItemClickListener() {
             @Override
             public void onClick(View v, int position) {

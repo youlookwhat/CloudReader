@@ -25,10 +25,10 @@
         android:layout_height="wrap_content"
         android:background="@drawable/ripple_joke_item_bg"
         android:orientation="vertical"
-        android:paddingBottom="10dp"
         android:paddingLeft="8dp"
+        android:paddingTop="8dp"
         android:paddingRight="8dp"
-        android:paddingTop="8dp">
+        android:paddingBottom="10dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -69,8 +69,8 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="5dp"
             android:layout_marginStart="58dp"
+            android:layout_marginEnd="5dp"
             android:lineSpacingExtra="4dp"
             android:text="@{bean.content}"
             android:textColor="@color/colorContent"

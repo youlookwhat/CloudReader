@@ -47,8 +47,7 @@ public class CoinAdapter extends BaseRecyclerViewAdapter<CoinLogBean> {
 
         @Override
         public void onBindViewHolder(final CoinLogBean bean, final int position) {
-            // 其实是 —2+1 两个header  +1是为了得到序号
-            int adapterPosition = getAdapterPosition() - 1;
+            int adapterPosition = position + 1;
             binding.setBean(bean);
             binding.setPosition(adapterPosition);
 

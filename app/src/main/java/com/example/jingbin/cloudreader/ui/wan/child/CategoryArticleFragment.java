@@ -5,8 +5,6 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 
 import com.example.jingbin.cloudreader.R;
@@ -14,10 +12,11 @@ import com.example.jingbin.cloudreader.adapter.CategoryArticleAdapter;
 import com.example.jingbin.cloudreader.base.BaseFragment;
 import com.example.jingbin.cloudreader.bean.wanandroid.HomeListBean;
 import com.example.jingbin.cloudreader.databinding.FragmentCategoryArticleBinding;
-import com.example.jingbin.cloudreader.view.MyDividerItemDecoration;
+import com.example.jingbin.cloudreader.view.byview.NeteaseLoadMoreView;
 import com.example.jingbin.cloudreader.viewmodel.wan.WanAndroidListViewModel;
 
 import me.jingbin.library.ByRecyclerView;
+import me.jingbin.library.decoration.SpacesItemDecoration;
 
 /**
  * @author jingbin
@@ -96,10 +95,9 @@ public class CategoryArticleFragment extends BaseFragment<WanAndroidListViewMode
         bindingView.recyclerView.setLayoutManager(new LinearLayoutManager(activity));
         bindingView.recyclerView.setItemAnimator(null);
         mAdapter = new CategoryArticleAdapter(activity);
+        bindingView.recyclerView.addItemDecoration(new SpacesItemDecoration(activity, SpacesItemDecoration.VERTICAL));
+        bindingView.recyclerView.setLoadingMoreView(new NeteaseLoadMoreView(activity));
         bindingView.recyclerView.setAdapter(mAdapter);
-        MyDividerItemDecoration itemDecoration = new MyDividerItemDecoration(bindingView.recyclerView.getContext(), DividerItemDecoration.VERTICAL, false);
-        itemDecoration.setDrawable(ContextCompat.getDrawable(activity, R.drawable.shape_line));
-        bindingView.recyclerView.addItemDecoration(itemDecoration);
 
         bindingView.recyclerView.setOnLoadMoreListener(new ByRecyclerView.OnLoadMoreListener() {
             @Override

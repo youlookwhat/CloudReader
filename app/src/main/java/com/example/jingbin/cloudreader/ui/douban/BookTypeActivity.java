@@ -3,8 +3,6 @@ package com.example.jingbin.cloudreader.ui.douban;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.GridLayoutManager;
 
 import com.example.jingbin.cloudreader.R;
@@ -13,12 +11,12 @@ import com.example.jingbin.cloudreader.base.BaseActivity;
 import com.example.jingbin.cloudreader.databinding.ActivityBookTypeBinding;
 import com.example.jingbin.cloudreader.http.api.BookApiUtils;
 import com.example.jingbin.cloudreader.utils.DebugUtil;
-import com.example.jingbin.cloudreader.view.MyDividerItemDecoration;
 import com.example.jingbin.cloudreader.viewmodel.menu.NoViewModel;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Objects;
+
+import me.jingbin.library.decoration.SpacesItemDecoration;
 
 /**
  * @author jingbin
@@ -63,9 +61,7 @@ public class BookTypeActivity extends BaseActivity<NoViewModel, ActivityBookType
         bindingView.recyclerView.setItemAnimator(null);
         mAdapter = new BookTypeAdapter();
         mAdapter.setType(type);
-        MyDividerItemDecoration itemDecoration = new MyDividerItemDecoration(bindingView.recyclerView.getContext(), DividerItemDecoration.VERTICAL, false);
-        itemDecoration.setDrawable(Objects.requireNonNull(ContextCompat.getDrawable(bindingView.recyclerView.getContext(), R.drawable.shape_line)));
-        bindingView.recyclerView.addItemDecoration(itemDecoration);
+        bindingView.recyclerView.addItemDecoration(new SpacesItemDecoration(this, SpacesItemDecoration.VERTICAL));
         bindingView.recyclerView.setAdapter(mAdapter);
         mAdapter.setOnSelectListener(new BookTypeAdapter.OnSelectListener() {
             @Override

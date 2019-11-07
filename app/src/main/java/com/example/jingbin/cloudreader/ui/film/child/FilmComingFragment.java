@@ -18,7 +18,6 @@ import com.example.jingbin.cloudreader.databinding.FragmentWanAndroidBinding;
 import com.example.jingbin.cloudreader.utils.CommonUtils;
 import com.example.jingbin.cloudreader.utils.DebugUtil;
 import com.example.jingbin.cloudreader.viewmodel.movie.FilmViewModel;
-import com.example.xrecyclerview.XRecyclerView;
 
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
@@ -78,10 +77,9 @@ public class FilmComingFragment extends BaseFragment<FilmViewModel, FragmentWanA
         bindingView.srlWan.setColorSchemeColors(CommonUtils.getColor(R.color.colorTheme));
         adapter = new FilmComingAdapter();
         bindingView.xrvWan.setLayoutManager(new StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL));
-        bindingView.xrvWan.setPullRefreshEnabled(false);
         bindingView.xrvWan.setItemAnimator(null);
-        bindingView.xrvWan.clearHeader();
         bindingView.xrvWan.setHasFixedSize(true);
+        bindingView.xrvWan.setLoadMoreEnabled(true);
         viewModel.bookType.set(mType);
         bindingView.xrvWan.setAdapter(adapter);
         adapter.setListener(new FilmComingAdapter.OnClickListener() {
@@ -107,24 +105,9 @@ public class FilmComingFragment extends BaseFragment<FilmViewModel, FragmentWanA
         bindingView.srlWan.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                if (!bindingView.xrvWan.isLoadingData()) {
-                    bindingView.srlWan.postDelayed(() -> {
-                        bindingView.xrvWan.reset();
-                        getHotFilm();
-                    }, 150);
-                }
-
-            }
-        });
-        bindingView.xrvWan.setLoadingListener(new XRecyclerView.LoadingListener() {
-            @Override
-            public void onRefresh() {
-
-            }
-
-            @Override
-            public void onLoadMore() {
-                bindingView.xrvWan.noMoreLoading();
+                bindingView.srlWan.postDelayed(() -> {
+                    getHotFilm();
+                }, 150);
             }
         });
     }
@@ -154,8 +137,7 @@ public class FilmComingFragment extends BaseFragment<FilmViewModel, FragmentWanA
                         adapter.clear();
                         adapter.notifyDataSetChanged();
                     }
-                    // +1 一个刷新头布局
-                    int positionStart = adapter.getItemCount() + 1;
+                    int positionStart = adapter.getItemCount();
 
                     ArrayList<ComingFilmBean.MoviecomingsBean> beans = new ArrayList<>();
                     beans.addAll(bookBean.getAttention());
@@ -167,7 +149,7 @@ public class FilmComingFragment extends BaseFragment<FilmViewModel, FragmentWanA
 
                     adapter.addAll(beans);
                     adapter.notifyItemRangeInserted(positionStart, beans.size());
-                    bindingView.xrvWan.refreshComplete();
+                    bindingView.xrvWan.loadMoreEnd();
                     if (mIsFirst) {
                         mIsFirst = false;
                     }
@@ -175,7 +157,7 @@ public class FilmComingFragment extends BaseFragment<FilmViewModel, FragmentWanA
                     if (adapter.getItemCount() == 0) {
                         showError();
                     } else {
-                        bindingView.xrvWan.noMoreLoading();
+                        bindingView.xrvWan.loadMoreEnd();
                     }
                 }
             }

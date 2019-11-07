@@ -13,6 +13,7 @@ import com.example.jingbin.cloudreader.adapter.GankAndroidAdapter;
 import com.example.jingbin.cloudreader.base.BaseFragment;
 import com.example.jingbin.cloudreader.bean.GankIoDataBean;
 import com.example.jingbin.cloudreader.databinding.FragmentAndroidBinding;
+import com.example.jingbin.cloudreader.utils.RefreshHelper;
 import com.example.jingbin.cloudreader.utils.SPUtils;
 import com.example.jingbin.cloudreader.utils.ToastUtil;
 import com.example.jingbin.cloudreader.viewmodel.gank.GankViewModel;
@@ -74,7 +75,7 @@ public class CustomFragment extends BaseFragment<GankViewModel, FragmentAndroidB
         View mHeaderView = View.inflate(getContext(), R.layout.header_item_gank_custom, null);
         bindingView.xrvAndroid.addHeaderView(mHeaderView);
         initHeader(mHeaderView);
-        bindingView.xrvAndroid.setLayoutManager(new LinearLayoutManager(getActivity()));
+        RefreshHelper.initLinear(bindingView.xrvAndroid, false);
         bindingView.xrvAndroid.setAdapter(adapter);
         bindingView.xrvAndroid.setOnLoadMoreListener(new ByRecyclerView.OnLoadMoreListener() {
             @Override
@@ -84,7 +85,7 @@ public class CustomFragment extends BaseFragment<GankViewModel, FragmentAndroidB
                 viewModel.setPage(page);
                 loadCustomData();
             }
-        });
+        }, 300);
     }
 
     private void loadCustomData() {

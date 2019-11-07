@@ -161,8 +161,6 @@ public class MovieDetailActivity extends AppCompatActivity {
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(MovieDetailActivity.this);
         mLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         binding.xrvCast.setLayoutManager(mLayoutManager);
-        binding.xrvCast.setPullRefreshEnabled(false);
-        binding.xrvCast.setLoadingMoreEnabled(false);
         // 需加，不然滑动不流畅
         binding.xrvCast.setNestedScrollingEnabled(false);
         binding.xrvCast.setHasFixedSize(false);

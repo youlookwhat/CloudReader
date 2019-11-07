@@ -112,7 +112,7 @@
             </LinearLayout>
 
             <!--导演&演员-->
-            <com.example.xrecyclerview.XRecyclerView
+            <me.jingbin.library.ByRecyclerView
                 android:id="@+id/xrv_cast"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

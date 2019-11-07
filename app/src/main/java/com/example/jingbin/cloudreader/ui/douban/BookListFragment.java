@@ -18,7 +18,8 @@ import com.example.jingbin.cloudreader.databinding.HeaderItemBookBinding;
 import com.example.jingbin.cloudreader.utils.CommonUtils;
 import com.example.jingbin.cloudreader.utils.DebugUtil;
 import com.example.jingbin.cloudreader.viewmodel.movie.BookListViewModel;
-import com.example.xrecyclerview.XRecyclerView;
+
+import me.jingbin.library.ByRecyclerView;
 
 /**
  * @author jingbin
@@ -82,9 +83,7 @@ public class BookListFragment extends BaseFragment<BookListViewModel, FragmentWa
         oneBinding.setViewModel(viewModel);
         GridLayoutManager mLayoutManager = new GridLayoutManager(getActivity(), 3);
         bindingView.xrvWan.setLayoutManager(mLayoutManager);
-        bindingView.xrvWan.setPullRefreshEnabled(false);
         bindingView.xrvWan.setItemAnimator(null);
-        bindingView.xrvWan.clearHeader();
         bindingView.xrvWan.setHasFixedSize(true);
         viewModel.bookType.set(mType);
         bindingView.xrvWan.setAdapter(mBookAdapter);
@@ -94,21 +93,14 @@ public class BookListFragment extends BaseFragment<BookListViewModel, FragmentWa
         bindingView.srlWan.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                if (!bindingView.xrvWan.isLoadingData()) {
-                    bindingView.srlWan.postDelayed(() -> {
-                        viewModel.setStart(0);
-                        bindingView.xrvWan.reset();
-                        getBook();
-                    }, 150);
-                }
-
+                bindingView.srlWan.postDelayed(() -> {
+                    viewModel.setStart(0);
+                    bindingView.xrvWan.setRefreshing(false);
+                    getBook();
+                }, 150);
             }
         });
-        bindingView.xrvWan.setLoadingListener(new XRecyclerView.LoadingListener() {
-            @Override
-            public void onRefresh() {
-
-            }
+        bindingView.xrvWan.setOnLoadMoreListener(new ByRecyclerView.OnLoadMoreListener() {
 
             @Override
             public void onLoadMore() {
@@ -116,7 +108,7 @@ public class BookListFragment extends BaseFragment<BookListViewModel, FragmentWa
                     viewModel.handleNextStart();
                     getBook();
                 } else {
-                    bindingView.xrvWan.refreshComplete();
+                    bindingView.xrvWan.loadMoreComplete();
                 }
             }
         });
@@ -133,7 +125,6 @@ public class BookListFragment extends BaseFragment<BookListViewModel, FragmentWa
     private void refresh(boolean isChecked, String mType) {
         if (isChecked) {
             bindingView.srlWan.setRefreshing(true);
-            bindingView.xrvWan.reset();
             viewModel.setStart(0);
             viewModel.bookType.set(mType);
             getBook();
@@ -169,7 +160,7 @@ public class BookListFragment extends BaseFragment<BookListViewModel, FragmentWa
                     int positionStart = mBookAdapter.getItemCount() + 2;
                     mBookAdapter.addAll(bookBean.getBooks());
                     mBookAdapter.notifyItemRangeInserted(positionStart, bookBean.getBooks().size());
-                    bindingView.xrvWan.refreshComplete();
+                    bindingView.xrvWan.loadMoreComplete();
                     if (mIsFirst) {
                         mIsFirst = false;
                     }
@@ -177,7 +168,7 @@ public class BookListFragment extends BaseFragment<BookListViewModel, FragmentWa
                     if (mBookAdapter.getItemCount() == 0) {
                         showError();
                     } else {
-                        bindingView.xrvWan.noMoreLoading();
+                        bindingView.xrvWan.loadMoreEnd();
                     }
                 }
             }

@@ -150,8 +150,6 @@ public class OneMovieDetailActivity extends BaseHeaderActivity<HeaderSlideShapeB
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(OneMovieDetailActivity.this);
         mLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         bindingContentView.xrvCast.setLayoutManager(mLayoutManager);
-        bindingContentView.xrvCast.setPullRefreshEnabled(false);
-        bindingContentView.xrvCast.setLoadingMoreEnabled(false);
         // 需加，不然滑动不流畅
         bindingContentView.xrvCast.setNestedScrollingEnabled(false);
         bindingContentView.xrvCast.setHasFixedSize(false);

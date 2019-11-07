@@ -7,7 +7,6 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v7.widget.LinearLayoutManager;
 
-import com.example.jingbin.cloudreader.ui.MainActivity;
 import com.example.jingbin.cloudreader.R;
 import com.example.jingbin.cloudreader.adapter.OneAdapter;
 import com.example.jingbin.cloudreader.app.Constants;
@@ -16,11 +15,13 @@ import com.example.jingbin.cloudreader.bean.HotMovieBean;
 import com.example.jingbin.cloudreader.databinding.FragmentOneBinding;
 import com.example.jingbin.cloudreader.databinding.HeaderItemOneBinding;
 import com.example.jingbin.cloudreader.http.cache.ACache;
+import com.example.jingbin.cloudreader.ui.MainActivity;
 import com.example.jingbin.cloudreader.utils.SPUtils;
 import com.example.jingbin.cloudreader.utils.TimeUtil;
 import com.example.jingbin.cloudreader.utils.ToastUtil;
 import com.example.jingbin.cloudreader.viewmodel.movie.OneViewModel;
-import com.example.xrecyclerview.XRecyclerView;
+
+import me.jingbin.library.ByRecyclerView;
 
 /**
  * @author jingbin
@@ -65,25 +66,18 @@ public class OneFragment extends BaseFragment<OneViewModel, FragmentOneBinding> 
         oneBinding = DataBindingUtil.inflate(getLayoutInflater(), R.layout.header_item_one, null, false);
         oneBinding.setView(this);
         bindingView.listOne.setLayoutManager(new LinearLayoutManager(activity));
-        bindingView.listOne.setPullRefreshEnabled(false);
-        bindingView.listOne.clearHeader();
         bindingView.listOne.setItemAnimator(null);
         bindingView.listOne.addHeaderView(oneBinding.getRoot());
         oneAdapter = new OneAdapter(activity);
         bindingView.listOne.setAdapter(oneAdapter);
-        bindingView.listOne.setLoadingListener(new XRecyclerView.LoadingListener() {
-            @Override
-            public void onRefresh() {
-
-            }
-
+        bindingView.listOne.setOnLoadMoreListener(new ByRecyclerView.OnLoadMoreListener() {
             @Override
             public void onLoadMore() {
                 if (oneBinding.tlMovie.getSelectedTabPosition() == 1) {
                     viewModel.handleNextStart();
                     loadComingSoonMovie();
                 } else {
-                    bindingView.listOne.noMoreLoading();
+                    bindingView.listOne.loadMoreEnd();
                 }
             }
         });
@@ -93,11 +87,11 @@ public class OneFragment extends BaseFragment<OneViewModel, FragmentOneBinding> 
                 int tabPosition = oneBinding.tlMovie.getSelectedTabPosition();
                 if (tabPosition == 0) {
                     viewModel.setStart(0);
-                    bindingView.listOne.reset();
+                    bindingView.listOne.setRefreshing(false);
                     loadHotMovie();
                 } else {
                     viewModel.setStart(0);
-                    bindingView.listOne.reset();
+                    bindingView.listOne.setRefreshing(false);
                     loadComingSoonMovie();
                 }
             }
@@ -180,13 +174,13 @@ public class OneFragment extends BaseFragment<OneViewModel, FragmentOneBinding> 
                     oneAdapter.notifyDataSetChanged();
                 }
                 // +2 一个刷新头布局 一个自己新增的头布局
-                int positionStart = oneAdapter.getItemCount() + 2;
+                int positionStart = oneAdapter.getItemCount() + 1;
                 oneAdapter.addAll(movieBean.getSubjects());
                 oneAdapter.notifyItemRangeInserted(positionStart, movieBean.getSubjects().size());
-                bindingView.listOne.refreshComplete();
+                bindingView.listOne.loadMoreComplete();
             }
         } else {
-            bindingView.listOne.refreshComplete();
+            bindingView.listOne.loadMoreComplete();
             if (oneBinding.tlMovie.getSelectedTabPosition() == 0) {
                 if (mHotMovieBean != null) {
                     setAdapter(mHotMovieBean);
@@ -202,7 +196,7 @@ public class OneFragment extends BaseFragment<OneViewModel, FragmentOneBinding> 
                 if (oneAdapter.getItemCount() == 0) {
                     showError();
                 } else {
-                    bindingView.listOne.noMoreLoading();
+                    bindingView.listOne.loadMoreEnd();
                 }
             }
         }
@@ -212,7 +206,7 @@ public class OneFragment extends BaseFragment<OneViewModel, FragmentOneBinding> 
         oneAdapter.clear();
         oneAdapter.addAll(hotMovieBean.getSubjects());
         oneAdapter.notifyDataSetChanged();
-        bindingView.listOne.refreshComplete();
+        bindingView.listOne.loadMoreComplete();
         if (isFirst) {
             isFirst = false;
         }

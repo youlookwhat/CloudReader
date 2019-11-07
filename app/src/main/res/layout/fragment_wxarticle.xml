@@ -17,7 +17,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <com.example.xrecyclerview.XRecyclerView
+        <me.jingbin.library.ByRecyclerView
             android:id="@+id/rv_wxarticle_list"
             android:layout_width="0dp"
             android:layout_height="0dp"

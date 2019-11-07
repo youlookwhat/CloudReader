@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import com.example.jingbin.cloudreader.R;
 import com.example.jingbin.cloudreader.base.baseadapter.BaseRecyclerViewAdapter;
 import com.example.jingbin.cloudreader.base.baseadapter.BaseRecyclerViewHolder;
+import com.example.jingbin.cloudreader.base.binding.BaseBindingAdapter;
 import com.example.jingbin.cloudreader.bean.wanandroid.ArticlesBean;
 import com.example.jingbin.cloudreader.data.UserUtil;
 import com.example.jingbin.cloudreader.data.model.CollectModel;
@@ -19,11 +20,13 @@ import com.example.jingbin.cloudreader.utils.ToastUtil;
 import com.example.jingbin.cloudreader.view.webview.WebViewActivity;
 import com.example.jingbin.cloudreader.viewmodel.wan.WanNavigator;
 
+import java.util.List;
+
 /**
  * Created by jingbin on 2016/11/25.
  */
 
-public class WanAndroidAdapter extends BaseRecyclerViewAdapter<ArticlesBean> {
+public class WanAndroidAdapter extends BaseBindingAdapter<ArticlesBean, ItemWanAndroidBinding> {
 
     private Activity activity;
     private CollectModel model;
@@ -45,13 +48,82 @@ public class WanAndroidAdapter extends BaseRecyclerViewAdapter<ArticlesBean> {
     private boolean isNoImage = false;
 
     public WanAndroidAdapter(Activity activity) {
+        super(R.layout.item_wan_android);
         this.activity = activity;
         model = new CollectModel();
     }
 
     @Override
-    public BaseRecyclerViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new ViewHolder(parent, R.layout.item_wan_android);
+    protected void bindView(ArticlesBean bean, ItemWanAndroidBinding binding, int position) {
+        if (bean != null) {
+            if (isCollectList) {
+                bean.setCollect(true);
+            }
+            binding.setBean(bean);
+            binding.setAdapter(WanAndroidAdapter.this);
+            if (!TextUtils.isEmpty(bean.getEnvelopePic()) && !isNoImage) {
+                bean.setShowImage(true);
+            } else {
+                bean.setShowImage(false);
+            }
+
+            binding.vbCollect.setOnClickListener(new PerfectClickListener() {
+                @Override
+                protected void onNoDoubleClick(View v) {
+                    if (UserUtil.isLogin(activity) && model != null) {
+                        // 为什么状态值相反？因为点了之后控件已改变状态
+//                            DebugUtil.error("-----binding.vbCollect.isChecked():" + binding.vbCollect.isChecked());
+                        if (!binding.vbCollect.isChecked()) {
+                            model.unCollect(isCollectList, bean.getId(), bean.getOriginId(), new WanNavigator.OnCollectNavigator() {
+                                @Override
+                                public void onSuccess() {
+                                    if (isCollectList) {
+
+//                                        int indexOf = getData().indexOf(bean);
+                                        // 角标始终加一
+//                                        int adapterPosition = getAdapterPosition();
+
+//                                        DebugUtil.error("getAdapterPosition():" + getAdapterPosition());
+//                                        DebugUtil.error("indexOf:" + indexOf);
+                                        // 移除数据增加删除动画
+                                        getData().remove(position);
+                                        refreshNotifyItemRemoved(position);
+                                    } else {
+                                        bean.setCollect(binding.vbCollect.isChecked());
+//                                            ToastUtil.showToastLong("已取消收藏");
+                                    }
+                                }
+
+                                @Override
+                                public void onFailure() {
+                                    bean.setCollect(true);
+                                    refreshNotifyItemChanged(position);
+                                    ToastUtil.showToastLong("取消收藏失败");
+                                }
+                            });
+                        } else {
+                            model.collect(bean.getId(), new WanNavigator.OnCollectNavigator() {
+                                @Override
+                                public void onSuccess() {
+                                    bean.setCollect(true);
+//                                        ToastUtil.showToastLong("收藏成功");
+                                }
+
+                                @Override
+                                public void onFailure() {
+//                                        ToastUtil.showToastLong("收藏失败");
+                                    bean.setCollect(false);
+                                    refreshNotifyItemChanged(position);
+                                }
+                            });
+                        }
+                    } else {
+                        bean.setCollect(false);
+                        refreshNotifyItemChanged(position);
+                    }
+                }
+            });
+        }
     }
 
     public void setCollectList() {
@@ -78,75 +150,7 @@ public class WanAndroidAdapter extends BaseRecyclerViewAdapter<ArticlesBean> {
 
         @Override
         public void onBindViewHolder(final ArticlesBean bean, final int position) {
-            if (bean != null) {
-                if (isCollectList) {
-                    bean.setCollect(true);
-                }
-                binding.setBean(bean);
-                binding.setAdapter(WanAndroidAdapter.this);
-                if (!TextUtils.isEmpty(bean.getEnvelopePic()) && !isNoImage) {
-                    bean.setShowImage(true);
-                } else {
-                    bean.setShowImage(false);
-                }
 
-                binding.vbCollect.setOnClickListener(new PerfectClickListener() {
-                    @Override
-                    protected void onNoDoubleClick(View v) {
-                        if (UserUtil.isLogin(activity) && model != null) {
-                            // 为什么状态值相反？因为点了之后控件已改变状态
-//                            DebugUtil.error("-----binding.vbCollect.isChecked():" + binding.vbCollect.isChecked());
-                            if (!binding.vbCollect.isChecked()) {
-                                model.unCollect(isCollectList, bean.getId(), bean.getOriginId(), new WanNavigator.OnCollectNavigator() {
-                                    @Override
-                                    public void onSuccess() {
-                                        if (isCollectList) {
-
-                                            int indexOf = getData().indexOf(bean);
-                                            // 角标始终加一
-                                            int adapterPosition = getAdapterPosition();
-
-                                            DebugUtil.error("getAdapterPosition():" + getAdapterPosition());
-                                            DebugUtil.error("indexOf:" + indexOf);
-                                            // 移除数据增加删除动画
-                                            getData().remove(indexOf);
-                                            notifyItemRemoved(adapterPosition);
-                                        } else {
-                                            bean.setCollect(binding.vbCollect.isChecked());
-//                                            ToastUtil.showToastLong("已取消收藏");
-                                        }
-                                    }
-
-                                    @Override
-                                    public void onFailure() {
-                                        bean.setCollect(true);
-                                        notifyItemChanged(getAdapterPosition());
-                                        ToastUtil.showToastLong("取消收藏失败");
-                                    }
-                                });
-                            } else {
-                                model.collect(bean.getId(), new WanNavigator.OnCollectNavigator() {
-                                    @Override
-                                    public void onSuccess() {
-                                        bean.setCollect(true);
-//                                        ToastUtil.showToastLong("收藏成功");
-                                    }
-
-                                    @Override
-                                    public void onFailure() {
-//                                        ToastUtil.showToastLong("收藏失败");
-                                        bean.setCollect(false);
-                                        notifyItemChanged(getAdapterPosition());
-                                    }
-                                });
-                            }
-                        } else {
-                            bean.setCollect(false);
-                            notifyItemChanged(getAdapterPosition());
-                        }
-                    }
-                });
-            }
         }
     }
 

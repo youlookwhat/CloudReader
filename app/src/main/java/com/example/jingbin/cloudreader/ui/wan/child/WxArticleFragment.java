@@ -16,9 +16,10 @@ import com.example.jingbin.cloudreader.bean.wanandroid.WxarticleItemBean;
 import com.example.jingbin.cloudreader.databinding.FragmentWxarticleBinding;
 import com.example.jingbin.cloudreader.utils.RefreshHelper;
 import com.example.jingbin.cloudreader.viewmodel.wan.WxArticleViewModel;
-import com.example.xrecyclerview.XRecyclerView;
 
 import java.util.List;
+
+import me.jingbin.library.ByRecyclerView;
 
 /**
  * @author jingbin
@@ -70,7 +71,7 @@ public class WxArticleFragment extends BaseFragment<WxArticleViewModel, Fragment
     }
 
     private void initRefreshView() {
-        RefreshHelper.init(bindingView.rvWxarticleList, false);
+        RefreshHelper.initLinear(bindingView.rvWxarticleList, true);
         LinearLayoutManager layoutManager = new LinearLayoutManager(activity);
         bindingView.rvWxarticle.setLayoutManager(layoutManager);
         wxArticleAdapter = new WxArticleAdapter();
@@ -89,18 +90,14 @@ public class WxArticleFragment extends BaseFragment<WxArticleViewModel, Fragment
                 selectItem(position);
             }
         });
-        bindingView.rvWxarticleList.setLoadingListener(new XRecyclerView.LoadingListener() {
-            @Override
-            public void onRefresh() {
-            }
-
+        bindingView.rvWxarticleList.setOnLoadMoreListener(new ByRecyclerView.OnLoadMoreListener() {
             @Override
             public void onLoadMore() {
                 int page = viewModel.getPage();
                 viewModel.setPage(++page);
                 viewModel.getWxarticleDetail(wxArticleId);
             }
-        });
+        }, 300);
         onObserveViewModel();
     }
 
@@ -136,17 +133,16 @@ public class WxArticleFragment extends BaseFragment<WxArticleViewModel, Fragment
                         int positionStart = mContentAdapter.getItemCount() + 1;
                         mContentAdapter.addAll(list);
                         mContentAdapter.notifyItemRangeInserted(positionStart, list.size());
-                        bindingView.rvWxarticleList.refreshComplete();
+                        bindingView.rvWxarticleList.loadMoreComplete();
                     }
 
                 } else {
                     if (viewModel.getPage() == 1) {
                         mContentAdapter.clear();
                         mContentAdapter.notifyDataSetChanged();
-                        bindingView.rvWxarticleList.refreshComplete();
+                        bindingView.rvWxarticleList.loadMoreComplete();
                     } else {
-                        bindingView.rvWxarticleList.refreshComplete();
-                        bindingView.rvWxarticleList.noMoreLoading();
+                        bindingView.rvWxarticleList.loadMoreEnd();
                     }
                 }
             }
@@ -157,7 +153,7 @@ public class WxArticleFragment extends BaseFragment<WxArticleViewModel, Fragment
         if (position < wxArticleAdapter.getData().size()) {
             wxArticleId = wxArticleAdapter.getData().get(position).getId();
             viewModel.setPage(1);
-            bindingView.rvWxarticleList.reset();
+            bindingView.rvWxarticleList.setRefreshing(false);
             viewModel.getWxarticleDetail(wxArticleId);
             wxArticleAdapter.setId(wxArticleId);
         }
