@@ -8,26 +8,27 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.jingbin.cloudreader.R;
-import com.example.jingbin.cloudreader.base.baseadapter.BaseRecyclerViewAdapter;
-import com.example.jingbin.cloudreader.base.baseadapter.BaseRecyclerViewHolder;
+import com.example.jingbin.cloudreader.base.binding.BaseBindingHolder;
 import com.example.jingbin.cloudreader.bean.wanandroid.ArticlesBean;
 import com.example.jingbin.cloudreader.databinding.ItemNavigationContentBinding;
 import com.example.jingbin.cloudreader.databinding.ItemNavigationTitleBinding;
 import com.example.jingbin.cloudreader.utils.CommonUtils;
 import com.example.jingbin.cloudreader.view.webview.WebViewActivity;
 
+import me.jingbin.library.adapter.BaseByRecyclerViewAdapter;
+
 /**
  * Created by jingbin on 2019/7/14.
  */
 
-public class NavigationContentAdapter extends BaseRecyclerViewAdapter<ArticlesBean> {
+public class NavigationContentAdapter extends BaseByRecyclerViewAdapter<ArticlesBean, BaseBindingHolder> {
 
     private static final int TYPE_TITLE = 0x001;
     private static final int TYPE_CONTENT = 0x002;
 
     @NonNull
     @Override
-    public BaseRecyclerViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public BaseBindingHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         switch (viewType) {
             case TYPE_TITLE:
                 return new ViewTitleHolder(parent, R.layout.item_navigation_title);
@@ -79,14 +80,14 @@ public class NavigationContentAdapter extends BaseRecyclerViewAdapter<ArticlesBe
         }
     }
 
-    private class ViewTitleHolder extends BaseRecyclerViewHolder<ArticlesBean, ItemNavigationTitleBinding> {
+    private class ViewTitleHolder extends BaseBindingHolder<ArticlesBean, ItemNavigationTitleBinding> {
 
         ViewTitleHolder(ViewGroup context, int layoutId) {
             super(context, layoutId);
         }
 
         @Override
-        public void onBindViewHolder(final ArticlesBean dataBean, final int position) {
+        protected void onBindingView(ArticlesBean dataBean, ItemNavigationTitleBinding binding, int position) {
             if (dataBean != null) {
                 binding.setBean(dataBean);
                 if (position == 0) {
@@ -99,14 +100,14 @@ public class NavigationContentAdapter extends BaseRecyclerViewAdapter<ArticlesBe
     }
 
 
-    private class ViewContentHolder extends BaseRecyclerViewHolder<ArticlesBean, ItemNavigationContentBinding> {
+    private class ViewContentHolder extends BaseBindingHolder<ArticlesBean, ItemNavigationContentBinding> {
 
         ViewContentHolder(ViewGroup context, int layoutId) {
             super(context, layoutId);
         }
 
         @Override
-        public void onBindViewHolder(final ArticlesBean dataBean, final int position) {
+        protected void onBindingView(ArticlesBean dataBean, ItemNavigationContentBinding binding, int position) {
             if (dataBean != null) {
                 binding.setBean(dataBean);
                 binding.tvNaviTag.setTextColor(CommonUtils.randomColor());

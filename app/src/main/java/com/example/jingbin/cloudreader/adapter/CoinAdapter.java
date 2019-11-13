@@ -7,19 +7,20 @@ import android.support.annotation.NonNull;
 import android.view.ViewGroup;
 
 import com.example.jingbin.cloudreader.R;
-import com.example.jingbin.cloudreader.base.baseadapter.BaseRecyclerViewAdapter;
-import com.example.jingbin.cloudreader.base.baseadapter.BaseRecyclerViewHolder;
+import com.example.jingbin.cloudreader.base.binding.BaseBindingHolder;
 import com.example.jingbin.cloudreader.bean.CoinLogBean;
 import com.example.jingbin.cloudreader.databinding.ItemWanCoinBinding;
 import com.example.jingbin.cloudreader.databinding.ItemWanCoinRankBinding;
 import com.example.jingbin.cloudreader.utils.CommonUtils;
-import com.example.jingbin.cloudreader.utils.TimeUtil;
+
+import me.jingbin.library.adapter.BaseByRecyclerViewAdapter;
+import me.jingbin.library.adapter.BaseByViewHolder;
 
 /**
  * Created by jingbin on 2019/9/26.
  */
 
-public class CoinAdapter extends BaseRecyclerViewAdapter<CoinLogBean> {
+public class CoinAdapter extends BaseByRecyclerViewAdapter<CoinLogBean, BaseByViewHolder> {
 
     private Activity activity;
     private boolean isRank;
@@ -31,7 +32,7 @@ public class CoinAdapter extends BaseRecyclerViewAdapter<CoinLogBean> {
 
     @NonNull
     @Override
-    public BaseRecyclerViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public BaseByViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         if (isRank) {
             return new ViewRankHolder(parent, R.layout.item_wan_coin_rank);
         } else {
@@ -39,14 +40,14 @@ public class CoinAdapter extends BaseRecyclerViewAdapter<CoinLogBean> {
         }
     }
 
-    private class ViewRankHolder extends BaseRecyclerViewHolder<CoinLogBean, ItemWanCoinRankBinding> {
+    private class ViewRankHolder extends BaseBindingHolder<CoinLogBean, ItemWanCoinRankBinding> {
 
         ViewRankHolder(ViewGroup context, int layoutId) {
             super(context, layoutId);
         }
 
         @Override
-        public void onBindViewHolder(final CoinLogBean bean, final int position) {
+        protected void onBindingView(CoinLogBean bean, ItemWanCoinRankBinding binding, int position) {
             int adapterPosition = position + 1;
             binding.setBean(bean);
             binding.setPosition(adapterPosition);
@@ -66,18 +67,17 @@ public class CoinAdapter extends BaseRecyclerViewAdapter<CoinLogBean> {
             }
             binding.tvRank.setTextSize(size);
             binding.tvRank.setTextColor(color);
-
         }
     }
 
-    private class ViewHolder extends BaseRecyclerViewHolder<CoinLogBean, ItemWanCoinBinding> {
+    private class ViewHolder extends BaseBindingHolder<CoinLogBean, ItemWanCoinBinding> {
 
         ViewHolder(ViewGroup context, int layoutId) {
             super(context, layoutId);
         }
 
         @Override
-        public void onBindViewHolder(final CoinLogBean bean, final int position) {
+        protected void onBindingView(CoinLogBean bean, ItemWanCoinBinding binding, int position) {
             binding.setBean(bean);
         }
     }

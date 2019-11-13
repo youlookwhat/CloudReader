@@ -1,5 +1,6 @@
 package com.example.jingbin.cloudreader.utils;
 
+import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 
@@ -41,6 +42,11 @@ public class RefreshHelper {
         }
         recyclerView.setRefreshHeaderView(new NeteaseRefreshHeaderView(recyclerView.getContext()));
         recyclerView.setLoadingMoreView(new NeteaseLoadMoreView(recyclerView.getContext()));
+        return recyclerView;
+    }
+
+    public static ByRecyclerView setDefaultAnimator(ByRecyclerView recyclerView) {
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
         return recyclerView;
     }
 }

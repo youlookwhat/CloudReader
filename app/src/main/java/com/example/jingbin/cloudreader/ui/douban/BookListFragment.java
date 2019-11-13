@@ -78,7 +78,7 @@ public class BookListFragment extends BaseFragment<BookListViewModel, FragmentWa
 
     private void initRefreshView() {
         bindingView.srlWan.setColorSchemeColors(CommonUtils.getColor(R.color.colorTheme));
-        mBookAdapter = new DouBookAdapter();
+        mBookAdapter = new DouBookAdapter(activity);
         oneBinding = DataBindingUtil.inflate(getLayoutInflater(), R.layout.header_item_book, null, false);
         oneBinding.setViewModel(viewModel);
         GridLayoutManager mLayoutManager = new GridLayoutManager(getActivity(), 3);

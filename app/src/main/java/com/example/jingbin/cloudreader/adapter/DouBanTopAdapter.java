@@ -1,13 +1,12 @@
 package com.example.jingbin.cloudreader.adapter;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.example.jingbin.cloudreader.R;
-import com.example.jingbin.cloudreader.base.baseadapter.BaseRecyclerViewAdapter;
-import com.example.jingbin.cloudreader.base.baseadapter.BaseRecyclerViewHolder;
+import com.example.jingbin.cloudreader.base.binding.BaseBindingAdapter;
 import com.example.jingbin.cloudreader.bean.moviechild.SubjectsBean;
 import com.example.jingbin.cloudreader.databinding.ItemDoubanTopBinding;
 import com.example.jingbin.cloudreader.utils.DensityUtil;
@@ -18,51 +17,43 @@ import com.example.jingbin.cloudreader.utils.PerfectClickListener;
  * Created by jingbin on 2016/12/10.
  */
 
-public class DouBanTopAdapter extends BaseRecyclerViewAdapter<SubjectsBean> {
+public class DouBanTopAdapter extends BaseBindingAdapter<SubjectsBean, ItemDoubanTopBinding> {
 
-    @Override
-    public BaseRecyclerViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new ViewHolder(parent, R.layout.item_douban_top);
+    private int width;
+
+    public DouBanTopAdapter(Context context) {
+        super(R.layout.item_douban_top);
+        int px = DensityUtil.dip2px(context, 36);
+        width = (DensityUtil.getDisplayWidth() - px) / 3;
     }
 
-    class ViewHolder extends BaseRecyclerViewHolder<SubjectsBean, ItemDoubanTopBinding> {
-        private int width;
-
-        ViewHolder(ViewGroup parent, int layout) {
-            super(parent, layout);
-            int px = DensityUtil.dip2px(parent.getContext(), 36);
-            width = (DensityUtil.getDisplayWidth() - px) / 3;
-        }
-
-        @Override
-        public void onBindViewHolder(final SubjectsBean bean, final int position) {
-            binding.setBean(bean);
-            DensityUtil.formatHeight(binding.ivTopPhoto, width, 0.758f, 1);
-            binding.cvTopMovie.setOnClickListener(new PerfectClickListener() {
-                @Override
-                protected void onNoDoubleClick(View v) {
-                    if (listener != null) {
-                        listener.onClick(bean, binding.ivTopPhoto);
-                    }
+    @Override
+    protected void bindView(SubjectsBean bean, ItemDoubanTopBinding binding, int position) {
+        binding.setBean(bean);
+        DensityUtil.formatHeight(binding.ivTopPhoto, width, 0.758f, 1);
+        binding.cvTopMovie.setOnClickListener(new PerfectClickListener() {
+            @Override
+            protected void onNoDoubleClick(View v) {
+                if (listener != null) {
+                    listener.onClick(bean, binding.ivTopPhoto);
                 }
-            });
-            binding.cvTopMovie.setOnLongClickListener(new View.OnLongClickListener() {
-                @Override
-                public boolean onLongClick(View v) {
-                    String title = "Top" + (position + 1) + ": " + bean.getTitle();
-                    DialogBuild.showCustom(v, title, "查看详情", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            if (listener != null) {
-                                listener.onClick(bean, binding.ivTopPhoto);
-                            }
+            }
+        });
+        binding.cvTopMovie.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                String title = "Top" + (position + 1) + ": " + bean.getTitle();
+                DialogBuild.showCustom(v, title, "查看详情", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        if (listener != null) {
+                            listener.onClick(bean, binding.ivTopPhoto);
                         }
-                    });
-                    return false;
-                }
-            });
-
-        }
+                    }
+                });
+                return false;
+            }
+        });
     }
 
     private OnClickListener listener;

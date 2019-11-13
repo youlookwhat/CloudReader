@@ -3,24 +3,18 @@ package com.example.jingbin.cloudreader.adapter;
 import android.app.Activity;
 import android.text.TextUtils;
 import android.view.View;
-import android.view.ViewGroup;
 
 import com.example.jingbin.cloudreader.R;
-import com.example.jingbin.cloudreader.base.baseadapter.BaseRecyclerViewAdapter;
-import com.example.jingbin.cloudreader.base.baseadapter.BaseRecyclerViewHolder;
 import com.example.jingbin.cloudreader.base.binding.BaseBindingAdapter;
 import com.example.jingbin.cloudreader.bean.wanandroid.ArticlesBean;
 import com.example.jingbin.cloudreader.data.UserUtil;
 import com.example.jingbin.cloudreader.data.model.CollectModel;
 import com.example.jingbin.cloudreader.databinding.ItemWanAndroidBinding;
 import com.example.jingbin.cloudreader.ui.wan.child.ArticleListActivity;
-import com.example.jingbin.cloudreader.utils.DebugUtil;
 import com.example.jingbin.cloudreader.utils.PerfectClickListener;
 import com.example.jingbin.cloudreader.utils.ToastUtil;
 import com.example.jingbin.cloudreader.view.webview.WebViewActivity;
 import com.example.jingbin.cloudreader.viewmodel.wan.WanNavigator;
-
-import java.util.List;
 
 /**
  * Created by jingbin on 2016/11/25.
@@ -79,18 +73,12 @@ public class WanAndroidAdapter extends BaseBindingAdapter<ArticlesBean, ItemWanA
                                 public void onSuccess() {
                                     if (isCollectList) {
 
-//                                        int indexOf = getData().indexOf(bean);
-                                        // 角标始终加一
-//                                        int adapterPosition = getAdapterPosition();
-
-//                                        DebugUtil.error("getAdapterPosition():" + getAdapterPosition());
-//                                        DebugUtil.error("indexOf:" + indexOf);
+                                        int indexOf = getData().indexOf(bean);
                                         // 移除数据增加删除动画
-                                        getData().remove(position);
-                                        refreshNotifyItemRemoved(position);
+                                        getData().remove(indexOf);
+                                        refreshNotifyItemRemoved(indexOf);
                                     } else {
                                         bean.setCollect(binding.vbCollect.isChecked());
-//                                            ToastUtil.showToastLong("已取消收藏");
                                     }
                                 }
 
@@ -140,18 +128,6 @@ public class WanAndroidAdapter extends BaseBindingAdapter<ArticlesBean, ItemWanA
 
     public void setNoImage(boolean isNoImage) {
         this.isNoImage = isNoImage;
-    }
-
-    private class ViewHolder extends BaseRecyclerViewHolder<ArticlesBean, ItemWanAndroidBinding> {
-
-        ViewHolder(ViewGroup context, int layoutId) {
-            super(context, layoutId);
-        }
-
-        @Override
-        public void onBindViewHolder(final ArticlesBean bean, final int position) {
-
-        }
     }
 
     public void openDetail(ArticlesBean bean) {

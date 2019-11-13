@@ -362,6 +362,12 @@ public class SearchActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        binding.recyclerView.destroy();
+    }
+
     public static void start(Context mContext) {
         Intent intent = new Intent(mContext, SearchActivity.class);
         mContext.startActivity(intent);

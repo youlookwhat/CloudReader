@@ -130,6 +130,7 @@ public class WxArticleFragment extends BaseFragment<WxArticleViewModel, Fragment
                     if (viewModel.getPage() == 1) {
                         showContentView();
                         mContentAdapter.setNewData(list);
+                        bindingView.rvWxarticleList.getLayoutManager().scrollToPosition(0);
                     } else {
                         mContentAdapter.addData(list);
                         bindingView.rvWxarticleList.loadMoreComplete();
@@ -150,7 +151,8 @@ public class WxArticleFragment extends BaseFragment<WxArticleViewModel, Fragment
         if (position < wxArticleAdapter.getData().size()) {
             wxArticleId = wxArticleAdapter.getData().get(position).getId();
             wxArticleAdapter.setId(wxArticleId);
-            bindingView.rvWxarticleList.setRefreshing(true);
+            viewModel.setPage(1);
+            viewModel.getWxarticleDetail(wxArticleId);
         }
         wxArticleAdapter.notifyItemChanged(currentPosition);
         currentPosition = position;

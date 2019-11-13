@@ -1,14 +1,11 @@
 package com.example.jingbin.cloudreader.adapter;
 
 import android.app.Activity;
-import android.support.annotation.NonNull;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.animation.OvershootInterpolator;
 
 import com.example.jingbin.cloudreader.R;
-import com.example.jingbin.cloudreader.base.baseadapter.BaseRecyclerViewAdapter;
-import com.example.jingbin.cloudreader.base.baseadapter.BaseRecyclerViewHolder;
+import com.example.jingbin.cloudreader.base.binding.BaseBindingAdapter;
 import com.example.jingbin.cloudreader.bean.moviechild.SubjectsBean;
 import com.example.jingbin.cloudreader.databinding.ItemOneBinding;
 import com.example.jingbin.cloudreader.ui.douban.OneMovieDetailActivity;
@@ -20,54 +17,43 @@ import com.nineoldandroids.view.ViewPropertyAnimator;
  * Created by jingbin on 2016/11/25.
  */
 
-public class OneAdapter extends BaseRecyclerViewAdapter<SubjectsBean> {
+public class OneAdapter extends BaseBindingAdapter<SubjectsBean, ItemOneBinding> {
 
     private Activity activity;
 
     public OneAdapter(Activity activity) {
+        super(R.layout.item_one);
         this.activity = activity;
     }
 
-    @NonNull
     @Override
-    public BaseRecyclerViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new ViewHolder(parent, R.layout.item_one);
-    }
+    protected void bindView(SubjectsBean positionData, ItemOneBinding binding, int position) {
+        if (positionData != null) {
+            binding.setSubjectsBean(positionData);
+            binding.llOneItem.setOnClickListener(new PerfectClickListener() {
+                @Override
+                protected void onNoDoubleClick(View v) {
+                    OneMovieDetailActivity.start(activity, positionData, binding.ivOnePhoto);
+                }
+            });
 
-    private class ViewHolder extends BaseRecyclerViewHolder<SubjectsBean, ItemOneBinding> {
-
-        ViewHolder(ViewGroup context, int layoutId) {
-            super(context, layoutId);
-        }
-
-        @Override
-        public void onBindViewHolder(final SubjectsBean positionData, final int position) {
-            if (positionData != null) {
-                binding.setSubjectsBean(positionData);
-                binding.llOneItem.setOnClickListener(new PerfectClickListener() {
-                    @Override
-                    protected void onNoDoubleClick(View v) {
-                        OneMovieDetailActivity.start(activity, positionData, binding.ivOnePhoto);
-                    }
-                });
-
-                // 图片
+            // 图片
 //                ImageLoadUtil.displayEspImage(positionData.getImages().getLarge(), binding.ivOnePhoto,0);
-                // 导演
+            // 导演
 //                binding.tvOneDirectors.setText(StringFormatUtil.formatName(positionData.getDirectors()));
-                // 主演
+            // 主演
 //                binding.tvOneCasts.setText(StringFormatUtil.formatName(positionData.getCasts()));
-                // 类型
+            // 类型
 //                binding.tvOneGenres.setText("类型：" + StringFormatUtil.formatGenres(positionData.getGenres()));
-                // 评分
+            // 评分
 //                binding.tvOneRatingRate.setText("评分：" + String.valueOf(positionData.getRating().getAverage()));
-                // 分割线颜色
+            // 分割线颜色
 //                binding.viewColor.setBackgroundColor(CommonUtils.randomColor());
 
-                ViewHelper.setScaleX(itemView, 0.8f);
-                ViewHelper.setScaleY(itemView, 0.8f);
-                ViewPropertyAnimator.animate(itemView).scaleX(1).setDuration(350).setInterpolator(new OvershootInterpolator()).start();
-                ViewPropertyAnimator.animate(itemView).scaleY(1).setDuration(350).setInterpolator(new OvershootInterpolator()).start();
+            ViewHelper.setScaleX(binding.getRoot(), 0.8f);
+            ViewHelper.setScaleY(binding.getRoot(), 0.8f);
+            ViewPropertyAnimator.animate(binding.getRoot()).scaleX(1).setDuration(350).setInterpolator(new OvershootInterpolator()).start();
+            ViewPropertyAnimator.animate(binding.getRoot()).scaleY(1).setDuration(350).setInterpolator(new OvershootInterpolator()).start();
 
                 /*binding.llOneItem.setOnClickListener(new PerfectClickListener() {
                     @Override
@@ -97,7 +83,6 @@ public class OneAdapter extends BaseRecyclerViewAdapter<SubjectsBean> {
 
                     }
                 });*/
-            }
         }
     }
 }

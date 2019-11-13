@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
@@ -36,6 +37,8 @@
             android:maxLines="2"
             android:text="@{Html.fromHtml(bean.name)}"
             android:textColor="@color/colorContent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             tools:text="MMKV——基于 mmap 的高性能通用 key-value 组件MMKV——基于 mmap 的高性能通用 key-value 组件" />
 
     </android.support.constraint.ConstraintLayout>

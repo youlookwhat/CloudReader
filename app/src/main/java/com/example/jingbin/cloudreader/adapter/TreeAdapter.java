@@ -1,14 +1,11 @@
 package com.example.jingbin.cloudreader.adapter;
 
-import android.support.annotation.NonNull;
 import android.text.Html;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.jingbin.cloudreader.R;
-import com.example.jingbin.cloudreader.base.baseadapter.BaseRecyclerViewAdapter;
-import com.example.jingbin.cloudreader.base.baseadapter.BaseRecyclerViewHolder;
+import com.example.jingbin.cloudreader.base.binding.BaseBindingAdapter;
 import com.example.jingbin.cloudreader.bean.wanandroid.TreeItemBean;
 import com.example.jingbin.cloudreader.databinding.ItemTreeBinding;
 import com.example.jingbin.cloudreader.ui.wan.child.CategoryDetailActivity;
@@ -19,34 +16,25 @@ import java.util.List;
  * Created by jingbin on 2018/09/15.
  */
 
-public class TreeAdapter extends BaseRecyclerViewAdapter<TreeItemBean> {
+public class TreeAdapter extends BaseBindingAdapter<TreeItemBean, ItemTreeBinding> {
 
     public int mProjectPosition = 26;
 
-    @NonNull
-    @Override
-    public BaseRecyclerViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new ViewHolder(parent, R.layout.item_tree);
+    public TreeAdapter() {
+        super(R.layout.item_tree);
     }
 
-    private class ViewHolder extends BaseRecyclerViewHolder<TreeItemBean, ItemTreeBinding> {
-
-        ViewHolder(ViewGroup context, int layoutId) {
-            super(context, layoutId);
-        }
-
-        @Override
-        public void onBindViewHolder(final TreeItemBean dataBean, final int position) {
-            if (dataBean != null) {
-                String name = dataBean.getName();
-                if ("开源项目主Tab".equals(name)) {
-                    mProjectPosition = position;
-                }
-                binding.setBean(dataBean);
-                List<TreeItemBean.ChildrenBean> children = dataBean.getChildren();
-                if (children != null && children.size() > 0) {
-                    showTreeView(binding.flTree, children, dataBean);
-                }
+    @Override
+    protected void bindView(TreeItemBean dataBean, ItemTreeBinding binding, int position) {
+        if (dataBean != null) {
+            String name = dataBean.getName();
+            if ("开源项目主Tab".equals(name)) {
+                mProjectPosition = position;
+            }
+            binding.setBean(dataBean);
+            List<TreeItemBean.ChildrenBean> children = dataBean.getChildren();
+            if (children != null && children.size() > 0) {
+                showTreeView(binding.flTree, children, dataBean);
             }
         }
     }

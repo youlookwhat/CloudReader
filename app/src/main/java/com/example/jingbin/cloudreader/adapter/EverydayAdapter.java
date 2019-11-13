@@ -15,8 +15,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.example.jingbin.cloudreader.R;
 import com.example.jingbin.cloudreader.app.App;
-import com.example.jingbin.cloudreader.base.baseadapter.BaseRecyclerViewAdapter;
-import com.example.jingbin.cloudreader.base.baseadapter.BaseRecyclerViewHolder;
+import com.example.jingbin.cloudreader.base.binding.BaseBindingHolder;
 import com.example.jingbin.cloudreader.bean.AndroidBean;
 import com.example.jingbin.cloudreader.databinding.ItemEverydayOneBinding;
 import com.example.jingbin.cloudreader.databinding.ItemEverydayThreeBinding;
@@ -30,13 +29,17 @@ import com.example.jingbin.cloudreader.utils.GlideUtil;
 import com.example.jingbin.cloudreader.utils.PerfectClickListener;
 import com.example.jingbin.cloudreader.view.webview.WebViewActivity;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import me.jingbin.library.adapter.BaseByRecyclerViewAdapter;
+import me.jingbin.library.adapter.BaseByViewHolder;
 
 /**
  * Created by jingbin on 2016/12/27.
  */
 
-public class EverydayAdapter extends BaseRecyclerViewAdapter<List<AndroidBean>> {
+public class EverydayAdapter extends BaseByRecyclerViewAdapter<ArrayList<AndroidBean>, BaseByViewHolder> {
 
     private static final int TYPE_TITLE = 1; // title
     private static final int TYPE_ONE = 2;// 一张图
@@ -66,7 +69,7 @@ public class EverydayAdapter extends BaseRecyclerViewAdapter<List<AndroidBean>> 
 
     @NonNull
     @Override
-    public BaseRecyclerViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public BaseByViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         switch (viewType) {
             case TYPE_TITLE:
                 return new TitleHolder(parent, R.layout.item_everyday_title);
@@ -79,14 +82,14 @@ public class EverydayAdapter extends BaseRecyclerViewAdapter<List<AndroidBean>> 
         }
     }
 
-    private class TitleHolder extends BaseRecyclerViewHolder<List<AndroidBean>, ItemEverydayTitleBinding> {
+    private class TitleHolder extends BaseBindingHolder<List<AndroidBean>, ItemEverydayTitleBinding> {
 
         TitleHolder(ViewGroup parent, int title) {
             super(parent, title);
         }
 
         @Override
-        public void onBindViewHolder(List<AndroidBean> object, final int position) {
+        public void onBindingView(List<AndroidBean> object, ItemEverydayTitleBinding binding, final int position) {
             int index = 0;
             String title = object.get(0).getType_title();
             binding.tvTitleType.setText(title);
@@ -124,14 +127,14 @@ public class EverydayAdapter extends BaseRecyclerViewAdapter<List<AndroidBean>> 
         }
     }
 
-    private class OneHolder extends BaseRecyclerViewHolder<List<AndroidBean>, ItemEverydayOneBinding> {
+    private class OneHolder extends BaseBindingHolder<List<AndroidBean>, ItemEverydayOneBinding> {
 
         OneHolder(ViewGroup parent, int title) {
             super(parent, title);
         }
 
         @Override
-        public void onBindViewHolder(final List<AndroidBean> object, int position) {
+        public void onBindingView(List<AndroidBean> object, ItemEverydayOneBinding binding, final int position) {
             DensityUtil.formatHeight(binding.ivOnePhoto, width, 2.6f, 1);
             if ("福利".equals(object.get(0).getType())) {
                 binding.tvOnePhotoTitle.setVisibility(View.GONE);
@@ -153,7 +156,7 @@ public class EverydayAdapter extends BaseRecyclerViewAdapter<List<AndroidBean>> 
         }
     }
 
-    private class TwoHolder extends BaseRecyclerViewHolder<List<AndroidBean>, ItemEverydayTwoBinding> {
+    private class TwoHolder extends BaseBindingHolder<List<AndroidBean>, ItemEverydayTwoBinding> {
         private int imageWidth;
 
         TwoHolder(ViewGroup parent, int title) {
@@ -162,7 +165,7 @@ public class EverydayAdapter extends BaseRecyclerViewAdapter<List<AndroidBean>> 
         }
 
         @Override
-        public void onBindViewHolder(List<AndroidBean> object, int position) {
+        public void onBindingView(List<AndroidBean> object, ItemEverydayTwoBinding binding, final int position) {
             DensityUtil.formatHeight(binding.ivTwoOneOne, imageWidth, 1.75f, 1);
             DensityUtil.formatHeight(binding.ivTwoOneTwo, imageWidth, 1.75f, 1);
             displayRandomImg(2, 0, binding.ivTwoOneOne, object);
@@ -174,7 +177,7 @@ public class EverydayAdapter extends BaseRecyclerViewAdapter<List<AndroidBean>> 
         }
     }
 
-    private class ThreeHolder extends BaseRecyclerViewHolder<List<AndroidBean>, ItemEverydayThreeBinding> {
+    private class ThreeHolder extends BaseBindingHolder<List<AndroidBean>, ItemEverydayThreeBinding> {
 
         private int imageWidth;
 
@@ -184,7 +187,7 @@ public class EverydayAdapter extends BaseRecyclerViewAdapter<List<AndroidBean>> 
         }
 
         @Override
-        public void onBindViewHolder(List<AndroidBean> object, int position) {
+        public void onBindingView(List<AndroidBean> object, ItemEverydayThreeBinding binding, int position) {
             DensityUtil.formatHeight(binding.ivThreeOneOne, imageWidth, 1, 1);
             DensityUtil.formatHeight(binding.ivThreeOneTwo, imageWidth, 1, 1);
             DensityUtil.formatHeight(binding.ivThreeOneThree, imageWidth, 1, 1);

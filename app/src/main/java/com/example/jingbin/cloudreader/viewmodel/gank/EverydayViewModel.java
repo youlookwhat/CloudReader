@@ -29,7 +29,7 @@ public class EverydayViewModel extends BaseViewModel {
 
     private EverydayModel mEverydayModel;
     private ACache maCache;
-    private ArrayList<List<AndroidBean>> mLists;
+    private ArrayList<ArrayList<AndroidBean>> mLists;
     private ArrayList<String> mBannerImages;
     private String year;
     private String month;
@@ -42,7 +42,7 @@ public class EverydayViewModel extends BaseViewModel {
 
     private final MutableLiveData<Boolean> isShowLoading = new MutableLiveData<>();
     private final MutableLiveData<BannerDataBean> bannerData = new MutableLiveData<>();
-    private final MutableLiveData<ArrayList<List<AndroidBean>>> contentData = new MutableLiveData<>();
+    private final MutableLiveData<ArrayList<ArrayList<AndroidBean>>> contentData = new MutableLiveData<>();
 
     public MutableLiveData<Boolean> getShowLoading() {
         return isShowLoading;
@@ -52,7 +52,7 @@ public class EverydayViewModel extends BaseViewModel {
         return bannerData;
     }
 
-    public MutableLiveData<ArrayList<List<AndroidBean>>> getContentData() {
+    public MutableLiveData<ArrayList<ArrayList<AndroidBean>>> getContentData() {
         return contentData;
     }
 
@@ -117,14 +117,14 @@ public class EverydayViewModel extends BaseViewModel {
                 if (mLists != null) {
                     mLists.clear();
                 }
-                mLists = (ArrayList<List<AndroidBean>>) object;
+                mLists = (ArrayList<ArrayList<AndroidBean>>) object;
                 if (mLists.size() > 0 && mLists.get(0).size() > 0) {
                     maCache.remove(Constants.EVERYDAY_CONTENT);
                     maCache.put(Constants.EVERYDAY_CONTENT, mLists);
                     saveDate();
                     contentData.setValue(mLists);
                 } else {
-                    mLists = (ArrayList<List<AndroidBean>>) maCache.getAsObject(Constants.EVERYDAY_CONTENT);
+                    mLists = (ArrayList<ArrayList<AndroidBean>>) maCache.getAsObject(Constants.EVERYDAY_CONTENT);
                     if (mLists != null && mLists.size() > 0) {
                         saveDate();
                         contentData.setValue(mLists);
@@ -195,7 +195,7 @@ public class EverydayViewModel extends BaseViewModel {
     }
 
     private void handleNoData() {
-        mLists = (ArrayList<List<AndroidBean>>) maCache.getAsObject(Constants.EVERYDAY_CONTENT);
+        mLists = (ArrayList<ArrayList<AndroidBean>>) maCache.getAsObject(Constants.EVERYDAY_CONTENT);
         if (mLists != null && mLists.size() > 0) {
             saveDate();
             contentData.setValue(mLists);
@@ -221,7 +221,7 @@ public class EverydayViewModel extends BaseViewModel {
         } else {
             showBannerPage();
         }
-        mLists = (ArrayList<List<AndroidBean>>) maCache.getAsObject(Constants.EVERYDAY_CONTENT);
+        mLists = (ArrayList<ArrayList<AndroidBean>>) maCache.getAsObject(Constants.EVERYDAY_CONTENT);
         if (mLists != null && mLists.size() > 0) {
             saveDate();
             contentData.setValue(mLists);

@@ -1,12 +1,11 @@
 package com.example.jingbin.cloudreader.adapter;
 
+import android.content.Context;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.example.jingbin.cloudreader.R;
-import com.example.jingbin.cloudreader.base.baseadapter.BaseRecyclerViewAdapter;
-import com.example.jingbin.cloudreader.base.baseadapter.BaseRecyclerViewHolder;
+import com.example.jingbin.cloudreader.base.binding.BaseBindingAdapter;
 import com.example.jingbin.cloudreader.bean.ComingFilmBean;
 import com.example.jingbin.cloudreader.databinding.ItemFilmComingBinding;
 import com.example.jingbin.cloudreader.utils.DensityUtil;
@@ -16,36 +15,28 @@ import com.example.jingbin.cloudreader.utils.PerfectClickListener;
  * Created by jingbin on 2016/12/10.
  */
 
-public class FilmComingAdapter extends BaseRecyclerViewAdapter<ComingFilmBean.MoviecomingsBean> {
+public class FilmComingAdapter extends BaseBindingAdapter<ComingFilmBean.MoviecomingsBean, ItemFilmComingBinding> {
 
-    @Override
-    public BaseRecyclerViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new ViewHolder(parent, R.layout.item_film_coming);
+    private int width;
+
+    public FilmComingAdapter(Context context) {
+        super(R.layout.item_film_coming);
+        int px = DensityUtil.dip2px(context, 36);
+        width = (DensityUtil.getDisplayWidth() - px) / 3;
     }
 
-    class ViewHolder extends BaseRecyclerViewHolder<ComingFilmBean.MoviecomingsBean, ItemFilmComingBinding> {
-
-        private int width;
-
-        ViewHolder(ViewGroup parent, int layout) {
-            super(parent, layout);
-            int px = DensityUtil.dip2px(parent.getContext(), 36);
-            width = (DensityUtil.getDisplayWidth() - px) / 3;
-        }
-
-        @Override
-        public void onBindViewHolder(final ComingFilmBean.MoviecomingsBean bean, final int position) {
-            binding.setBean(bean);
-            DensityUtil.formatHeight(binding.ivTopPhoto, width, 0.758f, 1);
-            binding.cvTopMovie.setOnClickListener(new PerfectClickListener() {
-                @Override
-                protected void onNoDoubleClick(View v) {
-                    if (listener != null) {
-                        listener.onClick(bean, binding.ivTopPhoto);
-                    }
+    @Override
+    protected void bindView(ComingFilmBean.MoviecomingsBean bean, ItemFilmComingBinding binding, int position) {
+        binding.setBean(bean);
+        DensityUtil.formatHeight(binding.ivTopPhoto, width, 0.758f, 1);
+        binding.cvTopMovie.setOnClickListener(new PerfectClickListener() {
+            @Override
+            protected void onNoDoubleClick(View v) {
+                if (listener != null) {
+                    listener.onClick(bean, binding.ivTopPhoto);
                 }
-            });
-        }
+            }
+        });
     }
 
     private OnClickListener listener;

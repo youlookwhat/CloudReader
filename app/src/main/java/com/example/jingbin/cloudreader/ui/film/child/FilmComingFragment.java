@@ -75,7 +75,7 @@ public class FilmComingFragment extends BaseFragment<FilmViewModel, FragmentWanA
 
     private void initRefreshView() {
         bindingView.srlWan.setColorSchemeColors(CommonUtils.getColor(R.color.colorTheme));
-        adapter = new FilmComingAdapter();
+        adapter = new FilmComingAdapter(activity);
         bindingView.xrvWan.setLayoutManager(new StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL));
         bindingView.xrvWan.setItemAnimator(null);
         bindingView.xrvWan.setHasFixedSize(true);

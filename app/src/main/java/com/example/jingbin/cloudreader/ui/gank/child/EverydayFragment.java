@@ -5,7 +5,6 @@ import android.arch.lifecycle.Observer;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -19,7 +18,6 @@ import com.example.jingbin.cloudreader.adapter.EverydayAdapter;
 import com.example.jingbin.cloudreader.base.BaseFragment;
 import com.example.jingbin.cloudreader.bean.AndroidBean;
 import com.example.jingbin.cloudreader.bean.BannerItemBean;
-import com.example.jingbin.cloudreader.databinding.FooterItemEverydayBinding;
 import com.example.jingbin.cloudreader.databinding.FragmentEverydayBinding;
 import com.example.jingbin.cloudreader.databinding.HeaderItemEverydayBinding;
 import com.example.jingbin.cloudreader.http.rx.RxBus;
@@ -32,7 +30,6 @@ import com.example.jingbin.cloudreader.view.webview.WebViewActivity;
 import com.example.jingbin.cloudreader.viewmodel.gank.EverydayViewModel;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import static com.example.jingbin.cloudreader.viewmodel.gank.EverydayViewModel.getTodayTime;
 
@@ -132,14 +129,11 @@ public class EverydayFragment extends BaseFragment<EverydayViewModel, FragmentEv
                 }
             }
         });
-        viewModel.getContentData().observe(this, new Observer<ArrayList<List<AndroidBean>>>() {
+        viewModel.getContentData().observe(this, new Observer<ArrayList<ArrayList<AndroidBean>>>() {
             @Override
-            public void onChanged(@Nullable ArrayList<List<AndroidBean>> lists) {
+            public void onChanged(@Nullable ArrayList<ArrayList<AndroidBean>> lists) {
                 if (lists != null && lists.size() > 0) {
-                    mEverydayAdapter.clear();
-                    mEverydayAdapter.addAll(lists);
-                    mEverydayAdapter.notifyDataSetChanged();
-                    bindingView.recyclerView.loadMoreComplete();
+                    mEverydayAdapter.setNewData(lists);
                 } else {
                     showError();
                 }
