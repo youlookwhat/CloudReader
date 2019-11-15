@@ -131,11 +131,7 @@ public class HomeFragment extends BaseFragment<WanAndroidListViewModel, Fragment
     private void swipeRefresh() {
         bindingView.srlWan.postDelayed(() -> {
             viewModel.setPage(0);
-            if (headerBinding.rb1.isChecked()) {
-                getHomeArticleList();
-            } else {
-                getHomeProjectList();
-            }
+            getWanAndroidBanner();
         }, 350);
     }
 
@@ -230,7 +226,11 @@ public class HomeFragment extends BaseFragment<WanAndroidListViewModel, Fragment
                     headerBinding.rlBanner.setVisibility(View.GONE);
                 }
                 headerBinding.radioGroup.setVisibility(View.VISIBLE);
-                getHomeArticleList();
+                if (headerBinding.rb1.isChecked()) {
+                    getHomeArticleList();
+                } else {
+                    getHomeProjectList();
+                }
             }
         });
     }
