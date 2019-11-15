@@ -71,7 +71,7 @@ If you have any questions, please write to [the issue][21] of making you don't u
 
 ### Version
 #### V3.1.0（2019-11-15）
- - 1、[优化] 将所有列表展示的地方替换为[ByRecyclerView][28]，支持自带刷新或SwipeRefreshLayout，手动上拉加载更多，添加分割线等
+ - 1、[优化] 将所有列表展示的地方替换为[ByRecyclerView][28]
  - 2、[优化] WebView进度条替换为[WebProgress，使其加载进度平滑过渡。](https://github.com/youlookwhat/WebProgress)
  - 3、[优化] 我的收藏-网址内容倒序显示
  - 4、[修复] 修复了4.4系统状态栏适配问题
