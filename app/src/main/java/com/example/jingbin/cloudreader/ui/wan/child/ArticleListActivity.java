@@ -70,7 +70,10 @@ public class ArticleListActivity extends BaseActivity<WanAndroidListViewModel, F
             bindingView.srlWan.setRefreshing(false);
         }
 
-        if (homeListBean != null) {
+        if (homeListBean != null
+                && homeListBean.getData() != null
+                && homeListBean.getData().getDatas() != null
+                && homeListBean.getData().getDatas().size() > 0) {
             if (viewModel.getPage() == 0) {
                 showContentView();
                 mAdapter.setNewData(homeListBean.getData().getDatas());

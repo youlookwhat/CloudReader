@@ -14,7 +14,6 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
-import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.Menu;
@@ -75,7 +74,6 @@ import io.reactivex.functions.Consumer;
 public class MainActivity extends BaseActivity<MainViewModel, ActivityMainBinding> implements View.OnClickListener {
 
     public static boolean isLaunch;
-    private Toolbar toolbar;
     private ViewPager vpContent;
     private ImageView ivTitleTwo;
     private ImageView ivTitleOne;
