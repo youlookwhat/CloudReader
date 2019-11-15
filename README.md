@@ -54,7 +54,7 @@ If you have any questions, please write to [the issue][21] of making you don't u
 
 
 ## See Detail
-> [项目介绍详情](https://github.com/youlookwhat/CloudReader/blob/master/file/Introduction.md) | [细节优化详情](https://github.com/youlookwhat/CloudReader/wiki) | [**版本更新详情(V2.9.5)**](http://jingbin.me/2016/12/30/%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97-%E4%BA%91%E9%98%85/)
+> [项目介绍详情](https://github.com/youlookwhat/CloudReader/blob/master/file/Introduction.md) | [细节优化详情](https://github.com/youlookwhat/CloudReader/wiki) | [**版本更新详情(V3.1.0)**](http://jingbin.me/2016/12/30/%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97-%E4%BA%91%E9%98%85/)
 
 ### Download
 　[火速跳转](https://fir.im/cloudreader)  
@@ -66,24 +66,31 @@ If you have any questions, please write to [the issue][21] of making you don't u
  - [开发中所遇问题归纳（jar包的具体使用等）][24]
  - [App使用中的常见问题][25]
  - [开源项目CloudReader笔记][26]
+ - [ByRecyclerView-支持自带刷新布局或SwipeRefreshLayout，手动上拉加载更多，添加分割线等][28]
 　
 
 ### Version
+#### V3.1.0（2019-11-15）
+ - 1、[优化] 将所有列表展示的地方替换为[ByRecyclerView][28]，支持自带刷新或SwipeRefreshLayout，手动上拉加载更多，添加分割线等
+ - 2、[优化] WebView进度条替换为[WebProgress，使其加载进度平滑过渡。](https://github.com/youlookwhat/WebProgress)
+ - 3、[优化] 我的收藏-网址内容倒序显示
+ - 4、[修复] 修复了4.4系统状态栏适配问题
+
 #### V3.0.0（2019-09-30）
- - 1、[新增]首页增加公众号栏目
- - 2、[新增]玩安卓增加积分系统模块
- - 3、[新增]赞赏云阅页面(每月后7天开启)
- - 4、[新增]电影详情剧照查看大图使用转场动画
- - 5、[修复]部分文章作者不显示修正
- - 6、[优化]屏蔽网页里的广告
- - 7、[优化]更改收藏图标等ui优化
+ - 1、[新增] 首页增加公众号栏目
+ - 2、[新增] 玩安卓增加积分系统模块
+ - 3、[新增] 赞赏云阅页面(每月后7天开启)
+ - 4、[新增] 电影详情剧照查看大图使用转场动画
+ - 5、[修复] 部分文章作者不显示修正
+ - 6、[优化] 屏蔽网页里的广告
+ - 7、[优化] 更改收藏图标等ui优化
 
 #### V2.9.5（2019-07-18）
- - 1、[新增]首页增加项目分类api
- - 2、[新增]增加历史搜索记录
- - 3、[优化]知识体系页ui改版
- - 4、[优化]导航数据页ui改版
- - 5、[优化]统一TabLayout指示器样式
+ - 1、[新增] 首页增加项目分类api
+ - 2、[新增] 增加历史搜索记录
+ - 3、[优化] 知识体系页ui改版
+ - 4、[优化] 导航数据页ui改版
+ - 5、[优化] 统一TabLayout指示器样式
 
 #### V2.9.1（2019-06-05）
  - 1、[新增] BaseViewModel释放资源
@@ -129,6 +136,7 @@ If you have any questions, please write to [the issue][21] of making you don't u
  - 3、[新增] 可[作为三方浏览器打开外部链接](https://www.jianshu.com/p/272bfb6c0779)
  - 4、[修复] 修复部分兼容性bug
 
+<!-- 
 #### V2.2（12-05）
  - 1、[新增] 进入首页可以获取剪切板的链接
  - 2、[规范] 玩安卓模块mvvm修正
@@ -136,7 +144,6 @@ If you have any questions, please write to [the issue][21] of making you don't u
  - 4、[优化] 电影、书籍和玩安卓首页等item点击效果
  - 5、[修复] 保存图片权限问题、上拉加载逻辑问题
 
-<!-- 
 #### V2.0（10-26）
  - 1、[新增] 知识体系页面
  - 2、[新增] 导航数据页面
@@ -271,7 +278,7 @@ limitations under the License.
 [2]:https://www.apache.org/licenses/LICENSE-2.0.html
 [3]:https://img.shields.io/badge/API-19%2B-red.svg?style=flat
 [4]:https://android-arsenal.com/api?level=19
-[30]:https://img.shields.io/badge/release-3.0.0-red.svg
+[30]:https://img.shields.io/badge/release-3.1.0-red.svg
 [31]:https://github.com/youlookwhat/CloudReader/releases
 [32]:https://img.shields.io/badge/PRs-welcome-brightgreen.svg
 [33]:https://github.com/youlookwhat/CloudReader/pulls
@@ -300,3 +307,4 @@ limitations under the License.
 [25]:http://jingbin.me/2016/12/25/%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98-%E4%BA%91%E9%98%85/
 [26]:https://blog.csdn.net/jingbin_/column/info/34963
 [27]:http://www.wanandroid.com/index
+[28]:https://github.com/youlookwhat/ByRecyclerView
