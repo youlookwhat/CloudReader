@@ -3,6 +3,7 @@ package com.example.jingbin.cloudreader.adapter;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,7 @@ import com.example.jingbin.cloudreader.bean.wanandroid.ArticlesBean;
 import com.example.jingbin.cloudreader.databinding.ItemNavigationContentBinding;
 import com.example.jingbin.cloudreader.databinding.ItemNavigationTitleBinding;
 import com.example.jingbin.cloudreader.utils.CommonUtils;
+import com.example.jingbin.cloudreader.view.StickyView;
 import com.example.jingbin.cloudreader.view.webview.WebViewActivity;
 
 import me.jingbin.library.adapter.BaseByRecyclerViewAdapter;
@@ -30,7 +32,7 @@ public class NavigationContentAdapter extends BaseByRecyclerViewAdapter<Articles
     @Override
     public BaseBindingHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         switch (viewType) {
-            case TYPE_TITLE:
+            case StickyView.TYPE_STICKY_VIEW:
                 return new ViewTitleHolder(parent, R.layout.item_navigation_title);
             case TYPE_CONTENT:
                 return new ViewContentHolder(parent, R.layout.item_navigation_content);
@@ -42,7 +44,7 @@ public class NavigationContentAdapter extends BaseByRecyclerViewAdapter<Articles
     @Override
     public int getItemViewType(int position) {
         if (!TextUtils.isEmpty(getData().get(position).getNavigationName())) {
-            return TYPE_TITLE;
+            return StickyView.TYPE_STICKY_VIEW;
         } else {
             return TYPE_CONTENT;
         }
@@ -93,7 +95,7 @@ public class NavigationContentAdapter extends BaseByRecyclerViewAdapter<Articles
                 if (position == 0) {
                     binding.viewLine.setVisibility(View.GONE);
                 } else {
-                    binding.viewLine.setVisibility(View.VISIBLE);
+                    binding.viewLine.setVisibility(View.GONE);
                 }
             }
         }

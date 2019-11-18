@@ -18,6 +18,7 @@ import com.example.jingbin.cloudreader.base.BaseFragment;
 import com.example.jingbin.cloudreader.bean.wanandroid.ArticlesBean;
 import com.example.jingbin.cloudreader.bean.wanandroid.NaviJsonBean;
 import com.example.jingbin.cloudreader.databinding.FragmentNaviBinding;
+import com.example.jingbin.cloudreader.view.StickyItemDecoration;
 import com.example.jingbin.cloudreader.viewmodel.wan.NavigationViewModel;
 
 import java.util.List;
@@ -78,6 +79,7 @@ public class NavigationFragment extends BaseFragment<NavigationViewModel, Fragme
 
         GridLayoutManager gridLayoutManager = new GridLayoutManager(activity, 6, GridLayoutManager.VERTICAL, false);
         bindingView.xrvNaviDetail.setLayoutManager(gridLayoutManager);
+        bindingView.xrvNaviDetail.addItemDecoration(new StickyItemDecoration());
         mContentAdapter = new NavigationContentAdapter();
         bindingView.xrvNaviDetail.setAdapter(mContentAdapter);
 
