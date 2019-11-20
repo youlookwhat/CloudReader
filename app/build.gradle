@@ -47,6 +47,12 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.release
+            // apk重命名
+            android.applicationVariants.all { variant ->
+                variant.outputs.all {
+                    outputFileName = "${project.name}_${defaultConfig.versionName}_${variant.buildType.name}.apk"
+                }
+            }
         }
         debug {
             minifyEnabled false
