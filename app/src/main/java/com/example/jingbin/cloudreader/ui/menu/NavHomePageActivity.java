@@ -5,13 +5,13 @@ import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
 
 import com.example.jingbin.cloudreader.R;
 import com.example.jingbin.cloudreader.databinding.ActivityNavHomePageBinding;
-import com.example.jingbin.cloudreader.utils.ShareUtils;
+import com.example.jingbin.cloudreader.utils.CommonUtils;
 import com.example.jingbin.cloudreader.utils.StatusBarUtil;
 import com.example.jingbin.cloudreader.utils.ToolbarHelper;
+import com.example.jingbin.cloudreader.view.webview.WebViewActivity;
 
 /**
  * @author jingbin
@@ -29,12 +29,7 @@ public class NavHomePageActivity extends AppCompatActivity {
         ToolbarHelper.initFullBar(binding.detailToolbar, this);
         binding.detailToolbar.setNavigationIcon(null);
 
-        binding.fabShare.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ShareUtils.share(v.getContext(), R.string.string_share_text);
-            }
-        });
+        binding.fabShare.setOnClickListener(v -> WebViewActivity.loadUrl(v.getContext(), CommonUtils.getString(R.string.string_url_cloudreader), "CloudReader"));
     }
 
     public static void startHome(Context mContext) {
