@@ -18,10 +18,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:paddingLeft="8dp"
-        android:paddingTop="8dp"
-        android:paddingRight="8dp"
-        android:paddingBottom="16dp">
+        android:padding="8dp">
 
         <TextView
             android:id="@+id/tv_tree_title"
@@ -35,17 +32,16 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:text="title" />
 
-        <android.support.design.internal.FlowLayout
+        <com.google.android.flexbox.FlexboxLayout
             android:id="@+id/fl_tree"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="15dp"
+            android:layout_marginStart="5dp"
             android:layout_marginTop="10dp"
-            android:layout_marginEnd="10dp"
-            app:itemSpacing="8dp"
+            android:layout_marginEnd="5dp"
+            app:flexWrap="wrap"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_tree_title"
-            app:lineSpacing="8dp" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_tree_title" />
     </android.support.constraint.ConstraintLayout>
 </layout>

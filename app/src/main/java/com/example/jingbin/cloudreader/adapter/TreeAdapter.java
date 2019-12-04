@@ -1,22 +1,29 @@
 package com.example.jingbin.cloudreader.adapter;
 
-import android.text.Html;
+import android.support.annotation.NonNull;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
 
 import com.example.jingbin.cloudreader.R;
 import com.example.jingbin.cloudreader.base.binding.BaseBindingAdapter;
+import com.example.jingbin.cloudreader.base.binding.BaseBindingHolder;
 import com.example.jingbin.cloudreader.bean.wanandroid.TreeItemBean;
 import com.example.jingbin.cloudreader.databinding.ItemTreeBinding;
 import com.example.jingbin.cloudreader.ui.wan.child.CategoryDetailActivity;
+import com.google.android.flexbox.FlexboxLayout;
 
-import java.util.List;
+import java.util.LinkedList;
+import java.util.Queue;
 
 /**
- * Created by jingbin on 2018/09/15.
+ * Created by jingbin on 2019/12/04.
  */
 
 public class TreeAdapter extends BaseBindingAdapter<TreeItemBean, ItemTreeBinding> {
+
+    private LayoutInflater mInflater = null;
+    private Queue<TextView> mFlexItemTextViewCaches = new LinkedList<>();
 
     public int mProjectPosition = 26;
 
@@ -32,29 +39,38 @@ public class TreeAdapter extends BaseBindingAdapter<TreeItemBean, ItemTreeBindin
                 mProjectPosition = position;
             }
             binding.setBean(dataBean);
-            List<TreeItemBean.ChildrenBean> children = dataBean.getChildren();
-            if (children != null && children.size() > 0) {
-                showTreeView(binding.flTree, children, dataBean);
+            for (int i = 0; i < dataBean.getChildren().size(); i++) {
+                TreeItemBean.ChildrenBean childItem = dataBean.getChildren().get(i);
+                TextView child = createOrGetCacheFlexItemTextView(binding.flTree);
+                child.setText(childItem.getName());
+                child.setOnClickListener(v -> CategoryDetailActivity.start(v.getContext(), childItem.getId(), dataBean));
+                binding.flTree.addView(child);
             }
         }
     }
 
-    /**
-     * 显示标签
-     */
-    private void showTreeView(android.support.design.internal.FlowLayout flowLayout, final List<TreeItemBean.ChildrenBean> children, TreeItemBean dataBean) {
-        flowLayout.removeAllViews();
-        for (int i = 0; i < children.size(); i++) {
-            TreeItemBean.ChildrenBean childrenBean = children.get(i);
-            TextView textView = (TextView) View.inflate(flowLayout.getContext(), R.layout.layout_tree_tag, null);
-            textView.setText(Html.fromHtml(childrenBean.getName()));
-            flowLayout.addView(textView);
-            textView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    CategoryDetailActivity.start(view.getContext(), childrenBean.getId(), dataBean);
-                }
-            });
+    @Override
+    public void onViewRecycled(@NonNull BaseBindingHolder<TreeItemBean, ItemTreeBinding> holder) {
+        super.onViewRecycled(holder);
+        FlexboxLayout fbl = holder.getView(R.id.fl_tree);
+        for (int i = 0; i < fbl.getChildCount(); i++) {
+            mFlexItemTextViewCaches.offer((TextView) fbl.getChildAt(i));
         }
+        fbl.removeAllViews();
+    }
+
+    private TextView createOrGetCacheFlexItemTextView(FlexboxLayout fbl) {
+        TextView tv = mFlexItemTextViewCaches.poll();
+        if (tv != null) {
+            return tv;
+        }
+        return createFlexItemTextView(fbl);
+    }
+
+    private TextView createFlexItemTextView(FlexboxLayout fbl) {
+        if (mInflater == null) {
+            mInflater = LayoutInflater.from(fbl.getContext());
+        }
+        return (TextView) mInflater.inflate(R.layout.layout_tree_tag, fbl, false);
     }
 }

@@ -22,7 +22,6 @@ import com.example.jingbin.cloudreader.viewmodel.wan.TreeViewModel;
  * @date 2018/09/15.
  * @description 知识体系
  */
-@Deprecated
 public class TreeFragment extends BaseFragment<TreeViewModel, FragmentWanAndroidBinding> {
 
     private boolean mIsPrepared;
@@ -61,16 +60,14 @@ public class TreeFragment extends BaseFragment<TreeViewModel, FragmentWanAndroid
 
     private void initRefreshView() {
         bindingView.srlWan.setColorSchemeColors(CommonUtils.getColor(R.color.colorTheme));
-        bindingView.srlWan.setOnRefreshListener(() -> bindingView.srlWan.postDelayed(() -> {
-            getTree();
-        }, 150));
+        bindingView.srlWan.setOnRefreshListener(() -> bindingView.srlWan.postDelayed(this::getTree, 150));
         LinearLayoutManager layoutManager = new LinearLayoutManager(activity);
         bindingView.xrvWan.setLayoutManager(layoutManager);
         mTreeAdapter = new TreeAdapter();
         bindingView.xrvWan.setAdapter(mTreeAdapter);
-        HeaderItemTreeBinding oneBinding = DataBindingUtil.inflate(getLayoutInflater(), R.layout.header_item_tree, null, false);
-        bindingView.xrvWan.addHeaderView(oneBinding.getRoot());
-        oneBinding.tvPosition.setOnClickListener(v -> layoutManager.scrollToPositionWithOffset(mTreeAdapter.mProjectPosition + 2, 0));
+//        HeaderItemTreeBinding oneBinding = DataBindingUtil.inflate(getLayoutInflater(), R.layout.header_item_tree, null, false);
+//        bindingView.xrvWan.addHeaderView(oneBinding.getRoot());
+//        oneBinding.tvPosition.setOnClickListener(v -> layoutManager.scrollToPositionWithOffset(mTreeAdapter.mProjectPosition + 2, 0));
     }
 
     @Override
@@ -95,9 +92,7 @@ public class TreeFragment extends BaseFragment<TreeViewModel, FragmentWanAndroid
                         && treeBean.getData() != null
                         && treeBean.getData().size() > 0) {
 
-                    mTreeAdapter.clear();
-                    mTreeAdapter.addAll(treeBean.getData());
-                    mTreeAdapter.notifyDataSetChanged();
+                    mTreeAdapter.setNewData(treeBean.getData());
                     bindingView.xrvWan.loadMoreComplete();
 
                     mIsFirst = false;

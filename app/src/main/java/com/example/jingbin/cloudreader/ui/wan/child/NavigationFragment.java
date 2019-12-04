@@ -112,9 +112,7 @@ public class NavigationFragment extends BaseFragment<NavigationViewModel, Fragme
         viewModel.getDataTitle().observe(this, new Observer<List<NaviJsonBean.DataBean>>() {
             @Override
             public void onChanged(@Nullable List<NaviJsonBean.DataBean> dataBeans) {
-                mNaviAdapter.clear();
-                mNaviAdapter.addAll(dataBeans);
-                mNaviAdapter.notifyDataSetChanged();
+                mNaviAdapter.setNewData(dataBeans);
                 selectItem(0);
             }
         });
@@ -125,10 +123,7 @@ public class NavigationFragment extends BaseFragment<NavigationViewModel, Fragme
                 if (list != null && list.size() > 0) {
                     showContentView();
 
-                    mContentAdapter.clear();
-                    mContentAdapter.addAll(list);
-                    mContentAdapter.notifyDataSetChanged();
-
+                    mContentAdapter.setNewData(list);
                     mIsFirst = false;
                 } else {
                     showError();
@@ -138,7 +133,7 @@ public class NavigationFragment extends BaseFragment<NavigationViewModel, Fragme
     }
 
     private void selectItem(int position) {
-        if (position < 0 || mNaviAdapter.getData().size() < position) {
+        if (position < 0 || mNaviAdapter.getData().size() <= position) {
             return;
         }
         mNaviAdapter.getData().get(currentPosition).setSelected(false);
