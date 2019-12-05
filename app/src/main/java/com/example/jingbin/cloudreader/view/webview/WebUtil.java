@@ -48,6 +48,7 @@ public class WebUtil {
             if (backUrl.startsWith("openapp.jdmobile:")// 京东
                     || backUrl.startsWith("zhihu:")// 知乎
                     || backUrl.startsWith("tbopen:")// 淘宝
+                    || backUrl.startsWith("kaola:")// 考拉
                     || backUrl.startsWith("vipshop:")//
                     || backUrl.startsWith("youku:")//优酷
                     || backUrl.startsWith("uclink:")// UC

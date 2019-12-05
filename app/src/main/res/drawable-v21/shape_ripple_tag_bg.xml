@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ripple xmlns:android="http://schemas.android.com/apk/res/android"
+    android:color="@color/colorTheme">
+
+    <!--背景透明色 android:id="@android:id/mask"-->
+    <item>
+        <shape android:shape="rectangle">
+            <padding
+                android:bottom="5dp"
+                android:left="15dp"
+                android:right="15dp"
+                android:top="5dp" />
+            <solid android:color="@color/color_page_bg" />
+            <corners android:radius="100dp" />
+        </shape>
+    </item>
+
+</ripple>

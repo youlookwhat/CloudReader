@@ -5,7 +5,6 @@
     android:id="@+id/tv_navi_tag"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:background="@drawable/shape_navi_tag"
-    android:foreground="?attr/selectableItemBackgroundBorderless"
+    android:background="@drawable/shape_ripple_tag_bg"
     android:textSize="13sp"
     tools:text="title" />
