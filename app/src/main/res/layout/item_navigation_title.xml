@@ -14,7 +14,6 @@
 
     <android.support.constraint.ConstraintLayout
         android:id="@id/id_by_sticky_item"
-        android:background="@color/colorWhite"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
