@@ -118,4 +118,14 @@ public class DataUtil {
         }
         return arrayList;
     }
+
+    /**
+     * 直接使用html格式化会有性能问题
+     */
+    public static String getHtmlString(String content) {
+        if (content != null && content.contains("&amp;")) {
+            return content.replace("&amp;", "&");
+        }
+        return content;
+    }
 }

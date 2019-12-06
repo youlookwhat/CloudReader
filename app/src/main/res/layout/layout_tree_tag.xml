@@ -5,7 +5,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_margin="4dp"
-    android:background="@drawable/selector_bg_tree_tag"
+    android:background="@drawable/shape_ripple_tag_bg"
     android:textColor="@color/colorTabText"
-    android:textSize="12sp"
+    android:textSize="13sp"
     tools:text="title" />
