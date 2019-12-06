@@ -40,7 +40,7 @@ public abstract class BaseBindingAdapter<T, B extends ViewDataBinding> extends B
         }
 
         @Override
-        protected void onBindingView(T bean, B binding, int position) {
+        protected void onBindingView(BaseBindingHolder holder, B binding, T bean, int position) {
             bindView(bean, binding, position);
         }
     }

@@ -89,7 +89,7 @@ public class EverydayAdapter extends BaseByRecyclerViewAdapter<ArrayList<Android
         }
 
         @Override
-        public void onBindingView(List<AndroidBean> object, ItemEverydayTitleBinding binding, final int position) {
+        protected void onBindingView(BaseBindingHolder holder, ItemEverydayTitleBinding binding, List<AndroidBean> object, int position) {
             int index = 0;
             String title = object.get(0).getType_title();
             binding.tvTitleType.setText(title);
@@ -134,7 +134,7 @@ public class EverydayAdapter extends BaseByRecyclerViewAdapter<ArrayList<Android
         }
 
         @Override
-        public void onBindingView(List<AndroidBean> object, ItemEverydayOneBinding binding, final int position) {
+        protected void onBindingView(BaseBindingHolder holder, ItemEverydayOneBinding binding, List<AndroidBean> object, int position) {
             DensityUtil.formatHeight(binding.ivOnePhoto, width, 2.6f, 1);
             if ("福利".equals(object.get(0).getType())) {
                 binding.tvOnePhotoTitle.setVisibility(View.GONE);
@@ -165,7 +165,7 @@ public class EverydayAdapter extends BaseByRecyclerViewAdapter<ArrayList<Android
         }
 
         @Override
-        public void onBindingView(List<AndroidBean> object, ItemEverydayTwoBinding binding, final int position) {
+        protected void onBindingView(BaseBindingHolder holder, ItemEverydayTwoBinding binding, List<AndroidBean> object, int position) {
             DensityUtil.formatHeight(binding.ivTwoOneOne, imageWidth, 1.75f, 1);
             DensityUtil.formatHeight(binding.ivTwoOneTwo, imageWidth, 1.75f, 1);
             displayRandomImg(2, 0, binding.ivTwoOneOne, object);
@@ -187,7 +187,7 @@ public class EverydayAdapter extends BaseByRecyclerViewAdapter<ArrayList<Android
         }
 
         @Override
-        public void onBindingView(List<AndroidBean> object, ItemEverydayThreeBinding binding, int position) {
+        protected void onBindingView(BaseBindingHolder holder, ItemEverydayThreeBinding binding, List<AndroidBean> object, int position) {
             DensityUtil.formatHeight(binding.ivThreeOneOne, imageWidth, 1, 1);
             DensityUtil.formatHeight(binding.ivThreeOneTwo, imageWidth, 1, 1);
             DensityUtil.formatHeight(binding.ivThreeOneThree, imageWidth, 1, 1);

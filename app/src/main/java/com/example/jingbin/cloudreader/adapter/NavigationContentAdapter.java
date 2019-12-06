@@ -3,7 +3,6 @@ package com.example.jingbin.cloudreader.adapter;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
@@ -89,7 +88,7 @@ public class NavigationContentAdapter extends BaseByRecyclerViewAdapter<Articles
         }
 
         @Override
-        protected void onBindingView(ArticlesBean dataBean, ItemNavigationTitleBinding binding, int position) {
+        protected void onBindingView(BaseBindingHolder holder, ItemNavigationTitleBinding binding, ArticlesBean dataBean, int position) {
             if (dataBean != null) {
                 binding.setBean(dataBean);
                 if (position == 0) {
@@ -109,7 +108,7 @@ public class NavigationContentAdapter extends BaseByRecyclerViewAdapter<Articles
         }
 
         @Override
-        protected void onBindingView(ArticlesBean dataBean, ItemNavigationContentBinding binding, int position) {
+        protected void onBindingView(BaseBindingHolder holder, ItemNavigationContentBinding binding, ArticlesBean dataBean, int position) {
             if (dataBean != null) {
                 binding.setBean(dataBean);
                 binding.tvNaviTag.setTextColor(CommonUtils.randomColor());
