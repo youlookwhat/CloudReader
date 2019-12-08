@@ -6,6 +6,5 @@
     android:layout_height="wrap_content"
     android:layout_margin="4dp"
     android:background="@drawable/shape_ripple_tag_bg"
-    android:textColor="@color/colorTabText"
     android:textSize="13sp"
     tools:text="title" />
