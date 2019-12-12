@@ -59,12 +59,8 @@ public class UpdateBean {
         this.changelog = changelog;
     }
 
-    public long getUpdated_at() {
+    public long getupdatedAt() {
         return updated_at;
-    }
-
-    public void setUpdated_at(int updated_at) {
-        this.updated_at = updated_at;
     }
 
     public String getVersionShort() {
@@ -91,28 +87,16 @@ public class UpdateBean {
         this.installUrl = installUrl;
     }
 
-    public String getInstall_url() {
+    public String getinstallUrl() {
         return install_url;
     }
 
-    public void setInstall_url(String install_url) {
-        this.install_url = install_url;
-    }
-
-    public String getDirect_install_url() {
+    public String getdirectInstallUrl() {
         return direct_install_url;
     }
 
-    public void setDirect_install_url(String direct_install_url) {
-        this.direct_install_url = direct_install_url;
-    }
-
-    public String getUpdate_url() {
+    public String getupdateUrl() {
         return update_url;
-    }
-
-    public void setUpdate_url(String update_url) {
-        this.update_url = update_url;
     }
 
     public BinaryBean getBinary() {

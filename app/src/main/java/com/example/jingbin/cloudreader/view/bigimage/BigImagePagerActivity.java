@@ -46,9 +46,7 @@ public class BigImagePagerActivity extends AppCompatActivity {
     private int mEnterIndex;
 
     private ViewPager mViewPager;
-    private PagerAdapter mPagerAdapter;
     private SparseArray<PhotoView> mPhotoViewMap;
-    private Bundle mTmpReenterState;
 
     public static void startThis(final AppCompatActivity activity, List<View> imageViews, List<String> imageUrls, int enterIndex) {
         Intent intent = new Intent(activity, BigImagePagerActivity.class);
@@ -116,7 +114,21 @@ public class BigImagePagerActivity extends AppCompatActivity {
 
 
         mPhotoViewMap = new SparseArray<>();
-        mPagerAdapter = new PagerAdapter() {
+        //                imageView.setLayoutParams(new ViewGroup.LayoutParams(
+        //                        ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+        //                    View view = getLayoutInflater().inflate(R.layout.dialog_save_image, null);
+        //
+        //                    AlertDialog alertDialog = new AlertDialog.Builder(BigImagePagerActivity.this)
+        //                            .setView(view)
+        //                            .create();
+        //
+        //                    TextView textView = (TextView) view.findViewById(R.id.save_image_tv);
+        //                    textView.setOnClickListener(v1 -> {
+        //                        saveImage(pv.getDrawable(), imageUrl);
+        //                        alertDialog.dismiss();
+        //                    });
+        //                    alertDialog.show();
+        PagerAdapter mPagerAdapter = new PagerAdapter() {
             @Override
             public int getCount() {
                 return mImageUrls.size();
@@ -124,7 +136,7 @@ public class BigImagePagerActivity extends AppCompatActivity {
 
             @Override
             public boolean isViewFromObject(@NonNull View view, @NonNull Object object) {
-                return view == object;
+                return view.equals(object);
             }
 
             @NonNull
@@ -236,7 +248,7 @@ public class BigImagePagerActivity extends AppCompatActivity {
     @Override
     public void onActivityReenter(int resultCode, Intent data) {
         super.onActivityReenter(resultCode, data);
-        mTmpReenterState = data.getExtras();
+        Bundle mTmpReenterState = data.getExtras();
     }
 
     public void setStartPostTransition(final View sharedView) {
@@ -254,17 +266,8 @@ public class BigImagePagerActivity extends AppCompatActivity {
                 });
     }
 
-
-    private Disposable mDisposable;
-
-    private void dispose() {
-        if (mDisposable != null && !mDisposable.isDisposed())
-            mDisposable.dispose();
-    }
-
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        dispose();
     }
 }

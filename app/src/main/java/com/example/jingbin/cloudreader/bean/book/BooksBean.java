@@ -51,16 +51,8 @@ public class BooksBean extends BaseObservable implements Serializable{
     private String subtitle;
     @ParamNames("pubdate")
     private String pubdate;
-    @ParamNames("origin_title")
-    private String origin_title;
     @ParamNames("image")
     private String image;
-    @ParamNames("binding")
-    private String binding;
-    @ParamNames("catalog")
-    private String catalog;
-    @ParamNames("pages")
-    private String pages;
     @ParamNames("images")
     private ImagesBean images;
     @ParamNames("alt")
@@ -73,18 +65,8 @@ public class BooksBean extends BaseObservable implements Serializable{
     private String title;
     @ParamNames("url")
     private String url;
-    @ParamNames("author_intro")
-    private String author_intro;
-    @ParamNames("summary")
-    private String summary;
-    @ParamNames("price")
-    private String price;
     @ParamNames("author")
     private List<String> author;
-    @ParamNames("tags")
-    private List<TagsBean> tags;
-    @ParamNames("translator")
-    private List<String> translator;// 翻译
 
 
     public static class RatingBean extends BaseObservable implements Serializable{

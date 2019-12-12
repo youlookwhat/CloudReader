@@ -10,18 +10,12 @@ import android.webkit.JavascriptInterface;
  * js通信接口
  */
 public class ImageClickInterface {
-    private Context context;
 
     public ImageClickInterface(Context context) {
-        this.context = context;
     }
 
     @JavascriptInterface
     public void imageClick(String imgUrl, String hasLink) {
-//        Toast.makeText(context, "----点击了图片", Toast.LENGTH_SHORT).show();
-        // 查看大图
-//        Intent intent = new Intent(context, ViewBigImageActivity.class);
-//        context.startActivity(intent);
         Log.e("----点击了图片 url: ", "" + imgUrl);
     }
 

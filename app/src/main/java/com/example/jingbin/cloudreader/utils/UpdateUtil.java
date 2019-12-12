@@ -50,7 +50,7 @@ public class UpdateUtil {
                         builder.setTitle("发现新版本")
                                 .setMessage(String.format("版本号: %s\n更新时间: %s\n更新内容:\n%s",
                                         updateBean.getVersionShort(),
-                                        TimeUtil.formatDataTime(Long.valueOf(updateBean.getUpdated_at() + "000")),
+                                        TimeUtil.formatDataTime(Long.valueOf(updateBean.getupdatedAt() + "000")),
                                         updateBean.getChangelog()));
                         builder.setNegativeButton("取消", null);
                         builder.setPositiveButton("立即下载", (dialogInterface, i) -> BaseTools.openLink(activity, updateBean.getInstallUrl()));
