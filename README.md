@@ -4,7 +4,8 @@
 [![fir.im][34]][35] 
 [![Release Version][30]][31]
 [![API][3]][4]
-[![PRs Welcome][32]][33]
+[![Codacy Badge][36]][37]
+
 
 > Netease cloud music Ui && Retrofit2 + RxJava2 + MVVM-databinding && wanandroid、Gank.Io、mtime Api 
 
@@ -38,19 +39,19 @@ If you have any questions, please write to [the issue][21] of making you don't u
 * 1、基本遵循Google Material Design设计风格。                                    
 * 2、玩安卓、干货集中营与时光网电影内容。
 * 3、MvvM-DataBinding的项目应用。                                    
-* 4、``NavigationView``搭配``DrawerLayout``的具体使用。                                    
+* 4、`NavigationView`搭配`DrawerLayout`的具体使用。                                    
 * 5、透明状态栏使用与版本适配。                                    
 * 6、高仿网易云音乐歌单详情页。                                    
 * 7、RxBus代替EventBus进行组件之间通讯。                                    
-* 8、``ToolBar``的全方面使用。                                    
-* 9、``Glide``加载监听，获取缓存，圆形图片，高斯模糊。                                    
+* 8、`ToolBar`的全方面使用。                                    
+* 9、`Glide`加载监听，获取缓存，圆形图片，高斯模糊。                                    
 * 10、水波纹点击效果详细使用与适配。                                    
-* 11、``Room``的基本使用。
-* 12、基于``DataBinding``的``ViewHolder``。                                    
-* 13、基于``DataBinding``的``BaseActivity``和``BaseFragment``。                                    
-* 14、``Fragment``懒加载模式。                                    
-* 15、``SwipeRefreshLayout``结合``RecyclerView``下拉刷新上拉加载。                                    
-* 16、``CoordinatorLayout``+``Behavior``实现标题栏渐变和滑动置顶。                                                                       
+* 11、`Room`的基本使用。
+* 12、基于`DataBinding`的`ViewHolder`。                                    
+* 13、基于`DataBinding`的`BaseActivity`和`BaseFragment`。                                    
+* 14、`Fragment`懒加载模式。                                    
+* 15、`SwipeRefreshLayout`结合`RecyclerView`下拉刷新上拉加载。                                    
+* 16、`CoordinatorLayout`+``Behavior`实现标题栏渐变和滑动置顶。                                                                       
 
 
 ## See Detail
@@ -284,6 +285,8 @@ limitations under the License.
 [33]:https://github.com/youlookwhat/CloudReader/pulls
 [34]:https://img.shields.io/badge/download-fir.im-blue.svg
 [35]:https://fir.im/cloudreader
+[36]:https://api.codacy.com/project/badge/Grade/1045e902e1294badaf783a640869c208?isInternal=true
+[37]:https://app.codacy.com/manual/youlookwhat/CloudReader/files?bid=14239237
 
 [5]:http://jingbin.me/2017/11/23/%E5%BC%80%E5%8F%91%E4%B8%AD%E6%89%80%E9%81%87%E9%97%AE%E9%A2%98%E5%BD%92%E7%BA%B3/
 [6]:http://www.iconfont.cn/plus
