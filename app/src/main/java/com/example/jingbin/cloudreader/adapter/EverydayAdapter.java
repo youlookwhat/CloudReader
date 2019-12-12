@@ -54,7 +54,7 @@ public class EverydayAdapter extends BaseByRecyclerViewAdapter<ArrayList<Android
 
     @Override
     public int getItemViewType(int position) {
-        if (!TextUtils.isEmpty(getData().get(position).get(0).getType_title())) {
+        if (!TextUtils.isEmpty(getData().get(position).get(0).gettypeTitle())) {
             return TYPE_TITLE;
         } else if (getData().get(position).size() == 1) {
             return TYPE_ONE;
@@ -91,7 +91,7 @@ public class EverydayAdapter extends BaseByRecyclerViewAdapter<ArrayList<Android
         @Override
         protected void onBindingView(BaseBindingHolder holder, ItemEverydayTitleBinding binding, List<AndroidBean> object, int position) {
             int index = 0;
-            String title = object.get(0).getType_title();
+            String title = object.get(0).gettypeTitle();
             binding.tvTitleType.setText(title);
             if ("Android".equals(title)) {
                 index = 0;
@@ -208,8 +208,8 @@ public class EverydayAdapter extends BaseByRecyclerViewAdapter<ArrayList<Android
     }
 
     private void displayRandomImg(int imgNumber, int position, ImageView imageView, List<AndroidBean> object) {
-//        DebugUtil.error("-----Image_url: "+object.get(position).getImage_url());
-        GlideUtil.displayRandom(imgNumber, object.get(position).getImage_url(), imageView);
+//        DebugUtil.error("-----Image_url: "+object.get(position).getImageUrl());
+        GlideUtil.displayRandom(imgNumber, object.get(position).getImageUrl(), imageView);
     }
 
 

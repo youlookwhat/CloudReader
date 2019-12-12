@@ -41,7 +41,7 @@ public class AndroidBean implements Serializable {
     @ParamNames("images")
     private List<String> images;
 
-    public String get_id() {
+    public String getId() {
         return _id;
     }
 
@@ -81,16 +81,12 @@ public class AndroidBean implements Serializable {
         return images;
     }
 
-    public String getType_title() {
+    public String gettypeTitle() {
         return type_title;
     }
 
-    public void setType_title(String type_title) {
+    public void settypeTitle(String type_title) {
         this.type_title = type_title;
-    }
-
-    public void set_id(String _id) {
-        this._id = _id;
     }
 
     public void setCreatedAt(String createdAt) {
@@ -129,11 +125,11 @@ public class AndroidBean implements Serializable {
         this.images = images;
     }
 
-    public void setImage_url(String image_url) {
+    public void setimageUrl(String image_url) {
         this.image_url = image_url;
     }
 
-    public String getImage_url() {
+    public String getImageUrl() {
         return image_url;
     }
 }

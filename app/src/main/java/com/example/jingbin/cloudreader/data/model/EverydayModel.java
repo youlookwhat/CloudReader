@@ -151,7 +151,7 @@ public class EverydayModel {
     private void addUrlList(List<List<AndroidBean>> lists, List<AndroidBean> arrayList, String typeTitle) {
         // title
         AndroidBean bean = new AndroidBean();
-        bean.setType_title(typeTitle);
+        bean.settypeTitle(typeTitle);
         ArrayList<AndroidBean> androidBeen = new ArrayList<>();
         androidBeen.add(bean);
         lists.add(androidBeen);
@@ -189,13 +189,13 @@ public class EverydayModel {
         androidBean.setUrl(arrayList.get(i).getUrl());
         // 随机图的url
         if (i < 3) {
-            androidBean.setImage_url(ConstantsImageUrl.HOME_SIX_URLS[getRandom(3)]);//三小图
+            androidBean.setimageUrl(ConstantsImageUrl.HOME_SIX_URLS[getRandom(3)]);//三小图
         } else if (androidSize == 4) {
-            androidBean.setImage_url(ConstantsImageUrl.HOME_ONE_URLS[getRandom(1)]);//一图
+            androidBean.setimageUrl(ConstantsImageUrl.HOME_ONE_URLS[getRandom(1)]);//一图
         } else if (androidSize == 5) {
-            androidBean.setImage_url(ConstantsImageUrl.HOME_TWO_URLS[getRandom(2)]);//两图
+            androidBean.setimageUrl(ConstantsImageUrl.HOME_TWO_URLS[getRandom(2)]);//两图
         } else if (androidSize >= 6) {
-            androidBean.setImage_url(ConstantsImageUrl.HOME_SIX_URLS[getRandom(3)]);//三小图
+            androidBean.setimageUrl(ConstantsImageUrl.HOME_SIX_URLS[getRandom(3)]);//三小图
         }
         return androidBean;
     }
@@ -214,11 +214,11 @@ public class EverydayModel {
 //            DebugUtil.error("---androidSize:  " + androidSize);
             // 随机图的url
             if (androidSize == 1) {
-                androidBean.setImage_url(ConstantsImageUrl.HOME_ONE_URLS[getRandom(1)]);//一图
+                androidBean.setimageUrl(ConstantsImageUrl.HOME_ONE_URLS[getRandom(1)]);//一图
             } else if (androidSize == 2) {
-                androidBean.setImage_url(ConstantsImageUrl.HOME_TWO_URLS[getRandom(2)]);//两图
+                androidBean.setimageUrl(ConstantsImageUrl.HOME_TWO_URLS[getRandom(2)]);//两图
             } else if (androidSize == 3) {
-                androidBean.setImage_url(ConstantsImageUrl.HOME_SIX_URLS[getRandom(3)]);//三图
+                androidBean.setimageUrl(ConstantsImageUrl.HOME_SIX_URLS[getRandom(3)]);//三图
             }
             tempList.add(androidBean);
         }

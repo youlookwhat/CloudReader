@@ -248,7 +248,6 @@ public class BigImagePagerActivity extends AppCompatActivity {
     @Override
     public void onActivityReenter(int resultCode, Intent data) {
         super.onActivityReenter(resultCode, data);
-        Bundle mTmpReenterState = data.getExtras();
     }
 
     public void setStartPostTransition(final View sharedView) {

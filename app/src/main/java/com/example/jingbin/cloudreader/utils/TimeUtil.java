@@ -11,58 +11,11 @@ import java.util.Date;
 
 public class TimeUtil {
 
-    /**
-     * 准备第一个模板，从字符串中提取出日期数字
-     */
-    private static String pat1 = "yyyy-MM-dd HH:mm:ss";
-    /**
-     * 准备第二个模板，将提取后的日期数字变为指定的格式
-     */
-    private static String pat2 = "yyyy年MM月dd日 HH:mm:ss";
-    /**
-     * 实例化模板对象
-     */
-    private static SimpleDateFormat sdf1 = new SimpleDateFormat(pat1);
-    private static SimpleDateFormat sdf2 = new SimpleDateFormat(pat2);
     private static long timeMilliseconds;
-
-    public static Long farmatTime(String string) {
-        Date date = null;
-        try {
-            SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-            date = Date(sf.parse(string));
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        return date.getTime();
-    }
-
-    public static Date Date(Date date) {
-        Date datetimeDate;
-        datetimeDate = new Date(date.getTime());
-        return datetimeDate;
-    }
-
-    public static Date Dates() {
-        Date datetimeDate;
-        Long dates = 1361515285070L;
-        datetimeDate = new Date(dates);
-        return datetimeDate;
-    }
-
-    public static Date Date() {
-        Date datetimeDate;
-        Long dates = 1361514787384L;
-        datetimeDate = new Date(dates);
-        return datetimeDate;
-    }
 
     /**
      * 如果在1分钟之内发布的显示"刚刚" 如果在1个小时之内发布的显示"XX分钟之前" 如果在1天之内发布的显示"XX小时之前"
      * 如果在今年的1天之外的只显示“月-日”，例如“05-03” 如果不是今年的显示“年-月-日”，例如“2014-03-11”
-     *
-     * @param time
-     * @return
      */
     public static String getTranslateTime(String time) {
         if (TextUtils.isEmpty(time)) {
@@ -187,23 +140,6 @@ public class TimeUtil {
     }
 
     /**
-     * 比较日期与当前日期的大小
-     */
-    public static boolean DateCompare(String s1) throws ParseException {
-        //设定时间的模板
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        //得到指定模范的时间
-        Date d1 = sdf.parse(s1);
-        Date d2 = sdf.parse(getData());
-        //比较
-        if (((d1.getTime() - d2.getTime()) / (24 * 3600 * 1000)) >= 1) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    /**
      * 获取当月的 天数
      */
     public static int getCurrentMonthDay() {
@@ -212,6 +148,7 @@ public class TimeUtil {
         a.roll(Calendar.DATE, -1);
         return a.get(Calendar.DATE);
     }
+
     /**
      * 获取当前月份的第几天
      */

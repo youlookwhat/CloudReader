@@ -35,7 +35,6 @@ public class BookAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     public static final int LOAD_PULL_TO = 1;
     public static final int LOAD_NONE = 2;
     private static final int LOAD_END = 3;
-    private static final int TYPE_TOP = -1;
 
     private static final int TYPE_FOOTER_BOOK = -2;
     private static final int TYPE_HEADER_BOOK = -3;
@@ -56,7 +55,7 @@ public class BookAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         } else if (position + 1 == getItemCount()) {
             return TYPE_FOOTER_BOOK;
         } else {
-            return TYPE_CONTENT_BOOK ;
+            return TYPE_CONTENT_BOOK;
         }
     }
 
@@ -88,7 +87,7 @@ public class BookAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             if (list != null && list.size() > 0) {
                 // 内容从"1"开始
 //                DebugUtil.error("------position: "+position);
-                bookViewHolder.bindItem(list.get(position - 1), position-1);
+                bookViewHolder.bindItem(list.get(position - 1));
             }
         }
     }
@@ -153,7 +152,7 @@ public class BookAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
      */
     private class FooterViewHolder extends RecyclerView.ViewHolder {
 
-        FooterItemBookBinding mBindFooter;
+        private FooterItemBookBinding mBindFooter;
 
         FooterViewHolder(View itemView) {
             super(itemView);
@@ -181,6 +180,7 @@ public class BookAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                     break;
                 case LOAD_END:
                     itemView.setVisibility(View.GONE);
+                    break;
                 default:
                     break;
             }
@@ -190,7 +190,7 @@ public class BookAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private class HeaderViewHolder extends RecyclerView.ViewHolder {
 
-        HeaderItemBookBinding mBindBook;
+        private HeaderItemBookBinding mBindBook;
 
         HeaderViewHolder(View view) {
             super(view);
@@ -208,7 +208,7 @@ public class BookAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         notifyDataSetChanged();
     }
 
-    public int getLoadStatus(){
+    public int getLoadStatus() {
         return this.status;
     }
 
@@ -222,14 +222,14 @@ public class BookAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             mBindBook = DataBindingUtil.getBinding(view);
         }
 
-        private void bindItem(final BooksBean book, int position) {
+        private void bindItem(final BooksBean book) {
             mBindBook.setBean(book);
             mBindBook.executePendingBindings();
 
             mBindBook.llItemTop.setOnClickListener(new PerfectClickListener() {
                 @Override
                 protected void onNoDoubleClick(View v) {
-                    BookDetailActivity.start(context,book,mBindBook.ivTopPhoto);
+                    BookDetailActivity.start(context, book, mBindBook.ivTopPhoto);
                 }
             });
 
