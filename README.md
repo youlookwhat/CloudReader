@@ -286,7 +286,7 @@ limitations under the License.
 [34]:https://img.shields.io/badge/download-fir.im-blue.svg
 [35]:https://fir.im/cloudreader
 [36]:https://api.codacy.com/project/badge/Grade/1045e902e1294badaf783a640869c208?isInternal=true
-[37]:https://app.codacy.com/manual/youlookwhat/CloudReader/files?bid=14239237
+[37]:https://app.codacy.com/manual/youlookwhat/CloudReader/dashboard?bid=14239237
 
 [5]:http://jingbin.me/2017/11/23/%E5%BC%80%E5%8F%91%E4%B8%AD%E6%89%80%E9%81%87%E9%97%AE%E9%A2%98%E5%BD%92%E7%BA%B3/
 [6]:http://www.iconfont.cn/plus
