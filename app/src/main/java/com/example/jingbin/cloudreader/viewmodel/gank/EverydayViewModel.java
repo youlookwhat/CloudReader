@@ -171,9 +171,7 @@ public class EverydayViewModel extends BaseViewModel {
                             //获取所有图片
                             mBannerImages.add(result.get(i).getRandpic());
                         }
-                        maCache.remove(Constants.BANNER_PIC);
                         maCache.put(Constants.BANNER_PIC, mBannerImages);
-                        maCache.remove(Constants.BANNER_PIC_DATA);
                         maCache.put(Constants.BANNER_PIC_DATA, result);
                         bannerDataBean.setData(mBannerImages, result);
 

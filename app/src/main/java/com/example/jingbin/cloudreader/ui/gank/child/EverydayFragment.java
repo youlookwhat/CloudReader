@@ -2,6 +2,7 @@ package com.example.jingbin.cloudreader.ui.gank.child;
 
 import android.animation.ValueAnimator;
 import android.arch.lifecycle.Observer;
+import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -12,7 +13,12 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.LinearInterpolator;
 import android.view.animation.RotateAnimation;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.example.jingbin.cloudreader.R;
 import com.example.jingbin.cloudreader.adapter.EverydayAdapter;
 import com.example.jingbin.cloudreader.base.BaseFragment;
@@ -25,11 +31,16 @@ import com.example.jingbin.cloudreader.http.rx.RxBusBaseMessage;
 import com.example.jingbin.cloudreader.http.rx.RxCodeConstants;
 import com.example.jingbin.cloudreader.utils.DensityUtil;
 import com.example.jingbin.cloudreader.utils.GlideImageLoader;
+import com.example.jingbin.cloudreader.utils.GlideUtil;
 import com.example.jingbin.cloudreader.utils.PerfectClickListener;
 import com.example.jingbin.cloudreader.view.webview.WebViewActivity;
 import com.example.jingbin.cloudreader.viewmodel.gank.EverydayViewModel;
 
 import java.util.ArrayList;
+
+import me.jingbin.sbanner.config.OnBannerClickListener;
+import me.jingbin.sbanner.holder.BannerViewHolder;
+import me.jingbin.sbanner.holder.HolderCreator;
 
 import static com.example.jingbin.cloudreader.viewmodel.gank.EverydayViewModel.getTodayTime;
 
@@ -116,15 +127,41 @@ public class EverydayFragment extends BaseFragment<EverydayViewModel, FragmentEv
             @Override
             public void onChanged(@Nullable EverydayViewModel.BannerDataBean bean) {
                 if (bean != null && bean.getImageUrls() != null && bean.getImageUrls().size() > 0) {
-                    mHeaderBinding.banner.setImages(bean.getImageUrls()).setImageLoader(new GlideImageLoader()).start();
-                    ArrayList<BannerItemBean> list = bean.getList();
-                    if (list != null && list.size() > 0) {
-                        mHeaderBinding.banner.setOnBannerListener(position -> {
-                            if (!TextUtils.isEmpty(list.get(position).getCode()) && list.get(position).getCode().startsWith("http")) {
-                                WebViewActivity.loadUrl(getContext(), list.get(position).getCode(), "加载中...");
+                    mHeaderBinding.banner
+                            .setAutoPlay(true)
+                            .setOffscreenPageLimit(bean.getImageUrls().size())
+                            .setPages(bean.getImageUrls(), new HolderCreator<BannerViewHolder>() {
+                                @Override
+                                public BannerViewHolder createViewHolder() {
+                                    return new BannerViewHolder<String>() {
+                                        private ImageView imageView;
+
+                                        @Override
+                                        public View createView(Context context) {
+                                            View view = LayoutInflater.from(context).inflate(R.layout.item_banner_wanandroid, null);
+                                            imageView = (ImageView) view.findViewById(R.id.iv_banner);
+                                            return view;
+                                        }
+
+                                        @Override
+                                        public void onBind(Context context, int position, String data) {
+                                            DensityUtil.formatHeight(imageView, DensityUtil.getDisplayWidth(), 2.5f, 3);
+                                            GlideUtil.displayEspImage(data, imageView, 3);
+                                        }
+                                    };
+                                }
+                            }).start();
+                    mHeaderBinding.banner.setOnBannerClickListener(new OnBannerClickListener() {
+                        @Override
+                        public void onBannerClick(int position) {
+                            if (bean.getList() != null
+                                    && bean.getList().size() > 0
+                                    && !TextUtils.isEmpty(bean.getList().get(position).getCode())
+                                    && bean.getList().get(position).getCode().startsWith("http")) {
+                                WebViewActivity.loadUrl(getContext(), bean.getList().get(position).getCode(), "加载中...");
                             }
-                        });
-                    }
+                        }
+                    });
                     isLoadBanner = true;
                 }
             }
@@ -222,4 +259,9 @@ public class EverydayFragment extends BaseFragment<EverydayViewModel, FragmentEv
         viewModel.loadData();
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        mHeaderBinding.banner.stopAutoPlay();
+    }
 }
