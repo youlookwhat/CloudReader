@@ -1,16 +1,10 @@
 package com.example.jingbin.cloudreader.view.webview.config;
 
-import android.app.Activity;
-import android.content.Intent;
-import android.net.Uri;
 import android.text.TextUtils;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
-import com.example.jingbin.cloudreader.utils.BaseTools;
 import com.example.jingbin.cloudreader.utils.CheckNetwork;
-import com.example.jingbin.cloudreader.utils.DebugUtil;
-import com.example.jingbin.cloudreader.view.webview.WebUtil;
 import com.example.jingbin.cloudreader.view.webview.WebViewActivity;
 
 

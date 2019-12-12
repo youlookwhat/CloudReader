@@ -2,12 +2,9 @@ package com.example.jingbin.cloudreader.ui.menu;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Toast;
 
 import com.example.jingbin.cloudreader.R;
 import com.example.jingbin.cloudreader.base.BaseActivity;
@@ -18,8 +15,6 @@ import com.example.jingbin.cloudreader.utils.PerfectClickListener;
 import com.example.jingbin.cloudreader.utils.ToastUtil;
 import com.example.jingbin.cloudreader.view.webview.WebViewActivity;
 import com.example.jingbin.cloudreader.viewmodel.menu.NoViewModel;
-
-import java.util.List;
 
 /**
  * @author jingbin

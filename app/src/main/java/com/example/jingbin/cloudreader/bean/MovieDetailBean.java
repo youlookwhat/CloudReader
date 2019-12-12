@@ -48,27 +48,13 @@ public class MovieDetailBean extends BaseObservable {
      */
 
     private RatingBean rating;
-    private int reviews_count;
-    private int wish_count;
-    private String douban_site;
     private String year;
     private ImagesBean images;
     private String alt;
     private String id;
-    private String mobile_url;
     private String title;
-    private int do_count;
-    private String share_url;
-    private int seasons_count;
-    private String schedule_url;
-    private int episodes_count;
-    private int collect_count;
-    private String current_season;
-    private String original_title;
     private String summary;
     private String subtype;
-    private int comments_count;
-    private int ratings_count;
     private List<String> countries;
     private List<String> genres;
     private List<PersonBean> casts;

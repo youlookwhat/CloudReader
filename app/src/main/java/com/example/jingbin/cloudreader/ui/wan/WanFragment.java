@@ -8,7 +8,6 @@ import com.example.jingbin.cloudreader.R;
 import com.example.jingbin.cloudreader.base.BaseFragment;
 import com.example.jingbin.cloudreader.databinding.FragmentContentBinding;
 import com.example.jingbin.cloudreader.ui.wan.child.HomeFragment;
-import com.example.jingbin.cloudreader.ui.wan.child.KnowledgeTreeFragment;
 import com.example.jingbin.cloudreader.ui.wan.child.NavigationFragment;
 import com.example.jingbin.cloudreader.ui.wan.child.TreeFragment;
 import com.example.jingbin.cloudreader.ui.wan.child.WxArticleFragment;

@@ -10,20 +10,14 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.text.TextUtils;
-import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
-import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
 
 import com.example.jingbin.cloudreader.app.App;
 
-import java.lang.reflect.Field;
-import java.text.DecimalFormat;
-import java.text.NumberFormat;
 import java.util.List;
-import java.util.Locale;
 
 /**
  * Created by jingbin on 2017/2/13.
@@ -89,7 +83,7 @@ public class BaseTools {
      */
     public static String getClipContent() {
         ClipboardManager manager = (ClipboardManager) App.getInstance().getSystemService(Context.CLIPBOARD_SERVICE);
-        if (manager != null) {
+        if (manager != null && manager.getPrimaryClip() != null) {
             if (manager.hasPrimaryClip() && manager.getPrimaryClip().getItemCount() > 0) {
                 CharSequence addedText = manager.getPrimaryClip().getItemAt(0).getText();
                 String addedTextString = String.valueOf(addedText);

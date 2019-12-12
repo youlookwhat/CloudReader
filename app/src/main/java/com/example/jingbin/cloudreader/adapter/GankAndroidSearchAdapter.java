@@ -18,8 +18,6 @@ import com.example.jingbin.cloudreader.view.webview.WebViewActivity;
 
 public class GankAndroidSearchAdapter extends BaseBindingAdapter<GankIoDataBean.ResultBean, ItemAndroidBinding> {
 
-    private CollectModel model;
-    private Activity activity;
     private boolean isAll = false;
 
     public void setAllType(boolean isAll) {
@@ -28,8 +26,6 @@ public class GankAndroidSearchAdapter extends BaseBindingAdapter<GankIoDataBean.
 
     public GankAndroidSearchAdapter(Activity activity) {
         super(R.layout.item_android);
-        model = new CollectModel();
-        this.activity = activity;
     }
 
     @Override

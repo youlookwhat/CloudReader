@@ -8,16 +8,11 @@ import android.support.annotation.NonNull;
 import com.example.jingbin.cloudreader.base.BaseViewModel;
 import com.example.jingbin.cloudreader.bean.wanandroid.BaseResultBean;
 import com.example.jingbin.cloudreader.bean.wanandroid.CoinUserInfoBean;
-import com.example.jingbin.cloudreader.bean.wanandroid.DuanZiBean;
 import com.example.jingbin.cloudreader.data.UserUtil;
 import com.example.jingbin.cloudreader.data.impl.OnUserInfoListener;
-import com.example.jingbin.cloudreader.data.model.JokeModel;
-import com.example.jingbin.cloudreader.data.room.Injection;
 import com.example.jingbin.cloudreader.data.room.User;
 import com.example.jingbin.cloudreader.http.HttpClient;
 import com.example.jingbin.cloudreader.utils.DataUtil;
-
-import java.util.List;
 
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
@@ -46,7 +41,8 @@ public class MainViewModel extends BaseViewModel {
             @Override
             public void onSuccess(User user) {
                 if (user != null) {
-                    execute(HttpClient.Builder.getWanAndroidServer().getCoinUserInfo(), new Observer<BaseResultBean<CoinUserInfoBean>>() {
+                    execute(HttpClient.Builder.getWanAndroidServer().getCoinUserInfo(),
+                            new Observer<BaseResultBean<CoinUserInfoBean>>() {
                         @Override
                         public void onSubscribe(Disposable d) {
                             addDisposable(d);
