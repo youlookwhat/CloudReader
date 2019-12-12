@@ -86,36 +86,6 @@ public class MovieDetailBean extends BaseObservable {
     }
 
     @Bindable
-    public int getReviews_count() {
-        return reviews_count;
-    }
-
-    public void setReviews_count(int reviews_count) {
-        this.reviews_count = reviews_count;
-        notifyPropertyChanged(BR.reviews_count);
-    }
-
-    @Bindable
-    public int getWish_count() {
-        return wish_count;
-    }
-
-    public void setWish_count(int wish_count) {
-        this.wish_count = wish_count;
-        notifyPropertyChanged(BR.wish_count);
-    }
-
-    @Bindable
-    public String getDouban_site() {
-        return douban_site;
-    }
-
-    public void setDouban_site(String douban_site) {
-        this.douban_site = douban_site;
-        notifyPropertyChanged(BR.douban_site);
-    }
-
-    @Bindable
     public String getYear() {
         return year;
     }
@@ -156,16 +126,6 @@ public class MovieDetailBean extends BaseObservable {
     }
 
     @Bindable
-    public String getMobile_url() {
-        return mobile_url;
-    }
-
-    public void setMobile_url(String mobile_url) {
-        this.mobile_url = mobile_url;
-        notifyPropertyChanged(BR.mobile_url);
-    }
-
-    @Bindable
     public String getTitle() {
         return title;
     }
@@ -173,86 +133,6 @@ public class MovieDetailBean extends BaseObservable {
     public void setTitle(String title) {
         this.title = title;
         notifyPropertyChanged(BR.title);
-    }
-
-    @Bindable
-    public int getDo_count() {
-        return do_count;
-    }
-
-    public void setDo_count(int do_count) {
-        this.do_count = do_count;
-        notifyPropertyChanged(BR.do_count);
-    }
-
-    @Bindable
-    public String getShare_url() {
-        return share_url;
-    }
-
-    public void setShare_url(String share_url) {
-        this.share_url = share_url;
-        notifyPropertyChanged(BR.share_url);
-    }
-
-    @Bindable
-    public int getSeasons_count() {
-        return seasons_count;
-    }
-
-    public void setSeasons_count(int seasons_count) {
-        this.seasons_count = seasons_count;
-        notifyPropertyChanged(BR.seasons_count);
-    }
-
-    @Bindable
-    public String getSchedule_url() {
-        return schedule_url;
-    }
-
-    public void setSchedule_url(String schedule_url) {
-        this.schedule_url = schedule_url;
-        notifyPropertyChanged(BR.schedule_url);
-    }
-
-    @Bindable
-    public int getEpisodes_count() {
-        return episodes_count;
-    }
-
-    public void setEpisodes_count(int episodes_count) {
-        this.episodes_count = episodes_count;
-        notifyPropertyChanged(BR.episodes_count);
-    }
-
-    @Bindable
-    public int getCollect_count() {
-        return collect_count;
-    }
-
-    public void setCollect_count(int collect_count) {
-        this.collect_count = collect_count;
-        notifyPropertyChanged(BR.collect_count);
-    }
-
-    @Bindable
-    public String getCurrent_season() {
-        return current_season;
-    }
-
-    public void setCurrent_season(String current_season) {
-        this.current_season = current_season;
-        notifyPropertyChanged(BR.current_season);
-    }
-
-    @Bindable
-    public String getOriginal_title() {
-        return original_title;
-    }
-
-    public void setOriginal_title(String original_title) {
-        this.original_title = original_title;
-        notifyPropertyChanged(BR.original_title);
     }
 
     @Bindable
@@ -273,26 +153,6 @@ public class MovieDetailBean extends BaseObservable {
     public void setSubtype(String subtype) {
         this.subtype = subtype;
         notifyPropertyChanged(BR.subtype);
-    }
-
-    @Bindable
-    public int getComments_count() {
-        return comments_count;
-    }
-
-    public void setComments_count(int comments_count) {
-        this.comments_count = comments_count;
-        notifyPropertyChanged(BR.comments_count);
-    }
-
-    @Bindable
-    public int getRatings_count() {
-        return ratings_count;
-    }
-
-    public void setRatings_count(int ratings_count) {
-        this.ratings_count = ratings_count;
-        notifyPropertyChanged(BR.ratings_count);
     }
 
     @Bindable
