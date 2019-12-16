@@ -55,7 +55,7 @@ If you have any questions, please write to [the issue][21] of making you don't u
 
 
 ## See Detail
-> [项目介绍详情](https://github.com/youlookwhat/CloudReader/blob/master/file/Introduction.md) | [细节优化详情](https://github.com/youlookwhat/CloudReader/wiki) | [**版本更新详情(V3.1.0)**](http://jingbin.me/2016/12/30/%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97-%E4%BA%91%E9%98%85/)
+> [项目介绍详情](https://github.com/youlookwhat/CloudReader/wiki/Introduction) | [细节优化详情](https://github.com/youlookwhat/CloudReader/wiki) | [🚀**版本更新详情(V3.2.0)**](https://github.com/youlookwhat/CloudReader/wiki/Update-log)
 
 ### Download
 　[火速跳转](https://fir.im/cloudreader)  
@@ -71,6 +71,11 @@ If you have any questions, please write to [the issue][21] of making you don't u
 　
 
 ### Version
+#### V3.2.0（2019-12-16）
+ - 1、[新增] 热搜词等tag处使用[水波纹点击效果](https://github.com/youlookwhat/CloudReader/blob/master/app/src/main/res/drawable-v21/shape_ripple_tag_bg.xml)
+ - 2、[优化] 知识体系页面恢复及优化
+ - 3、[优化] banner和ByRecyclerView版本升级优化
+
 #### V3.1.0（2019-11-15）
  - 1、[优化] 将所有列表展示的地方替换为[ByRecyclerView][28]
  - 2、[优化] WebView进度条替换为[WebProgress，使其加载进度平滑过渡。](https://github.com/youlookwhat/WebProgress)
@@ -131,13 +136,13 @@ If you have any questions, please write to [the issue][21] of making you don't u
  - 3、[优化] RecyclerView列表加载优化
  - 4、[修复] 修复无邮箱应用时点击跳转崩溃问题
 
+<!-- 
 #### V2.5.0（12-28）
  - 1、[规范] 所有页面mvvm架构修正
  - 2、[优化] 将电影和书籍放置在一块
  - 3、[新增] 可[作为三方浏览器打开外部链接](https://www.jianshu.com/p/272bfb6c0779)
  - 4、[修复] 修复部分兼容性bug
 
-<!-- 
 #### V2.2（12-05）
  - 1、[新增] 进入首页可以获取剪切板的链接
  - 2、[规范] 玩安卓模块mvvm修正
