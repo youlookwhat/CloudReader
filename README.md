@@ -258,7 +258,7 @@ If you have any questions, please write to [the issue][21] of making you don't u
 
 ## About me
  - **QQ：** 770413277
- - **简书：**[Jingbin_](http://www.jianshu.com/users/e43c6e979831/latest_articles)
+ - **简书：**[Jinbeen](https://www.jianshu.com/u/e43c6e979831)
  - **Blog：**[http://jingbin.me](http://jingbin.me)
  - **Email：** jingbin127@163.com
  - **QQ交流群：**[![](https://img.shields.io/badge/%E7%BE%A4%E5%8F%B7-727379132-orange.svg?style=flat-square)](https://shang.qq.com/wpa/qunwpa?idkey=5685061359b0a767674cd831d8261d36b347bde04cc23746cb6570e09ee5c8aa)
