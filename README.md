@@ -51,11 +51,11 @@ If you have any questions, please write to [the issue][21] of making you don't u
 * 13、基于`DataBinding`的`BaseActivity`和`BaseFragment`。                                    
 * 14、`Fragment`懒加载模式。                                    
 * 15、`SwipeRefreshLayout`结合`RecyclerView`下拉刷新上拉加载。                                    
-* 16、`CoordinatorLayout`+``Behavior`实现标题栏渐变和滑动置顶。                                                                       
+* 16、`CoordinatorLayout`+`Behavior`实现标题栏渐变和滑动置顶。                                                                       
 
 
 ## See Detail
-> [项目介绍详情](https://github.com/youlookwhat/CloudReader/wiki/Introduction) | [细节优化详情](https://github.com/youlookwhat/CloudReader/wiki) | [🚀**版本更新详情(V3.2.0)**](https://github.com/youlookwhat/CloudReader/wiki/Update-log)
+> [项目介绍详情](https://github.com/youlookwhat/CloudReader/wiki/Introduction) | [细节优化详情](https://github.com/youlookwhat/CloudReader/wiki) | 🚀[**版本更新详情(V3.2.0)**](https://github.com/youlookwhat/CloudReader/wiki/Update-log)
 
 ### Download
 　[火速跳转](https://fir.im/cloudreader)  
@@ -72,7 +72,7 @@ If you have any questions, please write to [the issue][21] of making you don't u
 
 ### Version
 #### V3.2.0（2019-12-16）
- - 1、[新增] 热搜词等tag处使用[水波纹点击效果](https://github.com/youlookwhat/CloudReader/blob/master/app/src/main/res/drawable-v21/shape_ripple_tag_bg.xml)
+ - 1、[新增] 热搜词等tag处使用[圆角有色水波纹](https://github.com/youlookwhat/CloudReader/blob/master/app/src/main/res/drawable-v21/shape_ripple_tag_bg.xml)点击效果
  - 2、[优化] 知识体系页面恢复及优化
  - 3、[优化] banner和ByRecyclerView版本升级优化
 
@@ -284,7 +284,7 @@ limitations under the License.
 [2]:https://www.apache.org/licenses/LICENSE-2.0.html
 [3]:https://img.shields.io/badge/API-19%2B-red.svg?style=flat
 [4]:https://android-arsenal.com/api?level=19
-[30]:https://img.shields.io/badge/release-3.1.0-red.svg
+[30]:https://img.shields.io/badge/release-3.2.0-red.svg
 [31]:https://github.com/youlookwhat/CloudReader/releases
 [32]:https://img.shields.io/badge/PRs-welcome-brightgreen.svg
 [33]:https://github.com/youlookwhat/CloudReader/pulls
