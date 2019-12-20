@@ -51,11 +51,11 @@ If you have any questions, please write to [the issue][21] of making you don't u
 * 13、基于`DataBinding`的`BaseActivity`和`BaseFragment`。                                    
 * 14、`Fragment`懒加载模式。                                    
 * 15、`SwipeRefreshLayout`结合`RecyclerView`下拉刷新上拉加载。                                    
-* 16、`CoordinatorLayout`+``Behavior`实现标题栏渐变和滑动置顶。                                                                       
+* 16、`CoordinatorLayout`+`Behavior`实现标题栏渐变和滑动置顶。                                                                       
 
 
 ## See Detail
-> [项目介绍详情](https://github.com/youlookwhat/CloudReader/blob/master/file/Introduction.md) | [细节优化详情](https://github.com/youlookwhat/CloudReader/wiki) | [**版本更新详情(V3.1.0)**](http://jingbin.me/2016/12/30/%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97-%E4%BA%91%E9%98%85/)
+> [项目介绍详情](https://github.com/youlookwhat/CloudReader/wiki/Introduction) | [细节优化详情](https://github.com/youlookwhat/CloudReader/wiki) | 🚀[**版本更新详情(V3.2.0)**](https://github.com/youlookwhat/CloudReader/wiki/Update-log)
 
 ### Download
 　[火速跳转](https://fir.im/cloudreader)  
@@ -71,6 +71,11 @@ If you have any questions, please write to [the issue][21] of making you don't u
 　
 
 ### Version
+#### V3.2.0（2019-12-16）
+ - 1、[新增] 热搜词等tag处使用[圆角有色水波纹](https://github.com/youlookwhat/CloudReader/blob/master/app/src/main/res/drawable-v21/shape_ripple_tag_bg.xml)点击效果
+ - 2、[优化] 知识体系页面恢复及优化
+ - 3、[优化] banner和ByRecyclerView版本升级优化
+
 #### V3.1.0（2019-11-15）
  - 1、[优化] 将所有列表展示的地方替换为[ByRecyclerView][28]
  - 2、[优化] WebView进度条替换为[WebProgress，使其加载进度平滑过渡。](https://github.com/youlookwhat/WebProgress)
@@ -131,13 +136,13 @@ If you have any questions, please write to [the issue][21] of making you don't u
  - 3、[优化] RecyclerView列表加载优化
  - 4、[修复] 修复无邮箱应用时点击跳转崩溃问题
 
+<!-- 
 #### V2.5.0（12-28）
  - 1、[规范] 所有页面mvvm架构修正
  - 2、[优化] 将电影和书籍放置在一块
  - 3、[新增] 可[作为三方浏览器打开外部链接](https://www.jianshu.com/p/272bfb6c0779)
  - 4、[修复] 修复部分兼容性bug
 
-<!-- 
 #### V2.2（12-05）
  - 1、[新增] 进入首页可以获取剪切板的链接
  - 2、[规范] 玩安卓模块mvvm修正
@@ -253,7 +258,7 @@ If you have any questions, please write to [the issue][21] of making you don't u
 
 ## About me
  - **QQ：** 770413277
- - **简书：**[Jingbin_](http://www.jianshu.com/users/e43c6e979831/latest_articles)
+ - **简书：**[Jinbeen](https://www.jianshu.com/u/e43c6e979831)
  - **Blog：**[http://jingbin.me](http://jingbin.me)
  - **Email：** jingbin127@163.com
  - **QQ交流群：**[![](https://img.shields.io/badge/%E7%BE%A4%E5%8F%B7-727379132-orange.svg?style=flat-square)](https://shang.qq.com/wpa/qunwpa?idkey=5685061359b0a767674cd831d8261d36b347bde04cc23746cb6570e09ee5c8aa)
@@ -279,7 +284,7 @@ limitations under the License.
 [2]:https://www.apache.org/licenses/LICENSE-2.0.html
 [3]:https://img.shields.io/badge/API-19%2B-red.svg?style=flat
 [4]:https://android-arsenal.com/api?level=19
-[30]:https://img.shields.io/badge/release-3.1.0-red.svg
+[30]:https://img.shields.io/badge/release-3.2.0-red.svg
 [31]:https://github.com/youlookwhat/CloudReader/releases
 [32]:https://img.shields.io/badge/PRs-welcome-brightgreen.svg
 [33]:https://github.com/youlookwhat/CloudReader/pulls
