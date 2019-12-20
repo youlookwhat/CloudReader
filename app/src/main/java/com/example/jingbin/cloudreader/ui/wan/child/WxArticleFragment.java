@@ -66,6 +66,7 @@ public class WxArticleFragment extends BaseFragment<WxArticleViewModel, Fragment
         if (!mIsPrepared || !mIsVisible || !mIsFirst) {
             return;
         }
+        showLoading();
         bindingView.rvWxarticle.postDelayed(() -> viewModel.getWxArticle(), 150);
 
     }

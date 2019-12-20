@@ -67,6 +67,7 @@ public class NavigationFragment extends BaseFragment<NavigationViewModel, Fragme
         if (!mIsPrepared || !mIsVisible || !mIsFirst) {
             return;
         }
+        showLoading();
         viewModel.getNavigationJson();
     }
 

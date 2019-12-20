@@ -65,6 +65,7 @@ public abstract class BaseFragment<VM extends AndroidViewModel, SV extends ViewD
         bindingView.getRoot().setLayoutParams(params);
         RelativeLayout mContainer = inflate.findViewById(R.id.container);
         mContainer.addView(bindingView.getRoot());
+        bindingView.getRoot().setVisibility(View.GONE);
         return inflate;
     }
 
@@ -102,16 +103,6 @@ public abstract class BaseFragment<VM extends AndroidViewModel, SV extends ViewD
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        loadingView = ((ViewStub) activity.findViewById(R.id.vs_loading)).inflate();
-        ImageView img = loadingView.findViewById(R.id.img_progress);
-
-        // 加载动画
-        mAnimationDrawable = (AnimationDrawable) img.getDrawable();
-        // 默认进入页面就开启动画
-        if (!mAnimationDrawable.isRunning()) {
-            mAnimationDrawable.start();
-        }
-        bindingView.getRoot().setVisibility(View.GONE);
         initViewModel();
     }
 
@@ -145,11 +136,17 @@ public abstract class BaseFragment<VM extends AndroidViewModel, SV extends ViewD
      * 显示加载中状态
      */
     protected void showLoading() {
+        ViewStub viewStub = getView(R.id.vs_loading);
+        if (viewStub != null) {
+            loadingView = viewStub.inflate();
+            ImageView img = loadingView.findViewById(R.id.img_progress);
+            mAnimationDrawable = (AnimationDrawable) img.getDrawable();
+        }
         if (loadingView != null && loadingView.getVisibility() != View.VISIBLE) {
             loadingView.setVisibility(View.VISIBLE);
         }
         // 开始动画
-        if (!mAnimationDrawable.isRunning()) {
+        if (mAnimationDrawable != null && !mAnimationDrawable.isRunning()) {
             mAnimationDrawable.start();
         }
         if (bindingView.getRoot().getVisibility() != View.GONE) {

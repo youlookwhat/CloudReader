@@ -71,6 +71,7 @@ public class AndroidFragment extends BaseFragment<GankViewModel, FragmentAndroid
         if (!mIsPrepared || !mIsVisible || !mIsFirst) {
             return;
         }
+        showLoading();
         loadAndroidData();
     }
 

@@ -50,6 +50,7 @@ public class WelfareFragment extends BaseFragment<WelfareViewModel, FragmentWelf
         if (!mIsVisible || !isPrepared || !isFirst) {
             return;
         }
+        showLoading();
         loadWelfareData();
     }
 

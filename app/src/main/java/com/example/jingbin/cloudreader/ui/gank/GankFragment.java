@@ -44,8 +44,8 @@ public class GankFragment extends BaseFragment<NoViewModel, FragmentContentBindi
         if (!mIsPrepared || !mIsVisible || !mIsFirst) {
             return;
         }
+        showLoading();
         bindingView.vpGank.postDelayed(() -> {
-            showContentView();
             initFragmentList();
             MyFragmentPagerAdapter myAdapter = new MyFragmentPagerAdapter(getChildFragmentManager(), mFragments, mTitleList);
             bindingView.vpGank.setAdapter(myAdapter);
@@ -55,6 +55,7 @@ public class GankFragment extends BaseFragment<NoViewModel, FragmentContentBindi
             bindingView.tabGank.setupWithViewPager(bindingView.vpGank);
             // item点击跳转
             initRxBus();
+            showContentView();
             mIsFirst = false;
         }, 120);
     }

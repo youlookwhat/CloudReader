@@ -52,6 +52,7 @@ public class CustomFragment extends BaseFragment<GankViewModel, FragmentAndroidB
         if (!mIsPrepared || !mIsVisible || !mIsFirst) {
             return;
         }
+        showLoading();
         loadCustomData();
     }
 

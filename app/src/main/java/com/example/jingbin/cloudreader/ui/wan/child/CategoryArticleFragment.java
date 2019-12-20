@@ -76,6 +76,7 @@ public class CategoryArticleFragment extends BaseFragment<WanAndroidListViewMode
         mIsPrepared = true;
         if (isLoad) {
             // 第一次进来加载
+            showLoading();
             getHomeList();
         } else {
             // 点击到不被复用的fragment时加载
@@ -88,6 +89,7 @@ public class CategoryArticleFragment extends BaseFragment<WanAndroidListViewMode
         if (!mIsPrepared || !mIsVisible || !mIsFirst) {
             return;
         }
+        showLoading();
         getHomeList();
     }
 

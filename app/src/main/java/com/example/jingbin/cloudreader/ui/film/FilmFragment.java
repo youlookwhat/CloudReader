@@ -38,14 +38,15 @@ public class FilmFragment extends BaseFragment<NoViewModel, FragmentContentBindi
         if (!mIsPrepared || !mIsVisible || !mIsFirst) {
             return;
         }
+        showLoading();
         bindingView.vpGank.postDelayed(() -> {
-            showContentView();
             initFragmentList();
             MyFragmentPagerAdapter myAdapter = new MyFragmentPagerAdapter(getChildFragmentManager(), mFragments, mTitleList);
             bindingView.vpGank.setAdapter(myAdapter);
             myAdapter.notifyDataSetChanged();
             bindingView.tabGank.setTabMode(TabLayout.MODE_FIXED);
             bindingView.tabGank.setupWithViewPager(bindingView.vpGank);
+            showContentView();
             mIsFirst = false;
         }, 110);
     }

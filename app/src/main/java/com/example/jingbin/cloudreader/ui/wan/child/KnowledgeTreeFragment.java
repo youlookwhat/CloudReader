@@ -62,6 +62,7 @@ public class KnowledgeTreeFragment extends BaseFragment<TreeViewModel, FragmentK
         if (!mIsPrepared || !mIsVisible || !mIsFirst) {
             return;
         }
+        showLoading();
         bindingView.flTree.postDelayed(this::getTree, 150);
     }
 

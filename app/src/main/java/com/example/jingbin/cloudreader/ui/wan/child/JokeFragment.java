@@ -139,7 +139,7 @@ public class JokeFragment extends BaseFragment<JokeViewModel, FragmentWanAndroid
         if (!mIsPrepared || !mIsVisible || !mIsFirst) {
             return;
         }
-
+        showLoading();
         bindingView.srlWan.setRefreshing(true);
         bindingView.srlWan.postDelayed(() -> viewModel.showQSBKList(), 100);
     }
