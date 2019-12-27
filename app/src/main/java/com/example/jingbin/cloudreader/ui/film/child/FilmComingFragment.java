@@ -70,7 +70,6 @@ public class FilmComingFragment extends BaseFragment<FilmViewModel, FragmentWanA
         initRefreshView();
         // 准备就绪
         mIsPrepared = true;
-//        loadData();
     }
 
     private void initRefreshView() {
@@ -132,12 +131,7 @@ public class FilmComingFragment extends BaseFragment<FilmViewModel, FragmentWanA
                     bindingView.srlWan.setRefreshing(false);
                 }
                 if (bookBean != null && bookBean.getMoviecomings() != null && bookBean.getMoviecomings().size() > 0) {
-                    if (viewModel.getStart() == 0) {
-                        showContentView();
-                        adapter.clear();
-                        adapter.notifyDataSetChanged();
-                    }
-                    int positionStart = adapter.getItemCount();
+                    showContentView();
 
                     ArrayList<ComingFilmBean.MoviecomingsBean> beans = new ArrayList<>();
                     beans.addAll(bookBean.getAttention());
@@ -147,8 +141,7 @@ public class FilmComingFragment extends BaseFragment<FilmViewModel, FragmentWanA
                     beans.clear();
                     beans.addAll(set);
 
-                    adapter.addAll(beans);
-                    adapter.notifyItemRangeInserted(positionStart, beans.size());
+                    adapter.setNewData(beans);
                     bindingView.xrvWan.loadMoreEnd();
                     if (mIsFirst) {
                         mIsFirst = false;

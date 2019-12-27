@@ -115,27 +115,30 @@ public class CategoryArticleFragment extends BaseFragment<WanAndroidListViewMode
         viewModel.getHomeArticleList(categoryId).observe(this, new Observer<HomeListBean>() {
             @Override
             public void onChanged(@Nullable HomeListBean homeListBean) {
-                if (homeListBean != null) {
-                    if (homeListBean.getData() != null && homeListBean.getData().getDatas() != null && homeListBean.getData().getDatas().size() > 0) {
-                        showContentView();
-                        if (viewModel.getPage() == 0) {
-                            mAdapter.setNewData(homeListBean.getData().getDatas());
-                        } else {
-                            mAdapter.addData(homeListBean.getData().getDatas());
-                        }
-                        bindingView.recyclerView.loadMoreComplete();
+                if (homeListBean != null
+                        && homeListBean.getData() != null
+                        && homeListBean.getData().getDatas() != null
+                        && homeListBean.getData().getDatas().size() > 0) {
+                    showContentView();
+                    if (viewModel.getPage() == 0) {
+                        mAdapter.setNewData(homeListBean.getData().getDatas());
                     } else {
-                        if (viewModel.getPage() == 0) {
+                        mAdapter.addData(homeListBean.getData().getDatas());
+                    }
+                    bindingView.recyclerView.loadMoreComplete();
+                } else {
+                    if (viewModel.getPage() == 0) {
+                        if (homeListBean != null) {
                             showEmptyView(String.format("未找到与\"%s\"相关的内容", categoryName));
                         } else {
-                            bindingView.recyclerView.loadMoreEnd();
+                            showError();
                         }
+                    } else {
+                        bindingView.recyclerView.loadMoreEnd();
                     }
-                    if (mIsFirst) {
-                        mIsFirst = false;
-                    }
-                } else {
-                    showError();
+                }
+                if (mIsFirst) {
+                    mIsFirst = false;
                 }
             }
         });

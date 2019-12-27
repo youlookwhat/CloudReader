@@ -105,14 +105,8 @@ public class FilmShowingFragment extends BaseFragment<FilmViewModel, FragmentWan
                     bindingView.srlWan.setRefreshing(false);
                 }
                 if (bookBean != null && bookBean.getMs() != null && bookBean.getMs().size() > 0) {
-                    if (viewModel.getStart() == 0) {
-                        showContentView();
-                        adapter.clear();
-                        adapter.notifyDataSetChanged();
-                    }
-                    int positionStart = adapter.getItemCount();
-                    adapter.addAll(bookBean.getMs());
-                    adapter.notifyItemRangeInserted(positionStart, bookBean.getMs().size());
+                    showContentView();
+                    adapter.setNewData(bookBean.getMs());
                     bindingView.xrvWan.loadMoreEnd();
                     if (mIsFirst) {
                         mIsFirst = false;
