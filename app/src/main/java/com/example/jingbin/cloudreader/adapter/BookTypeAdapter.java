@@ -4,6 +4,7 @@ import android.text.TextUtils;
 
 import com.example.jingbin.cloudreader.R;
 import com.example.jingbin.cloudreader.base.binding.BaseBindingAdapter;
+import com.example.jingbin.cloudreader.base.binding.BaseBindingHolder;
 import com.example.jingbin.cloudreader.databinding.ItemBookTypeBinding;
 import com.example.jingbin.cloudreader.utils.CommonUtils;
 
@@ -24,7 +25,7 @@ public class BookTypeAdapter extends BaseBindingAdapter<String, ItemBookTypeBind
     }
 
     @Override
-    protected void bindView(String bean, ItemBookTypeBinding binding, int position) {
+    protected void bindView(BaseBindingHolder holder, String bean, ItemBookTypeBinding binding, int position) {
         if (bean != null) {
             binding.setName(bean);
             if (!TextUtils.isEmpty(type)) {

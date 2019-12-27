@@ -6,6 +6,7 @@ import android.view.animation.OvershootInterpolator;
 
 import com.example.jingbin.cloudreader.R;
 import com.example.jingbin.cloudreader.base.binding.BaseBindingAdapter;
+import com.example.jingbin.cloudreader.base.binding.BaseBindingHolder;
 import com.example.jingbin.cloudreader.bean.moviechild.SubjectsBean;
 import com.example.jingbin.cloudreader.databinding.ItemOneBinding;
 import com.example.jingbin.cloudreader.ui.douban.OneMovieDetailActivity;
@@ -27,7 +28,7 @@ public class OneAdapter extends BaseBindingAdapter<SubjectsBean, ItemOneBinding>
     }
 
     @Override
-    protected void bindView(SubjectsBean positionData, ItemOneBinding binding, int position) {
+    protected void bindView(BaseBindingHolder holder, SubjectsBean positionData, ItemOneBinding binding, int position) {
         if (positionData != null) {
             binding.setSubjectsBean(positionData);
             binding.llOneItem.setOnClickListener(new PerfectClickListener() {

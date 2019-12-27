@@ -6,6 +6,7 @@ import android.view.View;
 
 import com.example.jingbin.cloudreader.R;
 import com.example.jingbin.cloudreader.base.binding.BaseBindingAdapter;
+import com.example.jingbin.cloudreader.base.binding.BaseBindingHolder;
 import com.example.jingbin.cloudreader.bean.CollectUrlBean;
 import com.example.jingbin.cloudreader.data.model.CollectModel;
 import com.example.jingbin.cloudreader.databinding.ItemCollectLinkBinding;
@@ -29,7 +30,7 @@ public class CollectUrlAdapter extends BaseBindingAdapter<CollectUrlBean.DataBea
     }
 
     @Override
-    protected void bindView(CollectUrlBean.DataBean bean, ItemCollectLinkBinding binding, int position) {
+    protected void bindView(BaseBindingHolder holder, CollectUrlBean.DataBean bean, ItemCollectLinkBinding binding, int position) {
         if (bean != null) {
             binding.setBean(bean);
             binding.setAdapter(CollectUrlAdapter.this);

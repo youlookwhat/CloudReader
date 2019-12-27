@@ -7,6 +7,7 @@ import android.widget.ImageView;
 
 import com.example.jingbin.cloudreader.R;
 import com.example.jingbin.cloudreader.base.binding.BaseBindingAdapter;
+import com.example.jingbin.cloudreader.base.binding.BaseBindingHolder;
 import com.example.jingbin.cloudreader.bean.moviechild.SubjectsBean;
 import com.example.jingbin.cloudreader.databinding.ItemDoubanTopBinding;
 import com.example.jingbin.cloudreader.utils.DensityUtil;
@@ -28,7 +29,7 @@ public class DouBanTopAdapter extends BaseBindingAdapter<SubjectsBean, ItemDouba
     }
 
     @Override
-    protected void bindView(SubjectsBean bean, ItemDoubanTopBinding binding, int position) {
+    protected void bindView(BaseBindingHolder holder, SubjectsBean bean, ItemDoubanTopBinding binding, int position) {
         binding.setBean(bean);
         DensityUtil.formatHeight(binding.ivTopPhoto, width, 0.758f, 1);
         binding.cvTopMovie.setOnClickListener(new PerfectClickListener() {

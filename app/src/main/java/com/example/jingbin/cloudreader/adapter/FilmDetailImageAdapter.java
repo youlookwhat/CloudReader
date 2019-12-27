@@ -6,6 +6,7 @@ import android.view.View;
 
 import com.example.jingbin.cloudreader.R;
 import com.example.jingbin.cloudreader.base.binding.BaseBindingAdapter;
+import com.example.jingbin.cloudreader.base.binding.BaseBindingHolder;
 import com.example.jingbin.cloudreader.bean.FilmDetailBean;
 import com.example.jingbin.cloudreader.databinding.ItemFilmDetailImageBinding;
 import com.example.jingbin.cloudreader.view.bigimage.BigImagePagerActivity;
@@ -34,7 +35,7 @@ public class FilmDetailImageAdapter extends BaseBindingAdapter<FilmDetailBean.Im
     }
 
     @Override
-    protected void bindView(FilmDetailBean.ImageListBean bean, ItemFilmDetailImageBinding binding, int position) {
+    protected void bindView(BaseBindingHolder holder, FilmDetailBean.ImageListBean bean, ItemFilmDetailImageBinding binding, int position) {
         mViews.set(position, binding.ivImage);
         binding.setBean(bean);
         binding.ivImage.setOnClickListener(new View.OnClickListener() {

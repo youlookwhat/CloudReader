@@ -10,7 +10,6 @@ import java.util.List;
 
 import me.jingbin.library.adapter.BaseByRecyclerViewAdapter;
 
-
 /**
  * 【databinding】单一 item 类型 adapter
  * https://github.com/youlookwhat/ByRecyclerView
@@ -40,11 +39,11 @@ public abstract class BaseBindingAdapter<T, B extends ViewDataBinding> extends B
         }
 
         @Override
-        protected void onBindingView(BaseBindingHolder holder, B binding, T bean, int position) {
-            bindView(bean, binding, position);
+        protected void onBindingView(BaseBindingHolder holder, T bean, int position) {
+            bindView(holder, bean, binding, position);
         }
     }
 
-    protected abstract void bindView(T bean, B binding, int position);
+    protected abstract void bindView(BaseBindingHolder holder, T bean, B binding, int position);
 }
 

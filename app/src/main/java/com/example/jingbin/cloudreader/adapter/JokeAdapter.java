@@ -2,6 +2,7 @@ package com.example.jingbin.cloudreader.adapter;
 
 import com.example.jingbin.cloudreader.R;
 import com.example.jingbin.cloudreader.base.binding.BaseBindingAdapter;
+import com.example.jingbin.cloudreader.base.binding.BaseBindingHolder;
 import com.example.jingbin.cloudreader.bean.wanandroid.DuanZiBean;
 import com.example.jingbin.cloudreader.databinding.ItemJokeBinding;
 import com.example.jingbin.cloudreader.utils.TimeUtil;
@@ -17,7 +18,7 @@ public class JokeAdapter extends BaseBindingAdapter<DuanZiBean, ItemJokeBinding>
     }
 
     @Override
-    protected void bindView(DuanZiBean bean, ItemJokeBinding binding, int position) {
+    protected void bindView(BaseBindingHolder holder, DuanZiBean bean, ItemJokeBinding binding, int position) {
         binding.setBean(bean);
         String time = TimeUtil.formatDataTime(Long.valueOf(bean.getCreateTime() + "000"));
         binding.setTime(time);

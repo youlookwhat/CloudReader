@@ -88,7 +88,7 @@ public class NavigationContentAdapter extends BaseByRecyclerViewAdapter<Articles
         }
 
         @Override
-        protected void onBindingView(BaseBindingHolder holder, ItemNavigationTitleBinding binding, ArticlesBean dataBean, int position) {
+        protected void onBindingView(BaseBindingHolder holder, ArticlesBean dataBean, int position) {
             if (dataBean != null) {
                 binding.setBean(dataBean);
                 if (position == 0) {
@@ -108,7 +108,7 @@ public class NavigationContentAdapter extends BaseByRecyclerViewAdapter<Articles
         }
 
         @Override
-        protected void onBindingView(BaseBindingHolder holder, ItemNavigationContentBinding binding, ArticlesBean dataBean, int position) {
+        protected void onBindingView(BaseBindingHolder holder, ArticlesBean dataBean, int position) {
             if (dataBean != null) {
                 binding.setBean(dataBean);
                 binding.tvNaviTag.setTextColor(CommonUtils.randomColor());

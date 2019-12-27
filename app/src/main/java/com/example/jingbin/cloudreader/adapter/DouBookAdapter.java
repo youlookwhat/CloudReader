@@ -6,6 +6,7 @@ import android.widget.ImageView;
 
 import com.example.jingbin.cloudreader.R;
 import com.example.jingbin.cloudreader.base.binding.BaseBindingAdapter;
+import com.example.jingbin.cloudreader.base.binding.BaseBindingHolder;
 import com.example.jingbin.cloudreader.bean.book.BooksBean;
 import com.example.jingbin.cloudreader.databinding.ItemBookBinding;
 import com.example.jingbin.cloudreader.utils.DensityUtil;
@@ -26,7 +27,7 @@ public class DouBookAdapter extends BaseBindingAdapter<BooksBean, ItemBookBindin
     }
 
     @Override
-    protected void bindView(BooksBean book, ItemBookBinding binding, int position) {
+    protected void bindView(BaseBindingHolder holder, BooksBean book, ItemBookBinding binding, int position) {
         if (book != null) {
             binding.setBean(book);
             DensityUtil.formatHeight(binding.ivTopPhoto, width, 0.703f, 1);

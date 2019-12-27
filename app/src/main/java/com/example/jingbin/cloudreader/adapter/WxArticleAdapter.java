@@ -2,6 +2,7 @@ package com.example.jingbin.cloudreader.adapter;
 
 import com.example.jingbin.cloudreader.R;
 import com.example.jingbin.cloudreader.base.binding.BaseBindingAdapter;
+import com.example.jingbin.cloudreader.base.binding.BaseBindingHolder;
 import com.example.jingbin.cloudreader.bean.wanandroid.WxarticleItemBean;
 import com.example.jingbin.cloudreader.databinding.ItemWxarticleBinding;
 import com.example.jingbin.cloudreader.utils.CommonUtils;
@@ -21,7 +22,7 @@ public class WxArticleAdapter extends BaseBindingAdapter<WxarticleItemBean, Item
     }
 
     @Override
-    protected void bindView(WxarticleItemBean dataBean, ItemWxarticleBinding binding, int position) {
+    protected void bindView(BaseBindingHolder holder, WxarticleItemBean dataBean, ItemWxarticleBinding binding, int position) {
         if (dataBean != null) {
 
             if (dataBean.getId() == id) {

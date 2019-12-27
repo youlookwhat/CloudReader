@@ -5,6 +5,7 @@ import android.view.View;
 
 import com.example.jingbin.cloudreader.R;
 import com.example.jingbin.cloudreader.base.binding.BaseBindingAdapter;
+import com.example.jingbin.cloudreader.base.binding.BaseBindingHolder;
 import com.example.jingbin.cloudreader.bean.GankIoDataBean;
 import com.example.jingbin.cloudreader.databinding.ItemAndroidBinding;
 import com.example.jingbin.cloudreader.utils.GlideUtil;
@@ -27,7 +28,7 @@ public class GankAndroidAdapter extends BaseBindingAdapter<GankIoDataBean.Result
     }
 
     @Override
-    protected void bindView(GankIoDataBean.ResultBean object, ItemAndroidBinding binding, int position) {
+    protected void bindView(BaseBindingHolder holder, GankIoDataBean.ResultBean object, ItemAndroidBinding binding, int position) {
         if (isAll && "福利".equals(object.getType())) {
             binding.ivAllWelfare.setVisibility(View.VISIBLE);
             binding.llWelfareOther.setVisibility(View.GONE);

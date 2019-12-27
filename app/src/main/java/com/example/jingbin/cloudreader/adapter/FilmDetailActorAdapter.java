@@ -2,6 +2,7 @@ package com.example.jingbin.cloudreader.adapter;
 
 import com.example.jingbin.cloudreader.R;
 import com.example.jingbin.cloudreader.base.binding.BaseBindingAdapter;
+import com.example.jingbin.cloudreader.base.binding.BaseBindingHolder;
 import com.example.jingbin.cloudreader.bean.FilmDetailBean;
 import com.example.jingbin.cloudreader.databinding.ItemFilmDetailActorBinding;
 
@@ -16,7 +17,7 @@ public class FilmDetailActorAdapter extends BaseBindingAdapter<FilmDetailBean.Ac
     }
 
     @Override
-    protected void bindView(FilmDetailBean.ActorsBean bean, ItemFilmDetailActorBinding binding, int position) {
+    protected void bindView(BaseBindingHolder holder, FilmDetailBean.ActorsBean bean, ItemFilmDetailActorBinding binding, int position) {
         binding.setPersonBean(bean);
     }
 }

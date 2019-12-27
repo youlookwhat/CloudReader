@@ -33,7 +33,7 @@ public class TreeAdapter extends BaseBindingAdapter<TreeItemBean, ItemTreeBindin
     }
 
     @Override
-    protected void bindView(TreeItemBean dataBean, ItemTreeBinding binding, int position) {
+    protected void bindView(BaseBindingHolder holder,TreeItemBean dataBean, ItemTreeBinding binding, int position) {
         if (dataBean != null) {
             String name = DataUtil.getHtmlString(dataBean.getName());
             if ("开源项目主Tab".equals(name)) {

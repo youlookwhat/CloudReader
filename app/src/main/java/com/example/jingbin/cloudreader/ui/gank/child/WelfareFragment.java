@@ -6,10 +6,12 @@ import android.support.annotation.Nullable;
 import android.view.View;
 
 import com.example.jingbin.cloudreader.R;
-import com.example.jingbin.cloudreader.adapter.WelfareAdapter;
 import com.example.jingbin.cloudreader.base.BaseFragment;
+import com.example.jingbin.cloudreader.base.binding.BaseBindingAdapter;
+import com.example.jingbin.cloudreader.base.binding.BaseBindingHolder;
 import com.example.jingbin.cloudreader.bean.GankIoDataBean;
 import com.example.jingbin.cloudreader.databinding.FragmentWelfareBinding;
+import com.example.jingbin.cloudreader.databinding.ItemWelfareBinding;
 import com.example.jingbin.cloudreader.utils.RefreshHelper;
 import com.example.jingbin.cloudreader.view.viewbigimage.ViewBigImageActivity;
 import com.example.jingbin.cloudreader.viewmodel.gank.WelfareViewModel;
@@ -26,11 +28,11 @@ import me.jingbin.library.ByRecyclerView;
 public class WelfareFragment extends BaseFragment<WelfareViewModel, FragmentWelfareBinding> {
 
     private static final String TAG = "WelfareFragment";
-    private WelfareAdapter mWelfareAdapter;
     private boolean isPrepared = false;
     private boolean isFirst = true;
     private ArrayList<String> imgList = new ArrayList<>();
     private ArrayList<String> imgTitleList = new ArrayList<>();
+    private BaseBindingAdapter<GankIoDataBean.ResultBean, ItemWelfareBinding> mWelfareAdapter;
 
     @Override
     public int setContent() {
@@ -55,7 +57,12 @@ public class WelfareFragment extends BaseFragment<WelfareViewModel, FragmentWelf
     }
 
     private void initRecycleView() {
-        mWelfareAdapter = new WelfareAdapter();
+        mWelfareAdapter = new BaseBindingAdapter<GankIoDataBean.ResultBean, ItemWelfareBinding>(R.layout.item_welfare) {
+            @Override
+            protected void bindView(BaseBindingHolder holder, GankIoDataBean.ResultBean bean, ItemWelfareBinding binding, int position) {
+                binding.setBean(bean);
+            }
+        };
         RefreshHelper.initStaggeredGrid(bindingView.xrvWelfare, 2, 12);
         bindingView.xrvWelfare.setAdapter(mWelfareAdapter);
         bindingView.xrvWelfare.setOnLoadMoreListener(new ByRecyclerView.OnLoadMoreListener() {

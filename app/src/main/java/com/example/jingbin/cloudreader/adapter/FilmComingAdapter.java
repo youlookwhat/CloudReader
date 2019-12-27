@@ -6,6 +6,7 @@ import android.widget.ImageView;
 
 import com.example.jingbin.cloudreader.R;
 import com.example.jingbin.cloudreader.base.binding.BaseBindingAdapter;
+import com.example.jingbin.cloudreader.base.binding.BaseBindingHolder;
 import com.example.jingbin.cloudreader.bean.ComingFilmBean;
 import com.example.jingbin.cloudreader.databinding.ItemFilmComingBinding;
 import com.example.jingbin.cloudreader.utils.DensityUtil;
@@ -26,7 +27,7 @@ public class FilmComingAdapter extends BaseBindingAdapter<ComingFilmBean.Movieco
     }
 
     @Override
-    protected void bindView(ComingFilmBean.MoviecomingsBean bean, ItemFilmComingBinding binding, int position) {
+    protected void bindView(BaseBindingHolder holder, ComingFilmBean.MoviecomingsBean bean, ItemFilmComingBinding binding, int position) {
         binding.setBean(bean);
         DensityUtil.formatHeight(binding.ivTopPhoto, width, 0.758f, 1);
         binding.cvTopMovie.setOnClickListener(new PerfectClickListener() {

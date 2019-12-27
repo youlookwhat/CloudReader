@@ -5,6 +5,7 @@ import android.view.View;
 
 import com.example.jingbin.cloudreader.R;
 import com.example.jingbin.cloudreader.base.binding.BaseBindingAdapter;
+import com.example.jingbin.cloudreader.base.binding.BaseBindingHolder;
 import com.example.jingbin.cloudreader.bean.wanandroid.ArticlesBean;
 import com.example.jingbin.cloudreader.data.UserUtil;
 import com.example.jingbin.cloudreader.data.model.CollectModel;
@@ -30,7 +31,7 @@ public class CategoryArticleAdapter extends BaseBindingAdapter<ArticlesBean, Ite
     }
 
     @Override
-    protected void bindView(ArticlesBean bean, ItemCategoryArticleBinding binding, int position) {
+    protected void bindView(BaseBindingHolder holder, ArticlesBean bean, ItemCategoryArticleBinding binding, int position) {
         if (bean != null) {
             binding.setAdapter(this);
             binding.setBean(bean);

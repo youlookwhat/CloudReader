@@ -6,6 +6,7 @@ import android.view.View;
 
 import com.example.jingbin.cloudreader.R;
 import com.example.jingbin.cloudreader.base.binding.BaseBindingAdapter;
+import com.example.jingbin.cloudreader.base.binding.BaseBindingHolder;
 import com.example.jingbin.cloudreader.bean.wanandroid.ArticlesBean;
 import com.example.jingbin.cloudreader.data.UserUtil;
 import com.example.jingbin.cloudreader.data.model.CollectModel;
@@ -48,7 +49,7 @@ public class WanAndroidAdapter extends BaseBindingAdapter<ArticlesBean, ItemWanA
     }
 
     @Override
-    protected void bindView(ArticlesBean bean, ItemWanAndroidBinding binding, int position) {
+    protected void bindView(BaseBindingHolder holder, ArticlesBean bean, ItemWanAndroidBinding binding, int position) {
         if (bean != null) {
             if (isCollectList) {
                 bean.setCollect(true);

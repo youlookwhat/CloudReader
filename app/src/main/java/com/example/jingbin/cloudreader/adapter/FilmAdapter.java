@@ -6,9 +6,11 @@ import android.view.animation.OvershootInterpolator;
 
 import com.example.jingbin.cloudreader.R;
 import com.example.jingbin.cloudreader.base.binding.BaseBindingAdapter;
+import com.example.jingbin.cloudreader.base.binding.BaseBindingHolder;
 import com.example.jingbin.cloudreader.bean.moviechild.FilmItemBean;
 import com.example.jingbin.cloudreader.databinding.ItemFilmBinding;
 import com.example.jingbin.cloudreader.ui.film.child.FilmDetailActivity;
+import com.example.jingbin.cloudreader.utils.DebugUtil;
 import com.example.jingbin.cloudreader.utils.PerfectClickListener;
 import com.nineoldandroids.view.ViewHelper;
 import com.nineoldandroids.view.ViewPropertyAnimator;
@@ -26,7 +28,7 @@ public class FilmAdapter extends BaseBindingAdapter<FilmItemBean, ItemFilmBindin
     }
 
     @Override
-    protected void bindView(FilmItemBean positionData, ItemFilmBinding binding, int position) {
+    protected void bindView(BaseBindingHolder holder, FilmItemBean positionData, ItemFilmBinding binding, int position) {
         if (positionData != null) {
             binding.setSubjectsBean(positionData);
             binding.llOneItem.setOnClickListener(new PerfectClickListener() {
@@ -36,10 +38,11 @@ public class FilmAdapter extends BaseBindingAdapter<FilmItemBean, ItemFilmBindin
                 }
             });
 
-            ViewHelper.setScaleX(binding.getRoot(), 0.8f);
-            ViewHelper.setScaleY(binding.getRoot(), 0.8f);
-            ViewPropertyAnimator.animate(binding.getRoot()).scaleX(1).setDuration(350).setInterpolator(new OvershootInterpolator()).start();
-            ViewPropertyAnimator.animate(binding.getRoot()).scaleY(1).setDuration(350).setInterpolator(new OvershootInterpolator()).start();
+            DebugUtil.error("position:"+position);
+            ViewHelper.setScaleX(binding.llOneItem, 0.8f);
+            ViewHelper.setScaleY(binding.llOneItem, 0.8f);
+            ViewPropertyAnimator.animate(binding.llOneItem).scaleX(1).setDuration(350).setInterpolator(new OvershootInterpolator()).start();
+            ViewPropertyAnimator.animate(binding.llOneItem).scaleY(1).setDuration(350).setInterpolator(new OvershootInterpolator()).start();
         }
     }
 }

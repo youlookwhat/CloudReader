@@ -47,7 +47,7 @@ public class CoinAdapter extends BaseByRecyclerViewAdapter<CoinLogBean, BaseByVi
         }
 
         @Override
-        protected void onBindingView(BaseBindingHolder holder, ItemWanCoinRankBinding binding, CoinLogBean bean, int position) {
+        protected void onBindingView(BaseBindingHolder holder, CoinLogBean bean, int position) {
             int adapterPosition = position + 1;
             binding.setBean(bean);
             binding.setPosition(adapterPosition);
@@ -77,7 +77,7 @@ public class CoinAdapter extends BaseByRecyclerViewAdapter<CoinLogBean, BaseByVi
         }
 
         @Override
-        protected void onBindingView(BaseBindingHolder holder, ItemWanCoinBinding binding, CoinLogBean bean, int position) {
+        protected void onBindingView(BaseBindingHolder holder, CoinLogBean bean, int position) {
             binding.setBean(bean);
         }
     }

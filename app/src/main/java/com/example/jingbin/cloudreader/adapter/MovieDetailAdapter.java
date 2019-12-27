@@ -5,6 +5,7 @@ import android.view.View;
 
 import com.example.jingbin.cloudreader.R;
 import com.example.jingbin.cloudreader.base.binding.BaseBindingAdapter;
+import com.example.jingbin.cloudreader.base.binding.BaseBindingHolder;
 import com.example.jingbin.cloudreader.bean.moviechild.PersonBean;
 import com.example.jingbin.cloudreader.databinding.ItemMovieDetailPersonBinding;
 import com.example.jingbin.cloudreader.utils.PerfectClickListener;
@@ -21,7 +22,7 @@ public class MovieDetailAdapter extends BaseBindingAdapter<PersonBean, ItemMovie
     }
 
     @Override
-    protected void bindView(PersonBean bean, ItemMovieDetailPersonBinding binding, int position) {
+    protected void bindView(BaseBindingHolder holder, PersonBean bean, ItemMovieDetailPersonBinding binding, int position) {
         binding.setPersonBean(bean);
         binding.llItem.setOnClickListener(new PerfectClickListener() {
             @Override

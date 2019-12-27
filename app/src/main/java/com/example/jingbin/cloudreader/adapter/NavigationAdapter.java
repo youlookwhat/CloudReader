@@ -2,6 +2,7 @@ package com.example.jingbin.cloudreader.adapter;
 
 import com.example.jingbin.cloudreader.R;
 import com.example.jingbin.cloudreader.base.binding.BaseBindingAdapter;
+import com.example.jingbin.cloudreader.base.binding.BaseBindingHolder;
 import com.example.jingbin.cloudreader.bean.wanandroid.NaviJsonBean;
 import com.example.jingbin.cloudreader.databinding.ItemNavigationBinding;
 
@@ -16,7 +17,7 @@ public class NavigationAdapter extends BaseBindingAdapter<NaviJsonBean.DataBean,
     }
 
     @Override
-    protected void bindView(NaviJsonBean.DataBean dataBean, ItemNavigationBinding binding, int position) {
+    protected void bindView(BaseBindingHolder holder, NaviJsonBean.DataBean dataBean, ItemNavigationBinding binding, int position) {
         if (dataBean != null) {
             binding.tvTitle.setSelected(dataBean.isSelected());
             binding.setBean(dataBean);
