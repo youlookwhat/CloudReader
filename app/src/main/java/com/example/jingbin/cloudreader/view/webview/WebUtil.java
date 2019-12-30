@@ -62,6 +62,7 @@ public class WebUtil {
                     || backUrl.startsWith("baiduboxapp:")// 百度
                     || backUrl.startsWith("alipays:")//支付宝
                     || backUrl.startsWith("qtt:")//
+                    || backUrl.startsWith("qqnews:")// 腾讯新闻
             ) {
                 isJump = false;
             }

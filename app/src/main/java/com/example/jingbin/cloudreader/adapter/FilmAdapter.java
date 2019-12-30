@@ -38,7 +38,6 @@ public class FilmAdapter extends BaseBindingAdapter<FilmItemBean, ItemFilmBindin
                 }
             });
 
-            DebugUtil.error("position:"+position);
             ViewHelper.setScaleX(binding.llOneItem, 0.8f);
             ViewHelper.setScaleY(binding.llOneItem, 0.8f);
             ViewPropertyAnimator.animate(binding.llOneItem).scaleX(1).setDuration(350).setInterpolator(new OvershootInterpolator()).start();
