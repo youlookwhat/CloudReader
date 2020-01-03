@@ -1,6 +1,7 @@
 package com.example.jingbin.cloudreader.ui.wan.child;
 
 import android.content.Context;
+import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
@@ -11,6 +12,7 @@ import com.example.jingbin.cloudreader.adapter.TreeAdapter;
 import com.example.jingbin.cloudreader.base.BaseFragment;
 import com.example.jingbin.cloudreader.bean.wanandroid.TreeBean;
 import com.example.jingbin.cloudreader.databinding.FragmentWanAndroidBinding;
+import com.example.jingbin.cloudreader.databinding.HeaderItemTreeBinding;
 import com.example.jingbin.cloudreader.utils.CommonUtils;
 import com.example.jingbin.cloudreader.viewmodel.wan.TreeViewModel;
 
@@ -62,9 +64,9 @@ public class TreeFragment extends BaseFragment<TreeViewModel, FragmentWanAndroid
         bindingView.xrvWan.setLayoutManager(layoutManager);
         mTreeAdapter = new TreeAdapter();
         bindingView.xrvWan.setAdapter(mTreeAdapter);
-//        HeaderItemTreeBinding oneBinding = DataBindingUtil.inflate(getLayoutInflater(), R.layout.header_item_tree, null, false);
-//        bindingView.xrvWan.addHeaderView(oneBinding.getRoot());
-//        oneBinding.tvPosition.setOnClickListener(v -> layoutManager.scrollToPositionWithOffset(mTreeAdapter.mProjectPosition + 2, 0));
+        HeaderItemTreeBinding oneBinding = DataBindingUtil.inflate(getLayoutInflater(), R.layout.header_item_tree, null, false);
+        bindingView.xrvWan.addHeaderView(oneBinding.getRoot());
+        oneBinding.tvPosition.setOnClickListener(v -> layoutManager.scrollToPositionWithOffset(mTreeAdapter.mProjectPosition + bindingView.xrvWan.getCustomTopItemViewCount(), 0));
     }
 
     @Override

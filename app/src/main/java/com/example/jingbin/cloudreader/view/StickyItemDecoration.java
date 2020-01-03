@@ -2,17 +2,27 @@ package com.example.jingbin.cloudreader.view;
 
 import android.graphics.Canvas;
 import android.support.annotation.NonNull;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.View;
 import android.view.ViewGroup;
 
+
 import java.util.ArrayList;
-import java.util.List;
+
+import me.jingbin.library.ByRecyclerView;
 
 /**
  * @author jingbin
+ * 两步即可实现：
+ * - 1.根布局使用：android:id="@id/id_by_sticky_item"
+ * - 2.分类viewType 设置为：StickyView.TYPE_STICKY_VIEW
+ * 注意：
+ * - 只支持 LinearLayoutManager
+ * - 第一个item必须为 StickyItem，所以不能使用自带下拉刷新
+ * <p>
  * 原作者：https://github.com/chenpengfei88/StickyItemDecoration
  */
 public class StickyItemDecoration extends RecyclerView.ItemDecoration {
@@ -50,17 +60,24 @@ public class StickyItemDecoration extends RecyclerView.ItemDecoration {
     /**
      * position list
      */
-    private List<Integer> mStickyPositionList = new ArrayList<>();
+    private ArrayList<Integer> mStickyPositionList = new ArrayList<>();
 
     /**
-     * layout manager  LinearLayoutManager / StaggeredGridLayoutManager
+     * layout manager  LinearLayoutManager
      */
     private RecyclerView.LayoutManager mLayoutManager;
+
+    /**
+     * GridLayoutManager  spanSizeLookup
+     */
+    private GridLayoutManager.SpanSizeLookup spanSizeLookup = null;
 
     /**
      * 绑定数据的position
      */
     private int mBindDataPosition = -1;
+
+    private ByRecyclerView byRecyclerView;
 
     public StickyItemDecoration() {
         mStickyView = new StickyViewImpl();
@@ -70,11 +87,24 @@ public class StickyItemDecoration extends RecyclerView.ItemDecoration {
     public void onDrawOver(@NonNull Canvas c, @NonNull RecyclerView parent, @NonNull RecyclerView.State state) {
         super.onDrawOver(c, parent, state);
 
-        if (parent.getAdapter() == null || parent.getAdapter().getItemCount() <= 0) {
+        if (byRecyclerView == null) {
+            if (parent instanceof ByRecyclerView) {
+                byRecyclerView = (ByRecyclerView) parent;
+            }
+        }
+
+        if (parent.getAdapter() == null || parent.getAdapter().getItemCount() <= getCustomTopPosition() + getCustomBottomPosition()) {
             return;
         }
 
         mLayoutManager = parent.getLayoutManager();
+
+        if (spanSizeLookup == null && mLayoutManager instanceof GridLayoutManager) {
+            GridLayoutManager manager = (GridLayoutManager) mLayoutManager;
+            spanSizeLookup = manager.getSpanSizeLookup();
+        }
+
+
         /**
          * 滚动过程中当前的UI是否可以找到吸附的view
          */
@@ -86,7 +116,8 @@ public class StickyItemDecoration extends RecyclerView.ItemDecoration {
             /**
              * 如果是吸附的view
              */
-            if (mStickyView.isStickyView(view)) {
+            boolean spanSizeDOne = spanSizeLookup != null && spanSizeLookup.getSpanSize(getFindFirstVisibleItemPosition()) == 1;
+            if (spanSizeDOne || mStickyView.isStickyView(view)) {
                 mCurrentUIFindStickView = true;
                 getStickyViewHolder(parent);
                 cacheStickyViewPosition(m);
@@ -126,7 +157,9 @@ public class StickyItemDecoration extends RecyclerView.ItemDecoration {
 
         if (!mCurrentUIFindStickView) {
             mStickyItemViewMarginTop = 0;
-            if (getFindFirstVisibleItemPosition() + parent.getChildCount() == parent.getAdapter().getItemCount() && mStickyPositionList.size() > 0) {
+            if (getFindFirstVisibleItemPosition() + parent.getChildCount() ==
+                    parent.getAdapter().getItemCount() + getCustomTopPosition() + getCustomBottomPosition()
+                    && mStickyPositionList.size() > 0) {
                 bindDataForStickyView(mStickyPositionList.get(mStickyPositionList.size() - 1), parent.getMeasuredWidth());
             }
             drawStickyItemView(c);
@@ -239,12 +272,26 @@ public class StickyItemDecoration extends RecyclerView.ItemDecoration {
     private int getFindFirstVisibleItemPosition() {
         if (mLayoutManager instanceof LinearLayoutManager) {
             final LinearLayoutManager llm = (LinearLayoutManager) mLayoutManager;
-            return llm.findFirstVisibleItemPosition();
+            return llm.findFirstVisibleItemPosition() + getCustomTopPosition();
         } else {
             StaggeredGridLayoutManager sglm = (StaggeredGridLayoutManager) mLayoutManager;
             int[] first = new int[sglm.getSpanCount()];
             sglm.findFirstVisibleItemPositions(first);
-            return first[0];
+            return first[0] + getCustomTopPosition();
         }
+    }
+
+    private int getCustomTopPosition() {
+        if (byRecyclerView != null) {
+            return byRecyclerView.getCustomTopItemViewCount();
+        }
+        return 0;
+    }
+
+    private int getCustomBottomPosition() {
+        if (byRecyclerView != null) {
+            return byRecyclerView.getFooterViewSize() + byRecyclerView.getLoadMoreSize();
+        }
+        return 0;
     }
 }
