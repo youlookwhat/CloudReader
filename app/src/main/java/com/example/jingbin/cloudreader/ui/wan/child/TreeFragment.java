@@ -46,7 +46,6 @@ public class TreeFragment extends BaseFragment<TreeViewModel, FragmentWanAndroid
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        showContentView();
         initRefreshView();
         // 准备就绪
         mIsPrepared = true;
@@ -75,7 +74,7 @@ public class TreeFragment extends BaseFragment<TreeViewModel, FragmentWanAndroid
             return;
         }
 
-        bindingView.srlWan.setRefreshing(true);
+        showLoading();
         bindingView.srlWan.postDelayed(this::getTree, 150);
     }
 
