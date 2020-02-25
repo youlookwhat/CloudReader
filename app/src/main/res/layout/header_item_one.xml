@@ -12,7 +12,6 @@
 
     </data>
 
-    <!--android:background="@color/color_page_bg"-->
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -28,13 +27,15 @@
             android:onClick="@{() -> view.headerClick()}"
             android:orientation="horizontal">
 
+            <!--android:displayRandom="@{ConstantsImageUrl.ONE_URL_01}"-->
+            <!--android:imgType="@{3}"-->
             <ImageView
                 android:id="@+id/iv_img"
                 android:layout_width="66dp"
                 android:layout_height="66dp"
-                android:displayRandom="@{ConstantsImageUrl.ONE_URL_01}"
-                android:imgType="@{3}"
-                android:scaleType="centerCrop" />
+                android:background="@color/color_page_bg"
+                android:scaleType="centerInside"
+                android:src="@drawable/icon_github" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -76,8 +77,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/ll_movie_top"
-            android:layout_marginBottom="7dp"
             android:layout_marginTop="7dp"
+            android:layout_marginBottom="7dp"
             android:gravity="center_vertical"
             android:orientation="horizontal">
 

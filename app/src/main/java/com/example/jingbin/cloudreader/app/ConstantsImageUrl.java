@@ -1,7 +1,5 @@
 package com.example.jingbin.cloudreader.app;
 
-import com.example.jingbin.cloudreader.R;
-
 /**
  * 固定图片链接
  * Created by jingbin on 2018/10/21.
@@ -9,11 +7,12 @@ import com.example.jingbin.cloudreader.R;
 
 public class ConstantsImageUrl {
 
-    // 电影栏头部的图片
-    public static final int ONE_URL_01 = R.drawable.header_item_one;
-
     // 头像
     public static final String IC_AVATAR = "https://upload-images.jianshu.io/upload_images/1354448-5a6a2b440de5b7e6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240";
+
+    // 赞赏图
+    public static final String ADMIRE_ALIPAY = "https://upload-images.jianshu.io/upload_images/1354448-ae994cff3a4484b4.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240";
+    public static final String ADMIRE_WECHAT = "https://upload-images.jianshu.io/upload_images/1354448-06bd4de5c60710c3.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240";
 
     /**
      * 2张图的随机图

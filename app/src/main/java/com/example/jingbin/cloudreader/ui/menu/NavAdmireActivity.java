@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.example.jingbin.cloudreader.R;
+import com.example.jingbin.cloudreader.app.ConstantsImageUrl;
 import com.example.jingbin.cloudreader.base.BaseActivity;
 import com.example.jingbin.cloudreader.databinding.ActivityNavAdmireBinding;
 import com.example.jingbin.cloudreader.utils.CommonUtils;
@@ -33,12 +34,10 @@ public class NavAdmireActivity extends BaseActivity<NoViewModel, ActivityNavAdmi
         bindingView.tvFunction.setOnClickListener(v -> WebViewActivity.loadUrl(v.getContext(), CommonUtils.getString(R.string.string_url_update_log), "更新日志"));
         bindingView.tvAdmire.setOnClickListener(v -> WebViewActivity.loadUrl(v.getContext(), CommonUtils.getString(R.string.string_url_admire), "赞赏记录"));
 
-        String wechat = "https://raw.githubusercontent.com/youlookwhat/CloudReader/master/file/Wechat-admire.jpg";
-        String alipay = "https://raw.githubusercontent.com/youlookwhat/CloudReader/master/file/alipay-admire.jpg";
-        GlideUtil.imageUrl(bindingView.ivWechat, wechat, 200, 200);
-        GlideUtil.imageUrl(bindingView.ivAlipay, alipay, 200, 200);
-        bindingView.ivWechat.setOnClickListener(v -> saveImage(v, wechat));
-        bindingView.ivAlipay.setOnClickListener(v -> saveImage(v, alipay));
+        GlideUtil.imageUrl(bindingView.ivWechat, ConstantsImageUrl.ADMIRE_WECHAT, 200, 200);
+        GlideUtil.imageUrl(bindingView.ivAlipay, ConstantsImageUrl.ADMIRE_ALIPAY, 200, 200);
+        bindingView.ivWechat.setOnClickListener(v -> saveImage(v, ConstantsImageUrl.ADMIRE_WECHAT));
+        bindingView.ivAlipay.setOnClickListener(v -> saveImage(v, ConstantsImageUrl.ADMIRE_ALIPAY));
     }
 
     private void saveImage(View v, String url) {
