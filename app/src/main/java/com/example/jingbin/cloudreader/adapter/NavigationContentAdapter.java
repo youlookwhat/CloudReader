@@ -16,6 +16,7 @@ import com.example.jingbin.cloudreader.utils.CommonUtils;
 import com.example.jingbin.cloudreader.view.webview.WebViewActivity;
 
 import me.jingbin.library.adapter.BaseByRecyclerViewAdapter;
+import me.jingbin.library.stickyview.StickyHeaderHandler;
 
 /**
  * Created by jingbin on 2019/7/14.
@@ -29,20 +30,16 @@ public class NavigationContentAdapter extends BaseByRecyclerViewAdapter<Articles
     @NonNull
     @Override
     public BaseBindingHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        switch (viewType) {
-            case TYPE_TITLE:
-                return new ViewTitleHolder(parent, R.layout.item_navigation_title);
-            case TYPE_CONTENT:
-                return new ViewContentHolder(parent, R.layout.item_navigation_content);
-            default:
-                return new ViewContentHolder(parent, R.layout.item_navigation_content);
+        if (viewType == StickyHeaderHandler.TYPE_STICKY_VIEW) {
+            return new ViewTitleHolder(parent, R.layout.item_navigation_title);
         }
+        return new ViewContentHolder(parent, R.layout.item_navigation_content);
     }
 
     @Override
     public int getItemViewType(int position) {
         if (!TextUtils.isEmpty(getData().get(position).getNavigationName())) {
-            return TYPE_TITLE;
+            return StickyHeaderHandler.TYPE_STICKY_VIEW;
         } else {
             return TYPE_CONTENT;
         }
@@ -65,7 +62,7 @@ public class NavigationContentAdapter extends BaseByRecyclerViewAdapter<Articles
                      * 这里的6（自己设置的最好设置成偶数）就相当于分母，6默认显示一整行（1列），下面的3 和2 就相当于分子，返回3就是（1/2）所以此类型对应的是2列，返回2就是（1/3）所以此类型对应的是3列
                      * */
                     switch (type) {
-                        case TYPE_TITLE:
+                        case StickyHeaderHandler.TYPE_STICKY_VIEW:
                             // title栏显示一列
                             return gridManager.getSpanCount();
                         case TYPE_CONTENT:

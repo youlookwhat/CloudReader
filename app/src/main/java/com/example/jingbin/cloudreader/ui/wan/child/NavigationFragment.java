@@ -22,6 +22,8 @@ import com.example.jingbin.cloudreader.viewmodel.wan.NavigationViewModel;
 
 import java.util.List;
 
+import me.jingbin.library.stickyview.StickyGridLayoutManager;
+
 /**
  * @author jingbin
  * @date 2018/10/8.
@@ -73,14 +75,14 @@ public class NavigationFragment extends BaseFragment<NavigationViewModel, Fragme
     }
 
     private void initRefreshView() {
+        mNaviAdapter = new NavigationAdapter();
         layoutManager = new LinearLayoutManager(activity);
         bindingView.xrvNavi.setLayoutManager(layoutManager);
-        mNaviAdapter = new NavigationAdapter();
         bindingView.xrvNavi.setAdapter(mNaviAdapter);
 
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(activity, 6, GridLayoutManager.VERTICAL, false);
-        bindingView.xrvNaviDetail.setLayoutManager(gridLayoutManager);
         mContentAdapter = new NavigationContentAdapter();
+        StickyGridLayoutManager gridLayoutManager = new StickyGridLayoutManager(activity, 6, GridLayoutManager.VERTICAL, mContentAdapter);
+        bindingView.xrvNaviDetail.setLayoutManager(gridLayoutManager);
         bindingView.xrvNaviDetail.setAdapter(mContentAdapter);
 
         mNaviAdapter.setOnSelectListener(new NavigationAdapter.OnSelectListener() {

@@ -3,8 +3,18 @@
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="horizontal">
+
+        <!--滑动置顶边距只支持paddingLeft，不然会显示屏幕等宽-->
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/xrv_navi_detail"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingLeft="100dp"
+            android:scrollbars="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/xrv_navi"
@@ -13,14 +23,6 @@
             android:scrollbars="none"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/xrv_navi_detail"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:scrollbars="vertical"
-            app:layout_constraintLeft_toRightOf="@+id/xrv_navi"
-            app:layout_constraintRight_toRightOf="parent" />
 
     </android.support.constraint.ConstraintLayout>
 
