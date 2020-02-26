@@ -69,6 +69,7 @@ public class NavigationFragment extends BaseFragment<NavigationViewModel, Fragme
         }
         showLoading();
         viewModel.getNavigationJson();
+        mIsFirst = false;
     }
 
     private void initRefreshView() {
@@ -79,7 +80,6 @@ public class NavigationFragment extends BaseFragment<NavigationViewModel, Fragme
 
         GridLayoutManager gridLayoutManager = new GridLayoutManager(activity, 6, GridLayoutManager.VERTICAL, false);
         bindingView.xrvNaviDetail.setLayoutManager(gridLayoutManager);
-//        bindingView.xrvNaviDetail.addItemDecoration(new StickyItemDecoration());
         mContentAdapter = new NavigationContentAdapter();
         bindingView.xrvNaviDetail.setAdapter(mContentAdapter);
 
@@ -122,9 +122,7 @@ public class NavigationFragment extends BaseFragment<NavigationViewModel, Fragme
             public void onChanged(@Nullable List<ArticlesBean> list) {
                 if (list != null && list.size() > 0) {
                     showContentView();
-
                     mContentAdapter.setNewData(list);
-                    mIsFirst = false;
                 } else {
                     showError();
                 }

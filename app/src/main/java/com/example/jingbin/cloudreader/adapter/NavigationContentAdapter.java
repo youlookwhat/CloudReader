@@ -13,7 +13,6 @@ import com.example.jingbin.cloudreader.bean.wanandroid.ArticlesBean;
 import com.example.jingbin.cloudreader.databinding.ItemNavigationContentBinding;
 import com.example.jingbin.cloudreader.databinding.ItemNavigationTitleBinding;
 import com.example.jingbin.cloudreader.utils.CommonUtils;
-import com.example.jingbin.cloudreader.view.StickyView;
 import com.example.jingbin.cloudreader.view.webview.WebViewActivity;
 
 import me.jingbin.library.adapter.BaseByRecyclerViewAdapter;
@@ -31,7 +30,7 @@ public class NavigationContentAdapter extends BaseByRecyclerViewAdapter<Articles
     @Override
     public BaseBindingHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         switch (viewType) {
-            case StickyView.TYPE_STICKY_VIEW:
+            case TYPE_TITLE:
                 return new ViewTitleHolder(parent, R.layout.item_navigation_title);
             case TYPE_CONTENT:
                 return new ViewContentHolder(parent, R.layout.item_navigation_content);
@@ -43,7 +42,7 @@ public class NavigationContentAdapter extends BaseByRecyclerViewAdapter<Articles
     @Override
     public int getItemViewType(int position) {
         if (!TextUtils.isEmpty(getData().get(position).getNavigationName())) {
-            return StickyView.TYPE_STICKY_VIEW;
+            return TYPE_TITLE;
         } else {
             return TYPE_CONTENT;
         }

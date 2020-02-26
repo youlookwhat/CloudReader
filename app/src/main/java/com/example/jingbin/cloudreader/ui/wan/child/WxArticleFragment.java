@@ -68,7 +68,7 @@ public class WxArticleFragment extends BaseFragment<WxArticleViewModel, Fragment
         }
         showLoading();
         bindingView.rvWxarticle.postDelayed(() -> viewModel.getWxArticle(), 150);
-
+        mIsFirst = false;
     }
 
     private void initRefreshView() {
@@ -113,14 +113,11 @@ public class WxArticleFragment extends BaseFragment<WxArticleViewModel, Fragment
             @Override
             public void onChanged(@Nullable List<WxarticleItemBean> dataBeans) {
                 if (dataBeans != null && dataBeans.size() > 0) {
-                    wxArticleAdapter.clear();
-                    wxArticleAdapter.addAll(dataBeans);
-                    wxArticleAdapter.notifyDataSetChanged();
+                    wxArticleAdapter.setNewData(dataBeans);
                     selectItem(0);
                 } else {
                     showError();
                 }
-                mIsFirst = false;
             }
         });
         // 右侧内容

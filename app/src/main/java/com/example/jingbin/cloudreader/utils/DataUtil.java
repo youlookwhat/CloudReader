@@ -35,8 +35,15 @@ public class DataUtil {
         return String.valueOf(value);
     }
 
+    /**
+     * 积分增加减少
+     */
     public static String getAdd(int value) {
-        return "+" + value;
+        if (value < 0) {
+            return String.valueOf(value);
+        } else {
+            return "+" + value;
+        }
     }
 
     /**

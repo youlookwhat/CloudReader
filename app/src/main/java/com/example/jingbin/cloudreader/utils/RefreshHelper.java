@@ -36,9 +36,7 @@ public class RefreshHelper {
         recyclerView.setLayoutManager(new LinearLayoutManager(recyclerView.getContext()));
         recyclerView.setItemAnimator(null);
         if (isDivider) {
-            SpacesItemDecoration itemDecoration = new SpacesItemDecoration(recyclerView.getContext(), SpacesItemDecoration.VERTICAL, headerNoShowSize);
-            itemDecoration.setDrawable(R.drawable.shape_line);
-            recyclerView.addItemDecoration(itemDecoration);
+            recyclerView.addItemDecoration(new SpacesItemDecoration(recyclerView.getContext(), SpacesItemDecoration.VERTICAL, headerNoShowSize).setDrawable(R.drawable.shape_line));
         }
         recyclerView.setRefreshHeaderView(new NeteaseRefreshHeaderView(recyclerView.getContext()));
         recyclerView.setLoadingMoreView(new NeteaseLoadMoreView(recyclerView.getContext()));

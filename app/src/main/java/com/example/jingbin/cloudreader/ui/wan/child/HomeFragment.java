@@ -146,7 +146,7 @@ public class HomeFragment extends BaseFragment<WanAndroidListViewModel, Fragment
                     .setDelayTime(5000)
                     .setPages(result, CustomViewHolder::new)
                     .start();
-            headerBinding.banner.stopAutoPlay();
+            headerBinding.banner.startAutoPlay();
             isLoadBanner = true;
         } else {
             headerBinding.banner.update(result);
@@ -189,6 +189,7 @@ public class HomeFragment extends BaseFragment<WanAndroidListViewModel, Fragment
         }
         bindingView.srlWan.setRefreshing(true);
         bindingView.srlWan.postDelayed(this::getWanAndroidBanner, 500);
+        mIsFirst = false;
     }
 
     @Override
@@ -261,15 +262,8 @@ public class HomeFragment extends BaseFragment<WanAndroidListViewModel, Fragment
                     mAdapter.addData(homeListBean.getData().getDatas());
                     bindingView.xrvWan.loadMoreComplete();
                 }
-
-                if (mIsFirst && viewModel.getPage() == 0) {
-                    if (isLoadBanner) {
-                        headerBinding.banner.startAutoPlay();
-                    }
-                    mIsFirst = false;
-                }
             } else {
-                if (viewModel.getPage() == 0) {
+                if (mAdapter.getItemCount() == 0) {
                     showError();
                 } else {
                     bindingView.xrvWan.loadMoreEnd();

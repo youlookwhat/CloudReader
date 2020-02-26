@@ -106,9 +106,9 @@ public class CoinRankFragment extends BaseFragment<CoinListViewModel, FragmentWa
         if (!mIsPrepared || !mIsVisible || !mIsFirst) {
             return;
         }
-
         bindingView.srlWan.setRefreshing(true);
         bindingView.srlWan.postDelayed(this::getCoinRank, 150);
+        mIsFirst = false;
     }
 
     private void getCoinRank() {
@@ -137,9 +137,6 @@ public class CoinRankFragment extends BaseFragment<CoinListViewModel, FragmentWa
                         } else {
                             bindingView.xrvWan.loadMoreEnd();
                         }
-                    }
-                    if (mIsFirst) {
-                        mIsFirst = false;
                     }
                 } else {
                     showError();

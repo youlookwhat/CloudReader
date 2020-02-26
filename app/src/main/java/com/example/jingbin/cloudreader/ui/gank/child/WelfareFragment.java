@@ -54,6 +54,7 @@ public class WelfareFragment extends BaseFragment<WelfareViewModel, FragmentWelf
         }
         showLoading();
         loadWelfareData();
+        isFirst = false;
     }
 
     private void initRecycleView() {
@@ -105,10 +106,6 @@ public class WelfareFragment extends BaseFragment<WelfareViewModel, FragmentWelf
                         mWelfareAdapter.addData(bean.getResults());
                     }
                     bindingView.xrvWelfare.loadMoreComplete();
-
-                    if (isFirst) {
-                        isFirst = false;
-                    }
                 } else {
                     bindingView.xrvWelfare.loadMoreComplete();
                     if (mWelfareAdapter.getItemCount() == 0) {

@@ -16,7 +16,6 @@ import com.example.jingbin.cloudreader.bean.ComingFilmBean;
 import com.example.jingbin.cloudreader.bean.moviechild.FilmItemBean;
 import com.example.jingbin.cloudreader.databinding.FragmentWanAndroidBinding;
 import com.example.jingbin.cloudreader.utils.CommonUtils;
-import com.example.jingbin.cloudreader.utils.DebugUtil;
 import com.example.jingbin.cloudreader.viewmodel.movie.FilmViewModel;
 
 import java.util.ArrayList;
@@ -113,14 +112,12 @@ public class FilmComingFragment extends BaseFragment<FilmViewModel, FragmentWanA
 
     @Override
     protected void loadData() {
-        DebugUtil.error("-----loadData");
         if (!mIsPrepared || !mIsVisible || !mIsFirst) {
             return;
         }
-
         bindingView.srlWan.setRefreshing(true);
         bindingView.srlWan.postDelayed(this::getHotFilm, 150);
-        DebugUtil.error("-----setRefreshing");
+        mIsFirst = false;
     }
 
     private void getHotFilm() {
@@ -143,9 +140,6 @@ public class FilmComingFragment extends BaseFragment<FilmViewModel, FragmentWanA
 
                     adapter.setNewData(beans);
                     bindingView.xrvWan.loadMoreEnd();
-                    if (mIsFirst) {
-                        mIsFirst = false;
-                    }
                 } else {
                     if (adapter.getItemCount() == 0) {
                         showError();

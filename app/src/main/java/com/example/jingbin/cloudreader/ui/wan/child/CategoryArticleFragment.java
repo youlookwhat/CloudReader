@@ -78,6 +78,7 @@ public class CategoryArticleFragment extends BaseFragment<WanAndroidListViewMode
             // 第一次进来加载
             showLoading();
             getHomeList();
+            mIsFirst = false;
         } else {
             // 点击到不被复用的fragment时加载
             loadData();
@@ -91,6 +92,7 @@ public class CategoryArticleFragment extends BaseFragment<WanAndroidListViewMode
         }
         showLoading();
         getHomeList();
+        mIsFirst = false;
     }
 
     private void initRefreshView() {
@@ -136,9 +138,6 @@ public class CategoryArticleFragment extends BaseFragment<WanAndroidListViewMode
                     } else {
                         bindingView.recyclerView.loadMoreEnd();
                     }
-                }
-                if (mIsFirst) {
-                    mIsFirst = false;
                 }
             }
         });

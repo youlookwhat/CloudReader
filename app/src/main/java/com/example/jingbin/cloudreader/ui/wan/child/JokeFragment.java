@@ -118,11 +118,6 @@ public class JokeFragment extends BaseFragment<JokeViewModel, FragmentWanAndroid
                         mAdapter.addData(duanZiBeans);
                         bindingView.xrvWan.loadMoreComplete();
                     }
-
-                    if (mIsFirst) {
-                        mIsFirst = false;
-                    }
-
                 } else {
                     if (!viewModel.isRefreshBK()) {
                         showError();
@@ -142,6 +137,7 @@ public class JokeFragment extends BaseFragment<JokeViewModel, FragmentWanAndroid
         showLoading();
         bindingView.srlWan.setRefreshing(true);
         bindingView.srlWan.postDelayed(() -> viewModel.showQSBKList(), 100);
+        mIsFirst = false;
     }
 
     @Override

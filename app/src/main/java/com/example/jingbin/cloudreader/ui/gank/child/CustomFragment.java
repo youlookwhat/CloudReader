@@ -54,6 +54,7 @@ public class CustomFragment extends BaseFragment<GankViewModel, FragmentAndroidB
         }
         showLoading();
         loadCustomData();
+        mIsFirst = false;
     }
 
     private void initData() {
@@ -101,11 +102,7 @@ public class CustomFragment extends BaseFragment<GankViewModel, FragmentAndroidB
                     } else {
                         adapter.addData(bean.getResults());
                     }
-
                     bindingView.xrvAndroid.loadMoreComplete();
-                    if (mIsFirst) {
-                        mIsFirst = false;
-                    }
                 } else {
                     if (viewModel.getPage() == 1) {
                         showError();

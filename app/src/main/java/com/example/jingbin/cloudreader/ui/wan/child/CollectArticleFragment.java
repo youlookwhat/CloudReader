@@ -101,9 +101,9 @@ public class CollectArticleFragment extends BaseFragment<ArticleListViewModel, F
         if (!mIsPrepared || !mIsVisible || !mIsFirst) {
             return;
         }
-
         bindingView.srlWan.setRefreshing(true);
         bindingView.srlWan.postDelayed(this::getCollectList, 150);
+        mIsFirst = false;
     }
 
     private void getCollectList() {
@@ -128,9 +128,6 @@ public class CollectArticleFragment extends BaseFragment<ArticleListViewModel, F
                         } else {
                             bindingView.xrvWan.loadMoreEnd();
                         }
-                    }
-                    if (mIsFirst) {
-                        mIsFirst = false;
                     }
                 } else {
                     showError();

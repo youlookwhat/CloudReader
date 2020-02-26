@@ -73,6 +73,7 @@ public class AndroidFragment extends BaseFragment<GankViewModel, FragmentAndroid
         }
         showLoading();
         loadAndroidData();
+        mIsFirst = false;
     }
 
     private void initRecyclerView() {
@@ -110,9 +111,6 @@ public class AndroidFragment extends BaseFragment<GankViewModel, FragmentAndroid
                     adapter.addData(bean.getResults());
                 }
                 bindingView.xrvAndroid.loadMoreComplete();
-                if (mIsFirst) {
-                    mIsFirst = false;
-                }
             } else {
                 if (viewModel.getPage() == 1) {
                     showError();

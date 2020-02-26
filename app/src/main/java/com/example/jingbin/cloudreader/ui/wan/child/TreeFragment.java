@@ -73,9 +73,9 @@ public class TreeFragment extends BaseFragment<TreeViewModel, FragmentWanAndroid
         if (!mIsPrepared || !mIsVisible || !mIsFirst) {
             return;
         }
-
         showLoading();
         bindingView.srlWan.postDelayed(this::getTree, 150);
+        mIsFirst = false;
     }
 
     private void getTree() {
@@ -92,10 +92,8 @@ public class TreeFragment extends BaseFragment<TreeViewModel, FragmentWanAndroid
 
                     mTreeAdapter.setNewData(treeBean.getData());
                     bindingView.xrvWan.loadMoreComplete();
-
-                    mIsFirst = false;
                 } else {
-                    if (mIsFirst) {
+                    if (mTreeAdapter.getData().size() == 0) {
                         showError();
                     } else {
                         bindingView.xrvWan.loadMoreComplete();
