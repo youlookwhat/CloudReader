@@ -10,7 +10,7 @@ import com.example.jingbin.cloudreader.databinding.FragmentContentBinding;
 import com.example.jingbin.cloudreader.ui.wan.child.HomeFragment;
 import com.example.jingbin.cloudreader.ui.wan.child.NavigationFragment;
 import com.example.jingbin.cloudreader.ui.wan.child.TreeFragment;
-import com.example.jingbin.cloudreader.ui.wan.child.WxArticleFragment;
+import com.example.jingbin.cloudreader.ui.wan.child.WanFindFragment;
 import com.example.jingbin.cloudreader.view.MyFragmentPagerAdapter;
 import com.example.jingbin.cloudreader.viewmodel.menu.NoViewModel;
 
@@ -52,11 +52,11 @@ public class WanFragment extends BaseFragment<NoViewModel, FragmentContentBindin
     private void initFragmentList() {
         mTitleList.clear();
         mTitleList.add("玩安卓");
-        mTitleList.add("公众号");
+        mTitleList.add("发现");
         mTitleList.add("知识体系");
         mTitleList.add("导航");
         mFragments.add(HomeFragment.newInstance());
-        mFragments.add(WxArticleFragment.newInstance());
+        mFragments.add(WanFindFragment.newInstance());
 //        mFragments.add(KnowledgeTreeFragment.newInstance());
         mFragments.add(TreeFragment.newInstance());
         mFragments.add(NavigationFragment.newInstance());

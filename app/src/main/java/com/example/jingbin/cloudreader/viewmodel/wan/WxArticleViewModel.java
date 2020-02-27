@@ -4,12 +4,15 @@ import android.app.Application;
 import android.arch.lifecycle.MutableLiveData;
 import android.support.annotation.NonNull;
 
+import com.example.jingbin.cloudreader.app.Constants;
 import com.example.jingbin.cloudreader.base.BaseListViewModel;
 import com.example.jingbin.cloudreader.bean.wanandroid.ArticlesBean;
 import com.example.jingbin.cloudreader.bean.wanandroid.BaseResultBean;
+import com.example.jingbin.cloudreader.bean.wanandroid.TreeBean;
 import com.example.jingbin.cloudreader.bean.wanandroid.WxarticleDetailItemBean;
 import com.example.jingbin.cloudreader.bean.wanandroid.WxarticleItemBean;
 import com.example.jingbin.cloudreader.http.HttpClient;
+import com.example.jingbin.cloudreader.utils.SPUtils;
 
 import java.util.List;
 
@@ -96,5 +99,21 @@ public class WxArticleViewModel extends BaseListViewModel {
                     }
                 });
         addDisposable(subscribe);
+    }
+
+    /**
+     * 处理订制页内容
+     */
+    public boolean handleCustomData(TreeBean treeBean, int position) {
+        if (treeBean != null
+                && treeBean.getData() != null
+                && treeBean.getData().size() > 0) {
+            SPUtils.putInt(Constants.FIND_POSITION, position);
+            mPage = 1;
+            dataTitle.setValue(treeBean.getData().get(position).getChildren());
+            return true;
+        } else {
+            return false;
+        }
     }
 }

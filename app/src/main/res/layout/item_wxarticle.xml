@@ -10,6 +10,8 @@
             type="com.example.jingbin.cloudreader.bean.wanandroid.WxarticleItemBean" />
 
         <import type="android.text.Html" />
+
+        <import type="com.example.jingbin.cloudreader.utils.DataUtil" />
     </data>
 
     <android.support.constraint.ConstraintLayout
@@ -25,20 +27,20 @@
             android:ellipsize="end"
             android:maxLines="1"
             android:singleLine="true"
-            android:text="@{bean.name}"
+            android:text="@{DataUtil.getHtmlString(bean.name)}"
             android:textColor="@color/select_navi_text"
             android:textSize="11sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="鸿洋" />
+            tools:text="景彬" />
 
         <View
-            android:layout_marginTop="10dp"
             android:id="@+id/view_line"
             android:layout_width="match_parent"
             android:layout_height="1px"
+            android:layout_marginTop="10dp"
             android:background="@color/colorSubtitle"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_title" />

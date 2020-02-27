@@ -14,4 +14,6 @@ public class RxCodeConstants {
     public static final int JUMP_CURRENT_POSITION = 2;
     // 登录状态处理
     public static final int LOGIN = 3;
+    // 发现页内容订制
+    public static final int FIND_CUSTOM = 4;
 }

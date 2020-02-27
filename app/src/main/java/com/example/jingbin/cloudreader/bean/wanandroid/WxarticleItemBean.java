@@ -1,11 +1,14 @@
 package com.example.jingbin.cloudreader.bean.wanandroid;
 
+import java.io.Serializable;
+
 /**
  * @author jingbin
  * @data 2019-09-29
  * @description
  */
-public class WxarticleItemBean {
+public class WxarticleItemBean implements Serializable {
+    private static final long serialVersionUID = 1L;
 
     /**
      * children : []

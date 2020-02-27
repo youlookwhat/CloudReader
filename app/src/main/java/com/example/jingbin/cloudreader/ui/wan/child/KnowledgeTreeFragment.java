@@ -13,6 +13,7 @@ import com.example.jingbin.cloudreader.app.Constants;
 import com.example.jingbin.cloudreader.base.BaseFragment;
 import com.example.jingbin.cloudreader.bean.wanandroid.TreeBean;
 import com.example.jingbin.cloudreader.bean.wanandroid.TreeItemBean;
+import com.example.jingbin.cloudreader.bean.wanandroid.WxarticleItemBean;
 import com.example.jingbin.cloudreader.databinding.FragmentKnowledgeTreeBinding;
 import com.example.jingbin.cloudreader.utils.CommonUtils;
 import com.example.jingbin.cloudreader.utils.SPUtils;
@@ -135,9 +136,9 @@ public class KnowledgeTreeFragment extends BaseFragment<TreeViewModel, FragmentK
             return;
         }
         flowLayout.removeAllViews();
-        flowLayout.setAdapter(new TagAdapter<TreeItemBean.ChildrenBean>(treeItemBean.getChildren()) {
+        flowLayout.setAdapter(new TagAdapter<WxarticleItemBean>(treeItemBean.getChildren()) {
             @Override
-            public View getView(FlowLayout parent, int position, TreeItemBean.ChildrenBean bean) {
+            public View getView(FlowLayout parent, int position, WxarticleItemBean bean) {
                 TextView textView = (TextView) View.inflate(flowLayout.getContext(), R.layout.layout_knowledge_tag, null);
                 textView.setBackground(CommonUtils.getDrawable(R.drawable.selector_bg_tag_no_check));
                 textView.setTextColor(CommonUtils.getColor(R.color.colorContent));

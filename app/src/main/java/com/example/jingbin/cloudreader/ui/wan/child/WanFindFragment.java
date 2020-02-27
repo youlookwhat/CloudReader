@@ -10,23 +10,32 @@ import android.support.v7.widget.LinearLayoutManager;
 import com.example.jingbin.cloudreader.R;
 import com.example.jingbin.cloudreader.adapter.WanAndroidAdapter;
 import com.example.jingbin.cloudreader.adapter.WxArticleAdapter;
+import com.example.jingbin.cloudreader.app.Constants;
 import com.example.jingbin.cloudreader.base.BaseFragment;
 import com.example.jingbin.cloudreader.bean.wanandroid.ArticlesBean;
+import com.example.jingbin.cloudreader.bean.wanandroid.TreeBean;
 import com.example.jingbin.cloudreader.bean.wanandroid.WxarticleItemBean;
 import com.example.jingbin.cloudreader.databinding.FragmentWxarticleBinding;
+import com.example.jingbin.cloudreader.http.rx.RxBus;
+import com.example.jingbin.cloudreader.http.rx.RxCodeConstants;
+import com.example.jingbin.cloudreader.utils.DataUtil;
 import com.example.jingbin.cloudreader.utils.RefreshHelper;
+import com.example.jingbin.cloudreader.utils.SPUtils;
+import com.example.jingbin.cloudreader.utils.ToastUtil;
 import com.example.jingbin.cloudreader.viewmodel.wan.WxArticleViewModel;
 
 import java.util.List;
 
+import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Consumer;
 import me.jingbin.library.ByRecyclerView;
 
 /**
  * @author jingbin
  * @date 2019/9/29.
- * @description 公众号
+ * @description 发现订制
  */
-public class WxArticleFragment extends BaseFragment<WxArticleViewModel, FragmentWxarticleBinding> {
+public class WanFindFragment extends BaseFragment<WxArticleViewModel, FragmentWxarticleBinding> {
 
     private boolean mIsPrepared;
     private boolean mIsFirst = true;
@@ -47,14 +56,15 @@ public class WxArticleFragment extends BaseFragment<WxArticleViewModel, Fragment
         activity = getActivity();
     }
 
-    public static WxArticleFragment newInstance() {
-        return new WxArticleFragment();
+    public static WanFindFragment newInstance() {
+        return new WanFindFragment();
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         initRefreshView();
+        initRxBus();
 
         // 准备就绪
         mIsPrepared = true;
@@ -67,8 +77,19 @@ public class WxArticleFragment extends BaseFragment<WxArticleViewModel, Fragment
             return;
         }
         showLoading();
-        bindingView.rvWxarticle.postDelayed(() -> viewModel.getWxArticle(), 150);
+        bindingView.rvWxarticle.postDelayed(this::getData, 150);
         mIsFirst = false;
+    }
+
+    private void getData() {
+        int anInt = SPUtils.getInt(Constants.FIND_POSITION, -1);
+        if (anInt == -1) {
+            viewModel.getWxArticle();
+        } else {
+            if (!viewModel.handleCustomData(DataUtil.getTreeData(activity), anInt)) {
+                viewModel.getWxArticle();
+            }
+        }
     }
 
     private void initRefreshView() {
@@ -159,5 +180,28 @@ public class WxArticleFragment extends BaseFragment<WxArticleViewModel, Fragment
     @Override
     protected void onRefresh() {
         viewModel.getWxArticle();
+    }
+
+    /**
+     * 知识体系页更改发现页内容
+     */
+    private void initRxBus() {
+        Disposable subscribe = RxBus.getDefault().toObservable(RxCodeConstants.FIND_CUSTOM, Integer.class)
+                .subscribe(new Consumer<Integer>() {
+                    @Override
+                    public void accept(Integer integer) throws Exception {
+                        if (integer != null) {
+                            if (!mIsFirst) {
+                                TreeBean treeData = DataUtil.getTreeData(activity);
+                                if (viewModel.handleCustomData(treeData, integer)) {
+                                    ToastUtil.showToastLong("发现页内容已改为\"" + treeData.getData().get(integer).getName() + "\"");
+                                }
+                            } else {
+                                ToastUtil.showToastLong("发现页内容已更改，请打开查看~");
+                            }
+                        }
+                    }
+                });
+        addSubscription(subscribe);
     }
 }

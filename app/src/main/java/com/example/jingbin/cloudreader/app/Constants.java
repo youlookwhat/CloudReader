@@ -28,4 +28,6 @@ public class Constants {
     public static String MESSAGE_READ_TIP = "message_read_tip";
     // 知识体系里上一次选中的position
     public static String TREE_POSITION = "tree_position";
+    // 发现页内容角标
+    public static String FIND_POSITION = "find_position";
 }

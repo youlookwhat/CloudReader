@@ -11,17 +11,18 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:layout_marginRight="8dp"
             android:layout_marginTop="8dp"
+            android:layout_marginRight="8dp"
             android:background="?android:attr/selectableItemBackground"
             android:drawableLeft="@drawable/icon_position"
             android:drawablePadding="3dp"
             android:gravity="center_vertical"
-            android:paddingBottom="7dp"
             android:paddingLeft="3dp"
-            android:paddingRight="3dp"
             android:paddingTop="7dp"
-            android:text="开源项目主Tab" />
+            android:paddingRight="3dp"
+            android:paddingBottom="7dp"
+            android:text="发现页内容订制"
+            android:textSize="13sp" />
 
     </RelativeLayout>
 </layout>

@@ -22,7 +22,7 @@ public class RefreshHelper {
         recyclerView.setLayoutManager(new StaggeredGridLayoutManager(spanCount, StaggeredGridLayoutManager.VERTICAL));
         // 如果每个item高度一致设置后效率更高
         recyclerView.setHasFixedSize(true);
-        recyclerView.setItemAnimator(null);
+//        recyclerView.setItemAnimator(null);
         recyclerView.addItemDecoration(new GridSpaceItemDecoration(spanCount, spacing));
         recyclerView.setRefreshHeaderView(new NeteaseRefreshHeaderView(recyclerView.getContext()));
         recyclerView.setLoadingMoreView(new NeteaseLoadMoreView(recyclerView.getContext()));
@@ -34,7 +34,7 @@ public class RefreshHelper {
 
     public static ByRecyclerView initLinear(ByRecyclerView recyclerView, boolean isDivider, int headerNoShowSize) {
         recyclerView.setLayoutManager(new LinearLayoutManager(recyclerView.getContext()));
-        recyclerView.setItemAnimator(null);
+//        recyclerView.setItemAnimator(null);
         if (isDivider) {
             recyclerView.addItemDecoration(new SpacesItemDecoration(recyclerView.getContext(), SpacesItemDecoration.VERTICAL, headerNoShowSize).setDrawable(R.drawable.shape_line));
         }

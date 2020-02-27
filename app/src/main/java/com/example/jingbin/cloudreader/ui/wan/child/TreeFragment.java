@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.LinearLayoutManager;
+import android.view.View;
 
 import com.example.jingbin.cloudreader.R;
 import com.example.jingbin.cloudreader.adapter.TreeAdapter;
@@ -13,8 +14,15 @@ import com.example.jingbin.cloudreader.base.BaseFragment;
 import com.example.jingbin.cloudreader.bean.wanandroid.TreeBean;
 import com.example.jingbin.cloudreader.databinding.FragmentWanAndroidBinding;
 import com.example.jingbin.cloudreader.databinding.HeaderItemTreeBinding;
+import com.example.jingbin.cloudreader.http.rx.RxBus;
+import com.example.jingbin.cloudreader.http.rx.RxCodeConstants;
 import com.example.jingbin.cloudreader.utils.CommonUtils;
+import com.example.jingbin.cloudreader.utils.DataUtil;
+import com.example.jingbin.cloudreader.utils.ToastUtil;
 import com.example.jingbin.cloudreader.viewmodel.wan.TreeViewModel;
+
+import me.jingbin.library.ByRecyclerView;
+import me.jingbin.library.decoration.SpacesItemDecoration;
 
 /**
  * @author jingbin
@@ -65,7 +73,43 @@ public class TreeFragment extends BaseFragment<TreeViewModel, FragmentWanAndroid
         bindingView.xrvWan.setAdapter(mTreeAdapter);
         HeaderItemTreeBinding oneBinding = DataBindingUtil.inflate(getLayoutInflater(), R.layout.header_item_tree, null, false);
         bindingView.xrvWan.addHeaderView(oneBinding.getRoot());
-        oneBinding.tvPosition.setOnClickListener(v -> layoutManager.scrollToPositionWithOffset(mTreeAdapter.mProjectPosition + bindingView.xrvWan.getCustomTopItemViewCount(), 0));
+        oneBinding.tvPosition.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!mTreeAdapter.isSelect()) {
+                    oneBinding.tvPosition.setText("选择类别");
+                    mTreeAdapter.setSelect(true);
+                    mTreeAdapter.notifyDataSetChanged();
+                    bindingView.xrvWan.addItemDecoration(new SpacesItemDecoration(activity).setNoShowDivider(1, 0).setDrawable(R.drawable.shape_line));
+                } else {
+                    oneBinding.tvPosition.setText("发现页内容订制");
+                    mTreeAdapter.setSelect(false);
+                    mTreeAdapter.notifyDataSetChanged();
+                    if (bindingView.xrvWan.getItemDecorationCount() > 0) {
+                        bindingView.xrvWan.removeItemDecorationAt(0);
+                    }
+                }
+            }
+        });
+        bindingView.xrvWan.setOnItemClickListener(new ByRecyclerView.OnItemClickListener() {
+            @Override
+            public void onClick(View v, int position) {
+                if (mTreeAdapter.isSelect()) {
+                    if (mTreeAdapter.getSelectedPosition() == position) {
+                        ToastUtil.showToastLong("当前已经是\"" + mTreeAdapter.getData().get(position).getName() + "\"");
+                        return;
+                    }
+                    oneBinding.tvPosition.setText("发现页内容订制");
+                    mTreeAdapter.setSelect(false);
+                    mTreeAdapter.notifyDataSetChanged();
+                    if (bindingView.xrvWan.getItemDecorationCount() > 0) {
+                        bindingView.xrvWan.removeItemDecorationAt(0);
+                    }
+                    layoutManager.scrollToPositionWithOffset(position + bindingView.xrvWan.getCustomTopItemViewCount(), 0);
+                    RxBus.getDefault().post(RxCodeConstants.FIND_CUSTOM, position);
+                }
+            }
+        });
     }
 
     @Override
@@ -90,6 +134,9 @@ public class TreeFragment extends BaseFragment<TreeViewModel, FragmentWanAndroid
                         && treeBean.getData() != null
                         && treeBean.getData().size() > 0) {
 
+                    if (mTreeAdapter.getItemCount() == 0) {
+                        DataUtil.putTreeData(activity, treeBean);
+                    }
                     mTreeAdapter.setNewData(treeBean.getData());
                     bindingView.xrvWan.loadMoreComplete();
                 } else {

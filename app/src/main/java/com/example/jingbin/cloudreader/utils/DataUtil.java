@@ -1,10 +1,13 @@
 package com.example.jingbin.cloudreader.utils;
 
+import android.content.Context;
 import android.text.TextUtils;
 
 import com.example.jingbin.cloudreader.R;
 import com.example.jingbin.cloudreader.bean.AndroidBean;
 import com.example.jingbin.cloudreader.bean.GankIoDataBean;
+import com.example.jingbin.cloudreader.bean.wanandroid.TreeBean;
+import com.example.jingbin.cloudreader.http.cache.ACache;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -134,5 +137,16 @@ public class DataUtil {
             return content.replace("&amp;", "&");
         }
         return content;
+    }
+
+    /**
+     * 保存知识体系数据
+     */
+    public static void putTreeData(Context context, TreeBean treeBean) {
+        ACache.get(context).put("TreeBean", treeBean);
+    }
+
+    public static TreeBean getTreeData(Context context) {
+        return (TreeBean) ACache.get(context).getAsObject("TreeBean");
     }
 }

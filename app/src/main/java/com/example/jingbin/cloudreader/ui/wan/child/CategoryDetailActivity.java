@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.example.jingbin.cloudreader.R;
 import com.example.jingbin.cloudreader.bean.wanandroid.TreeItemBean;
+import com.example.jingbin.cloudreader.bean.wanandroid.WxarticleItemBean;
 import com.example.jingbin.cloudreader.databinding.ActivityCategoryDetailBinding;
 import com.example.jingbin.cloudreader.utils.StatusBarUtil;
 import com.example.jingbin.cloudreader.utils.ToolbarHelper;
@@ -48,7 +49,7 @@ public class CategoryDetailActivity extends AppCompatActivity {
 
         int initIndex = 0;
         for (int i = 0, len = mTreeBean.getChildren().size(); i < len; i++) {
-            TreeItemBean.ChildrenBean childrenBean = mTreeBean.getChildren().get(i);
+            WxarticleItemBean childrenBean = mTreeBean.getChildren().get(i);
             mTitleList.add(childrenBean.getName());
             if (childrenBean.getId() == cid) {
                 initIndex = i;
