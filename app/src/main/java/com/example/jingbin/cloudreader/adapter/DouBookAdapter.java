@@ -30,7 +30,7 @@ public class DouBookAdapter extends BaseBindingAdapter<BooksBean, ItemBookBindin
     protected void bindView(BaseBindingHolder holder, BooksBean book, ItemBookBinding binding, int position) {
         if (book != null) {
             binding.setBean(book);
-            DensityUtil.formatHeight(binding.ivTopPhoto, width, 0.703f, 1);
+            DensityUtil.setWidthHeight(binding.ivTopPhoto, width, 0.703f);
             binding.cvTopBook.setOnClickListener(new PerfectClickListener() {
                 @Override
                 protected void onNoDoubleClick(View v) {

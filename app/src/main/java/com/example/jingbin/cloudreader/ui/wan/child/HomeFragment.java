@@ -167,7 +167,7 @@ public class HomeFragment extends BaseFragment<WanAndroidListViewModel, Fragment
         @Override
         public void onBind(Context context, int position, WanAndroidBannerBean.DataBean data) {
             if (data != null) {
-                DensityUtil.formatHeight(imageView, width, 1.8f, 3);
+                DensityUtil.setWidthHeight(imageView, width, 1.8f);
                 GlideUtil.displayEspImage(data.getImagePath(), imageView, 3);
                 imageView.setOnClickListener(new PerfectClickListener() {
                     @Override

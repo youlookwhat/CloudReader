@@ -4,16 +4,20 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
+import android.view.View;
+import android.widget.ImageView;
 
 import com.example.jingbin.cloudreader.R;
 import com.example.jingbin.cloudreader.adapter.FilmAdapter;
 import com.example.jingbin.cloudreader.base.BaseFragment;
 import com.example.jingbin.cloudreader.bean.MtimeFilmeBean;
+import com.example.jingbin.cloudreader.bean.moviechild.FilmItemBean;
 import com.example.jingbin.cloudreader.databinding.FragmentWanAndroidBinding;
 import com.example.jingbin.cloudreader.utils.CommonUtils;
 import com.example.jingbin.cloudreader.viewmodel.movie.FilmViewModel;
+
+import me.jingbin.library.ByRecyclerView;
 
 /**
  * @author jingbin
@@ -66,22 +70,23 @@ public class FilmShowingFragment extends BaseFragment<FilmViewModel, FragmentWan
     }
 
     private void initRefreshView() {
+        viewModel.bookType.set(mType);
         bindingView.srlWan.setColorSchemeColors(CommonUtils.getColor(R.color.colorTheme));
         adapter = new FilmAdapter(activity);
         bindingView.xrvWan.setLayoutManager(new LinearLayoutManager(activity));
         bindingView.xrvWan.setItemAnimator(null);
         bindingView.xrvWan.setHasFixedSize(true);
         bindingView.xrvWan.setLoadMoreEnabled(true);
-        viewModel.bookType.set(mType);
         bindingView.xrvWan.setAdapter(adapter);
-        bindingView.srlWan.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+        bindingView.xrvWan.setOnItemClickListener(new ByRecyclerView.OnItemClickListener() {
             @Override
-            public void onRefresh() {
-                bindingView.srlWan.postDelayed(() -> {
-                    getHotFilm();
-                }, 150);
+            public void onClick(View v, int position) {
+                ImageView imageView = v.findViewById(R.id.iv_one_photo);
+                FilmItemBean itemData = adapter.getItemData(position);
+                FilmDetailActivity.start(activity, itemData, imageView);
             }
         });
+        bindingView.srlWan.setOnRefreshListener(this::getHotFilm);
     }
 
     @Override

@@ -128,6 +128,18 @@ public class DensityUtil {
         }
     }
 
+    /**
+     * 通过比例设置图片的高度
+     *
+     * @param width 图片的宽
+     * @param bili  图片比例
+     */
+    public static void setWidthHeight(View view, int width, float bili) {
+        int height = (int) (width / bili);
+        ViewGroup.LayoutParams layoutParams = view.getLayoutParams();
+        layoutParams.width = width;
+        layoutParams.height = height;
+    }
 
     /**
      * 得到屏幕的宽度

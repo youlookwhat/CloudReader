@@ -105,7 +105,7 @@ public class EverydayFragment extends BaseFragment<EverydayViewModel, FragmentEv
         mHeaderBinding.includeEveryday.ibWanAndroid.setOnClickListener(listener);
         mHeaderBinding.includeEveryday.ibMovieHot.setOnClickListener(listener);
         mHeaderBinding.includeEveryday.flEveryday.setOnClickListener(listener);
-        DensityUtil.formatHeight(mHeaderBinding.banner, DensityUtil.getDisplayWidth(), 2.5f, 1);
+        DensityUtil.setWidthHeight(mHeaderBinding.banner, DensityUtil.getDisplayWidth(), 2.5f);
 
         onObserveViewModel();
     }
@@ -139,7 +139,7 @@ public class EverydayFragment extends BaseFragment<EverydayViewModel, FragmentEv
 
                                         @Override
                                         public void onBind(Context context, int position, String data) {
-                                            DensityUtil.formatHeight(imageView, DensityUtil.getDisplayWidth(), 2.5f, 3);
+                                            DensityUtil.setWidthHeight(imageView, DensityUtil.getDisplayWidth(), 2.5f);
                                             GlideUtil.displayEspImage(data, imageView, 3);
                                         }
                                     };

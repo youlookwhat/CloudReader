@@ -12,10 +12,9 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="12dp"
             android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
             android:layout_marginTop="12dp"
+            android:layout_marginRight="15dp"
             android:background="@drawable/shape_notclickbg"
             android:lineSpacingExtra="2dp"
             android:padding="12dp"
@@ -27,7 +26,10 @@
             android:id="@+id/iv_erweima"
             android:layout_width="220dp"
             android:layout_height="220dp"
-            android:layout_marginTop="40dp" />
+            android:layout_marginTop="30dp"
+            tools:background="@color/color_page_bg"
+            tools:scaleType="centerInside"
+            tools:src="@drawable/icon_github" />
 
 
         <TextView
@@ -41,7 +43,7 @@
             android:paddingRight="12dp"
             android:text="分享云阅开源客户端"
             android:textColor="@color/text_common"
-            android:textSize="17sp" />
+            android:textSize="16sp" />
 
         <TextView
             android:layout_width="match_parent"

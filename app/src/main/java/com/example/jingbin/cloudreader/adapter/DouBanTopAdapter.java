@@ -31,7 +31,7 @@ public class DouBanTopAdapter extends BaseBindingAdapter<SubjectsBean, ItemDouba
     @Override
     protected void bindView(BaseBindingHolder holder, SubjectsBean bean, ItemDoubanTopBinding binding, int position) {
         binding.setBean(bean);
-        DensityUtil.formatHeight(binding.ivTopPhoto, width, 0.758f, 1);
+        DensityUtil.setWidthHeight(binding.ivTopPhoto, width, 0.758f);
         binding.cvTopMovie.setOnClickListener(new PerfectClickListener() {
             @Override
             protected void onNoDoubleClick(View v) {

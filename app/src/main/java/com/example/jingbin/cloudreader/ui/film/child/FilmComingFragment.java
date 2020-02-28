@@ -4,9 +4,9 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.text.TextUtils;
+import android.view.View;
 import android.widget.ImageView;
 
 import com.example.jingbin.cloudreader.R;
@@ -21,6 +21,8 @@ import com.example.jingbin.cloudreader.viewmodel.movie.FilmViewModel;
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.Set;
+
+import me.jingbin.library.ByRecyclerView;
 
 /**
  * @author jingbin
@@ -80,9 +82,12 @@ public class FilmComingFragment extends BaseFragment<FilmViewModel, FragmentWanA
         bindingView.xrvWan.setLoadMoreEnabled(true);
         viewModel.bookType.set(mType);
         bindingView.xrvWan.setAdapter(adapter);
-        adapter.setListener(new FilmComingAdapter.OnClickListener() {
+        bindingView.xrvWan.setOnItemClickListener(new ByRecyclerView.OnItemClickListener() {
             @Override
-            public void onClick(ComingFilmBean.MoviecomingsBean bean, ImageView imageView) {
+            public void onClick(View v, int position) {
+                ImageView imageView = v.findViewById(R.id.iv_top_photo);
+                ComingFilmBean.MoviecomingsBean bean = adapter.getItemData(position);
+
                 FilmItemBean filmItemBean = new FilmItemBean();
                 filmItemBean.setId(bean.getId());
                 filmItemBean.setDN(bean.getDirector());
@@ -98,16 +103,10 @@ public class FilmComingFragment extends BaseFragment<FilmViewModel, FragmentWanA
                 }
                 filmItemBean.setActors(actor1);
                 FilmDetailActivity.start(activity, filmItemBean, imageView);
+
             }
         });
-        bindingView.srlWan.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                bindingView.srlWan.postDelayed(() -> {
-                    getHotFilm();
-                }, 150);
-            }
-        });
+        bindingView.srlWan.setOnRefreshListener(this::getHotFilm);
     }
 
     @Override

@@ -135,7 +135,7 @@ public class EverydayAdapter extends BaseByRecyclerViewAdapter<ArrayList<Android
 
         @Override
         protected void onBindingView(BaseBindingHolder holder, List<AndroidBean> object, int position) {
-            DensityUtil.formatHeight(binding.ivOnePhoto, width, 2.6f, 1);
+            DensityUtil.setWidthHeight(binding.ivOnePhoto, width, 2.6f);
             if ("福利".equals(object.get(0).getType())) {
                 binding.tvOnePhotoTitle.setVisibility(View.GONE);
                 binding.ivOnePhoto.setScaleType(ImageView.ScaleType.CENTER_CROP);
@@ -166,8 +166,8 @@ public class EverydayAdapter extends BaseByRecyclerViewAdapter<ArrayList<Android
 
         @Override
         protected void onBindingView(BaseBindingHolder holder, List<AndroidBean> object, int position) {
-            DensityUtil.formatHeight(binding.ivTwoOneOne, imageWidth, 1.75f, 1);
-            DensityUtil.formatHeight(binding.ivTwoOneTwo, imageWidth, 1.75f, 1);
+            DensityUtil.setWidthHeight(binding.ivTwoOneOne, imageWidth, 1.75f);
+            DensityUtil.setWidthHeight(binding.ivTwoOneTwo, imageWidth, 1.75f);
             displayRandomImg(2, 0, binding.ivTwoOneOne, object);
             displayRandomImg(2, 1, binding.ivTwoOneTwo, object);
             setDes(object, 0, binding.tvTwoOneOneTitle);
@@ -188,9 +188,9 @@ public class EverydayAdapter extends BaseByRecyclerViewAdapter<ArrayList<Android
 
         @Override
         protected void onBindingView(BaseBindingHolder holder, List<AndroidBean> object, int position) {
-            DensityUtil.formatHeight(binding.ivThreeOneOne, imageWidth, 1, 1);
-            DensityUtil.formatHeight(binding.ivThreeOneTwo, imageWidth, 1, 1);
-            DensityUtil.formatHeight(binding.ivThreeOneThree, imageWidth, 1, 1);
+            DensityUtil.setWidthHeight(binding.ivThreeOneOne, imageWidth, 1);
+            DensityUtil.setWidthHeight(binding.ivThreeOneTwo, imageWidth, 1);
+            DensityUtil.setWidthHeight(binding.ivThreeOneThree, imageWidth, 1);
             displayRandomImg(3, 0, binding.ivThreeOneOne, object);
             displayRandomImg(3, 1, binding.ivThreeOneTwo, object);
             displayRandomImg(3, 2, binding.ivThreeOneThree, object);

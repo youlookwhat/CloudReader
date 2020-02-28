@@ -15,7 +15,7 @@ import com.example.jingbin.cloudreader.base.BaseFragment;
 import com.example.jingbin.cloudreader.bean.wanandroid.ArticlesBean;
 import com.example.jingbin.cloudreader.bean.wanandroid.TreeBean;
 import com.example.jingbin.cloudreader.bean.wanandroid.WxarticleItemBean;
-import com.example.jingbin.cloudreader.databinding.FragmentWxarticleBinding;
+import com.example.jingbin.cloudreader.databinding.FragmentWanFindBinding;
 import com.example.jingbin.cloudreader.http.rx.RxBus;
 import com.example.jingbin.cloudreader.http.rx.RxCodeConstants;
 import com.example.jingbin.cloudreader.utils.DataUtil;
@@ -35,7 +35,7 @@ import me.jingbin.library.ByRecyclerView;
  * @date 2019/9/29.
  * @description 发现订制
  */
-public class WanFindFragment extends BaseFragment<WxArticleViewModel, FragmentWxarticleBinding> {
+public class WanFindFragment extends BaseFragment<WxArticleViewModel, FragmentWanFindBinding> {
 
     private boolean mIsPrepared;
     private boolean mIsFirst = true;
@@ -47,7 +47,7 @@ public class WanFindFragment extends BaseFragment<WxArticleViewModel, FragmentWx
 
     @Override
     public int setContent() {
-        return R.layout.fragment_wxarticle;
+        return R.layout.fragment_wan_find;
     }
 
     @Override
@@ -98,11 +98,11 @@ public class WanFindFragment extends BaseFragment<WxArticleViewModel, FragmentWx
         wxArticleAdapter = new WxArticleAdapter();
         bindingView.rvWxarticle.setAdapter(wxArticleAdapter);
 
-        RefreshHelper.initLinear(bindingView.rvWxarticleList, true, 1);
+        RefreshHelper.initLinear(bindingView.recyclerView, true, 1);
         mContentAdapter = new WanAndroidAdapter(activity);
         mContentAdapter.setNoShowChapterName();
         mContentAdapter.setNoShowAuthorName();
-        bindingView.rvWxarticleList.setAdapter(mContentAdapter);
+        bindingView.recyclerView.setAdapter(mContentAdapter);
 
         wxArticleAdapter.setOnSelectListener(new WxArticleAdapter.OnSelectListener() {
             @Override
@@ -110,7 +110,7 @@ public class WanFindFragment extends BaseFragment<WxArticleViewModel, FragmentWx
                 selectItem(position);
             }
         });
-        bindingView.rvWxarticleList.setOnLoadMoreListener(new ByRecyclerView.OnLoadMoreListener() {
+        bindingView.recyclerView.setOnLoadMoreListener(new ByRecyclerView.OnLoadMoreListener() {
             @Override
             public void onLoadMore() {
                 int page = viewModel.getPage();
@@ -118,7 +118,7 @@ public class WanFindFragment extends BaseFragment<WxArticleViewModel, FragmentWx
                 viewModel.getWxarticleDetail(wxArticleId);
             }
         }, 300);
-        bindingView.rvWxarticleList.setOnRefreshListener(new ByRecyclerView.OnRefreshListener() {
+        bindingView.recyclerView.setOnRefreshListener(new ByRecyclerView.OnRefreshListener() {
             @Override
             public void onRefresh() {
                 viewModel.setPage(1);
@@ -149,17 +149,17 @@ public class WanFindFragment extends BaseFragment<WxArticleViewModel, FragmentWx
                     if (viewModel.getPage() == 1) {
                         showContentView();
                         mContentAdapter.setNewData(list);
-                        bindingView.rvWxarticleList.getLayoutManager().scrollToPosition(0);
+                        bindingView.recyclerView.getLayoutManager().scrollToPosition(0);
                     } else {
                         mContentAdapter.addData(list);
-                        bindingView.rvWxarticleList.loadMoreComplete();
+                        bindingView.recyclerView.loadMoreComplete();
                     }
 
                 } else {
                     if (viewModel.getPage() == 1) {
                         mContentAdapter.setNewData(null);
                     } else {
-                        bindingView.rvWxarticleList.loadMoreEnd();
+                        bindingView.recyclerView.loadMoreEnd();
                     }
                 }
             }
