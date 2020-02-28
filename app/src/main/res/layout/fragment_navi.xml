@@ -1,5 +1,6 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
@@ -7,14 +8,17 @@
         android:orientation="horizontal">
 
         <!--滑动置顶边距只支持paddingLeft，不然会显示屏幕等宽-->
-        <android.support.v7.widget.RecyclerView
+        <me.jingbin.library.ByRecyclerView
             android:id="@+id/xrv_navi_detail"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:paddingLeft="100dp"
             android:scrollbars="vertical"
+            app:layoutManager="GridLayoutManager"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:spanCount="3"
+            tools:listitem="@layout/item_navigation_content" />
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/xrv_navi"

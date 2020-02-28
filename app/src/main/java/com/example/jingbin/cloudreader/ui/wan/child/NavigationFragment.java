@@ -9,6 +9,7 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.View;
 
 import com.example.jingbin.cloudreader.R;
@@ -18,10 +19,12 @@ import com.example.jingbin.cloudreader.base.BaseFragment;
 import com.example.jingbin.cloudreader.bean.wanandroid.ArticlesBean;
 import com.example.jingbin.cloudreader.bean.wanandroid.NaviJsonBean;
 import com.example.jingbin.cloudreader.databinding.FragmentNaviBinding;
+import com.example.jingbin.cloudreader.view.webview.WebViewActivity;
 import com.example.jingbin.cloudreader.viewmodel.wan.NavigationViewModel;
 
 import java.util.List;
 
+import me.jingbin.library.ByRecyclerView;
 import me.jingbin.library.stickyview.StickyGridLayoutManager;
 
 /**
@@ -103,6 +106,15 @@ public class NavigationFragment extends BaseFragment<NavigationViewModel, Fragme
                 if (integer != null && currentPosition != integer) {
                     selectItem(integer);
                     moveToCenter(integer);
+                }
+            }
+        });
+        bindingView.xrvNaviDetail.setOnItemClickListener(new ByRecyclerView.OnItemClickListener() {
+            @Override
+            public void onClick(View v, int position) {
+                ArticlesBean itemData = mContentAdapter.getItemData(position);
+                if (!TextUtils.isEmpty(itemData.getLink())) {
+                    WebViewActivity.loadUrl(v.getContext(), itemData.getLink(), itemData.getTitle());
                 }
             }
         });

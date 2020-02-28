@@ -13,7 +13,6 @@ import com.example.jingbin.cloudreader.bean.wanandroid.ArticlesBean;
 import com.example.jingbin.cloudreader.databinding.ItemNavigationContentBinding;
 import com.example.jingbin.cloudreader.databinding.ItemNavigationTitleBinding;
 import com.example.jingbin.cloudreader.utils.CommonUtils;
-import com.example.jingbin.cloudreader.view.webview.WebViewActivity;
 
 import me.jingbin.library.adapter.BaseByRecyclerViewAdapter;
 import me.jingbin.library.stickyview.StickyHeaderHandler;
@@ -96,7 +95,6 @@ public class NavigationContentAdapter extends BaseByRecyclerViewAdapter<Articles
         }
     }
 
-
     private class ViewContentHolder extends BaseBindingHolder<ArticlesBean, ItemNavigationContentBinding> {
 
         ViewContentHolder(ViewGroup context, int layoutId) {
@@ -108,12 +106,6 @@ public class NavigationContentAdapter extends BaseByRecyclerViewAdapter<Articles
             if (dataBean != null) {
                 binding.setBean(dataBean);
                 binding.tvNaviTag.setTextColor(CommonUtils.randomColor());
-                binding.tvNaviTag.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        WebViewActivity.loadUrl(view.getContext(), dataBean.getLink(), dataBean.getTitle());
-                    }
-                });
             }
         }
     }
