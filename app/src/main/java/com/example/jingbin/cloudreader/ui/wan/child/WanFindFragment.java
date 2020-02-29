@@ -22,7 +22,7 @@ import com.example.jingbin.cloudreader.utils.DataUtil;
 import com.example.jingbin.cloudreader.utils.RefreshHelper;
 import com.example.jingbin.cloudreader.utils.SPUtils;
 import com.example.jingbin.cloudreader.utils.ToastUtil;
-import com.example.jingbin.cloudreader.viewmodel.wan.WxArticleViewModel;
+import com.example.jingbin.cloudreader.viewmodel.wan.WanFindViewModel;
 
 import java.util.List;
 
@@ -35,7 +35,7 @@ import me.jingbin.library.ByRecyclerView;
  * @date 2019/9/29.
  * @description 发现订制
  */
-public class WanFindFragment extends BaseFragment<WxArticleViewModel, FragmentWanFindBinding> {
+public class WanFindFragment extends BaseFragment<WanFindViewModel, FragmentWanFindBinding> {
 
     private boolean mIsPrepared;
     private boolean mIsFirst = true;

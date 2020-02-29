@@ -60,7 +60,6 @@ public class NavigationFragment extends BaseFragment<NavigationViewModel, Fragme
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        initRefreshView();
 
         // 准备就绪
         mIsPrepared = true;
@@ -73,6 +72,7 @@ public class NavigationFragment extends BaseFragment<NavigationViewModel, Fragme
             return;
         }
         showLoading();
+        initRefreshView();
         viewModel.getNavigationJson();
         mIsFirst = false;
     }

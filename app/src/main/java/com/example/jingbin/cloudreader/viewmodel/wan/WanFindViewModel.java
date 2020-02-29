@@ -27,7 +27,7 @@ import io.reactivex.schedulers.Schedulers;
  * @Description wanandroid公众号的ViewModel
  */
 
-public class WxArticleViewModel extends BaseListViewModel {
+public class WanFindViewModel extends BaseListViewModel {
 
     // content数据
     private final MutableLiveData<List<ArticlesBean>> data = new MutableLiveData<>();
@@ -42,7 +42,7 @@ public class WxArticleViewModel extends BaseListViewModel {
         return dataTitle;
     }
 
-    public WxArticleViewModel(@NonNull Application application) {
+    public WanFindViewModel(@NonNull Application application) {
         super(application);
         mPage = 1;
     }
@@ -113,6 +113,8 @@ public class WxArticleViewModel extends BaseListViewModel {
             dataTitle.setValue(treeBean.getData().get(position).getChildren());
             return true;
         } else {
+            // 如果缓存失效清掉position值
+            SPUtils.remove(Constants.FIND_POSITION);
             return false;
         }
     }
