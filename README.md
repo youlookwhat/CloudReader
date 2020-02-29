@@ -53,6 +53,8 @@ If you have any questions, please write to [the issue][21] of making you don't u
 
 ### Download
 　[酷安下载](https://www.coolapk.com/apk/127875) | [Fir.im下载](https://d.eachqr.com/cloudreader)
+
+
 　  ![](https://raw.githubusercontent.com/youlookwhat/CloudReader/master/file/download_200.png)                                  
 　　<!--<img width="200" height=“200” src="https://github.com/youlookwhat/CloudReader/blob/master/file/download.png"></img>-->
 　　
@@ -61,7 +63,7 @@ If you have any questions, please write to [the issue][21] of making you don't u
  - [开发中所遇问题归纳（jar包的具体使用等）][24]
  - [App使用中的常见问题][25]
  - [开源项目CloudReader笔记][26]
- - [ByRecyclerView-支持自带刷新布局或SwipeRefreshLayout，手动上拉加载更多，添加分割线等][28]
+ - [ByRecyclerView - 下拉刷新、加载更多、item点击/长按、万能分割线、粘性Header等][28]
 　
 
 ### Version
