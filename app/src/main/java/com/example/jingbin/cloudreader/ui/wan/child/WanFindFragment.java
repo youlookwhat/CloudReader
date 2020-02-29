@@ -44,6 +44,7 @@ public class WanFindFragment extends BaseFragment<WanFindViewModel, FragmentWanF
     private FragmentActivity activity;
     private int currentPosition = 0;
     private int wxArticleId;
+    private boolean isAddFooter = false;
 
     @Override
     public int setContent() {
@@ -124,7 +125,7 @@ public class WanFindFragment extends BaseFragment<WanFindViewModel, FragmentWanF
                 viewModel.setPage(1);
                 viewModel.getWxarticleDetail(wxArticleId);
             }
-        });
+        }, 300);
         onObserveViewModel();
     }
 
@@ -145,9 +146,12 @@ public class WanFindFragment extends BaseFragment<WanFindViewModel, FragmentWanF
         viewModel.getData().observe(this, new Observer<List<ArticlesBean>>() {
             @Override
             public void onChanged(@Nullable List<ArticlesBean> list) {
+                showContentView();
                 if (list != null && list.size() > 0) {
                     if (viewModel.getPage() == 1) {
-                        showContentView();
+                        bindingView.recyclerView.setLoadMoreEnabled(true);
+                        bindingView.recyclerView.setRefreshEnabled(true);
+                        bindingView.recyclerView.setFootViewEnabled(false);
                         mContentAdapter.setNewData(list);
                         bindingView.recyclerView.getLayoutManager().scrollToPosition(0);
                     } else {
@@ -157,6 +161,14 @@ public class WanFindFragment extends BaseFragment<WanFindViewModel, FragmentWanF
 
                 } else {
                     if (viewModel.getPage() == 1) {
+                        bindingView.recyclerView.setLoadMoreEnabled(false);
+                        bindingView.recyclerView.setRefreshEnabled(false);
+                        if (!isAddFooter) {
+                            bindingView.recyclerView.addFooterView(R.layout.layout_loading_empty);
+                            isAddFooter = true;
+                        } else {
+                            bindingView.recyclerView.setFootViewEnabled(true);
+                        }
                         mContentAdapter.setNewData(null);
                     } else {
                         bindingView.recyclerView.loadMoreEnd();
@@ -172,6 +184,7 @@ public class WanFindFragment extends BaseFragment<WanFindViewModel, FragmentWanF
             wxArticleAdapter.setId(wxArticleId);
             viewModel.setPage(1);
             viewModel.getWxarticleDetail(wxArticleId);
+            bindingView.recyclerView.setRefreshEnabled(true);
         }
         wxArticleAdapter.notifyItemChanged(currentPosition);
         currentPosition = position;

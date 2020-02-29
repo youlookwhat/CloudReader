@@ -22,7 +22,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/img_err"
         android:text="加载失败,点击重试"
-        android:textSize="15sp"
+        android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
