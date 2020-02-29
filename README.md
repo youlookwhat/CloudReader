@@ -49,7 +49,7 @@ If you have any questions, please write to [the issue][21] of making you don't u
 
 
 ## See Detail
-> [项目介绍详情](https://github.com/youlookwhat/CloudReader/wiki/Introduction) | [细节优化详情](https://github.com/youlookwhat/CloudReader/wiki) | 🚀[**版本更新详情(V3.2.0)**](https://github.com/youlookwhat/CloudReader/wiki/Update-log)
+> [项目介绍详情](https://github.com/youlookwhat/CloudReader/wiki/Introduction) | [细节优化详情](https://github.com/youlookwhat/CloudReader/wiki) | 🚀[**版本更新详情(V3.3.0)**](https://github.com/youlookwhat/CloudReader/wiki/Update-log)
 
 ### Download
 　[酷安下载](https://www.coolapk.com/apk/127875) | [Fir.im下载](https://d.eachqr.com/cloudreader)
@@ -283,7 +283,7 @@ limitations under the License.
 [2]:https://www.apache.org/licenses/LICENSE-2.0.html
 [3]:https://img.shields.io/badge/API-19%2B-red.svg?style=flat
 [4]:https://android-arsenal.com/api?level=19
-[30]:https://img.shields.io/badge/release-3.2.0-red.svg
+[30]:https://img.shields.io/badge/release-3.3.0-red.svg
 [31]:https://github.com/youlookwhat/CloudReader/releases
 [32]:https://img.shields.io/badge/PRs-welcome-brightgreen.svg
 [33]:https://github.com/youlookwhat/CloudReader/pulls
