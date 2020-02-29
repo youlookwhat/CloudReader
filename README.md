@@ -20,12 +20,6 @@ A netease cloud music based UI, using wanandroid、Gank.Io and mtime API develop
 ![](https://raw.githubusercontent.com/youlookwhat/CloudReader/master/file/images.png)
 ![](https://raw.githubusercontent.com/youlookwhat/CloudReader/master/file/images2.png)
 
-<!--<img width="173" height=“274” src="https://github.com/youlookwhat/CloudReader/blob/master/file/page_book_01.png"></img>
-<img width="173" height=“274” src="https://github.com/youlookwhat/CloudReader/blob/master/file/page_gank_00.png"></img>
-<img width="173" height=“274” src="https://github.com/youlookwhat/CloudReader/blob/master/file/page_movie_01.png"></img>
-<img width="173" height=“274” src="https://github.com/youlookwhat/CloudReader/blob/master/file/page_menu_01.png"></img>
-<img width="173" height=“274” src="https://github.com/youlookwhat/CloudReader/blob/master/file/page_movie_03.png"></img>-->
-
 #### Gif Preview
 
 ![](https://raw.githubusercontent.com/youlookwhat/CloudReader/master/file/cloudreader.gif)
@@ -58,7 +52,7 @@ If you have any questions, please write to [the issue][21] of making you don't u
 > [项目介绍详情](https://github.com/youlookwhat/CloudReader/wiki/Introduction) | [细节优化详情](https://github.com/youlookwhat/CloudReader/wiki) | 🚀[**版本更新详情(V3.2.0)**](https://github.com/youlookwhat/CloudReader/wiki/Update-log)
 
 ### Download
-　[火速跳转](https://fir.im/cloudreader)  
+　[酷安下载](https://www.coolapk.com/apk/127875) | [Fir.im下载](https://d.eachqr.com/cloudreader)
 　  ![](https://raw.githubusercontent.com/youlookwhat/CloudReader/master/file/download_200.png)                                  
 　　<!--<img width="200" height=“200” src="https://github.com/youlookwhat/CloudReader/blob/master/file/download.png"></img>-->
 　　
@@ -71,6 +65,11 @@ If you have any questions, please write to [the issue][21] of making you don't u
 　
 
 ### Version
+#### V3.3.0（2020-02-29）
+ - 1、 [新增] 公众号页面改为发现页面，并可订制
+ - 2、[优化] 导航页面增加滑动置顶
+ - 3、[优化] 启动图、代码等部分优化
+
 #### V3.2.0（2019-12-16）
  - 1、[新增] 热搜词等tag处使用[圆角有色水波纹](https://github.com/youlookwhat/CloudReader/blob/master/app/src/main/res/drawable-v21/shape_ripple_tag_bg.xml)点击效果
  - 2、[优化] 知识体系页面恢复及优化
@@ -289,7 +288,7 @@ limitations under the License.
 [32]:https://img.shields.io/badge/PRs-welcome-brightgreen.svg
 [33]:https://github.com/youlookwhat/CloudReader/pulls
 [34]:https://img.shields.io/badge/download-fir.im-blue.svg
-[35]:https://fir.im/cloudreader
+[35]:https://d.eachqr.com/cloudreader
 [36]:https://api.codacy.com/project/badge/Grade/1045e902e1294badaf783a640869c208?isInternal=true
 [37]:https://app.codacy.com/manual/youlookwhat/CloudReader/dashboard?bid=14239237
 
