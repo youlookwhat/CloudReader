@@ -52,11 +52,10 @@ If you have any questions, please write to [the issue][21] of making you don't u
 > [项目介绍详情](https://github.com/youlookwhat/CloudReader/wiki/Introduction) | [细节优化详情](https://github.com/youlookwhat/CloudReader/wiki) | 🚀[**版本更新详情(V3.3.0)**](https://github.com/youlookwhat/CloudReader/wiki/Update-log)
 
 ### Download
-　[酷安下载](https://www.coolapk.com/apk/127875) | [Fir.im下载](https://d.eachqr.com/cloudreader)
+　[酷安下载](https://www.coolapk.com/apk/127875)
 
 
-　  ![](https://raw.githubusercontent.com/youlookwhat/CloudReader/master/file/download_200.png)                                  
-　　<!--<img width="200" height=“200” src="https://github.com/youlookwhat/CloudReader/blob/master/file/download.png"></img>-->
+　  ![](https://raw.githubusercontent.com/youlookwhat/CloudReader/master/file/download_200.png)
 　　
 ### Documents 
  - [《云阅》一个仿网易云音乐UI，使用Gank.Io及豆瓣Api开发的开源项目][23]
@@ -290,7 +289,7 @@ limitations under the License.
 [32]:https://img.shields.io/badge/PRs-welcome-brightgreen.svg
 [33]:https://github.com/youlookwhat/CloudReader/pulls
 [34]:https://img.shields.io/badge/download-coolapk.com-blue.svg
-[35]:https://d.eachqr.com/cloudreader
+[35]:https://www.coolapk.com/apk/127875
 [36]:https://api.codacy.com/project/badge/Grade/1045e902e1294badaf783a640869c208?isInternal=true
 [37]:https://app.codacy.com/manual/youlookwhat/CloudReader/dashboard?bid=14239237
 
