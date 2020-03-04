@@ -16,9 +16,11 @@
             app:contentInsetStartWithNavigation="0dp"
             app:layout_scrollFlags="enterAlways|scroll"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+            app:subtitleTextAppearance="@style/Toolbar.SubTitle"
             app:theme="@style/ToolbarStyle"
             app:title="@string/app_name"
-            app:titleMarginStart="0dp" />
+            app:titleMarginStart="0dp"
+            app:titleTextAppearance="@style/ToolBar.Title" />
 
 
         <RelativeLayout

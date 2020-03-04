@@ -21,10 +21,15 @@ package com.example.jingbin.cloudreader.utils;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Environment;
 import android.text.TextUtils;
+import android.view.View;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.Target;
@@ -32,7 +37,9 @@ import com.example.jingbin.cloudreader.R;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 
 import io.reactivex.Observable;
@@ -150,5 +157,52 @@ public class RxSaveImage {
 
         }
 
+    }
+
+    /**
+     * 注意开权限
+     */
+    public static void saveToLocal(Context context, Bitmap bitmap) {
+        try {
+            File appDir = new File(Environment.getExternalStorageDirectory(), "云阅相册");
+            // 没有目录创建目录
+            if (!appDir.exists()) {
+                appDir.mkdir();
+            }
+            File file = new File(appDir, "view_" + System.currentTimeMillis() + ".jpg");
+            FileOutputStream out;
+            try {
+                out = new FileOutputStream(file);
+                if (bitmap.compress(Bitmap.CompressFormat.PNG, 90, out)) {
+                    out.flush();
+                    out.close();
+                    // 通知图库更新
+                    Uri uri = Uri.fromFile(file);
+                    Intent scannerIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, uri);
+                    context.sendBroadcast(scannerIntent);
+                }
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * 生成单个view的bitmap，
+     */
+    public static Bitmap createViewBitmap(View v) {
+        if (v == null) {
+            return null;
+        }
+        Bitmap bitmap = Bitmap.createBitmap(v.getWidth(), v.getHeight(), Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(bitmap);
+        // 周边边透明
+        canvas.drawColor(Color.TRANSPARENT);
+        v.draw(canvas);
+        return bitmap;
     }
 }

@@ -7,6 +7,8 @@ package com.example.jingbin.cloudreader.app;
 
 public class Constants {
 
+    public static final String DOWNLOAD_URL = "https://www.coolapk.com/apk/127875";
+
     public static final String NIGHT_SKIN = "night.skin";
     public static final String KEY_MODE_NIGHT = "mode-night";
 

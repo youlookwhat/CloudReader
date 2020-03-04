@@ -8,6 +8,7 @@ import android.view.View;
 
 import com.bumptech.glide.Glide;
 import com.example.jingbin.cloudreader.R;
+import com.example.jingbin.cloudreader.app.Constants;
 import com.example.jingbin.cloudreader.base.BaseActivity;
 import com.example.jingbin.cloudreader.databinding.ActivityNavAboutBinding;
 import com.example.jingbin.cloudreader.utils.BaseTools;
@@ -75,8 +76,8 @@ public class NavAboutActivity extends BaseActivity<NoViewModel, ActivityNavAbout
                     title = "更新日志";
                     break;
                 case R.id.tv_download_url:
-                    url = CommonUtils.getString(R.string.string_url_new_version);
-                    title = "云阅 - fir.im";
+                    url = Constants.DOWNLOAD_URL;
+                    title = "云阅";
                     break;
                 case R.id.tv_wanandroid:
                     url = CommonUtils.getString(R.string.string_url_wanandroid);

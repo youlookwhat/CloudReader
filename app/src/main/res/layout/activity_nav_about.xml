@@ -42,7 +42,7 @@
 
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="50dp">
+                    android:layout_height="44dp">
 
                     <TextView
                         android:id="@+id/tv_new_version"
@@ -97,7 +97,7 @@
                 android:paddingRight="20dp"
                 android:text="很高兴您能使用，如感到满意请Star一下吧，我们将继续迭代，增加更多功能，O(∩_∩)O ~"
                 android:textColor="@color/colorSubtitle"
-                android:textSize="14sp" />
+                android:textSize="13sp" />
 
         </LinearLayout>
 

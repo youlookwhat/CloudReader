@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.example.jingbin.cloudreader.R;
+import com.example.jingbin.cloudreader.app.Constants;
 import com.example.jingbin.cloudreader.base.BaseActivity;
 import com.example.jingbin.cloudreader.databinding.ActivityNavDownloadBinding;
 import com.example.jingbin.cloudreader.utils.PerfectClickListener;
@@ -22,8 +23,7 @@ public class NavDownloadActivity extends BaseActivity<NoViewModel, ActivityNavDo
         showContentView();
 
         setTitle("扫码下载");
-        String url = "https://fir.im/cloudreader";
-        QRCodeUtil.showThreadImage(this, url, bindingView.ivErweima, R.drawable.ic_cloudreader_mip);
+        QRCodeUtil.showThreadImage(this, Constants.DOWNLOAD_URL, bindingView.ivErweima, R.drawable.ic_cloudreader_mip);
         bindingView.tvShare.setOnClickListener(new PerfectClickListener() {
             @Override
             protected void onNoDoubleClick(View v) {

@@ -31,7 +31,8 @@
                     android:padding="7dp"
                     android:text="@string/string_admire"
                     android:textColor="@color/colorContent"
-                    android:textIsSelectable="true" />
+                    android:textIsSelectable="true"
+                    android:textSize="14sp" />
             </android.support.v7.widget.CardView>
 
             <LinearLayout
