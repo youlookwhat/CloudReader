@@ -58,7 +58,7 @@ public class HttpUtils {
     public final static String API_GANKIO = "https://gank.io/api/";
     public final static String API_DOUBAN = "Https://api.douban.com/";
     public final static String API_TING = "https://tingapi.ting.baidu.com/v1/restserver/";
-    public final static String API_FIR = "http://api.fir.im/apps/";
+    public final static String API_GITEE = "https://gitee.com/";
     public final static String API_WAN_ANDROID = "https://www.wanandroid.com/";
     public final static String API_QSBK = "http://m2.qiushibaike.com/";
     public final static String API_MTIME = "https://api-m.mtime.cn/";

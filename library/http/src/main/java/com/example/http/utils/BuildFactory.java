@@ -3,7 +3,7 @@ package com.example.http.utils;
 import com.example.http.HttpUtils;
 
 import static com.example.http.HttpUtils.API_DOUBAN;
-import static com.example.http.HttpUtils.API_FIR;
+import static com.example.http.HttpUtils.API_GITEE;
 import static com.example.http.HttpUtils.API_GANKIO;
 import static com.example.http.HttpUtils.API_MTIME;
 import static com.example.http.HttpUtils.API_MTIME_TICKET;
@@ -70,7 +70,7 @@ public class BuildFactory {
                     }
                 }
                 return (T) dongtingHttps;
-            case API_FIR:
+            case API_GITEE:
                 if (firHttps == null) {
                     synchronized (BuildFactory.class) {
                         if (firHttps == null) {

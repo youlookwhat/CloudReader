@@ -58,8 +58,8 @@ public interface HttpClient {
             return BuildFactory.getInstance().create(HttpClient.class, HttpUtils.API_GANKIO);
         }
 
-        public static HttpClient getFirServer() {
-            return BuildFactory.getInstance().create(HttpClient.class, HttpUtils.API_FIR);
+        public static HttpClient getGiteeServer() {
+            return BuildFactory.getInstance().create(HttpClient.class, HttpUtils.API_GITEE);
         }
 
         public static HttpClient getWanAndroidServer() {
@@ -150,11 +150,10 @@ public interface HttpClient {
     Observable<BookDetailBean> getBookDetail(@Path("id") String id);
 
     /**
-     * @param id       应用id
-     * @param apiToken token
+     * 检查更新
      */
-    @GET("latest/{id}")
-    Observable<UpdateBean> checkUpdate(@Path("id") String id, @Query("api_token") String apiToken);
+    @GET("jingbin127/ApiServer/raw/master/update/update.json")
+    Observable<UpdateBean> checkUpdate();
 
     /**
      * 糗事百科
