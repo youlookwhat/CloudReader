@@ -1,7 +1,7 @@
 # CloudReader
 
 [![Apache License 2.0][1]][2]
-[![fir.im][34]][35] 
+[![coolapk.com][34]][35] 
 [![Release Version][30]][31]
 [![API][3]][4]
 [![Codacy Badge][36]][37]
@@ -289,7 +289,7 @@ limitations under the License.
 [31]:https://github.com/youlookwhat/CloudReader/releases
 [32]:https://img.shields.io/badge/PRs-welcome-brightgreen.svg
 [33]:https://github.com/youlookwhat/CloudReader/pulls
-[34]:https://img.shields.io/badge/download-fir.im-blue.svg
+[34]:https://img.shields.io/badge/download-coolapk.com-blue.svg
 [35]:https://d.eachqr.com/cloudreader
 [36]:https://api.codacy.com/project/badge/Grade/1045e902e1294badaf783a640869c208?isInternal=true
 [37]:https://app.codacy.com/manual/youlookwhat/CloudReader/dashboard?bid=14239237
