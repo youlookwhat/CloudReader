@@ -22,7 +22,8 @@
                 android:layout_height="66dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="50dp"
-                android:scaleType="centerCrop" />
+                android:scaleType="centerCrop"
+                tools:src="@drawable/ic_cloudreader" />
 
             <TextView
                 android:id="@+id/tv_version_name"
@@ -141,7 +142,7 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="4dp"
                 android:orientation="horizontal">
 
                 <TextView
@@ -170,7 +171,7 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="4dp"
                 android:orientation="horizontal">
 
                 <TextView

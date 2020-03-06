@@ -206,10 +206,10 @@ public class WebViewActivity extends AppCompatActivity implements IWebPageView {
 
     @SuppressLint("SetJavaScriptEnabled")
     private void initWebView() {
-//        mProgressBar.setVisibility(View.VISIBLE);
         WebSettings ws = webView.getSettings();
-        // 网页内容的宽度是否可大于WebView控件的宽度
-        ws.setLoadWithOverviewMode(false);
+        // 网页内容的宽度适配
+        ws.setLoadWithOverviewMode(true);
+        ws.setUseWideViewPort(true);
         // 保存表单数据
         ws.setSaveFormData(true);
         // 是否应该支持使用其屏幕缩放控件和手势缩放
@@ -220,11 +220,6 @@ public class WebViewActivity extends AppCompatActivity implements IWebPageView {
         ws.setAppCacheEnabled(true);
         // 设置缓存模式
         ws.setCacheMode(WebSettings.LOAD_DEFAULT);
-        // setDefaultZoom  api19被弃用
-        // 设置此属性，可任意比例缩放。
-        ws.setUseWideViewPort(true);
-        // 不缩放
-        webView.setInitialScale(100);
         // 告诉WebView启用JavaScript执行。默认的是false。
         ws.setJavaScriptEnabled(true);
         //  页面加载好以后，再放开图片
