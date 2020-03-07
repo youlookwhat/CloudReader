@@ -1,6 +1,7 @@
 package com.example.jingbin.cloudreader.utils;
 
 import android.support.v7.app.AlertDialog;
+import android.text.TextUtils;
 
 import com.example.jingbin.cloudreader.BuildConfig;
 import com.example.jingbin.cloudreader.base.BaseActivity;
@@ -26,6 +27,9 @@ public class UpdateUtil {
      * @param isShowToast 是否弹出更新框
      */
     public static void check(final BaseActivity activity, final boolean isShowToast) {
+        if (activity == null) {
+            return;
+        }
         Disposable subscribe = HttpClient.Builder.getGiteeServer().checkUpdate()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -41,7 +45,9 @@ public class UpdateUtil {
                         }
 
                         // 进入应用体提示更新
-                        if (updateBean != null && "1".equals(updateBean.getIsShow())) {
+                        if (updateBean != null
+                                && "1".equals(updateBean.getIsShow())
+                                && !TextUtils.isEmpty(updateBean.getInstallUrl())) {
                             AlertDialog.Builder builder = new AlertDialog.Builder(activity);
                             // 返回无效
                             builder.setCancelable(false);
