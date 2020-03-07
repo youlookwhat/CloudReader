@@ -7,11 +7,11 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.bumptech.glide.Glide;
+import com.example.jingbin.cloudreader.BuildConfig;
 import com.example.jingbin.cloudreader.R;
 import com.example.jingbin.cloudreader.app.Constants;
 import com.example.jingbin.cloudreader.base.BaseActivity;
 import com.example.jingbin.cloudreader.databinding.ActivityNavAboutBinding;
-import com.example.jingbin.cloudreader.utils.BaseTools;
 import com.example.jingbin.cloudreader.utils.CommonUtils;
 import com.example.jingbin.cloudreader.utils.PerfectClickListener;
 import com.example.jingbin.cloudreader.utils.UpdateUtil;
@@ -29,7 +29,7 @@ public class NavAboutActivity extends BaseActivity<NoViewModel, ActivityNavAbout
         setContentView(R.layout.activity_nav_about);
         showContentView();
         setTitle("关于云阅");
-        bindingView.tvVersionName.setText("当前版本 V" + BaseTools.getVersionName());
+        bindingView.tvVersionName.setText("当前版本 V" + BuildConfig.VERSION_NAME);
 
 
         // 直接写在布局文件里会很耗内存
