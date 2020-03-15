@@ -18,7 +18,25 @@ import java.util.List;
 public class DataUtil {
 
     /**
-     * 玩安卓列表显示用户名
+     * 玩安卓首页列表显示用户名
+     */
+    public static String getHomeAuthor(boolean isNew, String author, String shareName) {
+        String name = author;
+        if (TextUtils.isEmpty(name)) {
+            name = shareName;
+        }
+        if (TextUtils.isEmpty(name)) {
+            name = "匿名";
+        }
+        if (isNew) {
+            return " " + name;
+        } else {
+            return name;
+        }
+    }
+
+    /**
+     * 玩安卓知识体系列表显示用户名
      */
     public static String getAuthor(String author, String shareName) {
         String name = author;

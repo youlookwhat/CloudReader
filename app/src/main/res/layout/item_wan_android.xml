@@ -26,27 +26,53 @@
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:foreground="?attr/selectableItemBackgroundBorderless"
+        android:background="?attr/selectableItemBackground"
         android:onClick="@{()->adapter.openDetail(bean)}"
         android:paddingTop="8dp"
         android:paddingRight="8dp"
         android:paddingBottom="8dp">
 
+        <ImageView
+            android:id="@+id/iv_image"
+            android:layout_width="70dp"
+            android:layout_height="99dp"
+            android:layout_marginStart="8dp"
+            android:defaultPicType="@{1}"
+            android:displayFadeImage="@{bean.envelopePic}"
+            android:scaleType="centerCrop"
+            android:visibility="@{bean.isShowImage?View.VISIBLE:View.GONE}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:background="@color/colorLine" />
+
         <RelativeLayout
             android:id="@+id/rl_header"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/iv_image"
             app:layout_constraintTop_toTopOf="parent">
 
-            <ImageView
+            <TextView
                 android:id="@+id/iv_new"
-                android:layout_width="40dp"
-                android:layout_height="25dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:background="?selectableItemBackgroundBorderless"
-                android:src="@drawable/icon_new"
+                android:text="新"
+                android:textColor="@color/colorTheme"
+                android:textSize="11sp"
                 android:visibility="@{bean.fresh?View.VISIBLE:View.GONE}" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@+id/iv_new"
+                android:text="@{DataUtil.getHomeAuthor(bean.fresh,bean.author,bean.shareUser)}"
+                android:textColor="@color/colorSubtitle"
+                android:textSize="11sp"
+                android:visibility="@{adapter.isNoShowAuthorName?View.GONE:View.VISIBLE}"
+                tools:text=" jingbin" />
 
             <TextView
                 android:id="@+id/tv_tag_name"
@@ -68,25 +94,12 @@
 
         </RelativeLayout>
 
-        <ImageView
-            android:id="@+id/iv_image"
-            android:layout_width="60dp"
-            android:layout_height="78dp"
-            android:layout_marginStart="8dp"
-            android:defaultPicType="@{1}"
-            android:displayFadeImage="@{bean.envelopePic}"
-            android:scaleType="centerCrop"
-            android:visibility="@{bean.isShowImage?View.VISIBLE:View.GONE}"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/rl_header"
-            tools:background="@color/colorLine" />
-
         <TextView
             android:id="@+id/tv_title"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="6dp"
             android:ellipsize="end"
             android:lineSpacingExtra="4dp"
             android:maxLines="2"
@@ -95,15 +108,14 @@
             android:textSize="14sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/iv_image"
-            app:layout_constraintTop_toTopOf="@+id/iv_image"
+            app:layout_constraintTop_toBottomOf="@+id/rl_header"
             tools:text="一款基于网易云音乐UI，使用玩安卓、Gank.Io及时光网api开发的符合Google.." />
-
 
         <TextView
             android:id="@+id/tv_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="13dp"
+            android:layout_marginTop="10dp"
             android:text="@{bean.niceDate}"
             android:textColor="@color/colorSubtitle"
             android:textSize="11sp"
@@ -111,18 +123,6 @@
             app:layout_constraintStart_toStartOf="@+id/tv_title"
             app:layout_constraintTop_toBottomOf="@+id/tv_title"
             tools:text="2010-10-10" />
-
-        <TextView
-            android:id="@+id/textView3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@{DataUtil.getAuthor(bean.author,bean.shareUser)}"
-            android:textColor="@color/colorSubtitle"
-            android:textSize="11sp"
-            android:visibility="@{adapter.isNoShowAuthorName?View.GONE:View.VISIBLE}"
-            app:layout_constraintStart_toEndOf="@+id/tv_time"
-            app:layout_constraintTop_toTopOf="@+id/tv_time"
-            tools:text=" · jingbin" />
 
         <CheckBox
             android:id="@+id/vb_collect"

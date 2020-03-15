@@ -102,7 +102,7 @@ public class WanFindFragment extends BaseFragment<WanFindViewModel, FragmentWanF
         RefreshHelper.initLinear(bindingView.recyclerView, true, 1);
         mContentAdapter = new WanAndroidAdapter(activity);
         mContentAdapter.setNoShowChapterName();
-        mContentAdapter.setNoShowAuthorName();
+//        mContentAdapter.setNoShowAuthorName();
         bindingView.recyclerView.setAdapter(mContentAdapter);
 
         wxArticleAdapter.setOnSelectListener(new WxArticleAdapter.OnSelectListener() {
