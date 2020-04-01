@@ -388,7 +388,7 @@ public class MainActivity extends BaseActivity<MainViewModel, ActivityMainBindin
     private void getClipContent() {
         String clipContent = BaseTools.getClipContent();
         if (!TextUtils.isEmpty(clipContent)) {
-            DialogBuild.showCustom(vpContent, clipContent, "打开其中链接", new DialogInterface.OnClickListener() {
+            DialogBuild.showCustom(bindingView.drawerLayout, clipContent, "打开其中链接", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     WebViewActivity.loadUrl(MainActivity.this, clipContent, "加载中..");

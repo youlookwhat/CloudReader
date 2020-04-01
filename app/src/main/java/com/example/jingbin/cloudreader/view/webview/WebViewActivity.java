@@ -327,7 +327,7 @@ public class WebViewActivity extends AppCompatActivity implements IWebPageView {
      */
     public void hideCustomView() {
         mWebChromeClient.onHideCustomView();
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
     }
 
     /**
@@ -459,7 +459,7 @@ public class WebViewActivity extends AppCompatActivity implements IWebPageView {
         webView.resumeTimers();
         // 设置为横屏
         if (getRequestedOrientation() != ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE) {
-            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
         }
     }
 

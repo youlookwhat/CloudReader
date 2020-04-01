@@ -1,3 +1,2 @@
 include ':app'
-include ':library:xrecyclerview'
 include ':library:http'
