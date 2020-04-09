@@ -9,7 +9,6 @@ import android.content.res.Resources;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
@@ -32,15 +31,12 @@ import com.example.jingbin.cloudreader.databinding.NavHeaderMainBinding;
 import com.example.jingbin.cloudreader.http.rx.RxBus;
 import com.example.jingbin.cloudreader.http.rx.RxBusBaseMessage;
 import com.example.jingbin.cloudreader.http.rx.RxCodeConstants;
-import com.example.jingbin.cloudreader.ui.film.FilmFragment;
-import com.example.jingbin.cloudreader.ui.gank.GankFragment;
 import com.example.jingbin.cloudreader.ui.menu.NavAboutActivity;
 import com.example.jingbin.cloudreader.ui.menu.NavAdmireActivity;
 import com.example.jingbin.cloudreader.ui.menu.NavDeedBackActivity;
 import com.example.jingbin.cloudreader.ui.menu.NavDownloadActivity;
 import com.example.jingbin.cloudreader.ui.menu.NavHomePageActivity;
 import com.example.jingbin.cloudreader.ui.menu.SearchActivity;
-import com.example.jingbin.cloudreader.ui.wan.WanFragment;
 import com.example.jingbin.cloudreader.ui.wan.child.LoginActivity;
 import com.example.jingbin.cloudreader.ui.wan.child.MyCoinActivity;
 import com.example.jingbin.cloudreader.ui.wan.child.MyCollectActivity;
@@ -57,8 +53,6 @@ import com.example.jingbin.cloudreader.view.OnMyPageChangeListener;
 import com.example.jingbin.cloudreader.view.statusbar.StatusBarUtil;
 import com.example.jingbin.cloudreader.view.webview.WebViewActivity;
 import com.example.jingbin.cloudreader.viewmodel.wan.MainViewModel;
-
-import java.util.ArrayList;
 
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
@@ -164,12 +158,8 @@ public class MainActivity extends BaseActivity<MainViewModel, ActivityMainBindin
     }
 
     private void initContentFragment() {
-        ArrayList<Fragment> mFragmentList = new ArrayList<>();
-        mFragmentList.add(new WanFragment());
-        mFragmentList.add(new GankFragment());
-        mFragmentList.add(new FilmFragment());
         // 注意使用的是：getSupportFragmentManager
-        MyFragmentPagerAdapter adapter = new MyFragmentPagerAdapter(getSupportFragmentManager(), mFragmentList);
+        MyFragmentPagerAdapter adapter = new MyFragmentPagerAdapter(getSupportFragmentManager());
         vpContent.setAdapter(adapter);
         // 设置ViewPager最大缓存的页面个数(cpu消耗少)
         vpContent.setOffscreenPageLimit(2);

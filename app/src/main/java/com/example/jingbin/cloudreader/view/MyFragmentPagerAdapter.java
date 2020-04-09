@@ -1,10 +1,16 @@
 package com.example.jingbin.cloudreader.view;
 
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.text.Html;
+import android.util.SparseArray;
 import android.view.ViewGroup;
+
+import com.example.jingbin.cloudreader.ui.film.FilmFragment;
+import com.example.jingbin.cloudreader.ui.gank.GankFragment;
+import com.example.jingbin.cloudreader.ui.wan.WanFragment;
 
 import java.util.List;
 
@@ -14,39 +20,70 @@ import java.util.List;
 
 public class MyFragmentPagerAdapter extends FragmentStatePagerAdapter {
 
-    private List<?> mFragment;
+    private List<Fragment> mFragment;
     private List<String> mTitleList;
+    private SparseArray<Fragment> mRegisteredFragments = new SparseArray<Fragment>();
 
     /**
-     * 普通，主页使用
+     * 主页使用
      */
-    public MyFragmentPagerAdapter(FragmentManager fm, List<?> mFragment) {
+    public MyFragmentPagerAdapter(FragmentManager fm) {
         super(fm);
-        this.mFragment = mFragment;
     }
 
     /**
      * 接收首页传递的标题
      */
-    public MyFragmentPagerAdapter(FragmentManager fm, List<?> mFragment, List<String> mTitleList) {
+    public MyFragmentPagerAdapter(FragmentManager fm, List<Fragment> fragment, List<String> titleList) {
         super(fm);
-        this.mFragment = mFragment;
-        this.mTitleList = mTitleList;
+        this.mFragment = fragment;
+        this.mTitleList = titleList;
+    }
+
+    @NonNull
+    @Override
+    public Object instantiateItem(@NonNull ViewGroup container, int position) {
+        Fragment fragment = (Fragment) super.instantiateItem(container, position);
+        mRegisteredFragments.put(position, fragment);
+        return fragment;
     }
 
     @Override
+    public void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) {
+        mRegisteredFragments.remove(position);
+        super.destroyItem(container, position, object);
+    }
+
+    public Fragment getRegisteredFragment(int position) {
+        return mRegisteredFragments.get(position);
+    }
+
+    /**
+     * 应该是创建Fragment的地方
+     * https://mp.weixin.qq.com/s/MOWdbI5IREjQP1Px-WJY1Q
+     */
+    @Override
     public Fragment getItem(int position) {
-        return (Fragment) mFragment.get(position);
+        if (mFragment != null) {
+            return mFragment.get(position);
+        } else {
+            // 首页
+            switch (position) {
+                case 0:
+                    return new WanFragment();
+                case 1:
+                    return new GankFragment();
+                case 2:
+                    return new FilmFragment();
+                default:
+                    return new WanFragment();
+            }
+        }
     }
 
     @Override
     public int getCount() {
-        return mFragment.size();
-    }
-
-    @Override
-    public void destroyItem(ViewGroup container, int position, Object object) {
-        super.destroyItem(container, position, object);
+        return mFragment != null ? mFragment.size() : 3;
     }
 
     /**
@@ -61,12 +98,4 @@ public class MyFragmentPagerAdapter extends FragmentStatePagerAdapter {
             return "";
         }
     }
-
-    public void addFragmentList(List<?> fragment) {
-        this.mFragment.clear();
-        this.mFragment = null;
-        this.mFragment = fragment;
-        notifyDataSetChanged();
-    }
-
 }
