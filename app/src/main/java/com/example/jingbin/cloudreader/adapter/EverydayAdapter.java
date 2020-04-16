@@ -97,7 +97,7 @@ public class EverydayAdapter extends BaseByRecyclerViewAdapter<ArrayList<Android
                 index = 0;
             } else if ("福利".equals(title)) {
                 index = 1;
-            } else if ("IOS".equals(title)) {
+            } else if ("iOS".equals(title)) {
                 index = 2;
             } else if ("休息视频".equals(title)) {
                 index = 2;

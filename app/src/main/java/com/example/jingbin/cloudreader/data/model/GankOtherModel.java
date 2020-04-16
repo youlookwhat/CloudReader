@@ -19,18 +19,20 @@ import io.reactivex.schedulers.Schedulers;
 
 public class GankOtherModel {
 
+    private String category;
     private String id;
     private int page;
     private int perPage;
 
-    public void setData(String id, int page, int perPage) {
+    public void setData(String category,String id, int page, int perPage) {
+        this.category = category;
         this.id = id;
         this.page = page;
         this.perPage = perPage;
     }
 
     public void getGankIoData(final RequestImpl listener) {
-        HttpClient.Builder.getGankIOServer().getGankIoData(id, page, perPage)
+        HttpClient.Builder.getGankIOServer().getGankIoData(category,id, page, perPage)
                 .subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<GankIoDataBean>() {
 

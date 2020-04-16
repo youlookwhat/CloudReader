@@ -33,7 +33,7 @@ public class GankViewModel extends BaseViewModel {
 
     public MutableLiveData<GankIoDataBean> loadGankData() {
         final MutableLiveData<GankIoDataBean> data = new MutableLiveData<>();
-        mModel.setData(mType, mPage, HttpUtils.per_page_more);
+        mModel.setData("GanHuo", mType, mPage, HttpUtils.per_page_more);
         mModel.getGankIoData(new RequestImpl() {
             @Override
             public void loadSuccess(Object object) {

@@ -12,6 +12,7 @@ import com.example.jingbin.cloudreader.base.binding.BaseBindingHolder;
 import com.example.jingbin.cloudreader.bean.GankIoDataBean;
 import com.example.jingbin.cloudreader.databinding.FragmentWelfareBinding;
 import com.example.jingbin.cloudreader.databinding.ItemWelfareBinding;
+import com.example.jingbin.cloudreader.utils.DensityUtil;
 import com.example.jingbin.cloudreader.utils.RefreshHelper;
 import com.example.jingbin.cloudreader.view.viewbigimage.ViewBigImageActivity;
 import com.example.jingbin.cloudreader.viewmodel.gank.WelfareViewModel;
@@ -58,9 +59,11 @@ public class WelfareFragment extends BaseFragment<WelfareViewModel, FragmentWelf
     }
 
     private void initRecycleView() {
+        int width = (DensityUtil.getDisplayWidth() - 36) / 2;
         mWelfareAdapter = new BaseBindingAdapter<GankIoDataBean.ResultBean, ItemWelfareBinding>(R.layout.item_welfare) {
             @Override
             protected void bindView(BaseBindingHolder holder, GankIoDataBean.ResultBean bean, ItemWelfareBinding binding, int position) {
+                DensityUtil.setWidthHeight(binding.ivWelfare, width, 852 / 1280f);
                 binding.setBean(bean);
             }
         };

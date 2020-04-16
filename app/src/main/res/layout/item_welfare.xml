@@ -12,13 +12,18 @@
 
     </data>
 
-    <ImageView
-        android:id="@+id/iv_welfare"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="250dp"
-        android:defaultPicType="@{1}"
-        android:displayFadeImage="@{bean.url}"
-        android:scaleType="centerCrop"
-        tools:background="@color/tabBackground"
-        tools:layout_margin="5dp" />
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/iv_welfare"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:defaultPicType="@{1}"
+            android:displayFadeImage="@{bean.url}"
+            android:scaleType="centerCrop"
+            tools:background="@color/tabBackground"
+            tools:layout_margin="5dp" />
+    </FrameLayout>
 </layout>

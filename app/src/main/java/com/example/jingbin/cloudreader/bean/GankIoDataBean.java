@@ -16,7 +16,7 @@ import java.util.List;
 public class GankIoDataBean extends BaseObservable implements Serializable {
 
     @ParamNames("error")
-    private boolean error;
+    private int status;
     /**
      * _id : 5832662b421aa929b0f34e99
      * createdAt : 2016-11-21T11:12:43.567Z
@@ -29,8 +29,8 @@ public class GankIoDataBean extends BaseObservable implements Serializable {
      * who : Chauncey
      */
 
-    @ParamNames("results")
-    private List<ResultBean> results;
+    @ParamNames("data")
+    private List<ResultBean> data;
 
     public static class ResultBean extends BaseObservable implements Serializable {
 
@@ -44,14 +44,24 @@ public class GankIoDataBean extends BaseObservable implements Serializable {
         private String source;
         @ParamNames("type")
         private String type;
+        @ParamNames("category")
+        private String category;
         @ParamNames("url")
         private String url;
         @ParamNames("used")
         private boolean used;
-        @ParamNames("who")
-        private String who;
+        @ParamNames("author")
+        private String author;
         @ParamNames("images")
         private List<String> images;
+
+        public String getCategory() {
+            return category;
+        }
+
+        public void setCategory(String category) {
+            this.category = category;
+        }
 
         @Bindable
         public String getCreatedAt() {
@@ -84,8 +94,8 @@ public class GankIoDataBean extends BaseObservable implements Serializable {
         }
 
         @Bindable
-        public String getWho() {
-            return who;
+        public String getAuthor() {
+            return author;
         }
 
         public void setCreatedAt(String createdAt) {
@@ -118,9 +128,9 @@ public class GankIoDataBean extends BaseObservable implements Serializable {
             notifyPropertyChanged(BR.url);
         }
 
-        public void setWho(String who) {
-            this.who = who;
-            notifyPropertyChanged(BR.who);
+        public void setAuthor(String author) {
+            this.author = author;
+            notifyPropertyChanged(BR.author);
         }
 
         public void setImages(List<String> images) {
@@ -134,17 +144,17 @@ public class GankIoDataBean extends BaseObservable implements Serializable {
         }
     }
 
-    public boolean isError() {
-        return error;
+    public int getStatus() {
+        return status;
     }
 
     @Bindable
     public List<ResultBean> getResults() {
-        return results;
+        return data;
     }
 
     public void setResults(List<ResultBean> results) {
-        this.results = results;
+        this.data = results;
         notifyPropertyChanged(BR.results);
     }
 }

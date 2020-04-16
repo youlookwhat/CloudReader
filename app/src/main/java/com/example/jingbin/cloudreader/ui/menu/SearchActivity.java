@@ -194,7 +194,7 @@ public class SearchActivity extends AppCompatActivity {
                 loadGankData();
                 break;
             case 2:
-                viewModel.setType("all");
+                viewModel.setType("All");
                 viewModel.setGankPage(1);
                 loadGankData();
                 break;

@@ -23,7 +23,7 @@ public class RefreshHelper {
         // 如果每个item高度一致设置后效率更高
         recyclerView.setHasFixedSize(true);
 //        recyclerView.setItemAnimator(null);
-        recyclerView.addItemDecoration(new GridSpaceItemDecoration(spanCount, spacing));
+        recyclerView.addItemDecoration(new GridSpaceItemDecoration(spacing));
         recyclerView.setRefreshHeaderView(new NeteaseRefreshHeaderView(recyclerView.getContext()));
         recyclerView.setLoadingMoreView(new NeteaseLoadMoreView(recyclerView.getContext()));
     }

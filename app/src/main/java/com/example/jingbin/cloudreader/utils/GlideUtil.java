@@ -70,10 +70,10 @@ public class GlideUtil {
      * 用于干货item，将gif图转换为静态图
      */
     public static void displayGif(String url, ImageView imageView) {
-
         Glide.with(imageView.getContext())
-                .asBitmap()
+//                .asBitmap()
                 .load(url)
+                .override(DensityUtil.dip2px(imageView.getContext(), 60), DensityUtil.dip2px(imageView.getContext(), 80))
                 .placeholder(R.drawable.shape_bg_loading)
                 .error(R.drawable.shape_bg_loading)
 //                .skipMemoryCache(true) //跳过内存缓存

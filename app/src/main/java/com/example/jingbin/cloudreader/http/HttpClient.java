@@ -97,9 +97,15 @@ public interface HttpClient {
      * 请求个数： 数字，大于0
      * 第几页：数字，大于0
      * eg: http://gank.io/api/data/Android/10/1
+     * // 分类api
+     * https://gank.io/api/v2/categories/<category_type>
+     * https://gank.io/api/v2/categories/Article
+     * // 分类数据api
+     * https://gank.io/api/v2/data/category/<category>/type/<type>/page/<page>/count/<count>
+     * // 旧：@GET("data/{type}/{pre_page}/{page}")
      */
-    @GET("data/{type}/{pre_page}/{page}")
-    Observable<GankIoDataBean> getGankIoData(@Path("type") String id, @Path("page") int page, @Path("pre_page") int pre_page);
+    @GET("v2/data/category/{category}/type/{type}/page/{page}/count/{count}")
+    Observable<GankIoDataBean> getGankIoData(@Path("category") String category, @Path("type") String type, @Path("page") int page, @Path("count") int count);
 
     /**
      * 每日数据： http://gank.io/api/day/年/月/日
@@ -294,8 +300,10 @@ public interface HttpClient {
 
     /**
      * 干货集中营 搜索
+     * // @GET("search/query/{keyWord}/category/{type}/count/20/page/{p}")
+     * https://gank.io/api/v2/search/<search>/category/<category>/type/<type>/page/<page>/count/<count>
      */
-    @GET("search/query/{keyWord}/category/{type}/count/20/page/{p}")
+    @GET("v2/search/{keyWord}/category/GanHuo/type/{type}/page/{p}/count/20")
     Flowable<GankIoDataBean> searchGank(@Path("p") int p, @Path("type") String type, @Path("keyWord") String keyWord);
 
     /**

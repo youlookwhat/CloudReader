@@ -21,7 +21,7 @@ public class Constants {
     // 保存每日推荐recyclerview内容
     public static String EVERYDAY_CONTENT = "everyday_content";
     // 干货订制类别
-    public static String GANK_CALA = "gank_cala";
+    public static String GANK_TYPE = "gank_type";
     // 是否登录
     public static String IS_LOGIN = "is_login";
     // 是否第一次收藏网址

@@ -6,7 +6,7 @@
 
         <import type="android.text.TextUtils" />
 
-        <import type="com.example.jingbin.cloudreader.utils.TimeUtil" />
+        <import type="com.example.jingbin.cloudreader.utils.DataUtil" />
 
         <variable
             name="resultsBean"
@@ -59,7 +59,9 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_weight="1"
+                    android:ellipsize="end"
                     android:lineSpacingExtra="4dp"
+                    android:maxLines="5"
                     android:text="@{resultsBean.desc}"
                     android:textColor="@color/colorContent"
                     android:textSize="15sp"
@@ -89,7 +91,7 @@
                     android:id="@+id/tv_android_who"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text='@{TextUtils.isEmpty(resultsBean.who)?@string/no_name:resultsBean.who}'
+                    android:text='@{TextUtils.isEmpty(resultsBean.author)?@string/no_name:resultsBean.author}'
                     android:textColor="@color/colorSubtitle"
                     android:textSize="12sp"
                     tools:text="作者" />
@@ -111,7 +113,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
-                    android:text='@{TimeUtil.getTranslateTime(resultsBean.publishedAt)}'
+                    android:text='@{DataUtil.getGanHuoTime(resultsBean.publishedAt)}'
                     android:textColor="@color/colorSubtitle"
                     android:textSize="12sp"
                     tools:text="10-24"

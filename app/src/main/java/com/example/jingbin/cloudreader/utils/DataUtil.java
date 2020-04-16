@@ -158,6 +158,16 @@ public class DataUtil {
     }
 
     /**
+     * 直接使用html格式化会有性能问题
+     */
+    public static String getGanHuoTime(String content) {
+        if (TextUtils.isEmpty(content)) {
+            return "";
+        }
+        return content;
+    }
+
+    /**
      * 保存知识体系数据
      */
     public static void putTreeData(Context context, TreeBean treeBean) {

@@ -177,7 +177,7 @@ public class EverydayFragment extends BaseFragment<EverydayViewModel, FragmentEv
         protected void onNoDoubleClick(View v) {
             switch (v.getId()) {
                 case R.id.ib_xiandu:
-                    WebViewActivity.loadUrl(v.getContext(), getString(R.string.string_url_xiandu), "闲读");
+                    WebViewActivity.loadUrl(v.getContext(), getString(R.string.string_url_gank), "干货集中营");
                     break;
                 case R.id.ib_wan_android:
                     WebViewActivity.loadUrl(v.getContext(), getString(R.string.string_url_wanandroid), "玩Android");

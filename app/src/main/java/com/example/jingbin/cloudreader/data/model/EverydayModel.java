@@ -91,7 +91,7 @@ public class EverydayModel {
                     addUrlList(lists, results.getWelfare(), "福利");
                 }
                 if (results.getiOS() != null && results.getiOS().size() > 0) {
-                    addUrlList(lists, results.getiOS(), "IOS");
+                    addUrlList(lists, results.getiOS(), "iOS");
                 }
                 if (results.getRestMovie() != null && results.getRestMovie().size() > 0) {
                     addUrlList(lists, results.getRestMovie(), "休息视频");

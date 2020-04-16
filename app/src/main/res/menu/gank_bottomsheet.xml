@@ -6,9 +6,13 @@
         android:icon="@drawable/home_title_all"
         android:title="全部" />
     <item
+        android:id="@+id/gank_flutter"
+        android:icon="@drawable/home_title_flutter"
+        android:title="Flutter" />
+    <item
         android:id="@+id/gank_ios"
         android:icon="@drawable/home_title_ios"
-        android:title="IOS" />
+        android:title="iOS" />
     <item
         android:id="@+id/gank_app"
         android:icon="@drawable/home_title_app"
@@ -18,11 +22,11 @@
         android:icon="@drawable/home_title_qian"
         android:title="前端" />
     <item
-        android:id="@+id/gank_movie"
-        android:icon="@drawable/home_title_movie"
-        android:title="休息视频" />
+        android:id="@+id/gank_backend"
+        android:icon="@drawable/home_title_backend"
+        android:title="后端" />
     <item
         android:id="@+id/gank_resouce"
         android:icon="@drawable/home_title_source"
-        android:title="拓展资源" />
+        android:title="推荐" />
 </menu>

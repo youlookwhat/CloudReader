@@ -57,7 +57,7 @@ public class WelfareViewModel extends BaseViewModel {
 
     public MutableLiveData<GankIoDataBean> loadWelfareData() {
         final MutableLiveData<GankIoDataBean> data = new MutableLiveData<>();
-        mModel.setData("福利", mPage, HttpUtils.per_page_more);
+        mModel.setData("Girl", "Girl",mPage, HttpUtils.per_page_more);
         mModel.getGankIoData(new RequestImpl() {
             @Override
             public void loadSuccess(Object object) {
