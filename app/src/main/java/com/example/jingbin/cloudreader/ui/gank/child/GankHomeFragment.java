@@ -85,8 +85,9 @@ public class GankHomeFragment extends BaseFragment<GankHomeViewModel, FragmentEv
     }
 
     private void initRecyclerView() {
-        mHeaderBinding = DataBindingUtil.inflate(LayoutInflater.from(getContext()), R.layout.header_item_everyday, null, false);
         mAdapter = new GankAndroidAdapter();
+        mAdapter.setAllType(true);
+        mHeaderBinding = DataBindingUtil.inflate(LayoutInflater.from(getContext()), R.layout.header_item_everyday, null, false);
         bindingView.recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         bindingView.recyclerView.setLoadMoreEnabled(true);
         bindingView.recyclerView.setHasFixedSize(false);

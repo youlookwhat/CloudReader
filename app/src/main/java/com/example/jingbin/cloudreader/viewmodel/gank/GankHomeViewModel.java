@@ -50,6 +50,7 @@ public class GankHomeViewModel extends BaseViewModel {
                     @Override
                     public void accept(Throwable throwable) throws Exception {
                         bannerData.setValue(null);
+                        isShowLoading.setValue(false);
                     }
                 });
         addDisposable(subscribe);
@@ -65,13 +66,11 @@ public class GankHomeViewModel extends BaseViewModel {
                 .subscribe(new Consumer<GankIoDataBean>() {
                     @Override
                     public void accept(GankIoDataBean bean) throws Exception {
-                        isShowLoading.setValue(false);
                         contentData.setValue(bean);
                     }
                 }, new Consumer<Throwable>() {
                     @Override
                     public void accept(Throwable throwable) throws Exception {
-                        isShowLoading.setValue(false);
                         contentData.setValue(null);
                     }
                 });
