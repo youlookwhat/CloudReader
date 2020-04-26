@@ -7,6 +7,7 @@ import android.support.annotation.NonNull;
 import com.example.jingbin.cloudreader.base.BaseViewModel;
 import com.example.jingbin.cloudreader.bean.GankIoDataBean;
 import com.example.jingbin.cloudreader.http.HttpClient;
+import com.example.jingbin.cloudreader.utils.DataUtil;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
@@ -43,7 +44,7 @@ public class GankHomeViewModel extends BaseViewModel {
                 .subscribe(new Consumer<GankIoDataBean>() {
                     @Override
                     public void accept(GankIoDataBean bean) throws Exception {
-                        bannerData.setValue(bean);
+                        bannerData.setValue(DataUtil.getTrueData(bean));
                         isShowLoading.setValue(false);
                     }
                 }, new Consumer<Throwable>() {
@@ -66,7 +67,7 @@ public class GankHomeViewModel extends BaseViewModel {
                 .subscribe(new Consumer<GankIoDataBean>() {
                     @Override
                     public void accept(GankIoDataBean bean) throws Exception {
-                        contentData.setValue(bean);
+                        contentData.setValue(DataUtil.getTrueData(bean));
                     }
                 }, new Consumer<Throwable>() {
                     @Override
