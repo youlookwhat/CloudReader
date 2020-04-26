@@ -16,11 +16,14 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.CookieManager;
+import android.webkit.CookieSyncManager;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.FrameLayout;
@@ -34,6 +37,7 @@ import com.example.jingbin.cloudreader.data.model.CollectModel;
 import com.example.jingbin.cloudreader.ui.MainActivity;
 import com.example.jingbin.cloudreader.utils.BaseTools;
 import com.example.jingbin.cloudreader.utils.CommonUtils;
+import com.example.jingbin.cloudreader.utils.DebugUtil;
 import com.example.jingbin.cloudreader.utils.DialogBuild;
 import com.example.jingbin.cloudreader.utils.PermissionHandler;
 import com.example.jingbin.cloudreader.utils.RxSaveImage;
@@ -84,6 +88,7 @@ public class WebViewActivity extends AppCompatActivity implements IWebPageView {
         getIntentData();
         initTitle();
         initWebView();
+        syncCookie(mUrl);
         webView.loadUrl(mUrl);
         getDataFromBrowser(getIntent());
     }
@@ -316,6 +321,36 @@ public class WebViewActivity extends AppCompatActivity implements IWebPageView {
                 "window.injectedObject.textClick(this.getAttribute(\"type\"),this.getAttribute(\"item_pk\"));}" +
                 "}" +
                 "})()");
+    }
+
+    /**
+     * 同步cookie
+     */
+    private void syncCookie(String url) {
+        if (!TextUtils.isEmpty(url) && url.contains("wanandroid")) {
+            try {
+                CookieSyncManager.createInstance(this);
+                CookieManager cookieManager = CookieManager.getInstance();
+                cookieManager.setAcceptCookie(true);
+                cookieManager.removeSessionCookie();// 移除
+                cookieManager.removeAllCookie();
+                String cookie = SPUtils.getString("cookie", "");
+                if (!TextUtils.isEmpty(cookie)) {
+                    String[] split = cookie.split(";");
+                    for (int i = 0; i < split.length; i++) {
+                        cookieManager.setCookie(url, split[i]);
+                    }
+                }
+//            String cookies = cookieManager.getCookie(url);
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    cookieManager.flush();
+                } else {
+                    CookieSyncManager.getInstance().sync();
+                }
+            } catch (Exception e) {
+                DebugUtil.error("==异常==", e.toString());
+            }
+        }
     }
 
     public FrameLayout getVideoFullView() {

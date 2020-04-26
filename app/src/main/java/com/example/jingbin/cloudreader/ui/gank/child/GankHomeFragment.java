@@ -29,6 +29,7 @@ import com.example.jingbin.cloudreader.http.rx.RxCodeConstants;
 import com.example.jingbin.cloudreader.utils.DensityUtil;
 import com.example.jingbin.cloudreader.utils.GlideUtil;
 import com.example.jingbin.cloudreader.utils.PerfectClickListener;
+import com.example.jingbin.cloudreader.view.viewbigimage.ViewBigImageActivity;
 import com.example.jingbin.cloudreader.view.webview.WebViewActivity;
 import com.example.jingbin.cloudreader.viewmodel.gank.EverydayViewModel;
 import com.example.jingbin.cloudreader.viewmodel.gank.GankHomeViewModel;
@@ -138,19 +139,26 @@ public class GankHomeFragment extends BaseFragment<GankHomeViewModel, FragmentEv
                                         public void onBind(Context context, int position, GankIoDataBean.ResultBean data) {
                                             DensityUtil.setWidthHeight(imageView, DensityUtil.getDisplayWidth(), 2.2f);
                                             GlideUtil.displayEspImage(data.getImage(), imageView, 3);
+                                            imageView.setOnClickListener(new View.OnClickListener() {
+                                                @Override
+                                                public void onClick(View v) {
+                                                    if (!TextUtils.isEmpty(bean.getResults().get(position).getUrl())
+                                                            && bean.getResults().get(position).getUrl().startsWith("http")) {
+                                                        WebViewActivity.loadUrl(getContext(), bean.getResults().get(position).getUrl(), "干货集中营");
+                                                    }
+                                                }
+                                            });
+                                            imageView.setOnLongClickListener(new View.OnLongClickListener() {
+                                                @Override
+                                                public boolean onLongClick(View v) {
+                                                    ViewBigImageActivity.start(v.getContext(), data.getImage(), data.getTitle());
+                                                    return true;
+                                                }
+                                            });
                                         }
                                     };
                                 }
                             }).start();
-                    mHeaderBinding.banner.setOnBannerClickListener(new OnBannerClickListener() {
-                        @Override
-                        public void onBannerClick(int position) {
-                            if (!TextUtils.isEmpty(bean.getResults().get(position).getUrl())
-                                    && bean.getResults().get(position).getUrl().startsWith("http")) {
-                                WebViewActivity.loadUrl(getContext(), bean.getResults().get(position).getUrl(), "干货集中营");
-                            }
-                        }
-                    });
                     isLoadBanner = true;
                 }
             }
