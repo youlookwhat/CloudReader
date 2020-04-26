@@ -5,6 +5,7 @@ import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
 
@@ -76,11 +77,15 @@ public class TreeFragment extends BaseFragment<TreeViewModel, FragmentWanAndroid
             @Override
             public void onClick(View v) {
                 if (!mTreeAdapter.isSelect()) {
+                    GridLayoutManager layoutManager = new GridLayoutManager(activity, 2);
+                    bindingView.xrvWan.setLayoutManager(layoutManager);
                     oneBinding.tvPosition.setText("选择类别");
                     mTreeAdapter.setSelect(true);
                     mTreeAdapter.notifyDataSetChanged();
                     bindingView.xrvWan.addItemDecoration(new SpacesItemDecoration(activity).setNoShowDivider(1, 0).setDrawable(R.drawable.shape_line));
                 } else {
+                    LinearLayoutManager layoutManager = new LinearLayoutManager(activity);
+                    bindingView.xrvWan.setLayoutManager(layoutManager);
                     oneBinding.tvPosition.setText("发现页内容订制");
                     mTreeAdapter.setSelect(false);
                     mTreeAdapter.notifyDataSetChanged();
@@ -98,6 +103,8 @@ public class TreeFragment extends BaseFragment<TreeViewModel, FragmentWanAndroid
                         ToastUtil.showToastLong("当前已经是\"" + mTreeAdapter.getData().get(position).getName() + "\"");
                         return;
                     }
+                    LinearLayoutManager layoutManager = new LinearLayoutManager(activity);
+                    bindingView.xrvWan.setLayoutManager(layoutManager);
                     oneBinding.tvPosition.setText("发现页内容订制");
                     mTreeAdapter.setSelect(false);
                     mTreeAdapter.notifyDataSetChanged();

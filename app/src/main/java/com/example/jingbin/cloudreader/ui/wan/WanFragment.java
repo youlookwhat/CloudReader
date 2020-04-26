@@ -53,7 +53,7 @@ public class WanFragment extends BaseFragment<NoViewModel, FragmentContentBindin
         mTitleList.clear();
         mTitleList.add("玩安卓");
         mTitleList.add("发现");
-        mTitleList.add("知识体系");
+        mTitleList.add("体系");
         mTitleList.add("导航");
         mFragments.add(HomeFragment.newInstance());
         mFragments.add(WanFindFragment.newInstance());
