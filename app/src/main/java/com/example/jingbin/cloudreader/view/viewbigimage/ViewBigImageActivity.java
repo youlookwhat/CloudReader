@@ -26,11 +26,15 @@ import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 import com.example.http.utils.CheckNetwork;
 import com.example.jingbin.cloudreader.R;
+import com.example.jingbin.cloudreader.bean.ImageItemsBean;
+import com.example.jingbin.cloudreader.http.cache.ACache;
 import com.example.jingbin.cloudreader.utils.PermissionHandler;
 import com.example.jingbin.cloudreader.utils.RxSaveImage;
 import com.example.jingbin.cloudreader.utils.ToastUtil;
 import com.github.chrisbanes.photoview.OnPhotoTapListener;
 import com.github.chrisbanes.photoview.PhotoView;
+
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -103,8 +107,9 @@ public class ViewBigImageActivity extends FragmentActivity implements OnPageChan
             code = bundle.getInt("code");
             selet = bundle.getInt("selet");
             isLocal = bundle.getBoolean("isLocal", false);
-            imageList = bundle.getStringArrayList("imageList");
-            imageTitles = bundle.getStringArrayList("imageTitles");
+            ImageItemsBean itemsBean = (ImageItemsBean) ACache.get(this).getAsObject("ImageItemsBean");
+            imageList = itemsBean.getImageList();
+            imageTitles = itemsBean.getImageTitles();
             isApp = bundle.getBoolean("isApp", false);
             imageId = bundle.getInt("id", 0);
         }
@@ -328,8 +333,10 @@ public class ViewBigImageActivity extends FragmentActivity implements OnPageChan
         Bundle bundle = new Bundle();
         bundle.putInt("selet", 2);
         bundle.putInt("code", position);
-        bundle.putStringArrayList("imageList", imageList);
-        bundle.putStringArrayList("imageTitles", imageTitles);
+        ImageItemsBean itemsBean = new ImageItemsBean();
+        itemsBean.setImageList(imageList);
+        itemsBean.setImageTitles(imageTitles);
+        ACache.get(context).put("ImageItemsBean", itemsBean);
         Intent intent = new Intent(context, ViewBigImageActivity.class);
         intent.putExtras(bundle);
         context.startActivity(intent);
@@ -342,12 +349,14 @@ public class ViewBigImageActivity extends FragmentActivity implements OnPageChan
         ArrayList<String> imageList = new ArrayList<>();
         ArrayList<String> imageTitles = new ArrayList<>();
         imageList.add(imageUrl);
-        imageTitles.add(imageUrl);
+        imageTitles.add(imageTitle);
         Bundle bundle = new Bundle();
         bundle.putInt("selet", 1);
         bundle.putInt("code", 0);
-        bundle.putStringArrayList("imageList", imageList);
-        bundle.putStringArrayList("imageTitles", imageTitles);
+        ImageItemsBean itemsBean = new ImageItemsBean();
+        itemsBean.setImageList(imageList);
+        itemsBean.setImageTitles(imageTitles);
+        ACache.get(context).put("ImageItemsBean", itemsBean);
         Intent intent = new Intent(context, ViewBigImageActivity.class);
         intent.putExtras(bundle);
         context.startActivity(intent);
