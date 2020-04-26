@@ -54,6 +54,30 @@ public class GankIoDataBean extends BaseObservable implements Serializable {
         private String author;
         @ParamNames("images")
         private List<String> images;
+        @ParamNames("image")
+        private String image;
+        @ParamNames("title")
+        private String title;
+
+        @Bindable
+        public String getImage() {
+            return image;
+        }
+
+        public void setImage(String image) {
+            this.image = image;
+            notifyPropertyChanged(BR.image);
+        }
+
+        @Bindable
+        public String getTitle() {
+            return title;
+        }
+
+        public void setTitle(String title) {
+            this.title = title;
+            notifyPropertyChanged(BR.title);
+        }
 
         public String getCategory() {
             return category;

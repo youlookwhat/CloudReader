@@ -79,40 +79,7 @@ public interface HttpClient {
         }
     }
 
-    /**
-     * 首页轮播图
-     */
-    @GET("ting?from=android&version=5.8.1.0&channel=ppzs&operator=3&method=baidu.ting.plaza.index&cuid=89CF1E1A06826F9AB95A34DC0F6AAA14")
-    Observable<FrontpageBean> getFrontpage();
-
-    /**
-     * 玩安卓轮播图
-     */
-    @GET("banner/json")
-    Observable<WanAndroidBannerBean> getWanAndroidBanner();
-
-    /**
-     * 分类数据: http://gank.io/api/data/数据类型/请求个数/第几页
-     * 数据类型： 福利 | Android | iOS | 休息视频 | 拓展资源 | 前端 | all
-     * 请求个数： 数字，大于0
-     * 第几页：数字，大于0
-     * eg: http://gank.io/api/data/Android/10/1
-     * // 分类api
-     * https://gank.io/api/v2/categories/<category_type>
-     * https://gank.io/api/v2/categories/Article
-     * // 分类数据api
-     * https://gank.io/api/v2/data/category/<category>/type/<type>/page/<page>/count/<count>
-     * // 旧：@GET("data/{type}/{pre_page}/{page}")
-     */
-    @GET("v2/data/category/{category}/type/{type}/page/{page}/count/{count}")
-    Observable<GankIoDataBean> getGankIoData(@Path("category") String category, @Path("type") String type, @Path("page") int page, @Path("count") int count);
-
-    /**
-     * 每日数据： http://gank.io/api/day/年/月/日
-     * eg:http://gank.io/api/day/2015/08/06
-     */
-    @GET("day/{year}/{month}/{day}")
-    Observable<GankIoDayBean> getGankIoDay(@Path("year") String year, @Path("month") String month, @Path("day") String day);
+    /**--------------------------------------------豆瓣--------------------------------------------*/
 
     /**
      * 豆瓣热映电影，每日更新
@@ -155,6 +122,36 @@ public interface HttpClient {
     @GET("v2/book/{id}")
     Observable<BookDetailBean> getBookDetail(@Path("id") String id);
 
+    /**--------------------------------------------时光网--------------------------------------------*/
+
+    /**
+     * 时光网热映电影
+     */
+    @GET("Showtime/LocationMovies.api?locationId=561")
+    Observable<MtimeFilmeBean> getHotFilm();
+
+    /**
+     * 时光网即将上映电影
+     */
+    @GET("Movie/MovieComingNew.api?locationId=561")
+    Observable<ComingFilmBean> getComingFilm();
+
+    /**
+     * 获取电影详情
+     * FilmDetailBasicBean 561为武汉地区
+     *
+     * @param movieId 电影bean里的id
+     */
+    @GET("movie/detail.api?locationId=561")
+    Observable<FilmDetailBean> getFilmDetail(@Query("movieId") int movieId);
+
+    /**--------------------------------------------其他--------------------------------------------*/
+    /**
+     * 首页轮播图
+     */
+    @GET("ting?from=android&version=5.8.1.0&channel=ppzs&operator=3&method=baidu.ting.plaza.index&cuid=89CF1E1A06826F9AB95A34DC0F6AAA14")
+    Observable<FrontpageBean> getFrontpage();
+
     /**
      * 检查更新
      */
@@ -168,6 +165,14 @@ public interface HttpClient {
      */
     @GET("article/list/text")
     Observable<QsbkListBean> getQsbkList(@Query("page") int page);
+
+    /**--------------------------------------------玩安卓--------------------------------------------*/
+
+    /**
+     * 玩安卓轮播图
+     */
+    @GET("banner/json")
+    Observable<WanAndroidBannerBean> getWanAndroidBanner();
 
     /**
      * 玩安卓，文章列表、知识体系下的文章
@@ -299,35 +304,6 @@ public interface HttpClient {
     Flowable<SearchTagBean> getHotkey();
 
     /**
-     * 干货集中营 搜索
-     * // @GET("search/query/{keyWord}/category/{type}/count/20/page/{p}")
-     * https://gank.io/api/v2/search/<search>/category/<category>/type/<type>/page/<page>/count/<count>
-     */
-    @GET("v2/search/{keyWord}/category/GanHuo/type/{type}/page/{p}/count/20")
-    Flowable<GankIoDataBean> searchGank(@Path("p") int p, @Path("type") String type, @Path("keyWord") String keyWord);
-
-    /**
-     * 时光网热映电影
-     */
-    @GET("Showtime/LocationMovies.api?locationId=561")
-    Observable<MtimeFilmeBean> getHotFilm();
-
-    /**
-     * 时光网即将上映电影
-     */
-    @GET("Movie/MovieComingNew.api?locationId=561")
-    Observable<ComingFilmBean> getComingFilm();
-
-    /**
-     * 获取电影详情
-     * FilmDetailBasicBean 561为武汉地区
-     *
-     * @param movieId 电影bean里的id
-     */
-    @GET("movie/detail.api?locationId=561")
-    Observable<FilmDetailBean> getFilmDetail(@Query("movieId") int movieId);
-
-    /**
      * 玩安卓，首页第二tab 项目；列表
      *
      * @param page 页码，从0开始
@@ -366,4 +342,51 @@ public interface HttpClient {
      */
     @GET("wxarticle/list/{id}/{page}/json")
     Observable<BaseResultBean<WxarticleDetailItemBean>> getWxarticleDetail(@Path("id") int id, @Path("page") int page);
+
+    /**--------------------------------------------干货集中营--------------------------------------------*/
+
+    /**
+     * 每日数据： http://gank.io/api/day/年/月/日
+     * eg:http://gank.io/api/day/2015/08/06
+     */
+    @GET("day/{year}/{month}/{day}")
+    Observable<GankIoDayBean> getGankIoDay(@Path("year") String year, @Path("month") String month, @Path("day") String day);
+
+    /**
+     * 干货集中营轮播图
+     */
+    @GET("v2/banners")
+    Observable<GankIoDataBean> getGankBanner();
+
+    /**
+     * 干货集中营本周最热
+     */
+    @GET("v2/hot/views/category/GanHuo/count/20")
+    Observable<GankIoDataBean> getGankHot();
+
+    /**
+     * 干货集中营 搜索
+     * // @GET("search/query/{keyWord}/category/{type}/count/20/page/{p}")
+     * https://gank.io/api/v2/search/<search>/category/<category>/type/<type>/page/<page>/count/<count>
+     */
+    @GET("v2/search/{keyWord}/category/GanHuo/type/{type}/page/{p}/count/20")
+    Flowable<GankIoDataBean> searchGank(@Path("p") int p, @Path("type") String type, @Path("keyWord") String keyWord);
+
+
+    /**
+     * 分类数据: http://gank.io/api/data/数据类型/请求个数/第几页
+     * 数据类型： 福利 | Android | iOS | 休息视频 | 拓展资源 | 前端 | all
+     * 请求个数： 数字，大于0
+     * 第几页：数字，大于0
+     * eg: http://gank.io/api/data/Android/10/1
+     * // 分类api
+     * https://gank.io/api/v2/categories/<category_type>
+     * https://gank.io/api/v2/categories/Article
+     * // 分类数据api
+     * https://gank.io/api/v2/data/category/<category>/type/<type>/page/<page>/count/<count>
+     * // 旧：@GET("data/{type}/{pre_page}/{page}")
+     */
+    @GET("v2/data/category/{category}/type/{type}/page/{page}/count/{count}")
+    Observable<GankIoDataBean> getGankIoData(@Path("category") String category, @Path("type") String type, @Path("page") int page, @Path("count") int count);
+
 }

@@ -98,7 +98,7 @@ public class AndroidFragment extends BaseFragment<GankViewModel, FragmentAndroid
                 viewModel.setPage(page);
                 loadAndroidData();
             }
-        }, 300);
+        });
     }
 
     private void loadAndroidData() {

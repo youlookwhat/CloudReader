@@ -12,6 +12,7 @@ import com.example.jingbin.cloudreader.http.rx.RxCodeConstants;
 import com.example.jingbin.cloudreader.ui.gank.child.AndroidFragment;
 import com.example.jingbin.cloudreader.ui.gank.child.CustomFragment;
 import com.example.jingbin.cloudreader.ui.gank.child.EverydayFragment;
+import com.example.jingbin.cloudreader.ui.gank.child.GankHomeFragment;
 import com.example.jingbin.cloudreader.ui.gank.child.WelfareFragment;
 import com.example.jingbin.cloudreader.view.MyFragmentPagerAdapter;
 import com.example.jingbin.cloudreader.viewmodel.menu.NoViewModel;
@@ -67,11 +68,11 @@ public class GankFragment extends BaseFragment<NoViewModel, FragmentContentBindi
 
     private void initFragmentList() {
         mTitleList.clear();
-        mTitleList.add("每日推荐");
+        mTitleList.add("干货首页");
         mTitleList.add("福利");
-        mTitleList.add("干货订制");
+        mTitleList.add("订制");
         mTitleList.add("大安卓");
-        mFragments.add(new EverydayFragment());
+        mFragments.add(new GankHomeFragment());
         mFragments.add(new WelfareFragment());
         mFragments.add(new CustomFragment());
         mFragments.add(AndroidFragment.newInstance("Android"));

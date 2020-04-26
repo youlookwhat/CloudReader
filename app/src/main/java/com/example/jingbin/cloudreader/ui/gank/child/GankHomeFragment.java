@@ -1,0 +1,256 @@
+package com.example.jingbin.cloudreader.ui.gank.child;
+
+import android.animation.ValueAnimator;
+import android.arch.lifecycle.Observer;
+import android.content.Context;
+import android.databinding.DataBindingUtil;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.support.v7.widget.LinearLayoutManager;
+import android.text.TextUtils;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.LinearInterpolator;
+import android.view.animation.RotateAnimation;
+import android.widget.ImageView;
+
+import com.example.jingbin.cloudreader.R;
+import com.example.jingbin.cloudreader.adapter.EverydayAdapter;
+import com.example.jingbin.cloudreader.adapter.GankAndroidAdapter;
+import com.example.jingbin.cloudreader.base.BaseFragment;
+import com.example.jingbin.cloudreader.bean.AndroidBean;
+import com.example.jingbin.cloudreader.bean.GankIoDataBean;
+import com.example.jingbin.cloudreader.databinding.FragmentEverydayBinding;
+import com.example.jingbin.cloudreader.databinding.HeaderItemEverydayBinding;
+import com.example.jingbin.cloudreader.http.rx.RxBus;
+import com.example.jingbin.cloudreader.http.rx.RxBusBaseMessage;
+import com.example.jingbin.cloudreader.http.rx.RxCodeConstants;
+import com.example.jingbin.cloudreader.utils.DensityUtil;
+import com.example.jingbin.cloudreader.utils.GlideUtil;
+import com.example.jingbin.cloudreader.utils.PerfectClickListener;
+import com.example.jingbin.cloudreader.view.webview.WebViewActivity;
+import com.example.jingbin.cloudreader.viewmodel.gank.EverydayViewModel;
+import com.example.jingbin.cloudreader.viewmodel.gank.GankHomeViewModel;
+
+import java.util.ArrayList;
+
+import me.jingbin.sbanner.config.OnBannerClickListener;
+import me.jingbin.sbanner.holder.BannerViewHolder;
+import me.jingbin.sbanner.holder.HolderCreator;
+
+import static com.example.jingbin.cloudreader.viewmodel.gank.EverydayViewModel.getTodayTime;
+
+/**
+ * 干货首页
+ *
+ * @author jingbin
+ */
+public class GankHomeFragment extends BaseFragment<GankHomeViewModel, FragmentEverydayBinding> {
+
+    private HeaderItemEverydayBinding mHeaderBinding;
+    private GankAndroidAdapter mAdapter;
+    private boolean mIsPrepared = false;
+    private boolean mIsFirst = true;
+    private RotateAnimation animation;
+    private boolean isLoadBanner;
+
+    @Override
+    public int setContent() {
+        return R.layout.fragment_everyday;
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+        showContentView();
+        initAnimation();
+        initRecyclerView();
+
+        mIsPrepared = true;
+        loadData();
+    }
+
+    @Override
+    protected void loadData() {
+        if (mIsPrepared && isLoadBanner) {
+            onResume();
+        }
+        if (!mIsVisible || !mIsPrepared || !mIsFirst) {
+            return;
+        }
+        bindingView.recyclerView.postDelayed(() -> viewModel.loadData(), 150);
+        mIsFirst = false;
+    }
+
+    private void initRecyclerView() {
+        mHeaderBinding = DataBindingUtil.inflate(LayoutInflater.from(getContext()), R.layout.header_item_everyday, null, false);
+        mAdapter = new GankAndroidAdapter();
+        bindingView.recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        bindingView.recyclerView.setLoadMoreEnabled(true);
+        bindingView.recyclerView.setHasFixedSize(false);
+        bindingView.recyclerView.addHeaderView(mHeaderBinding.getRoot());
+        bindingView.recyclerView.setAdapter(mAdapter);
+
+        // 显示日期,去掉第一位的"0"
+        String day = getTodayTime().get(2);
+        mHeaderBinding.includeEveryday.tvDailyText.setText(day.indexOf("0") == 0 ? day.replace("0", "") : day);
+        mHeaderBinding.includeEveryday.ibXiandu.setOnClickListener(listener);
+        mHeaderBinding.includeEveryday.ibWanAndroid.setOnClickListener(listener);
+        mHeaderBinding.includeEveryday.ibMovieHot.setOnClickListener(listener);
+        mHeaderBinding.includeEveryday.flEveryday.setOnClickListener(listener);
+        DensityUtil.setWidthHeight(mHeaderBinding.banner, DensityUtil.getDisplayWidth(), 2.2f);
+
+        onObserveViewModel();
+    }
+
+    private void onObserveViewModel() {
+        viewModel.getShowLoading().observe(this, new Observer<Boolean>() {
+            @Override
+            public void onChanged(@Nullable Boolean aBoolean) {
+                showRotaLoading(aBoolean);
+            }
+        });
+        viewModel.getBannerData().observe(this, new Observer<GankIoDataBean>() {
+            @Override
+            public void onChanged(@Nullable GankIoDataBean bean) {
+                if (bean != null && bean.getResults() != null && bean.getResults().size() > 0) {
+                    mHeaderBinding.banner
+                            .setDelayTime(4000)
+                            .setAutoPlay(true)
+                            .setOffscreenPageLimit(bean.getResults().size())
+                            .setPages(bean.getResults(), new HolderCreator<BannerViewHolder>() {
+                                @Override
+                                public BannerViewHolder createViewHolder() {
+                                    return new BannerViewHolder<GankIoDataBean.ResultBean>() {
+                                        private ImageView imageView;
+
+                                        @Override
+                                        public View createView(Context context) {
+                                            View view = LayoutInflater.from(context).inflate(R.layout.item_banner_wanandroid, null);
+                                            imageView = (ImageView) view.findViewById(R.id.iv_banner);
+                                            return view;
+                                        }
+
+                                        @Override
+                                        public void onBind(Context context, int position, GankIoDataBean.ResultBean data) {
+                                            DensityUtil.setWidthHeight(imageView, DensityUtil.getDisplayWidth(), 2.2f);
+                                            GlideUtil.displayEspImage(data.getImage(), imageView, 3);
+                                        }
+                                    };
+                                }
+                            }).start();
+                    mHeaderBinding.banner.setOnBannerClickListener(new OnBannerClickListener() {
+                        @Override
+                        public void onBannerClick(int position) {
+                            if (!TextUtils.isEmpty(bean.getResults().get(position).getUrl())
+                                    && bean.getResults().get(position).getUrl().startsWith("http")) {
+                                WebViewActivity.loadUrl(getContext(), bean.getResults().get(position).getUrl(), "干货集中营");
+                            }
+                        }
+                    });
+                    isLoadBanner = true;
+                }
+            }
+        });
+        viewModel.getContentData().observe(this, new Observer<GankIoDataBean>() {
+            @Override
+            public void onChanged(@Nullable GankIoDataBean bean) {
+                if (bean != null && bean.getResults() != null && bean.getResults().size() > 0) {
+                    mAdapter.setNewData(bean.getResults());
+                    bindingView.recyclerView.loadMoreEnd();
+                } else {
+                    showError();
+                }
+            }
+        });
+    }
+
+    private PerfectClickListener listener = new PerfectClickListener() {
+        @Override
+        protected void onNoDoubleClick(View v) {
+            switch (v.getId()) {
+                case R.id.ib_xiandu:
+                    WebViewActivity.loadUrl(v.getContext(), getString(R.string.string_url_gank), "干货集中营");
+                    break;
+                case R.id.ib_wan_android:
+                    WebViewActivity.loadUrl(v.getContext(), getString(R.string.string_url_wanandroid), "玩Android");
+                    break;
+                case R.id.ib_movie_hot:
+                    RxBus.getDefault().post(RxCodeConstants.JUMP_TYPE_TO_ONE, new RxBusBaseMessage());
+                    break;
+                case R.id.fl_everyday:
+                    WebViewActivity.loadUrl(v.getContext(), getString(R.string.string_url_trending), "Trending");
+                    break;
+                default:
+                    break;
+            }
+        }
+    };
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        // 失去焦点，否则RecyclerView第一个item会回到顶部
+        bindingView.recyclerView.setFocusable(false);
+        if (isLoadBanner) {
+            mHeaderBinding.banner.startAutoPlay();
+        }
+    }
+
+    @Override
+    protected void onInvisible() {
+        if (mIsPrepared && isLoadBanner) {
+            onPause();
+        }
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        // 不可见时轮播图停止滚动
+        if (isLoadBanner) {
+            mHeaderBinding.banner.stopAutoPlay();
+        }
+    }
+
+    private void initAnimation() {
+        bindingView.llLoading.setVisibility(View.VISIBLE);
+        animation = new RotateAnimation(0f, 360f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
+        animation.setDuration(3000);//设置动画持续时间
+        animation.setInterpolator(new LinearInterpolator());//不停顿
+        animation.setRepeatMode(ValueAnimator.RESTART);//重新从头执行
+        animation.setRepeatCount(ValueAnimator.INFINITE);//设置重复次数
+        bindingView.ivLoading.setAnimation(animation);
+        animation.startNow();
+    }
+
+    /**
+     * 显示旋转动画
+     */
+    private void showRotaLoading(Boolean isLoading) {
+        if (isLoading != null && isLoading) {
+            bindingView.llLoading.setVisibility(View.VISIBLE);
+            bindingView.recyclerView.setVisibility(View.GONE);
+            animation.startNow();
+        } else {
+            bindingView.llLoading.setVisibility(View.GONE);
+            bindingView.recyclerView.setVisibility(View.VISIBLE);
+            animation.cancel();
+        }
+    }
+
+    @Override
+    protected void onRefresh() {
+        showContentView();
+        showRotaLoading(true);
+        viewModel.loadData();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        mHeaderBinding.banner.stopAutoPlay();
+    }
+}
