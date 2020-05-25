@@ -49,7 +49,7 @@ If you have any questions, please write to [the issue][21] of making you don't u
 
 
 ## See Detail
-> [项目介绍详情](https://github.com/youlookwhat/CloudReader/wiki/Introduction) | [细节优化详情](https://github.com/youlookwhat/CloudReader/wiki) | 🚀[**版本更新详情(V3.3.0)**](https://github.com/youlookwhat/CloudReader/wiki/Update-log)
+> [项目介绍详情](https://github.com/youlookwhat/CloudReader/wiki/Introduction) | [细节优化详情](https://github.com/youlookwhat/CloudReader/wiki) | 🚀[**版本更新详情(V3.4.0)**](https://github.com/youlookwhat/CloudReader/wiki/Update-log)
 
 ### Download
 　[酷安下载](https://www.coolapk.com/apk/127875)
@@ -66,8 +66,13 @@ If you have any questions, please write to [the issue][21] of making you don't u
 　
 
 ### Version
+#### V3.4.0（2020-05-20）
+ - 1、[替换] 干货集中营Api更新
+ - 2、[优化] 体系页面选择类别优化
+ - 3、[优化] 首页、福利等页面Ui优化
+
 #### V3.3.0（2020-02-29）
- - 1、 [新增] 公众号页面改为发现页面，并可订制
+ - 1、[新增] 公众号页面改为发现页面，并可订制
  - 2、[优化] 导航页面增加滑动置顶
  - 3、[优化] 启动图、代码等部分优化
 
@@ -284,7 +289,7 @@ limitations under the License.
 [2]:https://www.apache.org/licenses/LICENSE-2.0.html
 [3]:https://img.shields.io/badge/API-19%2B-red.svg?style=flat
 [4]:https://android-arsenal.com/api?level=19
-[30]:https://img.shields.io/badge/release-3.3.0-red.svg
+[30]:https://img.shields.io/badge/release-3.4.0-red.svg
 [31]:https://github.com/youlookwhat/CloudReader/releases
 [32]:https://img.shields.io/badge/PRs-welcome-brightgreen.svg
 [33]:https://github.com/youlookwhat/CloudReader/pulls
