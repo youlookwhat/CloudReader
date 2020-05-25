@@ -31,7 +31,7 @@ import java.util.List;
 
 import me.jingbin.library.ByRecyclerView;
 import me.jingbin.sbanner.config.ScaleRightTransformer;
-import me.jingbin.sbanner.holder.BannerViewHolder;
+import me.jingbin.sbanner.holder.SBannerViewHolder;
 
 
 /**
@@ -153,7 +153,7 @@ public class HomeFragment extends BaseFragment<WanAndroidListViewModel, Fragment
         }
     }
 
-    class CustomViewHolder implements BannerViewHolder<WanAndroidBannerBean.DataBean> {
+    class CustomViewHolder implements SBannerViewHolder<WanAndroidBannerBean.DataBean> {
 
         private ImageView imageView;
 

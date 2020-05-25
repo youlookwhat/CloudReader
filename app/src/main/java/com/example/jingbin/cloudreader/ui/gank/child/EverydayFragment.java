@@ -33,7 +33,7 @@ import com.example.jingbin.cloudreader.viewmodel.gank.EverydayViewModel;
 import java.util.ArrayList;
 
 import me.jingbin.sbanner.config.OnBannerClickListener;
-import me.jingbin.sbanner.holder.BannerViewHolder;
+import me.jingbin.sbanner.holder.SBannerViewHolder;
 import me.jingbin.sbanner.holder.HolderCreator;
 
 import static com.example.jingbin.cloudreader.viewmodel.gank.EverydayViewModel.getTodayTime;
@@ -124,10 +124,10 @@ public class EverydayFragment extends BaseFragment<EverydayViewModel, FragmentEv
                     mHeaderBinding.banner
                             .setAutoPlay(true)
                             .setOffscreenPageLimit(bean.getImageUrls().size())
-                            .setPages(bean.getImageUrls(), new HolderCreator<BannerViewHolder>() {
+                            .setPages(bean.getImageUrls(), new HolderCreator<SBannerViewHolder>() {
                                 @Override
-                                public BannerViewHolder createViewHolder() {
-                                    return new BannerViewHolder<String>() {
+                                public SBannerViewHolder createViewHolder() {
+                                    return new SBannerViewHolder<String>() {
                                         private ImageView imageView;
 
                                         @Override

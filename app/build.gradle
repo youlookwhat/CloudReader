@@ -113,7 +113,7 @@ dependencies {
     implementation 'com.android.support:multidex:1.0.3'
     implementation 'me.drakeet.support:toastcompat:1.1.0'
     implementation 'com.github.chrisbanes:PhotoView:2.1.4'
-    implementation 'com.github.youlookwhat:SBannerView:1.1.1'
+    implementation 'com.github.youlookwhat:SBannerView:1.1.5'
     implementation 'com.github.youlookwhat:WebProgress:1.1.0'
     implementation 'com.github.youlookwhat:ByRecyclerView:1.0.18-support'
     // leakcanary

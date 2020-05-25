@@ -16,10 +16,8 @@ import android.view.animation.RotateAnimation;
 import android.widget.ImageView;
 
 import com.example.jingbin.cloudreader.R;
-import com.example.jingbin.cloudreader.adapter.EverydayAdapter;
 import com.example.jingbin.cloudreader.adapter.GankAndroidAdapter;
 import com.example.jingbin.cloudreader.base.BaseFragment;
-import com.example.jingbin.cloudreader.bean.AndroidBean;
 import com.example.jingbin.cloudreader.bean.GankIoDataBean;
 import com.example.jingbin.cloudreader.databinding.FragmentEverydayBinding;
 import com.example.jingbin.cloudreader.databinding.HeaderItemEverydayBinding;
@@ -31,14 +29,10 @@ import com.example.jingbin.cloudreader.utils.GlideUtil;
 import com.example.jingbin.cloudreader.utils.PerfectClickListener;
 import com.example.jingbin.cloudreader.view.viewbigimage.ViewBigImageActivity;
 import com.example.jingbin.cloudreader.view.webview.WebViewActivity;
-import com.example.jingbin.cloudreader.viewmodel.gank.EverydayViewModel;
 import com.example.jingbin.cloudreader.viewmodel.gank.GankHomeViewModel;
 
-import java.util.ArrayList;
-
-import me.jingbin.sbanner.config.OnBannerClickListener;
-import me.jingbin.sbanner.holder.BannerViewHolder;
 import me.jingbin.sbanner.holder.HolderCreator;
+import me.jingbin.sbanner.holder.SBannerViewHolder;
 
 import static com.example.jingbin.cloudreader.viewmodel.gank.EverydayViewModel.getTodayTime;
 
@@ -122,10 +116,10 @@ public class GankHomeFragment extends BaseFragment<GankHomeViewModel, FragmentEv
                             .setDelayTime(4000)
                             .setAutoPlay(true)
                             .setOffscreenPageLimit(bean.getResults().size())
-                            .setPages(bean.getResults(), new HolderCreator<BannerViewHolder>() {
+                            .setPages(bean.getResults(), new HolderCreator<SBannerViewHolder>() {
                                 @Override
-                                public BannerViewHolder createViewHolder() {
-                                    return new BannerViewHolder<GankIoDataBean.ResultBean>() {
+                                public SBannerViewHolder createViewHolder() {
+                                    return new SBannerViewHolder<GankIoDataBean.ResultBean>() {
                                         private ImageView imageView;
 
                                         @Override

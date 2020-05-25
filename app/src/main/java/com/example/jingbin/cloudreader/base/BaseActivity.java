@@ -44,10 +44,6 @@ public abstract class BaseActivity<VM extends AndroidViewModel, SV extends ViewD
     private AnimationDrawable mAnimationDrawable;
     private CompositeDisposable mCompositeDisposable;
 
-    protected <T extends View> T getView(int id) {
-        return (T) findViewById(id);
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,7 +53,7 @@ public abstract class BaseActivity<VM extends AndroidViewModel, SV extends ViewD
     public void setContentView(@LayoutRes int layoutResID) {
 
         mBaseBinding = DataBindingUtil.inflate(LayoutInflater.from(this), R.layout.activity_base, null, false);
-        bindingView = DataBindingUtil.inflate(getLayoutInflater(), layoutResID, null, false);
+        bindingView = DataBindingUtil.inflate(LayoutInflater.from(this), layoutResID, null, false);
 
         // content
         RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
