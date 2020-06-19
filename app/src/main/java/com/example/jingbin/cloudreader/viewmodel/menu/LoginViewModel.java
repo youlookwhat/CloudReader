@@ -1,9 +1,9 @@
 package com.example.jingbin.cloudreader.viewmodel.menu;
 
 import android.app.Application;
-import android.arch.lifecycle.MutableLiveData;
-import android.databinding.ObservableField;
-import android.support.annotation.NonNull;
+import androidx.lifecycle.MutableLiveData;
+import androidx.databinding.ObservableField;
+import androidx.annotation.NonNull;
 import android.text.TextUtils;
 
 import com.example.jingbin.cloudreader.base.BaseViewModel;

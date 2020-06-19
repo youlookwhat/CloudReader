@@ -12,7 +12,7 @@
         <import type="android.text.Html" />
     </data>
 
-    <android.support.constraint.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@id/id_by_sticky_item"
         android:background="@color/color_page_bg"
         android:layout_width="match_parent"
@@ -40,5 +40,5 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/view_line"
             tools:text="网址导航" />
-    </android.support.constraint.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

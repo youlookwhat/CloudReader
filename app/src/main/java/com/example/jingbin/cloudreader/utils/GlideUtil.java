@@ -1,7 +1,7 @@
 package com.example.jingbin.cloudreader.utils;
 
 import android.content.Context;
-import android.databinding.BindingAdapter;
+import androidx.databinding.BindingAdapter;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;

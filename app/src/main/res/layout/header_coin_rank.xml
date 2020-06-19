@@ -10,7 +10,7 @@
             type="com.example.jingbin.cloudreader.bean.CoinLogBean" />
     </data>
 
-    <android.support.constraint.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/cl_header_rank"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -41,5 +41,5 @@
             app:layout_constraintTop_toBottomOf="@+id/iv_coin_rank"
             tools:text="jingbin" />
 
-    </android.support.constraint.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

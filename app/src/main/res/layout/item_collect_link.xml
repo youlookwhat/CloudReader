@@ -20,7 +20,7 @@
         <import type="android.view.View" />
     </data>
 
-    <android.support.constraint.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/rl_item_link"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -41,5 +41,5 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:text="MMKV——基于 mmap 的高性能通用 key-value 组件MMKV——基于 mmap 的高性能通用 key-value 组件" />
 
-    </android.support.constraint.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

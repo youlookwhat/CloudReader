@@ -36,7 +36,7 @@
                 android:layout_height="17dp"
                 android:background="@color/colorTheme" />
 
-            <android.support.v7.widget.AppCompatRadioButton
+            <androidx.appcompat.widget.AppCompatRadioButton
                 android:id="@+id/rb_1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -52,7 +52,7 @@
                 android:layout_height="20dp"
                 android:background="@color/colorHomeLine" />
 
-            <android.support.v7.widget.AppCompatRadioButton
+            <androidx.appcompat.widget.AppCompatRadioButton
                 android:id="@+id/rb_2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

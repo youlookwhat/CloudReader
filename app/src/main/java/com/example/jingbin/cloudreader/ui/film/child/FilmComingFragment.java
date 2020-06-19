@@ -2,9 +2,9 @@ package com.example.jingbin.cloudreader.ui.film.child;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.FragmentActivity;
-import android.support.v7.widget.StaggeredGridLayoutManager;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.FragmentActivity;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
@@ -120,7 +120,7 @@ public class FilmComingFragment extends BaseFragment<FilmViewModel, FragmentWanA
     }
 
     private void getHotFilm() {
-        viewModel.getComingFilm().observe(this, new android.arch.lifecycle.Observer<ComingFilmBean>() {
+        viewModel.getComingFilm().observe(this, new androidx.lifecycle.Observer<ComingFilmBean>() {
             @Override
             public void onChanged(@Nullable ComingFilmBean bookBean) {
                 if (bindingView.srlWan.isRefreshing()) {

@@ -2,12 +2,12 @@ package com.example.jingbin.cloudreader.ui.douban;
 
 import android.content.Context;
 import android.content.Intent;
-import android.databinding.DataBindingUtil;
+import androidx.databinding.DataBindingUtil;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.GridLayoutManager;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.FragmentActivity;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+import androidx.recyclerview.widget.GridLayoutManager;
 
 import com.example.jingbin.cloudreader.R;
 import com.example.jingbin.cloudreader.adapter.DouBookAdapter;
@@ -144,7 +144,7 @@ public class BookListFragment extends BaseFragment<BookListViewModel, FragmentWa
     }
 
     private void getBook() {
-        viewModel.getBook().observe(this, new android.arch.lifecycle.Observer<BookBean>() {
+        viewModel.getBook().observe(this, new androidx.lifecycle.Observer<BookBean>() {
             @Override
             public void onChanged(@Nullable BookBean bookBean) {
                 if (bindingView.srlWan.isRefreshing()) {

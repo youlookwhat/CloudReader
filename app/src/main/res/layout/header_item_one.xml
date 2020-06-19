@@ -87,7 +87,7 @@
                 android:layout_height="23dp"
                 android:background="@drawable/ic_cylinder" />
 
-            <android.support.design.widget.TabLayout
+            <com.google.android.material.tabs.TabLayout
                 android:id="@+id/tl_movie"
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
@@ -98,20 +98,20 @@
                 app:tabTextAppearance="@style/MyTabLayoutTextAppearance"
                 app:tabTextColor="@color/colorTabText">
 
-                <android.support.design.widget.TabItem
+                <com.google.android.material.tabs.TabItem
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="热映榜"
                     android:textColor="@color/colorContent"
                     android:textSize="16sp" />
 
-                <android.support.design.widget.TabItem
+                <com.google.android.material.tabs.TabItem
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="即将上映"
                     android:textColor="@color/colorContent"
                     android:textSize="16sp" />
-            </android.support.design.widget.TabLayout>
+            </com.google.android.material.tabs.TabLayout>
         </LinearLayout>
 
     </RelativeLayout>

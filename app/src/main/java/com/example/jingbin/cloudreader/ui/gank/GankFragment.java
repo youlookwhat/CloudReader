@@ -1,8 +1,8 @@
 package com.example.jingbin.cloudreader.ui.gank;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 
 import com.example.jingbin.cloudreader.R;
 import com.example.jingbin.cloudreader.base.BaseFragment;
@@ -11,7 +11,6 @@ import com.example.jingbin.cloudreader.http.rx.RxBus;
 import com.example.jingbin.cloudreader.http.rx.RxCodeConstants;
 import com.example.jingbin.cloudreader.ui.gank.child.AndroidFragment;
 import com.example.jingbin.cloudreader.ui.gank.child.CustomFragment;
-import com.example.jingbin.cloudreader.ui.gank.child.EverydayFragment;
 import com.example.jingbin.cloudreader.ui.gank.child.GankHomeFragment;
 import com.example.jingbin.cloudreader.ui.gank.child.WelfareFragment;
 import com.example.jingbin.cloudreader.view.MyFragmentPagerAdapter;

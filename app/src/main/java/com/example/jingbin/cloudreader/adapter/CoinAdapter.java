@@ -3,7 +3,7 @@ package com.example.jingbin.cloudreader.adapter;
 import android.app.Activity;
 import android.graphics.Color;
 import android.graphics.Typeface;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 import android.view.ViewGroup;
 
 import com.example.jingbin.cloudreader.R;

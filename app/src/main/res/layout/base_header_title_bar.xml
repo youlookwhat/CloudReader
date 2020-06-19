@@ -13,7 +13,7 @@
             android:layout_height="310dp"
             android:scaleType="fitXY" />
 
-        <android.support.v7.widget.Toolbar
+        <androidx.appcompat.widget.Toolbar
             android:id="@+id/tb_base_title"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
@@ -27,7 +27,7 @@
             app:titleMarginStart="0dp"
             app:titleTextAppearance="@style/ToolBar.Title">
 
-        </android.support.v7.widget.Toolbar>
+        </androidx.appcompat.widget.Toolbar>
 
     </RelativeLayout>
 </layout>

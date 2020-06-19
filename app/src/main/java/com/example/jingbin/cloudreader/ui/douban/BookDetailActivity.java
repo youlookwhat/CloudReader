@@ -3,8 +3,8 @@ package com.example.jingbin.cloudreader.ui.douban;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.ActivityOptionsCompat;
+import androidx.core.app.ActivityCompat;
+import androidx.core.app.ActivityOptionsCompat;
 import android.widget.ImageView;
 
 import com.example.jingbin.cloudreader.R;

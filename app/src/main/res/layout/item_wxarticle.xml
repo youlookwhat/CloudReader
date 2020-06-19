@@ -14,7 +14,7 @@
         <import type="com.example.jingbin.cloudreader.utils.DataUtil" />
     </data>
 
-    <android.support.constraint.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/cl_wxarticle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -44,5 +44,5 @@
             android:background="@color/colorSubtitle"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_title" />
-    </android.support.constraint.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

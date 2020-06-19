@@ -1,6 +1,6 @@
 package com.example.jingbin.cloudreader.utils;
 
-import android.support.v7.app.AlertDialog;
+import androidx.appcompat.app.AlertDialog;
 import android.text.TextUtils;
 
 import com.example.jingbin.cloudreader.BuildConfig;

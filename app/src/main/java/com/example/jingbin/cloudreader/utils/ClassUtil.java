@@ -1,6 +1,6 @@
 package com.example.jingbin.cloudreader.utils;
 
-import android.arch.lifecycle.AndroidViewModel;
+import androidx.lifecycle.AndroidViewModel;
 
 import com.example.jingbin.cloudreader.viewmodel.menu.NoViewModel;
 

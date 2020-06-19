@@ -11,7 +11,7 @@
         <import type="android.view.View" />
     </data>
 
-    <android.support.v4.widget.NestedScrollView
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fitsSystemWindows="true">
@@ -381,7 +381,7 @@
                     android:textColor="@color/colorContent"
                     android:textSize="15sp" />
 
-                <android.support.v7.widget.SwitchCompat
+                <androidx.appcompat.widget.SwitchCompat
                     android:id="@+id/day_night_switch"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -417,5 +417,5 @@
             </LinearLayout>
 
         </LinearLayout>
-    </android.support.v4.widget.NestedScrollView>
+    </androidx.core.widget.NestedScrollView>
 </layout>

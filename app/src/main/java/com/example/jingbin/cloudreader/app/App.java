@@ -1,6 +1,6 @@
 package com.example.jingbin.cloudreader.app;
 
-import android.support.multidex.MultiDexApplication;
+import androidx.multidex.MultiDexApplication;
 
 import com.example.http.BuildConfig;
 import com.example.http.HttpUtils;

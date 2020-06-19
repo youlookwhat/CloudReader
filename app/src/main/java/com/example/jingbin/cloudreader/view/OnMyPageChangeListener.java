@@ -1,6 +1,6 @@
 package com.example.jingbin.cloudreader.view;
 
-import android.support.v4.view.ViewPager;
+import androidx.viewpager.widget.ViewPager;
 
 public class OnMyPageChangeListener implements ViewPager.OnPageChangeListener {
 

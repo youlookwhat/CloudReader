@@ -1,6 +1,6 @@
 package com.example.jingbin.cloudreader.bean.wanandroid;
 
-import android.databinding.BaseObservable;
+import androidx.databinding.BaseObservable;
 
 import java.util.List;
 

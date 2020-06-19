@@ -2,8 +2,8 @@ package com.example.jingbin.cloudreader.ui.wan.child;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.FragmentActivity;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.FragmentActivity;
 import android.text.Html;
 import android.view.View;
 import android.widget.TextView;
@@ -68,7 +68,7 @@ public class KnowledgeTreeFragment extends BaseFragment<TreeViewModel, FragmentK
     }
 
     private void getTree() {
-        viewModel.getTree().observe(this, new android.arch.lifecycle.Observer<TreeBean>() {
+        viewModel.getTree().observe(this, new androidx.lifecycle.Observer<TreeBean>() {
             @Override
             public void onChanged(@Nullable TreeBean treeBean) {
                 if (treeBean != null

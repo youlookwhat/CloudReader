@@ -1,9 +1,9 @@
 package com.example.jingbin.cloudreader.bean.book;
 
-import android.databinding.BaseObservable;
-import android.databinding.Bindable;
+import androidx.databinding.BaseObservable;
+import androidx.databinding.Bindable;
 
-import com.android.databinding.library.baseAdapters.BR;
+import com.example.jingbin.cloudreader.BR;
 import com.example.http.ParamNames;
 
 import java.io.Serializable;

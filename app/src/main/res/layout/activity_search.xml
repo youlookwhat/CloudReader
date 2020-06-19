@@ -10,12 +10,12 @@
             type="com.example.jingbin.cloudreader.viewmodel.wan.SearchViewModel" />
     </data>
 
-    <android.support.constraint.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <android.support.v7.widget.Toolbar
+        <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
@@ -33,7 +33,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <android.support.v7.widget.AppCompatEditText
+                <androidx.appcompat.widget.AppCompatEditText
                     android:id="@+id/et_content"
                     android:layout_width="match_parent"
                     android:layout_height="47dp"
@@ -63,10 +63,10 @@
                     android:visibility="gone" />
             </RelativeLayout>
 
-        </android.support.v7.widget.Toolbar>
+        </androidx.appcompat.widget.Toolbar>
 
 
-        <android.support.design.widget.TabLayout
+        <com.google.android.material.tabs.TabLayout
             android:id="@+id/tl_search"
             android:layout_width="match_parent"
             android:layout_height="30dp"
@@ -79,36 +79,36 @@
             app:tabTextAppearance="@style/MyTabLayoutTextAppearance"
             app:tabTextColor="@color/colorWhiteHalf">
 
-            <android.support.design.widget.TabItem
+            <com.google.android.material.tabs.TabItem
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="玩安卓"
                 android:textColor="@color/colorWhite"
                 android:textSize="12sp" />
 
-            <android.support.design.widget.TabItem
+            <com.google.android.material.tabs.TabItem
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="干货 | 安卓"
                 android:textColor="@color/colorWhite"
                 android:textSize="12sp" />
 
-            <android.support.design.widget.TabItem
+            <com.google.android.material.tabs.TabItem
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="干货 | 全部"
                 android:textColor="@color/colorWhite"
                 android:textSize="12sp" />
 
-            <android.support.design.widget.TabItem
+            <com.google.android.material.tabs.TabItem
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="网页"
                 android:textColor="@color/colorWhite"
                 android:textSize="12sp" />
-        </android.support.design.widget.TabLayout>
+        </com.google.android.material.tabs.TabLayout>
 
-        <android.support.constraint.ConstraintLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -124,19 +124,19 @@
                 android:scrollbars="vertical"
                 android:visibility="gone" />
 
-            <android.support.v4.widget.NestedScrollView
+            <androidx.core.widget.NestedScrollView
                 android:id="@+id/ns_search_layout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <android.support.constraint.ConstraintLayout
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
 
-                    <android.support.constraint.ConstraintLayout
+                    <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/cl_search_tag"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -160,7 +160,7 @@
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
-                        <android.support.design.internal.FlowLayout
+                        <com.google.android.material.internal.FlowLayout
                             android:id="@+id/tfl_search"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -173,9 +173,9 @@
                             app:layout_constraintTop_toBottomOf="@+id/tv_title1"
                             app:lineSpacing="8dp" />
 
-                    </android.support.constraint.ConstraintLayout>
+                    </androidx.constraintlayout.widget.ConstraintLayout>
 
-                    <android.support.constraint.ConstraintLayout
+                    <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/cl_history_tag"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -208,7 +208,7 @@
 
                         <!--TagFlowLayout 如果两行则右边会有显示不全 使用了margin的原因-->
                         <!--一定要使用 match_parent-->
-                        <android.support.design.internal.FlowLayout
+                        <com.google.android.material.internal.FlowLayout
                             android:id="@+id/tfl_search_history"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -221,10 +221,10 @@
                             app:layout_constraintTop_toBottomOf="@+id/tv_title2"
                             app:lineSpacing="8dp" />
 
-                    </android.support.constraint.ConstraintLayout>
-                </android.support.constraint.ConstraintLayout>
-            </android.support.v4.widget.NestedScrollView>
-        </android.support.constraint.ConstraintLayout>
-    </android.support.constraint.ConstraintLayout>
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.core.widget.NestedScrollView>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

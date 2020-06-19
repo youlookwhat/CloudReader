@@ -1,12 +1,12 @@
 package com.example.jingbin.cloudreader.ui.wan.child;
 
 import android.content.Context;
-import android.databinding.DataBindingUtil;
+import androidx.databinding.DataBindingUtil;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.FragmentActivity;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.FragmentActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import android.view.View;
 
 import com.example.jingbin.cloudreader.R;
@@ -130,7 +130,7 @@ public class TreeFragment extends BaseFragment<TreeViewModel, FragmentWanAndroid
     }
 
     private void getTree() {
-        viewModel.getTree().observe(this, new android.arch.lifecycle.Observer<TreeBean>() {
+        viewModel.getTree().observe(this, new androidx.lifecycle.Observer<TreeBean>() {
             @Override
             public void onChanged(@Nullable TreeBean treeBean) {
                 showContentView();

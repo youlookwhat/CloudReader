@@ -96,7 +96,7 @@
                 android:scaleType="fitXY" />
             <!--android:showImgBg='@{subjectsBean.images.large}'-->
 
-            <android.support.v7.widget.Toolbar
+            <androidx.appcompat.widget.Toolbar
                 android:id="@+id/title_tool_bar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
@@ -132,7 +132,7 @@
 
                 </LinearLayout>
 
-            </android.support.v7.widget.Toolbar>
+            </androidx.appcompat.widget.Toolbar>
 
         </RelativeLayout>
 
