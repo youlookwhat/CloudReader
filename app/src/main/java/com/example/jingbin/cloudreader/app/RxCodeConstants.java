@@ -1,4 +1,4 @@
-package com.example.jingbin.cloudreader.http.rx;
+package com.example.jingbin.cloudreader.app;
 
 /**
  * Created by jingbin on 2016/12/2.

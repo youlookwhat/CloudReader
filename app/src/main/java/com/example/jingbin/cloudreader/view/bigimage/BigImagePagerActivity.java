@@ -19,8 +19,8 @@ import android.view.ViewTreeObserver;
 
 import com.bumptech.glide.Glide;
 import com.example.jingbin.cloudreader.R;
-import com.example.jingbin.cloudreader.http.rx.RxBus;
-import com.example.jingbin.cloudreader.http.rx.RxCodeConstants;
+import me.jingbin.bymvvm.rxbus.RxBus;
+import com.example.jingbin.cloudreader.app.RxCodeConstants;
 import com.github.chrisbanes.photoview.PhotoView;
 
 import java.util.ArrayList;

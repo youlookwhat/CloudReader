@@ -13,8 +13,8 @@ import com.example.jingbin.cloudreader.data.model.LoginModel;
 import com.example.jingbin.cloudreader.data.room.Injection;
 import com.example.jingbin.cloudreader.data.room.User;
 import com.example.jingbin.cloudreader.data.room.UserDataCallback;
-import com.example.jingbin.cloudreader.http.rx.RxBus;
-import com.example.jingbin.cloudreader.http.rx.RxCodeConstants;
+import me.jingbin.bymvvm.rxbus.RxBus;
+import com.example.jingbin.cloudreader.app.RxCodeConstants;
 import com.example.jingbin.cloudreader.view.OnLoginListener;
 
 

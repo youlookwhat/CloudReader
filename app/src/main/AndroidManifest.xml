@@ -43,10 +43,6 @@
             android:screenOrientation="portrait"
             android:theme="@style/MyScrollPage" />
         <activity
-            android:name=".ui.douban.MovieDetailActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/MyScrollPage" />
-        <activity
             android:name=".view.viewbigimage.ViewBigImageActivity"
             android:screenOrientation="portrait"
             android:theme="@style/ViewBigPicTheme" />

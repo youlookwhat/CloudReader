@@ -5,14 +5,13 @@ import android.app.Application;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
 
-import me.jingbin.bymvvm.base.BaseViewModel;
 import com.example.jingbin.cloudreader.bean.GankIoDataBean;
 import com.example.jingbin.cloudreader.data.model.GankOtherModel;
 import com.example.jingbin.cloudreader.http.RequestImpl;
 import com.example.jingbin.cloudreader.utils.DataUtil;
 
 import io.reactivex.disposables.Disposable;
-import me.jingbin.bymvvm.http.HttpUtils;
+import me.jingbin.bymvvm.base.BaseViewModel;
 
 /**
  * 干货集中营页面 ViewModel
@@ -34,7 +33,7 @@ public class GankViewModel extends BaseViewModel {
 
     public MutableLiveData<GankIoDataBean> loadGankData() {
         final MutableLiveData<GankIoDataBean> data = new MutableLiveData<>();
-        mModel.setData("GanHuo", mType, mPage, HttpUtils.per_page_more);
+        mModel.setData("GanHuo", mType, mPage, 20);
         mModel.getGankIoData(new RequestImpl() {
             @Override
             public void loadSuccess(Object object) {

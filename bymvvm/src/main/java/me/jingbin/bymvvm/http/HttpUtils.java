@@ -5,6 +5,8 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.text.TextUtils;
 
+import androidx.annotation.NonNull;
+
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.FieldNamingStrategy;
 import com.google.gson.Gson;
@@ -45,8 +47,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 /**
  * Created by jingbin on 2017/2/14.
  * updated by jingbin on 2019/2/25.
- * 网络请求工具类
- * 使用时请在"CloudReaderApplication"下初始化。
+ * updated by jingbin on 2020/6/21.
+ * 网络请求工具类, 使用时请在"Application"下初始化。
  */
 
 public class HttpUtils {
@@ -54,7 +56,6 @@ public class HttpUtils {
     private static HttpUtils instance;
     private Gson gson;
     private Context context;
-    private IpmlTokenGetListener listener;
     // wanandroid、gankio、时光网
     public final static String API_GANKIO = "https://gank.io/api/";
     public final static String API_DOUBAN = "Https://api.douban.com/";
@@ -64,10 +65,6 @@ public class HttpUtils {
     public final static String API_QSBK = "http://m2.qiushibaike.com/";
     public final static String API_MTIME = "https://api-m.mtime.cn/";
     public final static String API_MTIME_TICKET = "https://ticket-api-m.mtime.cn/";
-    /**
-     * 分页数据，每页的数量
-     */
-    public static int per_page_more = 20;
 
     public static HttpUtils getInstance() {
         if (instance == null) {
@@ -82,14 +79,12 @@ public class HttpUtils {
 
     public void init(Context context) {
         this.context = context;
-        HttpHead.init(context);
     }
-
 
     public Retrofit.Builder getBuilder(String apiUrl) {
         Retrofit.Builder builder = new Retrofit.Builder();
         builder.client(getOkClient());
-        builder.baseUrl(apiUrl);//设置远程地址
+        builder.baseUrl(apiUrl);// 设置远程地址
         builder.addConverterFactory(new NullOnEmptyConverterFactory());
         builder.addConverterFactory(GsonConverterFactory.create(getGson()));
         builder.addCallAdapterFactory(RxJava2CallAdapterFactory.create());
@@ -166,12 +161,8 @@ public class HttpUtils {
         return client1;
     }
 
-    public void setTokenListener(IpmlTokenGetListener listener) {
-        this.listener = listener;
-    }
-
-
     private class HttpHeadInterceptor implements Interceptor {
+        @NonNull
         @Override
         public Response intercept(Chain chain) throws IOException {
             Request request = chain.request();
@@ -188,7 +179,7 @@ public class HttpUtils {
         }
     }
 
-    private class AddCacheInterceptor implements Interceptor {
+    private static class AddCacheInterceptor implements Interceptor {
         private Context context;
 
         AddCacheInterceptor(Context context) {
@@ -196,6 +187,7 @@ public class HttpUtils {
             this.context = context;
         }
 
+        @NonNull
         @Override
         public Response intercept(Chain chain) throws IOException {
 
@@ -228,7 +220,7 @@ public class HttpUtils {
         }
     }
 
-    private class ReceivedCookiesInterceptor implements Interceptor {
+    private static class ReceivedCookiesInterceptor implements Interceptor {
         private Context context;
 
         ReceivedCookiesInterceptor(Context context) {
@@ -237,6 +229,7 @@ public class HttpUtils {
 
         }
 
+        @NonNull
         @Override
         public Response intercept(Chain chain) throws IOException {
 
@@ -305,7 +298,7 @@ public class HttpUtils {
         }
     }
 
-    private class AddCookiesInterceptor implements Interceptor {
+    private static class AddCookiesInterceptor implements Interceptor {
         private Context context;
 
         AddCookiesInterceptor(Context context) {
@@ -314,6 +307,7 @@ public class HttpUtils {
 
         }
 
+        @NonNull
         @Override
         public Response intercept(Chain chain) throws IOException {
 

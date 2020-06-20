@@ -5,7 +5,6 @@ import android.app.Application;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
 
-import me.jingbin.bymvvm.base.BaseViewModel;
 import com.example.jingbin.cloudreader.bean.GankIoDataBean;
 import com.example.jingbin.cloudreader.data.model.GankOtherModel;
 import com.example.jingbin.cloudreader.http.RequestImpl;
@@ -19,7 +18,7 @@ import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
-import me.jingbin.bymvvm.http.HttpUtils;
+import me.jingbin.bymvvm.base.BaseViewModel;
 
 
 /**
@@ -58,7 +57,7 @@ public class WelfareViewModel extends BaseViewModel {
 
     public MutableLiveData<GankIoDataBean> loadWelfareData() {
         final MutableLiveData<GankIoDataBean> data = new MutableLiveData<>();
-        mModel.setData("Girl", "Girl",mPage, HttpUtils.per_page_more);
+        mModel.setData("Girl", "Girl",mPage, 20);
         mModel.getGankIoData(new RequestImpl() {
             @Override
             public void loadSuccess(Object object) {

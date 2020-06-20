@@ -1,4 +1,4 @@
-package com.example.jingbin.cloudreader.http.rx;
+package me.jingbin.bymvvm.rxbus;
 
 
 import io.reactivex.Observable;
