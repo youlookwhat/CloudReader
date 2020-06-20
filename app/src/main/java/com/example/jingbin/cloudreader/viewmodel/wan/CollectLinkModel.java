@@ -4,7 +4,7 @@ import android.app.Application;
 import androidx.lifecycle.MutableLiveData;
 import androidx.annotation.NonNull;
 
-import com.example.jingbin.cloudreader.base.BaseListViewModel;
+import me.jingbin.bymvvm.base.BaseListViewModel;
 import com.example.jingbin.cloudreader.bean.CollectUrlBean;
 import com.example.jingbin.cloudreader.http.HttpClient;
 

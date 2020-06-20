@@ -1,12 +1,11 @@
 package com.example.jingbin.cloudreader.adapter;
 
 import android.app.Activity;
-import androidx.appcompat.app.AlertDialog;
 import android.view.View;
 
+import androidx.appcompat.app.AlertDialog;
+
 import com.example.jingbin.cloudreader.R;
-import com.example.jingbin.cloudreader.base.binding.BaseBindingAdapter;
-import com.example.jingbin.cloudreader.base.binding.BaseBindingHolder;
 import com.example.jingbin.cloudreader.bean.CollectUrlBean;
 import com.example.jingbin.cloudreader.data.model.CollectModel;
 import com.example.jingbin.cloudreader.databinding.ItemCollectLinkBinding;
@@ -14,6 +13,9 @@ import com.example.jingbin.cloudreader.utils.DialogBuild;
 import com.example.jingbin.cloudreader.utils.ToastUtil;
 import com.example.jingbin.cloudreader.view.webview.WebViewActivity;
 import com.example.jingbin.cloudreader.viewmodel.wan.WanNavigator;
+
+import me.jingbin.bymvvm.adapter.BaseBindingAdapter;
+import me.jingbin.bymvvm.adapter.BaseBindingHolder;
 
 /**
  * Created by jingbin on 2016/11/25.

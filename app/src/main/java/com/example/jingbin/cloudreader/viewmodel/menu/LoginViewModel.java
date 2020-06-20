@@ -6,7 +6,7 @@ import androidx.databinding.ObservableField;
 import androidx.annotation.NonNull;
 import android.text.TextUtils;
 
-import com.example.jingbin.cloudreader.base.BaseViewModel;
+import me.jingbin.bymvvm.base.BaseViewModel;
 import com.example.jingbin.cloudreader.bean.wanandroid.LoginBean;
 import com.example.jingbin.cloudreader.data.UserUtil;
 import com.example.jingbin.cloudreader.data.room.Injection;

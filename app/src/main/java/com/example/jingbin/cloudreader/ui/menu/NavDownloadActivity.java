@@ -7,12 +7,12 @@ import android.view.View;
 
 import com.example.jingbin.cloudreader.R;
 import com.example.jingbin.cloudreader.app.Constants;
-import com.example.jingbin.cloudreader.base.BaseActivity;
+import me.jingbin.bymvvm.base.BaseActivity;
 import com.example.jingbin.cloudreader.databinding.ActivityNavDownloadBinding;
 import com.example.jingbin.cloudreader.utils.PerfectClickListener;
 import com.example.jingbin.cloudreader.utils.QRCodeUtil;
 import com.example.jingbin.cloudreader.utils.ShareUtils;
-import com.example.jingbin.cloudreader.viewmodel.menu.NoViewModel;
+import me.jingbin.bymvvm.base.NoViewModel;
 
 public class NavDownloadActivity extends BaseActivity<NoViewModel, ActivityNavDownloadBinding> {
 

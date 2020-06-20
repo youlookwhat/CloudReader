@@ -2,20 +2,21 @@ package com.example.jingbin.cloudreader.ui.douban;
 
 import android.content.Intent;
 import android.os.Bundle;
+
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 
 import com.example.jingbin.cloudreader.R;
 import com.example.jingbin.cloudreader.adapter.BookTypeAdapter;
-import com.example.jingbin.cloudreader.base.BaseActivity;
 import com.example.jingbin.cloudreader.databinding.ActivityBookTypeBinding;
 import com.example.jingbin.cloudreader.http.api.BookApiUtils;
 import com.example.jingbin.cloudreader.utils.DebugUtil;
-import com.example.jingbin.cloudreader.viewmodel.menu.NoViewModel;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import me.jingbin.bymvvm.base.BaseActivity;
+import me.jingbin.bymvvm.base.NoViewModel;
 import me.jingbin.library.decoration.SpacesItemDecoration;
 
 /**

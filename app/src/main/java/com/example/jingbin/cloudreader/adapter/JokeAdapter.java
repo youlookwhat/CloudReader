@@ -1,11 +1,12 @@
 package com.example.jingbin.cloudreader.adapter;
 
 import com.example.jingbin.cloudreader.R;
-import com.example.jingbin.cloudreader.base.binding.BaseBindingAdapter;
-import com.example.jingbin.cloudreader.base.binding.BaseBindingHolder;
 import com.example.jingbin.cloudreader.bean.wanandroid.DuanZiBean;
 import com.example.jingbin.cloudreader.databinding.ItemJokeBinding;
 import com.example.jingbin.cloudreader.utils.TimeUtil;
+
+import me.jingbin.bymvvm.adapter.BaseBindingAdapter;
+import me.jingbin.bymvvm.adapter.BaseBindingHolder;
 
 /**
  * Created by jingbin on 2016/11/25.

@@ -3,11 +3,12 @@ package com.example.jingbin.cloudreader.adapter;
 import android.content.Context;
 
 import com.example.jingbin.cloudreader.R;
-import com.example.jingbin.cloudreader.base.binding.BaseBindingAdapter;
-import com.example.jingbin.cloudreader.base.binding.BaseBindingHolder;
 import com.example.jingbin.cloudreader.bean.ComingFilmBean;
 import com.example.jingbin.cloudreader.databinding.ItemFilmComingBinding;
 import com.example.jingbin.cloudreader.utils.DensityUtil;
+
+import me.jingbin.bymvvm.adapter.BaseBindingAdapter;
+import me.jingbin.bymvvm.adapter.BaseBindingHolder;
 
 /**
  * Created by jingbin on 2016/12/10.

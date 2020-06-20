@@ -1,9 +1,10 @@
 package com.example.jingbin.cloudreader.bean;
 
-import com.example.http.ParamNames;
 
 import java.io.Serializable;
 import java.util.List;
+
+import me.jingbin.bymvvm.http.ParamNames;
 
 /**
  * Created by jingbin on 2016/11/24.

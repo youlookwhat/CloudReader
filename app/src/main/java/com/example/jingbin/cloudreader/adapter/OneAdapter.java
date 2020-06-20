@@ -5,14 +5,15 @@ import android.view.View;
 import android.view.animation.OvershootInterpolator;
 
 import com.example.jingbin.cloudreader.R;
-import com.example.jingbin.cloudreader.base.binding.BaseBindingAdapter;
-import com.example.jingbin.cloudreader.base.binding.BaseBindingHolder;
 import com.example.jingbin.cloudreader.bean.moviechild.SubjectsBean;
 import com.example.jingbin.cloudreader.databinding.ItemOneBinding;
 import com.example.jingbin.cloudreader.ui.douban.OneMovieDetailActivity;
 import com.example.jingbin.cloudreader.utils.PerfectClickListener;
 import com.nineoldandroids.view.ViewHelper;
 import com.nineoldandroids.view.ViewPropertyAnimator;
+
+import me.jingbin.bymvvm.adapter.BaseBindingAdapter;
+import me.jingbin.bymvvm.adapter.BaseBindingHolder;
 
 /**
  * Created by jingbin on 2016/11/25.

@@ -4,8 +4,9 @@ import android.text.TextUtils;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
-import com.example.jingbin.cloudreader.utils.CheckNetwork;
 import com.example.jingbin.cloudreader.view.webview.WebViewActivity;
+
+import me.jingbin.bymvvm.utils.CheckNetwork;
 
 
 /**

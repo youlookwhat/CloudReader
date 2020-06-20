@@ -25,7 +25,6 @@ import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
-import com.example.http.utils.CheckNetwork;
 import com.example.jingbin.cloudreader.R;
 import com.example.jingbin.cloudreader.bean.ImageItemsBean;
 import com.example.jingbin.cloudreader.http.cache.ACache;
@@ -37,6 +36,8 @@ import com.github.chrisbanes.photoview.PhotoView;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import me.jingbin.bymvvm.utils.CheckNetwork;
 
 
 /**

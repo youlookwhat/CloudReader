@@ -1,14 +1,13 @@
 package com.example.jingbin.cloudreader.ui.gank.child;
 
-import androidx.lifecycle.Observer;
 import android.os.Bundle;
-import androidx.annotation.Nullable;
 import android.view.View;
 
+import androidx.annotation.Nullable;
+import androidx.lifecycle.Observer;
+
 import com.example.jingbin.cloudreader.R;
-import com.example.jingbin.cloudreader.base.BaseFragment;
-import com.example.jingbin.cloudreader.base.binding.BaseBindingAdapter;
-import com.example.jingbin.cloudreader.base.binding.BaseBindingHolder;
+import me.jingbin.bymvvm.base.BaseFragment;
 import com.example.jingbin.cloudreader.bean.GankIoDataBean;
 import com.example.jingbin.cloudreader.databinding.FragmentWelfareBinding;
 import com.example.jingbin.cloudreader.databinding.ItemWelfareBinding;
@@ -19,6 +18,8 @@ import com.example.jingbin.cloudreader.viewmodel.gank.WelfareViewModel;
 
 import java.util.ArrayList;
 
+import me.jingbin.bymvvm.adapter.BaseBindingAdapter;
+import me.jingbin.bymvvm.adapter.BaseBindingHolder;
 import me.jingbin.library.ByRecyclerView;
 
 /**

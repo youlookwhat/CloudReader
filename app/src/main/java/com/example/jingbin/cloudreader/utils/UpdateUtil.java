@@ -1,10 +1,10 @@
 package com.example.jingbin.cloudreader.utils;
 
-import androidx.appcompat.app.AlertDialog;
 import android.text.TextUtils;
 
+import androidx.appcompat.app.AlertDialog;
+
 import com.example.jingbin.cloudreader.BuildConfig;
-import com.example.jingbin.cloudreader.base.BaseActivity;
 import com.example.jingbin.cloudreader.bean.UpdateBean;
 import com.example.jingbin.cloudreader.http.HttpClient;
 
@@ -12,6 +12,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
+import me.jingbin.bymvvm.base.BaseActivity;
 
 
 /**

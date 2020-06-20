@@ -36,7 +36,7 @@ import com.example.jingbin.cloudreader.utils.CommonUtils;
 import com.example.jingbin.cloudreader.utils.DebugUtil;
 import com.example.jingbin.cloudreader.utils.StringFormatUtil;
 import com.example.jingbin.cloudreader.view.MyNestedScrollView;
-import com.example.jingbin.cloudreader.view.statusbar.StatusBarUtil;
+import me.jingbin.bymvvm.utils.StatusBarUtil;
 import com.example.jingbin.cloudreader.view.statue.StatusBarUtils;
 import com.example.jingbin.cloudreader.view.webview.WebViewActivity;
 
@@ -46,7 +46,7 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import jp.wasabeef.glide.transformations.BlurTransformation;
 
-import static com.example.jingbin.cloudreader.view.statusbar.StatusBarUtil.getStatusBarHeight;
+import static me.jingbin.bymvvm.utils.StatusBarUtil.getStatusBarHeight;
 
 /**
  * （已使用：{@link OneMovieDetailActivity} 替代）

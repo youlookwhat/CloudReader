@@ -1,16 +1,15 @@
 package com.example.jingbin.cloudreader.app;
 
-import androidx.multidex.MultiDexApplication;
-
-import com.example.http.BuildConfig;
-import com.example.http.HttpUtils;
+import com.example.jingbin.cloudreader.BuildConfig;
 import com.tencent.bugly.crashreport.CrashReport;
+
+import me.jingbin.bymvvm.base.RootApplication;
 
 /**
  * Created by jingbin on 2016/11/22.
  */
 
-public class App extends MultiDexApplication {
+public class App extends RootApplication {
 
     private static App app;
 
@@ -27,7 +26,7 @@ public class App extends MultiDexApplication {
 //            return;
 //        }
 //        LeakCanary.install(this);
-        HttpUtils.getInstance().init(this);
+//        HttpUtils.getInstance().init(this);
         CrashReport.initCrashReport(getApplicationContext(), "3977b2d86f", BuildConfig.DEBUG);
 
     }

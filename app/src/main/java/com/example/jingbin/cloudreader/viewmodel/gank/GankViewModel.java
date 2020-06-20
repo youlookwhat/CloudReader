@@ -1,17 +1,18 @@
 package com.example.jingbin.cloudreader.viewmodel.gank;
 
 import android.app.Application;
-import androidx.lifecycle.MutableLiveData;
-import androidx.annotation.NonNull;
 
-import com.example.http.HttpUtils;
-import com.example.jingbin.cloudreader.base.BaseViewModel;
+import androidx.annotation.NonNull;
+import androidx.lifecycle.MutableLiveData;
+
+import me.jingbin.bymvvm.base.BaseViewModel;
 import com.example.jingbin.cloudreader.bean.GankIoDataBean;
 import com.example.jingbin.cloudreader.data.model.GankOtherModel;
 import com.example.jingbin.cloudreader.http.RequestImpl;
 import com.example.jingbin.cloudreader.utils.DataUtil;
 
 import io.reactivex.disposables.Disposable;
+import me.jingbin.bymvvm.http.HttpUtils;
 
 /**
  * 干货集中营页面 ViewModel

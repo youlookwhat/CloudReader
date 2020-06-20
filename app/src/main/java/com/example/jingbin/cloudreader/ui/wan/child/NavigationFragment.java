@@ -15,7 +15,7 @@ import android.view.View;
 import com.example.jingbin.cloudreader.R;
 import com.example.jingbin.cloudreader.adapter.NavigationAdapter;
 import com.example.jingbin.cloudreader.adapter.NavigationContentAdapter;
-import com.example.jingbin.cloudreader.base.BaseFragment;
+import me.jingbin.bymvvm.base.BaseFragment;
 import com.example.jingbin.cloudreader.bean.wanandroid.ArticlesBean;
 import com.example.jingbin.cloudreader.bean.wanandroid.NaviJsonBean;
 import com.example.jingbin.cloudreader.databinding.FragmentNaviBinding;

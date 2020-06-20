@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <RelativeLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <!--加载失败-->
+        <ViewStub
+            android:id="@+id/vs_error_refresh"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerHorizontal="true"
+            android:layout="@layout/layout_loading_error" />
+
+        <!--加载中..-->
+        <ViewStub
+            android:id="@+id/vs_loading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout="@layout/layout_loading_view" />
+
+        <!--数据为空-->
+        <ViewStub
+            android:id="@+id/vs_empty"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout="@layout/layout_loading_empty" />
+
+    </RelativeLayout>
+</layout>

@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import com.example.jingbin.cloudreader.R;
 import com.example.jingbin.cloudreader.adapter.DouBanTopAdapter;
-import com.example.jingbin.cloudreader.base.BaseActivity;
+import me.jingbin.bymvvm.base.BaseActivity;
 import com.example.jingbin.cloudreader.bean.HotMovieBean;
 import com.example.jingbin.cloudreader.databinding.ActivityDoubanTopBinding;
 import com.example.jingbin.cloudreader.viewmodel.movie.DoubanTopViewModel;

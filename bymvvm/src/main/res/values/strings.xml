@@ -1,0 +1,5 @@
+<resources>
+    <string name="string_try_load">加载失败,点击重试</string>
+    <string name="string_loading">努力加载中...</string>
+    <string name="string_empty">未找到相关内容</string>
+</resources>

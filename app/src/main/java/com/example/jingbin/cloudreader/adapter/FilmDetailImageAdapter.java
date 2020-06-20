@@ -1,18 +1,20 @@
 package com.example.jingbin.cloudreader.adapter;
 
 import android.app.Activity;
-import androidx.appcompat.app.AppCompatActivity;
 import android.view.View;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.jingbin.cloudreader.R;
-import com.example.jingbin.cloudreader.base.binding.BaseBindingAdapter;
-import com.example.jingbin.cloudreader.base.binding.BaseBindingHolder;
 import com.example.jingbin.cloudreader.bean.FilmDetailBean;
 import com.example.jingbin.cloudreader.databinding.ItemFilmDetailImageBinding;
 import com.example.jingbin.cloudreader.view.bigimage.BigImagePagerActivity;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import me.jingbin.bymvvm.adapter.BaseBindingAdapter;
+import me.jingbin.bymvvm.adapter.BaseBindingHolder;
 
 
 /**

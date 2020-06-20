@@ -6,12 +6,12 @@ import com.google.android.material.tabs.TabLayout;
 import androidx.fragment.app.Fragment;
 
 import com.example.jingbin.cloudreader.R;
-import com.example.jingbin.cloudreader.base.BaseFragment;
+import me.jingbin.bymvvm.base.BaseFragment;
 import com.example.jingbin.cloudreader.databinding.FragmentContentBinding;
 import com.example.jingbin.cloudreader.ui.film.child.FilmComingFragment;
 import com.example.jingbin.cloudreader.ui.film.child.FilmShowingFragment;
 import com.example.jingbin.cloudreader.view.MyFragmentPagerAdapter;
-import com.example.jingbin.cloudreader.viewmodel.menu.NoViewModel;
+import me.jingbin.bymvvm.base.NoViewModel;
 
 import java.util.ArrayList;
 

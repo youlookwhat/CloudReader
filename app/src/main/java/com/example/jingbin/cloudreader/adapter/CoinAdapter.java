@@ -3,16 +3,17 @@ package com.example.jingbin.cloudreader.adapter;
 import android.app.Activity;
 import android.graphics.Color;
 import android.graphics.Typeface;
-import androidx.annotation.NonNull;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
+
 import com.example.jingbin.cloudreader.R;
-import com.example.jingbin.cloudreader.base.binding.BaseBindingHolder;
 import com.example.jingbin.cloudreader.bean.CoinLogBean;
 import com.example.jingbin.cloudreader.databinding.ItemWanCoinBinding;
 import com.example.jingbin.cloudreader.databinding.ItemWanCoinRankBinding;
 import com.example.jingbin.cloudreader.utils.CommonUtils;
 
+import me.jingbin.bymvvm.adapter.BaseBindingHolder;
 import me.jingbin.library.adapter.BaseByRecyclerViewAdapter;
 import me.jingbin.library.adapter.BaseByViewHolder;
 

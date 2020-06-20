@@ -1,20 +1,22 @@
 package com.example.jingbin.cloudreader.ui.wan;
 
 import android.os.Bundle;
+
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.jingbin.cloudreader.R;
-import com.example.jingbin.cloudreader.base.BaseFragment;
 import com.example.jingbin.cloudreader.databinding.FragmentContentBinding;
 import com.example.jingbin.cloudreader.ui.wan.child.HomeFragment;
 import com.example.jingbin.cloudreader.ui.wan.child.NavigationFragment;
 import com.example.jingbin.cloudreader.ui.wan.child.TreeFragment;
 import com.example.jingbin.cloudreader.ui.wan.child.WanFindFragment;
 import com.example.jingbin.cloudreader.view.MyFragmentPagerAdapter;
-import com.example.jingbin.cloudreader.viewmodel.menu.NoViewModel;
+import me.jingbin.bymvvm.base.NoViewModel;
 
 import java.util.ArrayList;
+
+import me.jingbin.bymvvm.base.BaseFragment;
 
 /**
  * Created by jingbin on 16/12/14.
