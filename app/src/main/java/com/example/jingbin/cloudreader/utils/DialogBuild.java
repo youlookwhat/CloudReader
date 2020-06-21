@@ -1,21 +1,23 @@
 package com.example.jingbin.cloudreader.utils;
 
 import android.content.DialogInterface;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.widget.AppCompatEditText;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.widget.AppCompatEditText;
+
 import com.example.jingbin.cloudreader.R;
+import com.example.jingbin.cloudreader.app.RxCodeConstants;
 import com.example.jingbin.cloudreader.data.UserUtil;
 import com.example.jingbin.cloudreader.data.model.LoginModel;
-import com.example.jingbin.cloudreader.data.room.Injection;
-import com.example.jingbin.cloudreader.data.room.User;
-import com.example.jingbin.cloudreader.data.room.UserDataCallback;
-import me.jingbin.bymvvm.rxbus.RxBus;
-import com.example.jingbin.cloudreader.app.RxCodeConstants;
 import com.example.jingbin.cloudreader.view.OnLoginListener;
+
+import me.jingbin.bymvvm.room.Injection;
+import me.jingbin.bymvvm.room.User;
+import me.jingbin.bymvvm.room.UserDataCallback;
+import me.jingbin.bymvvm.rxbus.RxBus;
 
 
 /**

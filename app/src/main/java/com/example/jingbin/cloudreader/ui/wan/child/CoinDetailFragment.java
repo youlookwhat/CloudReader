@@ -15,8 +15,7 @@ import com.example.jingbin.cloudreader.R;
 import com.example.jingbin.cloudreader.adapter.CoinAdapter;
 import com.example.jingbin.cloudreader.bean.CoinBean;
 import com.example.jingbin.cloudreader.data.UserUtil;
-import com.example.jingbin.cloudreader.data.impl.OnUserInfoListener;
-import com.example.jingbin.cloudreader.data.room.User;
+import com.example.jingbin.cloudreader.data.OnUserInfoListener;
 import com.example.jingbin.cloudreader.databinding.FragmentWanAndroidBinding;
 import com.example.jingbin.cloudreader.databinding.HeaderCoinDetailBinding;
 import com.example.jingbin.cloudreader.utils.CommonUtils;
@@ -24,6 +23,7 @@ import com.example.jingbin.cloudreader.utils.RefreshHelper;
 import com.example.jingbin.cloudreader.viewmodel.wan.CoinListViewModel;
 
 import me.jingbin.bymvvm.base.BaseFragment;
+import me.jingbin.bymvvm.room.User;
 import me.jingbin.library.ByRecyclerView;
 
 /**

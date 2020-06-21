@@ -1,21 +1,22 @@
 package com.example.jingbin.cloudreader.viewmodel.wan;
 
 import android.app.Application;
-import androidx.lifecycle.MutableLiveData;
-import androidx.databinding.ObservableField;
-import androidx.annotation.NonNull;
 
-import me.jingbin.bymvvm.base.BaseViewModel;
+import androidx.annotation.NonNull;
+import androidx.databinding.ObservableField;
+import androidx.lifecycle.MutableLiveData;
+
 import com.example.jingbin.cloudreader.bean.wanandroid.BaseResultBean;
 import com.example.jingbin.cloudreader.bean.wanandroid.CoinUserInfoBean;
 import com.example.jingbin.cloudreader.data.UserUtil;
-import com.example.jingbin.cloudreader.data.impl.OnUserInfoListener;
-import com.example.jingbin.cloudreader.data.room.User;
+import com.example.jingbin.cloudreader.data.OnUserInfoListener;
 import com.example.jingbin.cloudreader.http.HttpClient;
 import com.example.jingbin.cloudreader.utils.DataUtil;
 
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
+import me.jingbin.bymvvm.base.BaseViewModel;
+import me.jingbin.bymvvm.room.User;
 
 /**
  * @author jingbin

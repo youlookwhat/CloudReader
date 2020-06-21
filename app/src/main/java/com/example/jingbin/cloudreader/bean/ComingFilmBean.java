@@ -1,6 +1,5 @@
 package com.example.jingbin.cloudreader.bean;
 
-import com.example.jingbin.cloudreader.data.room.User;
 
 import java.util.List;
 import java.util.Objects;

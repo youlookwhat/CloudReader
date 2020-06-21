@@ -87,17 +87,6 @@ dependencies {
     // 流式标签 FlexboxLayout
     implementation 'com.google.android:flexbox:2.0.1'
     implementation 'com.google.zxing:core:3.3.0'
-    // Room
-    implementation 'androidx.room:room-runtime:2.2.5'
-    annotationProcessor 'androidx.room:room-compiler:2.2.5'
-    implementation 'androidx.room:room-rxjava2:2.2.5'
-    implementation 'androidx.paging:paging-runtime:2.1.2'
-
-    // Glide
-    implementation 'com.github.bumptech.glide:glide:4.9.0'
-    annotationProcessor 'com.github.bumptech.glide:compiler:4.9.0'
-    // 高斯模糊和圆角等
-    implementation 'jp.wasabeef:glide-transformations:4.0.1'
 
     implementation 'com.hyman:flowlayout-lib:1.1.2'
     implementation 'com.nineoldandroids:library:2.4.0'
@@ -106,7 +95,7 @@ dependencies {
     implementation 'com.github.chrisbanes:PhotoView:2.1.4'
     implementation 'com.github.youlookwhat:SBannerView:1.1.5'
     implementation 'com.github.youlookwhat:WebProgress:1.1.0'
-    implementation 'com.github.youlookwhat:ByRecyclerView:1.1.0'
+
     // leakcanary
 //    debugImplementation 'com.squareup.leakcanary:leakcanary-android:1.6.1'
 //    releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.6.1'

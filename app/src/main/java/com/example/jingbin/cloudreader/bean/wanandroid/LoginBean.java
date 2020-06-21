@@ -1,8 +1,9 @@
 package com.example.jingbin.cloudreader.bean.wanandroid;
 
-import com.example.jingbin.cloudreader.data.room.User;
 
 import java.util.List;
+
+import me.jingbin.bymvvm.room.User;
 
 /**
  * @author jingbin

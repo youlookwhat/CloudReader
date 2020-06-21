@@ -1,15 +1,14 @@
 package com.example.jingbin.cloudreader.viewmodel.menu;
 
 import android.app.Application;
-import androidx.lifecycle.MutableLiveData;
-import androidx.databinding.ObservableField;
-import androidx.annotation.NonNull;
 import android.text.TextUtils;
 
-import me.jingbin.bymvvm.base.BaseViewModel;
+import androidx.annotation.NonNull;
+import androidx.databinding.ObservableField;
+import androidx.lifecycle.MutableLiveData;
+
 import com.example.jingbin.cloudreader.bean.wanandroid.LoginBean;
 import com.example.jingbin.cloudreader.data.UserUtil;
-import com.example.jingbin.cloudreader.data.room.Injection;
 import com.example.jingbin.cloudreader.http.HttpClient;
 import com.example.jingbin.cloudreader.utils.ToastUtil;
 
@@ -17,6 +16,8 @@ import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
+import me.jingbin.bymvvm.base.BaseViewModel;
+import me.jingbin.bymvvm.room.Injection;
 
 
 /**
