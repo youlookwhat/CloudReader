@@ -27,11 +27,13 @@
             android:name=".ui.MainActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
-            android:theme="@style/MyScrollPage" />
+            android:theme="@style/MyScrollPage"
+            tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".ui.LoadingActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/SplashTheme">
+            android:theme="@style/SplashTheme"
+            tools:ignore="LockedOrientationActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -41,17 +43,20 @@
         <activity
             android:name=".ui.douban.SlideShadeViewActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/MyScrollPage" />
+            android:theme="@style/MyScrollPage"
+            tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".view.viewbigimage.ViewBigImageActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/ViewBigPicTheme" />
+            android:theme="@style/ViewBigPicTheme"
+            tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".view.webview.WebViewActivity"
             android:configChanges="orientation|screenSize"
             android:hardwareAccelerated="true"
             android:launchMode="singleTask"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity">
             <intent-filter tools:ignore="AppLinkUrlError">
                 <action android:name="android.intent.action.VIEW" />
 
@@ -64,57 +69,73 @@
         </activity>
         <activity
             android:name=".ui.douban.DoubanTopActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".ui.douban.BookTypeActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".ui.douban.OneMovieDetailActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/MyScrollPage" />
+            android:theme="@style/MyScrollPage"
+            tools:ignore="LockedOrientationActivity" />
 
         <activity
             android:name=".ui.film.child.FilmDetailActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/MyScrollPage" />
+            android:theme="@style/MyScrollPage"
+            tools:ignore="LockedOrientationActivity" />
 
         <activity
             android:name=".ui.menu.NavHomePageActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/HomePageTheme" />
+            android:theme="@style/HomePageTheme"
+            tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".ui.menu.NavDeedBackActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".ui.menu.NavAboutActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".ui.menu.NavAdmireActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".ui.douban.BookDetailActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".ui.menu.NavDownloadActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".ui.wan.child.LoginActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".ui.wan.child.ArticleListActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".ui.wan.child.MyCollectActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".ui.wan.child.MyCoinActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".ui.wan.child.CategoryDetailActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".ui.menu.SearchActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
 
         <activity
             android:name=".view.bigimage.BigImagePagerActivity"
