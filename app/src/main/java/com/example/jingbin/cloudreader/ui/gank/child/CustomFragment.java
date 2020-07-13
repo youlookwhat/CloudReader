@@ -84,7 +84,7 @@ public class CustomFragment extends BaseFragment<GankViewModel, FragmentAndroidB
     }
 
     private void loadCustomData() {
-        viewModel.loadGankData().observe(this, new Observer<GankIoDataBean>() {
+        viewModel.loadGankData().observe(getViewLifecycleOwner(), new Observer<GankIoDataBean>() {
             @Override
             public void onChanged(@Nullable GankIoDataBean bean) {
                 bindingView.xrvAndroid.setStateViewEnabled(false);

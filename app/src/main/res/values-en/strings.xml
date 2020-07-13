@@ -1,0 +1,116 @@
+<resources>
+    <string name="app_name">云阅</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="action_share">Share</string>
+
+    <string name="custom_header_hint_normal">Drop update</string>
+    <string name="custom_header_hint_release">Release update</string>
+    <string name="custom_refreshing">Refreshing…</string>
+    <string name="custom_refresh_done">Update done</string>
+
+    <string name="hello_blank_fragment">Hello blank mFragment</string>
+    <string name="title_activity_base">BaseActivity</string>
+    <string name="actionbar_search">Search</string>
+    <string name="actionbar_help_coin">Integral rules</string>
+    <string name="actionbar_more">More information</string>
+    <string name="actionbar_webview_share">Share</string>
+    <string name="actionbar_webview_cope">Copy the link</string>
+    <string name="actionbar_webview_open">Browser opens</string>
+    <string name="actionbar_webview_refresh">Refresh</string>
+    <string name="actionbar_webview_collect">Add to favorites</string>
+    <string name="actionbar_share">Share it with friends\(^o^)/~</string>
+    <string name="picture_has_save_to">Saved to %s</string>
+    <string name="string_empty">""</string>
+    <string name="github_issues">您好，很希望得到您的意见，由于没有线上反馈系统，您可以在GitHub的Issues处说明问题原因，也可以通过以下方式联系我，我将根据情况尽量处理哦 ~</string>
+    <string name="string_about">由于网易云音乐用了很久，特别喜爱它的界面风格，所以仿写了它的UI。如构成侵权请及时通知我修改或删除。
+        \n\n 大部分数据使用的是鸿洋的玩安卓、代码家的干货集中营和时光网，一切数据解释权都归鸿洋、代码家和时光网所有。
+        \n\n 干货每日推荐每天12：30更新，如没有内容则取缓存。应用已使用离线缓存，断网时可得到上一次请求到的数据。
+        \n\n 整体采用Retrofit+RxJava+MvvM-DataBinding框架。
+        \n\n 我的GitHub：https://github.com/youlookwhat
+        \n\n 项目完全开源，如果你觉得不错，请帮忙Star一下吧，或帮忙分享给你的朋友，这是给我们最大的动力与支持，非常感谢！
+        </string>
+
+    <string name="string_about_me">
+        Blog: http://jingbin.me
+        \nEmail: jingbin127@163.com
+    </string>
+
+    <string name="string_lib">
+           android.arch.lifecycle:extensions:1.1.1
+        \n android.arch.lifecycle:reactivestreams:1.1.1
+        \n android.arch.persistence.room:runtime
+        \n com.android.support:appcompat-v7:28.0.0
+        \n com.android.support:design:28.0.0
+        \n com.android.support:cardview-v7:28.0.0
+        \n com.google.zxing:core:3.3.0
+        \n com.google.code.gson:gson:2.8.5
+        \n com.squareup.retrofit2:retrofit:2.4.0
+        \n com.squareup.retrofit2:converter-gson:2.3.0
+        \n com.squareup.okhttp3:okhttp:3.10.0
+        \n com.squareup.okhttp3:logging-interceptor:3.9.1
+        \n com.squareup.okio:okio:1.14.0
+        \n com.squareup.retrofit2:adapter-rxjava2:2.4.0
+        \n io.reactivex.rxjava2:rxjava:2.2.7
+        \n io.reactivex.rxjava2:rxandroid:2.0.1
+        \n com.github.bumptech.glide:glide:4.9.0
+        \n com.github.chrisbanes:PhotoView:2.1.4
+        \n com.github.youlookwhat:WebProgress:1.1.0
+        \n com.github.youlookwhat:SBannerView:1.1.1
+        \n com.github.youlookwhat:ByRecyclerView:x.y.z-support
+        \n com.nineoldandroids:library:2.4.0
+        \n com.youth.banner:banner:1.4.10
+        \n com.cocosw:bottomsheet:1.3.1@aar
+        \n com.squareup.leakcanary:leakcanary-android
+        \n com.tencent.bugly:crashreport
+    </string>
+
+    <string name="string_everyday_empty">There is no update for the moment. Check out the other information~</string>
+    <string name="string_share_text">发现了一个高仿网易云音乐的App，里面有玩安卓、IT干货等最新资讯，还有最新电影热映榜，大力推荐哦~：https://www.coolapk.com/apk/127875</string>
+
+    <!--项目布局文件引用的字符串-->
+    <string name="no_name">anonymous</string>
+    <string name="string_rating">score：</string>
+    <string name="string_rating_num">people score</string>
+    <string name="string_type">type：</string>
+    <string name="string_film_time">running time：</string>
+    <string name="string_film_date">release date：</string>
+    <string name="string_publisher">press：</string>
+    <string name="string_joke">------</string>
+    <string name="no_name_joke">anonymous</string>
+    <string name="string_dian">&#160;·&#160;</string>
+    <string name="string_add">+</string>
+    <string name="string_tree_category_size">Total %s subcategories</string>
+
+    <!--url-->
+    <string name="string_url_cloudreader">https://github.com/youlookwhat/CloudReader</string>
+    <!--酷安-->
+    <string name="string_url_new_version">https://www.coolapk.com/apk/127875</string>
+    <!--issues-->
+    <string name="string_url_issues">https://github.com/youlookwhat/CloudReader/issues</string>
+    <!--jianshu-->
+    <string name="string_url_jianshu">http://www.jianshu.com/users/e43c6e979831/latest_articles</string>
+    <string name="string_url_gankio">http://gank.io/api</string>
+    <string name="string_url_douban">https://developers.douban.com/wiki/?title=terms</string>
+    <string name="string_url_mtime">http://www.mtime.com/</string>
+    <!--更新日志-->
+    <string name="string_url_update_log">https://github.com/youlookwhat/CloudReader/wiki/Update-log</string>
+    <!--问题归纳-->
+    <string name="string_url_faq">http://jingbin.me/2016/12/25/%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98-%E4%BA%91%E9%98%85/</string>
+    <!--干货闲读-->
+    <string name="string_url_gank">https://gank.io</string>
+    <!--玩安卓-->
+    <string name="string_url_wanandroid">http://www.wanandroid.com/index</string>
+    <!--每日推荐-->
+    <string name="string_url_trending">https://github.com/trending</string>
+    <!--积分规则-->
+    <string name="string_url_coin_help">https://www.wanandroid.com/blog/show/2653</string>
+    <!--赞赏-->
+    <string name="string_url_admire">https://github.com/youlookwhat/CloudReader/blob/master/file/admire.md</string>
+    <string name="string_admire">本项目已累计迭代将近三年，期间很多api失效被替换，和增加了玩安卓的近全部功能，耗费了作者很多心血。
+        \n\n每月的后 7 天，会在侧边栏放置赞助入口；如果您认为本软件内容对你确实产生了帮助，或者喜欢云阅，不防小额赞助一下。这样可以增加我维护本软件的动力，迭代更多实用有趣的功能。
+        \n\n非常感谢！</string>
+</resources>

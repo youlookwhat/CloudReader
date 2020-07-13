@@ -3,6 +3,10 @@ package com.example.jingbin.cloudreader.ui.wan.child;
 import androidx.lifecycle.Observer;
 import android.content.Context;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -131,7 +135,7 @@ public class WanFindFragment extends BaseFragment<WanFindViewModel, FragmentWanF
 
     private void onObserveViewModel() {
         // 左侧标题
-        viewModel.getDataTitle().observe(this, new Observer<List<WxarticleItemBean>>() {
+        viewModel.getDataTitle().observe(getViewLifecycleOwner(), new Observer<List<WxarticleItemBean>>() {
             @Override
             public void onChanged(@Nullable List<WxarticleItemBean> dataBeans) {
                 if (dataBeans != null && dataBeans.size() > 0) {
@@ -143,7 +147,7 @@ public class WanFindFragment extends BaseFragment<WanFindViewModel, FragmentWanF
             }
         });
         // 右侧内容
-        viewModel.getData().observe(this, new Observer<List<ArticlesBean>>() {
+        viewModel.getData().observe(getViewLifecycleOwner(), new Observer<List<ArticlesBean>>() {
             @Override
             public void onChanged(@Nullable List<ArticlesBean> list) {
                 showContentView();
@@ -164,7 +168,7 @@ public class WanFindFragment extends BaseFragment<WanFindViewModel, FragmentWanF
                         bindingView.recyclerView.setLoadMoreEnabled(false);
                         bindingView.recyclerView.setRefreshEnabled(false);
                         if (!isAddFooter) {
-                            bindingView.recyclerView.addFooterView(R.layout.layout_loading_empty);
+                            bindingView.recyclerView.addFooterView(LayoutInflater.from(activity).inflate(R.layout.layout_loading_empty, (ViewGroup) bindingView.recyclerView, false));
                             isAddFooter = true;
                         } else {
                             bindingView.recyclerView.setFootViewEnabled(true);

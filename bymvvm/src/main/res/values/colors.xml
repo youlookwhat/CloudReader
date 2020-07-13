@@ -2,4 +2,5 @@
 <resources>
     <color name="colorTheme">#ffce3d3a</color>
     <color name="colorWhite">#ffffffff</color>
+    <color name="colorTabText">#585858</color>
 </resources>

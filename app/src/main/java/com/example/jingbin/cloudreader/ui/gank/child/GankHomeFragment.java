@@ -102,13 +102,13 @@ public class GankHomeFragment extends BaseFragment<GankHomeViewModel, FragmentEv
     }
 
     private void onObserveViewModel() {
-        viewModel.getShowLoading().observe(this, new Observer<Boolean>() {
+        viewModel.getShowLoading().observe(getViewLifecycleOwner(), new Observer<Boolean>() {
             @Override
             public void onChanged(@Nullable Boolean aBoolean) {
                 showRotaLoading(aBoolean);
             }
         });
-        viewModel.getBannerData().observe(this, new Observer<GankIoDataBean>() {
+        viewModel.getBannerData().observe(getViewLifecycleOwner(), new Observer<GankIoDataBean>() {
             @Override
             public void onChanged(@Nullable GankIoDataBean bean) {
                 if (bean != null && bean.getResults() != null && bean.getResults().size() > 0) {
