@@ -15,7 +15,7 @@ import com.example.jingbin.cloudreader.databinding.ActivityNavAboutBinding;
 import com.example.jingbin.cloudreader.utils.CommonUtils;
 import com.example.jingbin.cloudreader.utils.PerfectClickListener;
 import com.example.jingbin.cloudreader.utils.UpdateUtil;
-import com.example.jingbin.cloudreader.view.webview.WebViewActivity;
+import com.example.jingbin.cloudreader.ui.WebViewActivity;
 import me.jingbin.bymvvm.base.NoViewModel;
 
 /**

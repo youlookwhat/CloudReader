@@ -50,7 +50,6 @@ import com.example.jingbin.cloudreader.utils.UpdateUtil;
 import com.example.jingbin.cloudreader.view.MyFragmentPagerAdapter;
 import com.example.jingbin.cloudreader.view.OnLoginListener;
 import com.example.jingbin.cloudreader.view.OnMyPageChangeListener;
-import com.example.jingbin.cloudreader.view.webview.WebViewActivity;
 import com.example.jingbin.cloudreader.viewmodel.wan.MainViewModel;
 
 import io.reactivex.disposables.Disposable;

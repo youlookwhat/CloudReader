@@ -51,7 +51,7 @@
             android:theme="@style/ViewBigPicTheme"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name=".view.webview.WebViewActivity"
+            android:name=".ui.WebViewActivity"
             android:configChanges="orientation|screenSize"
             android:hardwareAccelerated="true"
             android:launchMode="singleTask"

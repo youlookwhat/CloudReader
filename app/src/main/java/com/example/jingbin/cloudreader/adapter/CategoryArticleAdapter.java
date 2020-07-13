@@ -10,7 +10,7 @@ import com.example.jingbin.cloudreader.data.model.CollectModel;
 import com.example.jingbin.cloudreader.databinding.ItemCategoryArticleBinding;
 import com.example.jingbin.cloudreader.utils.PerfectClickListener;
 import com.example.jingbin.cloudreader.utils.ToastUtil;
-import com.example.jingbin.cloudreader.view.webview.WebViewActivity;
+import com.example.jingbin.cloudreader.ui.WebViewActivity;
 import com.example.jingbin.cloudreader.viewmodel.wan.WanNavigator;
 
 import me.jingbin.bymvvm.adapter.BaseBindingAdapter;

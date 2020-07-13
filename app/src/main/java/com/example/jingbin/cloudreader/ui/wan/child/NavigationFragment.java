@@ -19,7 +19,7 @@ import me.jingbin.bymvvm.base.BaseFragment;
 import com.example.jingbin.cloudreader.bean.wanandroid.ArticlesBean;
 import com.example.jingbin.cloudreader.bean.wanandroid.NaviJsonBean;
 import com.example.jingbin.cloudreader.databinding.FragmentNaviBinding;
-import com.example.jingbin.cloudreader.view.webview.WebViewActivity;
+import com.example.jingbin.cloudreader.ui.WebViewActivity;
 import com.example.jingbin.cloudreader.viewmodel.wan.NavigationViewModel;
 
 import java.util.List;

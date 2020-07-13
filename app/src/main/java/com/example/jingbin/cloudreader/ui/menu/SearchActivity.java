@@ -31,7 +31,7 @@ import com.example.jingbin.cloudreader.utils.CommonUtils;
 import com.example.jingbin.cloudreader.utils.DialogBuild;
 import com.example.jingbin.cloudreader.utils.ToastUtil;
 import com.example.jingbin.cloudreader.view.byview.NeteaseLoadMoreView;
-import com.example.jingbin.cloudreader.view.webview.WebViewActivity;
+import com.example.jingbin.cloudreader.ui.WebViewActivity;
 import com.example.jingbin.cloudreader.viewmodel.wan.SearchViewModel;
 import com.google.android.material.internal.FlowLayout;
 import com.google.android.material.tabs.TabLayout;

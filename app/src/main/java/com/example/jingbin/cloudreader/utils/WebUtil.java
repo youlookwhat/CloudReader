@@ -1,4 +1,4 @@
-package com.example.jingbin.cloudreader.view.webview;
+package com.example.jingbin.cloudreader.utils;
 
 import android.app.Activity;
 import android.content.Intent;

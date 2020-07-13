@@ -15,7 +15,7 @@ import com.example.jingbin.cloudreader.databinding.ActivityBookDetailBinding;
 import com.example.jingbin.cloudreader.databinding.HeaderBookDetailBinding;
 import com.example.jingbin.cloudreader.http.HttpClient;
 import com.example.jingbin.cloudreader.utils.CommonUtils;
-import com.example.jingbin.cloudreader.view.webview.WebViewActivity;
+import com.example.jingbin.cloudreader.ui.WebViewActivity;
 
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;

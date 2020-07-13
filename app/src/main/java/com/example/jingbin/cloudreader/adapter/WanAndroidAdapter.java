@@ -12,7 +12,7 @@ import com.example.jingbin.cloudreader.databinding.ItemWanAndroidBinding;
 import com.example.jingbin.cloudreader.ui.wan.child.ArticleListActivity;
 import com.example.jingbin.cloudreader.utils.PerfectClickListener;
 import com.example.jingbin.cloudreader.utils.ToastUtil;
-import com.example.jingbin.cloudreader.view.webview.WebViewActivity;
+import com.example.jingbin.cloudreader.ui.WebViewActivity;
 import com.example.jingbin.cloudreader.viewmodel.wan.WanNavigator;
 
 import me.jingbin.bymvvm.adapter.BaseBindingAdapter;

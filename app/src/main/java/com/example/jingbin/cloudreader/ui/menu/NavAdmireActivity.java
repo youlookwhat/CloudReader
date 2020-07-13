@@ -16,7 +16,7 @@ import com.example.jingbin.cloudreader.utils.DialogBuild;
 import com.example.jingbin.cloudreader.utils.GlideUtil;
 import com.example.jingbin.cloudreader.utils.PermissionHandler;
 import com.example.jingbin.cloudreader.utils.RxSaveImage;
-import com.example.jingbin.cloudreader.view.webview.WebViewActivity;
+import com.example.jingbin.cloudreader.ui.WebViewActivity;
 import me.jingbin.bymvvm.base.NoViewModel;
 
 /**

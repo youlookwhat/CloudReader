@@ -11,7 +11,7 @@ import com.example.jingbin.cloudreader.R;
 import me.jingbin.bymvvm.base.BaseActivity;
 import com.example.jingbin.cloudreader.databinding.ActivityMyCollectBinding;
 import com.example.jingbin.cloudreader.view.MyFragmentPagerAdapter;
-import com.example.jingbin.cloudreader.view.webview.WebViewActivity;
+import com.example.jingbin.cloudreader.ui.WebViewActivity;
 import me.jingbin.bymvvm.base.NoViewModel;
 
 import java.util.ArrayList;

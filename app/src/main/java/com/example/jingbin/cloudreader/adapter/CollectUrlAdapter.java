@@ -11,7 +11,7 @@ import com.example.jingbin.cloudreader.data.model.CollectModel;
 import com.example.jingbin.cloudreader.databinding.ItemCollectLinkBinding;
 import com.example.jingbin.cloudreader.utils.DialogBuild;
 import com.example.jingbin.cloudreader.utils.ToastUtil;
-import com.example.jingbin.cloudreader.view.webview.WebViewActivity;
+import com.example.jingbin.cloudreader.ui.WebViewActivity;
 import com.example.jingbin.cloudreader.viewmodel.wan.WanNavigator;
 
 import me.jingbin.bymvvm.adapter.BaseBindingAdapter;

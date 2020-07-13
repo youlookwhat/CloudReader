@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/ll_webview"
     android:orientation="vertical"
-    tools:context="com.example.jingbin.cloudreader.view.webview.WebViewActivity">
+    tools:context="com.example.jingbin.cloudreader.ui.WebViewActivity">
 
     <androidx.appcompat.widget.Toolbar xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/title_tool_bar"
@@ -32,24 +33,4 @@
 
     </androidx.appcompat.widget.Toolbar>
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/title_tool_bar">
-
-        <WebView
-            android:id="@+id/webview_detail"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scrollbarSize="3dp"
-            android:scrollbarThumbVertical="@color/tabBackground" />
-
-        <me.jingbin.progress.WebProgress
-            android:id="@+id/pb_progress"
-            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:visibility="gone" />
-
-    </RelativeLayout>
-</RelativeLayout>
+</LinearLayout>

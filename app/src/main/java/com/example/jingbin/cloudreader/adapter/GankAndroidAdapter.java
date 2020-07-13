@@ -7,7 +7,7 @@ import com.example.jingbin.cloudreader.R;
 import com.example.jingbin.cloudreader.bean.GankIoDataBean;
 import com.example.jingbin.cloudreader.databinding.ItemAndroidBinding;
 import com.example.jingbin.cloudreader.utils.GlideUtil;
-import com.example.jingbin.cloudreader.view.webview.WebViewActivity;
+import com.example.jingbin.cloudreader.ui.WebViewActivity;
 
 import me.jingbin.bymvvm.adapter.BaseBindingAdapter;
 import me.jingbin.bymvvm.adapter.BaseBindingHolder;

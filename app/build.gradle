@@ -93,7 +93,7 @@ dependencies {
     implementation 'me.drakeet.support:toastcompat:1.1.0'
     implementation 'com.github.chrisbanes:PhotoView:2.1.4'
     implementation 'com.github.youlookwhat:SBannerView:1.1.5'
-    implementation 'com.github.youlookwhat:WebProgress:1.1.0'
+    implementation 'com.github.youlookwhat:ByWebView:1.0.0'
 
     // leakcanary
 //    debugImplementation 'com.squareup.leakcanary:leakcanary-android:1.6.1'
