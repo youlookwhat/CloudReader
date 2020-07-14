@@ -80,8 +80,8 @@ public class WebViewActivity extends AppCompatActivity {
 
     private void getIntentData() {
         if (getIntent() != null) {
-            mTitle = getIntent().getStringExtra("mTitle");
-            mUrl = getIntent().getStringExtra("mUrl");
+            mTitle = getIntent().getStringExtra("title");
+            mUrl = getIntent().getStringExtra("url");
             isTitleFix = getIntent().getBooleanExtra("isTitleFix", false);
         }
     }
@@ -99,7 +99,7 @@ public class WebViewActivity extends AppCompatActivity {
         }
         mTitleToolBar.setOverflowIcon(ContextCompat.getDrawable(this, R.drawable.actionbar_more));
         tvGunTitle.postDelayed(() -> tvGunTitle.setSelected(true), 1900);
-        tvGunTitle.setText(Html.fromHtml(mTitle));
+        tvGunTitle.setText(mTitle == null ? "加载中..." : Html.fromHtml(mTitle));
 
         byWebView = ByWebView.with(this)
                 .setWebParent(llWebView, new LinearLayout.LayoutParams(-1, -1))
@@ -371,28 +371,30 @@ public class WebViewActivity extends AppCompatActivity {
     /**
      * 打开网页:
      *
-     * @param mContext 上下文
-     * @param mUrl     要加载的网页url
-     * @param mTitle   title
+     * @param context 上下文
+     * @param url     要加载的网页url
+     * @param title   title
      */
-    public static void loadUrl(Context mContext, String mUrl, String mTitle) {
-        loadUrl(mContext, mUrl, mTitle, false);
+    public static void loadUrl(Context context, String url, String title) {
+        loadUrl(context, url, title, false);
     }
 
     /**
      * 打开网页:
      *
-     * @param mContext     上下文
-     * @param mUrl         要加载的网页url
-     * @param mTitle       title
+     * @param context      上下文
+     * @param url          要加载的网页url
+     * @param title        title
      * @param isTitleFixed title是否固定
      */
-    public static void loadUrl(Context mContext, String mUrl, String mTitle, boolean isTitleFixed) {
-        Intent intent = new Intent(mContext, WebViewActivity.class);
-        intent.putExtra("mUrl", mUrl);
-        intent.putExtra("isTitleFix", isTitleFixed);
-        intent.putExtra("mTitle", mTitle == null ? "" : mTitle);
-        mContext.startActivity(intent);
+    public static void loadUrl(Context context, String url, String title, boolean isTitleFixed) {
+        if (!TextUtils.isEmpty(url)) {
+            Intent intent = new Intent(context, WebViewActivity.class);
+            intent.putExtra("url", url);
+            intent.putExtra("isTitleFix", isTitleFixed);
+            intent.putExtra("title", TextUtils.isEmpty(title) ? url : title);
+            context.startActivity(intent);
+        }
     }
 
 }
