@@ -9,6 +9,7 @@ import android.content.res.Resources;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.Html;
 import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.Menu;
@@ -38,6 +39,7 @@ import com.example.jingbin.cloudreader.utils.RxSaveImage;
 import com.example.jingbin.cloudreader.utils.SPUtils;
 import com.example.jingbin.cloudreader.utils.ShareUtils;
 import com.example.jingbin.cloudreader.utils.ToastUtil;
+import com.example.jingbin.cloudreader.view.viewbigimage.ViewBigImageActivity;
 import com.example.jingbin.cloudreader.viewmodel.wan.WanNavigator;
 
 import me.jingbin.bymvvm.utils.CheckNetwork;
@@ -97,7 +99,7 @@ public class WebViewActivity extends AppCompatActivity {
         }
         mTitleToolBar.setOverflowIcon(ContextCompat.getDrawable(this, R.drawable.actionbar_more));
         tvGunTitle.postDelayed(() -> tvGunTitle.setSelected(true), 1900);
-        tvGunTitle.setText(mTitle);
+        tvGunTitle.setText(Html.fromHtml(mTitle));
 
         byWebView = ByWebView.with(this)
                 .setWebParent(llWebView, new LinearLayout.LayoutParams(-1, -1))
@@ -272,16 +274,19 @@ public class WebViewActivity extends AppCompatActivity {
                 hitTestResult.getType() == WebView.HitTestResult.SRC_IMAGE_ANCHOR_TYPE) {
             // 弹出保存图片的对话框
             new AlertDialog.Builder(WebViewActivity.this)
-                    .setItems(new String[]{"发送给朋友", "保存到相册"}, new DialogInterface.OnClickListener() {
+                    .setItems(new String[]{"查看大图", "发送给朋友", "保存到相册"}, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             //获取图片
                             String picUrl = hitTestResult.getExtra();
                             switch (which) {
                                 case 0:
-                                    ShareUtils.shareNetImage(WebViewActivity.this, picUrl);
+                                    ViewBigImageActivity.start(WebViewActivity.this, picUrl, picUrl);
                                     break;
                                 case 1:
+                                    ShareUtils.shareNetImage(WebViewActivity.this, picUrl);
+                                    break;
+                                case 2:
                                     if (!PermissionHandler.isHandlePermission(WebViewActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
                                         return;
                                     }
