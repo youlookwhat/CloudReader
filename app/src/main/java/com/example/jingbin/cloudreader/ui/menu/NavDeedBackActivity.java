@@ -67,7 +67,6 @@ public class NavDeedBackActivity extends BaseActivity<NoViewModel, ActivityNavDe
                     break;
                 case R.id.tv_qq_group_num:
                     BaseTools.copy(bindingView.tvQqGroupNum.getText().toString());
-                    ToastUtil.showToast("已复制到剪贴板");
                     break;
                 default:
                     break;

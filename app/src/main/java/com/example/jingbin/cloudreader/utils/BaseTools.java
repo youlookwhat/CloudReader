@@ -51,13 +51,19 @@ public class BaseTools {
      */
     public static void copy(String content) {
         if (!TextUtils.isEmpty(content)) {
-            // 得到剪贴板管理器
-            ClipboardManager cmb = (ClipboardManager) App.getInstance().getSystemService(Context.CLIPBOARD_SERVICE);
-            cmb.setText(content.trim());
-            // 创建一个剪贴数据集，包含一个普通文本数据条目（需要复制的数据）
-            ClipData clipData = ClipData.newPlainText(null, content);
-            // 把数据集设置（复制）到剪贴板
-            cmb.setPrimaryClip(clipData);
+            try {
+                // 得到剪贴板管理器
+                ClipboardManager cmb = (ClipboardManager) App.getInstance().getSystemService(Context.CLIPBOARD_SERVICE);
+                cmb.setText(content.trim());
+                // 创建一个剪贴数据集，包含一个普通文本数据条目（需要复制的数据）
+                ClipData clipData = ClipData.newPlainText(null, content);
+                // 把数据集设置（复制）到剪贴板
+                cmb.setPrimaryClip(clipData);
+                ToastUtil.showToast("已复制到剪贴板");
+            } catch (Exception e) {
+                e.printStackTrace();
+                ToastUtil.showToast("复制失败");
+            }
         }
     }
 
@@ -100,9 +106,14 @@ public class BaseTools {
      * 使用浏览器打开链接
      */
     public static void openLink(Context context, String content) {
-        Uri issuesUrl = Uri.parse(content);
-        Intent intent = new Intent(Intent.ACTION_VIEW, issuesUrl);
-        context.startActivity(intent);
+        try {
+            Uri issuesUrl = Uri.parse(content);
+            Intent intent = new Intent(Intent.ACTION_VIEW, issuesUrl);
+            context.startActivity(intent);
+        } catch (Exception e) {
+            ToastUtil.showToast("抱歉，无法打开链接");
+            e.printStackTrace();
+        }
     }
 
     /**

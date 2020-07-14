@@ -70,7 +70,6 @@ public class DialogBuild {
             switch (which) {
                 case 0:
                     BaseTools.copy(content);
-                    ToastUtil.showToast("已复制到剪贴板");
                     break;
                 case 1:
                     ShareUtils.share(v.getContext(), content);

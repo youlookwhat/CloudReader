@@ -140,7 +140,6 @@ public class WebViewActivity extends AppCompatActivity {
             case R.id.actionbar_cope:
                 // 复制链接
                 BaseTools.copy(byWebView.getWebView().getUrl());
-                ToastUtil.showToast("已复制到剪贴板");
                 break;
             case R.id.actionbar_open:
                 // 打开链接
