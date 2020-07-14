@@ -1,12 +1,18 @@
 package com.example.jingbin.cloudreader.ui.gank.child;
 
 import android.animation.ValueAnimator;
+
 import androidx.lifecycle.Observer;
+
 import android.content.Context;
+
 import androidx.databinding.DataBindingUtil;
+
 import android.os.Bundle;
+
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
+
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,12 +23,16 @@ import android.widget.ImageView;
 
 import com.example.jingbin.cloudreader.R;
 import com.example.jingbin.cloudreader.adapter.GankAndroidAdapter;
+
 import me.jingbin.bymvvm.base.BaseFragment;
+
 import com.example.jingbin.cloudreader.bean.GankIoDataBean;
 import com.example.jingbin.cloudreader.databinding.FragmentEverydayBinding;
 import com.example.jingbin.cloudreader.databinding.HeaderItemEverydayBinding;
+
 import me.jingbin.bymvvm.rxbus.RxBus;
 import me.jingbin.bymvvm.rxbus.RxBusBaseMessage;
+
 import com.example.jingbin.cloudreader.app.RxCodeConstants;
 import com.example.jingbin.cloudreader.utils.DensityUtil;
 import com.example.jingbin.cloudreader.utils.GlideUtil;
@@ -31,6 +41,8 @@ import com.example.jingbin.cloudreader.view.viewbigimage.ViewBigImageActivity;
 import com.example.jingbin.cloudreader.ui.WebViewActivity;
 import com.example.jingbin.cloudreader.viewmodel.gank.GankHomeViewModel;
 
+import me.jingbin.library.skeleton.ByRVItemSkeletonScreen;
+import me.jingbin.library.skeleton.BySkeleton;
 import me.jingbin.sbanner.holder.HolderCreator;
 import me.jingbin.sbanner.holder.SBannerViewHolder;
 
@@ -49,6 +61,7 @@ public class GankHomeFragment extends BaseFragment<GankHomeViewModel, FragmentEv
     private boolean mIsFirst = true;
     private RotateAnimation animation;
     private boolean isLoadBanner;
+    private ByRVItemSkeletonScreen skeletonScreen;
 
     @Override
     public int setContent() {
@@ -87,7 +100,7 @@ public class GankHomeFragment extends BaseFragment<GankHomeViewModel, FragmentEv
         bindingView.recyclerView.setLoadMoreEnabled(true);
         bindingView.recyclerView.setHasFixedSize(false);
         bindingView.recyclerView.addHeaderView(mHeaderBinding.getRoot());
-        bindingView.recyclerView.setAdapter(mAdapter);
+//        bindingView.recyclerView.setAdapter(mAdapter);
 
         // 显示日期,去掉第一位的"0"
         String day = getTodayTime().get(2);
@@ -99,6 +112,23 @@ public class GankHomeFragment extends BaseFragment<GankHomeViewModel, FragmentEv
         DensityUtil.setWidthHeight(mHeaderBinding.banner, DensityUtil.getDisplayWidth(), 2.2f);
 
         onObserveViewModel();
+        showItemSkeleton();
+    }
+
+    /**
+     * 骨架图
+     */
+    private void showItemSkeleton() {
+        skeletonScreen = BySkeleton
+                .bindItem(bindingView.recyclerView)
+                .adapter(mAdapter)// 必须设置adapter，且在此之前不要设置adapter
+                .shimmer(false)// 是否有动画
+                .load(R.layout.item_android_skeleton)// item骨架图
+                .angle(30)// 微光角度
+                .frozen(false) // 是否不可滑动
+                .duration(1500)// 微光一次显示时间
+                .count(10)// item个数
+                .show();
     }
 
     private void onObserveViewModel() {
@@ -157,15 +187,21 @@ public class GankHomeFragment extends BaseFragment<GankHomeViewModel, FragmentEv
                 }
             }
         });
-        viewModel.getContentData().observe(this, new Observer<GankIoDataBean>() {
+        viewModel.getContentData().observe(getViewLifecycleOwner(), new Observer<GankIoDataBean>() {
             @Override
             public void onChanged(@Nullable GankIoDataBean bean) {
-                if (bean != null && bean.getResults() != null && bean.getResults().size() > 0) {
-                    mAdapter.setNewData(bean.getResults());
-                    bindingView.recyclerView.loadMoreEnd();
-                } else {
-                    showError();
-                }
+                bindingView.ivLoading.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (bean != null && bean.getResults() != null && bean.getResults().size() > 0) {
+                            skeletonScreen.hide();
+                            mAdapter.setNewData(bean.getResults());
+                            bindingView.recyclerView.loadMoreEnd();
+                        } else {
+                            showError();
+                        }
+                    }
+                }, 1000);
             }
         });
     }
