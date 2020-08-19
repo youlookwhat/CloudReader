@@ -1,11 +1,16 @@
 package com.example.jingbin.cloudreader.ui.wan.child;
 
 import androidx.lifecycle.Observer;
+
 import android.content.Context;
+
 import androidx.databinding.DataBindingUtil;
+
 import android.os.Bundle;
+
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +19,9 @@ import android.widget.RelativeLayout;
 
 import com.example.jingbin.cloudreader.R;
 import com.example.jingbin.cloudreader.adapter.WanAndroidAdapter;
+
 import me.jingbin.bymvvm.base.BaseFragment;
+
 import com.example.jingbin.cloudreader.bean.wanandroid.HomeListBean;
 import com.example.jingbin.cloudreader.bean.wanandroid.WanAndroidBannerBean;
 import com.example.jingbin.cloudreader.databinding.FragmentWanAndroidBinding;
@@ -27,9 +34,11 @@ import com.example.jingbin.cloudreader.utils.RefreshHelper;
 import com.example.jingbin.cloudreader.ui.WebViewActivity;
 import com.example.jingbin.cloudreader.viewmodel.wan.WanAndroidListViewModel;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import me.jingbin.library.ByRecyclerView;
+import me.jingbin.library.skeleton.BySkeleton;
 import me.jingbin.sbanner.config.ScaleRightTransformer;
 import me.jingbin.sbanner.holder.SBannerViewHolder;
 
@@ -110,6 +119,18 @@ public class HomeFragment extends BaseFragment<WanAndroidListViewModel, Fragment
                 }
             }
         }, 300);
+
+        showSkeletonView();
+    }
+
+    private void showSkeletonView() {
+        ArrayList<WanAndroidBannerBean.DataBean> dataBeans = new ArrayList<>();
+        WanAndroidBannerBean.DataBean dataBean = new WanAndroidBannerBean.DataBean();
+        dataBeans.add(dataBean);
+        dataBeans.add(dataBean);
+        dataBeans.add(dataBean);
+        showBannerView(dataBeans);
+        BySkeleton.bindItem(bindingView.xrvWan).adapter(mAdapter).count(10).load(R.layout.item_wan_android).show();
     }
 
     private void refresh(boolean isChecked, boolean isArticle) {
@@ -188,7 +209,7 @@ public class HomeFragment extends BaseFragment<WanAndroidListViewModel, Fragment
             return;
         }
         bindingView.srlWan.setRefreshing(true);
-        bindingView.srlWan.postDelayed(this::getWanAndroidBanner, 500);
+        bindingView.srlWan.postDelayed(this::getWanAndroidBanner, 1000);
         mIsFirst = false;
     }
 
@@ -221,10 +242,10 @@ public class HomeFragment extends BaseFragment<WanAndroidListViewModel, Fragment
             @Override
             public void onChanged(@Nullable WanAndroidBannerBean bean) {
                 if (bean != null) {
-                    headerBinding.rlBanner.setVisibility(View.VISIBLE);
+                    headerBinding.banner.setVisibility(View.VISIBLE);
                     showBannerView(bean.getData());
                 } else {
-                    headerBinding.rlBanner.setVisibility(View.GONE);
+                    headerBinding.banner.setVisibility(View.GONE);
                 }
                 headerBinding.radioGroup.setVisibility(View.VISIBLE);
                 if (headerBinding.rb1.isChecked()) {
@@ -237,11 +258,11 @@ public class HomeFragment extends BaseFragment<WanAndroidListViewModel, Fragment
     }
 
     private void getHomeArticleList() {
-        viewModel.getHomeArticleList(null).observe(this, observer);
+        viewModel.getHomeArticleList(null).observe(getViewLifecycleOwner(), observer);
     }
 
     private void getHomeProjectList() {
-        viewModel.getHomeProjectList().observe(this, observer);
+        viewModel.getHomeProjectList().observe(getViewLifecycleOwner(), observer);
     }
 
     private Observer<HomeListBean> observer = new Observer<HomeListBean>() {
