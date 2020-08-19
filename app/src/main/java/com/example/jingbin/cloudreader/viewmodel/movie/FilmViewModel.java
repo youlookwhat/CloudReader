@@ -69,7 +69,7 @@ public class FilmViewModel extends BaseViewModel {
 
     public MutableLiveData<MtimeFilmeBean> getHotFilm() {
         final MutableLiveData<MtimeFilmeBean> data = new MutableLiveData<>();
-        Disposable subscribe = HttpClient.Builder.getMtimeServer().getHotFilm()
+        Disposable subscribe = HttpClient.Builder.getMtimeTicketServer().getHotFilm()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<MtimeFilmeBean>() {
@@ -89,7 +89,7 @@ public class FilmViewModel extends BaseViewModel {
 
     public MutableLiveData<ComingFilmBean> getComingFilm() {
         final MutableLiveData<ComingFilmBean> data = new MutableLiveData<>();
-        Disposable subscribe = HttpClient.Builder.getMtimeServer().getComingFilm()
+        Disposable subscribe = HttpClient.Builder.getMtimeTicketServer().getComingFilm()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<ComingFilmBean>() {

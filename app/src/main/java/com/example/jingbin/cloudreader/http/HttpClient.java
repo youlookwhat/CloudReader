@@ -127,13 +127,13 @@ public interface HttpClient {
     /**
      * 时光网热映电影
      */
-    @GET("Showtime/LocationMovies.api?locationId=561")
+    @GET("showing/movies.api?locationId=561")
     Observable<MtimeFilmeBean> getHotFilm();
 
     /**
      * 时光网即将上映电影
      */
-    @GET("Movie/MovieComingNew.api?locationId=561")
+    @GET("movie/mobilemoviecoming.api?locationId=561")
     Observable<ComingFilmBean> getComingFilm();
 
     /**
