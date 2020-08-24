@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="adapter"
+            type="com.example.jingbin.cloudreader.adapter.WanAndroidAdapter" />
+
+        <variable
+            name="bean"
+            type="com.example.jingbin.cloudreader.bean.wanandroid.ArticlesBean" />
+
+        <import type="android.text.Html" />
+
+        <import type="android.text.TextUtils" />
+
+        <import type="android.view.View" />
+        <!--调用静态方法-->
+        <import type="com.example.jingbin.cloudreader.utils.DataUtil" />
+    </data>
+
+    <!--如果有点击事件，则内部的水波纹不能扩散-->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/selectableItemBackground"
+        android:onClick="@{()->adapter.openDetail(bean)}"
+        android:paddingTop="8dp"
+        android:paddingRight="8dp"
+        android:paddingBottom="8dp">
+
+        <ImageView
+            android:id="@+id/iv_image"
+            android:layout_width="70dp"
+            android:layout_height="99dp"
+            android:layout_marginStart="8dp"
+            android:background="@color/colorLine"
+            android:defaultPicType="@{1}"
+            android:displayFadeImage="@{bean.envelopePic}"
+            android:scaleType="centerCrop"
+            android:visibility="gone"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <RelativeLayout
+            android:id="@+id/rl_header"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/iv_image"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/iv_new"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="?selectableItemBackgroundBorderless"
+                android:text="新"
+                android:textColor="@color/colorTheme"
+                android:textSize="11sp"
+                android:visibility="gone" />
+
+            <View
+                android:layout_width="60dp"
+                android:layout_height="20dp"
+                android:layout_toEndOf="@+id/iv_new"
+                android:background="@color/colorLine"
+                android:visibility="visible"
+                tools:text=" jingbin" />
+
+            <View
+                android:id="@+id/tv_tag_name"
+                android:layout_width="60dp"
+                android:layout_height="20dp"
+                android:layout_alignParentEnd="true"
+                android:background="@color/colorLine"
+                android:paddingLeft="7dp"
+                android:paddingTop="2dp"
+                android:paddingRight="7dp"
+                android:paddingBottom="2dp"
+                android:visibility="visible"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+        </RelativeLayout>
+
+        <View
+            android:id="@+id/tv_title"
+            android:layout_width="0dp"
+            android:layout_height="20dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="6dp"
+            android:background="@color/colorLine"
+            android:ellipsize="end"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/iv_image"
+            app:layout_constraintTop_toBottomOf="@+id/rl_header" />
+
+        <View
+            android:id="@+id/view_item_2"
+            android:layout_width="170dp"
+            android:layout_height="20dp"
+            android:layout_marginTop="5dp"
+            android:background="@color/colorLine"
+            app:layout_constraintStart_toStartOf="@+id/tv_title"
+            app:layout_constraintTop_toBottomOf="@+id/tv_title" />
+
+        <View
+            android:id="@+id/tv_time"
+            android:layout_width="80dp"
+            android:layout_height="20dp"
+            android:layout_marginTop="10dp"
+            android:background="@color/colorLine"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/view_item_2"
+            app:layout_constraintTop_toBottomOf="@+id/view_item_2" />
+
+        <CheckBox
+            android:id="@+id/vb_collect"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="3dp"
+            android:layout_marginRight="5dp"
+            android:background="?selectableItemBackgroundBorderless"
+            android:button="@drawable/selector_collect_check"
+            android:checked="@{bean.collect}"
+            android:gravity="center"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
