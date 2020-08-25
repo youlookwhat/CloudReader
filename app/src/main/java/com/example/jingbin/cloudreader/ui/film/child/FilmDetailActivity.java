@@ -2,11 +2,15 @@ package com.example.jingbin.cloudreader.ui.film.child;
 
 import android.app.Activity;
 import android.content.Intent;
+
 import androidx.databinding.ObservableField;
+
 import android.os.Bundle;
+
 import androidx.core.app.ActivityCompat;
 import androidx.core.app.ActivityOptionsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
+
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
@@ -20,9 +24,12 @@ import com.example.jingbin.cloudreader.bean.moviechild.FilmItemBean;
 import com.example.jingbin.cloudreader.databinding.ActivityFilmDetailBinding;
 import com.example.jingbin.cloudreader.databinding.HeaderFilmDetailBinding;
 import com.example.jingbin.cloudreader.http.HttpClient;
+
 import me.jingbin.bymvvm.rxbus.RxBus;
+
 import com.example.jingbin.cloudreader.app.RxCodeConstants;
 import com.example.jingbin.cloudreader.utils.CommonUtils;
+import com.example.jingbin.cloudreader.utils.DataUtil;
 import com.example.jingbin.cloudreader.utils.DensityUtil;
 import com.example.jingbin.cloudreader.utils.ToastUtil;
 import com.example.jingbin.cloudreader.ui.WebViewActivity;
@@ -155,10 +162,20 @@ public class FilmDetailActivity extends BaseHeaderActivity<HeaderFilmDetailBindi
     private void transformData(final FilmDetailBean bean) {
         if (bean.getData().getBasic().getActors() != null && bean.getData().getBasic().getActors().size() > 0) {
             isShowActor.set(true);
+            // 即将上映缺失填充
+            String cast = bindingHeaderView.tvOneCasts.getText().toString();
+            if (TextUtils.isEmpty(cast)) {
+                bindingHeaderView.tvOneCasts.setText(DataUtil.getActorString(bean.getData().getBasic().getActors()));
+            }
             FilmDetailBean.ActorsBean director = bean.getData().getBasic().getDirector();
             if (director != null) {
                 director.setRoleName("导演");
                 bean.getData().getBasic().getActors().add(0, director);
+                // 即将上映缺失填充
+                String name = bindingHeaderView.tvOneDirectors.getText().toString();
+                if (TextUtils.isEmpty(name)) {
+                    bindingHeaderView.tvOneDirectors.setText(director.getName());
+                }
             }
             setAdapter(bean.getData().getBasic().getActors());
         } else {
