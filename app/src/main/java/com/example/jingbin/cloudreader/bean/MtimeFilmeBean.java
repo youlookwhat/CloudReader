@@ -4,24 +4,31 @@ import com.example.jingbin.cloudreader.bean.moviechild.FilmItemBean;
 
 import java.util.List;
 
+/**
+ * @author jingbin
+ */
 public class MtimeFilmeBean {
 
-    private int totalComingMovie;
-    private List<FilmItemBean> ms;
+    private String code;
+    private DataFilmBean data;
 
-    public int getTotalComingMovie() {
-        return totalComingMovie;
+    public static class DataFilmBean {
+        private List<FilmItemBean> ms;
+
+        public List<FilmItemBean> getMs() {
+            return ms;
+        }
+
+        public void setMs(List<FilmItemBean> ms) {
+            this.ms = ms;
+        }
     }
 
-    public void setTotalComingMovie(int totalComingMovie) {
-        this.totalComingMovie = totalComingMovie;
+    public DataFilmBean getData() {
+        return data;
     }
 
-    public List<FilmItemBean> getMs() {
-        return ms;
-    }
-
-    public void setMs(List<FilmItemBean> ms) {
-        this.ms = ms;
+    public void setData(DataFilmBean data) {
+        this.data = data;
     }
 }

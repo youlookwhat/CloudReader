@@ -2,15 +2,19 @@ package com.example.jingbin.cloudreader.ui.film.child;
 
 import android.content.Context;
 import android.os.Bundle;
+
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
+
 import android.view.View;
 import android.widget.ImageView;
 
 import com.example.jingbin.cloudreader.R;
 import com.example.jingbin.cloudreader.adapter.FilmAdapter;
+
 import me.jingbin.bymvvm.base.BaseFragment;
+
 import com.example.jingbin.cloudreader.bean.MtimeFilmeBean;
 import com.example.jingbin.cloudreader.bean.moviechild.FilmItemBean;
 import com.example.jingbin.cloudreader.databinding.FragmentWanAndroidBinding;
@@ -106,9 +110,9 @@ public class FilmShowingFragment extends BaseFragment<FilmViewModel, FragmentWan
                 if (bindingView.srlWan.isRefreshing()) {
                     bindingView.srlWan.setRefreshing(false);
                 }
-                if (bookBean != null && bookBean.getMs() != null && bookBean.getMs().size() > 0) {
+                if (bookBean != null && bookBean.getData() != null && bookBean.getData().getMs() != null && bookBean.getData().getMs().size() > 0) {
                     showContentView();
-                    adapter.setNewData(bookBean.getMs());
+                    adapter.setNewData(bookBean.getData().getMs());
                     bindingView.xrvWan.loadMoreEnd();
                 } else {
                     if (adapter.getItemCount() == 0) {

@@ -2,16 +2,20 @@ package com.example.jingbin.cloudreader.ui.film.child;
 
 import android.content.Context;
 import android.os.Bundle;
+
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
+
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 
 import com.example.jingbin.cloudreader.R;
 import com.example.jingbin.cloudreader.adapter.FilmComingAdapter;
+
 import me.jingbin.bymvvm.base.BaseFragment;
+
 import com.example.jingbin.cloudreader.bean.ComingFilmBean;
 import com.example.jingbin.cloudreader.bean.moviechild.FilmItemBean;
 import com.example.jingbin.cloudreader.databinding.FragmentWanAndroidBinding;
@@ -126,12 +130,18 @@ public class FilmComingFragment extends BaseFragment<FilmViewModel, FragmentWanA
                 if (bindingView.srlWan.isRefreshing()) {
                     bindingView.srlWan.setRefreshing(false);
                 }
-                if (bookBean != null && bookBean.getMoviecomings() != null && bookBean.getMoviecomings().size() > 0) {
+                if (bookBean != null && bookBean.getData() != null && bookBean.getData().getMoviecomings() != null && bookBean.getData().getMoviecomings().size() > 0) {
                     showContentView();
 
                     ArrayList<ComingFilmBean.MoviecomingsBean> beans = new ArrayList<>();
-                    beans.addAll(bookBean.getAttention());
-                    beans.addAll(bookBean.getMoviecomings());
+                    if (bookBean.getData().getRecommends() != null
+                            && bookBean.getData().getRecommends().size() > 0
+                            && bookBean.getData().getRecommends().get(0) != null
+                            && bookBean.getData().getRecommends().get(0).getMovies() != null
+                            && bookBean.getData().getRecommends().get(0).getMovies().size() > 0) {
+                        beans.addAll(bookBean.getData().getRecommends().get(0).getMovies());
+                    }
+                    beans.addAll(bookBean.getData().getMoviecomings());
                     // 用HashSet 根据id去重 https://www.cnblogs.com/woshimrf/p/java-list-distinct.html
                     Set<ComingFilmBean.MoviecomingsBean> set = new LinkedHashSet<>(beans);
                     beans.clear();

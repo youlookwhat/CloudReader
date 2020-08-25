@@ -38,19 +38,10 @@
   **[] $VALUES;
   public *;
 }
+
 # banner 的混淆代码
 -keep class com.youth.banner.** {
     *;
- }
-
- # com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.41
- -keep class com.chad.library.adapter.** {
- *;
- }
- -keep public class * extends com.chad.library.adapter.base.BaseQuickAdapter
- -keep public class * extends com.chad.library.adapter.base.BaseViewHolder
- -keepclassmembers  class **$** extends com.chad.library.adapter.base.BaseViewHolder {
-      <init>(...);
  }
 
 # glide

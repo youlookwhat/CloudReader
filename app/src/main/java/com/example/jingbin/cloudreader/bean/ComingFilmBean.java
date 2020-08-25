@@ -9,23 +9,48 @@ import java.util.Objects;
  */
 public class ComingFilmBean {
 
-    private List<MoviecomingsBean> attention;
-    private List<MoviecomingsBean> moviecomings;
+    private String code;
+    private DataFilmBean data;
 
-    public List<MoviecomingsBean> getAttention() {
-        return attention;
+    public static class DataFilmBean {
+        private List<MovieRecommendBean> recommends;
+        private List<MoviecomingsBean> moviecomings;
+
+        public List<MovieRecommendBean> getRecommends() {
+            return recommends;
+        }
+
+        public void setRecommends(List<MovieRecommendBean> recommends) {
+            this.recommends = recommends;
+        }
+
+        public List<MoviecomingsBean> getMoviecomings() {
+            return moviecomings;
+        }
+
+        public void setMoviecomings(List<MoviecomingsBean> moviecomings) {
+            this.moviecomings = moviecomings;
+        }
     }
 
-    public void setAttention(List<MoviecomingsBean> attention) {
-        this.attention = attention;
+    public static class MovieRecommendBean{
+        List<MoviecomingsBean> movies;
+
+        public List<MoviecomingsBean> getMovies() {
+            return movies;
+        }
+
+        public void setMovies(List<MoviecomingsBean> movies) {
+            this.movies = movies;
+        }
     }
 
-    public List<MoviecomingsBean> getMoviecomings() {
-        return moviecomings;
+    public DataFilmBean getData() {
+        return data;
     }
 
-    public void setMoviecomings(List<MoviecomingsBean> moviecomings) {
-        this.moviecomings = moviecomings;
+    public void setData(DataFilmBean data) {
+        this.data = data;
     }
 
     public static class AttentionBean {
@@ -224,6 +249,7 @@ public class ComingFilmBean {
         private String actor2;
         private String director;
         private int id;
+        private int movieId;
         private String image;
         private boolean isFilter;
         private boolean isTicket;
@@ -238,6 +264,14 @@ public class ComingFilmBean {
         private int videoCount;
         private int wantedCount;
         private List<VideosBean> videos;
+
+        public int getMovieId() {
+            return movieId;
+        }
+
+        public void setMovieId(int movieId) {
+            this.movieId = movieId;
+        }
 
         public String getActor1() {
             return actor1;
@@ -264,11 +298,11 @@ public class ComingFilmBean {
         }
 
         public int getId() {
-            return id;
+            return movieId;
         }
 
         public void setId(int id) {
-            this.id = id;
+            this.movieId = id;
         }
 
         public String getImage() {
@@ -392,12 +426,12 @@ public class ComingFilmBean {
                 return false;
             }
             ComingFilmBean.MoviecomingsBean bean = (ComingFilmBean.MoviecomingsBean) o;
-            return Objects.equals(id, bean.id);
+            return Objects.equals(movieId, bean.movieId);
         }
 
         @Override
         public int hashCode() {
-            return Objects.hash(id);
+            return Objects.hash(movieId);
         }
     }
 
