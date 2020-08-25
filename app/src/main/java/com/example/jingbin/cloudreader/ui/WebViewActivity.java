@@ -284,6 +284,9 @@ public class WebViewActivity extends AppCompatActivity {
                                     ViewBigImageActivity.start(WebViewActivity.this, picUrl, picUrl);
                                     break;
                                 case 1:
+                                    if (!PermissionHandler.isHandlePermission(WebViewActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+                                        return;
+                                    }
                                     ShareUtils.shareNetImage(WebViewActivity.this, picUrl);
                                     break;
                                 case 2:
