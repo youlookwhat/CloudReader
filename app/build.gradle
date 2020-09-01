@@ -83,7 +83,7 @@ dependencies {
     })
     implementation project(path: ':bymvvm')
     testImplementation "junit:junit:$rootProject.ext.junitVersion"
-    // 流式标签 FlexboxLayout
+    // 流式标签
     implementation 'com.google.android:flexbox:2.0.1'
     implementation 'com.google.zxing:core:3.3.0'
 

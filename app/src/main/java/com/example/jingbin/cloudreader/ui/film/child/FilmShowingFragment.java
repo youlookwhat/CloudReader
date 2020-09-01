@@ -22,6 +22,7 @@ import com.example.jingbin.cloudreader.utils.CommonUtils;
 import com.example.jingbin.cloudreader.viewmodel.movie.FilmViewModel;
 
 import me.jingbin.library.ByRecyclerView;
+import me.jingbin.library.view.OnItemFilterClickListener;
 
 /**
  * @author jingbin
@@ -82,9 +83,9 @@ public class FilmShowingFragment extends BaseFragment<FilmViewModel, FragmentWan
         bindingView.xrvWan.setHasFixedSize(true);
         bindingView.xrvWan.setLoadMoreEnabled(true);
         bindingView.xrvWan.setAdapter(adapter);
-        bindingView.xrvWan.setOnItemClickListener(new ByRecyclerView.OnItemClickListener() {
+        bindingView.xrvWan.setOnItemClickListener(new OnItemFilterClickListener() {
             @Override
-            public void onClick(View v, int position) {
+            public void onSingleClick(View v, int position) {
                 ImageView imageView = v.findViewById(R.id.iv_one_photo);
                 FilmItemBean itemData = adapter.getItemData(position);
                 FilmDetailActivity.start(activity, itemData, imageView);
@@ -116,7 +117,11 @@ public class FilmShowingFragment extends BaseFragment<FilmViewModel, FragmentWan
                     bindingView.xrvWan.loadMoreEnd();
                 } else {
                     if (adapter.getItemCount() == 0) {
-                        showError();
+                        if (bookBean != null) {
+                            showEmptyView("暂未发现热映中的电影");
+                        } else {
+                            showError();
+                        }
                     } else {
                         bindingView.xrvWan.loadMoreEnd();
                     }
