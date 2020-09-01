@@ -130,15 +130,20 @@ public class FilmComingFragment extends BaseFragment<FilmViewModel, FragmentWanA
                 if (bindingView.srlWan.isRefreshing()) {
                     bindingView.srlWan.setRefreshing(false);
                 }
-                if (bookBean != null && bookBean.getData() != null && bookBean.getData().getMoviecomings() != null && bookBean.getData().getMoviecomings().size() > 0) {
+                boolean isMovieComings = bookBean != null && bookBean.getData() != null && bookBean.getData().getMoviecomings() != null && bookBean.getData().getMoviecomings().size() > 0;
+                boolean isRecommends = bookBean != null
+                        && bookBean.getData() != null
+                        && bookBean.getData().getRecommends() != null
+                        && bookBean.getData().getRecommends().size() > 0
+                        && bookBean.getData().getRecommends().get(0) != null
+                        && bookBean.getData().getRecommends().get(0).getMovies() != null
+                        && bookBean.getData().getRecommends().get(0).getMovies().size() > 0;
+
+                if (isMovieComings || isRecommends) {
                     showContentView();
 
                     ArrayList<ComingFilmBean.MoviecomingsBean> beans = new ArrayList<>();
-                    if (bookBean.getData().getRecommends() != null
-                            && bookBean.getData().getRecommends().size() > 0
-                            && bookBean.getData().getRecommends().get(0) != null
-                            && bookBean.getData().getRecommends().get(0).getMovies() != null
-                            && bookBean.getData().getRecommends().get(0).getMovies().size() > 0) {
+                    if (isRecommends) {
                         beans.addAll(bookBean.getData().getRecommends().get(0).getMovies());
                     }
                     beans.addAll(bookBean.getData().getMoviecomings());
