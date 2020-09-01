@@ -7,7 +7,9 @@ import androidx.annotation.Nullable;
 import androidx.lifecycle.Observer;
 
 import com.example.jingbin.cloudreader.R;
+
 import me.jingbin.bymvvm.base.BaseFragment;
+
 import com.example.jingbin.cloudreader.bean.GankIoDataBean;
 import com.example.jingbin.cloudreader.databinding.FragmentWelfareBinding;
 import com.example.jingbin.cloudreader.databinding.ItemWelfareBinding;
@@ -21,6 +23,7 @@ import java.util.ArrayList;
 import me.jingbin.bymvvm.adapter.BaseBindingAdapter;
 import me.jingbin.bymvvm.adapter.BaseBindingHolder;
 import me.jingbin.library.ByRecyclerView;
+import me.jingbin.library.view.OnItemFilterClickListener;
 
 /**
  * 福利
@@ -79,13 +82,13 @@ public class WelfareFragment extends BaseFragment<WelfareViewModel, FragmentWelf
                 loadWelfareData();
             }
         }, 300);
-        bindingView.xrvWelfare.setOnItemClickListener(new ByRecyclerView.OnItemClickListener() {
+        bindingView.xrvWelfare.setOnItemClickListener(new OnItemFilterClickListener() {
             @Override
-            public void onClick(View v, int position) {
+            public void onSingleClick(View v, int position) {
                 ViewBigImageActivity.startImageList(getContext(), position, imgList, imgTitleList);
             }
         });
-        viewModel.getImageAndTitle().observe(this, new Observer<ArrayList<ArrayList<String>>>() {
+        viewModel.getImageAndTitle().observe(getViewLifecycleOwner(), new Observer<ArrayList<ArrayList<String>>>() {
             @Override
             public void onChanged(@Nullable ArrayList<ArrayList<String>> arrayLists) {
                 if (arrayLists != null && arrayLists.size() == 2) {

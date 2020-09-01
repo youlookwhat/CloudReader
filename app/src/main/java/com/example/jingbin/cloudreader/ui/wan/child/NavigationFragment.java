@@ -1,21 +1,26 @@
 package com.example.jingbin.cloudreader.ui.wan.child;
 
 import androidx.lifecycle.Observer;
+
 import android.content.Context;
 import android.os.Bundle;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import android.text.TextUtils;
 import android.view.View;
 
 import com.example.jingbin.cloudreader.R;
 import com.example.jingbin.cloudreader.adapter.NavigationAdapter;
 import com.example.jingbin.cloudreader.adapter.NavigationContentAdapter;
+
 import me.jingbin.bymvvm.base.BaseFragment;
+
 import com.example.jingbin.cloudreader.bean.wanandroid.ArticlesBean;
 import com.example.jingbin.cloudreader.bean.wanandroid.NaviJsonBean;
 import com.example.jingbin.cloudreader.databinding.FragmentNaviBinding;
@@ -26,6 +31,7 @@ import java.util.List;
 
 import me.jingbin.library.ByRecyclerView;
 import me.jingbin.library.stickyview.StickyGridLayoutManager;
+import me.jingbin.library.view.OnItemFilterClickListener;
 
 /**
  * @author jingbin
@@ -109,9 +115,9 @@ public class NavigationFragment extends BaseFragment<NavigationViewModel, Fragme
                 }
             }
         });
-        bindingView.xrvNaviDetail.setOnItemClickListener(new ByRecyclerView.OnItemClickListener() {
+        bindingView.xrvNaviDetail.setOnItemClickListener(new OnItemFilterClickListener() {
             @Override
-            public void onClick(View v, int position) {
+            public void onSingleClick(View v, int position) {
                 ArticlesBean itemData = mContentAdapter.getItemData(position);
                 if (!TextUtils.isEmpty(itemData.getLink())) {
                     WebViewActivity.loadUrl(v.getContext(), itemData.getLink(), itemData.getTitle());

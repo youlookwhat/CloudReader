@@ -27,6 +27,7 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 
 import me.jingbin.library.ByRecyclerView;
+import me.jingbin.library.view.OnItemFilterClickListener;
 
 /**
  * @author jingbin
@@ -86,9 +87,9 @@ public class FilmComingFragment extends BaseFragment<FilmViewModel, FragmentWanA
         bindingView.xrvWan.setLoadMoreEnabled(true);
         viewModel.bookType.set(mType);
         bindingView.xrvWan.setAdapter(adapter);
-        bindingView.xrvWan.setOnItemClickListener(new ByRecyclerView.OnItemClickListener() {
+        bindingView.xrvWan.setOnItemClickListener(new OnItemFilterClickListener() {
             @Override
-            public void onClick(View v, int position) {
+            public void onSingleClick(View v, int position) {
                 ImageView imageView = v.findViewById(R.id.iv_top_photo);
                 ComingFilmBean.MoviecomingsBean bean = adapter.getItemData(position);
 
@@ -130,7 +131,10 @@ public class FilmComingFragment extends BaseFragment<FilmViewModel, FragmentWanA
                 if (bindingView.srlWan.isRefreshing()) {
                     bindingView.srlWan.setRefreshing(false);
                 }
-                boolean isMovieComings = bookBean != null && bookBean.getData() != null && bookBean.getData().getMoviecomings() != null && bookBean.getData().getMoviecomings().size() > 0;
+                boolean isMovieComings = bookBean != null
+                        && bookBean.getData() != null
+                        && bookBean.getData().getMoviecomings() != null
+                        && bookBean.getData().getMoviecomings().size() > 0;
                 boolean isRecommends = bookBean != null
                         && bookBean.getData() != null
                         && bookBean.getData().getRecommends() != null
@@ -156,7 +160,11 @@ public class FilmComingFragment extends BaseFragment<FilmViewModel, FragmentWanA
                     bindingView.xrvWan.loadMoreEnd();
                 } else {
                     if (adapter.getItemCount() == 0) {
-                        showError();
+                        if (bookBean != null) {
+                            showEmptyView("暂未发现即将上映的电影");
+                        } else {
+                            showError();
+                        }
                     } else {
                         bindingView.xrvWan.loadMoreEnd();
                     }

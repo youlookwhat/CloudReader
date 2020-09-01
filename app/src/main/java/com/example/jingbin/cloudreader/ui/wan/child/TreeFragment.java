@@ -1,21 +1,29 @@
 package com.example.jingbin.cloudreader.ui.wan.child;
 
 import android.content.Context;
+
 import androidx.databinding.DataBindingUtil;
+
 import android.os.Bundle;
+
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
+
 import android.view.View;
 
 import com.example.jingbin.cloudreader.R;
 import com.example.jingbin.cloudreader.adapter.TreeAdapter;
+
 import me.jingbin.bymvvm.base.BaseFragment;
+
 import com.example.jingbin.cloudreader.bean.wanandroid.TreeBean;
 import com.example.jingbin.cloudreader.databinding.FragmentWanAndroidBinding;
 import com.example.jingbin.cloudreader.databinding.HeaderItemTreeBinding;
+
 import me.jingbin.bymvvm.rxbus.RxBus;
+
 import com.example.jingbin.cloudreader.app.RxCodeConstants;
 import com.example.jingbin.cloudreader.utils.CommonUtils;
 import com.example.jingbin.cloudreader.utils.DataUtil;
@@ -24,6 +32,7 @@ import com.example.jingbin.cloudreader.viewmodel.wan.TreeViewModel;
 
 import me.jingbin.library.ByRecyclerView;
 import me.jingbin.library.decoration.SpacesItemDecoration;
+import me.jingbin.library.view.OnItemFilterClickListener;
 
 /**
  * @author jingbin
@@ -95,9 +104,9 @@ public class TreeFragment extends BaseFragment<TreeViewModel, FragmentWanAndroid
                 }
             }
         });
-        bindingView.xrvWan.setOnItemClickListener(new ByRecyclerView.OnItemClickListener() {
+        bindingView.xrvWan.setOnItemClickListener(new OnItemFilterClickListener() {
             @Override
-            public void onClick(View v, int position) {
+            public void onSingleClick(View v, int position) {
                 if (mTreeAdapter.isSelect()) {
                     if (mTreeAdapter.getSelectedPosition() == position) {
                         ToastUtil.showToastLong("当前已经是\"" + mTreeAdapter.getData().get(position).getName() + "\"");
