@@ -1,16 +1,21 @@
 package com.example.jingbin.cloudreader.adapter;
 
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.text.TextUtils;
 import android.view.View;
 
 import com.example.jingbin.cloudreader.R;
+import com.example.jingbin.cloudreader.app.Constants;
 import com.example.jingbin.cloudreader.bean.wanandroid.ArticlesBean;
 import com.example.jingbin.cloudreader.data.UserUtil;
 import com.example.jingbin.cloudreader.data.model.CollectModel;
 import com.example.jingbin.cloudreader.databinding.ItemWanAndroidBinding;
 import com.example.jingbin.cloudreader.ui.wan.child.ArticleListActivity;
+import com.example.jingbin.cloudreader.utils.BaseTools;
+import com.example.jingbin.cloudreader.utils.DialogBuild;
 import com.example.jingbin.cloudreader.utils.PerfectClickListener;
+import com.example.jingbin.cloudreader.utils.SPUtils;
 import com.example.jingbin.cloudreader.utils.ToastUtil;
 import com.example.jingbin.cloudreader.ui.WebViewActivity;
 import com.example.jingbin.cloudreader.viewmodel.wan.WanNavigator;
@@ -80,6 +85,21 @@ public class WanAndroidAdapter extends BaseBindingAdapter<ArticlesBean, ItemWanA
                                         getData().remove(indexOf);
                                         refreshNotifyItemRemoved(indexOf);
                                     } else {
+                                        boolean checked = binding.vbCollect.isChecked();
+                                        if (checked) {
+                                            // 收藏成功
+                                            ToastUtil.showToast("收藏成功");
+                                            boolean aBoolean = SPUtils.getBoolean(Constants.SHOW_EVL, false);
+                                            if (!aBoolean) {
+                                                SPUtils.putBoolean(Constants.SHOW_EVL, true);
+                                                DialogBuild.showCustom(v, "很高兴你使用云阅，使用愉快的话可以去酷安支持一下哦~", "去支持", "取消", new DialogInterface.OnClickListener() {
+                                                    @Override
+                                                    public void onClick(DialogInterface dialog, int which) {
+                                                        BaseTools.launchAppDetail(activity, "com.example.jingbin.cloudreader", "com.coolapk.market");
+                                                    }
+                                                });
+                                            }
+                                        }
                                         bean.setCollect(binding.vbCollect.isChecked());
                                     }
                                 }

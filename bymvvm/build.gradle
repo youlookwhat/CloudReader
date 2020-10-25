@@ -41,7 +41,7 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 
     // 基础库
-    api 'com.google.android.material:material:1.2.0'
+    api 'com.google.android.material:material:1.2.1'
     api 'androidx.appcompat:appcompat:1.2.0'
     api 'androidx.legacy:legacy-support-v4:1.0.0'
     api 'androidx.cardview:cardview:1.0.0'
