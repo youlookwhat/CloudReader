@@ -32,23 +32,27 @@ public class DialogBuild {
      * 显示自定义布局
      */
     public static void showCustom(View v, String content, String buttonText, DialogInterface.OnClickListener clickListener) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
-        View view = View.inflate(v.getContext(), R.layout.title_douban_top, null);
-        TextView titleTop = view.findViewById(R.id.title_top);
-        titleTop.setText(content);
-        builder.setView(view);
-        builder.setPositiveButton(buttonText, clickListener);
-        builder.show();
+        showCustom(v, 0, content, buttonText, null, clickListener);
     }
 
-    public static void showCustom(View v, String content, String positiveText, String negativeText, DialogInterface.OnClickListener clickListener) {
+    /**
+     * @param status 0弹框点击消失，1弹框不可点击消失
+     */
+    public static void showCustom(View v, int status, String content, String positiveText, String negativeText, DialogInterface.OnClickListener clickListener) {
         AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
         View view = View.inflate(v.getContext(), R.layout.title_douban_top, null);
         TextView titleTop = view.findViewById(R.id.title_top);
+        if (status == 1) {
+            builder.setCancelable(false);
+        } else {
+            builder.setCancelable(true);
+        }
         titleTop.setText(content);
         builder.setView(view);
         builder.setPositiveButton(positiveText, clickListener);
-        builder.setNegativeButton(negativeText, null);
+        if (!TextUtils.isEmpty(negativeText)) {
+            builder.setNegativeButton(negativeText, null);
+        }
         builder.show();
     }
 

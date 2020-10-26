@@ -5,19 +5,20 @@ import android.content.DialogInterface;
 import android.text.TextUtils;
 import android.view.View;
 
+import androidx.appcompat.app.AlertDialog;
+
 import com.example.jingbin.cloudreader.R;
 import com.example.jingbin.cloudreader.app.Constants;
 import com.example.jingbin.cloudreader.bean.wanandroid.ArticlesBean;
 import com.example.jingbin.cloudreader.data.UserUtil;
 import com.example.jingbin.cloudreader.data.model.CollectModel;
 import com.example.jingbin.cloudreader.databinding.ItemWanAndroidBinding;
+import com.example.jingbin.cloudreader.ui.WebViewActivity;
 import com.example.jingbin.cloudreader.ui.wan.child.ArticleListActivity;
 import com.example.jingbin.cloudreader.utils.BaseTools;
 import com.example.jingbin.cloudreader.utils.DialogBuild;
-import com.example.jingbin.cloudreader.utils.PerfectClickListener;
 import com.example.jingbin.cloudreader.utils.SPUtils;
 import com.example.jingbin.cloudreader.utils.ToastUtil;
-import com.example.jingbin.cloudreader.ui.WebViewActivity;
 import com.example.jingbin.cloudreader.viewmodel.wan.WanNavigator;
 
 import me.jingbin.bymvvm.adapter.BaseBindingAdapter;
@@ -68,9 +69,9 @@ public class WanAndroidAdapter extends BaseBindingAdapter<ArticlesBean, ItemWanA
                 bean.setShowImage(false);
             }
 
-            binding.vbCollect.setOnClickListener(new PerfectClickListener() {
+            binding.vbCollect.setOnClickListener(new View.OnClickListener() {
                 @Override
-                protected void onNoDoubleClick(View v) {
+                public void onClick(View v) {
                     if (UserUtil.isLogin(activity) && model != null) {
                         // 为什么状态值相反？因为点了之后控件已改变状态
 //                            DebugUtil.error("-----binding.vbCollect.isChecked():" + binding.vbCollect.isChecked());
@@ -78,28 +79,13 @@ public class WanAndroidAdapter extends BaseBindingAdapter<ArticlesBean, ItemWanA
                             model.unCollect(isCollectList, bean.getId(), bean.getOriginId(), new WanNavigator.OnCollectNavigator() {
                                 @Override
                                 public void onSuccess() {
+                                    ToastUtil.showToastLong("已取消收藏");
                                     if (isCollectList) {
-
                                         int indexOf = getData().indexOf(bean);
                                         // 移除数据增加删除动画
                                         getData().remove(indexOf);
                                         refreshNotifyItemRemoved(indexOf);
                                     } else {
-                                        boolean checked = binding.vbCollect.isChecked();
-                                        if (checked) {
-                                            // 收藏成功
-                                            ToastUtil.showToast("收藏成功");
-                                            boolean aBoolean = SPUtils.getBoolean(Constants.SHOW_EVL, false);
-                                            if (!aBoolean) {
-                                                SPUtils.putBoolean(Constants.SHOW_EVL, true);
-                                                DialogBuild.showCustom(v, "很高兴你使用云阅，使用愉快的话可以去酷安支持一下哦~", "去支持", "取消", new DialogInterface.OnClickListener() {
-                                                    @Override
-                                                    public void onClick(DialogInterface dialog, int which) {
-                                                        BaseTools.launchAppDetail(activity, "com.example.jingbin.cloudreader", "com.coolapk.market");
-                                                    }
-                                                });
-                                            }
-                                        }
                                         bean.setCollect(binding.vbCollect.isChecked());
                                     }
                                 }
@@ -116,12 +102,30 @@ public class WanAndroidAdapter extends BaseBindingAdapter<ArticlesBean, ItemWanA
                                 @Override
                                 public void onSuccess() {
                                     bean.setCollect(true);
-//                                        ToastUtil.showToastLong("收藏成功");
+                                    ToastUtil.showToastLong("收藏成功");
+                                    v.postDelayed(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            if (BaseTools.isApplicationAvilible(activity, "com.coolapk.market")) {
+                                                boolean show = SPUtils.getBoolean(Constants.SHOW_MARKET, false);
+                                                if (!show) {
+                                                    SPUtils.putBoolean(Constants.SHOW_MARKET, true);
+                                                    DialogBuild.showCustom(v, 1, "很高兴你使用云阅，如果用的愉快的话可以去酷安支持一下哦~", "去支持", "取消", new DialogInterface.OnClickListener() {
+                                                        @Override
+                                                        public void onClick(DialogInterface dialog, int which) {
+                                                            BaseTools.launchAppDetail(activity, "com.example.jingbin.cloudreader", "com.coolapk.market");
+                                                        }
+                                                    });
+                                                }
+                                            }
+                                        }
+                                    }, 200);
+
                                 }
 
                                 @Override
                                 public void onFailure() {
-//                                        ToastUtil.showToastLong("收藏失败");
+                                    ToastUtil.showToastLong("收藏失败");
                                     bean.setCollect(false);
                                     refreshNotifyItemChanged(position);
                                 }

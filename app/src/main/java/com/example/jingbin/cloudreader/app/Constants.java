@@ -11,7 +11,7 @@ public class Constants {
 
     public static final String NIGHT_SKIN = "night.skin";
     public static final String KEY_MODE_NIGHT = "mode-night";
-    public static final String SHOW_EVL = "show_evl";
+    public static final String SHOW_MARKET = "show_market";
 
     // 热映缓存
     public static String ONE_HOT_MOVIE = "one_hot_movie";

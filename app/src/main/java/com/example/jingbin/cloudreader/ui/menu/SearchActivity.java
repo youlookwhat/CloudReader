@@ -96,7 +96,7 @@ public class SearchActivity extends AppCompatActivity {
     protected void initView() {
         setSupportActionBar(binding.toolbar);
         binding.toolbar.setNavigationOnClickListener(v -> finish());
-        binding.ivHistoryDelete.setOnClickListener(v -> DialogBuild.showCustom(v, "确认清空全部历史记录?", "清空", "取消", (dialog, which) -> viewModel.clearHistory()));
+        binding.ivHistoryDelete.setOnClickListener(v -> DialogBuild.showCustom(v, 0, "确认清空全部历史记录?", "清空", "取消", (dialog, which) -> viewModel.clearHistory()));
         binding.etContent.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
