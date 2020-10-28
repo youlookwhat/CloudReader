@@ -86,6 +86,20 @@
                     android:clickable="true"
                     android:text="给个Star吧" />
 
+                <View
+                    android:id="@+id/line_rate"
+                    style="@style/horizontalLine"
+                    android:layout_marginLeft="10dp"
+                    android:visibility="gone"
+                    tools:visibility="visible" />
+
+                <TextView
+                    android:id="@+id/tv_about_rate"
+                    style="@style/menuItem"
+                    android:clickable="true"
+                    android:text="酷安评分鼓励"
+                    android:visibility="gone"
+                    tools:visibility="visible" />
             </LinearLayout>
 
             <TextView

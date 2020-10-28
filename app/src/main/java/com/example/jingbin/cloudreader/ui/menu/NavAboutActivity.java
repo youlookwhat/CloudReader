@@ -10,12 +10,14 @@ import com.bumptech.glide.Glide;
 import com.example.jingbin.cloudreader.BuildConfig;
 import com.example.jingbin.cloudreader.R;
 import com.example.jingbin.cloudreader.app.Constants;
-import me.jingbin.bymvvm.base.BaseActivity;
 import com.example.jingbin.cloudreader.databinding.ActivityNavAboutBinding;
+import com.example.jingbin.cloudreader.ui.WebViewActivity;
+import com.example.jingbin.cloudreader.utils.BaseTools;
 import com.example.jingbin.cloudreader.utils.CommonUtils;
 import com.example.jingbin.cloudreader.utils.PerfectClickListener;
 import com.example.jingbin.cloudreader.utils.UpdateUtil;
-import com.example.jingbin.cloudreader.ui.WebViewActivity;
+
+import me.jingbin.bymvvm.base.BaseActivity;
 import me.jingbin.bymvvm.base.NoViewModel;
 
 /**
@@ -51,6 +53,13 @@ public class NavAboutActivity extends BaseActivity<NoViewModel, ActivityNavAbout
         bindingView.tvFunction.setOnClickListener(listener);
         bindingView.tvWanandroid.setOnClickListener(listener);
         bindingView.tvDownloadUrl.setOnClickListener(listener);
+
+        // 酷安评分鼓励
+        if (BaseTools.isApplicationAvilible(this, "com.coolapk.market")) {
+            bindingView.lineRate.setVisibility(View.VISIBLE);
+            bindingView.tvAboutRate.setVisibility(View.VISIBLE);
+            bindingView.tvAboutRate.setOnClickListener(v -> BaseTools.launchAppDetail(NavAboutActivity.this, getPackageName(), "com.coolapk.market"));
+        }
     }
 
     private PerfectClickListener listener = new PerfectClickListener() {
