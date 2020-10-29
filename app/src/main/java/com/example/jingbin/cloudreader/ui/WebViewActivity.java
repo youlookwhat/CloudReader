@@ -39,12 +39,13 @@ import com.example.jingbin.cloudreader.utils.RxSaveImage;
 import com.example.jingbin.cloudreader.utils.SPUtils;
 import com.example.jingbin.cloudreader.utils.ShareUtils;
 import com.example.jingbin.cloudreader.utils.ToastUtil;
+import com.example.jingbin.cloudreader.utils.WebUtil;
 import com.example.jingbin.cloudreader.view.viewbigimage.ViewBigImageActivity;
 import com.example.jingbin.cloudreader.viewmodel.wan.WanNavigator;
 
-import me.jingbin.bymvvm.utils.CheckNetwork;
 import me.jingbin.bymvvm.utils.StatusBarUtil;
 import me.jingbin.web.ByWebView;
+import me.jingbin.web.OnByWebClientCallback;
 import me.jingbin.web.OnTitleProgressCallback;
 
 
@@ -104,6 +105,7 @@ public class WebViewActivity extends AppCompatActivity {
         byWebView = ByWebView.with(this)
                 .setWebParent(llWebView, new LinearLayout.LayoutParams(-1, -1))
                 .useWebProgress(CommonUtils.getColor(R.color.colorRateRed))
+                .setOnByWebClientCallback(onByWebClientCallback)
                 .setOnTitleProgressCallback(new OnTitleProgressCallback() {
                     @Override
                     public void onReceivedTitle(String title) {
@@ -113,6 +115,14 @@ public class WebViewActivity extends AppCompatActivity {
                 .loadUrl(mUrl);
         byWebView.getWebView().setOnLongClickListener(v -> handleLongImage());
     }
+
+    private OnByWebClientCallback onByWebClientCallback = new OnByWebClientCallback() {
+        @Override
+        public boolean isOpenThirdApp(String url) {
+            // 单独处理简书等App的唤起
+            return WebUtil.handleThirdApp(WebViewActivity.this, url);
+        }
+    };
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
