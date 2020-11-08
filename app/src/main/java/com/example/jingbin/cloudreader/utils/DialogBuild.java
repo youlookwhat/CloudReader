@@ -1,5 +1,6 @@
 package com.example.jingbin.cloudreader.utils;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.text.TextUtils;
 import android.view.View;
@@ -61,6 +62,19 @@ public class DialogBuild {
         builder.setTitle("提示");
         builder.setMessage(message);
         builder.setPositiveButton(buttonText, clickListener);
+        builder.show();
+    }
+
+    public static void show(Context context, String message, String positiveText, String negativeText, DialogInterface.OnClickListener clickListener) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        View view = View.inflate(context, R.layout.title_douban_top, null);
+        TextView titleTop = view.findViewById(R.id.title_top);
+        titleTop.setText(message);
+        builder.setView(view);
+        builder.setPositiveButton(positiveText, clickListener);
+        if (!TextUtils.isEmpty(negativeText)) {
+            builder.setNegativeButton(negativeText, null);
+        }
         builder.show();
     }
 

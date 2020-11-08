@@ -1,6 +1,7 @@
 package com.example.jingbin.cloudreader.utils;
 
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 
@@ -33,6 +34,7 @@ public class WebUtil {
      * 默认处理流程：网页里可能唤起其他的app
      */
     public static boolean handleThirdApp(Activity activity, String backUrl) {
+        DebugUtil.error("---backUrl:" + backUrl);
         /**http开头直接跳过*/
         if (backUrl.startsWith("http")) {
             // 可能有提示下载Apk文件
@@ -51,6 +53,21 @@ public class WebUtil {
         } else if (backUrl.contains("weixin://wap/pay")) {
             // 微信支付
             if (ByWebTools.hasPackage(activity, "com.tencent.mm")) {
+                startActivity(activity, backUrl);
+            }
+        } else if (backUrl.contains("jianshu://")) {
+            // 简书
+            if (ByWebTools.hasPackage(activity, "com.jianshu.haruki")) {
+                DialogBuild.show(activity, "是否使用《简书App》打开？", "打开", "取消", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        startActivity(activity, backUrl);
+                    }
+                });
+            }
+        } else if (backUrl.contains("wvhzpj://")) {
+            // csdn
+            if (ByWebTools.hasPackage(activity, "net.csdn.csdnplus")) {
                 startActivity(activity, backUrl);
             }
         } else {
