@@ -176,13 +176,13 @@ If you have any questions, please write to [the issue][21] of making you don't u
 
 #### V1.9.4（05-21）
  - 1、[修复] 修复干货订制点击“选择分类”崩溃的bug
- - 2、[新增] 干货订制页面长按item增加[水波纹扩散效果](https://jingbin.me/2018/05/20/Android%20%E6%B0%B4%E6%B3%A2%E7%BA%B9%E6%95%88%E6%9E%9C%E7%9A%84%E6%8E%A2%E7%A9%B6/)
+ - 2、[新增] 干货订制页面长按item增加[水波纹扩散效果](https://jinbeen.com/2018/05/20/Android%20%E6%B0%B4%E6%B3%A2%E7%BA%B9%E6%95%88%E6%9E%9C%E7%9A%84%E6%8E%A2%E7%A9%B6/)
 
 #### V1.9.3（05-18）
  - 1、[新增] 玩安卓模块增加登录与收藏文章的功能
  - 2、[新增] 增加Room的使用
  - 3、[修复] 修复7.0以上系统主页显示错乱的bug
- - 4、[完善] 性能优化之[布局大幅优化](https://jingbin.me/2018/05/17/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E4%B9%8B%E5%B8%83%E5%B1%80%E4%BC%98%E5%8C%96%E8%AE%B0%E5%BD%95/)
+ - 4、[完善] 性能优化之[布局大幅优化](https://jinbeen.com/2018/05/17/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E4%B9%8B%E5%B8%83%E5%B1%80%E4%BC%98%E5%8C%96%E8%AE%B0%E5%BD%95/)
  - 5、[完善] 完善体验修复若干bug
 
 #### V1.9.2（05-06）
@@ -274,7 +274,7 @@ If you have any questions, please write to [the issue][21] of making you don't u
 ## About me
  - **QQ：** 770413277
  - **简书：**[Jinbeen](https://www.jianshu.com/u/e43c6e979831)
- - **Blog：**[http://jingbin.me](http://jingbin.me)
+ - **Blog：**[http://jinbeen.com](http://jinbeen.com)
  - **Email：** jingbin127@163.com
  - **QQ交流群：**[![](https://img.shields.io/badge/%E7%BE%A4%E5%8F%B7-727379132-orange.svg?style=flat-square)](https://shang.qq.com/wpa/qunwpa?idkey=5685061359b0a767674cd831d8261d36b347bde04cc23746cb6570e09ee5c8aa)
 
@@ -308,7 +308,7 @@ limitations under the License.
 [36]:https://api.codacy.com/project/badge/Grade/1045e902e1294badaf783a640869c208?isInternal=true
 [37]:https://app.codacy.com/manual/youlookwhat/CloudReader/dashboard?bid=14239237
 
-[5]:http://jingbin.me/2017/11/23/%E5%BC%80%E5%8F%91%E4%B8%AD%E6%89%80%E9%81%87%E9%97%AE%E9%A2%98%E5%BD%92%E7%BA%B3/
+[5]:http://jinbeen.com/2017/11/23/%E5%BC%80%E5%8F%91%E4%B8%AD%E6%89%80%E9%81%87%E9%97%AE%E9%A2%98%E5%BD%92%E7%BA%B3/
 [6]:http://www.iconfont.cn/plus
 [7]:https://github.com/GiitSmile/ImitateNetEasyCloud
 [8]:https://github.com/forezp/banya
@@ -326,8 +326,8 @@ limitations under the License.
 [21]:https://github.com/youlookwhat/CloudReader/issues
 
 [23]:http://www.jianshu.com/p/69a229fb6e1d
-[24]:http://jingbin.me/2017/11/23/%E5%BC%80%E5%8F%91%E4%B8%AD%E6%89%80%E9%81%87%E9%97%AE%E9%A2%98%E5%BD%92%E7%BA%B3/
-[25]:http://jingbin.me/2016/12/25/%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98-%E4%BA%91%E9%98%85/
+[24]:http://jinbeen.com/2017/11/23/%E5%BC%80%E5%8F%91%E4%B8%AD%E6%89%80%E9%81%87%E9%97%AE%E9%A2%98%E5%BD%92%E7%BA%B3/
+[25]:http://jinbeen.com/2016/12/25/%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98-%E4%BA%91%E9%98%85/
 [26]:https://blog.csdn.net/jingbin_/column/info/34963
 [27]:http://www.wanandroid.com/index
 [28]:https://github.com/youlookwhat/ByRecyclerView
