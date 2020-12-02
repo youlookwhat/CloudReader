@@ -1,4 +1,6 @@
 apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
@@ -83,6 +85,13 @@ dependencies {
     })
     implementation project(path: ':bymvvm')
     testImplementation "junit:junit:$rootProject.ext.junitVersion"
+
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    // Android API扩展
+    implementation "org.jetbrains.anko:anko:$anko_version"
+    // Anko Commons
+    implementation "org.jetbrains.anko:anko-commons:$anko_version"
+
     // 流式标签
     implementation 'com.google.android:flexbox:2.0.1'
     implementation 'com.google.zxing:core:3.3.0'

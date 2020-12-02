@@ -7,7 +7,6 @@ import java.util.Calendar;
 
 /**
  * 避免在1秒内出发多次点击
- * Created by yangcai on 2016/1/15.
  */
 public abstract class PerfectClickListener implements OnClickListener {
     public static final int MIN_CLICK_DELAY_TIME = 1000;
