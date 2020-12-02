@@ -5,8 +5,6 @@ import android.content.DialogInterface;
 import android.text.TextUtils;
 import android.view.View;
 
-import androidx.appcompat.app.AlertDialog;
-
 import com.example.jingbin.cloudreader.R;
 import com.example.jingbin.cloudreader.app.Constants;
 import com.example.jingbin.cloudreader.bean.wanandroid.ArticlesBean;
