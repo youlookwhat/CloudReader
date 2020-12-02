@@ -8,7 +8,6 @@ import androidx.annotation.NonNull;
 import me.jingbin.bymvvm.base.BaseViewModel;
 import com.example.jingbin.cloudreader.bean.ComingFilmBean;
 import com.example.jingbin.cloudreader.bean.MtimeFilmeBean;
-import com.example.jingbin.cloudreader.bean.book.BookBean;
 import com.example.jingbin.cloudreader.http.HttpClient;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -41,26 +40,6 @@ public class FilmViewModel extends BaseViewModel {
 
     public int getStart() {
         return mStart;
-    }
-
-    public MutableLiveData<BookBean> getBook() {
-        final MutableLiveData<BookBean> data = new MutableLiveData<>();
-        Disposable subscribe = HttpClient.Builder.getDouBanService().getBook(bookType.get(), mStart, mCount)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Consumer<BookBean>() {
-                    @Override
-                    public void accept(BookBean bookBean) throws Exception {
-                        data.setValue(bookBean);
-                    }
-                }, new Consumer<Throwable>() {
-                    @Override
-                    public void accept(Throwable throwable) throws Exception {
-                        data.setValue(null);
-                    }
-                });
-        addDisposable(subscribe);
-        return data;
     }
 
     public void handleNextStart() {

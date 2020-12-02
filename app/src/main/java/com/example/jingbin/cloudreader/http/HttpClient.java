@@ -11,8 +11,6 @@ import com.example.jingbin.cloudreader.bean.HotMovieBean;
 import com.example.jingbin.cloudreader.bean.MovieDetailBean;
 import com.example.jingbin.cloudreader.bean.MtimeFilmeBean;
 import com.example.jingbin.cloudreader.bean.UpdateBean;
-import com.example.jingbin.cloudreader.bean.book.BookBean;
-import com.example.jingbin.cloudreader.bean.book.BookDetailBean;
 import com.example.jingbin.cloudreader.bean.wanandroid.BaseResultBean;
 import com.example.jingbin.cloudreader.bean.wanandroid.CoinUserInfoBean;
 import com.example.jingbin.cloudreader.bean.wanandroid.HomeListBean;
@@ -70,10 +68,6 @@ public interface HttpClient {
             return BuildFactory.getInstance().create(HttpClient.class, HttpUtils.API_QSBK);
         }
 
-        public static HttpClient getMtimeServer() {
-            return BuildFactory.getInstance().create(HttpClient.class, HttpUtils.API_MTIME);
-        }
-
         public static HttpClient getMtimeTicketServer() {
             return BuildFactory.getInstance().create(HttpClient.class, HttpUtils.API_MTIME_TICKET);
         }
@@ -109,18 +103,6 @@ public interface HttpClient {
      */
     @GET("v2/movie/top250")
     Observable<HotMovieBean> getMovieTop250(@Query("start") int start, @Query("count") int count);
-
-    /**
-     * 根据tag获取图书
-     *
-     * @param tag   搜索关键字
-     * @param count 一次请求的数目 最多100
-     */
-    @GET("v2/book/search")
-    Observable<BookBean> getBook(@Query("tag") String tag, @Query("start") int start, @Query("count") int count);
-
-    @GET("v2/book/{id}")
-    Observable<BookDetailBean> getBookDetail(@Path("id") String id);
 
     /**--------------------------------------------时光网--------------------------------------------*/
 

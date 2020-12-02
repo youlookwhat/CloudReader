@@ -41,11 +41,6 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.douban.SlideShadeViewActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/MyScrollPage"
-            tools:ignore="LockedOrientationActivity" />
-        <activity
             android:name=".view.viewbigimage.ViewBigImageActivity"
             android:screenOrientation="portrait"
             android:theme="@style/ViewBigPicTheme"
@@ -69,10 +64,6 @@
         </activity>
         <activity
             android:name=".ui.douban.DoubanTopActivity"
-            android:screenOrientation="portrait"
-            tools:ignore="LockedOrientationActivity" />
-        <activity
-            android:name=".ui.douban.BookTypeActivity"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
         <activity
@@ -102,10 +93,6 @@
             tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".ui.menu.NavAdmireActivity"
-            android:screenOrientation="portrait"
-            tools:ignore="LockedOrientationActivity" />
-        <activity
-            android:name=".ui.douban.BookDetailActivity"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
         <activity

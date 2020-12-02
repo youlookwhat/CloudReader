@@ -21,7 +21,7 @@ class ImageClickInterface(context: Context?) {
 
     @JavascriptInterface
     fun imageClick(imgUrl: String, hasLink: String?) {
-        Log.e("----点击了图片 url: ", "" + imgUrl)
+        Log.e("----点击了图片 url: ", "$imgUrl- hasLink:$hasLink")
     }
 
     @JavascriptInterface
