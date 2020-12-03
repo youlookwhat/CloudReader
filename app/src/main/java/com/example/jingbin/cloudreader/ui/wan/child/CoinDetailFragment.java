@@ -126,21 +126,19 @@ public class CoinDetailFragment extends BaseFragment<CoinListViewModel, Fragment
     private void getCoinLog() {
         viewModel.getCoinLog().observe(this, new Observer<CoinBean>() {
             @Override
-            public void onChanged(@Nullable CoinBean homeListBean) {
+            public void onChanged(@Nullable CoinBean coinBean) {
                 if (bindingView.srlWan.isRefreshing()) {
                     bindingView.srlWan.setRefreshing(false);
                 }
-                if (homeListBean != null) {
-                    if (homeListBean.getDatas() != null && homeListBean.getDatas().size() > 0) {
+                if (coinBean != null) {
+                    if (coinBean.getDatas() != null && coinBean.getDatas().size() > 0) {
                         if (viewModel.getPage() == 1) {
                             showContentView();
                             headerBinding.tvHeaderCoin.setVisibility(View.VISIBLE);
-                            mAdapter.clear();
-                            mAdapter.notifyDataSetChanged();
+                            mAdapter.setNewData(coinBean.getDatas());
+                        } else {
+                            mAdapter.addData(coinBean.getDatas());
                         }
-                        int positionStart = mAdapter.getItemCount() + 1;
-                        mAdapter.addAll(homeListBean.getDatas());
-                        mAdapter.notifyItemRangeInserted(positionStart, homeListBean.getDatas().size());
                         bindingView.xrvWan.loadMoreComplete();
                     } else {
                         if (viewModel.getPage() == 1) {

@@ -203,10 +203,10 @@ public class BaseTools {
      * @param appPkg    目标App的包名 com.coolapk.market 酷安
      * @param marketPkg 应用商店包名 ,如果为""则由系统弹出应用商店列表供用户选择,否则调转到目标市场的应用详情界面，某些应用商店可能会失败
      */
-    public static void launchAppDetail(Activity context, String appPkg, String marketPkg) {
+    public static boolean launchAppDetail(Activity context, String appPkg, String marketPkg) {
         try {
             if (TextUtils.isEmpty(appPkg)) {
-                return;
+                return false;
             }
             Uri uri = Uri.parse("market://details?id=" + appPkg);
             Intent intent = new Intent(Intent.ACTION_VIEW, uri);
@@ -215,9 +215,11 @@ public class BaseTools {
             }
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             context.startActivity(intent);
+            return true;
         } catch (Exception e) {
             e.printStackTrace();
             ToastUtil.showToastLong("未找到相关的应用市场哦");
+            return false;
         }
     }
 
