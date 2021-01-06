@@ -69,7 +69,7 @@ public interface HttpClient {
         }
 
         public static HttpClient getMtimeTicketServer() {
-            return BuildFactory.getInstance().create(HttpClient.class, HttpUtils.API_MTIME_TICKET);
+            return BuildFactory.getInstance().create(HttpClient.class, HttpUtils.API_MTIME);
         }
     }
 
