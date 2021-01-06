@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
 
 
     <data>
@@ -20,10 +21,10 @@
             android:layout_height="wrap_content"
             android:background="?attr/selectableItemBackground"
             android:orientation="horizontal"
-            android:paddingBottom="10dp"
             android:paddingLeft="10dp"
+            android:paddingTop="10dp"
             android:paddingRight="5dp"
-            android:paddingTop="10dp">
+            android:paddingBottom="10dp">
 
             <ImageView
                 android:id="@+id/iv_avatar"
@@ -44,7 +45,8 @@
                     android:layout_height="wrap_content"
                     android:text="@{personBean.name}"
                     android:textColor="@color/colorTitle"
-                    android:textSize="17sp" />
+                    android:textSize="17sp"
+                    tools:text="名称" />
 
                 <TextView
                     android:layout_width="wrap_content"
