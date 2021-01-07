@@ -9,28 +9,20 @@ import java.util.Objects;
  */
 public class ComingFilmBean {
 
-    private String code;
-    private DataFilmBean data;
+//    private List<MovieRecommendBean> recommends;
+    private List<MoviecomingsBean> moviecomings;
+    private List<MoviecomingsBean> attention;
 
-    public static class DataFilmBean {
-        private List<MovieRecommendBean> recommends;
-        private List<MoviecomingsBean> moviecomings;
+    public List<MoviecomingsBean> getRecommends() {
+        return attention;
+    }
 
-        public List<MovieRecommendBean> getRecommends() {
-            return recommends;
-        }
+    public List<MoviecomingsBean> getMoviecomings() {
+        return moviecomings;
+    }
 
-        public void setRecommends(List<MovieRecommendBean> recommends) {
-            this.recommends = recommends;
-        }
-
-        public List<MoviecomingsBean> getMoviecomings() {
-            return moviecomings;
-        }
-
-        public void setMoviecomings(List<MoviecomingsBean> moviecomings) {
-            this.moviecomings = moviecomings;
-        }
+    public void setMoviecomings(List<MoviecomingsBean> moviecomings) {
+        this.moviecomings = moviecomings;
     }
 
     public static class MovieRecommendBean{
@@ -43,14 +35,6 @@ public class ComingFilmBean {
         public void setMovies(List<MoviecomingsBean> movies) {
             this.movies = movies;
         }
-    }
-
-    public DataFilmBean getData() {
-        return data;
-    }
-
-    public void setData(DataFilmBean data) {
-        this.data = data;
     }
 
     public static class AttentionBean {
@@ -298,7 +282,7 @@ public class ComingFilmBean {
         }
 
         public int getId() {
-            return movieId;
+            return id;
         }
 
         public void setId(int id) {

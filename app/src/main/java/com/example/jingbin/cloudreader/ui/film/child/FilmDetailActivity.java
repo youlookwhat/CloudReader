@@ -104,7 +104,7 @@ public class FilmDetailActivity extends BaseHeaderActivity<HeaderFilmDetailBindi
     }
 
     private void loadMovieDetail() {
-        HttpClient.Builder.getMtimeTicketServer().getFilmDetail(filmItemBean.getId())
+        HttpClient.Builder.getMtimeTicketServer().getFilmDetail(561,filmItemBean.getId())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<FilmDetailBean>() {

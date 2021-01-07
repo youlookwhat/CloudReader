@@ -2,20 +2,16 @@ package com.example.jingbin.cloudreader.ui.film.child;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.view.View;
+import android.widget.ImageView;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
-import android.text.TextUtils;
-import android.view.View;
-import android.widget.ImageView;
-
 import com.example.jingbin.cloudreader.R;
 import com.example.jingbin.cloudreader.adapter.FilmComingAdapter;
-
-import me.jingbin.bymvvm.base.BaseFragment;
-
 import com.example.jingbin.cloudreader.bean.ComingFilmBean;
 import com.example.jingbin.cloudreader.bean.moviechild.FilmItemBean;
 import com.example.jingbin.cloudreader.databinding.FragmentWanAndroidBinding;
@@ -23,10 +19,8 @@ import com.example.jingbin.cloudreader.utils.CommonUtils;
 import com.example.jingbin.cloudreader.viewmodel.movie.FilmViewModel;
 
 import java.util.ArrayList;
-import java.util.LinkedHashSet;
-import java.util.Set;
 
-import me.jingbin.library.ByRecyclerView;
+import me.jingbin.bymvvm.base.BaseFragment;
 import me.jingbin.library.view.OnItemFilterClickListener;
 
 /**
@@ -132,29 +126,26 @@ public class FilmComingFragment extends BaseFragment<FilmViewModel, FragmentWanA
                     bindingView.srlWan.setRefreshing(false);
                 }
                 boolean isMovieComings = bookBean != null
-                        && bookBean.getData() != null
-                        && bookBean.getData().getMoviecomings() != null
-                        && bookBean.getData().getMoviecomings().size() > 0;
+                        && bookBean.getMoviecomings() != null
+                        && bookBean.getMoviecomings().size() > 0;
                 boolean isRecommends = bookBean != null
-                        && bookBean.getData() != null
-                        && bookBean.getData().getRecommends() != null
-                        && bookBean.getData().getRecommends().size() > 0
-                        && bookBean.getData().getRecommends().get(0) != null
-                        && bookBean.getData().getRecommends().get(0).getMovies() != null
-                        && bookBean.getData().getRecommends().get(0).getMovies().size() > 0;
+                        && bookBean.getRecommends() != null
+                        && bookBean.getRecommends().size() > 0;
 
                 if (isMovieComings || isRecommends) {
                     showContentView();
 
                     ArrayList<ComingFilmBean.MoviecomingsBean> beans = new ArrayList<>();
-                    if (isRecommends) {
-                        beans.addAll(bookBean.getData().getRecommends().get(0).getMovies());
+                    if (isMovieComings) {
+                        beans.addAll(bookBean.getMoviecomings());
+                    } else {
+                        beans.addAll(bookBean.getRecommends());
                     }
-                    beans.addAll(bookBean.getData().getMoviecomings());
+
                     // 用HashSet 根据id去重 https://www.cnblogs.com/woshimrf/p/java-list-distinct.html
-                    Set<ComingFilmBean.MoviecomingsBean> set = new LinkedHashSet<>(beans);
-                    beans.clear();
-                    beans.addAll(set);
+//                    Set<ComingFilmBean.MoviecomingsBean> set = new LinkedHashSet<>(beans);
+//                    beans.clear();
+//                    beans.addAll(set);
 
                     adapter.setNewData(beans);
                     bindingView.xrvWan.loadMoreEnd();

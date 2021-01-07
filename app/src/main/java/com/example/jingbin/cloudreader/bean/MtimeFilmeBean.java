@@ -9,26 +9,13 @@ import java.util.List;
  */
 public class MtimeFilmeBean {
 
-    private String code;
-    private DataFilmBean data;
+    private List<FilmItemBean> ms;
 
-    public static class DataFilmBean {
-        private List<FilmItemBean> ms;
-
-        public List<FilmItemBean> getMs() {
-            return ms;
-        }
-
-        public void setMs(List<FilmItemBean> ms) {
-            this.ms = ms;
-        }
+    public List<FilmItemBean> getMs() {
+        return ms;
     }
 
-    public DataFilmBean getData() {
-        return data;
-    }
-
-    public void setData(DataFilmBean data) {
-        this.data = data;
+    public void setMs(List<FilmItemBean> ms) {
+        this.ms = ms;
     }
 }

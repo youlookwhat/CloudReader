@@ -70,6 +70,7 @@ dependencies {
     annotationProcessor 'androidx.room:room-compiler:2.2.5'
     implementation 'androidx.room:room-rxjava2:2.2.5'
 //    implementation 'androidx.paging:paging-runtime:2.1.2'
+    testImplementation "androidx.room:room-testing:2.2.5"
 
     // ViewModelProviders
 //    implementation "android.arch.lifecycle:common-java8:1.0.0"
