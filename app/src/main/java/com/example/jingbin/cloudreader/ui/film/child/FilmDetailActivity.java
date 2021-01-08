@@ -50,7 +50,6 @@ public class FilmDetailActivity extends BaseHeaderActivity<HeaderFilmDetailBindi
     private String mMoreUrl;
     private String mMoreTitle;
     public ObservableField<Boolean> isShowActor = new ObservableField<>();
-    public ObservableField<Boolean> isShowBoxOffice = new ObservableField<>();
     public ObservableField<Boolean> isShowVideo = new ObservableField<>();
 
     @Override
@@ -135,15 +134,6 @@ public class FilmDetailActivity extends BaseHeaderActivity<HeaderFilmDetailBindi
 
                             transformData(bean);
 
-//                            if (bean.getData().getBoxOffice() != null
-//                                    && !TextUtils.isEmpty(bean.getData().getBoxOffice().getTodayBoxDes())
-//                                    && !TextUtils.isEmpty(bean.getData().getBoxOffice().getTotalBoxDes())) {
-//                                isShowBoxOffice.set(true);
-//                                bindingContentView.setBoxOffice(bean.getData().getBoxOffice());
-//                            } else {
-//                                isShowBoxOffice.set(false);
-//                            }
-                            isShowBoxOffice.set(false);
                             if (!TextUtils.isEmpty(bean.getImage())) {
                                 mMoreUrl = bean.getImage();
                                 mMoreTitle = "加载中...";

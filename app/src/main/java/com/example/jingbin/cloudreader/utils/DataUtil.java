@@ -5,7 +5,6 @@ import android.text.TextUtils;
 
 import com.example.jingbin.cloudreader.R;
 import com.example.jingbin.cloudreader.bean.AndroidBean;
-import com.example.jingbin.cloudreader.bean.FilmDetailBean;
 import com.example.jingbin.cloudreader.bean.FilmDetailNewBean;
 import com.example.jingbin.cloudreader.bean.GankIoDataBean;
 import com.example.jingbin.cloudreader.bean.wanandroid.TreeBean;

@@ -17,10 +17,6 @@
             type="com.example.jingbin.cloudreader.bean.FilmDetailNewBean" />
 
         <variable
-            name="boxOffice"
-            type="com.example.jingbin.cloudreader.bean.FilmDetailBean.BoxOfficeBean" />
-
-        <variable
             name="video"
             type="com.example.jingbin.cloudreader.bean.FilmDetailNewBean.VideoBean" />
     </data>
@@ -120,7 +116,7 @@
                 android:orientation="horizontal"
                 android:paddingTop="10dp"
                 android:paddingBottom="5dp"
-                android:visibility="@{listener.isShowBoxOffice?View.VISIBLE:View.GONE}">
+                android:visibility="gone">
 
                 <View
                     android:layout_width="2dp"
@@ -144,7 +140,7 @@
                 android:layout_margin="10dp"
                 android:background="@color/colorSmallRed"
                 android:orientation="horizontal"
-                android:visibility="@{listener.isShowBoxOffice?View.VISIBLE:View.GONE}">
+                android:visibility="gone">
 
                 <LinearLayout
                     android:layout_width="0dp"
@@ -159,7 +155,6 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text='@{boxOffice.todayBoxDes}'
                         android:textColor="@color/colorTheme"
                         android:textSize="17sp"
                         tools:text="996.76" />
@@ -168,7 +163,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
-                        android:text='@{boxOffice.todayBoxDesUnit}'
                         android:textSize="14sp"
                         tools:text="今日实时(万)" />
                 </LinearLayout>
@@ -186,7 +180,6 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text='@{boxOffice.totalBoxDes}'
                         android:textColor="@color/colorTheme"
                         android:textSize="17sp"
                         tools:text="996.76" />
@@ -195,7 +188,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
-                        android:text='@{boxOffice.totalBoxUnit}'
                         android:textSize="14sp"
                         tools:text="今日实时(万)" />
                 </LinearLayout>
@@ -213,7 +205,6 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@{@string/string_empty+boxOffice.ranking}"
                         android:textColor="@color/colorTheme"
                         android:textSize="17sp"
                         tools:text="996.76" />
