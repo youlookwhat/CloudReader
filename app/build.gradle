@@ -9,8 +9,8 @@ android {
         applicationId "com.example.jingbin.cloudreader"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 44
-        versionName "3.4.3"
+        versionCode 45
+        versionName "3.4.4"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         renderscriptTargetApi 19
         renderscriptSupportModeEnabled true
