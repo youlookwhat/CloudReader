@@ -14,15 +14,15 @@
 
         <variable
             name="bean"
-            type="com.example.jingbin.cloudreader.bean.FilmDetailBean.FilmDetailDataBean.BasicBean" />
+            type="com.example.jingbin.cloudreader.bean.FilmDetailNewBean" />
 
         <variable
             name="boxOffice"
-            type="com.example.jingbin.cloudreader.bean.FilmDetailBean.FilmDetailDataBean.BoxOfficeBean" />
+            type="com.example.jingbin.cloudreader.bean.FilmDetailBean.BoxOfficeBean" />
 
         <variable
             name="video"
-            type="com.example.jingbin.cloudreader.bean.FilmDetailBean.FilmDetailDataBean.BasicBean.VideoBean" />
+            type="com.example.jingbin.cloudreader.bean.FilmDetailNewBean.VideoBean" />
     </data>
 
 
@@ -44,10 +44,10 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
                 android:padding="5dp"
-                android:text='@{bean.commentSpecial}'
+                android:text='@{bean.commonSpecial}'
                 android:textColor="@color/colorTitle"
                 android:textStyle="bold|italic"
-                android:visibility="@{TextUtils.isEmpty(bean.commentSpecial)?View.GONE:View.VISIBLE}"
+                android:visibility="@{TextUtils.isEmpty(bean.commonSpecial)?View.GONE:View.VISIBLE}"
                 tools:text="“超级英雄们共谋大计战灭霸”" />
 
             <LinearLayout
@@ -77,7 +77,7 @@
                 android:layout_height="wrap_content"
                 android:lineSpacingExtra="7dp"
                 android:padding="12dp"
-                android:text="@{bean.story}"
+                android:text="@{bean.content}"
                 android:textColor="@color/colorTitle"
                 android:textSize="15sp" />
 
@@ -266,7 +266,7 @@
                     android:layout_marginTop="10dp"
                     android:layout_marginRight="20dp"
                     android:scaleType="centerCrop"
-                    android:showImg='@{video.img}'
+                    android:showImg='@{video.image}'
                     tools:background="@color/color_page_bg" />
 
                 <ImageView

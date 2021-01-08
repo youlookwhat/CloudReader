@@ -8,7 +8,7 @@
 
         <variable
             name="personBean"
-            type="com.example.jingbin.cloudreader.bean.FilmDetailBean.ActorsBean" />
+            type="com.example.jingbin.cloudreader.bean.FilmDetailNewBean.ActorBean" />
     </data>
 
     <!--android:background="@drawable/ripple_one_item_bg"-->
@@ -28,7 +28,7 @@
             android:layout_height="100dp"
             android:imageWidthDp="@{70}"
             android:imageHeightDp="@{100}"
-            android:imageUrl='@{personBean.img}'
+            android:imageUrl='@{personBean.actorImg}'
             android:scaleType="centerCrop" />
 
         <LinearLayout
@@ -43,7 +43,7 @@
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
                 android:maxLines="2"
-                android:text="@{personBean.name}"
+                android:text="@{personBean.actor}"
                 android:textColor="@color/colorTitle"
                 android:textSize="14sp"
                 tools:text="小罗伯特·唐尼" />

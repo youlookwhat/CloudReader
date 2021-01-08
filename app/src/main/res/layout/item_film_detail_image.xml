@@ -7,7 +7,7 @@
 
         <variable
             name="bean"
-            type="com.example.jingbin.cloudreader.bean.FilmDetailBean.ImageListBean" />
+            type="java.lang.String" />
     </data>
 
     <RelativeLayout
@@ -21,7 +21,7 @@
             android:layout_marginRight="10dp"
             android:imageWidthDp="@{140}"
             android:imageHeightDp="@{100}"
-            android:imageUrl='@{bean.imgUrl}'
+            android:imageUrl='@{bean}'
             android:scaleType="centerCrop" />
 
     </RelativeLayout>

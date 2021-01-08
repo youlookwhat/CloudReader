@@ -17,6 +17,7 @@
     <string name="actionbar_search">搜索</string>
     <string name="actionbar_help_coin">积分规则</string>
     <string name="actionbar_more">更多信息</string>
+    <string name="actionbar_image">封面大图</string>
     <string name="actionbar_webview_share">分享</string>
     <string name="actionbar_webview_cope">复制链接</string>
     <string name="actionbar_webview_open">浏览器打开</string>

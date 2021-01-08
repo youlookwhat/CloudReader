@@ -3,7 +3,7 @@ package com.example.jingbin.cloudreader.http;
 import com.example.jingbin.cloudreader.bean.CoinBean;
 import com.example.jingbin.cloudreader.bean.CollectUrlBean;
 import com.example.jingbin.cloudreader.bean.ComingFilmBean;
-import com.example.jingbin.cloudreader.bean.FilmDetailBean;
+import com.example.jingbin.cloudreader.bean.FilmDetailNewBean;
 import com.example.jingbin.cloudreader.bean.FrontpageBean;
 import com.example.jingbin.cloudreader.bean.GankIoDataBean;
 import com.example.jingbin.cloudreader.bean.GankIoDayBean;
@@ -125,7 +125,7 @@ public interface HttpClient {
      * @param movieId 电影bean里的id
      */
     @GET("movie/detail.api")
-    Observable<FilmDetailBean> getFilmDetail(@Query("locationId") int locationId,@Query("movieId") int movieId);
+    Observable<FilmDetailNewBean> getFilmDetail(@Query("locationId") int locationId, @Query("movieId") int movieId);
 
     /**--------------------------------------------其他--------------------------------------------*/
     /**

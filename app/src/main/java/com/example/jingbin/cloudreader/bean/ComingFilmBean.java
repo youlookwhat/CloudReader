@@ -9,7 +9,6 @@ import java.util.Objects;
  */
 public class ComingFilmBean {
 
-//    private List<MovieRecommendBean> recommends;
     private List<MoviecomingsBean> moviecomings;
     private List<MoviecomingsBean> attention;
 

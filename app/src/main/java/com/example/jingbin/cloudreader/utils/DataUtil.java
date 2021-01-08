@@ -6,6 +6,7 @@ import android.text.TextUtils;
 import com.example.jingbin.cloudreader.R;
 import com.example.jingbin.cloudreader.bean.AndroidBean;
 import com.example.jingbin.cloudreader.bean.FilmDetailBean;
+import com.example.jingbin.cloudreader.bean.FilmDetailNewBean;
 import com.example.jingbin.cloudreader.bean.GankIoDataBean;
 import com.example.jingbin.cloudreader.bean.wanandroid.TreeBean;
 import com.example.jingbin.cloudreader.http.cache.ACache;
@@ -182,15 +183,15 @@ public class DataUtil {
     /**
      * 详情内演员字段
      */
-    public static String getActorString(List<FilmDetailBean.ActorsBean> beans) {
+    public static String getActorString(List<FilmDetailNewBean.ActorBean> beans) {
         StringBuilder text = new StringBuilder();
         int i = 0;
         if (beans != null) {
-            for (FilmDetailBean.ActorsBean bean : beans) {
+            for (FilmDetailNewBean.ActorBean bean : beans) {
                 if (i == 4) {
                     break;
                 }
-                String name = bean.getName();
+                String name = bean.getActor();
                 if (!TextUtils.isEmpty(name)) {
                     i++;
                     text.append(" / ").append(name);
