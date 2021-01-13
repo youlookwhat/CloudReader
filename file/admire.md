@@ -1,3 +1,5 @@
+<img src="https://raw.githubusercontent.com/youlookwhat/CloudReader/master/file/Wechat-admire.jpg" width="250" height="250" /><img src="https://raw.githubusercontent.com/youlookwhat/CloudReader/master/file/alipay-admire.jpg" width="250" height="250"/>
+
 ### 捐赠列表
 非常感谢列表中的朋友，你们的肯定和支持是我前进的最大动力！
 
