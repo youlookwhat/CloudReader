@@ -49,7 +49,7 @@ If you have any questions, please write to [the issue][21] of making you don't u
 
 
 ## See Detail
-> [项目介绍详情](https://github.com/youlookwhat/CloudReader/wiki/Introduction) | [细节优化详情](https://github.com/youlookwhat/CloudReader/wiki) | 🚀[**版本更新详情(V3.4.3)**](https://github.com/youlookwhat/CloudReader/wiki/Update-log)
+> [项目介绍详情](https://github.com/youlookwhat/CloudReader/wiki/Introduction) | [细节优化详情](https://github.com/youlookwhat/CloudReader/wiki) | 🚀[**版本更新详情(V3.4.4)**](https://github.com/youlookwhat/CloudReader/wiki/Update-log)
 
 ### Download
 　[酷安下载](https://www.coolapk.com/apk/127875)
@@ -66,6 +66,10 @@ If you have any questions, please write to [the issue][21] of making you don't u
 　
 
 ### Version
+#### V3.4.4（2021-01-09）
+ - 1、[修复] 修复电影模块数据问题
+ - 2、[优化] 部分使用Koltin，代码优化
+
 #### V3.4.3（2020-11-16）
  - 1、[新增] 去酷安应用市场评星
  - 2、[新增] WebView拦截简书直接打开App
@@ -299,7 +303,7 @@ limitations under the License.
 [2]:https://www.apache.org/licenses/LICENSE-2.0.html
 [3]:https://img.shields.io/badge/API-19%2B-red.svg?style=flat
 [4]:https://android-arsenal.com/api?level=19
-[30]:https://img.shields.io/badge/release-3.4.3-red.svg
+[30]:https://img.shields.io/badge/release-3.4.4-red.svg
 [31]:https://github.com/youlookwhat/CloudReader/releases
 [32]:https://img.shields.io/badge/PRs-welcome-brightgreen.svg
 [33]:https://github.com/youlookwhat/CloudReader/pulls
