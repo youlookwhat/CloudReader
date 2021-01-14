@@ -1,9 +1,10 @@
 package com.example.jingbin.cloudreader.adapter;
 
-import androidx.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
 
 import com.example.jingbin.cloudreader.R;
 import com.example.jingbin.cloudreader.app.Constants;

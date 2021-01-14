@@ -40,7 +40,6 @@ import me.jingbin.library.view.OnItemFilterClickListener;
  */
 public class NavigationFragment extends BaseFragment<NavigationViewModel, FragmentNaviBinding> {
 
-    private boolean mIsPrepared;
     private boolean mIsFirst = true;
     private NavigationAdapter mNaviAdapter;
     private NavigationContentAdapter mContentAdapter;
@@ -67,20 +66,17 @@ public class NavigationFragment extends BaseFragment<NavigationViewModel, Fragme
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        // 准备就绪
-        mIsPrepared = true;
-        loadData();
     }
 
     @Override
-    protected void loadData() {
-        if (!mIsPrepared || !mIsVisible || !mIsFirst) {
-            return;
+    public void onResume() {
+        super.onResume();
+        if (mIsFirst){
+            showLoading();
+            initRefreshView();
+            viewModel.getNavigationJson();
+            mIsFirst = false;
         }
-        showLoading();
-        initRefreshView();
-        viewModel.getNavigationJson();
-        mIsFirst = false;
     }
 
     private void initRefreshView() {

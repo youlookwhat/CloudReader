@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.transition.ArcMotion;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
@@ -82,14 +83,15 @@ public abstract class BaseHeaderActivity<HV extends ViewDataBinding, SV extends 
 
     @Override
     public void setContentView(@LayoutRes int layoutResID) {
-        View ll = getLayoutInflater().inflate(R.layout.activity_header_base, null);
+        LayoutInflater layoutInflater = LayoutInflater.from(this);
+        View ll = layoutInflater.inflate(R.layout.activity_header_base, null);
 
         // 内容
-        bindingContentView = DataBindingUtil.inflate(getLayoutInflater(), layoutResID, null, false);
+        bindingContentView = DataBindingUtil.inflate(layoutInflater, layoutResID, null, false);
         // 头部
-        bindingHeaderView = DataBindingUtil.inflate(getLayoutInflater(), setHeaderLayout(), null, false);
+        bindingHeaderView = DataBindingUtil.inflate(layoutInflater, setHeaderLayout(), null, false);
         // 标题
-        bindingTitleView = DataBindingUtil.inflate(getLayoutInflater(), R.layout.base_header_title_bar, null, false);
+        bindingTitleView = DataBindingUtil.inflate(layoutInflater, R.layout.base_header_title_bar, null, false);
 
         // title (如自定义很强可以拿出去)
         RelativeLayout.LayoutParams titleParams = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);

@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 
 import com.example.jingbin.cloudreader.ui.film.FilmFragment;
 import com.example.jingbin.cloudreader.ui.gank.GankFragment;
+import com.example.jingbin.cloudreader.ui.wan.WanCenterFragment;
 import com.example.jingbin.cloudreader.ui.wan.WanFragment;
 
 import java.util.List;
@@ -72,9 +73,9 @@ public class MyFragmentPagerAdapter extends FragmentStatePagerAdapter {
                 case 0:
                     return new WanFragment();
                 case 1:
-                    return new GankFragment();
+                    return new WanCenterFragment();
                 case 2:
-                    return new FilmFragment();
+                    return new GankFragment();
                 default:
                     return new WanFragment();
             }

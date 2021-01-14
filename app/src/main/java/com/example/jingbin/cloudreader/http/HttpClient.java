@@ -325,6 +325,14 @@ public interface HttpClient {
     @GET("wxarticle/list/{id}/{page}/json")
     Observable<BaseResultBean<WxarticleDetailItemBean>> getWxarticleDetail(@Path("id") int id, @Path("page") int page);
 
+    /**
+     * 问答列表
+     *
+     * @param page 1开始
+     */
+    @GET("wenda/list/{page}/json")
+    Observable<BaseResultBean<WxarticleDetailItemBean>> getWendaList(@Path("page") int page);
+
     /**--------------------------------------------干货集中营--------------------------------------------*/
 
     /**

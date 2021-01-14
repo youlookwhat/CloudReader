@@ -2,10 +2,11 @@ package com.example.jingbin.cloudreader.ui.wan.child;
 
 import android.content.Context;
 import android.content.Intent;
-import androidx.databinding.DataBindingUtil;
 import android.os.Bundle;
-import androidx.fragment.app.Fragment;
+
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
+import androidx.fragment.app.Fragment;
 
 import com.example.jingbin.cloudreader.R;
 import com.example.jingbin.cloudreader.bean.wanandroid.TreeItemBean;

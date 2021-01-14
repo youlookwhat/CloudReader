@@ -1,0 +1,34 @@
+package com.example.jingbin.cloudreader.viewmodel.wan
+
+import android.app.Application
+import androidx.lifecycle.MutableLiveData
+import com.example.jingbin.cloudreader.bean.wanandroid.ArticlesBean
+import com.example.jingbin.cloudreader.http.HttpClient
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
+import me.jingbin.bymvvm.base.BaseListViewModel
+
+class WanCenterViewModel(application: Application) : BaseListViewModel(application) {
+
+    init {
+        mPage = 1
+    }
+
+    fun getWendaList(): MutableLiveData<List<ArticlesBean>?>? {
+        val data = MutableLiveData<List<ArticlesBean>?>()
+        val subscribe = HttpClient.Builder.getWanAndroidServer().getWendaList(page)
+                .subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
+                .subscribe({ bean ->
+                    if (bean != null
+                            && bean.data != null
+                            && bean.data.datas != null
+                            && bean.data.datas.size > 0) {
+                        data.setValue(bean.data.datas)
+                    } else {
+                        data.setValue(ArrayList())
+                    }
+                }) { throwable: Throwable? -> data.setValue(null) }
+        addDisposable(subscribe)
+        return data
+    }
+}
