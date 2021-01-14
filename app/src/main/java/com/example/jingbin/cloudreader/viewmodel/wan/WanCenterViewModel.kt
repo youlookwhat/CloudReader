@@ -14,7 +14,10 @@ class WanCenterViewModel(application: Application) : BaseListViewModel(applicati
         mPage = 1
     }
 
-    fun getWendaList(): MutableLiveData<List<ArticlesBean>?>? {
+    /**
+     * 问答列表
+     */
+    fun getWendaList(): MutableLiveData<List<ArticlesBean>?> {
         val data = MutableLiveData<List<ArticlesBean>?>()
         val subscribe = HttpClient.Builder.getWanAndroidServer().getWendaList(page)
                 .subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
@@ -31,4 +34,26 @@ class WanCenterViewModel(application: Application) : BaseListViewModel(applicati
         addDisposable(subscribe)
         return data
     }
+
+    /**
+     * 广场列表数据
+     */
+    fun getUserArticleList(): MutableLiveData<List<ArticlesBean>?> {
+        val data = MutableLiveData<List<ArticlesBean>?>()
+        val subscribe = HttpClient.Builder.getWanAndroidServer().getUserArticleList(page)
+                .subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
+                .subscribe({ bean ->
+                    if (bean != null
+                            && bean.data != null
+                            && bean.data.datas != null
+                            && bean.data.datas.size > 0) {
+                        data.setValue(bean.data.datas)
+                    } else {
+                        data.setValue(ArrayList())
+                    }
+                }) { throwable: Throwable? -> data.setValue(null) }
+        addDisposable(subscribe)
+        return data
+    }
+
 }

@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import com.example.jingbin.cloudreader.R
 import com.example.jingbin.cloudreader.databinding.FragmentContentBinding
 import com.example.jingbin.cloudreader.ui.wan.child.NavigationFragment
+import com.example.jingbin.cloudreader.ui.wan.child.SquareFragment
 import com.example.jingbin.cloudreader.ui.wan.child.WendaFragment
 import com.example.jingbin.cloudreader.view.CommonTabPagerAdapter
 import com.example.jingbin.cloudreader.viewmodel.wan.WanCenterViewModel
@@ -47,7 +48,7 @@ class WanCenterFragment : BaseFragment<NoViewModel, FragmentContentBinding>(), C
     override fun getFragment(position: Int): Fragment? =
             when (position) {
                 0 -> WendaFragment.newInstance()
-                1 -> NavigationFragment.newInstance()
+                1 -> SquareFragment.newInstance()
                 2 -> NavigationFragment.newInstance()
                 else -> NavigationFragment.newInstance()
             }

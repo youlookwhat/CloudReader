@@ -333,6 +333,13 @@ public interface HttpClient {
     @GET("wenda/list/{page}/json")
     Observable<BaseResultBean<WxarticleDetailItemBean>> getWendaList(@Path("page") int page);
 
+    /**
+     * 广场列表数据
+     *
+     * @param page 0开始
+     */
+    @GET("user_article/list/{page}/json")
+    Observable<BaseResultBean<WxarticleDetailItemBean>> getUserArticleList(@Path("page") int page);
     /**--------------------------------------------干货集中营--------------------------------------------*/
 
     /**

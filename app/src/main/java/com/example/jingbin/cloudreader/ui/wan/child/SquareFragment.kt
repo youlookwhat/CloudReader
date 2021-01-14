@@ -12,9 +12,9 @@ import com.example.jingbin.cloudreader.viewmodel.wan.WanCenterViewModel
 import me.jingbin.bymvvm.base.BaseFragment
 
 /**
- * 问答
+ * 广场
  */
-class WendaFragment : BaseFragment<WanCenterViewModel, FragmentAndroidBinding>() {
+class SquareFragment : BaseFragment<WanCenterViewModel, FragmentAndroidBinding>() {
 
     private var isFirst = true
     private lateinit var activity: Activity
@@ -23,8 +23,8 @@ class WendaFragment : BaseFragment<WanCenterViewModel, FragmentAndroidBinding>()
     override fun setContent(): Int = R.layout.fragment_android
 
     companion object {
-        fun newInstance(): WendaFragment {
-            return WendaFragment()
+        fun newInstance(): SquareFragment {
+            return SquareFragment()
         }
     }
 
@@ -36,7 +36,7 @@ class WendaFragment : BaseFragment<WanCenterViewModel, FragmentAndroidBinding>()
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-
+        viewModel.mPage = 0
     }
 
     override fun onResume() {
@@ -54,7 +54,7 @@ class WendaFragment : BaseFragment<WanCenterViewModel, FragmentAndroidBinding>()
         mAdapter = WanAndroidAdapter(activity)
         bindingView.xrvAndroid.adapter = mAdapter
         bindingView.xrvAndroid.setOnRefreshListener {
-            viewModel.mPage = 1
+            viewModel.mPage = 0
             getWendaData()
         }
         bindingView.xrvAndroid.setOnLoadMoreListener {
@@ -64,11 +64,11 @@ class WendaFragment : BaseFragment<WanCenterViewModel, FragmentAndroidBinding>()
     }
 
     private fun getWendaData() {
-        viewModel.getWendaList().observe(this, Observer {
+        viewModel.getUserArticleList().observe(this, Observer {
             bindingView.xrvAndroid.isRefreshing = false
             if (it != null && it.isNotEmpty()) {
                 showContentView()
-                if (viewModel.mPage == 1) {
+                if (viewModel.mPage == 0) {
                     mAdapter.setNewData(it)
                 } else {
                     mAdapter.addData(it)
@@ -76,9 +76,9 @@ class WendaFragment : BaseFragment<WanCenterViewModel, FragmentAndroidBinding>()
                 }
 
             } else {
-                if (viewModel.mPage == 1) {
+                if (viewModel.mPage == 0) {
                     if (it != null) {
-                        showEmptyView("没找到问答的内容~")
+                        showEmptyView("没找到广场里的内容~")
                     } else {
                         showError()
                         if (viewModel.mPage > 1) viewModel.mPage--
