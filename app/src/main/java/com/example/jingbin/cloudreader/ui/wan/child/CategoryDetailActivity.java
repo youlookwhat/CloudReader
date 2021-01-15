@@ -30,7 +30,6 @@ public class CategoryDetailActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-//        ToolbarHelper.initTranslucent(this);
         StatusBarUtil.setTranslucentStatus(this);
         super.onCreate(savedInstanceState);
         bindingView = DataBindingUtil.setContentView(this, R.layout.activity_category_detail);

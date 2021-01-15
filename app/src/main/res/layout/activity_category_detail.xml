@@ -87,7 +87,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:background="@color/colorWhite"
-                app:tabGravity="center"
                 app:tabIndicatorColor="@color/colorTheme"
                 app:tabIndicatorHeight="2dp"
                 app:tabMode="scrollable"
