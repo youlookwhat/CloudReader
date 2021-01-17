@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="viewModel"
+            type="com.example.jingbin.cloudreader.viewmodel.wan.PublishViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="15dp">
+
+        <TextView
+            android:id="@+id/tv_title_tip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="文章标题"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/et_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
+            android:hint="100字以内"
+            android:imeOptions="actionNext"
+            android:paddingRight="40dp"
+            android:singleLine="true"
+            android:text="@={viewModel.title}"
+            android:textColorHint="@color/colorLineDeep"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_title_tip" />
+
+        <ImageView
+            android:id="@+id/iv_up"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="3dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:padding="7dp"
+            android:src="@drawable/icon_paste"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@+id/et_title"
+            app:layout_constraintEnd_toEndOf="@+id/et_title"
+            app:layout_constraintTop_toTopOf="@+id/et_title"
+            tools:visibility="visible" />
+
+        <TextView
+            android:id="@+id/tv_link_tip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:text="文章链接"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/et_title" />
+
+        <EditText
+            android:id="@+id/et_link"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
+            android:hint="如：https://www.wanandroid.com/blog/show/1234"
+            android:imeOptions="actionDone"
+            android:inputType="textUri"
+            android:singleLine="true"
+            android:text="@={viewModel.link}"
+            android:textColorHint="@color/colorLineDeep"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_link_tip" />
+
+        <ImageView
+            android:id="@+id/iv_down"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="3dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:padding="7dp"
+            android:src="@drawable/icon_paste"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@+id/et_link"
+            app:layout_constraintEnd_toEndOf="@+id/et_link"
+            app:layout_constraintTop_toTopOf="@+id/et_link"
+            tools:visibility="visible" />
+
+        <TextView
+            android:id="@+id/tv_go_web"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="?attr/selectableItemBackground"
+            android:onClick="goWeb"
+            android:padding="5dp"
+            android:text="去网页分享"
+            android:textColor="@color/colorTabTextCheck"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/et_link" />
+
+        <!--        <LinearLayout-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:gravity="center_vertical"-->
+        <!--            android:layout_marginTop="30dp"-->
+        <!--            android:background="@drawable/shape_bg_tag_selected"-->
+        <!--            app:layout_constraintEnd_toEndOf="parent"-->
+        <!--            app:layout_constraintStart_toStartOf="parent"-->
+        <!--            app:layout_constraintTop_toBottomOf="@+id/et_link">-->
+
+        <!--            <ImageView-->
+        <!--                android:layout_width="wrap_content"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:src="@drawable/icon_share_wan"-->
+        <!--                android:transitionName="@string/transition_publish_bt" />-->
+
+        <TextView
+            android:layout_width="160dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/shape_bg_publish"
+            android:gravity="center"
+            android:onClick="publish"
+            android:text="分享"
+            android:textColor="@color/colorWhite"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/et_link" />
+        <!--        </LinearLayout>-->
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:lineSpacingExtra="2dp"
+            android:text="1. 只要是任何好文都可以分享哈，并不一定要是原创！投递的文章会进入广场 tab;\n
+2. CSDN，掘金，简书等官方博客站点会直接通过，不需要审核;\n
+3. 其他个人站点会进入审核阶段，不要投递任何无效链接，测试的请尽快删除，否则可能会对你的账号产生一定影响;\n
+4. 目前处于测试阶段，如果你发现500等错误，可以向我提交日志，让我们一起使网站变得更好。\n
+5. 由于本站只有我一个人开发与维护，会尽力保证24小时内审核，当然有可能哪天太累，会延期，请保持佛系..."
+            android:textColor="@color/colorSubtitle"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

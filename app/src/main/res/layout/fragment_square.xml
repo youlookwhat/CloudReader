@@ -1,0 +1,44 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <RelativeLayout xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context="com.example.jingbin.cloudreader.ui.wan.child.PublishActivity">
+
+        <me.jingbin.library.ByRecyclerView
+            android:id="@+id/xrv_android"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scrollbars="vertical"
+            tools:itemCount="5"
+            tools:layoutManager="LinearLayoutManager"
+            tools:listitem="@layout/item_wan_android" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/tv_publish"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:layout_margin="@dimen/fab_margin"
+            android:src="@drawable/icon_share_wan"
+            android:visibility="visible"
+            app:layout_anchorGravity="bottom|end" />
+
+        <!--        <TextView-->
+        <!--            android:id="@+id/tv_publish"-->
+        <!--            android:layout_width="60dp"-->
+        <!--            android:layout_height="60dp"-->
+        <!--            android:layout_alignParentRight="true"-->
+        <!--            android:layout_alignParentBottom="true"-->
+        <!--            android:layout_margin="30dp"-->
+        <!--            android:layout_marginTop="30dp"-->
+        <!--            android:background="@drawable/shape_bg_publish"-->
+        <!--            android:gravity="center"-->
+        <!--            android:text="发布"-->
+        <!--            android:textColor="@color/colorWhite"-->
+        <!--            app:layout_constraintEnd_toEndOf="parent"-->
+        <!--            app:layout_constraintStart_toStartOf="parent" />-->
+    </RelativeLayout>
+</layout>

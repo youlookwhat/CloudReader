@@ -6,21 +6,26 @@ import android.os.Bundle
 import androidx.lifecycle.Observer
 import com.example.jingbin.cloudreader.R
 import com.example.jingbin.cloudreader.adapter.WanAndroidAdapter
-import com.example.jingbin.cloudreader.databinding.FragmentAndroidBinding
+import com.example.jingbin.cloudreader.app.RxCodeConstants
+import com.example.jingbin.cloudreader.data.UserUtil
+import com.example.jingbin.cloudreader.databinding.FragmentSquareBinding
 import com.example.jingbin.cloudreader.utils.RefreshHelper
 import com.example.jingbin.cloudreader.viewmodel.wan.WanCenterViewModel
+import io.reactivex.functions.Consumer
 import me.jingbin.bymvvm.base.BaseFragment
+import me.jingbin.bymvvm.rxbus.RxBus
+import me.jingbin.bymvvm.rxbus.RxBusBaseMessage
 
 /**
  * 广场
  */
-class SquareFragment : BaseFragment<WanCenterViewModel, FragmentAndroidBinding>() {
+class SquareFragment : BaseFragment<WanCenterViewModel, FragmentSquareBinding>() {
 
     private var isFirst = true
     private lateinit var activity: Activity
     private lateinit var mAdapter: WanAndroidAdapter
 
-    override fun setContent(): Int = R.layout.fragment_android
+    override fun setContent(): Int = R.layout.fragment_square
 
     companion object {
         fun newInstance(): SquareFragment {
@@ -45,6 +50,7 @@ class SquareFragment : BaseFragment<WanCenterViewModel, FragmentAndroidBinding>(
             showLoading()
             initRv()
             getWendaData()
+            initRxBus()
             isFirst = false
         }
     }
@@ -60,6 +66,11 @@ class SquareFragment : BaseFragment<WanCenterViewModel, FragmentAndroidBinding>(
         bindingView.xrvAndroid.setOnLoadMoreListener {
             ++viewModel.mPage
             getWendaData()
+        }
+        bindingView.tvPublish.setOnClickListener {
+            if (UserUtil.isLogin(activity)) {
+                PublishActivity.start(activity, it)
+            }
         }
     }
 
@@ -92,5 +103,15 @@ class SquareFragment : BaseFragment<WanCenterViewModel, FragmentAndroidBinding>(
 
     override fun onRefresh() {
         getWendaData()
+    }
+
+    private fun initRxBus() {
+        val subscribe = RxBus.getDefault().toObservable(RxCodeConstants.REFRESH_SQUARE_DATA, RxBusBaseMessage::class.java)
+                .subscribe(Consumer {
+                    showLoading()
+                    viewModel.mPage = 0
+                    getWendaData()
+                })
+        addSubscription(subscribe)
     }
 }

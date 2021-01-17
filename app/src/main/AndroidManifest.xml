@@ -128,7 +128,10 @@
             android:name=".view.bigimage.BigImagePagerActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:theme="@style/AppBigImageThem" />
-
+        <activity
+            android:name=".ui.wan.child.PublishActivity"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
     </application>
 
 </manifest>

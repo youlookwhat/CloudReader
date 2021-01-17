@@ -340,6 +340,16 @@ public interface HttpClient {
      */
     @GET("user_article/list/{page}/json")
     Observable<BaseResultBean<WxarticleDetailItemBean>> getUserArticleList(@Path("page") int page);
+
+    /**
+     * 分享文章
+     *
+     * @param title 标题
+     * @param link  链接
+     */
+    @FormUrlEncoded
+    @POST("lg/user_article/add/json")
+    Observable<BaseResultBean> pushArticle(@Field("title") String title, @Field("link") String link);
     /**--------------------------------------------干货集中营--------------------------------------------*/
 
     /**

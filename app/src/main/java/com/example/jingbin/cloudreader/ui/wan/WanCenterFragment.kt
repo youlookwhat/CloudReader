@@ -8,7 +8,6 @@ import com.example.jingbin.cloudreader.ui.wan.child.NavigationFragment
 import com.example.jingbin.cloudreader.ui.wan.child.SquareFragment
 import com.example.jingbin.cloudreader.ui.wan.child.WendaFragment
 import com.example.jingbin.cloudreader.view.CommonTabPagerAdapter
-import com.example.jingbin.cloudreader.viewmodel.wan.WanCenterViewModel
 import me.jingbin.bymvvm.base.BaseFragment
 import me.jingbin.bymvvm.base.NoViewModel
 
@@ -32,7 +31,7 @@ class WanCenterFragment : BaseFragment<NoViewModel, FragmentContentBinding>(), C
         }
         showLoading()
         bindingView.tabGank.postDelayed({
-            val pagerAdapter = CommonTabPagerAdapter(childFragmentManager, listOf("问答", "广场", "导航"))
+            val pagerAdapter = CommonTabPagerAdapter(childFragmentManager, listOf("广场", "问答", "导航"))
             pagerAdapter.listener = this
             bindingView.vpGank.adapter = pagerAdapter
             bindingView.vpGank.offscreenPageLimit = 2
@@ -47,8 +46,8 @@ class WanCenterFragment : BaseFragment<NoViewModel, FragmentContentBinding>(), C
 
     override fun getFragment(position: Int): Fragment? =
             when (position) {
-                0 -> WendaFragment.newInstance()
-                1 -> SquareFragment.newInstance()
+                0 -> SquareFragment.newInstance()
+                1 -> WendaFragment.newInstance()
                 2 -> NavigationFragment.newInstance()
                 else -> NavigationFragment.newInstance()
             }

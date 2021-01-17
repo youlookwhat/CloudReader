@@ -16,5 +16,7 @@ class RxCodeConstants {
         const val LOGIN = 3
         // 发现页内容订制
         const val FIND_CUSTOM = 4
+        // 刷新广场数据
+        const val REFRESH_SQUARE_DATA = 5
     }
 }
