@@ -45,7 +45,7 @@ public class WanAndroidAdapter extends BaseBindingAdapter<ArticlesBean, ItemWanA
     /**
      * 列表中是否显示图片
      */
-    private boolean isNoImage = false;
+    public boolean isNoImage = false;
 
     public WanAndroidAdapter(Activity activity) {
         super(R.layout.item_wan_android);
