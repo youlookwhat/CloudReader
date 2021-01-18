@@ -149,7 +149,11 @@ public class WebViewActivity extends AppCompatActivity {
                 String shareText = mTitle + " " + byWebView.getWebView().getUrl() + " ( 分享自云阅 " + Constants.DOWNLOAD_URL + " )";
                 ShareUtils.share(WebViewActivity.this, shareText);
                 break;
-            case R.id.actionbar_cope:
+            case R.id.actionbar_copy_title:
+                // 复制标题
+                BaseTools.copy(tvGunTitle.getText().toString());
+                break;
+            case R.id.actionbar_copy_link:
                 // 复制链接
                 BaseTools.copy(byWebView.getWebView().getUrl());
                 break;

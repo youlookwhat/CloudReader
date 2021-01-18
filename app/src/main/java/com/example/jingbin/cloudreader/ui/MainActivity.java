@@ -46,6 +46,7 @@ import com.example.jingbin.cloudreader.utils.DialogBuild;
 import com.example.jingbin.cloudreader.utils.GlideUtil;
 import com.example.jingbin.cloudreader.utils.PerfectClickListener;
 import com.example.jingbin.cloudreader.utils.SPUtils;
+import com.example.jingbin.cloudreader.utils.StringFormatUtil;
 import com.example.jingbin.cloudreader.utils.UpdateUtil;
 import com.example.jingbin.cloudreader.view.MyFragmentPagerAdapter;
 import com.example.jingbin.cloudreader.view.OnLoginListener;
@@ -377,7 +378,7 @@ public class MainActivity extends BaseActivity<MainViewModel, ActivityMainBindin
      */
     private void getClipContent() {
         String clipContent = BaseTools.getClipContent();
-        if (!TextUtils.isEmpty(clipContent)) {
+        if (!TextUtils.isEmpty(StringFormatUtil.formatUrl(clipContent))) {
             DialogBuild.showCustom(bindingView.drawerLayout, clipContent, "打开其中链接", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {

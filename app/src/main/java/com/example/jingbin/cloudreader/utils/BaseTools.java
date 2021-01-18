@@ -77,7 +77,7 @@ public class BaseTools {
                 CharSequence addedText = manager.getPrimaryClip().getItemAt(0).getText();
                 String addedTextString = String.valueOf(addedText);
                 if (!TextUtils.isEmpty(addedTextString)) {
-                    return StringFormatUtil.formatUrl(String.valueOf(addedText));
+                    return addedTextString;
                 }
             }
         }

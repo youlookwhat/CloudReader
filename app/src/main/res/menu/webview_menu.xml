@@ -15,9 +15,15 @@
         app:showAsAction="never" />
 
     <item
-        android:id="@+id/actionbar_cope"
+        android:id="@+id/actionbar_copy_title"
         android:orderInCategory="100"
-        android:title="@string/actionbar_webview_cope"
+        android:title="@string/actionbar_webview_copy_title"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/actionbar_copy_link"
+        android:orderInCategory="100"
+        android:title="@string/actionbar_webview_copy_link"
         app:showAsAction="never" />
 
     <item

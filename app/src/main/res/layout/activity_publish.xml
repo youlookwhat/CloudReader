@@ -47,11 +47,11 @@
             android:layout_marginBottom="3dp"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:padding="7dp"
-            android:src="@drawable/icon_paste"
-            android:visibility="gone"
+            android:visibility="@{viewModel.isShowTitleIv()?View.VISIBLE:View.GONE}"
             app:layout_constraintBottom_toBottomOf="@+id/et_title"
             app:layout_constraintEnd_toEndOf="@+id/et_title"
             app:layout_constraintTop_toTopOf="@+id/et_title"
+            tools:src="@drawable/icon_paste"
             tools:visibility="visible" />
 
         <TextView
@@ -86,44 +86,28 @@
             android:background="?attr/selectableItemBackgroundBorderless"
             android:padding="7dp"
             android:src="@drawable/icon_paste"
-            android:visibility="gone"
+            android:visibility="@{viewModel.isShowLinkIv()?View.VISIBLE:View.GONE}"
             app:layout_constraintBottom_toBottomOf="@+id/et_link"
             app:layout_constraintEnd_toEndOf="@+id/et_link"
             app:layout_constraintTop_toTopOf="@+id/et_link"
             tools:visibility="visible" />
 
         <TextView
-            android:id="@+id/tv_go_web"
+            android:id="@+id/tv_open_link"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="?attr/selectableItemBackground"
-            android:onClick="goWeb"
+            android:onClick="openLink"
             android:padding="5dp"
-            android:text="去网页分享"
+            android:text="打开链接"
             android:textColor="@color/colorTabTextCheck"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/et_link" />
 
-        <!--        <LinearLayout-->
-        <!--            android:layout_width="wrap_content"-->
-        <!--            android:layout_height="wrap_content"-->
-        <!--            android:gravity="center_vertical"-->
-        <!--            android:layout_marginTop="30dp"-->
-        <!--            android:background="@drawable/shape_bg_tag_selected"-->
-        <!--            app:layout_constraintEnd_toEndOf="parent"-->
-        <!--            app:layout_constraintStart_toStartOf="parent"-->
-        <!--            app:layout_constraintTop_toBottomOf="@+id/et_link">-->
-
-        <!--            <ImageView-->
-        <!--                android:layout_width="wrap_content"-->
-        <!--                android:layout_height="wrap_content"-->
-        <!--                android:src="@drawable/icon_share_wan"-->
-        <!--                android:transitionName="@string/transition_publish_bt" />-->
-
         <TextView
             android:layout_width="160dp"
             android:layout_height="40dp"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="35dp"
             android:background="@drawable/shape_bg_publish"
             android:gravity="center"
             android:onClick="publish"
@@ -132,7 +116,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/et_link" />
-        <!--        </LinearLayout>-->
 
         <TextView
             android:layout_width="match_parent"

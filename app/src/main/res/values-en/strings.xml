@@ -16,10 +16,12 @@
     <string name="title_activity_base">BaseActivity</string>
     <string name="actionbar_search">Search</string>
     <string name="actionbar_help_coin">Integral rules</string>
+    <string name="actionbar_web">Website to share</string>
     <string name="actionbar_more">More information</string>
     <string name="actionbar_image">Big Picture</string>
     <string name="actionbar_webview_share">Share</string>
-    <string name="actionbar_webview_cope">Copy the link</string>
+    <string name="actionbar_webview_copy_title">Copy the title</string>
+    <string name="actionbar_webview_copy_link">Copy the link</string>
     <string name="actionbar_webview_open">Browser opens</string>
     <string name="actionbar_webview_refresh">Refresh</string>
     <string name="actionbar_webview_collect">Add to favorites</string>
