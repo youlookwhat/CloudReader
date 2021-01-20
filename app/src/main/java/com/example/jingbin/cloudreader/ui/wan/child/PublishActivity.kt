@@ -109,7 +109,7 @@ class PublishActivity : BaseActivity<PublishViewModel, ActivityPublishBinding>()
                     }
                 }
             }
-        }, 500)
+        }, 150)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
