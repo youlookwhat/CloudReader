@@ -30,7 +30,7 @@ public class MainViewModel extends BaseViewModel {
     public ObservableField<Boolean> isReadOk = new ObservableField<>();
     // 赞赏入口是否开放
     public ObservableField<Boolean> isShowAdmire = new ObservableField<>();
-    private final MutableLiveData<CoinUserInfoBean> coin = new MutableLiveData<>();
+    public MutableLiveData<CoinUserInfoBean> coin = new MutableLiveData<>();
 
     public MainViewModel(@NonNull Application application) {
         super(application);

@@ -4,6 +4,7 @@ import android.app.Application
 import androidx.lifecycle.MutableLiveData
 import com.example.jingbin.cloudreader.bean.wanandroid.ArticlesBean
 import com.example.jingbin.cloudreader.http.HttpClient
+import com.example.jingbin.cloudreader.ui.wan.child.ShareArticleBean
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import me.jingbin.bymvvm.base.BaseListViewModel
@@ -55,5 +56,24 @@ class WanCenterViewModel(application: Application) : BaseListViewModel(applicati
         addDisposable(subscribe)
         return data
     }
+
+    /**
+     * 自己的分享的文章列表
+     */
+    fun getShareList(): MutableLiveData<ShareArticleBean?> {
+        val data = MutableLiveData<ShareArticleBean?>()
+        val subscribe = HttpClient.Builder.getWanAndroidServer().getShareList(page)
+                .subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
+                .subscribe({ bean ->
+                    if (bean != null) {
+                        data.setValue(bean.data)
+                    } else {
+                        data.setValue(ShareArticleBean())
+                    }
+                }) { throwable: Throwable? -> data.setValue(null) }
+        addDisposable(subscribe)
+        return data
+    }
+
 
 }

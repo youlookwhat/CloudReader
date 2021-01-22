@@ -24,13 +24,11 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.example.jingbin.cloudreader.R;
 import com.example.jingbin.cloudreader.app.ConstantsImageUrl;
+import com.example.jingbin.cloudreader.app.RxCodeConstants;
 import com.example.jingbin.cloudreader.bean.wanandroid.CoinUserInfoBean;
 import com.example.jingbin.cloudreader.data.UserUtil;
 import com.example.jingbin.cloudreader.databinding.ActivityMainBinding;
 import com.example.jingbin.cloudreader.databinding.NavHeaderMainBinding;
-import me.jingbin.bymvvm.rxbus.RxBus;
-import me.jingbin.bymvvm.rxbus.RxBusBaseMessage;
-import com.example.jingbin.cloudreader.app.RxCodeConstants;
 import com.example.jingbin.cloudreader.ui.menu.NavAboutActivity;
 import com.example.jingbin.cloudreader.ui.menu.NavAdmireActivity;
 import com.example.jingbin.cloudreader.ui.menu.NavDeedBackActivity;
@@ -40,6 +38,7 @@ import com.example.jingbin.cloudreader.ui.menu.SearchActivity;
 import com.example.jingbin.cloudreader.ui.wan.child.LoginActivity;
 import com.example.jingbin.cloudreader.ui.wan.child.MyCoinActivity;
 import com.example.jingbin.cloudreader.ui.wan.child.MyCollectActivity;
+import com.example.jingbin.cloudreader.ui.wan.child.MyShareActivity;
 import com.example.jingbin.cloudreader.utils.BaseTools;
 import com.example.jingbin.cloudreader.utils.CommonUtils;
 import com.example.jingbin.cloudreader.utils.DialogBuild;
@@ -56,6 +55,8 @@ import com.example.jingbin.cloudreader.viewmodel.wan.MainViewModel;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 import me.jingbin.bymvvm.base.BaseActivity;
+import me.jingbin.bymvvm.rxbus.RxBus;
+import me.jingbin.bymvvm.rxbus.RxBusBaseMessage;
 import me.jingbin.bymvvm.utils.StatusBarUtil;
 
 
@@ -136,13 +137,14 @@ public class MainActivity extends BaseActivity<MainViewModel, ActivityMainBindin
         bind.llNavAbout.setOnClickListener(listener);
         bind.llNavLogin.setOnClickListener(listener);
         bind.llNavCollect.setOnClickListener(listener);
+        bind.llNavShare.setOnClickListener(listener);
         bind.llInfo.setOnClickListener(listener);
         bind.llNavCoin.setOnClickListener(listener);
         bind.llNavAdmire.setOnClickListener(listener);
         bind.tvRank.setOnClickListener(listener);
 
         viewModel.getUserInfo();
-        viewModel.getCoin().observe(this, new Observer<CoinUserInfoBean>() {
+        viewModel.coin.observe(this, new Observer<CoinUserInfoBean>() {
             @Override
             public void onChanged(@Nullable CoinUserInfoBean coinUserInfoBean) {
                 if (coinUserInfoBean != null) {
@@ -217,6 +219,12 @@ public class MainActivity extends BaseActivity<MainViewModel, ActivityMainBindin
                         // 玩安卓收藏
                         if (UserUtil.isLogin(MainActivity.this)) {
                             MyCollectActivity.start(MainActivity.this);
+                        }
+                        break;
+                    case R.id.ll_nav_share:
+                        // 玩安卓分享
+                        if (UserUtil.isLogin(MainActivity.this)) {
+                            MyShareActivity.start(MainActivity.this);
                         }
                         break;
                     case R.id.ll_nav_login:
@@ -443,7 +451,7 @@ public class MainActivity extends BaseActivity<MainViewModel, ActivityMainBindin
                         if (isLogin) {
                             viewModel.getUserInfo();
                         } else {
-                            viewModel.getCoin().setValue(null);
+                            viewModel.coin.setValue(null);
                         }
                     }
                 });

@@ -78,6 +78,7 @@ class PublishActivity : BaseActivity<PublishViewModel, ActivityPublishBinding>()
         viewModel.pushArticle().observe(this, Observer {
             if (it != null && it) {
                 // 成功
+                RxBus.getDefault().post(RxCodeConstants.LOGIN, true)
                 RxBus.getDefault().post(RxCodeConstants.REFRESH_SQUARE_DATA, RxBusBaseMessage())
             }
         })

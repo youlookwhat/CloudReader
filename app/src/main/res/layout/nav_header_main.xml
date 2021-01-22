@@ -313,6 +313,31 @@
 
             </LinearLayout>
 
+            <LinearLayout
+                android:id="@+id/ll_nav_share"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:background="?attr/selectableItemBackground"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp">
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/icon_share_article" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:text="我的分享"
+                    android:textColor="@color/colorContent"
+                    android:textSize="15sp" />
+
+            </LinearLayout>
+
             <RelativeLayout
                 android:id="@+id/ll_nav_coin"
                 android:layout_width="match_parent"

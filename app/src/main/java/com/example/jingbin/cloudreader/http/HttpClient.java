@@ -22,6 +22,7 @@ import com.example.jingbin.cloudreader.bean.wanandroid.TreeBean;
 import com.example.jingbin.cloudreader.bean.wanandroid.WanAndroidBannerBean;
 import com.example.jingbin.cloudreader.bean.wanandroid.WxarticleDetailItemBean;
 import com.example.jingbin.cloudreader.bean.wanandroid.WxarticleItemBean;
+import com.example.jingbin.cloudreader.ui.wan.child.ShareArticleBean;
 
 import java.util.List;
 
@@ -350,6 +351,14 @@ public interface HttpClient {
     @FormUrlEncoded
     @POST("lg/user_article/add/json")
     Observable<BaseResultBean> pushArticle(@Field("title") String title, @Field("link") String link);
+
+    /**
+     * 自己的分享的文章列表
+     *
+     * @param page 1开始
+     */
+    @GET("user/lg/private_articles/{page}/json")
+    Observable<BaseResultBean<ShareArticleBean>> getShareList(@Path("page") int page);
     /**--------------------------------------------干货集中营--------------------------------------------*/
 
     /**
