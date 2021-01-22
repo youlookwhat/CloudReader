@@ -1,5 +1,10 @@
 package com.example.jingbin.cloudreader.bean.wanandroid;
 
+import android.text.Html;
+import android.text.TextUtils;
+
+import com.example.jingbin.cloudreader.utils.DataUtil;
+
 /**
  * @author jingbin
  * @data 2018/10/8
@@ -142,6 +147,10 @@ public class ArticlesBean {
     }
 
     public String getDesc() {
+        if (!TextUtils.isEmpty(desc)) {
+            String desc1 = Html.fromHtml(desc).toString();
+            desc = DataUtil.removeAllBank(desc1, 2);
+        }
         return desc;
     }
 
@@ -174,6 +183,9 @@ public class ArticlesBean {
     }
 
     public String getNiceDate() {
+        if (!TextUtils.isEmpty(niceDate) && niceDate.endsWith("00:00")) {
+            niceDate = niceDate.replace("00:00", "");
+        }
         return niceDate;
     }
 

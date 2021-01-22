@@ -12,6 +12,8 @@ import com.example.jingbin.cloudreader.http.cache.ACache;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * @author jingbin
@@ -202,5 +204,15 @@ public class DataUtil {
             toString = toString.substring(3);
         }
         return toString;
+    }
+
+    public static String removeAllBank(String str, int count) {
+        String s = "";
+        if (str != null) {
+            Pattern p = Pattern.compile("\\s{" + count + ",}|\t|\r|\n");
+            Matcher m = p.matcher(str);
+            s = m.replaceAll(" ");
+        }
+        return s;
     }
 }

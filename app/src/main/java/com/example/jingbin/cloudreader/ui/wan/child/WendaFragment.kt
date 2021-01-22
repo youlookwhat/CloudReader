@@ -54,6 +54,7 @@ class WendaFragment : BaseFragment<WanCenterViewModel, FragmentAndroidBinding>()
         mAdapter = WanAndroidAdapter(activity)
         mAdapter.isNoShowChapterName = true
         mAdapter.isNoImage = false
+        mAdapter.isShowDesc = true
         bindingView.xrvAndroid.adapter = mAdapter
         bindingView.xrvAndroid.setOnRefreshListener {
             viewModel.mPage = 1

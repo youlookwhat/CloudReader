@@ -7,14 +7,12 @@ import android.text.Editable
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.widget.ImageView
 import androidx.lifecycle.Observer
 import com.example.jingbin.cloudreader.R
 import com.example.jingbin.cloudreader.app.RxCodeConstants
 import com.example.jingbin.cloudreader.databinding.ActivityPublishBinding
 import com.example.jingbin.cloudreader.ui.WebViewActivity
 import com.example.jingbin.cloudreader.utils.BaseTools
-import com.example.jingbin.cloudreader.utils.DebugUtil
 import com.example.jingbin.cloudreader.utils.ToastUtil
 import com.example.jingbin.cloudreader.view.MyTextWatch
 import com.example.jingbin.cloudreader.viewmodel.wan.PublishViewModel
@@ -89,7 +87,7 @@ class PublishActivity : BaseActivity<PublishViewModel, ActivityPublishBinding>()
         super.onResume()
         bindingView.etLink.postDelayed({
             clipContent = BaseTools.getClipContent()
-            if (clipContent.isNotBlank()) {
+            if (clipContent.isNotBlank() && "null" != clipContent) {
                 val title = bindingView.etTitle.text.toString().trim()
                 if (title.isBlank()) {
                     if (!clipContent.contains("http")) {

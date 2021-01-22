@@ -30,22 +30,16 @@ public class WanAndroidAdapter extends BaseBindingAdapter<ArticlesBean, ItemWanA
 
     private Activity activity;
     private CollectModel model;
-    /**
-     * 是我的收藏页进来的，全部是收藏状态。bean里面没有返回isCollect信息
-     */
+    // 是我的收藏页进来的，全部是收藏状态。bean里面没有返回isCollect信息
     public boolean isCollectList = false;
-    /**
-     * 不显示类别信息
-     */
+    // 不显示类别信息
     public boolean isNoShowChapterName = false;
-    /**
-     * 不显示作者名字
-     */
+    // 不显示作者名字
     public boolean isNoShowAuthorName = false;
-    /**
-     * 列表中是否显示图片
-     */
+    // 列表中是否显示图片
     public boolean isNoImage = false;
+    // 列表中是否显示描述
+    public boolean isShowDesc = false;
 
     public WanAndroidAdapter(Activity activity) {
         super(R.layout.item_wan_android);
@@ -58,6 +52,9 @@ public class WanAndroidAdapter extends BaseBindingAdapter<ArticlesBean, ItemWanA
         if (bean != null) {
             if (isCollectList) {
                 bean.setCollect(true);
+            }
+            if (isShowDesc) {
+                binding.tvTitle.setSingleLine();
             }
             binding.setBean(bean);
             binding.setAdapter(WanAndroidAdapter.this);
