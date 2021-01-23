@@ -10,7 +10,7 @@
 
         <variable
             name="bean"
-            type="com.example.jingbin.cloudreader.ui.wan.child.ShareArticleBean.CoinInfoBean" />
+            type="com.example.jingbin.cloudreader.bean.ShareArticleBean.CoinInfoBean" />
 
         <import type="android.view.View" />
 

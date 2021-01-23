@@ -1,4 +1,4 @@
-package com.example.jingbin.cloudreader.ui.wan.child
+package com.example.jingbin.cloudreader.bean
 
 import com.example.jingbin.cloudreader.bean.wanandroid.WxarticleDetailItemBean
 

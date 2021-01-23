@@ -22,7 +22,7 @@ import com.example.jingbin.cloudreader.bean.wanandroid.TreeBean;
 import com.example.jingbin.cloudreader.bean.wanandroid.WanAndroidBannerBean;
 import com.example.jingbin.cloudreader.bean.wanandroid.WxarticleDetailItemBean;
 import com.example.jingbin.cloudreader.bean.wanandroid.WxarticleItemBean;
-import com.example.jingbin.cloudreader.ui.wan.child.ShareArticleBean;
+import com.example.jingbin.cloudreader.bean.ShareArticleBean;
 
 import java.util.List;
 

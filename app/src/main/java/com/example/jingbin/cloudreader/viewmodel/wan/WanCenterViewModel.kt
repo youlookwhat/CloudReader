@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import com.example.jingbin.cloudreader.bean.wanandroid.ArticlesBean
 import com.example.jingbin.cloudreader.bean.wanandroid.BaseResultBean
 import com.example.jingbin.cloudreader.http.HttpClient
-import com.example.jingbin.cloudreader.ui.wan.child.ShareArticleBean
+import com.example.jingbin.cloudreader.bean.ShareArticleBean
 import com.example.jingbin.cloudreader.utils.ToastUtil
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
