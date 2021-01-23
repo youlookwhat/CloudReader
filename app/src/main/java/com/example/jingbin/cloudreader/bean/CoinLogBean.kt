@@ -21,6 +21,6 @@ class CoinLogBean {
     val reason: String? = null
     val type = 0
     val userId = 0
-    val userName: String? = null
     val username: String? = null
+    val nickname: String? = null
 }

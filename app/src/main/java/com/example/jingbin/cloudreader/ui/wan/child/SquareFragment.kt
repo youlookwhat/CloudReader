@@ -71,7 +71,7 @@ class SquareFragment : BaseFragment<WanCenterViewModel, FragmentSquareBinding>()
         }
         bindingView.tvPublish.setOnClickListener {
             if (UserUtil.isLogin(activity)) {
-                PublishActivity.start(activity, it)
+                PublishActivity.start(activity)
             }
         }
     }

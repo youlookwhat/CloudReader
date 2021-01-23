@@ -215,4 +215,28 @@ public class DataUtil {
         }
         return s;
     }
+
+    public static String getLevel(int level) {
+        return "Lv." + level;
+    }
+
+    public static String getRank(String rank) {
+        if (TextUtils.isEmpty(rank)) {
+            return "排名 --";
+        }
+        return "排名 " + rank;
+    }
+
+    public static String getUserId(int userId) {
+        return "ID." + userId;
+    }
+
+    public static String getName(String username, String nickname) {
+        if (!TextUtils.isEmpty(nickname)) {
+            return username + "(" + nickname + ")";
+        } else {
+            return username;
+        }
+    }
+
 }

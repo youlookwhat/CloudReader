@@ -11,7 +11,7 @@ class ShareArticleBean {
     var coinInfo: CoinInfoBean? = null
 
     class CoinInfoBean {
-        val coinCount: Long = 0
+        val coinCount: Int = 0
         val userId: Int = 0
         val level: Int = 0
         val nickname: String = ""

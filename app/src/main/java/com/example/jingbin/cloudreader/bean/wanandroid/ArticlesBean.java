@@ -42,6 +42,7 @@ public class ArticlesBean {
     private String desc;
     private String envelopePic;
     private int id;
+    private int userId;
     private int originId = -1;// 收藏文章列表里面的原始文章id
     private String link;
     private String niceDate;
@@ -57,6 +58,14 @@ public class ArticlesBean {
     private String navigationName;
     // 可能没有author 有 shareUser
     private String shareUser;
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
 
     public String getShareUser() {
         return shareUser;

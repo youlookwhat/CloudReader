@@ -1,5 +1,6 @@
 package me.jingbin.bymvvm.base;
 
+import android.app.Activity;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.drawable.AnimationDrawable;
@@ -181,6 +182,9 @@ public abstract class BaseActivity<VM extends AndroidViewModel, SV extends ViewD
         }
     }
 
+    protected Activity getActivity(){
+        return this;
+    }
     /**
      * 失败后点击刷新
      */

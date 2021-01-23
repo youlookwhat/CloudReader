@@ -359,6 +359,25 @@ public interface HttpClient {
      */
     @GET("user/lg/private_articles/{page}/json")
     Observable<BaseResultBean<ShareArticleBean>> getShareList(@Path("page") int page);
+
+    /**
+     * 分享人对应列表数据
+     *
+     * @param page   1开始
+     * @param userId 用户id
+     */
+    @GET("user/{userId}/share_articles/{page}/json")
+    Observable<BaseResultBean<ShareArticleBean>> getUserShare(@Path("userId") int userId, @Path("page") int page);
+
+    /**
+     * 删除自己分享的文章
+     *
+     * @param id 文章id
+     */
+    @FormUrlEncoded
+    @POST("lg/user_article/delete/{id}/json")
+    Observable<BaseResultBean> deleteShare(@Path("id") int id, @Field("title") String title);
+
     /**--------------------------------------------干货集中营--------------------------------------------*/
 
     /**

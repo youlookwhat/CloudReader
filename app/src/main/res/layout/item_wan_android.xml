@@ -23,11 +23,11 @@
     </data>
 
     <!--如果有点击事件，则内部的水波纹不能扩散-->
+<!--    android:onClick="@{()->adapter.openDetail(bean)}"-->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="?attr/selectableItemBackground"
-        android:onClick="@{()->adapter.openDetail(bean)}"
         android:paddingTop="8dp"
         android:paddingRight="8dp"
         android:paddingBottom="8dp">

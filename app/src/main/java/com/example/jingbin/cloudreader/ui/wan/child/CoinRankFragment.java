@@ -1,26 +1,30 @@
 package com.example.jingbin.cloudreader.ui.wan.child;
 
-import androidx.lifecycle.Observer;
 import android.content.Context;
-import androidx.databinding.DataBindingUtil;
 import android.os.Bundle;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.FragmentActivity;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.Nullable;
+import androidx.databinding.DataBindingUtil;
+import androidx.fragment.app.FragmentActivity;
+import androidx.lifecycle.Observer;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+
 import com.example.jingbin.cloudreader.R;
 import com.example.jingbin.cloudreader.adapter.CoinAdapter;
-import me.jingbin.bymvvm.base.BaseFragment;
 import com.example.jingbin.cloudreader.bean.CoinBean;
+import com.example.jingbin.cloudreader.bean.CoinLogBean;
 import com.example.jingbin.cloudreader.databinding.FragmentWanAndroidBinding;
 import com.example.jingbin.cloudreader.databinding.HeaderCoinRankBinding;
 import com.example.jingbin.cloudreader.utils.CommonUtils;
+import com.example.jingbin.cloudreader.utils.DataUtil;
 import com.example.jingbin.cloudreader.utils.RefreshHelper;
 import com.example.jingbin.cloudreader.viewmodel.wan.CoinListViewModel;
 
+import me.jingbin.bymvvm.base.BaseFragment;
 import me.jingbin.library.ByRecyclerView;
+import me.jingbin.library.view.OnItemFilterClickListener;
 
 /**
  * @author jingbin
@@ -97,6 +101,13 @@ public class CoinRankFragment extends BaseFragment<CoinListViewModel, FragmentWa
                 } else {
                     bindingView.xrvWan.loadMoreComplete();
                 }
+            }
+        });
+        bindingView.xrvWan.setOnItemClickListener(new OnItemFilterClickListener() {
+            @Override
+            protected void onSingleClick(View v, int position) {
+                CoinLogBean bean = mAdapter.getItemData(position);
+                MyShareActivity.start(activity, DataUtil.getName(bean.getUsername(), bean.getNickname()), bean.getUserId());
             }
         });
     }

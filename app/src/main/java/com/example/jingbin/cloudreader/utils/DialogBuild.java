@@ -14,6 +14,7 @@ import com.example.jingbin.cloudreader.app.RxCodeConstants;
 import com.example.jingbin.cloudreader.data.UserUtil;
 import com.example.jingbin.cloudreader.data.model.LoginModel;
 import com.example.jingbin.cloudreader.view.OnLoginListener;
+import com.example.jingbin.cloudreader.view.OnShareDialogListener;
 
 import me.jingbin.bymvvm.room.Injection;
 import me.jingbin.bymvvm.room.User;
@@ -138,6 +139,24 @@ public class DialogBuild {
                     } else {
                         listener.loginWanAndroid();
                     }
+                    break;
+                default:
+                    break;
+            }
+        });
+        builder.show();
+    }
+
+    public static void showItemDialog(View v, OnShareDialogListener listener) {
+        String[] items = {"查看", "删除此篇分享"};
+        AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
+        builder.setItems(items, (dialog, which) -> {
+            switch (which) {
+                case 0:
+                    listener.look();
+                    break;
+                case 1:
+                    listener.delete();
                     break;
                 default:
                     break;

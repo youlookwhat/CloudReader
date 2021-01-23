@@ -14,6 +14,11 @@ interface OnLoginListener {
     fun loginGitHub()
 }
 
+interface OnShareDialogListener {
+    fun look()
+    fun delete()
+}
+
 /**
  * js通信接口
  */

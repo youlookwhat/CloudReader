@@ -78,6 +78,8 @@ class PublishActivity : BaseActivity<PublishViewModel, ActivityPublishBinding>()
         viewModel.pushArticle().observe(this, Observer {
             if (it != null && it) {
                 // 成功
+                ToastUtil.showToast("分享成功")
+                this@PublishActivity.finish()
                 RxBus.getDefault().post(RxCodeConstants.LOGIN, true)
                 RxBus.getDefault().post(RxCodeConstants.REFRESH_SQUARE_DATA, RxBusBaseMessage())
             }
@@ -133,7 +135,7 @@ class PublishActivity : BaseActivity<PublishViewModel, ActivityPublishBinding>()
     }
 
     companion object {
-        fun start(context: Activity, view: View) {
+        fun start(context: Activity) {
             val intent = Intent(context, PublishActivity::class.java)
             context.startActivity(intent)
 //            val options = ActivityOptionsCompat.makeSceneTransitionAnimation(context, view, CommonUtils.getString(R.string.transition_publish_bt))

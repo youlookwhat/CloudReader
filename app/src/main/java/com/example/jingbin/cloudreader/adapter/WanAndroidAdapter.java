@@ -15,6 +15,7 @@ import com.example.jingbin.cloudreader.ui.WebViewActivity;
 import com.example.jingbin.cloudreader.ui.wan.child.ArticleListActivity;
 import com.example.jingbin.cloudreader.utils.BaseTools;
 import com.example.jingbin.cloudreader.utils.DialogBuild;
+import com.example.jingbin.cloudreader.utils.PerfectClickListener;
 import com.example.jingbin.cloudreader.utils.SPUtils;
 import com.example.jingbin.cloudreader.utils.ToastUtil;
 import com.example.jingbin.cloudreader.viewmodel.wan.WanNavigator;
@@ -40,6 +41,8 @@ public class WanAndroidAdapter extends BaseBindingAdapter<ArticlesBean, ItemWanA
     public boolean isNoImage = false;
     // 列表中是否显示描述
     public boolean isShowDesc = false;
+    // 是否是我的分享
+    public boolean isMyShare = false;
 
     public WanAndroidAdapter(Activity activity) {
         super(R.layout.item_wan_android);
@@ -64,6 +67,14 @@ public class WanAndroidAdapter extends BaseBindingAdapter<ArticlesBean, ItemWanA
                 bean.setShowImage(false);
             }
 
+            if (!isMyShare) {
+                binding.getRoot().setOnClickListener(new PerfectClickListener() {
+                    @Override
+                    protected void onNoDoubleClick(View v) {
+                        WebViewActivity.loadUrl(activity, bean.getLink(), bean.getTitle());
+                    }
+                });
+            }
             binding.vbCollect.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="totalNum"
+            type="String" />
+
+        <variable
+            name="bean"
+            type="com.example.jingbin.cloudreader.ui.wan.child.ShareArticleBean.CoinInfoBean" />
+
+        <import type="android.view.View" />
+
+        <import type="com.example.jingbin.cloudreader.utils.DataUtil" />
+    </data>
+
+    <LinearLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/rl_banner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{totalNum}"
+            android:textColor="@color/colorTabText"
+            android:textSize="14sp"
+            tools:text="分享了457篇文章" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="本站积分:  "
+                android:textColor="@color/colorTabText"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/tv_coin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{DataUtil.getStringValue(bean.coinCount)}"
+                android:textColor="@color/colorTheme"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="16326" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="12dp"
+                android:background="@color/colorTheme"
+                android:paddingLeft="4dp"
+                android:paddingTop="1dp"
+                android:paddingRight="4dp"
+                android:paddingBottom="1dp"
+                android:text="@{DataUtil.getLevel(bean.level)}"
+                android:textColor="@color/colorWhite"
+                android:textSize="11sp"
+                tools:text="Lv.164" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="12dp"
+                android:background="@color/colorPrimary"
+                android:paddingLeft="4dp"
+                android:paddingTop="1dp"
+                android:paddingRight="4dp"
+                android:paddingBottom="1dp"
+                android:text="@{DataUtil.getRank(bean.rank)}"
+                android:textColor="@color/colorWhite"
+                android:textSize="11sp"
+                tools:text="排名 2" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="12dp"
+                android:background="@color/colorTabText"
+                android:paddingLeft="4dp"
+                android:paddingTop="1dp"
+                android:paddingRight="4dp"
+                android:paddingBottom="1dp"
+                android:text="@{DataUtil.getUserId(bean.userId)}"
+                android:textColor="@color/colorWhite"
+                android:textSize="11sp"
+                tools:text="ID.164" />
+        </LinearLayout>
+    </LinearLayout>
+</layout>

@@ -1,10 +1,10 @@
 package com.example.jingbin.cloudreader.viewmodel.wan;
 
 import android.app.Application;
-import androidx.lifecycle.MutableLiveData;
-import androidx.annotation.NonNull;
 
-import me.jingbin.bymvvm.base.BaseListViewModel;
+import androidx.annotation.NonNull;
+import androidx.lifecycle.MutableLiveData;
+
 import com.example.jingbin.cloudreader.bean.CollectUrlBean;
 import com.example.jingbin.cloudreader.http.HttpClient;
 
@@ -14,6 +14,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
+import me.jingbin.bymvvm.base.BaseListViewModel;
 
 
 /**
@@ -40,7 +41,7 @@ public class CollectLinkModel extends BaseListViewModel {
                             Collections.reverse(collectUrlBean.getData());
                             data.setValue(collectUrlBean);
                         } else {
-                            data.setValue(null);
+                            data.setValue(collectUrlBean);
                         }
                     }
                 }, throwable -> data.setValue(null));
