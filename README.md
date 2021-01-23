@@ -7,13 +7,13 @@
 [![Codacy Badge][36]][37]
 
 
-> Netease cloud music Ui && Retrofit2 + RxJava2 + MVVM-databinding && wanandroid、Gank.Io、mtime Api 
+> Kotlin && Netease cloud music Ui && Retrofit2 + RxJava2 + MVVM-databinding && wanandroid、Gank.Io Api 
 
 
 ## Introduce
-一款基于网易云音乐UI，使用wanandroid、GankIo及时光网api开发的符合Google Material Desgin阅读类的开源项目。项目采取的是Retrofit2 + RxJava2 + MVVM-DataBinding架构开发。
+一款基于网易云音乐UI，使用wanandroid、Gank.Io Api开发的符合Google Material Desgin阅读类的开源项目。项目采取的是Retrofit2 + RxJava2 + MVVM-DataBinding架构开发。
 
-A netease cloud music based UI, using wanandroid、Gank.Io and mtime API development accord with Google Material Desgin reading class open source projects.
+A netease cloud music based UI, using wanandroid、Gank.Io Api development accord with Google Material Desgin reading class open source projects.
 
 ## Screenshots
 
@@ -49,7 +49,7 @@ If you have any questions, please write to [the issue][21] of making you don't u
 
 
 ## See Detail
-> [项目介绍详情](https://github.com/youlookwhat/CloudReader/wiki/Introduction) | [细节优化详情](https://github.com/youlookwhat/CloudReader/wiki) | 🚀[**版本更新详情(V3.4.4)**](https://github.com/youlookwhat/CloudReader/wiki/Update-log)
+> [项目介绍详情](https://github.com/youlookwhat/CloudReader/wiki/Introduction) | [细节优化详情](https://github.com/youlookwhat/CloudReader/wiki) | 🚀[**版本更新详情(V3.5.0)**](https://github.com/youlookwhat/CloudReader/wiki/Update-log)
 
 ### Download
 　[酷安下载](https://www.coolapk.com/apk/127875)
@@ -66,9 +66,14 @@ If you have any questions, please write to [the issue][21] of making you don't u
 　
 
 ### Version
+#### V3.5.0（2021-01-23）
+ - 1、[移除] 因Api失效去除电影模块，很遗憾
+ - 2、[新增] 广场、问答、文章分享等功能 (Kotlin)
+ - 3、[优化] Ui优化
+
 #### V3.4.4（2021-01-09）
  - 1、[修复] 修复电影模块数据问题
- - 2、[优化] 部分使用Koltin，代码优化
+ - 2、[优化] 部分使用Kotlin，代码优化
 
 #### V3.4.3（2020-11-16）
  - 1、[新增] 去酷安应用市场评星
@@ -303,7 +308,7 @@ limitations under the License.
 [2]:https://www.apache.org/licenses/LICENSE-2.0.html
 [3]:https://img.shields.io/badge/API-19%2B-red.svg?style=flat
 [4]:https://android-arsenal.com/api?level=19
-[30]:https://img.shields.io/badge/release-3.4.4-red.svg
+[30]:https://img.shields.io/badge/release-3.5.0-red.svg
 [31]:https://github.com/youlookwhat/CloudReader/releases
 [32]:https://img.shields.io/badge/PRs-welcome-brightgreen.svg
 [33]:https://github.com/youlookwhat/CloudReader/pulls
