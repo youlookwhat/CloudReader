@@ -1,12 +1,13 @@
 package com.example.jingbin.cloudreader.view;
 
+import android.text.Html;
+import android.util.SparseArray;
+import android.view.ViewGroup;
+
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
-import android.text.Html;
-import android.util.SparseArray;
-import android.view.ViewGroup;
 
 import com.example.jingbin.cloudreader.ui.film.FilmFragment;
 import com.example.jingbin.cloudreader.ui.gank.GankFragment;
@@ -77,7 +78,7 @@ public class MyFragmentPagerAdapter extends FragmentStatePagerAdapter {
                 case 2:
                     return new GankFragment();
                 default:
-                    return new WanFragment();
+                    return new FilmFragment();
             }
         }
     }
