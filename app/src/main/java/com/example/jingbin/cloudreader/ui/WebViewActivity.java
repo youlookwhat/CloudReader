@@ -120,7 +120,7 @@ public class WebViewActivity extends AppCompatActivity {
         @Override
         public boolean isOpenThirdApp(String url) {
             // 单独处理简书等App的唤起
-            return WebUtil.handleThirdApp(WebViewActivity.this, url);
+            return WebUtil.handleThirdApp(WebViewActivity.this,mUrl, url);
         }
     };
 
