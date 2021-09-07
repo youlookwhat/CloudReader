@@ -82,17 +82,28 @@ public class WebUtil {
         DebugUtil.error("---backUrl:" + backUrl);
         if (!TextUtils.isEmpty(fromUrl) && fromUrl.contains("jianshu")) {
             // 简书url只能跳简书app，很恶心一直唤起广告
-            if (backUrl.startsWith("http") && backUrl.contains(".apk")) {
-                startActivity(activity, fromUrl, backUrl);
-                return true;
-            } else if (backUrl.contains("jianshu://")) {
+            if (backUrl.startsWith("http")) {
+                if (backUrl.contains(".apk")) {
+                    startActivity(activity, fromUrl, backUrl);
+                    return true;
+                } else if (backUrl.contains("vip.com")) {
+                    // 不允许重定向，自己处理
+                    return true;
+                }
+                // 允许重定向，WebView处理
+                return false;
+            }
+            if (backUrl.contains("jianshu://")) {
                 if (ByWebTools.hasPackage(activity, "com.jianshu.haruki")) {
                     startActivity(activity, fromUrl, backUrl);
                     return true;
                 }
+            } else if (backUrl.contains("hap://app")) {
+                // 快应用 自动打开
+                DebugUtil.error("--------11111111-----");
                 return true;
             }
-            return false;
+            return true;
         }
 
         /**http开头直接跳过*/
