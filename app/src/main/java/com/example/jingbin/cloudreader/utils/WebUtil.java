@@ -100,7 +100,7 @@ public class WebUtil {
                 }
             } else if (backUrl.contains("hap://app")) {
                 // 快应用 自动打开
-                DebugUtil.error("--------11111111-----");
+                ToastUtil.showToastLong(parseDomain(fromUrl) + " 在强制唤起快应用");
                 return true;
             }
             return true;

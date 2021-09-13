@@ -21,7 +21,7 @@
             android:background="@color/colorHomeLine"
             app:layout_constraintTop_toBottomOf="@+id/tab_gank" />
 
-        <androidx.viewpager.widget.ViewPager
+        <com.example.jingbin.cloudreader.view.ViewPagerFixed
             android:id="@+id/vp_gank"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

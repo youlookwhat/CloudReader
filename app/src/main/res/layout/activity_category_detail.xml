@@ -95,13 +95,13 @@
                 app:tabTextColor="@color/colorTabTextNormal" />
         </com.google.android.material.appbar.AppBarLayout>
 
-        <androidx.viewpager.widget.ViewPager
+        <com.example.jingbin.cloudreader.view.ViewPagerFixed
             android:id="@+id/viewPager"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        </androidx.viewpager.widget.ViewPager>
+        </com.example.jingbin.cloudreader.view.ViewPagerFixed>
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

@@ -66,11 +66,11 @@ dependencies {
     implementation files('libs/commons-lang-2.6.jar')
 
     // Room
-    implementation 'androidx.room:room-runtime:2.2.5'
-    annotationProcessor 'androidx.room:room-compiler:2.2.5'
-    implementation 'androidx.room:room-rxjava2:2.2.5'
+    implementation 'androidx.room:room-runtime:2.3.0'
+    annotationProcessor 'androidx.room:room-compiler:2.3.0'
+    implementation 'androidx.room:room-rxjava2:2.3.0'
 //    implementation 'androidx.paging:paging-runtime:2.1.2'
-    testImplementation "androidx.room:room-testing:2.2.5"
+    testImplementation "androidx.room:room-testing:2.3.0"
 
     // ViewModelProviders
 //    implementation "android.arch.lifecycle:common-java8:1.0.0"
@@ -83,5 +83,5 @@ dependencies {
     // 高斯模糊和圆角等
     api 'jp.wasabeef:glide-transformations:4.0.1'
 
-    api 'com.github.youlookwhat:ByRecyclerView:1.1.4'
+    api 'com.github.youlookwhat:ByRecyclerView:1.1.6'
 }
