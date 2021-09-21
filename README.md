@@ -258,7 +258,7 @@ If you have any questions, please write to [the issue][21] of making you don't u
  
  - 图片来源：[iconfont][6]、UI工程师[Sandawang](https://github.com/Sandawang)和网易云音乐App。
 
- - 主要数据来源：[wanandroid][27]、[Gank.Io][9]、[时光网][10]。
+ - 主要数据来源：[wanandroid][27]、[Gank.Io][9]。
 
  - 使用到的开源库：[glide][11]、[bottomsheet][12]、[nineoldandroids][13]、[rxandroid][14]等等。
 
@@ -305,7 +305,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 ```
 
-[1]:https://img.shields.io/:license-apache-blue.svg
+[1]:https://img.shields.io/:license-apache%202.0-blue.svg
 [2]:https://www.apache.org/licenses/LICENSE-2.0.html
 [3]:https://img.shields.io/badge/API-19%2B-red.svg?style=flat
 [4]:https://android-arsenal.com/api?level=19
@@ -323,7 +323,6 @@ limitations under the License.
 [7]:https://github.com/GiitSmile/ImitateNetEasyCloud
 [8]:https://github.com/forezp/banya
 [9]:https://gank.io/api
-[10]:http://www.mtime.com
 [11]:https://github.com/bumptech/glide
 [12]:https://github.com/Flipboard/bottomsheet
 [13]:https://github.com/JakeWharton/NineOldAndroids
