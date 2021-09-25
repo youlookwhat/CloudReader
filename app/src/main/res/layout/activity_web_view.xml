@@ -11,7 +11,7 @@
         android:id="@+id/title_tool_bar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="@color/colorTheme"
+        android:background="@color/colorToolBar"
         app:contentInsetStartWithNavigation="0dp"
         app:layout_scrollFlags="enterAlways|scroll"
         app:navigationContentDescription="返回"

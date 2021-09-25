@@ -81,7 +81,7 @@ public abstract class BaseActivity<VM extends AndroidViewModel, SV extends ViewD
 
     protected void initStatusBar() {
         // 设置透明状态栏，兼容4.4
-        StatusBarUtil.setColor(this, CommonUtils.getColor(R.color.colorTheme), 0);
+        StatusBarUtil.setColor(this, CommonUtils.getColor(R.color.colorToolBar), 0);
     }
 
     /**

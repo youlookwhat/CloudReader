@@ -5,7 +5,7 @@
     <style name="AppTheme" parent="MyThemeRed" />
 
     <!-- 网易红为主色调 -->
-    <style name="MyThemeRed" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="MyThemeRed" parent="Theme.AppCompat.DayNight.NoActionBar">
 
         <!--选中状态icon的颜色和字体颜色-->
         <item name="colorPrimary">@color/colorTheme</item>
@@ -14,7 +14,7 @@
         <item name="android:windowAnimationStyle">@style/default_animation</item>
         <item name="android:listDivider">@drawable/shape_line</item>
         <!--默认状态下页面的背景色-->
-        <!--<item name="android:windowBackground">@color/color_page_bg</item>-->
+        <item name="android:windowBackground">@color/color_page_bg</item>
         <!--正常状态下字体颜色和icon颜色-->
         <!--<item name="android:textColorPrimary">@color/colorTheme</item>-->
     </style>
@@ -40,7 +40,7 @@
     </style>
 
     <!--电影详情页-->
-    <style name="MyScrollPage" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="MyScrollPage" parent="AppTheme">
         <!--选中状态icon的颜色和字体颜色-->
         <item name="colorPrimary">@color/colorTheme</item>
         <item name="colorPrimaryDark">@color/colorTheme</item>
@@ -55,7 +55,7 @@
     </style>
 
     <!--查看大图页面，全屏显示-->
-    <style name="ViewBigPicTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="ViewBigPicTheme" parent="AppTheme">
         <item name="colorPrimary">@color/colorTheme</item>
         <item name="colorPrimaryDark">@color/colorTheme</item>
         <item name="colorAccent">@color/colorTheme</item>
@@ -106,7 +106,7 @@
         <item name="android:textColorSecondary">@color/colorSubtitle</item>
         <item name="android:textSize">15sp</item>
         <item name="android:textColorHint">#42ffffff</item>
-        <item name="bs_dialogBackground">@color/colorWhite</item>
+        <item name="bs_dialogBackground">@color/color_sheet_bg</item>
         <item name="bs_dividerColor">@color/colorLine</item>
         <item name="bs_numColumns">5</item>
         <item name="bs_listStyle">@style/BottomSheet.List</item>

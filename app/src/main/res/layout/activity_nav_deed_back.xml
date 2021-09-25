@@ -37,7 +37,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/colorWhite"
+                    android:background="@color/color_sheet_bg"
                     android:padding="10dp"
                     android:text="Issues"
                     android:textColor="@color/colorTabText"
@@ -114,7 +114,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/colorWhite"
+                    android:background="@color/color_sheet_bg"
                     android:padding="10dp"
                     android:text="联系我"
                     android:textColor="@color/colorTabText"

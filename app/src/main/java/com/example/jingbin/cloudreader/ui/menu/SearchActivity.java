@@ -59,7 +59,7 @@ public class SearchActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_search);
-        StatusBarUtil.setColor(this, CommonUtils.getColor(R.color.colorTheme), 0);
+        StatusBarUtil.setColor(this, CommonUtils.getColor(R.color.colorToolBar), 0);
         viewModel = new ViewModelProvider(this).get(SearchViewModel.class);
         binding.setViewModel(viewModel);
         initRefreshView();

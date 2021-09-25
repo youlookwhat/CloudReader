@@ -15,14 +15,14 @@
             android:id="@+id/view_status"
             android:layout_width="match_parent"
             android:layout_height="24dp"
-            android:background="@color/colorTheme"
+            android:background="@color/colorHomeToolBar"
             android:visibility="gone" />
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="@color/colorTheme"
+            android:background="@color/colorHomeToolBar"
             app:contentInsetStart="0.0dp"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
             app:theme="@style/ToolbarStyle">

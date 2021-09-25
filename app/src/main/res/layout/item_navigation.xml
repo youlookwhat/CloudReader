@@ -18,10 +18,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/select_navi_bg"
-        android:foreground="?attr/selectableItemBackgroundBorderless"
         android:paddingTop="4dp"
         android:paddingBottom="4dp">
 
+        <!--        android:foreground="?attr/selectableItemBackgroundBorderless"-->
         <TextView
             android:id="@+id/tv_title"
             android:layout_width="match_parent"

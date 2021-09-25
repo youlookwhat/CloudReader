@@ -10,7 +10,7 @@
                 android:left="15dp"
                 android:right="15dp"
                 android:top="5dp" />
-            <solid android:color="@color/color_page_bg" />
+            <solid android:color="@color/color_tree_tab_bg" />
             <corners android:radius="100dp" />
         </shape>
     </item>

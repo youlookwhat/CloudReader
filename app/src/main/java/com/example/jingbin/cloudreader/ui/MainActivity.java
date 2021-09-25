@@ -90,7 +90,7 @@ public class MainActivity extends BaseActivity<MainViewModel, ActivityMainBindin
 
     @Override
     protected void initStatusBar() {
-        StatusBarUtil.setColorNoTranslucentForDrawerLayout(MainActivity.this, bindingView.drawerLayout, CommonUtils.getColor(R.color.colorTheme));
+        StatusBarUtil.setColorNoTranslucentForDrawerLayout(MainActivity.this, bindingView.drawerLayout, CommonUtils.getColor(R.color.colorHomeToolBar));
         ViewGroup.LayoutParams layoutParams = bindingView.include.viewStatus.getLayoutParams();
         layoutParams.height = StatusBarUtil.getStatusBarHeight(this);
         bindingView.include.viewStatus.setLayoutParams(layoutParams);

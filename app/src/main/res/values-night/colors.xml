@@ -5,15 +5,15 @@
     <color name="colorAccent">#FF4081</color>
 
     <color name="colorTheme">#ffce3d3a</color>
-    <color name="colorHomeToolBar">#ffce3d3a</color>
-    <color name="colorToolBar">#ffce3d3a</color>
+    <color name="colorHomeToolBar">#000000</color>
+    <color name="colorToolBar">#181818</color>
     <!--页面背景的颜色-->
-    <color name="color_page_bg">#F8F8F8</color>
-    <color name="color_tree_tab_bg">#F1F3F4</color>
-    <color name="color_sheet_bg">#ffffff</color>
-    <color name="color_gray_bg">#00000000</color>
+    <color name="color_page_bg">#000000</color>
+    <color name="color_tree_tab_bg">#181818</color>
+    <color name="color_sheet_bg">#181818</color>
+    <color name="color_gray_bg">#343434</color>
 
-    <color name="colorTabBgDefault">#ffffffff</color>
+    <color name="colorTabBgDefault">#000000</color>
     <color name="colorWhite">#ffffffff</color>
     <color name="colorWhiteHalf">#bbffffff</color>
 
@@ -24,25 +24,25 @@
     <color name="colorTabLine">#ffce3d3a</color>
 
     <!--侧边栏分割线-->
-    <color name="colorNavLine">#E0E0E0</color>
+    <color name="colorNavLine">#1F1F1F</color>
     <!--导航数据侧边栏背景色-->
-    <color name="colorNaviBg">#f3f3f3</color>
+    <color name="colorNaviBg">#000000</color>
 
 
     <!--分割线-->
-    <color name="colorLine">#EBEBEB</color>
+    <color name="colorLine">#1F1F1F</color>
     <!--首页分割线-->
-    <color name="colorHomeLine">#D4D4D4</color>
+    <color name="colorHomeLine">#1F1F1F</color>
 
-    <color name="colorLineDeep">#BBBBBB</color>
+    <color name="colorLineDeep">#1F1F1F</color>
 
     <!--item的分割线-->
-    <color name="colorLineItem">#FFDDDDDD</color>
+    <color name="colorLineItem">#1F1F1F</color>
 
     <!--tab标签栏文字的颜色-->
     <color name="colorTabText">#585858</color>
     <!--正文文字颜色-->
-    <color name="colorContent">#ff333333</color>
+    <color name="colorContent">#9e9e9e</color>
     <!--水波纹或5.0以下选择器颜色-->
     <color name="tabBackground">#777D7D7D</color>
     <!--item的水波纹颜色-->
@@ -71,9 +71,9 @@
     <color name="colorChoosePress">#DDD</color>
 
     <!--暂时用于反馈文字-->
-    <color name="text_common">#191919</color>
+    <color name="text_common">#9e9e9e</color>
 
-    <color name="text_deed_bg">#f6f6f6</color>
+    <color name="text_deed_bg">#181818</color>
     <!--dialog的查看详情键-->
     <color name="colorBtDialog">#38659C</color>
 

@@ -72,7 +72,7 @@ public class WebViewActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_web_view);
-        StatusBarUtil.setColor(this, CommonUtils.getColor(R.color.colorTheme), 0);
+        StatusBarUtil.setColor(this, CommonUtils.getColor(R.color.colorToolBar), 0);
         getIntentData();
         initTitle();
         syncCookie(mUrl);

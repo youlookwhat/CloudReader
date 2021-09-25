@@ -5,7 +5,7 @@
 
     <item android:state_enabled="false">
         <shape>
-            <solid android:color="@color/colorWhite" />
+            <solid android:color="@color/colorTabBgDefault" />
         </shape>
     </item>
     <item android:state_pressed="true">
@@ -15,7 +15,7 @@
     </item>
     <item android:state_pressed="false">
         <shape>
-            <solid android:color="@color/colorWhite" />
+            <solid android:color="@color/colorTabBgDefault" />
         </shape>
     </item>
 

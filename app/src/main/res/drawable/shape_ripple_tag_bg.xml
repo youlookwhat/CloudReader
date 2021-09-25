@@ -4,7 +4,7 @@
 
     <corners android:radius="100dp" />
 
-    <solid android:color="@color/color_page_bg" />
+    <solid android:color="@color/color_tree_tab_bg" />
 
     
     <padding
