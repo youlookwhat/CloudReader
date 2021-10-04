@@ -194,11 +194,13 @@ public class HomeFragment extends BaseFragment<WanAndroidListViewModel, Fragment
     class CustomViewHolder implements SBannerViewHolder<WanAndroidBannerBean.DataBean> {
 
         private ImageView imageView;
+        private View viewMask;
 
         @Override
         public View createView(Context context) {
             View view = LayoutInflater.from(context).inflate(R.layout.item_banner_wanandroid, null);
             imageView = view.findViewById(R.id.iv_banner);
+            viewMask = view.findViewById(R.id.view_mask);
             return view;
         }
 
@@ -206,6 +208,7 @@ public class HomeFragment extends BaseFragment<WanAndroidListViewModel, Fragment
         public void onBind(Context context, int position, WanAndroidBannerBean.DataBean data) {
             if (data != null) {
                 DensityUtil.setWidthHeight(imageView, width, 1.8f);
+                DensityUtil.setWidthHeight(viewMask, width, 1.8f);
                 GlideUtil.displayEspImage(data.getImagePath(), imageView, 3);
                 imageView.setOnClickListener(new PerfectClickListener() {
                     @Override

@@ -67,16 +67,27 @@
                     android:textSize="15sp"
                     tools:text="描述" />
 
-                <ImageView
-                    android:id="@+id/iv_android_pic"
+                <RelativeLayout
                     android:layout_width="60dp"
                     android:layout_height="80dp"
                     android:layout_gravity="center_vertical"
-                    android:layout_marginStart="5dp"
-                    android:background="@color/colorLine"
-                    android:scaleType="centerCrop"
-                    android:visibility="visible" />
+                    android:layout_marginStart="5dp">
 
+                    <ImageView
+                        android:id="@+id/iv_android_pic"
+                        android:layout_width="60dp"
+                        android:layout_height="80dp"
+                        android:background="@color/colorLine"
+                        android:scaleType="centerCrop"
+                        android:visibility="visible" />
+
+                    <View
+                        android:id="@+id/view_mask"
+                        android:layout_width="60dp"
+                        android:layout_height="80dp"
+                        android:background="@color/colorBannerMask"
+                        android:visibility="visible" />
+                </RelativeLayout>
             </LinearLayout>
 
             <RelativeLayout

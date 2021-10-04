@@ -76,6 +76,7 @@
     <color name="text_deed_bg">#181818</color>
     <!--dialog的查看详情键-->
     <color name="colorBtDialog">#38659C</color>
-
+    <!--banner和图片的蒙层-->
+    <color name="colorBannerMask">#50000000</color>
 
 </resources>

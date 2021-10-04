@@ -23,7 +23,7 @@
     </data>
 
     <!--如果有点击事件，则内部的水波纹不能扩散-->
-<!--    android:onClick="@{()->adapter.openDetail(bean)}"-->
+    <!--    android:onClick="@{()->adapter.openDetail(bean)}"-->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -44,6 +44,17 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:background="@color/colorLine"
+            tools:visibility="gone" />
+
+        <View
+            android:id="@+id/view_mask"
+            android:layout_width="70dp"
+            android:layout_height="99dp"
+            android:layout_marginStart="8dp"
+            android:background="@color/colorBannerMask"
+            android:visibility="@{bean.isShowImage?View.VISIBLE:View.GONE}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             tools:visibility="gone" />
 
         <RelativeLayout

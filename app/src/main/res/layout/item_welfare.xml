@@ -12,7 +12,7 @@
 
     </data>
 
-    <FrameLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -25,5 +25,11 @@
             android:scaleType="centerCrop"
             tools:background="@color/tabBackground"
             tools:layout_margin="5dp" />
-    </FrameLayout>
+
+        <View
+            android:id="@+id/view_mask"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:background="@color/colorBannerMask" />
+    </RelativeLayout>
 </layout>

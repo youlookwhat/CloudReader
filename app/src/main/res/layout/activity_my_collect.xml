@@ -8,8 +8,9 @@
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tab_my_collect"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="38dp"
+            android:background="@color/color_sheet_bg"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:tabBackground="?android:attr/selectableItemBackground"

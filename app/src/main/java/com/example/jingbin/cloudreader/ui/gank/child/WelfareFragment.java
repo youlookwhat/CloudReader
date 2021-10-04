@@ -7,9 +7,6 @@ import androidx.annotation.Nullable;
 import androidx.lifecycle.Observer;
 
 import com.example.jingbin.cloudreader.R;
-
-import me.jingbin.bymvvm.base.BaseFragment;
-
 import com.example.jingbin.cloudreader.bean.GankIoDataBean;
 import com.example.jingbin.cloudreader.databinding.FragmentWelfareBinding;
 import com.example.jingbin.cloudreader.databinding.ItemWelfareBinding;
@@ -22,6 +19,7 @@ import java.util.ArrayList;
 
 import me.jingbin.bymvvm.adapter.BaseBindingAdapter;
 import me.jingbin.bymvvm.adapter.BaseBindingHolder;
+import me.jingbin.bymvvm.base.BaseFragment;
 import me.jingbin.library.ByRecyclerView;
 import me.jingbin.library.view.OnItemFilterClickListener;
 
@@ -68,6 +66,7 @@ public class WelfareFragment extends BaseFragment<WelfareViewModel, FragmentWelf
             @Override
             protected void bindView(BaseBindingHolder holder, GankIoDataBean.ResultBean bean, ItemWelfareBinding binding, int position) {
                 DensityUtil.setWidthHeight(binding.ivWelfare, width, 852 / 1280f);
+                DensityUtil.setWidthHeight(binding.viewMask, width, 852 / 1280f);
                 binding.setBean(bean);
             }
         };
