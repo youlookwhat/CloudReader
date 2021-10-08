@@ -24,7 +24,7 @@
             android:layout_height="?attr/actionBarSize"
             android:background="@color/colorHomeToolBar"
             app:contentInsetStart="0.0dp"
-            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.ActionBar"
             app:theme="@style/ToolbarStyle">
 
             <FrameLayout

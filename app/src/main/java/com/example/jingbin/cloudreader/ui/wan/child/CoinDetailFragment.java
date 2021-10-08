@@ -14,11 +14,10 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.example.jingbin.cloudreader.R;
 import com.example.jingbin.cloudreader.adapter.CoinAdapter;
 import com.example.jingbin.cloudreader.bean.CoinBean;
-import com.example.jingbin.cloudreader.data.UserUtil;
 import com.example.jingbin.cloudreader.data.OnUserInfoListener;
+import com.example.jingbin.cloudreader.data.UserUtil;
 import com.example.jingbin.cloudreader.databinding.FragmentWanAndroidBinding;
 import com.example.jingbin.cloudreader.databinding.HeaderCoinDetailBinding;
-import com.example.jingbin.cloudreader.utils.CommonUtils;
 import com.example.jingbin.cloudreader.utils.RefreshHelper;
 import com.example.jingbin.cloudreader.viewmodel.wan.CoinListViewModel;
 
@@ -74,7 +73,7 @@ public class CoinDetailFragment extends BaseFragment<CoinListViewModel, Fragment
     private void initRefreshView() {
         headerBinding = DataBindingUtil.inflate(getLayoutInflater(), R.layout.header_coin_detail, (ViewGroup) bindingView.xrvWan.getParent(), false);
         RefreshHelper.initLinear(bindingView.xrvWan, true, 1);
-        bindingView.srlWan.setColorSchemeColors(CommonUtils.getColor(R.color.colorTheme));
+        RefreshHelper.setSwipeRefreshView(bindingView.srlWan);
         mAdapter = new CoinAdapter(activity, false);
         bindingView.xrvWan.setAdapter(mAdapter);
         bindingView.xrvWan.addHeaderView(headerBinding.getRoot());

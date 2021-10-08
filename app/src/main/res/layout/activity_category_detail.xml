@@ -73,7 +73,7 @@
                     app:contentInsetStartWithNavigation="0dp"
                     app:layout_collapseMode="pin"
                     app:navigationIcon="@drawable/icon_back"
-                    app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+                    app:popupTheme="@style/ThemeOverlay.AppCompat.ActionBar"
                     app:title="@{treeItemBean.name}"
                     app:titleMarginStart="0dp"
                     app:titleTextColor="@color/colorTabTextNormal"

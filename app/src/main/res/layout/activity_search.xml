@@ -25,7 +25,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:navigationIcon="@drawable/icon_back"
-            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.ActionBar"
             app:titleMarginStart="0dp">
             <!--android:colorControlActivated="@color/colorWhite"-->
 
@@ -69,7 +69,7 @@
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tl_search"
             android:layout_width="match_parent"
-            android:layout_height="30dp"
+            android:layout_height="35dp"
             android:background="@color/colorToolBar"
             app:layout_constraintTop_toBottomOf="@+id/toolbar"
             app:tabGravity="center"

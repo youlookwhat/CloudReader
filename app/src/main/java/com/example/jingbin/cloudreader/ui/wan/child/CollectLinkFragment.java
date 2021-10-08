@@ -1,19 +1,20 @@
 package com.example.jingbin.cloudreader.ui.wan.child;
 
-import androidx.lifecycle.Observer;
 import android.content.Context;
 import android.os.Bundle;
+
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
+import androidx.lifecycle.Observer;
 
 import com.example.jingbin.cloudreader.R;
 import com.example.jingbin.cloudreader.adapter.CollectUrlAdapter;
-import me.jingbin.bymvvm.base.BaseFragment;
 import com.example.jingbin.cloudreader.bean.CollectUrlBean;
 import com.example.jingbin.cloudreader.databinding.FragmentWanAndroidBinding;
-import com.example.jingbin.cloudreader.utils.CommonUtils;
 import com.example.jingbin.cloudreader.utils.RefreshHelper;
 import com.example.jingbin.cloudreader.viewmodel.wan.CollectLinkModel;
+
+import me.jingbin.bymvvm.base.BaseFragment;
 
 /**
  * @author jingbin
@@ -59,8 +60,8 @@ public class CollectLinkFragment extends BaseFragment<CollectLinkModel, Fragment
     }
 
     private void initRefreshView() {
-        bindingView.srlWan.setColorSchemeColors(CommonUtils.getColor(R.color.colorTheme));
         RefreshHelper.initLinear(bindingView.xrvWan, true);
+        RefreshHelper.setSwipeRefreshView(bindingView.srlWan);
         RefreshHelper.setDefaultAnimator(bindingView.xrvWan).setLoadMoreEnabled(true);
         mAdapter = new CollectUrlAdapter(activity);
         bindingView.xrvWan.setAdapter(mAdapter);

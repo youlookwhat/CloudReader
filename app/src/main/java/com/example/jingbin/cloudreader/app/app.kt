@@ -1,6 +1,7 @@
 package com.example.jingbin.cloudreader.app
 
 import com.example.jingbin.cloudreader.BuildConfig
+import com.example.jingbin.cloudreader.utils.NightModeUtil
 import com.tencent.bugly.crashreport.CrashReport
 import me.jingbin.bymvvm.base.RootApplication
 
@@ -28,6 +29,7 @@ open class App : RootApplication() {
 //        }
 //        LeakCanary.install(this);
 //        HttpUtils.getInstance().init(this);
+        NightModeUtil.initNightMode()
         CrashReport.initCrashReport(applicationContext, "3977b2d86f", BuildConfig.DEBUG)
     }
 }

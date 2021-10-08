@@ -52,6 +52,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@{bean.name ?? @string/no_name_joke}"
+                    android:textColor="?android:attr/textColorSecondary"
                     android:textSize="14sp"
                     tools:text="用户名" />
 
@@ -73,7 +74,7 @@
             android:layout_marginEnd="5dp"
             android:lineSpacingExtra="4dp"
             android:text="@{bean.content}"
-            android:textColor="@color/colorContent"
+            android:textColor="?android:attr/textColorPrimary"
             android:textSize="15sp"
             tools:text="这是内容" />
 

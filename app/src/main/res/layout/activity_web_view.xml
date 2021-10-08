@@ -16,7 +16,7 @@
         app:layout_scrollFlags="enterAlways|scroll"
         app:navigationContentDescription="返回"
         app:navigationIcon="@drawable/icon_back"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.ActionBar"
         app:theme="@style/ToolbarStyle"
         app:titleMarginStart="0dp">
 

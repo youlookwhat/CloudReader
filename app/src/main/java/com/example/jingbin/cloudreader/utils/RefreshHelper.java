@@ -3,6 +3,7 @@ package com.example.jingbin.cloudreader.utils;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.jingbin.cloudreader.R;
 import com.example.jingbin.cloudreader.view.byview.NeteaseLoadMoreView;
@@ -46,5 +47,10 @@ public class RefreshHelper {
     public static ByRecyclerView setDefaultAnimator(ByRecyclerView recyclerView) {
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         return recyclerView;
+    }
+
+    public static void setSwipeRefreshView(SwipeRefreshLayout swipeRefreshView) {
+        swipeRefreshView.setColorSchemeColors(CommonUtils.getColor(R.color.colorTheme));
+        swipeRefreshView.setProgressBackgroundColorSchemeColor(CommonUtils.getColor(R.color.colorSwipeRefresh));
     }
 }

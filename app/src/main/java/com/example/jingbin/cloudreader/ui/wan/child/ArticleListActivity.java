@@ -6,13 +6,12 @@ import android.os.Bundle;
 
 import com.example.jingbin.cloudreader.R;
 import com.example.jingbin.cloudreader.adapter.WanAndroidAdapter;
-import me.jingbin.bymvvm.base.BaseActivity;
 import com.example.jingbin.cloudreader.bean.wanandroid.HomeListBean;
 import com.example.jingbin.cloudreader.databinding.FragmentWanAndroidBinding;
-import com.example.jingbin.cloudreader.utils.CommonUtils;
 import com.example.jingbin.cloudreader.utils.RefreshHelper;
 import com.example.jingbin.cloudreader.viewmodel.wan.WanAndroidListViewModel;
 
+import me.jingbin.bymvvm.base.BaseActivity;
 import me.jingbin.library.ByRecyclerView;
 
 /**
@@ -47,7 +46,7 @@ public class ArticleListActivity extends BaseActivity<WanAndroidListViewModel, F
 
     private void initRefreshView() {
         RefreshHelper.initLinear(bindingView.xrvWan, true);
-        bindingView.srlWan.setColorSchemeColors(CommonUtils.getColor(R.color.colorTheme));
+        RefreshHelper.setSwipeRefreshView(bindingView.srlWan);
         mAdapter = new WanAndroidAdapter(this);
         bindingView.xrvWan.setAdapter(mAdapter);
         bindingView.srlWan.setOnRefreshListener(() -> bindingView.srlWan.postDelayed(() -> {

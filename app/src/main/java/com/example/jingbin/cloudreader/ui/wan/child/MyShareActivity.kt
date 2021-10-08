@@ -50,7 +50,7 @@ open class MyShareActivity : BaseActivity<WanCenterViewModel, FragmentWanAndroid
     private fun initRefreshView() {
         headerBinding = DataBindingUtil.inflate(layoutInflater, R.layout.header_share_article, bindingView.xrvWan.parent as ViewGroup?, false)
         RefreshHelper.initLinear(bindingView.xrvWan, true)
-        bindingView.srlWan.setColorSchemeColors(CommonUtils.getColor(R.color.colorTheme))
+        RefreshHelper.setSwipeRefreshView(bindingView.srlWan);
         mAdapter = WanAndroidAdapter(this)
         mAdapter.isMyShare = true
         bindingView.xrvWan.adapter = mAdapter

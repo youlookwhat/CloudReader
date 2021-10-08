@@ -73,7 +73,7 @@ public class JokeFragment extends BaseFragment<JokeViewModel, FragmentWanAndroid
 
     private void initRefreshView() {
         RefreshHelper.initLinear(bindingView.xrvWan, true).setItemAnimator(new DefaultItemAnimator());
-        bindingView.srlWan.setColorSchemeColors(CommonUtils.getColor(R.color.colorTheme));
+        RefreshHelper.setSwipeRefreshView(bindingView.srlWan);
         mAdapter = new JokeAdapter();
         bindingView.xrvWan.setAdapter(mAdapter);
 

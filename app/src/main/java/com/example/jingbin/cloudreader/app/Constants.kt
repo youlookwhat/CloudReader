@@ -12,6 +12,7 @@ open class Constants {
 
         const val NIGHT_SKIN = "night.skin"
         const val KEY_MODE_NIGHT = "mode-night"
+        const val KEY_MODE_SYSTEM = "mode-system"
         const val SHOW_MARKET = "show_market"
         // 酷安包名
         const val COOLAPK_PACKAGE = "com.coolapk.market"

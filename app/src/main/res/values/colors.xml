@@ -15,6 +15,8 @@
 
     <color name="colorTabBgDefault">#ffffffff</color>
     <color name="colorWhite">#ffffffff</color>
+    <color name="colorSkeleton">#ffffffff</color>
+    <color name="colorSwipeRefresh">#ffffffff</color>
     <color name="colorWhiteHalf">#bbffffff</color>
 
     <!--主页tab背景-->

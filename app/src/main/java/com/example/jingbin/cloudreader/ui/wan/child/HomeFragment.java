@@ -20,7 +20,6 @@ import com.example.jingbin.cloudreader.bean.wanandroid.WanAndroidBannerBean;
 import com.example.jingbin.cloudreader.databinding.FragmentWanAndroidBinding;
 import com.example.jingbin.cloudreader.databinding.HeaderWanAndroidBinding;
 import com.example.jingbin.cloudreader.ui.WebViewActivity;
-import com.example.jingbin.cloudreader.utils.CommonUtils;
 import com.example.jingbin.cloudreader.utils.DensityUtil;
 import com.example.jingbin.cloudreader.utils.GlideUtil;
 import com.example.jingbin.cloudreader.utils.PerfectClickListener;
@@ -85,8 +84,8 @@ public class HomeFragment extends BaseFragment<WanAndroidListViewModel, Fragment
 
     private void initRefreshView() {
         RefreshHelper.initLinear(bindingView.xrvWan, true, 1);
+        RefreshHelper.setSwipeRefreshView(bindingView.srlWan);
         headerBinding = DataBindingUtil.inflate(getLayoutInflater(), R.layout.header_wan_android, (ViewGroup) bindingView.xrvWan.getParent(), false);
-        bindingView.srlWan.setColorSchemeColors(CommonUtils.getColor(R.color.colorTheme));
         mAdapter = new WanAndroidAdapter(getActivity());
         mAdapter.setNoImage(true);
         bindingView.xrvWan.addHeaderView(headerBinding.getRoot());
@@ -127,7 +126,7 @@ public class HomeFragment extends BaseFragment<WanAndroidListViewModel, Fragment
         skeletonScreen = BySkeleton.bindItem(bindingView.xrvWan)
                 .adapter(mAdapter)
                 .count(10)
-                .color(R.color.colorWhite)
+                .color(R.color.colorSkeleton)
                 .duration(1100)
                 .load(R.layout.item_wan_android_skeleton)
                 .frozen(false)

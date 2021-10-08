@@ -1,21 +1,21 @@
 package com.example.jingbin.cloudreader.ui.wan.child;
 
-import androidx.lifecycle.Observer;
 import android.content.Context;
 import android.os.Bundle;
+
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
+import androidx.lifecycle.Observer;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.jingbin.cloudreader.R;
 import com.example.jingbin.cloudreader.adapter.WanAndroidAdapter;
-import me.jingbin.bymvvm.base.BaseFragment;
 import com.example.jingbin.cloudreader.bean.wanandroid.HomeListBean;
 import com.example.jingbin.cloudreader.databinding.FragmentWanAndroidBinding;
-import com.example.jingbin.cloudreader.utils.CommonUtils;
 import com.example.jingbin.cloudreader.utils.RefreshHelper;
 import com.example.jingbin.cloudreader.viewmodel.wan.ArticleListViewModel;
 
+import me.jingbin.bymvvm.base.BaseFragment;
 import me.jingbin.library.ByRecyclerView;
 
 /**
@@ -66,7 +66,7 @@ public class CollectArticleFragment extends BaseFragment<ArticleListViewModel, F
     private void initRefreshView() {
         RefreshHelper.initLinear(bindingView.xrvWan, true);
         RefreshHelper.setDefaultAnimator(bindingView.xrvWan).setLoadMoreEnabled(true);
-        bindingView.srlWan.setColorSchemeColors(CommonUtils.getColor(R.color.colorTheme));
+        RefreshHelper.setSwipeRefreshView(bindingView.srlWan);
         mAdapter = new WanAndroidAdapter(activity);
         bindingView.xrvWan.setAdapter(mAdapter);
         bindingView.srlWan.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {

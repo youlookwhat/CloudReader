@@ -16,6 +16,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.webkit.CookieManager;
 import android.webkit.CookieSyncManager;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -25,6 +26,8 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
+import androidx.webkit.WebSettingsCompat;
+import androidx.webkit.WebViewFeature;
 
 import com.example.jingbin.cloudreader.R;
 import com.example.jingbin.cloudreader.app.Constants;
@@ -34,6 +37,7 @@ import com.example.jingbin.cloudreader.utils.BaseTools;
 import com.example.jingbin.cloudreader.utils.CommonUtils;
 import com.example.jingbin.cloudreader.utils.DebugUtil;
 import com.example.jingbin.cloudreader.utils.DialogBuild;
+import com.example.jingbin.cloudreader.utils.NightModeUtil;
 import com.example.jingbin.cloudreader.utils.PermissionHandler;
 import com.example.jingbin.cloudreader.utils.RxSaveImage;
 import com.example.jingbin.cloudreader.utils.SPUtils;
@@ -114,13 +118,23 @@ public class WebViewActivity extends AppCompatActivity {
                 })
                 .loadUrl(mUrl);
         byWebView.getWebView().setOnLongClickListener(v -> handleLongImage());
+        byWebView.getWebView().setBackgroundColor(CommonUtils.getColor(R.color.color_page_bg));
+        WebSettings webSetting = byWebView.getWebView().getSettings();
+        boolean isAppDarkMode = NightModeUtil.isNightMode(this);
+        if (WebViewFeature.isFeatureSupported(WebViewFeature.FORCE_DARK)) {
+            if (isAppDarkMode) {
+                WebSettingsCompat.setForceDark(webSetting, WebSettingsCompat.FORCE_DARK_ON);
+            } else {
+                WebSettingsCompat.setForceDark(webSetting, WebSettingsCompat.FORCE_DARK_OFF);
+            }
+        }
     }
 
     private OnByWebClientCallback onByWebClientCallback = new OnByWebClientCallback() {
         @Override
         public boolean isOpenThirdApp(String url) {
             // 单独处理简书等App的唤起
-            return WebUtil.handleThirdApp(WebViewActivity.this,mUrl, url);
+            return WebUtil.handleThirdApp(WebViewActivity.this, mUrl, url);
         }
     };
 

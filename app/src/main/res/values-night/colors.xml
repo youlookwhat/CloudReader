@@ -15,6 +15,8 @@
 
     <color name="colorTabBgDefault">#000000</color>
     <color name="colorWhite">#ffffffff</color>
+    <color name="colorSkeleton">#585858</color>
+    <color name="colorSwipeRefresh">#181818</color>
     <color name="colorWhiteHalf">#bbffffff</color>
 
     <!--主页tab背景-->
@@ -34,7 +36,7 @@
     <!--首页分割线-->
     <color name="colorHomeLine">#1F1F1F</color>
 
-    <color name="colorLineDeep">#1F1F1F</color>
+    <color name="colorLineDeep">#77ffffff</color>
 
     <!--item的分割线-->
     <color name="colorLineItem">#1F1F1F</color>
@@ -55,9 +57,9 @@
     <!--半透明-->
     <color name="colorBanTransparent">#11000000</color>
     <!--首页item文字颜色-->
-    <color name="colorSubtitle">#999</color>
+    <color name="colorSubtitle">#666666</color>
 
-    <color name="colorTitle">#666</color>
+    <color name="colorTitle">#999</color>
     <!--谈红色  用于首页调整点击变色-->
     <color name="colorSmallRed">#faebeb</color>
 
