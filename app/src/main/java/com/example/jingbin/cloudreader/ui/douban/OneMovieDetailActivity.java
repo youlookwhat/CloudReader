@@ -3,11 +3,12 @@ package com.example.jingbin.cloudreader.ui.douban;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageView;
+
 import androidx.core.app.ActivityCompat;
 import androidx.core.app.ActivityOptionsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import android.view.View;
-import android.widget.ImageView;
 
 import com.example.jingbin.cloudreader.R;
 import com.example.jingbin.cloudreader.adapter.MovieDetailAdapter;
@@ -17,14 +18,14 @@ import com.example.jingbin.cloudreader.bean.moviechild.SubjectsBean;
 import com.example.jingbin.cloudreader.databinding.ActivityOneMovieDetailBinding;
 import com.example.jingbin.cloudreader.databinding.HeaderSlideShapeBinding;
 import com.example.jingbin.cloudreader.http.HttpClient;
-import com.example.jingbin.cloudreader.utils.CommonUtils;
-import com.example.jingbin.cloudreader.utils.StringFormatUtil;
 import com.example.jingbin.cloudreader.ui.WebViewActivity;
+import com.example.jingbin.cloudreader.utils.StringFormatUtil;
 
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
+import me.jingbin.bymvvm.utils.CommonUtils;
 
 
 /**

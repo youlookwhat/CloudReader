@@ -9,7 +9,7 @@
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.KILL_BACKGROUND_PROCESSES" /><!--杀死应用进程-->
+    <uses-permission android:name="android.permission.KILL_BACKGROUND_PROCESSES" />
 
     <application
         android:name=".app.App"
@@ -70,13 +70,11 @@
             android:screenOrientation="portrait"
             android:theme="@style/MyScrollPage"
             tools:ignore="LockedOrientationActivity" />
-
         <activity
             android:name=".ui.film.child.FilmDetailActivity"
             android:screenOrientation="portrait"
             android:theme="@style/MyScrollPage"
             tools:ignore="LockedOrientationActivity" />
-
         <activity
             android:name=".ui.menu.NavHomePageActivity"
             android:screenOrientation="portrait"
@@ -122,7 +120,6 @@
             android:name=".ui.menu.SearchActivity"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
-
         <activity
             android:name=".view.bigimage.BigImagePagerActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
@@ -133,6 +130,11 @@
             tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".ui.wan.child.MyShareActivity"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".ui.menu.NavNightModeActivity"
+            android:configChanges="keyboard|keyboardHidden|screenSize|fontScale|density|orientation"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
     </application>

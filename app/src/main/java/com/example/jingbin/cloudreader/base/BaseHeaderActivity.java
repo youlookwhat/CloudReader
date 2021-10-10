@@ -34,7 +34,6 @@ import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 import com.example.jingbin.cloudreader.R;
 import com.example.jingbin.cloudreader.databinding.BaseHeaderTitleBarBinding;
-import com.example.jingbin.cloudreader.utils.CommonUtils;
 import com.example.jingbin.cloudreader.view.CustomChangeBounds;
 import com.example.jingbin.cloudreader.view.MyNestedScrollView;
 import com.example.jingbin.cloudreader.view.statue.StatusBarUtils;
@@ -44,6 +43,7 @@ import java.lang.reflect.Method;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 import jp.wasabeef.glide.transformations.BlurTransformation;
+import me.jingbin.bymvvm.utils.CommonUtils;
 import me.jingbin.bymvvm.utils.StatusBarUtil;
 
 

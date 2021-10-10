@@ -7,14 +7,15 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.example.jingbin.cloudreader.R;
-import me.jingbin.bymvvm.base.BaseActivity;
 import com.example.jingbin.cloudreader.databinding.ActivityNavDeedBackBinding;
+import com.example.jingbin.cloudreader.ui.WebViewActivity;
 import com.example.jingbin.cloudreader.utils.BaseTools;
-import com.example.jingbin.cloudreader.utils.CommonUtils;
 import com.example.jingbin.cloudreader.utils.PerfectClickListener;
 import com.example.jingbin.cloudreader.utils.ToastUtil;
-import com.example.jingbin.cloudreader.ui.WebViewActivity;
+
+import me.jingbin.bymvvm.base.BaseActivity;
 import me.jingbin.bymvvm.base.NoViewModel;
+import me.jingbin.bymvvm.utils.CommonUtils;
 
 /**
  * @author jingbin

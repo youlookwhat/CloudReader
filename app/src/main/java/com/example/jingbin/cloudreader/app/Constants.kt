@@ -32,6 +32,8 @@ open class Constants {
         const val IS_FIRST_COLLECTURL = "isFirstCollectUrl"
         // 问题反馈消息提示
         const val MESSAGE_READ_TIP = "message_read_tip"
+        // 深色模式消息提示
+        const val MESSAGE_READ_NIGHT_TIP = "message_read_night_tip"
         // 知识体系里上一次选中的position
         const val TREE_POSITION = "tree_position"
         // 发现页内容角标

@@ -18,6 +18,7 @@
     <string name="actionbar_help_coin">积分规则</string>
     <string name="actionbar_web">去网页分享</string>
     <string name="actionbar_publish">去分享文章</string>
+    <string name="actionbar_night_ok">完成</string>
     <string name="actionbar_more">更多信息</string>
     <string name="actionbar_image">封面大图</string>
     <string name="actionbar_webview_share">分享</string>
@@ -31,8 +32,7 @@
     <string name="string_empty">""</string>
     <string name="github_issues">您好，很希望得到您的意见，由于没有线上反馈系统，您可以在GitHub的Issues处说明问题原因，也可以通过以下方式联系我，我将根据情况尽量处理哦 ~</string>
     <string name="string_about">由于网易云音乐用了很久，特别喜爱它的界面风格，所以仿写了它的UI。如构成侵权请及时通知我修改或删除。
-        \n\n 大部分数据使用的是鸿洋的玩安卓、代码家的干货集中营和时光网，一切数据解释权都归鸿洋、代码家和时光网所有。
-        \n\n 干货每日推荐每天12：30更新，如没有内容则取缓存。应用已使用离线缓存，断网时可得到上一次请求到的数据。
+        \n\n 大部分数据使用的是鸿洋的玩安卓和代码家的干货集中营，一切数据解释权都归鸿洋和代码家所有。
         \n\n 整体采用Retrofit+RxJava+MvvM-DataBinding框架。
         \n\n 我的GitHub：https://github.com/youlookwhat
         \n\n 项目完全开源，如果你觉得不错，请帮忙Star一下吧，或帮忙分享给你的朋友，这是给我们最大的动力与支持，非常感谢！
@@ -46,10 +46,12 @@
     <string name="string_lib">
            android.arch.lifecycle:extensions:1.1.1
         \n android.arch.lifecycle:reactivestreams:1.1.1
-        \n android.arch.persistence.room:runtime
-        \n com.android.support:appcompat-v7:28.0.0
-        \n com.android.support:design:28.0.0
-        \n com.android.support:cardview-v7:28.0.0
+        \n androidx.room:room-runtime:2.3.0
+        \n androidx.room:room-rxjava2:2.3.0
+        \n androidx.appcompat:appcompat:1.2.0
+        \n androidx.cardview:cardview:1.0.0
+        \n androidx.legacy:legacy-support-v4:1.0.0
+        \n androidx.constraintlayout:constraintlayout:2.0.4
         \n com.google.zxing:core:3.3.0
         \n com.google.code.gson:gson:2.8.5
         \n com.squareup.retrofit2:retrofit:2.4.0
@@ -60,16 +62,16 @@
         \n com.squareup.retrofit2:adapter-rxjava2:2.4.0
         \n io.reactivex.rxjava2:rxjava:2.2.7
         \n io.reactivex.rxjava2:rxandroid:2.0.1
-        \n com.github.bumptech.glide:glide:4.9.0
+        \n com.github.bumptech.glide:glide:4.12.0
         \n com.github.chrisbanes:PhotoView:2.1.4
-        \n com.github.youlookwhat:WebProgress:1.1.0
-        \n com.github.youlookwhat:SBannerView:1.1.1
-        \n com.github.youlookwhat:ByRecyclerView:x.y.z-support
         \n com.nineoldandroids:library:2.4.0
-        \n com.youth.banner:banner:1.4.10
         \n com.cocosw:bottomsheet:1.3.1@aar
         \n com.squareup.leakcanary:leakcanary-android
         \n com.tencent.bugly:crashreport
+        \n com.github.youlookwhat:WebProgress:1.1.0
+        \n com.github.youlookwhat:SBannerView:1.1.5
+        \n com.github.youlookwhat:ByWebView:1.1.3
+        \n com.github.youlookwhat:ByRecyclerView:1.1.6
     </string>
 
     <string name="string_everyday_empty">暂时没有更新内容，去看看其他信息吧~</string>

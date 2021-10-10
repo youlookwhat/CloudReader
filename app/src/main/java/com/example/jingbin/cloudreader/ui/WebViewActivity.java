@@ -34,7 +34,6 @@ import com.example.jingbin.cloudreader.app.Constants;
 import com.example.jingbin.cloudreader.data.UserUtil;
 import com.example.jingbin.cloudreader.data.model.CollectModel;
 import com.example.jingbin.cloudreader.utils.BaseTools;
-import com.example.jingbin.cloudreader.utils.CommonUtils;
 import com.example.jingbin.cloudreader.utils.DebugUtil;
 import com.example.jingbin.cloudreader.utils.DialogBuild;
 import com.example.jingbin.cloudreader.utils.NightModeUtil;
@@ -47,6 +46,7 @@ import com.example.jingbin.cloudreader.utils.WebUtil;
 import com.example.jingbin.cloudreader.view.viewbigimage.ViewBigImageActivity;
 import com.example.jingbin.cloudreader.viewmodel.wan.WanNavigator;
 
+import me.jingbin.bymvvm.utils.CommonUtils;
 import me.jingbin.bymvvm.utils.StatusBarUtil;
 import me.jingbin.web.ByWebView;
 import me.jingbin.web.OnByWebClientCallback;
@@ -76,7 +76,7 @@ public class WebViewActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_web_view);
-        StatusBarUtil.setColor(this, CommonUtils.getColor(R.color.colorToolBar), 0);
+        StatusBarUtil.setColor(this, CommonUtils.getColor(this, R.color.colorToolBar), 0);
         getIntentData();
         initTitle();
         syncCookie(mUrl);
@@ -108,7 +108,7 @@ public class WebViewActivity extends AppCompatActivity {
 
         byWebView = ByWebView.with(this)
                 .setWebParent(llWebView, new LinearLayout.LayoutParams(-1, -1))
-                .useWebProgress(CommonUtils.getColor(R.color.colorRateRed))
+                .useWebProgress(CommonUtils.getColor(this, R.color.colorRateRed))
                 .setOnByWebClientCallback(onByWebClientCallback)
                 .setOnTitleProgressCallback(new OnTitleProgressCallback() {
                     @Override
@@ -118,10 +118,15 @@ public class WebViewActivity extends AppCompatActivity {
                 })
                 .loadUrl(mUrl);
         byWebView.getWebView().setOnLongClickListener(v -> handleLongImage());
-        byWebView.getWebView().setBackgroundColor(CommonUtils.getColor(R.color.color_page_bg));
+        byWebView.getWebView().setBackgroundColor(CommonUtils.getColor(this, R.color.color_page_bg));
         WebSettings webSetting = byWebView.getWebView().getSettings();
-        boolean isAppDarkMode = NightModeUtil.isNightMode(this);
         if (WebViewFeature.isFeatureSupported(WebViewFeature.FORCE_DARK)) {
+            boolean isAppDarkMode;
+            if (NightModeUtil.getSystemMode()) {
+                isAppDarkMode = NightModeUtil.isNightMode(this);
+            } else {
+                isAppDarkMode = NightModeUtil.getNightMode();
+            }
             if (isAppDarkMode) {
                 WebSettingsCompat.setForceDark(webSetting, WebSettingsCompat.FORCE_DARK_ON);
             } else {

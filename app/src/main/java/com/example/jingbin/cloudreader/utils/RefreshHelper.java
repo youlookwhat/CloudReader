@@ -9,6 +9,7 @@ import com.example.jingbin.cloudreader.R;
 import com.example.jingbin.cloudreader.view.byview.NeteaseLoadMoreView;
 import com.example.jingbin.cloudreader.view.byview.NeteaseRefreshHeaderView;
 
+import me.jingbin.bymvvm.utils.CommonUtils;
 import me.jingbin.library.ByRecyclerView;
 import me.jingbin.library.decoration.GridSpaceItemDecoration;
 import me.jingbin.library.decoration.SpacesItemDecoration;
@@ -50,7 +51,7 @@ public class RefreshHelper {
     }
 
     public static void setSwipeRefreshView(SwipeRefreshLayout swipeRefreshView) {
-        swipeRefreshView.setColorSchemeColors(CommonUtils.getColor(R.color.colorTheme));
-        swipeRefreshView.setProgressBackgroundColorSchemeColor(CommonUtils.getColor(R.color.colorSwipeRefresh));
+        swipeRefreshView.setColorSchemeColors(CommonUtils.getColor(swipeRefreshView.getContext(), R.color.colorTheme));
+        swipeRefreshView.setProgressBackgroundColorSchemeColor(CommonUtils.getColor(swipeRefreshView.getContext(), R.color.colorSwipeRefresh));
     }
 }

@@ -1,27 +1,24 @@
 package com.example.jingbin.cloudreader.ui.wan.child;
 
-import androidx.lifecycle.Observer;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
+import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.jingbin.cloudreader.R;
 import com.example.jingbin.cloudreader.adapter.WanAndroidAdapter;
 import com.example.jingbin.cloudreader.adapter.WxArticleAdapter;
 import com.example.jingbin.cloudreader.app.Constants;
-import me.jingbin.bymvvm.base.BaseFragment;
+import com.example.jingbin.cloudreader.app.RxCodeConstants;
 import com.example.jingbin.cloudreader.bean.wanandroid.ArticlesBean;
 import com.example.jingbin.cloudreader.bean.wanandroid.TreeBean;
 import com.example.jingbin.cloudreader.bean.wanandroid.WxarticleItemBean;
 import com.example.jingbin.cloudreader.databinding.FragmentWanFindBinding;
-import me.jingbin.bymvvm.rxbus.RxBus;
-import com.example.jingbin.cloudreader.app.RxCodeConstants;
 import com.example.jingbin.cloudreader.utils.DataUtil;
 import com.example.jingbin.cloudreader.utils.RefreshHelper;
 import com.example.jingbin.cloudreader.utils.SPUtils;
@@ -32,6 +29,8 @@ import java.util.List;
 
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
+import me.jingbin.bymvvm.base.BaseFragment;
+import me.jingbin.bymvvm.rxbus.RxBus;
 import me.jingbin.library.ByRecyclerView;
 
 /**
@@ -100,7 +99,7 @@ public class WanFindFragment extends BaseFragment<WanFindViewModel, FragmentWanF
     private void initRefreshView() {
         LinearLayoutManager layoutManager = new LinearLayoutManager(activity);
         bindingView.rvWxarticle.setLayoutManager(layoutManager);
-        wxArticleAdapter = new WxArticleAdapter();
+        wxArticleAdapter = new WxArticleAdapter(activity);
         bindingView.rvWxarticle.setAdapter(wxArticleAdapter);
 
         RefreshHelper.initLinear(bindingView.recyclerView, true, 1);

@@ -165,14 +165,6 @@ public class SPUtils {
         editor.remove(key).apply();
     }
 
-    public static boolean getNightMode() {
-        return SPUtils.getBoolean(Constants.KEY_MODE_NIGHT, false);
-    }
-
-    public static void setNightMode(boolean nightMode) {
-        SPUtils.putBoolean(Constants.KEY_MODE_NIGHT, nightMode);
-    }
-
     public static boolean isRead() {
         return SPUtils.getBoolean(Constants.MESSAGE_READ_TIP, false);
     }
@@ -181,4 +173,11 @@ public class SPUtils {
         SPUtils.putBoolean(Constants.MESSAGE_READ_TIP, isRead);
     }
 
+    public static boolean isReadNight() {
+        return SPUtils.getBoolean(Constants.MESSAGE_READ_NIGHT_TIP, false);
+    }
+
+    public static void setReadNight(boolean isRead) {
+        SPUtils.putBoolean(Constants.MESSAGE_READ_NIGHT_TIP, isRead);
+    }
 }

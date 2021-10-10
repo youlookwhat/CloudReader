@@ -22,6 +22,7 @@ import me.jingbin.bymvvm.base.BaseActivity
 import me.jingbin.bymvvm.databinding.LayoutLoadingEmptyBinding
 import me.jingbin.bymvvm.rxbus.RxBus
 import me.jingbin.bymvvm.rxbus.RxBusBaseMessage
+import me.jingbin.bymvvm.utils.CommonUtils
 import me.jingbin.library.ByRecyclerView
 
 /**
@@ -128,7 +129,7 @@ open class MyShareActivity : BaseActivity<WanCenterViewModel, FragmentWanAndroid
                             bindingEmpty.tvTipEmpty.text = "未找到相关内容"
                         } else {
                             bindingEmpty.tvTipEmpty.text = "未找到相关内容\n点击分享一篇文章吧~"
-                            bindingEmpty.tvTipEmpty.setTextColor(CommonUtils.getColor(R.color.colorTheme))
+                            bindingEmpty.tvTipEmpty.setTextColor(CommonUtils.getColor(this, R.color.colorTheme))
                             bindingEmpty.tvTipEmpty.setOnClickListener { PublishActivity.start(this) }
                             initRxBus()
                         }

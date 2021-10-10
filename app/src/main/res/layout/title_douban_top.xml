@@ -12,7 +12,7 @@
         android:id="@+id/title_top"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/colorContent"
+        android:textColor="?android:attr/textColorPrimary"
         android:textSize="14sp"
         tools:text="Android:《云阅》- 一款看Android技术资讯的App，不只是用来看安卓~" />
 

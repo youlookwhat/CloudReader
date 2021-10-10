@@ -34,13 +34,13 @@ import com.example.jingbin.cloudreader.ui.menu.NavAdmireActivity;
 import com.example.jingbin.cloudreader.ui.menu.NavDeedBackActivity;
 import com.example.jingbin.cloudreader.ui.menu.NavDownloadActivity;
 import com.example.jingbin.cloudreader.ui.menu.NavHomePageActivity;
+import com.example.jingbin.cloudreader.ui.menu.NavNightModeActivity;
 import com.example.jingbin.cloudreader.ui.menu.SearchActivity;
 import com.example.jingbin.cloudreader.ui.wan.child.LoginActivity;
 import com.example.jingbin.cloudreader.ui.wan.child.MyCoinActivity;
 import com.example.jingbin.cloudreader.ui.wan.child.MyCollectActivity;
 import com.example.jingbin.cloudreader.ui.wan.child.MyShareActivity;
 import com.example.jingbin.cloudreader.utils.BaseTools;
-import com.example.jingbin.cloudreader.utils.CommonUtils;
 import com.example.jingbin.cloudreader.utils.DialogBuild;
 import com.example.jingbin.cloudreader.utils.GlideUtil;
 import com.example.jingbin.cloudreader.utils.PerfectClickListener;
@@ -57,6 +57,7 @@ import io.reactivex.functions.Consumer;
 import me.jingbin.bymvvm.base.BaseActivity;
 import me.jingbin.bymvvm.rxbus.RxBus;
 import me.jingbin.bymvvm.rxbus.RxBusBaseMessage;
+import me.jingbin.bymvvm.utils.CommonUtils;
 import me.jingbin.bymvvm.utils.StatusBarUtil;
 
 
@@ -70,6 +71,7 @@ import me.jingbin.bymvvm.utils.StatusBarUtil;
 public class MainActivity extends BaseActivity<MainViewModel, ActivityMainBinding> implements View.OnClickListener {
 
     public static boolean isLaunch;
+    public boolean isClickCloseApp;
     private ViewPager vpContent;
     private ImageView ivTitleTwo;
     private ImageView ivTitleOne;
@@ -90,7 +92,7 @@ public class MainActivity extends BaseActivity<MainViewModel, ActivityMainBindin
 
     @Override
     protected void initStatusBar() {
-        StatusBarUtil.setColorNoTranslucentForDrawerLayout(MainActivity.this, bindingView.drawerLayout, CommonUtils.getColor(R.color.colorHomeToolBar));
+        StatusBarUtil.setColorNoTranslucentForDrawerLayout(MainActivity.this, bindingView.drawerLayout, CommonUtils.getColor(this, R.color.colorHomeToolBar));
         ViewGroup.LayoutParams layoutParams = bindingView.include.viewStatus.getLayoutParams();
         layoutParams.height = StatusBarUtil.getStatusBarHeight(this);
         bindingView.include.viewStatus.setLayoutParams(layoutParams);
@@ -124,8 +126,8 @@ public class MainActivity extends BaseActivity<MainViewModel, ActivityMainBindin
         View headerView = bindingView.navView.getHeaderView(0);
         bind = DataBindingUtil.bind(headerView);
         bind.setViewModel(viewModel);
-        bind.dayNightSwitch.setChecked(SPUtils.getNightMode());
         viewModel.isReadOk.set(SPUtils.isRead());
+        viewModel.isReadOkNight.set(SPUtils.isReadNight());
 
         GlideUtil.displayCircle(bind.ivAvatar, ConstantsImageUrl.IC_AVATAR);
         bind.llNavExit.setOnClickListener(this);
@@ -142,6 +144,7 @@ public class MainActivity extends BaseActivity<MainViewModel, ActivityMainBindin
         bind.llNavCoin.setOnClickListener(listener);
         bind.llNavAdmire.setOnClickListener(listener);
         bind.tvRank.setOnClickListener(listener);
+        bind.llNavNightMode.setOnClickListener(listener);
 
         viewModel.getUserInfo();
         viewModel.coin.observe(this, new Observer<CoinUserInfoBean>() {
@@ -265,6 +268,14 @@ public class MainActivity extends BaseActivity<MainViewModel, ActivityMainBindin
                         // 赞赏
                         NavAdmireActivity.start(MainActivity.this);
                         break;
+                    case R.id.ll_nav_night_mode:
+                        // 深色模式
+                        NavNightModeActivity.Companion.start(MainActivity.this);
+                        if (viewModel.isReadOkNight.get() != null && !viewModel.isReadOkNight.get().booleanValue()) {
+                            SPUtils.setReadNight(true);
+                            viewModel.isReadOkNight.set(true);
+                        }
+                        break;
                     default:
                         break;
                 }
@@ -301,6 +312,7 @@ public class MainActivity extends BaseActivity<MainViewModel, ActivityMainBindin
                 break;
             case R.id.ll_nav_exit:
                 // 退出应用
+                isClickCloseApp = true;
                 finish();
                 break;
             default:
@@ -335,24 +347,6 @@ public class MainActivity extends BaseActivity<MainViewModel, ActivityMainBindin
         ivTitleOne.setSelected(isOne);
         ivTitleTwo.setSelected(isTwo);
         ivTitleThree.setSelected(isThree);
-    }
-
-    /**
-     * 夜间模式待完善
-     */
-    public boolean getNightMode() {
-        return SPUtils.getNightMode();
-    }
-
-    public void onNightModeClick(View view) {
-        if (!SPUtils.getNightMode()) {
-//            SkinCompatManager.getInstance().loadSkin(Constants.NIGHT_SKIN);
-        } else {
-            // 恢复应用默认皮肤
-//            SkinCompatManager.getInstance().restoreDefaultTheme();
-        }
-        SPUtils.setNightMode(!SPUtils.getNightMode());
-        bind.dayNightSwitch.setChecked(SPUtils.getNightMode());
     }
 
     @Override
@@ -462,8 +456,11 @@ public class MainActivity extends BaseActivity<MainViewModel, ActivityMainBindin
     public void onDestroy() {
         super.onDestroy();
         isLaunch = false;
-        // 杀死该应用进程 需要权限
-        android.os.Process.killProcess(android.os.Process.myPid());
+        if (isClickCloseApp) {
+            isClickCloseApp = false;
+            // 杀死该应用进程 需要权限; 如果不控制会影响切换深色模式重启
+            android.os.Process.killProcess(android.os.Process.myPid());
+        }
     }
 
     public static void start(Context context) {

@@ -9,10 +9,14 @@ import com.example.jingbin.cloudreader.app.Constants;
 
 /**
  * GitHub: https://github.com/youlookwhat
+ * https://shenguojun.github.io/post/android-dark-mode/
  */
 public class NightModeUtil {
 
-    public static boolean isNightMode(Configuration config) {
+    private boolean mSystemTheme = true;
+    private boolean mDarkTheme = false;
+
+    private static boolean isNightMode(Configuration config) {
         int uiMode = config.uiMode & Configuration.UI_MODE_NIGHT_MASK;
         return uiMode == Configuration.UI_MODE_NIGHT_YES;
     }
@@ -38,10 +42,14 @@ public class NightModeUtil {
     }
 
     public static void initNightMode() {
-        if (getSystemMode()) {
+        initNightMode(getSystemMode(), getNightMode());
+    }
+
+    public static void initNightMode(boolean systemMode, boolean nightMode) {
+        if (systemMode) {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
         } else {
-            if (getNightMode()) {
+            if (nightMode) {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
             } else {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);

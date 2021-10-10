@@ -14,10 +14,10 @@ import com.example.jingbin.cloudreader.adapter.FilmAdapter;
 import com.example.jingbin.cloudreader.bean.MtimeFilmeBean;
 import com.example.jingbin.cloudreader.bean.moviechild.FilmItemBean;
 import com.example.jingbin.cloudreader.databinding.FragmentWanAndroidBinding;
-import com.example.jingbin.cloudreader.utils.CommonUtils;
 import com.example.jingbin.cloudreader.viewmodel.movie.FilmViewModel;
 
 import me.jingbin.bymvvm.base.BaseFragment;
+import me.jingbin.bymvvm.utils.CommonUtils;
 import me.jingbin.library.view.OnItemFilterClickListener;
 
 /**
@@ -72,7 +72,7 @@ public class FilmShowingFragment extends BaseFragment<FilmViewModel, FragmentWan
 
     private void initRefreshView() {
         viewModel.bookType.set(mType);
-        bindingView.srlWan.setColorSchemeColors(CommonUtils.getColor(R.color.colorTheme));
+        bindingView.srlWan.setColorSchemeColors(CommonUtils.getColor(activity, R.color.colorTheme));
         adapter = new FilmAdapter(activity);
         bindingView.xrvWan.setLayoutManager(new LinearLayoutManager(activity));
         bindingView.xrvWan.setItemAnimator(null);

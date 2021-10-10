@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/activity_nav_about"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        tools:context="com.example.jingbin.cloudreader.ui.menu.NavNightModeActivity">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/color_sheet_bg"
+            android:paddingLeft="10dp"
+            android:paddingTop="20dp"
+            android:paddingRight="10dp"
+            android:paddingBottom="20dp">
+
+            <TextView
+                android:id="@+id/tv_title_tip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="跟随系统"
+                android:textColor="?android:attr/textColorPrimary"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/day_night_switch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="开启后，将随系统打开或关闭深色模式"
+                android:textColor="?android:attr/textColorSecondary"
+                android:textSize="15sp"
+                app:layout_constraintStart_toStartOf="@+id/tv_title_tip"
+                app:layout_constraintTop_toBottomOf="@+id/tv_title_tip" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_choose"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone"
+            tools:visibility="visible">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="10dp"
+                android:text="手动选择"
+                android:textSize="14sp" />
+
+            <CheckedTextView
+                android:id="@+id/ctv_check_normal"
+                android:layout_width="match_parent"
+                android:layout_height="44dp"
+                android:background="@drawable/ripple_item_white_bg"
+                android:checkMark="?android:attr/listChoiceIndicatorMultiple"
+                android:gravity="center_vertical"
+                android:paddingLeft="10dp"
+                android:paddingRight="12dp"
+                android:text="普通模式"
+                android:textColor="?android:attr/textColorPrimary"
+                android:textSize="14sp" />
+
+            <View style="@style/horizontalLine" />
+
+            <CheckedTextView
+                android:id="@+id/ctv_check_night"
+                android:layout_width="match_parent"
+                android:layout_height="44dp"
+                android:background="@drawable/ripple_item_white_bg"
+                android:checkMark="?android:attr/listChoiceIndicatorMultiple"
+                android:gravity="center_vertical"
+                android:paddingLeft="10dp"
+                android:paddingRight="12dp"
+                android:text="深色模式"
+                android:textColor="?android:attr/textColorPrimary"
+                android:textSize="14sp" />
+
+            <!--            <TextView-->
+            <!--                android:id="@+id/tv_night"-->
+            <!--                style="@style/menuItem"-->
+            <!--                android:text="深色模式" />-->
+
+        </LinearLayout>
+
+    </LinearLayout>
+</layout>

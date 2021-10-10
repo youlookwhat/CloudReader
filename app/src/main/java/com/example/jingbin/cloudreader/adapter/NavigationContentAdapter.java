@@ -12,9 +12,9 @@ import com.example.jingbin.cloudreader.R;
 import com.example.jingbin.cloudreader.bean.wanandroid.ArticlesBean;
 import com.example.jingbin.cloudreader.databinding.ItemNavigationContentBinding;
 import com.example.jingbin.cloudreader.databinding.ItemNavigationTitleBinding;
-import com.example.jingbin.cloudreader.utils.CommonUtils;
 
 import me.jingbin.bymvvm.adapter.BaseBindingHolder;
+import me.jingbin.bymvvm.utils.CommonUtils;
 import me.jingbin.library.adapter.BaseByRecyclerViewAdapter;
 import me.jingbin.library.stickyview.StickyHeaderHandler;
 

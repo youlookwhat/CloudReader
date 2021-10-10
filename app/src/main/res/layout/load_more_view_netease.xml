@@ -24,7 +24,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:text="@string/by_footer_loading"
-            android:textColor="#333333" />
+            android:textColor="?android:attr/textColorSecondary" />
     </LinearLayout>
 
     <TextView

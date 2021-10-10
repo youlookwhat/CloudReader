@@ -1,8 +1,9 @@
 package com.example.jingbin.cloudreader.utils;
 
 import android.content.Context;
-import androidx.databinding.BindingAdapter;
 import android.widget.ImageView;
+
+import androidx.databinding.BindingAdapter;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.CircleCrop;
@@ -10,6 +11,7 @@ import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.example.jingbin.cloudreader.R;
 
 import jp.wasabeef.glide.transformations.BlurTransformation;
+import me.jingbin.bymvvm.utils.CommonUtils;
 
 
 /**

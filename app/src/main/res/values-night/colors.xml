@@ -70,7 +70,7 @@
     <color name="colorItemBackground">#d9d9d9</color>
 
     <!--选择分类按下颜色-->
-    <color name="colorChoosePress">#DDD</color>
+    <color name="colorChoosePress">#777D7D7D</color>
 
     <!--暂时用于反馈文字-->
     <color name="text_common">#9e9e9e</color>

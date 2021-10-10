@@ -9,15 +9,16 @@ import android.view.View;
 
 import com.example.jingbin.cloudreader.R;
 import com.example.jingbin.cloudreader.app.ConstantsImageUrl;
-import me.jingbin.bymvvm.base.BaseActivity;
 import com.example.jingbin.cloudreader.databinding.ActivityNavAdmireBinding;
-import com.example.jingbin.cloudreader.utils.CommonUtils;
+import com.example.jingbin.cloudreader.ui.WebViewActivity;
 import com.example.jingbin.cloudreader.utils.DialogBuild;
 import com.example.jingbin.cloudreader.utils.GlideUtil;
 import com.example.jingbin.cloudreader.utils.PermissionHandler;
 import com.example.jingbin.cloudreader.utils.RxSaveImage;
-import com.example.jingbin.cloudreader.ui.WebViewActivity;
+
+import me.jingbin.bymvvm.base.BaseActivity;
 import me.jingbin.bymvvm.base.NoViewModel;
+import me.jingbin.bymvvm.utils.CommonUtils;
 
 /**
  * @author jingbin

@@ -11,7 +11,7 @@
             name="subjectsBean"
             type="com.example.jingbin.cloudreader.bean.moviechild.FilmItemBean" />
 
-        <import type="com.example.jingbin.cloudreader.utils.CommonUtils" />
+        <import type="me.jingbin.bymvvm.utils.CommonUtils" />
 
     </data>
 

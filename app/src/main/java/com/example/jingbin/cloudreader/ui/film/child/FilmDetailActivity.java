@@ -23,7 +23,6 @@ import com.example.jingbin.cloudreader.databinding.ActivityFilmDetailBinding;
 import com.example.jingbin.cloudreader.databinding.HeaderFilmDetailBinding;
 import com.example.jingbin.cloudreader.http.HttpClient;
 import com.example.jingbin.cloudreader.ui.WebViewActivity;
-import com.example.jingbin.cloudreader.utils.CommonUtils;
 import com.example.jingbin.cloudreader.utils.DataUtil;
 import com.example.jingbin.cloudreader.utils.DensityUtil;
 import com.example.jingbin.cloudreader.utils.ToastUtil;
@@ -37,6 +36,7 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 import me.jingbin.bymvvm.rxbus.RxBus;
+import me.jingbin.bymvvm.utils.CommonUtils;
 
 
 /**

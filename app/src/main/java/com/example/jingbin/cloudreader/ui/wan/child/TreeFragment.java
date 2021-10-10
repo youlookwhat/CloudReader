@@ -70,7 +70,7 @@ public class TreeFragment extends BaseFragment<TreeViewModel, FragmentWanAndroid
         bindingView.srlWan.setOnRefreshListener(() -> bindingView.srlWan.postDelayed(this::getTree, 150));
         LinearLayoutManager layoutManager = new LinearLayoutManager(activity);
         bindingView.xrvWan.setLayoutManager(layoutManager);
-        mTreeAdapter = new TreeAdapter();
+        mTreeAdapter = new TreeAdapter(activity);
         bindingView.xrvWan.setAdapter(mTreeAdapter);
         HeaderItemTreeBinding oneBinding = DataBindingUtil.inflate(getLayoutInflater(), R.layout.header_item_tree, null, false);
         bindingView.xrvWan.addHeaderView(oneBinding.getRoot());

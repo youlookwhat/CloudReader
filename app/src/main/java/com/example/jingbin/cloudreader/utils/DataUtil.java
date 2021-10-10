@@ -4,6 +4,7 @@ import android.content.Context;
 import android.text.TextUtils;
 
 import com.example.jingbin.cloudreader.R;
+import com.example.jingbin.cloudreader.app.App;
 import com.example.jingbin.cloudreader.bean.AndroidBean;
 import com.example.jingbin.cloudreader.bean.FilmDetailNewBean;
 import com.example.jingbin.cloudreader.bean.GankIoDataBean;
@@ -14,6 +15,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import me.jingbin.bymvvm.utils.CommonUtils;
 
 /**
  * @author jingbin
@@ -93,9 +96,9 @@ public class DataUtil {
      */
     public static int getCoinTextColor(String desc) {
         if (!TextUtils.isEmpty(desc) && desc.contains("分享文章")) {
-            return CommonUtils.getColor(R.color.colorPrimary);
+            return CommonUtils.getColor(App.getInstance(), R.color.colorPrimary);
         } else {
-            return CommonUtils.getColor(R.color.colorTheme);
+            return CommonUtils.getColor(App.getInstance(), R.color.colorTheme);
         }
     }
 

@@ -13,12 +13,12 @@ import com.example.jingbin.cloudreader.app.Constants;
 import com.example.jingbin.cloudreader.databinding.ActivityNavAboutBinding;
 import com.example.jingbin.cloudreader.ui.WebViewActivity;
 import com.example.jingbin.cloudreader.utils.BaseTools;
-import com.example.jingbin.cloudreader.utils.CommonUtils;
 import com.example.jingbin.cloudreader.utils.PerfectClickListener;
 import com.example.jingbin.cloudreader.utils.UpdateUtil;
 
 import me.jingbin.bymvvm.base.BaseActivity;
 import me.jingbin.bymvvm.base.NoViewModel;
+import me.jingbin.bymvvm.utils.CommonUtils;
 
 /**
  * @author jingbin

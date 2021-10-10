@@ -1,12 +1,14 @@
 package com.example.jingbin.cloudreader.adapter;
 
+import android.content.Context;
+
 import com.example.jingbin.cloudreader.R;
 import com.example.jingbin.cloudreader.bean.wanandroid.WxarticleItemBean;
 import com.example.jingbin.cloudreader.databinding.ItemWxarticleBinding;
-import com.example.jingbin.cloudreader.utils.CommonUtils;
 
 import me.jingbin.bymvvm.adapter.BaseBindingAdapter;
 import me.jingbin.bymvvm.adapter.BaseBindingHolder;
+import me.jingbin.bymvvm.utils.CommonUtils;
 
 /**
  * Created by jingbin on 2019/9/29.
@@ -17,9 +19,11 @@ public class WxArticleAdapter extends BaseBindingAdapter<WxarticleItemBean, Item
     private int id;
     private int selectPosition = 0;
     private int lastPosition = 0;
+    private final Context context;
 
-    public WxArticleAdapter() {
+    public WxArticleAdapter(Context context) {
         super(R.layout.item_wxarticle);
+        this.context = context;
     }
 
     @Override
@@ -27,11 +31,11 @@ public class WxArticleAdapter extends BaseBindingAdapter<WxarticleItemBean, Item
         if (dataBean != null) {
 
             if (dataBean.getId() == id) {
-                binding.tvTitle.setTextColor(CommonUtils.getColor(R.color.colorTheme));
-                binding.viewLine.setBackgroundColor(CommonUtils.getColor(R.color.colorTheme));
+                binding.tvTitle.setTextColor(CommonUtils.getColor(context, R.color.colorTheme));
+                binding.viewLine.setBackgroundColor(CommonUtils.getColor(context, R.color.colorTheme));
             } else {
-                binding.tvTitle.setTextColor(CommonUtils.getColor(R.color.select_navi_text));
-                binding.viewLine.setBackgroundColor(CommonUtils.getColor(R.color.colorSubtitle));
+                binding.tvTitle.setTextColor(CommonUtils.getColor(context, R.color.select_navi_text));
+                binding.viewLine.setBackgroundColor(CommonUtils.getColor(context, R.color.colorSubtitle));
             }
             binding.setBean(dataBean);
             binding.clWxarticle.setOnClickListener(v -> {

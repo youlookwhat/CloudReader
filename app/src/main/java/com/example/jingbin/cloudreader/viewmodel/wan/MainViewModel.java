@@ -28,6 +28,8 @@ public class MainViewModel extends BaseViewModel {
 
     // 问题反馈是否已读
     public ObservableField<Boolean> isReadOk = new ObservableField<>();
+    // 深色模式是否已读
+    public ObservableField<Boolean> isReadOkNight = new ObservableField<>();
     // 赞赏入口是否开放
     public ObservableField<Boolean> isShowAdmire = new ObservableField<>();
     public MutableLiveData<CoinUserInfoBean> coin = new MutableLiveData<>();
@@ -44,41 +46,41 @@ public class MainViewModel extends BaseViewModel {
                 if (user != null) {
                     execute(HttpClient.Builder.getWanAndroidServer().getCoinUserInfo(),
                             new Observer<BaseResultBean<CoinUserInfoBean>>() {
-                        @Override
-                        public void onSubscribe(Disposable d) {
-                            addDisposable(d);
-                        }
+                                @Override
+                                public void onSubscribe(Disposable d) {
+                                    addDisposable(d);
+                                }
 
-                        @Override
-                        public void onNext(BaseResultBean<CoinUserInfoBean> bean) {
-                            if (bean != null && bean.getData() != null) {
-                                CoinUserInfoBean infoBean = bean.getData();
-                                infoBean.setUsername(user.getUsername());
-                                coin.setValue(infoBean);
+                                @Override
+                                public void onNext(BaseResultBean<CoinUserInfoBean> bean) {
+                                    if (bean != null && bean.getData() != null) {
+                                        CoinUserInfoBean infoBean = bean.getData();
+                                        infoBean.setUsername(user.getUsername());
+                                        coin.setValue(infoBean);
 
-                                UserUtil.getUserInfo(new OnUserInfoListener() {
-                                    @Override
-                                    public void onSuccess(User user) {
-                                        if (user != null) {
-                                            user.setCoinCount(infoBean.getCoinCount());
-                                            user.setRank(infoBean.getRank());
-                                            UserUtil.setUserInfo(user);
-                                        }
+                                        UserUtil.getUserInfo(new OnUserInfoListener() {
+                                            @Override
+                                            public void onSuccess(User user) {
+                                                if (user != null) {
+                                                    user.setCoinCount(infoBean.getCoinCount());
+                                                    user.setRank(infoBean.getRank());
+                                                    UserUtil.setUserInfo(user);
+                                                }
+                                            }
+                                        });
                                     }
-                                });
-                            }
-                        }
+                                }
 
-                        @Override
-                        public void onError(Throwable e) {
-                            coin.setValue(null);
-                        }
+                                @Override
+                                public void onError(Throwable e) {
+                                    coin.setValue(null);
+                                }
 
-                        @Override
-                        public void onComplete() {
+                                @Override
+                                public void onComplete() {
 
-                        }
-                    });
+                                }
+                            });
                 } else {
                     coin.setValue(null);
                 }

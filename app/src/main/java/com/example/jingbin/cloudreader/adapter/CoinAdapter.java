@@ -11,9 +11,9 @@ import com.example.jingbin.cloudreader.R;
 import com.example.jingbin.cloudreader.bean.CoinLogBean;
 import com.example.jingbin.cloudreader.databinding.ItemWanCoinBinding;
 import com.example.jingbin.cloudreader.databinding.ItemWanCoinRankBinding;
-import com.example.jingbin.cloudreader.utils.CommonUtils;
 
 import me.jingbin.bymvvm.adapter.BaseBindingHolder;
+import me.jingbin.bymvvm.utils.CommonUtils;
 import me.jingbin.library.adapter.BaseByRecyclerViewAdapter;
 import me.jingbin.library.adapter.BaseByViewHolder;
 
@@ -43,8 +43,8 @@ public class CoinAdapter extends BaseByRecyclerViewAdapter<CoinLogBean, BaseByVi
 
     private class ViewRankHolder extends BaseBindingHolder<CoinLogBean, ItemWanCoinRankBinding> {
 
-        ViewRankHolder(ViewGroup context, int layoutId) {
-            super(context, layoutId);
+        ViewRankHolder(ViewGroup viewGroup, int layoutId) {
+            super(viewGroup, layoutId);
         }
 
         @Override
@@ -53,7 +53,7 @@ public class CoinAdapter extends BaseByRecyclerViewAdapter<CoinLogBean, BaseByVi
             binding.setBean(bean);
             binding.setPosition(adapterPosition);
 
-            int color = CommonUtils.getColor(R.color.colorSubtitle);
+            int color = CommonUtils.getColor(binding.tvCoin.getContext(), R.color.colorSubtitle);
             int size = 18;
             binding.tvRank.setTypeface(Typeface.DEFAULT_BOLD);
             if (adapterPosition == 1) {

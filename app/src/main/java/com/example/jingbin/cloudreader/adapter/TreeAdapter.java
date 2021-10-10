@@ -1,5 +1,6 @@
 package com.example.jingbin.cloudreader.adapter;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
@@ -11,7 +12,6 @@ import com.example.jingbin.cloudreader.app.Constants;
 import com.example.jingbin.cloudreader.bean.wanandroid.TreeItemBean;
 import com.example.jingbin.cloudreader.bean.wanandroid.WxarticleItemBean;
 import com.example.jingbin.cloudreader.ui.wan.child.CategoryDetailActivity;
-import com.example.jingbin.cloudreader.utils.CommonUtils;
 import com.example.jingbin.cloudreader.utils.DataUtil;
 import com.example.jingbin.cloudreader.utils.SPUtils;
 import com.example.jingbin.cloudreader.view.ThinBoldSpan;
@@ -20,6 +20,7 @@ import com.google.android.flexbox.FlexboxLayout;
 import java.util.LinkedList;
 import java.util.Queue;
 
+import me.jingbin.bymvvm.utils.CommonUtils;
 import me.jingbin.library.adapter.BaseByViewHolder;
 import me.jingbin.library.adapter.BaseRecyclerAdapter;
 
@@ -33,9 +34,11 @@ public class TreeAdapter extends BaseRecyclerAdapter<TreeItemBean> {
     private Queue<TextView> mFlexItemTextViewCaches = new LinkedList<>();
     private boolean isSelect = false;
     private int selectedPosition = -1;
+    private final Context context;
 
-    public TreeAdapter() {
+    public TreeAdapter(Context context) {
         super(R.layout.item_tree);
+        this.context = context;
     }
 
     @Override
@@ -48,12 +51,12 @@ public class TreeAdapter extends BaseRecyclerAdapter<TreeItemBean> {
                 flTree.setVisibility(View.GONE);
                 if (selectedPosition == position) {
                     name = name + "     ★★★";
-                    tvTreeTitle.setTextColor(CommonUtils.getColor(R.color.colorTheme));
+                    tvTreeTitle.setTextColor(CommonUtils.getColor(context, R.color.colorTheme));
                 } else {
-                    tvTreeTitle.setTextColor(CommonUtils.getColor(R.color.colorContent));
+                    tvTreeTitle.setTextColor(CommonUtils.getColor(context, R.color.colorContent));
                 }
             } else {
-                tvTreeTitle.setTextColor(CommonUtils.getColor(R.color.colorContent));
+                tvTreeTitle.setTextColor(CommonUtils.getColor(context, R.color.colorContent));
                 flTree.setVisibility(View.VISIBLE);
                 for (int i = 0; i < dataBean.getChildren().size(); i++) {
                     WxarticleItemBean childItem = dataBean.getChildren().get(i);

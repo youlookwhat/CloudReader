@@ -26,12 +26,11 @@ import com.example.jingbin.cloudreader.adapter.GankAndroidSearchAdapter;
 import com.example.jingbin.cloudreader.bean.wanandroid.HomeListBean;
 import com.example.jingbin.cloudreader.bean.wanandroid.SearchTagBean;
 import com.example.jingbin.cloudreader.databinding.ActivitySearchBinding;
+import com.example.jingbin.cloudreader.ui.WebViewActivity;
 import com.example.jingbin.cloudreader.utils.BaseTools;
-import com.example.jingbin.cloudreader.utils.CommonUtils;
 import com.example.jingbin.cloudreader.utils.DialogBuild;
 import com.example.jingbin.cloudreader.utils.ToastUtil;
 import com.example.jingbin.cloudreader.view.byview.NeteaseLoadMoreView;
-import com.example.jingbin.cloudreader.ui.WebViewActivity;
 import com.example.jingbin.cloudreader.viewmodel.wan.SearchViewModel;
 import com.google.android.material.internal.FlowLayout;
 import com.google.android.material.tabs.TabLayout;
@@ -39,6 +38,7 @@ import com.google.android.material.tabs.TabLayout;
 import java.util.List;
 
 import me.jingbin.bymvvm.adapter.BaseBindingAdapter;
+import me.jingbin.bymvvm.utils.CommonUtils;
 import me.jingbin.bymvvm.utils.StatusBarUtil;
 import me.jingbin.library.ByRecyclerView;
 import me.jingbin.library.decoration.SpacesItemDecoration;
@@ -59,7 +59,7 @@ public class SearchActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_search);
-        StatusBarUtil.setColor(this, CommonUtils.getColor(R.color.colorToolBar), 0);
+        StatusBarUtil.setColor(this, CommonUtils.getColor(this, R.color.colorToolBar), 0);
         viewModel = new ViewModelProvider(this).get(SearchViewModel.class);
         binding.setViewModel(viewModel);
         initRefreshView();

@@ -26,7 +26,7 @@ import me.jingbin.bymvvm.rxbus.RxBusBaseMessage
  */
 class PublishActivity : BaseActivity<PublishViewModel, ActivityPublishBinding>() {
 
-    private lateinit var clipContent: String
+    private var clipContent: String = ""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_publish)

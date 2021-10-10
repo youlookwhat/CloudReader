@@ -51,7 +51,7 @@ public class GankAndroidAdapter extends BaseBindingAdapter<GankIoDataBean.Result
         if (object.getImages() != null
                 && object.getImages().size() > 0
                 && !TextUtils.isEmpty(object.getImages().get(0))) {
-            binding.ivAndroidPic.setVisibility(View.VISIBLE);
+            binding.rlImageLayout.setVisibility(View.VISIBLE);
             GlideUtil.displayGif(object.getImages().get(0), binding.ivAndroidPic);
             //                Glide.with(context).load(object.getImages().get(0))
 //                        .diskCacheStrategy(DiskCacheStrategy.SOURCE)
@@ -59,7 +59,7 @@ public class GankAndroidAdapter extends BaseBindingAdapter<GankIoDataBean.Result
 //                        .error(R.drawable.img_one_bi_one)
 //                        .into(binding.ivAndroidPic);
         } else {
-            binding.ivAndroidPic.setVisibility(View.GONE);
+            binding.rlImageLayout.setVisibility(View.GONE);
         }
         binding.llAll.setOnClickListener(v -> WebViewActivity.loadUrl(v.getContext(), object.getUrl(), object.getDesc()));
 
