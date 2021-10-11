@@ -21,19 +21,6 @@ import me.jingbin.bymvvm.utils.CommonUtils;
 
 public class GlideUtil {
 
-    private static GlideUtil instance;
-
-    private GlideUtil() {
-    }
-
-    public static GlideUtil getInstance() {
-        if (instance == null) {
-            instance = new GlideUtil();
-        }
-        return instance;
-    }
-
-
     /**
      * 显示随机的图片(每日推荐)
      *
@@ -44,8 +31,8 @@ public class GlideUtil {
     public static void displayRandom(int imgNumber, String imageUrl, ImageView imageView) {
         Glide.with(imageView.getContext())
                 .load(imageUrl)
-                .placeholder(getMusicDefaultPic(imgNumber))
-                .error(getMusicDefaultPic(imgNumber))
+                .placeholder(CommonUtils.getDrawable(imageView.getContext(), getMusicDefaultPic(imgNumber)))
+                .error(CommonUtils.getDrawable(imageView.getContext(), getMusicDefaultPic(imgNumber)))
                 .transition(DrawableTransitionOptions.withCrossFade(1500))
                 .into(imageView);
     }
@@ -76,8 +63,8 @@ public class GlideUtil {
 //                .asBitmap()
                 .load(url)
                 .override(DensityUtil.dip2px(imageView.getContext(), 60), DensityUtil.dip2px(imageView.getContext(), 80))
-                .placeholder(R.drawable.shape_bg_loading)
-                .error(R.drawable.shape_bg_loading)
+                .placeholder(CommonUtils.getDrawable(imageView.getContext(), R.drawable.shape_bg_loading))
+                .error(CommonUtils.getDrawable(imageView.getContext(), R.drawable.shape_bg_loading))
 //                .skipMemoryCache(true) //跳过内存缓存
 //                .crossFade(1000)
 //                .diskCacheStrategy(DiskCacheStrategy.SOURCE)// 缓存图片源文件（解决加载gif内存溢出问题）
@@ -93,8 +80,8 @@ public class GlideUtil {
         Glide.with(imageView.getContext())
                 .load(url)
                 .transition(DrawableTransitionOptions.withCrossFade(500))
-                .placeholder(getDefaultPic(type))
-                .error(getDefaultPic(type))
+                .placeholder(CommonUtils.getDrawable(imageView.getContext(), getDefaultPic(type)))
+                .error(CommonUtils.getDrawable(imageView.getContext(), getDefaultPic(type)))
                 .into(imageView);
     }
 
@@ -228,9 +215,9 @@ public class GlideUtil {
                 .load(url)
                 .override(DensityUtil.dip2px(imageView.getContext(), imageWidthDp), DensityUtil.dip2px(imageView.getContext(), imageHeightDp))
                 .transition(DrawableTransitionOptions.withCrossFade(500))
-                .placeholder(getMusicDefaultPic(4))
+                .placeholder(CommonUtils.getDrawable(imageView.getContext(), getMusicDefaultPic(4)))
                 .centerCrop()
-                .error(getDefaultPic(0))
+                .error(CommonUtils.getDrawable(imageView.getContext(), getDefaultPic(0)))
                 .into(imageView);
     }
 }
