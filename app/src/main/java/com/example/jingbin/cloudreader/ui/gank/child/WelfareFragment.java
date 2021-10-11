@@ -56,6 +56,7 @@ public class WelfareFragment extends BaseFragment<WelfareViewModel, FragmentWelf
             return;
         }
         showLoading();
+        viewModel.setPage(1);
         loadWelfareData();
         isFirst = false;
     }
@@ -103,18 +104,16 @@ public class WelfareFragment extends BaseFragment<WelfareViewModel, FragmentWelf
             @Override
             public void onChanged(@Nullable GankIoDataBean bean) {
                 if (bean != null && bean.getResults() != null && bean.getResults().size() > 0) {
-                    // +1 是因为本身的rv带有一个刷新头布局
                     if (viewModel.getPage() == 1) {
                         showContentView();
-                        mWelfareAdapter.clear();
                         mWelfareAdapter.setNewData(bean.getResults());
                     } else {
                         mWelfareAdapter.addData(bean.getResults());
+                        bindingView.xrvWelfare.loadMoreComplete();
                     }
-                    bindingView.xrvWelfare.loadMoreComplete();
                 } else {
-                    bindingView.xrvWelfare.loadMoreComplete();
                     if (mWelfareAdapter.getItemCount() == 0) {
+                        bindingView.xrvWelfare.loadMoreComplete();
                         showError();
                     } else {
                         bindingView.xrvWelfare.loadMoreEnd();
@@ -127,11 +126,5 @@ public class WelfareFragment extends BaseFragment<WelfareViewModel, FragmentWelf
     @Override
     protected void onRefresh() {
         loadWelfareData();
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        viewModel.onDestroy();
     }
 }

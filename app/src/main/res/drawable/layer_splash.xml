@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
     <!-- 背景颜色 -->
-    <item android:drawable="@color/colorWhite" />
+    <item android:drawable="@color/colorTabBgDefault" />
 
     <!-- <item android:bottom="50dp">-->
     <item>

@@ -56,6 +56,8 @@ open class MyShareActivity : BaseActivity<WanCenterViewModel, FragmentWanAndroid
         mAdapter.isMyShare = true
         bindingView.xrvWan.adapter = mAdapter
         bindingView.xrvWan.addHeaderView(headerBinding.root)
+        // 目的是修复系统切换深色模式时page的值不变
+        viewModel.mPage = 1
         bindingView.srlWan.setOnRefreshListener {
             viewModel.mPage = 1
             loadData()

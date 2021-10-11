@@ -1,17 +1,17 @@
 package com.example.jingbin.cloudreader.ui.gank.child;
 
-import androidx.lifecycle.Observer;
 import android.os.Bundle;
-import androidx.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.annotation.Nullable;
+import androidx.lifecycle.Observer;
+
 import com.cocosw.bottomsheet.BottomSheet;
 import com.example.jingbin.cloudreader.R;
 import com.example.jingbin.cloudreader.adapter.GankAndroidAdapter;
-import me.jingbin.bymvvm.base.BaseFragment;
 import com.example.jingbin.cloudreader.bean.GankIoDataBean;
 import com.example.jingbin.cloudreader.databinding.FragmentAndroidBinding;
 import com.example.jingbin.cloudreader.utils.RefreshHelper;
@@ -19,6 +19,7 @@ import com.example.jingbin.cloudreader.utils.SPUtils;
 import com.example.jingbin.cloudreader.utils.ToastUtil;
 import com.example.jingbin.cloudreader.viewmodel.gank.GankViewModel;
 
+import me.jingbin.bymvvm.base.BaseFragment;
 import me.jingbin.library.ByRecyclerView;
 
 import static com.example.jingbin.cloudreader.app.Constants.GANK_TYPE;
@@ -62,6 +63,7 @@ public class CustomFragment extends BaseFragment<GankViewModel, FragmentAndroidB
     private void initData() {
         String type = SPUtils.getString(GANK_TYPE, "全部");
         setSelectType(type);
+        viewModel.setPage(1);
         viewModel.setType(mType);
     }
 

@@ -57,7 +57,7 @@ public class WelfareViewModel extends BaseViewModel {
 
     public MutableLiveData<GankIoDataBean> loadWelfareData() {
         final MutableLiveData<GankIoDataBean> data = new MutableLiveData<>();
-        mModel.setData("Girl", "Girl",mPage, 20);
+        mModel.setData("Girl", "Girl", mPage, 20);
         mModel.getGankIoData(new RequestImpl() {
             @Override
             public void loadSuccess(Object object) {
@@ -137,12 +137,20 @@ public class WelfareViewModel extends BaseViewModel {
         this.mPage = mPage;
     }
 
-    public void onDestroy() {
-        imgList.clear();
-        imgList = null;
-        imageTitleList.clear();
-        imageTitleList = null;
-        allList.clear();
-        allList = null;
+    @Override
+    protected void onCleared() {
+        super.onCleared();
+        if (imgList != null) {
+            imgList.clear();
+            imgList = null;
+        }
+        if (imageTitleList != null) {
+            imageTitleList.clear();
+            imageTitleList = null;
+        }
+        if (allList != null) {
+            allList.clear();
+            allList = null;
+        }
     }
 }

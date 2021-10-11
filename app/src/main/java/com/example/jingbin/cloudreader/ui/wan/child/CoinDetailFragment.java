@@ -118,6 +118,7 @@ public class CoinDetailFragment extends BaseFragment<CoinListViewModel, Fragment
             return;
         }
         bindingView.srlWan.setRefreshing(true);
+        viewModel.setPage(1);
         bindingView.srlWan.postDelayed(this::getCoinLog, 150);
         mIsFirst = false;
     }

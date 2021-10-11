@@ -2,16 +2,17 @@ package com.example.jingbin.cloudreader.ui.gank.child;
 
 import android.content.Context;
 import android.os.Bundle;
+
 import androidx.annotation.Nullable;
 
 import com.example.jingbin.cloudreader.R;
 import com.example.jingbin.cloudreader.adapter.GankAndroidAdapter;
-import me.jingbin.bymvvm.base.BaseFragment;
 import com.example.jingbin.cloudreader.databinding.FragmentAndroidBinding;
 import com.example.jingbin.cloudreader.ui.MainActivity;
 import com.example.jingbin.cloudreader.utils.RefreshHelper;
 import com.example.jingbin.cloudreader.viewmodel.gank.GankViewModel;
 
+import me.jingbin.bymvvm.base.BaseFragment;
 import me.jingbin.library.ByRecyclerView;
 import me.jingbin.library.decoration.SpacesItemDecoration;
 
@@ -60,6 +61,7 @@ public class AndroidFragment extends BaseFragment<GankViewModel, FragmentAndroid
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
+        viewModel.setPage(1);
         viewModel.setType(mType);
         initRecyclerView();
         // 准备就绪

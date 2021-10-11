@@ -117,6 +117,7 @@ public class CoinRankFragment extends BaseFragment<CoinListViewModel, FragmentWa
             return;
         }
         bindingView.srlWan.setRefreshing(true);
+        viewModel.setPage(1);
         bindingView.srlWan.postDelayed(this::getCoinRank, 150);
         mIsFirst = false;
     }

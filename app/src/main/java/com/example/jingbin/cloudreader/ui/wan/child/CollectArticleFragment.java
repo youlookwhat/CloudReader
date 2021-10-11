@@ -102,6 +102,7 @@ public class CollectArticleFragment extends BaseFragment<ArticleListViewModel, F
             return;
         }
         bindingView.srlWan.setRefreshing(true);
+        viewModel.setPage(1);
         bindingView.srlWan.postDelayed(this::getCollectList, 150);
         mIsFirst = false;
     }

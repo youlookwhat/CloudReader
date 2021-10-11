@@ -162,10 +162,7 @@ public class HomeFragment extends BaseFragment<WanAndroidListViewModel, Fragment
      * 下拉刷新
      */
     private void swipeRefresh() {
-        bindingView.srlWan.postDelayed(() -> {
-            viewModel.setPage(0);
-            getWanAndroidBanner();
-        }, 350);
+        bindingView.srlWan.postDelayed(this::getWanAndroidBanner, 350);
     }
 
     /**
@@ -174,7 +171,7 @@ public class HomeFragment extends BaseFragment<WanAndroidListViewModel, Fragment
     public void showBannerView(List<WanAndroidBannerBean.DataBean> result) {
         if (!isLoadBanner) {
             headerBinding.banner
-                    .setIndicatorRes(R.drawable.banner_red, R.drawable.banner_grey)
+                    .setIndicatorRes(R.drawable.shape_banner_select, R.drawable.shape_banner_unselect)
                     .setBannerStyle(BannerConfig.NOT_INDICATOR)
                     .setBannerAnimation(ScaleRightTransformer.class)
                     .setDelayTime(6000)
@@ -244,6 +241,7 @@ public class HomeFragment extends BaseFragment<WanAndroidListViewModel, Fragment
     }
 
     public void getWanAndroidBanner() {
+        viewModel.setPage(0);
         viewModel.getWanAndroidBanner().observe(this, new Observer<WanAndroidBannerBean>() {
             @Override
             public void onChanged(@Nullable WanAndroidBannerBean bean) {

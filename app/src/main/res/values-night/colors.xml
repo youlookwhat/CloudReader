@@ -80,5 +80,8 @@
     <color name="colorBtDialog">#38659C</color>
     <!--banner和图片的蒙层-->
     <color name="colorBannerMask">#50000000</color>
-
+    <!--banner指示器已选颜色-->
+    <color name="colorBannerSelect">#80ffffff</color>
+    <!--banner指示器未选颜色-->
+    <color name="colorBannerUnSelect">#20000000</color>
 </resources>

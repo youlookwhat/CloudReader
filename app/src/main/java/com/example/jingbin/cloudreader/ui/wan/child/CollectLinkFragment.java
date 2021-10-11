@@ -88,9 +88,7 @@ public class CollectLinkFragment extends BaseFragment<CollectLinkModel, Fragment
                 if (bean != null) {
                     if (bean.getData() != null && bean.getData() != null && bean.getData().size() > 0) {
                         showContentView();
-                        mAdapter.clear();
-                        mAdapter.addAll(bean.getData());
-                        mAdapter.notifyDataSetChanged();
+                        mAdapter.setNewData(bean.getData());
                         bindingView.xrvWan.loadMoreEnd();
                     } else {
                         showEmptyView("你还没有收藏网址哦~");
