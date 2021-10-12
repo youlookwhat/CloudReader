@@ -74,7 +74,7 @@
     </string>
 
     <string name="string_everyday_empty">There is no update for the moment. Check out the other information~</string>
-    <string name="string_share_text">发现了一个高仿网易云音乐的App，里面有玩安卓、IT干货等最新资讯，还有最新电影热映榜，大力推荐哦~：https://www.coolapk.com/apk/127875</string>
+    <string name="string_share_text">发现了一个高仿网易云音乐的App，里面有玩安卓、IT干货等最新资讯，大力推荐哦~：https://www.coolapk.com/apk/127875</string>
 
     <!--项目布局文件引用的字符串-->
     <string name="no_name">anonymous</string>
@@ -109,6 +109,8 @@
     <string name="string_url_gank">https://gank.io</string>
     <!--玩安卓-->
     <string name="string_url_wanandroid">http://www.wanandroid.com/index</string>
+    <!--玩安卓积分榜-->
+    <string name="string_url_jifen">https://www.wanandroid.com/coin/rank/1</string>
     <!--每日推荐-->
     <string name="string_url_trending">https://github.com/trending</string>
     <!--积分规则-->

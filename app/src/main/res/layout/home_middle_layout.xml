@@ -144,7 +144,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_marginTop="8dp"
-                        android:text="热映榜"
+                        android:text="积分榜"
                         android:textColor="@color/colorContent"
                         android:textSize="12sp" />
                 </LinearLayout>

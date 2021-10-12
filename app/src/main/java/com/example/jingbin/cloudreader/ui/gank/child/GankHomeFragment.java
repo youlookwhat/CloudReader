@@ -217,7 +217,7 @@ public class GankHomeFragment extends BaseFragment<GankHomeViewModel, FragmentEv
                     WebViewActivity.loadUrl(v.getContext(), getString(R.string.string_url_wanandroid), "玩Android");
                     break;
                 case R.id.ib_movie_hot:
-                    RxBus.getDefault().post(RxCodeConstants.JUMP_TYPE_TO_ONE, new RxBusBaseMessage());
+                    WebViewActivity.loadUrl(v.getContext(), getString(R.string.string_url_jifen), "积分榜");
                     break;
                 case R.id.fl_everyday:
                     WebViewActivity.loadUrl(v.getContext(), getString(R.string.string_url_trending), "Trending");
