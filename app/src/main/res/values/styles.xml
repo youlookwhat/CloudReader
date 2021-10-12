@@ -194,10 +194,13 @@
         <item name="tabBackground">@drawable/ripple_tab_bg</item>
     </style>
 
-    <style name="AppBigImageThem" parent="Theme.AppCompat.NoActionBar">
+    <style name="AppBigImageTheme" parent="Theme.AppCompat.NoActionBar">
         <item name="android:windowTranslucentStatus" tools:targetApi="19">true</item>
         <item name="android:windowActivityTransitions" tools:targetApi="lollipop">true</item>
         <!--<item name="android:navigationBarColor" tools:targetApi="lollipop">@color/colorBtDialog</item>-->
     </style>
+
+    <!--深色的ActionBar主题-->
+    <style name="ToolBarDarkActionBar" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
 </resources>

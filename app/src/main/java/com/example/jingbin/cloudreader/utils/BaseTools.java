@@ -26,19 +26,6 @@ import java.util.List;
 public class BaseTools {
 
     /**
-     * 重启App
-     */
-    public static void restartApp(Activity activity) {
-        final Intent intent = App.getInstance().getPackageManager().getLaunchIntentForPackage(App.getInstance().getPackageName());
-        if (intent != null) {
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-            activity.startActivity(intent);
-            android.os.Process.killProcess(android.os.Process.myPid());
-        }
-    }
-
-    /**
      * 处于栈顶的Activity名
      */
     public String getTopActivityName(Context context) {

@@ -29,6 +29,8 @@ class NavNightModeActivity : BaseActivity<NoViewModel, ActivityNavNightModeBindi
     }
 
     private fun initView() {
+        // 设置toolbar的dark模式，为了使"完成"文字颜色显示白色
+        supportActionBar?.themedContext?.setTheme(R.style.ToolBarDarkActionBar)
         if (NightModeUtil.getSystemMode()) {
             bindingView.dayNightSwitch.isChecked = true
             bindingView.llChoose.visibility = View.GONE
@@ -88,7 +90,7 @@ class NavNightModeActivity : BaseActivity<NoViewModel, ActivityNavNightModeBindi
                 }
                 bindingView.ctvCheckNormal.postDelayed(Runnable {
                     NightModeUtil.initNightMode(bindingView.dayNightSwitch.isChecked, bindingView.ctvCheckNight.isChecked)
-                    BaseTools.restartApp(activity)
+                    NightModeUtil.restartApp(activity)
                 }, 300)
             }
         }
