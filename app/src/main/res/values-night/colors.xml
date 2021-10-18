@@ -84,4 +84,6 @@
     <color name="colorBannerSelect">#80ffffff</color>
     <!--banner指示器未选颜色-->
     <color name="colorBannerUnSelect">#20000000</color>
+    <!--dialog背景-->
+    <color name="colorDialogBg">#ff303030</color>
 </resources>

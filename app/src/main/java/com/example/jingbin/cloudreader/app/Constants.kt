@@ -9,6 +9,7 @@ open class Constants {
 
     companion object {
         const val DOWNLOAD_URL = "https://www.coolapk.com/apk/127875"
+        const val PRIVATE_URL = "https://www.coolapk.com/apk/127875 "
 
         const val NIGHT_SKIN = "night.skin"
         const val KEY_MODE_NIGHT = "mode-night"
@@ -34,9 +35,9 @@ open class Constants {
         const val MESSAGE_READ_TIP = "message_read_tip"
         // 深色模式消息提示
         const val MESSAGE_READ_NIGHT_TIP = "message_read_night_tip"
-        // 知识体系里上一次选中的position
-        const val TREE_POSITION = "tree_position"
         // 发现页内容角标
         const val FIND_POSITION = "find_position"
+        // 是否同意隐私政策
+        const val IS_AGREE_PRIVATE = "is_agree_private"
     }
 }

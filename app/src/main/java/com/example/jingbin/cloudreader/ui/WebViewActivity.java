@@ -71,6 +71,7 @@ public class WebViewActivity extends AppCompatActivity {
     private boolean isTitleFix;
     private CollectModel collectModel;
     private ByWebView byWebView;
+    private boolean isPrivateUrl = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,6 +89,7 @@ public class WebViewActivity extends AppCompatActivity {
             mTitle = getIntent().getStringExtra("title");
             mUrl = getIntent().getStringExtra("url");
             isTitleFix = getIntent().getBooleanExtra("isTitleFix", false);
+            isPrivateUrl = Constants.PRIVATE_URL.equals(mUrl);
         }
     }
 
@@ -145,9 +147,13 @@ public class WebViewActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+        if (isPrivateUrl) {
+            return super.onCreateOptionsMenu(menu);
+        }
         getMenuInflater().inflate(R.menu.webview_menu, menu);
         return true;
     }
+
 
     public void setTitle(String mTitle) {
         if (!isTitleFix) {
@@ -356,7 +362,7 @@ public class WebViewActivity extends AppCompatActivity {
      */
     public void handleFinish() {
         supportFinishAfterTransition();
-        if (!MainActivity.isLaunch) {
+        if (!isPrivateUrl && !MainActivity.isLaunch) {
             MainActivity.start(this);
         }
     }

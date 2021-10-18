@@ -308,7 +308,7 @@ public class MainActivity extends BaseActivity<MainViewModel, ActivityMainBindin
                 break;
             case R.id.iv_avatar:
                 // 头像进入GitHub
-                WebViewActivity.loadUrl(v.getContext(), CommonUtils.getString(R.string.string_url_cloudreader), "CloudReader");
+                WebViewActivity.loadUrl(v.getContext(), CommonUtils.getString(this, R.string.string_url_cloudreader), "CloudReader");
                 break;
             case R.id.ll_nav_exit:
                 // 退出应用

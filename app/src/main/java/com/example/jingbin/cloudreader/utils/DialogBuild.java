@@ -2,7 +2,9 @@ package com.example.jingbin.cloudreader.utils;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.text.SpannableString;
 import android.text.TextUtils;
+import android.text.method.LinkMovementMethod;
 import android.view.View;
 import android.widget.TextView;
 
@@ -10,9 +12,11 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.AppCompatEditText;
 
 import com.example.jingbin.cloudreader.R;
+import com.example.jingbin.cloudreader.app.Constants;
 import com.example.jingbin.cloudreader.app.RxCodeConstants;
 import com.example.jingbin.cloudreader.data.UserUtil;
 import com.example.jingbin.cloudreader.data.model.LoginModel;
+import com.example.jingbin.cloudreader.ui.WebViewActivity;
 import com.example.jingbin.cloudreader.view.OnLoginListener;
 import com.example.jingbin.cloudreader.view.OnShareDialogListener;
 
@@ -20,6 +24,7 @@ import me.jingbin.bymvvm.room.Injection;
 import me.jingbin.bymvvm.room.User;
 import me.jingbin.bymvvm.room.UserDataCallback;
 import me.jingbin.bymvvm.rxbus.RxBus;
+import me.jingbin.bymvvm.utils.CommonUtils;
 
 
 /**
@@ -204,4 +209,40 @@ public class DialogBuild {
         void onClick(String name, String link);
     }
 
+    /**
+     * 显示隐私政策弹框
+     */
+    public static void showPrivate(Context context, View.OnClickListener clickListener) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        View view = View.inflate(context, R.layout.dialog_layout_private, null);
+        TextView tv_agree = view.findViewById(R.id.tv_agree);
+        TextView tv_content = view.findViewById(R.id.tv_content);
+        TextView tv_close_app = view.findViewById(R.id.tv_close_app);
+        SpannableString doubleClickTag = BaseTools.getDoubleClickTag(context, R.color.colorTheme, CommonUtils.getString(context, R.string.string_private), "《隐私政策》", "", new BaseTools.OnActionListener<Integer>() {
+            @Override
+            public void click(Integer bean) {
+                WebViewActivity.loadUrl(context, Constants.PRIVATE_URL, "隐私政策");
+            }
+        });
+        tv_content.setText(doubleClickTag);
+        tv_content.setMovementMethod(LinkMovementMethod.getInstance());
+        builder.setCancelable(false);
+        builder.setView(view);
+        AlertDialog show = builder.show();
+        tv_agree.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                show.dismiss();
+                clickListener.onClick(v);
+            }
+        });
+        tv_close_app.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                show.dismiss();
+                // 杀死该应用进程 需要权限;
+                android.os.Process.killProcess(android.os.Process.myPid());
+            }
+        });
+    }
 }

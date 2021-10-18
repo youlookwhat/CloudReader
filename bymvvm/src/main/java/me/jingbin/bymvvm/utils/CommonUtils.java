@@ -44,6 +44,10 @@ public class CommonUtils {
         return getResources().getString(resId);
     }
 
+    public static String getString(Context context, int resId) {
+        return context.getResources().getString(resId);
+    }
+
     public static float getDimens(int resId) {
         return getResources().getDimension(resId);
     }

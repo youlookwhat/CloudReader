@@ -3,9 +3,14 @@ package com.example.jingbin.cloudreader.ui;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.View;
+
 import androidx.fragment.app.FragmentActivity;
 
 import com.example.jingbin.cloudreader.R;
+import com.example.jingbin.cloudreader.app.Constants;
+import com.example.jingbin.cloudreader.utils.DialogBuild;
+import com.example.jingbin.cloudreader.utils.SPUtils;
 
 /**
  * 解决启动白屏问题
@@ -24,15 +29,27 @@ public class LoadingActivity extends FragmentActivity {
             finish();
             return;
         }
-        handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                startActivity(new Intent(LoadingActivity.this, MainActivity.class));
-                overridePendingTransition(R.anim.screen_zoom_in, R.anim.screen_zoom_out);
-                finish();
-            }
-        }, 200);
+        if (SPUtils.getInt(Constants.IS_AGREE_PRIVATE, 0) == 0) {
+            DialogBuild.showPrivate(this, new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    SPUtils.putInt(Constants.IS_AGREE_PRIVATE, 1);
+                    startActivity(new Intent(LoadingActivity.this, MainActivity.class));
+                    overridePendingTransition(R.anim.screen_zoom_in, R.anim.screen_zoom_out);
+                    finish();
+                }
+            });
+        } else {
+            handler = new Handler();
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    startActivity(new Intent(LoadingActivity.this, MainActivity.class));
+                    overridePendingTransition(R.anim.screen_zoom_in, R.anim.screen_zoom_out);
+                    finish();
+                }
+            }, 200);
+        }
     }
 
     @Override
