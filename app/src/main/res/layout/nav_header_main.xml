@@ -400,6 +400,7 @@
                             android:gravity="center_vertical"
                             android:paddingLeft="10dp"
                             android:paddingRight="10dp"
+                            android:textColor="@color/colorSubtitle"
                             android:textSize="12sp"
                             tools:text="排名 1" />
 

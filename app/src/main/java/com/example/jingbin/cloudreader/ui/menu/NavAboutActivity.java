@@ -53,6 +53,7 @@ public class NavAboutActivity extends BaseActivity<NoViewModel, ActivityNavAbout
         bindingView.tvFunction.setOnClickListener(listener);
         bindingView.tvWanandroid.setOnClickListener(listener);
         bindingView.tvDownloadUrl.setOnClickListener(listener);
+        bindingView.tvPrivacy.setOnClickListener(listener);
 
         // 酷安评分鼓励
         if (BaseTools.isApplicationAvilible(this, "com.coolapk.market")) {
@@ -91,6 +92,10 @@ public class NavAboutActivity extends BaseActivity<NoViewModel, ActivityNavAbout
                 case R.id.tv_wanandroid:
                     url = CommonUtils.getString(R.string.string_url_wanandroid);
                     title = "玩Android";
+                    break;
+                case R.id.tv_privacy:
+                    url = Constants.PRIVATE_URL;
+                    title = "隐私政策";
                     break;
                 default:
                     break;

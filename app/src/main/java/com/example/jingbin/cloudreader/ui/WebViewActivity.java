@@ -147,7 +147,7 @@ public class WebViewActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        if (isPrivateUrl) {
+        if (isPrivateUrl && !MainActivity.isLaunch) {
             return super.onCreateOptionsMenu(menu);
         }
         getMenuInflater().inflate(R.menu.webview_menu, menu);
@@ -307,6 +307,9 @@ public class WebViewActivity extends AppCompatActivity {
      * 长按图片事件处理
      */
     private boolean handleLongImage() {
+        if (isPrivateUrl && !MainActivity.isLaunch) {
+            return false;
+        }
         final WebView.HitTestResult hitTestResult = byWebView.getWebView().getHitTestResult();
         // 如果是图片类型或者是带有图片链接的类型
         if (hitTestResult.getType() == WebView.HitTestResult.IMAGE_TYPE ||

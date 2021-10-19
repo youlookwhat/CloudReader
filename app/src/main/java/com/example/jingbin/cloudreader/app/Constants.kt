@@ -4,16 +4,19 @@ package com.example.jingbin.cloudreader.app
  * Created by jingbin on 2016/11/26.
  * 固定参数
  */
-
 open class Constants {
 
     companion object {
+        // 下载的链接
         const val DOWNLOAD_URL = "https://www.coolapk.com/apk/127875"
-        const val PRIVATE_URL = "https://www.coolapk.com/apk/127875 "
+        // 隐私政策
+        const val PRIVATE_URL = "https://jingbin127.gitee.io/apiserver/privacy.html"
 
-        const val NIGHT_SKIN = "night.skin"
+        // 深色模式
         const val KEY_MODE_NIGHT = "mode-night"
+        // 跟随系统
         const val KEY_MODE_SYSTEM = "mode-system"
+        // 是否打开过酷安应用市场
         const val SHOW_MARKET = "show_market"
         // 酷安包名
         const val COOLAPK_PACKAGE = "com.coolapk.market"
