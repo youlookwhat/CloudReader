@@ -11,6 +11,7 @@ import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.example.jingbin.cloudreader.R;
 
 import jp.wasabeef.glide.transformations.BlurTransformation;
+import me.jingbin.bymvvm.http.glide.GlideApp;
 import me.jingbin.bymvvm.utils.CommonUtils;
 
 
@@ -75,9 +76,10 @@ public class GlideUtil {
     /**
      * 书籍、妹子图、电影列表图
      * 默认图区别
+     * GlideApp 干货api 忽略图片https证书验证
      */
     public static void displayEspImage(String url, ImageView imageView, int type) {
-        Glide.with(imageView.getContext())
+        GlideApp.with(imageView.getContext())
                 .load(url)
                 .transition(DrawableTransitionOptions.withCrossFade(500))
                 .placeholder(CommonUtils.getDrawable(imageView.getContext(), getDefaultPic(type)))
