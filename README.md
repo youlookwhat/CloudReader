@@ -35,22 +35,22 @@ If you have any questions, please write to [the issue][21] of making you don't u
 * 2、玩安卓和干货集中营内容。
 * 3、MvvM-DataBinding的项目应用。                                    
 * 4、`NavigationView`搭配`DrawerLayout`的具体使用。                                    
-* 5、透明状态栏使用与版本适配。                                    
-* 6、高仿网易云音乐歌单详情页。                                    
-* 7、RxBus代替EventBus进行组件之间通讯。                                    
-* 8、`ToolBar`的全方面使用。                                    
-* 9、`Glide`加载监听，获取缓存，圆形图片，高斯模糊。                                    
-* 10、水波纹点击效果详细使用与适配。                                    
-* 11、`Room`的基本使用。
-* 12、基于`DataBinding`的`ViewHolder`。                                    
-* 13、基于`DataBinding`的`BaseActivity`和`BaseFragment`。                                    
-* 14、`Fragment`懒加载模式。                                    
-* 15、`SwipeRefreshLayout`结合`RecyclerView`下拉刷新上拉加载。                                    
-* 16、`CoordinatorLayout`+`Behavior`实现标题栏渐变和滑动置顶。                                                                       
+* 5、透明状态栏使用与版本适配。                                                                        
+* 6、RxBus代替EventBus进行组件之间通讯。                                    
+* 7、`ToolBar`的全方面使用。                                    
+* 8、`Glide`加载监听，获取缓存，圆形图片，高斯模糊。                                    
+* 9、水波纹点击效果详细使用与适配。                                    
+* 10、`Room`的基本使用。
+* 11、基于`DataBinding`的`ViewHolder`。                                    
+* 12、基于`DataBinding`的`BaseActivity`和`BaseFragment`。                                    
+* 13、`Fragment`懒加载模式。                                    
+* 14、`SwipeRefreshLayout`结合`RecyclerView`下拉刷新上拉加载。                                    
+* 15、`CoordinatorLayout`+`Behavior`实现标题栏渐变和滑动置顶。                                                                       
+* 16、深色模式的应用。                                                                       
 
 
 ## See Detail
-> [项目介绍详情](https://github.com/youlookwhat/CloudReader/wiki/Introduction) | [细节优化详情](https://github.com/youlookwhat/CloudReader/wiki) | 🚀[**版本更新详情(V3.5.0)**](https://github.com/youlookwhat/CloudReader/wiki/Update-log)
+> [项目介绍详情](https://github.com/youlookwhat/CloudReader/wiki/Introduction) | [细节优化详情](https://github.com/youlookwhat/CloudReader/wiki) | 🚀[**版本更新详情(V3.6.0)**](https://github.com/youlookwhat/CloudReader/wiki/Update-log)
 
 ### Download
 　[酷安下载](https://www.coolapk.com/apk/127875)
@@ -67,6 +67,12 @@ If you have any questions, please write to [the issue][21] of making you don't u
 　
 
 ### Version
+#### V3.6.0（2021-10-20）
+ - 1、[新增] 新增了深色模式
+ - 2、[新增] 更新了用户隐私协议
+ - 3、[优化] 优化了网页内跳转应用
+ - 4、[优化] 优化了菜单等部分样式
+
 #### V3.5.0（2021-01-23）
  - 1、[移除] 因Api失效去除电影模块，很遗憾
  - 2、[新增] 广场、问答、文章分享等功能 (Kotlin)
@@ -309,7 +315,7 @@ limitations under the License.
 [2]:https://www.apache.org/licenses/LICENSE-2.0.html
 [3]:https://img.shields.io/badge/API-19%2B-red.svg?style=flat
 [4]:https://android-arsenal.com/api?level=19
-[30]:https://img.shields.io/badge/release-3.5.0-red.svg
+[30]:https://img.shields.io/badge/release-3.6.0-red.svg
 [31]:https://github.com/youlookwhat/CloudReader/releases
 [32]:https://img.shields.io/badge/PRs-welcome-brightgreen.svg
 [33]:https://github.com/youlookwhat/CloudReader/pulls
