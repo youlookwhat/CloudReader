@@ -14,7 +14,8 @@ import javax.net.ssl.X509TrustManager;
 /**
  * Created by jingbin on 10/19/21.
  */
-public class SSLSocketClient  {
+public class SSLSocketClient {
+
     //获取这个SSLSocketFactory
     public static SSLSocketFactory getSSLSocketFactory() {
         try {
@@ -28,7 +29,7 @@ public class SSLSocketClient  {
 
     //获取TrustManager
     private static TrustManager[] getTrustManager() {
-        TrustManager[] trustAllCerts = new TrustManager[]{
+        return new TrustManager[]{
                 new X509TrustManager() {
                     @Override
                     public void checkClientTrusted(X509Certificate[] chain, String authType) {
@@ -44,17 +45,15 @@ public class SSLSocketClient  {
                     }
                 }
         };
-        return trustAllCerts;
     }
 
     //获取HostnameVerifier
     public static HostnameVerifier getHostnameVerifier() {
-        HostnameVerifier hostnameVerifier = new HostnameVerifier() {
+        return new HostnameVerifier() {
             @Override
             public boolean verify(String s, SSLSession sslSession) {
                 return true;
             }
         };
-        return hostnameVerifier;
     }
 }
