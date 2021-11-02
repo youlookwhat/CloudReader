@@ -106,6 +106,7 @@ public class WebViewActivity extends AppCompatActivity {
         }
         mTitleToolBar.setOverflowIcon(ContextCompat.getDrawable(this, R.drawable.actionbar_more));
         tvGunTitle.postDelayed(() -> tvGunTitle.setSelected(true), 1900);
+        tvGunTitle.setOnClickListener(v -> tvGunTitle.setSelected(!tvGunTitle.isSelected()));
         tvGunTitle.setText(mTitle == null ? "加载中..." : Html.fromHtml(mTitle));
 
         byWebView = ByWebView.with(this)
@@ -295,8 +296,8 @@ public class WebViewActivity extends AppCompatActivity {
                 String path = data.getPath();
 //                String text = "Scheme: " + scheme + "\n" + "host: " + host + "\n" + "path: " + path;
 //                Log.e("data", text);
-                String url = scheme + "://" + host + path;
-                byWebView.loadUrl(url);
+                mUrl = scheme + "://" + host + path;
+                byWebView.loadUrl(mUrl);
             } catch (Exception e) {
                 e.printStackTrace();
             }

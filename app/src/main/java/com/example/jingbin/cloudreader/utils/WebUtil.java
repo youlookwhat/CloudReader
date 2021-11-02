@@ -21,7 +21,7 @@ public class WebUtil {
             DebugUtil.error("----" + url);
             String host = parseDomain(fromUrl);
             String appName = getAppName(url);
-            DialogBuild.show(activity, "\" " + host + "\" 想要唤起 \" " + appName + " \" ", "唤起", "取消", new DialogInterface.OnClickListener() {
+            DialogBuild.show(activity, "\" " + host + " \" 想要唤起 \" " + appName + " \" ", "唤起", "取消", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     Intent intent = new Intent();
@@ -62,7 +62,7 @@ public class WebUtil {
     private static String parseDomain(String url) {
         String regex = "^([hH][tT]{2}[pP]:/*|[hH][tT]{2}[pP][sS]:/*|[fF][tT][pP]:/*)(([A-Za-z0-9-~]+).)+([A-Za-z0-9-~\\/])+(\\?{0,1}(([A-Za-z0-9-~]+\\={0,1})([A-Za-z0-9-~]*)\\&{0,1})*)$";
         Pattern pattern = Pattern.compile(regex);
-        if (pattern.matcher(url).matches()) {
+        if (!TextUtils.isEmpty(url) && pattern.matcher(url).matches()) {
             return URI.create(url).getHost();
         } else {
             return url;
