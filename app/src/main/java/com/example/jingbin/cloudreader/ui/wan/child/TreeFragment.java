@@ -33,7 +33,6 @@ import me.jingbin.library.view.OnItemFilterClickListener;
  */
 public class TreeFragment extends BaseFragment<TreeViewModel, FragmentWanAndroidBinding> {
 
-    private boolean mIsPrepared;
     private boolean mIsFirst = true;
     private TreeAdapter mTreeAdapter;
     private FragmentActivity activity;
@@ -56,13 +55,17 @@ public class TreeFragment extends BaseFragment<TreeViewModel, FragmentWanAndroid
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        // 准备就绪
-        mIsPrepared = true;
-        /**
-         * 因为启动时先走loadData()再走onActivityCreated，
-         * 所以此处要额外调用load(),不然最初不会加载内容
-         */
-        loadData();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (mIsFirst) {
+            showLoading();
+            initRefreshView();
+            getTree();
+            mIsFirst = false;
+        }
     }
 
     private void initRefreshView() {
@@ -117,17 +120,6 @@ public class TreeFragment extends BaseFragment<TreeViewModel, FragmentWanAndroid
                 }
             }
         });
-    }
-
-    @Override
-    protected void loadData() {
-        if (!mIsPrepared || !mIsVisible || !mIsFirst) {
-            return;
-        }
-        showLoading();
-        initRefreshView();
-        bindingView.srlWan.postDelayed(this::getTree, 150);
-        mIsFirst = false;
     }
 
     private void getTree() {

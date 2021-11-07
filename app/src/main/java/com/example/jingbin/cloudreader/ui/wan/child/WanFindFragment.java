@@ -40,7 +40,6 @@ import me.jingbin.library.ByRecyclerView;
  */
 public class WanFindFragment extends BaseFragment<WanFindViewModel, FragmentWanFindBinding> {
 
-    private boolean mIsPrepared;
     private boolean mIsFirst = true;
     private WxArticleAdapter wxArticleAdapter;
     private WanAndroidAdapter mContentAdapter;
@@ -67,22 +66,18 @@ public class WanFindFragment extends BaseFragment<WanFindViewModel, FragmentWanF
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        initRefreshView();
-        initRxBus();
-
-        // 准备就绪
-        mIsPrepared = true;
-        loadData();
     }
 
     @Override
-    protected void loadData() {
-        if (!mIsPrepared || !mIsVisible || !mIsFirst) {
-            return;
+    public void onResume() {
+        super.onResume();
+        if (mIsFirst) {
+            showLoading();
+            initRefreshView();
+            initRxBus();
+            bindingView.rvWxarticle.postDelayed(this::getData, 150);
+            mIsFirst = false;
         }
-        showLoading();
-        bindingView.rvWxarticle.postDelayed(this::getData, 150);
-        mIsFirst = false;
     }
 
     private void getData() {

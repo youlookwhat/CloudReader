@@ -19,6 +19,7 @@ import androidx.appcompat.app.ActionBar;
 import androidx.core.view.GravityCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.viewpager.widget.ViewPager;
 
@@ -29,6 +30,7 @@ import com.example.jingbin.cloudreader.bean.wanandroid.CoinUserInfoBean;
 import com.example.jingbin.cloudreader.data.UserUtil;
 import com.example.jingbin.cloudreader.databinding.ActivityMainBinding;
 import com.example.jingbin.cloudreader.databinding.NavHeaderMainBinding;
+import com.example.jingbin.cloudreader.ui.gank.GankFragment;
 import com.example.jingbin.cloudreader.ui.menu.NavAboutActivity;
 import com.example.jingbin.cloudreader.ui.menu.NavAdmireActivity;
 import com.example.jingbin.cloudreader.ui.menu.NavDeedBackActivity;
@@ -36,6 +38,8 @@ import com.example.jingbin.cloudreader.ui.menu.NavDownloadActivity;
 import com.example.jingbin.cloudreader.ui.menu.NavHomePageActivity;
 import com.example.jingbin.cloudreader.ui.menu.NavNightModeActivity;
 import com.example.jingbin.cloudreader.ui.menu.SearchActivity;
+import com.example.jingbin.cloudreader.ui.wan.WanCenterFragment;
+import com.example.jingbin.cloudreader.ui.wan.WanFragment;
 import com.example.jingbin.cloudreader.ui.wan.child.LoginActivity;
 import com.example.jingbin.cloudreader.ui.wan.child.MyCoinActivity;
 import com.example.jingbin.cloudreader.ui.wan.child.MyCollectActivity;
@@ -47,10 +51,12 @@ import com.example.jingbin.cloudreader.utils.PerfectClickListener;
 import com.example.jingbin.cloudreader.utils.SPUtils;
 import com.example.jingbin.cloudreader.utils.StringFormatUtil;
 import com.example.jingbin.cloudreader.utils.UpdateUtil;
-import com.example.jingbin.cloudreader.view.MyFragmentPagerAdapter;
+import com.example.jingbin.cloudreader.view.CommonTabPagerAdapter;
 import com.example.jingbin.cloudreader.view.OnLoginListener;
 import com.example.jingbin.cloudreader.view.OnMyPageChangeListener;
 import com.example.jingbin.cloudreader.viewmodel.wan.MainViewModel;
+
+import java.util.Arrays;
 
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
@@ -68,7 +74,7 @@ import me.jingbin.bymvvm.utils.StatusBarUtil;
  * <a href="https://github.com/youlookwhat/CloudReader">source code</a>
  * <a href="http://www.jianshu.com/u/e43c6e979831">Contact me</a>
  */
-public class MainActivity extends BaseActivity<MainViewModel, ActivityMainBinding> implements View.OnClickListener {
+public class MainActivity extends BaseActivity<MainViewModel, ActivityMainBinding> implements View.OnClickListener, CommonTabPagerAdapter.TabPagerListener {
 
     public static boolean isLaunch;
     public boolean isClickCloseApp;
@@ -165,7 +171,8 @@ public class MainActivity extends BaseActivity<MainViewModel, ActivityMainBindin
 
     private void initContentFragment() {
         // 注意使用的是：getSupportFragmentManager
-        MyFragmentPagerAdapter adapter = new MyFragmentPagerAdapter(getSupportFragmentManager());
+        CommonTabPagerAdapter adapter = new CommonTabPagerAdapter(getSupportFragmentManager(), Arrays.asList("", "", ""));
+        adapter.setListener(this);
         vpContent.setAdapter(adapter);
         // 设置ViewPager最大缓存的页面个数(cpu消耗少)
         vpContent.setOffscreenPageLimit(2);
@@ -465,5 +472,19 @@ public class MainActivity extends BaseActivity<MainViewModel, ActivityMainBindin
 
     public static void start(Context context) {
         context.startActivity(new Intent(context, MainActivity.class));
+    }
+
+    @org.jetbrains.annotations.Nullable
+    @Override
+    public Fragment getFragment(int position) {
+        switch (position) {
+            case 0:
+                return new WanFragment();
+            case 1:
+                return new WanCenterFragment();
+            case 2:
+                return new GankFragment();
+        }
+        return new WanFragment();
     }
 }

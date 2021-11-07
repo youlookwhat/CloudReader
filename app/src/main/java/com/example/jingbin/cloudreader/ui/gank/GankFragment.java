@@ -1,25 +1,26 @@
 package com.example.jingbin.cloudreader.ui.gank;
 
 import android.os.Bundle;
+
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.jingbin.cloudreader.R;
-import me.jingbin.bymvvm.base.BaseFragment;
-import com.example.jingbin.cloudreader.databinding.FragmentContentBinding;
-import me.jingbin.bymvvm.rxbus.RxBus;
 import com.example.jingbin.cloudreader.app.RxCodeConstants;
+import com.example.jingbin.cloudreader.databinding.FragmentContentBinding;
 import com.example.jingbin.cloudreader.ui.gank.child.AndroidFragment;
 import com.example.jingbin.cloudreader.ui.gank.child.CustomFragment;
 import com.example.jingbin.cloudreader.ui.gank.child.GankHomeFragment;
 import com.example.jingbin.cloudreader.ui.gank.child.WelfareFragment;
 import com.example.jingbin.cloudreader.view.MyFragmentPagerAdapter;
-import me.jingbin.bymvvm.base.NoViewModel;
 
 import java.util.ArrayList;
 
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
+import me.jingbin.bymvvm.base.BaseFragment;
+import me.jingbin.bymvvm.base.NoViewModel;
+import me.jingbin.bymvvm.rxbus.RxBus;
 
 /**
  * Created by jingbin on 16/11/21.
@@ -27,37 +28,34 @@ import io.reactivex.functions.Consumer;
  */
 public class GankFragment extends BaseFragment<NoViewModel, FragmentContentBinding> {
 
-    private ArrayList<String> mTitleList = new ArrayList<>(4);
-    private ArrayList<Fragment> mFragments = new ArrayList<>(4);
+    private final ArrayList<String> mTitleList = new ArrayList<>(4);
+    private final ArrayList<Fragment> mFragments = new ArrayList<>(4);
     private boolean mIsFirst = true;
-    private boolean mIsPrepared;
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
-        mIsPrepared = true;
     }
 
     @Override
-    protected void loadData() {
-        if (!mIsPrepared || !mIsVisible || !mIsFirst) {
-            return;
-        }
-        showLoading();
-        bindingView.vpGank.postDelayed(() -> {
-            initFragmentList();
-            MyFragmentPagerAdapter myAdapter = new MyFragmentPagerAdapter(getChildFragmentManager(), mFragments, mTitleList);
-            bindingView.vpGank.setAdapter(myAdapter);
-            myAdapter.notifyDataSetChanged();
-            // 左右预加载页面的个数
-            bindingView.vpGank.setOffscreenPageLimit(3);
-            bindingView.tabGank.setupWithViewPager(bindingView.vpGank);
-            // item点击跳转
-            initRxBus();
-            showContentView();
+    public void onResume() {
+        super.onResume();
+        if (mIsFirst) {
+            showLoading();
+            bindingView.vpGank.postDelayed(() -> {
+                initFragmentList();
+                MyFragmentPagerAdapter myAdapter = new MyFragmentPagerAdapter(getChildFragmentManager(), mFragments, mTitleList);
+                bindingView.vpGank.setAdapter(myAdapter);
+                myAdapter.notifyDataSetChanged();
+                // 左右预加载页面的个数
+                bindingView.vpGank.setOffscreenPageLimit(3);
+                bindingView.tabGank.setupWithViewPager(bindingView.vpGank);
+                // item点击跳转
+                initRxBus();
+                showContentView();
+            }, 120);
             mIsFirst = false;
-        }, 120);
+        }
     }
 
     @Override

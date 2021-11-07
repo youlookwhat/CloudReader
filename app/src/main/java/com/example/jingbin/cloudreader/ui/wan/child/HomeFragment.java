@@ -46,7 +46,6 @@ import me.jingbin.sbanner.holder.SBannerViewHolder;
  */
 public class HomeFragment extends BaseFragment<WanAndroidListViewModel, FragmentWanAndroidBinding> {
 
-    private boolean mIsPrepared;
     private boolean mIsFirst = true;
     private WanAndroidAdapter mAdapter;
     private HeaderWanAndroidBinding headerBinding;
@@ -77,8 +76,6 @@ public class HomeFragment extends BaseFragment<WanAndroidListViewModel, Fragment
         showContentView();
         initRefreshView();
 
-        // 准备就绪
-        mIsPrepared = true;
         loadData();
     }
 
@@ -131,18 +128,6 @@ public class HomeFragment extends BaseFragment<WanAndroidListViewModel, Fragment
                 .load(R.layout.item_wan_android_skeleton)
                 .frozen(false)
                 .show();
-    }
-
-    @Override
-    protected void loadData() {
-        if (mIsPrepared && isLoadBanner) {
-            onResume();
-        }
-        if (!mIsPrepared || !mIsVisible || !mIsFirst) {
-            return;
-        }
-        bindingView.srlWan.postDelayed(this::getWanAndroidBanner, 1000);
-        mIsFirst = false;
     }
 
     private void refresh(boolean isChecked, boolean isArticle) {
@@ -219,15 +204,12 @@ public class HomeFragment extends BaseFragment<WanAndroidListViewModel, Fragment
     @Override
     public void onResume() {
         super.onResume();
+        if (mIsFirst) {
+            bindingView.srlWan.postDelayed(this::getWanAndroidBanner, 1000);
+            mIsFirst = false;
+        }
         if (isLoadBanner) {
             headerBinding.banner.startAutoPlay();
-        }
-    }
-
-    @Override
-    protected void onInvisible() {
-        if (mIsPrepared && isLoadBanner) {
-            onPause();
         }
     }
 
