@@ -65,54 +65,11 @@
 
         </androidx.appcompat.widget.Toolbar>
 
-
-        <com.google.android.material.tabs.TabLayout
-            android:id="@+id/tl_search"
-            android:layout_width="match_parent"
-            android:layout_height="35dp"
-            android:background="@color/colorToolBar"
-            app:layout_constraintTop_toBottomOf="@+id/toolbar"
-            app:tabGravity="center"
-            app:tabIndicatorColor="@color/colorWhite"
-            app:tabMode="fixed"
-            app:tabSelectedTextColor="@color/colorWhite"
-            app:tabTextAppearance="@style/MyTabLayoutTextAppearance"
-            app:tabTextColor="@color/colorWhiteHalf">
-
-            <com.google.android.material.tabs.TabItem
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="玩安卓"
-                android:textColor="@color/colorWhite"
-                android:textSize="12sp" />
-
-            <com.google.android.material.tabs.TabItem
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="干货 | 安卓"
-                android:textColor="@color/colorWhite"
-                android:textSize="12sp" />
-
-            <com.google.android.material.tabs.TabItem
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="干货 | 全部"
-                android:textColor="@color/colorWhite"
-                android:textSize="12sp" />
-
-            <com.google.android.material.tabs.TabItem
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="网页"
-                android:textColor="@color/colorWhite"
-                android:textSize="12sp" />
-        </com.google.android.material.tabs.TabLayout>
-
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tl_search">
+            app:layout_constraintTop_toBottomOf="@+id/toolbar">
 
             <me.jingbin.library.ByRecyclerView
                 android:id="@+id/recyclerView"
@@ -137,52 +94,14 @@
                     app:layout_constraintTop_toTopOf="parent">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
-                        android:id="@+id/cl_search_tag"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:paddingBottom="10dp"
-                        android:visibility="gone"
-                        app:layout_constraintBottom_toTopOf="@+id/cl_history_tag"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent">
-
-                        <TextView
-                            android:id="@+id/tv_title1"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="15dp"
-                            android:text="热门搜索"
-                            android:textColor="@color/colorTabText"
-                            android:textSize="15sp"
-                            android:textStyle="bold"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                        <com.google.android.material.internal.FlowLayout
-                            android:id="@+id/tfl_search"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="17dp"
-                            android:layout_marginTop="10dp"
-                            android:layout_marginEnd="10dp"
-                            app:itemSpacing="8dp"
-                            app:layout_constraintRight_toRightOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/tv_title1"
-                            app:lineSpacing="8dp" />
-
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-
-                    <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/cl_history_tag"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
                         android:paddingBottom="10dp"
                         android:visibility="gone"
-                        app:layout_constraintTop_toBottomOf="@+id/cl_search_tag">
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:visibility="visible">
 
                         <TextView
                             android:id="@+id/tv_title2"
@@ -222,6 +141,46 @@
                             app:lineSpacing="8dp" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/cl_search_tag"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:paddingBottom="10dp"
+                        android:visibility="gone"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/cl_history_tag"
+                        tools:visibility="visible">
+
+                        <TextView
+                            android:id="@+id/tv_title1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="15dp"
+                            android:text="热门搜索"
+                            android:textColor="@color/colorTabText"
+                            android:textSize="15sp"
+                            android:textStyle="bold"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <com.google.android.material.internal.FlowLayout
+                            android:id="@+id/tfl_search"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="17dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginEnd="10dp"
+                            app:itemSpacing="8dp"
+                            app:layout_constraintRight_toRightOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/tv_title1"
+                            app:lineSpacing="8dp" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.core.widget.NestedScrollView>
         </androidx.constraintlayout.widget.ConstraintLayout>

@@ -22,22 +22,18 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.jingbin.cloudreader.R;
 import com.example.jingbin.cloudreader.adapter.CategoryArticleAdapter;
-import com.example.jingbin.cloudreader.adapter.GankAndroidSearchAdapter;
 import com.example.jingbin.cloudreader.bean.wanandroid.HomeListBean;
 import com.example.jingbin.cloudreader.bean.wanandroid.SearchTagBean;
 import com.example.jingbin.cloudreader.databinding.ActivitySearchBinding;
 import com.example.jingbin.cloudreader.ui.WebViewActivity;
 import com.example.jingbin.cloudreader.utils.BaseTools;
 import com.example.jingbin.cloudreader.utils.DialogBuild;
-import com.example.jingbin.cloudreader.utils.ToastUtil;
 import com.example.jingbin.cloudreader.view.byview.NeteaseLoadMoreView;
 import com.example.jingbin.cloudreader.viewmodel.wan.SearchViewModel;
 import com.google.android.material.internal.FlowLayout;
-import com.google.android.material.tabs.TabLayout;
 
 import java.util.List;
 
-import me.jingbin.bymvvm.adapter.BaseBindingAdapter;
 import me.jingbin.bymvvm.utils.CommonUtils;
 import me.jingbin.bymvvm.utils.StatusBarUtil;
 import me.jingbin.library.ByRecyclerView;
@@ -51,7 +47,7 @@ import me.jingbin.library.decoration.SpacesItemDecoration;
 public class SearchActivity extends AppCompatActivity {
 
     private ActivitySearchBinding binding;
-    private BaseBindingAdapter mAdapter;
+    private CategoryArticleAdapter mAdapter;
     private SearchViewModel viewModel;
     private String keyWord;
 
@@ -79,6 +75,7 @@ public class SearchActivity extends AppCompatActivity {
                 }
             }
         });
+        viewModel.getHistoryData();
         viewModel.getHotkey().observe(this, new Observer<List<SearchTagBean.DataBean>>() {
             @Override
             public void onChanged(@Nullable List<SearchTagBean.DataBean> dataBeans) {
@@ -88,15 +85,23 @@ public class SearchActivity extends AppCompatActivity {
                 } else {
                     binding.clSearchTag.setVisibility(View.GONE);
                 }
-                viewModel.getHistoryData();
             }
         });
     }
 
     protected void initView() {
         setSupportActionBar(binding.toolbar);
-        binding.toolbar.setNavigationOnClickListener(v -> finish());
         binding.ivHistoryDelete.setOnClickListener(v -> DialogBuild.showCustom(v, 0, "确认清空全部历史记录?", "清空", "取消", (dialog, which) -> viewModel.clearHistory()));
+        binding.toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (binding.recyclerView.getVisibility() == View.VISIBLE) {
+                    showLayoutView(true);
+                } else {
+                    finish();
+                }
+            }
+        });
         binding.etContent.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -106,12 +111,14 @@ public class SearchActivity extends AppCompatActivity {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 String content = binding.etContent.getText().toString().trim();
+                keyWord = content;
                 if (!TextUtils.isEmpty(content)) {
                     binding.ivClear.setVisibility(View.VISIBLE);
-                    keyWord = content;
-                    load();
+                    viewModel.setPage(0);
+                    loadWanData();
                 } else {
                     binding.ivClear.setVisibility(View.GONE);
+                    showLayoutView(true);
                 }
             }
 
@@ -123,29 +130,29 @@ public class SearchActivity extends AppCompatActivity {
         binding.etContent.setOnEditorActionListener((textView, actionId, keyEvent) -> {
             BaseTools.hideSoftKeyBoard(this);
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                if (!TextUtils.isEmpty(keyWord) && binding.tlSearch.getSelectedTabPosition() == 3) {
+                if (!TextUtils.isEmpty(keyWord)) {
                     /**
                      * www.baidu.com
                      * http://www.baidu.com
                      * youtube.com等
                      */
                     if (Patterns.WEB_URL.matcher(keyWord).matches() || URLUtil.isValidUrl(keyWord)) {
-                        if (!TextUtils.isEmpty(keyWord)) {
-                            if (!keyWord.startsWith("http")) {
-                                if (keyWord.startsWith("www")) {
-                                    keyWord = "http://" + keyWord;
-                                } else {
-                                    keyWord = "http://www." + keyWord;
-                                }
+                        if (!keyWord.startsWith("http")) {
+                            if (keyWord.startsWith("www")) {
+                                keyWord = "http://" + keyWord;
+                            } else {
+                                keyWord = "http://www." + keyWord;
                             }
-                            BaseTools.hideSoftKeyBoard(this);
-                            WebViewActivity.loadUrl(this, keyWord, "加载中...");
-                            viewModel.saveSearch(keyWord);
                         }
+                        BaseTools.hideSoftKeyBoard(this);
+                        WebViewActivity.loadUrl(this, keyWord, "加载中...");
                     } else {
-                        ToastUtil.showToast("请输入正确的链接~");
+                        if (binding.recyclerView.getVisibility() != View.VISIBLE) {
+                            binding.ivClear.setVisibility(View.VISIBLE);
+                            viewModel.setPage(0);
+                            loadWanData();
+                        }
                     }
-                } else {
                     viewModel.saveSearch(keyWord);
                 }
             }
@@ -164,100 +171,35 @@ public class SearchActivity extends AppCompatActivity {
             }
         });
 
-        binding.tlSearch.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-            @Override
-            public void onTabSelected(TabLayout.Tab tab) {
-                initViewModel(tab.getPosition());
-            }
-
-            @Override
-            public void onTabUnselected(TabLayout.Tab tab) {
-
-            }
-
-            @Override
-            public void onTabReselected(TabLayout.Tab tab) {
-
-            }
-        });
-        initViewModel(0);
+        initViewModel();
     }
 
-    private void load() {
-        int tabPosition = binding.tlSearch.getSelectedTabPosition();
-        switch (tabPosition) {
-            case 0:
-                viewModel.setPage(0);
-                loadWanData();
-                break;
-            case 1:
-                viewModel.setType("Android");
-                viewModel.setGankPage(1);
-                loadGankData();
-                break;
-            case 2:
-                viewModel.setType("All");
-                viewModel.setGankPage(1);
-                loadGankData();
-                break;
-            case 3:
-                break;
-            default:
-                break;
+    private void initViewModel() {
+        mAdapter = new CategoryArticleAdapter(this);
+        if (binding.recyclerView.getItemDecorationCount() > 0) {
+            binding.recyclerView.removeItemDecorationAt(0);
         }
-    }
-
-    private void initViewModel(int position) {
-        if (position == 0) {
-            mAdapter = new CategoryArticleAdapter(this);
-            if (binding.recyclerView.getItemDecorationCount() > 0) {
-                binding.recyclerView.removeItemDecorationAt(0);
-            }
-            binding.recyclerView.addItemDecoration(new SpacesItemDecoration(this, SpacesItemDecoration.VERTICAL));
-            binding.recyclerView.setAdapter(mAdapter);
-        } else if (position == 1 || position == 2) {
-            mAdapter = new GankAndroidSearchAdapter(this);
-            if (binding.recyclerView.getItemDecorationCount() > 0) {
-                binding.recyclerView.removeItemDecorationAt(0);
-            }
-            binding.recyclerView.setAdapter(mAdapter);
-        }
+        binding.recyclerView.addItemDecoration(new SpacesItemDecoration(this, SpacesItemDecoration.VERTICAL));
+        binding.recyclerView.setAdapter(mAdapter);
         binding.recyclerView.setItemAnimator(null);
         binding.recyclerView.setOnLoadMoreListener(new ByRecyclerView.OnLoadMoreListener() {
             @Override
             public void onLoadMore() {
-                int position2 = binding.tlSearch.getSelectedTabPosition();
-                if (position2 == 0) {
-                    int page = viewModel.getPage();
-                    viewModel.setPage(++page);
-                    loadWanData();
-                } else if (position2 == 1 || position2 == 2) {
-                    int page = viewModel.getGankPage();
-                    viewModel.setGankPage(++page);
-                    loadGankData();
-                }
+                int page = viewModel.getPage();
+                viewModel.setPage(++page);
+                loadWanData();
             }
         });
         if (!TextUtils.isEmpty(keyWord)) {
-            load();
+            viewModel.setPage(0);
+            loadWanData();
         }
     }
 
     private void initRefreshView() {
         binding.recyclerView.setLayoutManager(new LinearLayoutManager(this));
         binding.recyclerView.setLoadingMoreView(new NeteaseLoadMoreView(this));
-        int tabPosition = binding.tlSearch.getSelectedTabPosition();
-        switch (tabPosition) {
-            case 0:
-                mAdapter = new CategoryArticleAdapter(this);
-                break;
-            case 1:
-            case 2:
-                mAdapter = new GankAndroidSearchAdapter(this);
-                break;
-            default:
-                break;
-        }
+        mAdapter = new CategoryArticleAdapter(this);
         binding.recyclerView.setAdapter(mAdapter);
     }
 
@@ -274,7 +216,7 @@ public class SearchActivity extends AppCompatActivity {
                         mAdapter.getData().clear();
                         mAdapter.notifyDataSetChanged();
                     }
-                    if (mAdapter instanceof CategoryArticleAdapter) {
+                    if (mAdapter != null) {
                         mAdapter.addData(homeListBean.getData().getDatas());
                     }
                     binding.recyclerView.loadMoreComplete();
@@ -285,37 +227,6 @@ public class SearchActivity extends AppCompatActivity {
                         mAdapter.getData().clear();
                         mAdapter.notifyDataSetChanged();
                     }
-                }
-            }
-        });
-    }
-
-    private void loadGankData() {
-        viewModel.loadGankData(keyWord).observe(this, bean -> {
-            if (bean != null && bean.getResults() != null && bean.getResults().size() > 0) {
-                showLayoutView(false);
-                if (viewModel.getGankPage() == 1) {
-                    mAdapter.getData().clear();
-                    mAdapter.notifyDataSetChanged();
-                }
-                if (mAdapter instanceof GankAndroidSearchAdapter) {
-                    GankAndroidSearchAdapter adapter = (GankAndroidSearchAdapter) this.mAdapter;
-                    adapter.addData(bean.getResults());
-                    int position = binding.tlSearch.getSelectedTabPosition();
-                    if (position == 2) {
-                        adapter.setAllType(true);
-                    } else {
-                        adapter.setAllType(false);
-                    }
-                }
-                binding.recyclerView.loadMoreComplete();
-            } else {
-                if (viewModel.getGankPage() != 1) {
-                    binding.recyclerView.loadMoreEnd();
-                } else {
-                    mAdapter.getData().clear();
-                    mAdapter.notifyDataSetChanged();
-                    binding.recyclerView.loadMoreComplete();
                 }
             }
         });
@@ -361,6 +272,15 @@ public class SearchActivity extends AppCompatActivity {
         } else {
             binding.recyclerView.setVisibility(View.VISIBLE);
             binding.nsSearchLayout.setVisibility(View.GONE);
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (binding.recyclerView.getVisibility() == View.VISIBLE) {
+            showLayoutView(true);
+        } else {
+            super.onBackPressed();
         }
     }
 
