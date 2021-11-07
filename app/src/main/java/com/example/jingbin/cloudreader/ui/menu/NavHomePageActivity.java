@@ -29,7 +29,8 @@ public class NavHomePageActivity extends AppCompatActivity {
         // 解决7.0以上系统 滑动到顶部 标题裁减一半的问题
 //        setSupportActionBar(binding.detailToolbar);
         ToolbarHelper.initFullBar(binding.detailToolbar, this);
-        binding.detailToolbar.setNavigationIcon(null);
+//        binding.detailToolbar.setNavigationIcon(null);
+        binding.detailToolbar.setNavigationOnClickListener(v -> finish());
 
         binding.fabShare.setOnClickListener(v -> WebViewActivity.loadUrl(v.getContext(), CommonUtils.getString(R.string.string_url_cloudreader), "CloudReader"));
     }
