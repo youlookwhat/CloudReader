@@ -69,7 +69,7 @@ public class SearchActivity extends AppCompatActivity {
             public void onChanged(@Nullable List<String> strings) {
                 if (strings != null && strings.size() > 0) {
                     binding.clHistoryTag.setVisibility(View.VISIBLE);
-                    showTagView(binding.tflSearchHistory, strings);
+                    showTagView(binding.tflSearchHistory, strings, true);
                 } else {
                     binding.clHistoryTag.setVisibility(View.GONE);
                 }
@@ -81,7 +81,7 @@ public class SearchActivity extends AppCompatActivity {
             public void onChanged(@Nullable List<SearchTagBean.DataBean> dataBeans) {
                 if (dataBeans != null && dataBeans.size() > 0) {
                     binding.clSearchTag.setVisibility(View.VISIBLE);
-                    showTagView(binding.tflSearch, dataBeans);
+                    showTagView(binding.tflSearch, dataBeans, false);
                 } else {
                     binding.clSearchTag.setVisibility(View.GONE);
                 }
@@ -138,11 +138,7 @@ public class SearchActivity extends AppCompatActivity {
                      */
                     if (Patterns.WEB_URL.matcher(keyWord).matches() || URLUtil.isValidUrl(keyWord)) {
                         if (!keyWord.startsWith("http")) {
-                            if (keyWord.startsWith("www")) {
-                                keyWord = "http://" + keyWord;
-                            } else {
-                                keyWord = "http://www." + keyWord;
-                            }
+                            keyWord = "http://" + keyWord;
                         }
                         BaseTools.hideSoftKeyBoard(this);
                         WebViewActivity.loadUrl(this, keyWord, "加载中...");
@@ -235,7 +231,7 @@ public class SearchActivity extends AppCompatActivity {
     /**
      * 显示热门搜索或历史搜索标签
      */
-    private <T> void showTagView(FlowLayout flowLayout, final List<T> beanList) {
+    private <T> void showTagView(FlowLayout flowLayout, final List<T> beanList, boolean isHistory) {
         flowLayout.removeAllViews();
         for (int i = 0; i < beanList.size(); i++) {
             TextView textView = (TextView) View.inflate(flowLayout.getContext(), R.layout.layout_navi_tag, null);
@@ -258,7 +254,17 @@ public class SearchActivity extends AppCompatActivity {
                         name = dataBean.getName();
                     }
                     viewModel.keyWord.set(name);
-                    viewModel.saveSearch(name);
+                    if (isHistory) {
+                        // 搜索历史则可点击进去网页
+                        if (Patterns.WEB_URL.matcher(name).matches() || URLUtil.isValidUrl(name)) {
+                            if (!name.startsWith("http")) {
+                                name = "http://" + name;
+                            }
+                            WebViewActivity.loadUrl(SearchActivity.this, name, "加载中...");
+                        }
+                        // 更新历史记录
+                        viewModel.saveSearch(name);
+                    }
                     BaseTools.hideSoftKeyBoard(SearchActivity.this);
                 }
             });

@@ -6,7 +6,6 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
-import androidx.fragment.app.Fragment;
 
 import com.example.jingbin.cloudreader.R;
 import com.example.jingbin.cloudreader.bean.wanandroid.TreeItemBean;
@@ -14,7 +13,7 @@ import com.example.jingbin.cloudreader.bean.wanandroid.WxarticleItemBean;
 import com.example.jingbin.cloudreader.databinding.ActivityCategoryDetailBinding;
 import com.example.jingbin.cloudreader.utils.StatusBarUtil;
 import com.example.jingbin.cloudreader.utils.ToolbarHelper;
-import com.example.jingbin.cloudreader.view.MyFragmentPagerAdapter;
+import com.example.jingbin.cloudreader.view.CommonTabPagerAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,21 +44,17 @@ public class CategoryDetailActivity extends AppCompatActivity {
         bindingView.setTreeItemBean(mTreeBean);
 
         List<String> mTitleList = new ArrayList<>();
-        List<Fragment> mFragments = new ArrayList<>();
-
         int initIndex = 0;
         for (int i = 0, len = mTreeBean.getChildren().size(); i < len; i++) {
             WxarticleItemBean childrenBean = mTreeBean.getChildren().get(i);
             mTitleList.add(childrenBean.getName());
             if (childrenBean.getId() == cid) {
                 initIndex = i;
-                mFragments.add(CategoryArticleFragment.newInstance(childrenBean.getId(), childrenBean.getName(), true));
-            } else {
-                mFragments.add(CategoryArticleFragment.newInstance(childrenBean.getId(), childrenBean.getName(), false));
             }
         }
 
-        MyFragmentPagerAdapter myAdapter = new MyFragmentPagerAdapter(getSupportFragmentManager(), mFragments, mTitleList);
+        CommonTabPagerAdapter myAdapter = new CommonTabPagerAdapter(getSupportFragmentManager(), mTitleList);
+        myAdapter.setListener(position -> CategoryArticleFragment.newInstance(mTreeBean.getChildren().get(position).getId(), mTreeBean.getChildren().get(position).getName(), false));
         bindingView.viewPager.setAdapter(myAdapter);
         myAdapter.notifyDataSetChanged();
         bindingView.tabLayout.setupWithViewPager(bindingView.viewPager);

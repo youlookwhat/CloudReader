@@ -30,7 +30,6 @@ import com.example.jingbin.cloudreader.bean.wanandroid.CoinUserInfoBean;
 import com.example.jingbin.cloudreader.data.UserUtil;
 import com.example.jingbin.cloudreader.databinding.ActivityMainBinding;
 import com.example.jingbin.cloudreader.databinding.NavHeaderMainBinding;
-import com.example.jingbin.cloudreader.ui.gank.GankFragment;
 import com.example.jingbin.cloudreader.ui.menu.NavAboutActivity;
 import com.example.jingbin.cloudreader.ui.menu.NavAdmireActivity;
 import com.example.jingbin.cloudreader.ui.menu.NavDeedBackActivity;
@@ -40,6 +39,7 @@ import com.example.jingbin.cloudreader.ui.menu.NavNightModeActivity;
 import com.example.jingbin.cloudreader.ui.menu.SearchActivity;
 import com.example.jingbin.cloudreader.ui.wan.WanCenterFragment;
 import com.example.jingbin.cloudreader.ui.wan.WanFragment;
+import com.example.jingbin.cloudreader.ui.wan.WanProjectFragment;
 import com.example.jingbin.cloudreader.ui.wan.child.LoginActivity;
 import com.example.jingbin.cloudreader.ui.wan.child.MyCoinActivity;
 import com.example.jingbin.cloudreader.ui.wan.child.MyCollectActivity;
@@ -483,7 +483,7 @@ public class MainActivity extends BaseActivity<MainViewModel, ActivityMainBindin
             case 1:
                 return new WanCenterFragment();
             case 2:
-                return new GankFragment();
+                return new WanProjectFragment();
         }
         return new WanFragment();
     }

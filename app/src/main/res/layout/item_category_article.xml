@@ -44,6 +44,16 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:background="@color/colorLine" />
 
+        <View
+            android:id="@+id/view_mask"
+            android:layout_width="60dp"
+            android:layout_height="78dp"
+            android:background="@color/colorBannerMask"
+            android:visibility='@{TextUtils.isEmpty(bean.envelopePic)?View.GONE:View.VISIBLE}'
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:visibility="gone" />
+
         <TextView
             android:id="@+id/tv_title"
             android:layout_width="0dp"

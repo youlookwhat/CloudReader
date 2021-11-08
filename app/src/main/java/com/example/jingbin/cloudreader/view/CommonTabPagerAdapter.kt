@@ -3,6 +3,7 @@ package com.example.jingbin.cloudreader.view
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
+import com.example.jingbin.cloudreader.utils.DataUtil
 
 class CommonTabPagerAdapter : FragmentPagerAdapter {
 
@@ -26,7 +27,7 @@ class CommonTabPagerAdapter : FragmentPagerAdapter {
 
     override fun getCount(): Int = pageCount
 
-    override fun getPageTitle(position: Int): CharSequence? = mList?.get(position)!!
+    override fun getPageTitle(position: Int): CharSequence? = DataUtil.getHtmlString(mList?.get(position))!!
 
     interface TabPagerListener {
         fun getFragment(position: Int): Fragment?

@@ -10,12 +10,11 @@ import com.example.jingbin.cloudreader.bean.wanandroid.ArticlesBean;
 import com.example.jingbin.cloudreader.data.UserUtil;
 import com.example.jingbin.cloudreader.data.model.CollectModel;
 import com.example.jingbin.cloudreader.databinding.ItemCategoryArticleBinding;
+import com.example.jingbin.cloudreader.ui.WebViewActivity;
 import com.example.jingbin.cloudreader.utils.BaseTools;
 import com.example.jingbin.cloudreader.utils.DialogBuild;
-import com.example.jingbin.cloudreader.utils.PerfectClickListener;
 import com.example.jingbin.cloudreader.utils.SPUtils;
 import com.example.jingbin.cloudreader.utils.ToastUtil;
-import com.example.jingbin.cloudreader.ui.WebViewActivity;
 import com.example.jingbin.cloudreader.viewmodel.wan.WanNavigator;
 
 import me.jingbin.bymvvm.adapter.BaseBindingAdapter;
@@ -27,8 +26,8 @@ import me.jingbin.bymvvm.adapter.BaseBindingHolder;
 
 public class CategoryArticleAdapter extends BaseBindingAdapter<ArticlesBean, ItemCategoryArticleBinding> {
 
-    private CollectModel model;
-    private Activity activity;
+    private final CollectModel model;
+    private final Activity activity;
 
     public CategoryArticleAdapter(Activity activity) {
         super(R.layout.item_category_article);
