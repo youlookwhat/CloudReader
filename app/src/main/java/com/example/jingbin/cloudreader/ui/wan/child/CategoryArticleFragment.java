@@ -89,7 +89,7 @@ public class CategoryArticleFragment extends BaseFragment<WanAndroidListViewMode
         mAdapter = new CategoryArticleAdapter(activity);
         bindingView.recyclerView.setLayoutManager(new LinearLayoutManager(activity));
         bindingView.recyclerView.setItemAnimator(null);
-        bindingView.recyclerView.addItemDecoration(new SpacesItemDecoration(activity, SpacesItemDecoration.VERTICAL).setHeaderNoShowDivider(1));
+        bindingView.recyclerView.addItemDecoration(new SpacesItemDecoration(activity).setHeaderNoShowDivider(isRefresh ? 1 : 0));
         bindingView.recyclerView.setRefreshHeaderView(new NeteaseRefreshHeaderView(activity));
         bindingView.recyclerView.setLoadingMoreView(new NeteaseLoadMoreView(activity));
         bindingView.recyclerView.setAdapter(mAdapter);
