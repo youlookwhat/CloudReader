@@ -7,14 +7,14 @@
 [![Codacy Badge][36]][37]
 
 
-> Kotlin && Netease cloud music Ui && Retrofit2 + RxJava2 + MVVM-databinding && Wanandroid、Gank.Io Api 
+> Kotlin && Netease cloud music Ui && Retrofit2 + RxJava2 + Room + MVVM-databinding && Wanandroid Api 
 
 
 ## Introduce
-一款基于网易云音乐UI，使用WanAndroid、Gank.Io Api，MVVM-DataBinding架构开发的符合Google Material Design阅读类的开源项目。
+一款基于网易云音乐UI，使用WanAndroid Api，MVVM-DataBinding架构开发的符合Google Material Design阅读类的开源项目。
 
 
-A netease cloud music based UI, using wanandroid、Gank.Io Api development accord with Google Material Desgin reading class open source projects.
+A netease cloud music based UI, using wanandroid Api development accord with Google Material Desgin reading class open source projects.
 
 ## Screenshots
 
@@ -32,25 +32,24 @@ If you have any questions, please write to [the issue][21] of making you don't u
 
 ## Features 特性
 * 1、基本遵循Google Material Design设计风格。                                    
-* 2、玩安卓和干货集中营内容。
-* 3、MvvM-DataBinding的项目应用。                                    
-* 4、`NavigationView`搭配`DrawerLayout`的具体使用。                                    
-* 5、透明状态栏使用与版本适配。                                                                        
-* 6、RxBus代替EventBus进行组件之间通讯。                                    
-* 7、`ToolBar`的全方面使用。                                    
-* 8、`Glide`加载监听，获取缓存，圆形图片，高斯模糊。                                    
-* 9、水波纹点击效果详细使用与适配。                                    
-* 10、`Room`的基本使用。
-* 11、基于`DataBinding`的`ViewHolder`。                                    
-* 12、基于`DataBinding`的`BaseActivity`和`BaseFragment`。                                    
-* 13、`Fragment`懒加载模式。                                    
-* 14、`SwipeRefreshLayout`结合`RecyclerView`下拉刷新上拉加载。                                    
-* 15、`CoordinatorLayout`+`Behavior`实现标题栏渐变和滑动置顶。                                                                       
-* 16、深色模式的应用。                                                                       
+* 2、MvvM-DataBinding的项目应用。                                    
+* 3、`NavigationView`搭配`DrawerLayout`的具体使用。                                    
+* 4、透明状态栏使用与版本适配。                                                                        
+* 5、RxBus代替EventBus进行组件之间通讯。                                    
+* 6、`ToolBar`的全方面使用。                                    
+* 7、`Glide`加载监听，获取缓存，圆形图片，高斯模糊。                                    
+* 8、水波纹点击效果详细使用与适配。                                    
+* 9、`Room`的基本使用。
+* 10、基于`DataBinding`的`ViewHolder`。                                    
+* 11、基于`DataBinding`的`BaseActivity`和`BaseFragment`。                                    
+* 12、`Fragment`懒加载模式。                                    
+* 13、`SwipeRefreshLayout`结合`RecyclerView`下拉刷新上拉加载。                                    
+* 14、`CoordinatorLayout`+`Behavior`实现标题栏渐变和滑动置顶。                                                                       
+* 15、深色模式的应用。                                                                       
 
 
 ## See Detail
-> [项目介绍详情](https://github.com/youlookwhat/CloudReader/wiki/Introduction) | [细节优化详情](https://github.com/youlookwhat/CloudReader/wiki) | 🚀[**版本更新详情(V3.6.0)**](https://github.com/youlookwhat/CloudReader/wiki/Update-log)
+> [项目介绍详情](https://github.com/youlookwhat/CloudReader/wiki/Introduction) | [细节优化详情](https://github.com/youlookwhat/CloudReader/wiki) | 🚀[**版本更新详情(V3.7.0)**](https://github.com/youlookwhat/CloudReader/wiki/Update-log)
 
 ### Download
 　[酷安下载](https://www.coolapk.com/apk/127875)
@@ -64,9 +63,15 @@ If you have any questions, please write to [the issue][21] of making you don't u
  - [App使用中的常见问题][25]
  - [开源项目CloudReader笔记][26]
  - [ByRecyclerView - 下拉刷新、加载更多、item点击/长按、万能分割线、粘性Header等][28]
+ - [Android 深色模式的项目应用](https://juejin.cn/post/7022270811524300808)
 　
 
 ### Version
+#### V3.7.0（2021-11-09）
+ - 1、[新增] 新增了玩安卓项目分类模块
+ - 2、[移除] 移除了干货集中营模块
+ - 3、[优化] 调整了子页面位置
+
 #### V3.6.0（2021-10-20）
  - 1、[新增] 新增了深色模式
  - 2、[新增] 更新了用户隐私协议
@@ -264,7 +269,7 @@ If you have any questions, please write to [the issue][21] of making you don't u
  
  - 图片来源：[iconfont][6]、UI工程师[Sandawang](https://github.com/Sandawang)和网易云音乐App。
 
- - 主要数据来源：[wanandroid][27]、[Gank.Io][9]。
+ - 主要数据来源：[玩Android][27]。
 
  - 使用到的开源库：[glide][11]、[bottomsheet][12]、[nineoldandroids][13]、[rxandroid][14]等等。
 
@@ -315,7 +320,7 @@ limitations under the License.
 [2]:https://www.apache.org/licenses/LICENSE-2.0.html
 [3]:https://img.shields.io/badge/API-19%2B-red.svg?style=flat
 [4]:https://android-arsenal.com/api?level=19
-[30]:https://img.shields.io/badge/release-3.6.0-red.svg
+[30]:https://img.shields.io/badge/release-3.7.0-red.svg
 [31]:https://github.com/youlookwhat/CloudReader/releases
 [32]:https://img.shields.io/badge/PRs-welcome-brightgreen.svg
 [33]:https://github.com/youlookwhat/CloudReader/pulls
