@@ -22,9 +22,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.jingbin.cloudreader.R;
 import com.example.jingbin.cloudreader.adapter.CategoryArticleAdapter;
+import com.example.jingbin.cloudreader.app.App;
 import com.example.jingbin.cloudreader.bean.wanandroid.HomeListBean;
 import com.example.jingbin.cloudreader.bean.wanandroid.SearchTagBean;
 import com.example.jingbin.cloudreader.databinding.ActivitySearchBinding;
+import com.example.jingbin.cloudreader.ui.LoadingActivity;
+import com.example.jingbin.cloudreader.ui.MainActivity;
 import com.example.jingbin.cloudreader.ui.WebViewActivity;
 import com.example.jingbin.cloudreader.utils.BaseTools;
 import com.example.jingbin.cloudreader.utils.DialogBuild;
@@ -61,6 +64,7 @@ public class SearchActivity extends AppCompatActivity {
         initRefreshView();
         initView();
         initData();
+        if (!MainActivity.isLaunch) App.isShortcuts = true;
     }
 
     private void initData() {
@@ -98,7 +102,7 @@ public class SearchActivity extends AppCompatActivity {
                 if (binding.recyclerView.getVisibility() == View.VISIBLE) {
                     showLayoutView(true);
                 } else {
-                    finish();
+                    BaseTools.handleFinish(SearchActivity.this);
                 }
             }
         });
@@ -287,6 +291,9 @@ public class SearchActivity extends AppCompatActivity {
             showLayoutView(true);
         } else {
             super.onBackPressed();
+            if (!MainActivity.isLaunch) {
+                LoadingActivity.start(this);
+            }
         }
     }
 

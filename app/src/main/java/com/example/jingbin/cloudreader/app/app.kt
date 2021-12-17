@@ -12,6 +12,10 @@ import me.jingbin.bymvvm.base.RootApplication
 open class App : RootApplication() {
 
     companion object {
+        // 是否是快捷方式进来
+        @JvmField
+        var isShortcuts: Boolean = false
+
         private lateinit var app: App
 
         // @JvmStatic 加上后可以直接 getInstance()，不然需要加上Companion

@@ -30,6 +30,7 @@ import androidx.webkit.WebSettingsCompat;
 import androidx.webkit.WebViewFeature;
 
 import com.example.jingbin.cloudreader.R;
+import com.example.jingbin.cloudreader.app.App;
 import com.example.jingbin.cloudreader.app.Constants;
 import com.example.jingbin.cloudreader.data.UserUtil;
 import com.example.jingbin.cloudreader.data.model.CollectModel;
@@ -366,8 +367,8 @@ public class WebViewActivity extends AppCompatActivity {
      */
     public void handleFinish() {
         supportFinishAfterTransition();
-        if (!isPrivateUrl && !MainActivity.isLaunch) {
-            MainActivity.start(this);
+        if (!isPrivateUrl && !MainActivity.isLaunch && !App.isShortcuts) {
+            LoadingActivity.start(this);
         }
     }
 

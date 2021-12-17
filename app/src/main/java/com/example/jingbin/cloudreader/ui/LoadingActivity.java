@@ -1,5 +1,6 @@
 package com.example.jingbin.cloudreader.ui;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -9,6 +10,7 @@ import androidx.fragment.app.FragmentActivity;
 
 import com.example.jingbin.cloudreader.R;
 import com.example.jingbin.cloudreader.app.Constants;
+import com.example.jingbin.cloudreader.ui.wan.child.MyCoinActivity;
 import com.example.jingbin.cloudreader.utils.DialogBuild;
 import com.example.jingbin.cloudreader.utils.SPUtils;
 
@@ -56,5 +58,10 @@ public class LoadingActivity extends FragmentActivity {
     protected void onDestroy() {
         handler = null;
         super.onDestroy();
+    }
+
+    public static void start(Context mContext) {
+        Intent intent = new Intent(mContext, LoadingActivity.class);
+        mContext.startActivity(intent);
     }
 }

@@ -7,10 +7,14 @@ import android.text.Editable
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.Observer
 import com.example.jingbin.cloudreader.R
+import com.example.jingbin.cloudreader.app.App
 import com.example.jingbin.cloudreader.app.RxCodeConstants
+import com.example.jingbin.cloudreader.data.UserUtil
 import com.example.jingbin.cloudreader.databinding.ActivityPublishBinding
+import com.example.jingbin.cloudreader.ui.MainActivity
 import com.example.jingbin.cloudreader.ui.WebViewActivity
 import com.example.jingbin.cloudreader.utils.BaseTools
 import com.example.jingbin.cloudreader.utils.ToastUtil
@@ -34,6 +38,7 @@ class PublishActivity : BaseActivity<PublishViewModel, ActivityPublishBinding>()
         showContentView()
         bindingView.viewModel = viewModel
         initView()
+        handleShortcuts()
     }
 
     private fun initView() {
@@ -75,6 +80,9 @@ class PublishActivity : BaseActivity<PublishViewModel, ActivityPublishBinding>()
 
     /**分享*/
     fun publish(view: View) {
+        if (!MainActivity.isLaunch && !UserUtil.isLogin(this)) {
+            return
+        }
         viewModel.pushArticle().observe(this, Observer {
             if (it != null && it) {
                 // 成功
@@ -132,6 +140,23 @@ class PublishActivity : BaseActivity<PublishViewModel, ActivityPublishBinding>()
         } else {
             ToastUtil.showToast("请输入链接")
         }
+    }
+
+    /**
+     * 处理快捷方式进来
+     */
+    private fun handleShortcuts() {
+        if (!MainActivity.isLaunch) {
+            App.isShortcuts = true
+            findViewById<Toolbar>(R.id.tool_bar).setNavigationOnClickListener {
+                BaseTools.handleFinish(this)
+            }
+        }
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        BaseTools.handleFinish(this)
     }
 
     companion object {
