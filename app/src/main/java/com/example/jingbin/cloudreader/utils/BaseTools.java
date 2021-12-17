@@ -20,8 +20,11 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentActivity;
 
 import com.example.jingbin.cloudreader.app.App;
+import com.example.jingbin.cloudreader.ui.LoadingActivity;
+import com.example.jingbin.cloudreader.ui.MainActivity;
 
 import java.util.List;
 
@@ -32,6 +35,16 @@ import me.jingbin.bymvvm.utils.CommonUtils;
  */
 
 public class BaseTools {
+
+    /**
+     * 直接通过快捷方式方式打开，回退到首页
+     */
+    public static void handleFinish(FragmentActivity activity) {
+        activity.supportFinishAfterTransition();
+        if (!MainActivity.isLaunch) {
+            LoadingActivity.start(activity);
+        }
+    }
 
     /**
      * 处于栈顶的Activity名

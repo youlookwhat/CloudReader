@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shortcuts xmlns:android="http://schemas.android.com/apk/res/android">
+    <shortcut
+        android:shortcutId="search"
+        android:enabled="true"
+        android:icon="@drawable/ic_shortcut_search"
+        android:shortcutShortLabel="@string/actionbar_search"
+        android:shortcutLongLabel="@string/actionbar_search"
+        android:shortcutDisabledMessage="@string/actionbar_search">
+
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetPackage="com.example.jingbin.cloudreader"
+            android:targetClass="com.example.jingbin.cloudreader.ui.menu.SearchActivity" />
+        <categories android:name="android.shortcut.conversation"/>
+    </shortcut>
+    <shortcut
+        android:shortcutId="publish"
+        android:enabled="true"
+        android:icon="@drawable/ic_shortcut_send"
+        android:shortcutShortLabel="@string/string_publish"
+        android:shortcutLongLabel="@string/string_publish"
+        android:shortcutDisabledMessage="@string/string_publish">
+
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetPackage="com.example.jingbin.cloudreader"
+            android:targetClass="com.example.jingbin.cloudreader.ui.wan.child.PublishActivity" />
+        <categories android:name="android.shortcut.conversation"/>
+    </shortcut>
+    <shortcut
+        android:shortcutId="integral"
+        android:enabled="true"
+        android:icon="@drawable/ic_shortcut_coin"
+        android:shortcutShortLabel="@string/string_integral"
+        android:shortcutLongLabel="@string/string_integral"
+        android:shortcutDisabledMessage="@string/string_integral">
+
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetPackage="com.example.jingbin.cloudreader"
+            android:targetClass="com.example.jingbin.cloudreader.ui.wan.child.MyCoinActivity" />
+        <categories android:name="android.shortcut.conversation"/>
+    </shortcut>
+</shortcuts>

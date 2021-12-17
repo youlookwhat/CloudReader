@@ -45,7 +45,7 @@ class NavNightModeActivity : BaseActivity<NoViewModel, ActivityNavNightModeBindi
                 bindingView.ctvCheckNormal.isChecked = true
             }
         }
-        bindingView.dayNightSwitch.setOnCheckedChangeListener(CompoundButton.OnCheckedChangeListener { buttonView, isChecked ->
+        bindingView.dayNightSwitch.setOnCheckedChangeListener(CompoundButton.OnCheckedChangeListener { _, isChecked ->
             bindingView.llChoose.visibility = if (!isChecked) View.VISIBLE else View.GONE
             if (!isChecked) {
                 bindingView.ctvCheckNight.isChecked = false

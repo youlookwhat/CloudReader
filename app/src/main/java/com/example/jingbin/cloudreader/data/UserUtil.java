@@ -63,7 +63,7 @@ public class UserUtil {
     public static boolean isLogin(Context context) {
         boolean isLogin = SPUtils.getBoolean(Constants.IS_LOGIN, false);
         if (!isLogin) {
-            ToastUtil.showToastLong("请先登录~");
+            ToastUtil.showToastLong("请先登录");
             LoginActivity.start(context);
             return false;
         } else {

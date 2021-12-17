@@ -49,7 +49,7 @@ class UpdateUtil {
                                                 TimeUtil.formatDataTime((updateBean.updated_at.toString() + "000").toLong()),
                                                 updateBean.changelog))
                                 builder.setNegativeButton("取消", null)
-                                builder.setPositiveButton("立即下载") { dialogInterface: DialogInterface?, i: Int ->
+                                builder.setPositiveButton("立即下载") { _: DialogInterface?, i: Int ->
                                     when {
                                         // isJumpMarket == 1 跳应用市场
                                         updateBean.isJumpMarket == 1
