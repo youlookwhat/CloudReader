@@ -3,7 +3,7 @@
     <shortcut
         android:shortcutId="search"
         android:enabled="true"
-        android:icon="@drawable/actionbar_search"
+        android:icon="@drawable/ic_shortcut_search"
         android:shortcutShortLabel="@string/actionbar_search"
         android:shortcutLongLabel="@string/actionbar_search"
         android:shortcutDisabledMessage="@string/actionbar_search">
@@ -17,7 +17,7 @@
     <shortcut
         android:shortcutId="publish"
         android:enabled="true"
-        android:icon="@drawable/icon_share_wan"
+        android:icon="@drawable/ic_shortcut_send"
         android:shortcutShortLabel="@string/string_publish"
         android:shortcutLongLabel="@string/string_publish"
         android:shortcutDisabledMessage="@string/string_publish">
@@ -31,7 +31,7 @@
     <shortcut
         android:shortcutId="integral"
         android:enabled="true"
-        android:icon="@drawable/ic_nav_coin"
+        android:icon="@drawable/ic_shortcut_coin"
         android:shortcutShortLabel="@string/string_integral"
         android:shortcutLongLabel="@string/string_integral"
         android:shortcutDisabledMessage="@string/string_integral">

@@ -14,6 +14,7 @@ import com.example.jingbin.cloudreader.app.App
 import com.example.jingbin.cloudreader.app.RxCodeConstants
 import com.example.jingbin.cloudreader.data.UserUtil
 import com.example.jingbin.cloudreader.databinding.ActivityPublishBinding
+import com.example.jingbin.cloudreader.ui.LoadingActivity
 import com.example.jingbin.cloudreader.ui.MainActivity
 import com.example.jingbin.cloudreader.ui.WebViewActivity
 import com.example.jingbin.cloudreader.utils.BaseTools
@@ -88,6 +89,9 @@ class PublishActivity : BaseActivity<PublishViewModel, ActivityPublishBinding>()
                 // 成功
                 ToastUtil.showToast("分享成功")
                 this@PublishActivity.finish()
+                if (!MainActivity.isLaunch) {
+                    MainActivity.start(this)
+                }
                 RxBus.getDefault().post(RxCodeConstants.LOGIN, true)
                 RxBus.getDefault().post(RxCodeConstants.REFRESH_SQUARE_DATA, RxBusBaseMessage())
             }
