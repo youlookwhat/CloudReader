@@ -7,7 +7,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <me.jingbin.sbanner.SBannerView
+        <me.jingbin.banner.ByBannerView
             android:id="@+id/banner"
             android:layout_width="match_parent"
             android:layout_height="150dp"

@@ -55,8 +55,8 @@
 # for DexGuard only
 -keepresourcexmlelements manifest/application/meta-data@value=GlideModule
 
-# me.jingbin.sbanner.SBannerView
--keep class me.jingbin.sbanner.** {*;}
+# me.jingbin.banner.ByBannerView
+-keep class me.jingbin.banner.** {*;}
 
 -keep public class * implements com.bumptech.glide.module.GlideModule
 -keep public class * extends com.bumptech.glide.module.AppGlideModule

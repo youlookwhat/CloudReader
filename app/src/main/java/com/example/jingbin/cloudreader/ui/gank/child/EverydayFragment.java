@@ -17,6 +17,10 @@ import android.widget.ImageView;
 
 import com.example.jingbin.cloudreader.R;
 import com.example.jingbin.cloudreader.adapter.EverydayAdapter;
+
+import me.jingbin.banner.config.OnBannerClickListener;
+import me.jingbin.banner.holder.ByBannerViewHolder;
+import me.jingbin.banner.holder.HolderCreator;
 import me.jingbin.bymvvm.base.BaseFragment;
 import com.example.jingbin.cloudreader.bean.AndroidBean;
 import com.example.jingbin.cloudreader.databinding.FragmentEverydayBinding;
@@ -32,9 +36,6 @@ import com.example.jingbin.cloudreader.viewmodel.gank.EverydayViewModel;
 
 import java.util.ArrayList;
 
-import me.jingbin.sbanner.config.OnBannerClickListener;
-import me.jingbin.sbanner.holder.SBannerViewHolder;
-import me.jingbin.sbanner.holder.HolderCreator;
 
 import static com.example.jingbin.cloudreader.viewmodel.gank.EverydayViewModel.getTodayTime;
 
@@ -124,10 +125,10 @@ public class EverydayFragment extends BaseFragment<EverydayViewModel, FragmentEv
                     mHeaderBinding.banner
                             .setAutoPlay(true)
                             .setOffscreenPageLimit(bean.getImageUrls().size())
-                            .setPages(bean.getImageUrls(), new HolderCreator<SBannerViewHolder>() {
+                            .setPages(bean.getImageUrls(), new HolderCreator<ByBannerViewHolder>() {
                                 @Override
-                                public SBannerViewHolder createViewHolder() {
-                                    return new SBannerViewHolder<String>() {
+                                public ByBannerViewHolder createViewHolder() {
+                                    return new ByBannerViewHolder<String>() {
                                         private ImageView imageView;
 
                                         @Override

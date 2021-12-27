@@ -22,20 +22,19 @@ import com.example.jingbin.cloudreader.databinding.HeaderWanAndroidBinding;
 import com.example.jingbin.cloudreader.ui.WebViewActivity;
 import com.example.jingbin.cloudreader.utils.DensityUtil;
 import com.example.jingbin.cloudreader.utils.GlideUtil;
-import com.example.jingbin.cloudreader.utils.PerfectClickListener;
 import com.example.jingbin.cloudreader.utils.RefreshHelper;
 import com.example.jingbin.cloudreader.viewmodel.wan.WanAndroidListViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import me.jingbin.banner.config.BannerConfig;
+import me.jingbin.banner.config.ScaleRightTransformer;
+import me.jingbin.banner.holder.ByBannerViewHolder;
 import me.jingbin.bymvvm.base.BaseFragment;
 import me.jingbin.library.ByRecyclerView;
 import me.jingbin.library.skeleton.ByRVItemSkeletonScreen;
 import me.jingbin.library.skeleton.BySkeleton;
-import me.jingbin.sbanner.config.BannerConfig;
-import me.jingbin.sbanner.config.ScaleRightTransformer;
-import me.jingbin.sbanner.holder.SBannerViewHolder;
 
 
 /**
@@ -164,6 +163,7 @@ public class HomeFragment extends BaseFragment<WanAndroidListViewModel, Fragment
                     .setAutoPlay(false)
                     .setPages(result, CustomViewHolder::new)
                     .start();
+            headerBinding.banner.setOnBannerClickListener(i -> WebViewActivity.loadUrl(getContext(), result.get(i).getUrl(), result.get(i).getTitle()));
             headerBinding.banner.startAutoPlay();
             isLoadBanner = true;
         } else {
@@ -172,7 +172,7 @@ public class HomeFragment extends BaseFragment<WanAndroidListViewModel, Fragment
         }
     }
 
-    class CustomViewHolder implements SBannerViewHolder<WanAndroidBannerBean.DataBean> {
+    class CustomViewHolder implements ByBannerViewHolder<WanAndroidBannerBean.DataBean> {
 
         private ImageView imageView;
         private View viewMask;
@@ -191,12 +191,6 @@ public class HomeFragment extends BaseFragment<WanAndroidListViewModel, Fragment
                 DensityUtil.setWidthHeight(imageView, width, 1.8f);
                 DensityUtil.setWidthHeight(viewMask, width, 1.8f);
                 GlideUtil.displayEspImage(data.getImagePath(), imageView, 3);
-                imageView.setOnClickListener(new PerfectClickListener() {
-                    @Override
-                    protected void onNoDoubleClick(View v) {
-                        WebViewActivity.loadUrl(getContext(), data.getUrl(), data.getTitle());
-                    }
-                });
             }
         }
     }

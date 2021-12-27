@@ -1,18 +1,8 @@
 package com.example.jingbin.cloudreader.ui.gank.child;
 
 import android.animation.ValueAnimator;
-
-import androidx.lifecycle.Observer;
-
 import android.content.Context;
-
-import androidx.databinding.DataBindingUtil;
-
 import android.os.Bundle;
-
-import androidx.annotation.Nullable;
-import androidx.recyclerview.widget.LinearLayoutManager;
-
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,30 +11,28 @@ import android.view.animation.LinearInterpolator;
 import android.view.animation.RotateAnimation;
 import android.widget.ImageView;
 
+import androidx.annotation.Nullable;
+import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.Observer;
+import androidx.recyclerview.widget.LinearLayoutManager;
+
 import com.example.jingbin.cloudreader.R;
 import com.example.jingbin.cloudreader.adapter.GankAndroidAdapter;
-
-import me.jingbin.bymvvm.base.BaseFragment;
-
 import com.example.jingbin.cloudreader.bean.GankIoDataBean;
 import com.example.jingbin.cloudreader.databinding.FragmentEverydayBinding;
 import com.example.jingbin.cloudreader.databinding.HeaderItemEverydayBinding;
-
-import me.jingbin.bymvvm.rxbus.RxBus;
-import me.jingbin.bymvvm.rxbus.RxBusBaseMessage;
-
-import com.example.jingbin.cloudreader.app.RxCodeConstants;
+import com.example.jingbin.cloudreader.ui.WebViewActivity;
 import com.example.jingbin.cloudreader.utils.DensityUtil;
 import com.example.jingbin.cloudreader.utils.GlideUtil;
 import com.example.jingbin.cloudreader.utils.PerfectClickListener;
 import com.example.jingbin.cloudreader.view.viewbigimage.ViewBigImageActivity;
-import com.example.jingbin.cloudreader.ui.WebViewActivity;
 import com.example.jingbin.cloudreader.viewmodel.gank.GankHomeViewModel;
 
+import me.jingbin.banner.holder.ByBannerViewHolder;
+import me.jingbin.banner.holder.HolderCreator;
+import me.jingbin.bymvvm.base.BaseFragment;
 import me.jingbin.library.skeleton.ByRVItemSkeletonScreen;
 import me.jingbin.library.skeleton.BySkeleton;
-import me.jingbin.sbanner.holder.HolderCreator;
-import me.jingbin.sbanner.holder.SBannerViewHolder;
 
 import static com.example.jingbin.cloudreader.viewmodel.gank.EverydayViewModel.getTodayTime;
 
@@ -146,10 +134,10 @@ public class GankHomeFragment extends BaseFragment<GankHomeViewModel, FragmentEv
                             .setDelayTime(4000)
                             .setAutoPlay(true)
                             .setOffscreenPageLimit(bean.getResults().size())
-                            .setPages(bean.getResults(), new HolderCreator<SBannerViewHolder>() {
+                            .setPages(bean.getResults(), new HolderCreator<ByBannerViewHolder>() {
                                 @Override
-                                public SBannerViewHolder createViewHolder() {
-                                    return new SBannerViewHolder<GankIoDataBean.ResultBean>() {
+                                public ByBannerViewHolder createViewHolder() {
+                                    return new ByBannerViewHolder<GankIoDataBean.ResultBean>() {
                                         private ImageView imageView;
 
                                         @Override
