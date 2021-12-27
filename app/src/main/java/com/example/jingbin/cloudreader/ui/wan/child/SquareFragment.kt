@@ -65,7 +65,7 @@ class SquareFragment : BaseFragment<WanCenterViewModel, FragmentSquareBinding>()
             viewModel.mPage = 0
             getWendaData()
         }
-        bindingView.xrvAndroid.setOnLoadMoreListener {
+        bindingView.xrvAndroid.setOnLoadMoreListener(true) {
             ++viewModel.mPage
             getWendaData()
         }

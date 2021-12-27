@@ -60,7 +60,7 @@ class WendaFragment : BaseFragment<WanCenterViewModel, FragmentAndroidBinding>()
             viewModel.mPage = 1
             getWendaData()
         }
-        bindingView.xrvAndroid.setOnLoadMoreListener {
+        bindingView.xrvAndroid.setOnLoadMoreListener(true) {
             ++viewModel.mPage
             getWendaData()
         }

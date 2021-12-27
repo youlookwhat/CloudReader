@@ -26,6 +26,7 @@ public class NeteaseLoadMoreView extends LinearLayout implements BaseLoadMore {
     private TextView tvMoreFailed;
     private LinearLayout llMoreLoading;
     private AnimationDrawable mAnimationDrawable;
+    private int mState = BaseLoadMore.STATE_COMPLETE;
 
     public NeteaseLoadMoreView(Context context) {
         super(context);
@@ -89,6 +90,12 @@ public class NeteaseLoadMoreView extends LinearLayout implements BaseLoadMore {
         } else {
             viewBottom.setVisibility(View.GONE);
         }
+        mState = state;
+    }
+
+    @Override
+    public int getState() {
+        return mState;
     }
 
     /**

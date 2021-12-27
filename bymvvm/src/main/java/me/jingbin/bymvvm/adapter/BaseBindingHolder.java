@@ -3,8 +3,11 @@ package me.jingbin.bymvvm.adapter;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ViewDataBinding;
+
+import java.util.List;
 
 import me.jingbin.library.adapter.BaseByViewHolder;
 
@@ -27,5 +30,14 @@ public abstract class BaseBindingHolder<T, B extends ViewDataBinding> extends Ba
         binding.executePendingBindings();
     }
 
+    @Override
+    protected void onBaseBindViewPayloads(BaseByViewHolder<T> holder, T bean, int position, @NonNull List<Object> payloads) {
+        onBindingViewPayloads(this, bean, position, payloads);
+        binding.executePendingBindings();
+    }
+
     protected abstract void onBindingView(BaseBindingHolder holder, T bean, int position);
+
+    protected void onBindingViewPayloads(BaseBindingHolder holder, T bean, int position, @NonNull List<Object> payloads) {
+    }
 }

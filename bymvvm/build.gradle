@@ -81,5 +81,5 @@ dependencies {
     // 高斯模糊和圆角等
     api 'jp.wasabeef:glide-transformations:4.0.1'
 
-    api 'com.github.youlookwhat:ByRecyclerView:1.2.1'
+    api 'com.github.youlookwhat:ByRecyclerView:1.3.0'
 }

@@ -93,7 +93,7 @@ public class HomeFragment extends BaseFragment<WanAndroidListViewModel, Fragment
         headerBinding.rb1.setOnCheckedChangeListener((buttonView, isChecked) -> refresh(isChecked, true));
         headerBinding.rb2.setOnCheckedChangeListener((buttonView, isChecked) -> refresh(isChecked, false));
         bindingView.srlWan.setOnRefreshListener(this::swipeRefresh);
-        bindingView.xrvWan.setOnLoadMoreListener(new ByRecyclerView.OnLoadMoreListener() {
+        bindingView.xrvWan.setOnLoadMoreListener(true, new ByRecyclerView.OnLoadMoreListener() {
             @Override
             public void onLoadMore() {
                 if (!bindingView.srlWan.isRefreshing()) {
@@ -108,7 +108,7 @@ public class HomeFragment extends BaseFragment<WanAndroidListViewModel, Fragment
                     bindingView.xrvWan.loadMoreComplete();
                 }
             }
-        }, 300);
+        });
 
         showSkeletonView();
     }
