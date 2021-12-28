@@ -39,5 +39,10 @@ public abstract class BaseBindingHolder<T, B extends ViewDataBinding> extends Ba
     protected abstract void onBindingView(BaseBindingHolder holder, T bean, int position);
 
     protected void onBindingViewPayloads(BaseBindingHolder holder, T bean, int position, @NonNull List<Object> payloads) {
+        /*
+         * fallback to onBindingViewPayloads(holder, bean,position) if app does not override this method.
+         * 如果不覆盖 onBindingViewPayloads() 方法，就走 onBindingView()
+         */
+        onBindingView(holder, bean, position);
     }
 }
