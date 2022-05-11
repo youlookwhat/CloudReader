@@ -4,6 +4,7 @@ import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -143,7 +144,7 @@ public class ViewBigImageActivity extends FragmentActivity implements OnPageChan
                 ToastUtil.showToastLong("当前网络不可用，请检查你的网络设置");
                 return;
             }
-            if (!PermissionHandler.isHandlePermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q && !PermissionHandler.isHandlePermission(ViewBigImageActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
                 return;
             }
 

@@ -27,12 +27,20 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Environment;
 import android.text.TextUtils;
 import android.view.View;
 
+import androidx.annotation.Nullable;
+
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.DataSource;
+import com.bumptech.glide.load.engine.GlideException;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.target.Target;
+import com.bumptech.glide.request.transition.Transition;
 import com.example.jingbin.cloudreader.R;
 
 import java.io.File;
@@ -46,6 +54,7 @@ import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.annotations.NonNull;
 import io.reactivex.schedulers.Schedulers;
 import me.jingbin.bymvvm.utils.CommonUtils;
 
@@ -55,6 +64,94 @@ import me.jingbin.bymvvm.utils.CommonUtils;
  * @author jingbin
  */
 public class RxSaveImage {
+
+    /**
+     * 保存图片的相册名字
+     */
+    public static final String MLXX_PICTURE = "云阅相册";
+
+    public static Observable<String> handleImage(Activity context, String url, String title) {
+        return Observable.create(new ObservableOnSubscribe<String>() {
+            @Override
+            public void subscribe(@NonNull ObservableEmitter<String> emitter) throws Exception {
+                // 检查路径
+                if (TextUtils.isEmpty(url) || TextUtils.isEmpty(title)) {
+                    emitter.onError(new Exception("请检查图片路径"));
+                }
+                String ext = getExtName(url);
+
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                    Glide.with(context)
+                            .asBitmap()
+                            .load(url)
+                            .into(new SimpleTarget<Bitmap>() {
+                                @Override
+                                public void onResourceReady(@NonNull Bitmap result, @Nullable Transition<? super Bitmap> transition) {
+                                    SDCardDirUtil.saveImageToGallery2(context, result, ext, new SDCardDirUtil.OnSaveListener() {
+                                        @Override
+                                        public void onSuccess(String file) {
+                                            emitter.onNext("");
+                                            emitter.onComplete();
+                                        }
+
+                                        @Override
+                                        public void onFailed() {
+                                            emitter.onError(new Exception("下载失败"));
+                                        }
+                                    });
+                                }
+                            });
+                } else {
+                    // 检查图片是否已存在
+                    File appDir = new File(Environment.getExternalStorageDirectory(), MLXX_PICTURE);
+                    if (appDir.exists()) {
+                        String fileName = title.replace('/', '-') + "." + ext;
+                        File file = new File(appDir, fileName);
+                        if (file.exists()) {
+                            emitter.onError(new Exception("图片已存在"));
+                            return;
+                        }
+                    }
+
+                    if (!appDir.exists()) {
+                        appDir.mkdirs();
+                    }
+                    String fileName = title.replace('/', '-') + "." + ext;
+                    File file = new File(appDir, fileName);
+                    try {
+                        Glide.with(context)
+                                .downloadOnly()
+                                .load(url)
+                                .listener(new RequestListener<File>() {
+                                    @Override
+                                    public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<File> target, boolean isFirstResource) {
+                                        emitter.onError(new Exception("下载失败"));
+                                        return false;
+                                    }
+
+                                    @Override
+                                    public boolean onResourceReady(File resource, Object model, Target<File> target, DataSource dataSource, boolean isFirstResource) {
+                                        // 复制图片
+                                        copyFile(file.getAbsolutePath(), resource.getPath());
+
+                                        // 通知图库更新
+                                        Uri uri = Uri.fromFile(file);
+                                        Intent scannerIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, uri);
+                                        context.sendBroadcast(scannerIntent);
+                                        emitter.onNext("");
+                                        emitter.onComplete();
+                                        return true;
+                                    }
+                                })
+                                .preload();
+                    } catch (Exception e) {
+                        emitter.onError(new Exception("下载失败"));
+                    }
+                }
+            }
+        }).subscribeOn(Schedulers.io());
+    }
+
 
     private static Observable<String> saveImageAndGetPathObservable(Activity context, String url, String title) {
         return Observable.create(new ObservableOnSubscribe<String>() {
@@ -110,7 +207,7 @@ public class RxSaveImage {
     public static void saveImageToGallery(Activity context, String mImageUrl, String mImageTitle) {
         ToastUtil.showToast("开始下载图片");
         // @formatter:off
-        RxSaveImage.saveImageAndGetPathObservable(context, mImageUrl, mImageTitle)
+        RxSaveImage.handleImage(context, mImageUrl, mImageTitle)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(uri -> {
                     File appDir = new File(Environment.getExternalStorageDirectory(), "云阅相册");
@@ -144,7 +241,7 @@ public class RxSaveImage {
             if (oldfile.exists()) { //文件存在时
                 InputStream inStream = new FileInputStream(oldPath); //读入原文件
                 FileOutputStream fs = new FileOutputStream(newPath);
-                byte[] buffer = new byte[1444];
+                byte[] buffer = new byte[1024];
                 int length;
                 while ((byteread = inStream.read(buffer)) != -1) {
                     bytesum += byteread; //字节数 文件大小
@@ -205,5 +302,26 @@ public class RxSaveImage {
         canvas.drawColor(Color.TRANSPARENT);
         v.draw(canvas);
         return bitmap;
+    }
+
+    /**
+     * gif动态图以对应后缀结尾
+     */
+    public static String getExtName(String mImageUrl) {
+        try {
+            int indexOf = mImageUrl.lastIndexOf("/");
+            String fileName = mImageUrl.substring(indexOf);
+            String ext = "jpg";
+            if (fileName.contains(".")) {
+                ext = fileName.substring(fileName.lastIndexOf(".") + 1);
+                if (ext.length() < 3) {
+                    ext = "jpg";
+                }
+            }
+            return ext;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "jpg";
+        }
     }
 }

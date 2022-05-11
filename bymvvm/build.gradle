@@ -76,10 +76,10 @@ dependencies {
     api 'androidx.lifecycle:lifecycle-reactivestreams:2.2.0'
 
     // Glide
-    api 'com.github.bumptech.glide:glide:4.12.0'
-    annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
+    api 'com.github.bumptech.glide:glide:4.13.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.13.0'
     // 高斯模糊和圆角等
     api 'jp.wasabeef:glide-transformations:4.0.1'
 
-    api 'com.github.youlookwhat:ByRecyclerView:1.3.0'
+    api 'com.github.youlookwhat:ByRecyclerView:1.3.1'
 }

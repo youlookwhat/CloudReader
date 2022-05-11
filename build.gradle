@@ -38,9 +38,9 @@ task clean(type: Delete) {
 ext {
     // Support library and architecture components support minSdk 19 and above.
     minSdkVersion = 19
-    targetSdkVersion = 28
-    compileSdkVersion = 28
-    buildToolsVersion = '28.0.3'
+    targetSdkVersion = 29
+    compileSdkVersion = 29
+    buildToolsVersion = '29.0.3'
 
     // App dependencies
     supportLibraryVersion = '28.0.0'

@@ -334,7 +334,7 @@ public class WebViewActivity extends AppCompatActivity {
                                     ShareUtils.shareNetImage(WebViewActivity.this, picUrl);
                                     break;
                                 case 2:
-                                    if (!PermissionHandler.isHandlePermission(WebViewActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+                                    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q && !PermissionHandler.isHandlePermission(WebViewActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
                                         return;
                                     }
                                     RxSaveImage.saveImageToGallery(WebViewActivity.this, picUrl, picUrl);
