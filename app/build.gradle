@@ -96,7 +96,6 @@ dependencies {
     implementation 'com.google.android:flexbox:2.0.1'
     implementation 'com.google.zxing:core:3.3.0'
 
-    implementation 'com.hyman:flowlayout-lib:1.1.2'
     implementation 'com.nineoldandroids:library:2.4.0'
     implementation 'com.cocosw:bottomsheet:1.4.0'
     implementation 'me.drakeet.support:toastcompat:1.1.0'
@@ -110,6 +109,6 @@ dependencies {
 //    releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.6.1'
 //    debugImplementation 'com.squareup.leakcanary:leakcanary-support-fragment:1.6.1'
     // bugly
-    implementation 'com.tencent.bugly:crashreport:2.6.6.1'
-    implementation 'com.tencent.bugly:nativecrashreport:3.3.1'
+    implementation 'com.tencent.bugly:crashreport:3.4.4'
+    implementation 'com.tencent.bugly:nativecrashreport:3.9.2'
 }
