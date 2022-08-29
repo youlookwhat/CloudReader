@@ -319,7 +319,7 @@ limitations under the License.
 [1]:https://img.shields.io/:license-apache%202.0-blue.svg
 [2]:https://www.apache.org/licenses/LICENSE-2.0.html
 [3]:https://img.shields.io/badge/API-19%2B-red.svg?style=flat
-[4]:https://android-arsenal.com/api?level=19
+[4]:https://android-arsenal.com/api?level=21
 [30]:https://img.shields.io/badge/release-3.7.0-red.svg
 [31]:https://github.com/youlookwhat/CloudReader/releases
 [32]:https://img.shields.io/badge/PRs-welcome-brightgreen.svg
