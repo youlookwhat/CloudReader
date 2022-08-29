@@ -10,6 +10,30 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.KILL_BACKGROUND_PROCESSES" />
 
+    <!--适配android 11无法唤起第三方apk-->
+    <queries>
+
+        <!-- com.blankj.utilcode SDK检测虚拟机 -->
+        <intent>
+            <action android:name="android.intent.action.DIAL" />
+        </intent>
+
+        <!-- 微信支付SDK -->
+        <package android:name="com.tencent.mm" />
+        <!-- 支付宝支付SDK -->
+        <package android:name="com.eg.android.AlipayGphone" />
+        <!-- 微博 -->
+        <package android:name="com.sina.weibo" />
+        <!-- QQ -->
+        <package android:name="com.tencent.mobileqq" />
+        <!-- 酷安 -->
+        <package android:name="com.coolapk.market" />
+        <!--简书-->
+        <package android:name="com.jianshu.haruki" />
+        <!--CSDN-->
+        <package android:name="net.csdn.csdnplus" />
+    </queries>
+
     <application
         android:name=".app.App"
         android:allowBackup="false"

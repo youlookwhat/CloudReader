@@ -53,7 +53,7 @@ class UpdateUtil {
                                     when {
                                         // isJumpMarket == 1 跳应用市场
                                         updateBean.isJumpMarket == 1
-                                                && BaseTools.isApplicationAvilible(activity, Constants.COOLAPK_PACKAGE)
+                                                && BaseTools.hasPackage(activity, Constants.COOLAPK_PACKAGE)
                                                 && BaseTools.launchAppDetail(activity, activity.packageName, Constants.COOLAPK_PACKAGE) -> {
                                         }
                                         else -> {

@@ -6,7 +6,6 @@ import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.text.SpannableString;
@@ -138,28 +137,17 @@ public class BaseTools {
     }
 
     /**
-     * 判断手机是否安装某个应用
-     *
-     * @param context
-     * @param appPackageName 应用包名
-     * @return true：安装，false：未安装
+     * 通过包名找应用,不需要权限
      */
-    public static boolean isApplicationAvilible(Context context, String appPackageName) {
-        try {
-            // 获取packagemanager
-            PackageManager packageManager = context.getPackageManager();
-            // 获取所有已安装程序的包信息
-            List<PackageInfo> pinfo = packageManager.getInstalledPackages(0);
-            if (pinfo != null) {
-                for (int i = 0; i < pinfo.size(); i++) {
-                    String pn = pinfo.get(i).packageName;
-                    if (appPackageName.equals(pn)) {
-                        return true;
-                    }
-                }
-            }
+    public static boolean hasPackage(Context context, String packageName) {
+        if (null == context || TextUtils.isEmpty(packageName)) {
             return false;
-        } catch (Exception ignored) {
+        }
+        try {
+            context.getPackageManager().getPackageInfo(packageName, PackageManager.GET_GIDS);
+            return true;
+        } catch (PackageManager.NameNotFoundException e) {
+            // 抛出找不到的异常，说明该程序已经被卸载
             return false;
         }
     }

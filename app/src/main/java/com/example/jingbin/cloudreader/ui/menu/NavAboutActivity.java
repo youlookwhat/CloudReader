@@ -56,7 +56,7 @@ public class NavAboutActivity extends BaseActivity<NoViewModel, ActivityNavAbout
         bindingView.tvPrivacy.setOnClickListener(listener);
 
         // 酷安评分鼓励
-        if (BaseTools.isApplicationAvilible(this, "com.coolapk.market")) {
+        if (BaseTools.hasPackage(this, "com.coolapk.market")) {
             bindingView.lineRate.setVisibility(View.VISIBLE);
             bindingView.tvAboutRate.setVisibility(View.VISIBLE);
             bindingView.tvAboutRate.setOnClickListener(v -> BaseTools.launchAppDetail(NavAboutActivity.this, getPackageName(), "com.coolapk.market"));

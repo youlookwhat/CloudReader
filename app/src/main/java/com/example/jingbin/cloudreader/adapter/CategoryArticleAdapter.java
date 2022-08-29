@@ -69,7 +69,7 @@ public class CategoryArticleAdapter extends BaseBindingAdapter<ArticlesBean, Ite
                                     v.postDelayed(new Runnable() {
                                         @Override
                                         public void run() {
-                                            if (BaseTools.isApplicationAvilible(activity, "com.coolapk.market")) {
+                                            if (BaseTools.hasPackage(activity, "com.coolapk.market")) {
                                                 boolean show = SPUtils.getBoolean(Constants.SHOW_MARKET, false);
                                                 if (!show) {
                                                     SPUtils.putBoolean(Constants.SHOW_MARKET, true);

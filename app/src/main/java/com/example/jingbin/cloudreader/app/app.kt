@@ -28,10 +28,6 @@ open class App : RootApplication() {
     override fun onCreate() {
         super.onCreate()
         app = this
-//        if (LeakCanary.isInAnalyzerProcess(this)) {
-//            return;
-//        }
-//        LeakCanary.install(this);
 //        HttpUtils.getInstance().init(this);
         NightModeUtil.initNightMode()
         CrashReport.initCrashReport(applicationContext, "3977b2d86f", BuildConfig.DEBUG)
