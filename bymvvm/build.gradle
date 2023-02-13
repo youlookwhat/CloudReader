@@ -20,15 +20,18 @@ android {
         }
     }
 
-    buildFeatures{
-        dataBinding = true
-        // for view binding :
-        // viewBinding = true
+    // dataBinding 加入
+    dataBinding {
+        enabled = true
     }
 
     // https://github.com/ReactiveX/RxJava/issues/4445
     packagingOptions {
         exclude 'META-INF/rxjava.properties'
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
 
 }
