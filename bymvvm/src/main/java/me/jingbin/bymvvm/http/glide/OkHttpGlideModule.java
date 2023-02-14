@@ -11,6 +11,13 @@ import com.bumptech.glide.load.model.GlideUrl;
 import com.bumptech.glide.module.AppGlideModule;
 
 import java.io.InputStream;
+import java.net.Socket;
+import java.security.cert.CertificateException;
+import java.security.cert.X509Certificate;
+
+import javax.net.ssl.SSLEngine;
+import javax.net.ssl.SSLSocketFactory;
+import javax.net.ssl.X509ExtendedTrustManager;
 
 import okhttp3.OkHttpClient;
 
@@ -26,7 +33,7 @@ public class OkHttpGlideModule extends AppGlideModule {
     public void registerComponents(@NonNull Context context, @NonNull Glide glide, @NonNull Registry registry) {
         // 忽略证书
         OkHttpClient mHttpClient = new OkHttpClient().newBuilder()
-                .sslSocketFactory(SSLSocketClient.getSSLSocketFactory())
+                .sslSocketFactory(SSLSocketClient.getSSLSocketFactory(),SSLSocketClient.X509TrustManager())
                 .hostnameVerifier(SSLSocketClient.getHostnameVerifier())
                 .build();
         registry.replace(GlideUrl.class, InputStream.class, new OkHttpUrlLoader.Factory(mHttpClient));
