@@ -82,5 +82,5 @@ dependencies {
     // 高斯模糊和圆角等 要求minSdkVersion = 21
     api 'jp.wasabeef:glide-transformations:4.3.0'
 
-    api 'com.github.youlookwhat:ByRecyclerView:1.3.2'
+    api 'com.github.youlookwhat:ByRecyclerView:1.3.5'
 }

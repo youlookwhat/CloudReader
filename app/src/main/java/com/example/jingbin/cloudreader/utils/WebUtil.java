@@ -4,7 +4,14 @@ import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.AsyncTask;
+import android.os.Build;
 import android.text.TextUtils;
+import android.webkit.CookieManager;
+import android.webkit.CookieSyncManager;
+import android.webkit.ValueCallback;
+
+import androidx.annotation.Nullable;
 
 import java.net.URI;
 import java.util.regex.Pattern;
@@ -167,5 +174,54 @@ public class WebUtil {
             }
         }
         return true;
+    }
+
+    /**
+     * 删除所有 Cookies
+     */
+    public static void removeAllCookies() {
+        removeAllCookies(null);
+    }
+
+    //Android  4.4  NoSuchMethodError: android.webkit.CookieManager.removeAllCookies
+    public static void removeAllCookies(@Nullable ValueCallback<Boolean> callback) {
+        if (callback == null) {
+            callback = getDefaultIgnoreCallback();
+        }
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+            CookieManager.getInstance().removeAllCookie();
+            toSyncCookies();
+            callback.onReceiveValue(!CookieManager.getInstance().hasCookies());
+            return;
+        }
+        CookieManager.getInstance().removeAllCookies(callback);
+        toSyncCookies();
+    }
+
+    private static ValueCallback<Boolean> getDefaultIgnoreCallback() {
+        return new ValueCallback<Boolean>() {
+            @Override
+            public void onReceiveValue(Boolean ignore) {
+                DebugUtil.error("removeExpiredCookies:" + ignore);
+            }
+        };
+    }
+
+    public static void toSyncCookies() {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+            CookieSyncManager.getInstance().sync();
+            return;
+        }
+        AsyncTask.THREAD_POOL_EXECUTOR.execute(new Runnable() {
+            @Override
+            public void run() {
+                CookieManager.getInstance().flush();
+            }
+        });
+    }
+
+    //获取Cookie
+    public static String getCookiesByUrl(String url) {
+        return CookieManager.getInstance() == null ? null : CookieManager.getInstance().getCookie(url);
     }
 }

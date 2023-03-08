@@ -15,7 +15,6 @@ import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.webkit.CookieManager;
-import android.webkit.CookieSyncManager;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.LinearLayout;
@@ -237,11 +236,12 @@ public class WebViewActivity extends AppCompatActivity {
     private void syncCookie(String url) {
         if (!TextUtils.isEmpty(url) && url.contains("wanandroid")) {
             try {
-                CookieSyncManager.createInstance(this);
+                WebUtil.removeAllCookies();
+//                CookieSyncManager.createInstance(this);
                 CookieManager cookieManager = CookieManager.getInstance();
                 cookieManager.setAcceptCookie(true);
-                cookieManager.removeSessionCookie();// 移除
-                cookieManager.removeAllCookie();
+//                cookieManager.removeSessionCookie();// 移除
+//                cookieManager.removeAllCookie();
                 String cookie = SPUtils.getString("cookie", "");
                 if (!TextUtils.isEmpty(cookie)) {
                     String[] split = cookie.split(";");
@@ -249,12 +249,15 @@ public class WebViewActivity extends AppCompatActivity {
                         cookieManager.setCookie(url, split[i]);
                     }
                 }
+                WebUtil.toSyncCookies();
+
+                DebugUtil.error("------getCookiesByUrl:" + WebUtil.getCookiesByUrl(url));
 //            String cookies = cookieManager.getCookie(url);
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                    cookieManager.flush();
-                } else {
-                    CookieSyncManager.getInstance().sync();
-                }
+//                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+//                    cookieManager.flush();
+//                } else {
+//                    CookieSyncManager.getInstance().sync();
+//                }
             } catch (Exception e) {
                 DebugUtil.error("==异常==", e.toString());
             }
