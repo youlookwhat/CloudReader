@@ -14,7 +14,6 @@ import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.webkit.CookieManager;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.LinearLayout;
@@ -34,7 +33,6 @@ import com.example.jingbin.cloudreader.app.Constants;
 import com.example.jingbin.cloudreader.data.UserUtil;
 import com.example.jingbin.cloudreader.data.model.CollectModel;
 import com.example.jingbin.cloudreader.utils.BaseTools;
-import com.example.jingbin.cloudreader.utils.DebugUtil;
 import com.example.jingbin.cloudreader.utils.DialogBuild;
 import com.example.jingbin.cloudreader.utils.NightModeUtil;
 import com.example.jingbin.cloudreader.utils.PermissionHandler;
@@ -80,7 +78,6 @@ public class WebViewActivity extends AppCompatActivity {
         StatusBarUtil.setColor(this, CommonUtils.getColor(this, R.color.colorToolBar), 0);
         getIntentData();
         initTitle();
-        syncCookie(mUrl);
         getDataFromBrowser(getIntent());
     }
 
@@ -118,8 +115,10 @@ public class WebViewActivity extends AppCompatActivity {
                     public void onReceivedTitle(String title) {
                         setTitle(title);
                     }
-                })
-                .loadUrl(mUrl);
+                }).get();
+
+        syncCookie(mUrl);
+        byWebView.loadUrl(mUrl);
         byWebView.getWebView().setOnLongClickListener(v -> handleLongImage());
         byWebView.getWebView().setBackgroundColor(CommonUtils.getColor(this, R.color.color_page_bg));
         WebSettings webSetting = byWebView.getWebView().getSettings();
@@ -235,32 +234,8 @@ public class WebViewActivity extends AppCompatActivity {
      */
     private void syncCookie(String url) {
         if (!TextUtils.isEmpty(url) && url.contains("wanandroid")) {
-            try {
-                WebUtil.removeAllCookies();
-//                CookieSyncManager.createInstance(this);
-                CookieManager cookieManager = CookieManager.getInstance();
-                cookieManager.setAcceptCookie(true);
-//                cookieManager.removeSessionCookie();// 移除
-//                cookieManager.removeAllCookie();
-                String cookie = SPUtils.getString("cookie", "");
-                if (!TextUtils.isEmpty(cookie)) {
-                    String[] split = cookie.split(";");
-                    for (int i = 0; i < split.length; i++) {
-                        cookieManager.setCookie(url, split[i]);
-                    }
-                }
-                WebUtil.toSyncCookies();
-
-                DebugUtil.error("------getCookiesByUrl:" + WebUtil.getCookiesByUrl(url));
-//            String cookies = cookieManager.getCookie(url);
-//                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-//                    cookieManager.flush();
-//                } else {
-//                    CookieSyncManager.getInstance().sync();
-//                }
-            } catch (Exception e) {
-                DebugUtil.error("==异常==", e.toString());
-            }
+            String cookie = SPUtils.getString("cookie", "");
+            WebUtil.syncCookie(byWebView.getWebView(), url, cookie);
         }
     }
 

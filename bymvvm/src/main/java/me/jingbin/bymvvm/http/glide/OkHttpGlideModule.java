@@ -12,11 +12,11 @@ import com.bumptech.glide.module.AppGlideModule;
 
 import java.io.InputStream;
 
+import okhttp3.Call;
 import okhttp3.OkHttpClient;
 
 /**
  * Created by jingbin on 10/19/21.
- * 忽略https证书验证：https://www.shangmayuan.com/a/23f4d43be62f48c29d876213.html
  * 直接将Glide.with替换为GlideApp.with即可
  */
 @GlideModule
@@ -26,10 +26,10 @@ public class OkHttpGlideModule extends AppGlideModule {
     public void registerComponents(@NonNull Context context, @NonNull Glide glide, @NonNull Registry registry) {
         // 忽略证书
         OkHttpClient mHttpClient = new OkHttpClient().newBuilder()
-                .sslSocketFactory(SSLSocketClient.getSSLSocketFactory())
+                .sslSocketFactory(SSLSocketClient.getSSLSocketFactory(),SSLSocketClient.X509TrustManager())
                 .hostnameVerifier(SSLSocketClient.getHostnameVerifier())
                 .build();
-        registry.replace(GlideUrl.class, InputStream.class, new OkHttpUrlLoader.Factory(mHttpClient));
+        registry.replace(GlideUrl.class, InputStream.class, new OkHttpUrlLoader.Factory((Call.Factory) mHttpClient));
     }
 }
 

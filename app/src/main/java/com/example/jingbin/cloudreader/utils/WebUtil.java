@@ -10,6 +10,7 @@ import android.text.TextUtils;
 import android.webkit.CookieManager;
 import android.webkit.CookieSyncManager;
 import android.webkit.ValueCallback;
+import android.webkit.WebView;
 
 import androidx.annotation.Nullable;
 
@@ -177,7 +178,8 @@ public class WebUtil {
     }
 
     /**
-     * 删除所有 Cookies
+     * 删除所有 Cookies，因为是删除异步的，所以需要在退出登录登录的时候调用。
+     * 如果不在退出登录的时候调用，那么就每次设置cookie的时候，额外设置"token="用于刷新webview里的cookie
      */
     public static void removeAllCookies() {
         removeAllCookies(null);
@@ -220,8 +222,49 @@ public class WebUtil {
         });
     }
 
-    //获取Cookie
+    // 获取Cookie
     public static String getCookiesByUrl(String url) {
         return CookieManager.getInstance() == null ? null : CookieManager.getInstance().getCookie(url);
+    }
+
+    /**
+     * 同步cookie，要放在loadUrl之前
+     */
+    public static void syncCookie(WebView webView, String url, String cookies) {
+        if (!TextUtils.isEmpty(url)) {
+            try {
+
+                CookieManager cookieManager = CookieManager.getInstance();
+                cookieManager.setAcceptCookie(true);
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    cookieManager.setAcceptThirdPartyCookies(webView, true);        //跨域cookie读取
+                }
+//                DebugUtil.error("------getCookiesByUrl1:" + "url:" + url + "--" + WebUtil.getCookiesByUrl(url));
+                if (!TextUtils.isEmpty(cookies)) {
+                    String[] split = cookies.split(";");
+                    for (String s : split) {
+                        cookieManager.setCookie(url, s);
+                    }
+                    if (!cookies.contains("token_pass_wanandroid_com=")) {
+                        cookieManager.setCookie(url, "token_pass_wanandroid_com=");
+                    }
+                    if (!cookies.contains("token_pass=")) {
+                        cookieManager.setCookie(url, "token_pass=");
+                    }
+                    if (!cookies.contains("JSESSIONID=")) {
+                        cookieManager.setCookie(url, "JSESSIONID=");
+                    }
+                } else {
+                    cookieManager.setCookie(url, "token_pass_wanandroid_com=");
+                    cookieManager.setCookie(url, "token_pass=");
+                    cookieManager.setCookie(url, "JSESSIONID=");
+                }
+//                WebUtil.toSyncCookies();
+                CookieManager.getInstance().flush();
+//                DebugUtil.error("------getCookiesByUrl2:" + WebUtil.getCookiesByUrl(url));
+            } catch (Exception e) {
+                DebugUtil.error("syncCookie", e.toString());
+            }
+        }
     }
 }

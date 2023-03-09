@@ -42,7 +42,7 @@ public class OkHttpUrlLoader implements ModelLoader<GlideUrl, InputStream> {
             if (internalClient == null) {
                 synchronized (Factory.class) {
                     if (internalClient == null) {
-                        internalClient = new OkHttpClient();
+                        internalClient = (Call.Factory) new OkHttpClient();
                     }
                 }
             }
