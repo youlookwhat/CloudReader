@@ -235,7 +235,7 @@ public class WebViewActivity extends AppCompatActivity {
     private void syncCookie(String url) {
         if (!TextUtils.isEmpty(url) && url.contains("wanandroid")) {
             String cookie = SPUtils.getString("cookie", "");
-            WebUtil.syncCookie(byWebView.getWebView(), url, cookie);
+            WebUtil.syncCookie(byWebView.getWebView(), url, cookie, "token_pass_wanandroid_com=", "token_pass=", "JSESSIONID=");
         }
     }
 

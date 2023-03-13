@@ -228,40 +228,70 @@ public class WebUtil {
     }
 
     /**
-     * 同步cookie，要放在loadUrl之前
+     * 同步cookie
      */
     public static void syncCookie(WebView webView, String url, String cookies) {
+        CookieManager cookieManager = CookieManager.getInstance();
+        if (cookieManager != null) {
+            cookieManager.setAcceptCookie(true);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                cookieManager.setAcceptThirdPartyCookies(webView, true);        //跨域cookie读取
+            }
+            if (!TextUtils.isEmpty(cookies)) {
+                String[] split = cookies.split(";");
+                for (String s : split) {
+                    cookieManager.setCookie(url, s);
+                }
+            }
+            toSyncCookies();
+        }
+    }
+
+    /**
+     * 同步cookie，要放在loadUrl之前
+     *
+     * @param emptyKeys 空的键值对，用来清空cookie里的登录信息
+     */
+    public static void syncCookie(WebView webView, String url, String cookies, String... emptyKeys) {
         if (!TextUtils.isEmpty(url)) {
             try {
-
                 CookieManager cookieManager = CookieManager.getInstance();
+                if (cookieManager == null) {
+                    return;
+                }
                 cookieManager.setAcceptCookie(true);
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                     cookieManager.setAcceptThirdPartyCookies(webView, true);        //跨域cookie读取
                 }
-//                DebugUtil.error("------getCookiesByUrl1:" + "url:" + url + "--" + WebUtil.getCookiesByUrl(url));
+                DebugUtil.error("------getCookiesByUrl1:" + WebUtil.getCookiesByUrl(url));
                 if (!TextUtils.isEmpty(cookies)) {
                     String[] split = cookies.split(";");
                     for (String s : split) {
                         cookieManager.setCookie(url, s);
                     }
-                    if (!cookies.contains("token_pass_wanandroid_com=")) {
-                        cookieManager.setCookie(url, "token_pass_wanandroid_com=");
-                    }
-                    if (!cookies.contains("token_pass=")) {
-                        cookieManager.setCookie(url, "token_pass=");
-                    }
-                    if (!cookies.contains("JSESSIONID=")) {
-                        cookieManager.setCookie(url, "JSESSIONID=");
+                    if (emptyKeys != null && emptyKeys.length > 0) {
+                        for (String key : emptyKeys) {
+                            if (!TextUtils.isEmpty(key) && !cookies.contains(key)) {
+                                cookieManager.setCookie(url, key);
+                            }
+                        }
                     }
                 } else {
-                    cookieManager.setCookie(url, "token_pass_wanandroid_com=");
-                    cookieManager.setCookie(url, "token_pass=");
-                    cookieManager.setCookie(url, "JSESSIONID=");
+                    if (emptyKeys != null && emptyKeys.length > 0) {
+                        for (String key : emptyKeys) {
+                            if (!TextUtils.isEmpty(key)) {
+                                cookieManager.setCookie(url, key);
+                            }
+                        }
+                    }
                 }
 //                WebUtil.toSyncCookies();
-                CookieManager.getInstance().flush();
-//                DebugUtil.error("------getCookiesByUrl2:" + WebUtil.getCookiesByUrl(url));
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    CookieManager.getInstance().flush();
+                } else {
+                    CookieSyncManager.getInstance().sync();
+                }
+                DebugUtil.error("------getCookiesByUrl2:" + WebUtil.getCookiesByUrl(url));
             } catch (Exception e) {
                 DebugUtil.error("syncCookie", e.toString());
             }
