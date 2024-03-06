@@ -28,16 +28,11 @@ public class WanFragment extends BaseFragment<NoViewModel, FragmentContentBindin
         super.onActivityCreated(savedInstanceState);
 
         showLoading();
-        /**
-         * 注意使用的是：getChildFragmentManager，
-         * 这样setOffscreenPageLimit()就可以添加上，保留相邻2个实例，切换时不会卡
-         */
         CommonTabPagerAdapter myAdapter = new CommonTabPagerAdapter(getChildFragmentManager(), Arrays.asList("玩安卓", "广场", "问答"));
         myAdapter.setListener(this);
         bindingView.vpGank.setAdapter(myAdapter);
         // 左右预加载页面的个数
         bindingView.vpGank.setOffscreenPageLimit(2);
-        myAdapter.notifyDataSetChanged();
         bindingView.tabGank.setupWithViewPager(bindingView.vpGank);
         showContentView();
     }

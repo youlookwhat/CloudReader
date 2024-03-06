@@ -53,6 +53,7 @@
             tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".ui.LoadingActivity"
+            android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@style/SplashTheme"
             tools:ignore="LockedOrientationActivity">
@@ -74,6 +75,7 @@
         <activity
             android:name=".ui.WebViewActivity"
             android:configChanges="orientation|screenSize"
+            android:exported="true"
             android:hardwareAccelerated="true"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"

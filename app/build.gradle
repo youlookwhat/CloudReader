@@ -9,8 +9,8 @@ android {
         applicationId "com.example.jingbin.cloudreader"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 50
-        versionName "3.8.0"
+        versionCode 51
+        versionName "3.8.1"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         renderscriptTargetApi 19
         renderscriptSupportModeEnabled true
@@ -65,8 +65,8 @@ android {
     // ------------------------↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑-----------------------------
 
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
     }
 
     // dataBinding 加入
@@ -97,7 +97,7 @@ dependencies {
     implementation 'com.cocosw:bottomsheet:1.4.0'
     implementation 'me.drakeet.support:toastcompat:1.1.0'
     implementation 'com.github.chrisbanes:PhotoView:2.1.4'
-    implementation 'com.github.youlookwhat:ByBannerView:1.4.0'
+    implementation 'com.github.youlookwhat:ByBannerView:1.4.6'
     implementation 'com.github.youlookwhat:ByWebView:1.2.1'
     implementation 'androidx.webkit:webkit:1.4.0'
 
