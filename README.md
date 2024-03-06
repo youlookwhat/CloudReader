@@ -1,7 +1,7 @@
 # CloudReader
 
 [![Apache License 2.0][1]][2]
-[![coolapk.com][34]][35] 
+<!--[![coolapk.com][34]][35] -->
 [![Release Version][30]][31]
 [![API][3]][4]
 [![Codacy Badge][36]][37]
@@ -51,12 +51,14 @@ If you have any questions, please write to [the issue][21] of making you don't u
 ## See Detail
 > [项目介绍详情](https://github.com/youlookwhat/CloudReader/wiki/Introduction) | [细节优化详情](https://github.com/youlookwhat/CloudReader/wiki) | 🚀[**版本更新详情(V3.7.0)**](https://github.com/youlookwhat/CloudReader/wiki/Update-log)
 
+<!--
 ### Download
-　[酷安下载](https://www.coolapk.com/apk/127875)
+　[GitHub下载](https://www.coolapk.com/apk/127875)
 
 
 　  ![](https://raw.githubusercontent.com/youlookwhat/CloudReader/master/file/download_200.png)
-　　
+-->
+
 ### Documents 
  - [《云阅》一个仿网易云音乐UI，使用Gank.Io及豆瓣Api开发的开源项目][23]
  - [开发中所遇问题归纳（jar包的具体使用等）][24]
@@ -320,7 +322,7 @@ limitations under the License.
 [2]:https://www.apache.org/licenses/LICENSE-2.0.html
 [3]:https://img.shields.io/badge/API-21%2B-red.svg?style=flat
 [4]:https://android-arsenal.com/api?level=21
-[30]:https://img.shields.io/badge/release-3.7.0-red.svg
+[30]:https://img.shields.io/badge/release-3.8.2-red.svg
 [31]:https://github.com/youlookwhat/CloudReader/releases
 [32]:https://img.shields.io/badge/PRs-welcome-brightgreen.svg
 [33]:https://github.com/youlookwhat/CloudReader/pulls
