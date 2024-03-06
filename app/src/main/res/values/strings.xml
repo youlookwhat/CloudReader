@@ -41,7 +41,7 @@
         </string>
 
     <string name="string_about_me">
-        Blog: http://jinbeen.com
+        Blog: https://youlookwhat.github.io
         \nEmail: jingbin127@163.com
     </string>
 
@@ -107,7 +107,7 @@
     <!--更新日志-->
     <string name="string_url_update_log">https://github.com/youlookwhat/CloudReader/wiki/Update-log</string>
     <!--问题归纳-->
-    <string name="string_url_faq">http://jinbeen.com/2016/12/25/%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98-%E4%BA%91%E9%98%85/</string>
+    <string name="string_url_faq">https://youlookwhat.github.io/2016/12/25/%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98-%E4%BA%91%E9%98%85/</string>
     <!--干货闲读-->
     <string name="string_url_gank">https://gank.io</string>
     <!--玩安卓-->
