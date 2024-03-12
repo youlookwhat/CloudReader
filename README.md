@@ -1,7 +1,7 @@
 # CloudReader
 
 [![Apache License 2.0][1]][2]
-<!--[![coolapk.com][34]][35] -->
+[![Apk][34]][35]
 [![Release Version][30]][31]
 [![API][3]][4]
 [![Codacy Badge][36]][37]
@@ -50,6 +50,17 @@ If you have any questions, please write to [the issue][21] of making you don't u
 
 ## See Detail
 > [项目介绍详情](https://github.com/youlookwhat/CloudReader/wiki/Introduction) | [细节优化详情](https://github.com/youlookwhat/CloudReader/wiki) | 🚀[**版本更新详情(V3.7.0)**](https://github.com/youlookwhat/CloudReader/wiki/Update-log)
+
+
+> 运行环境：
+> 	- targetSdkVersion：31 
+> 	- gradle：7.1.0-alpha11；
+> 	- JDK11；
+> 	- Android Studio Bumblebee | 2021.1.1 Canary 11
+> 	- Runtime version: 11.0.11+0-b60-7590822 aarch64
+> 	- VM: OpenJDK 64-Bit Server VM by JetBrains s.r.o.
+> 	- macOS 13.0.1
+
 
 <!--
 ### Download
@@ -322,12 +333,12 @@ limitations under the License.
 [2]:https://www.apache.org/licenses/LICENSE-2.0.html
 [3]:https://img.shields.io/badge/API-21%2B-red.svg?style=flat
 [4]:https://android-arsenal.com/api?level=21
-[30]:https://img.shields.io/badge/release-3.8.2-red.svg
+[30]:https://img.shields.io/badge/release-3.8.1-red.svg
 [31]:https://github.com/youlookwhat/CloudReader/releases
 [32]:https://img.shields.io/badge/PRs-welcome-brightgreen.svg
 [33]:https://github.com/youlookwhat/CloudReader/pulls
-[34]:https://img.shields.io/badge/download-coolapk.com-blue.svg
-[35]:https://www.coolapk.com/apk/127875
+[34]:https://img.shields.io/badge/download-apk-blue.svg
+[35]:https://github.com/youlookwhat/download/raw/main/CloudReader.apk
 [36]:https://api.codacy.com/project/badge/Grade/1045e902e1294badaf783a640869c208?isInternal=true
 [37]:https://app.codacy.com/manual/youlookwhat/CloudReader/dashboard?bid=14239237
 
