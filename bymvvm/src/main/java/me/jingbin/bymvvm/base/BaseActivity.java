@@ -128,7 +128,11 @@ public abstract class BaseActivity<VM extends AndroidViewModel, SV extends ViewD
             loadingView.setVisibility(View.VISIBLE);
         }
         // 开始动画
-        if (!mAnimationDrawable.isRunning()) {
+        if (mAnimationDrawable == null && loadingView != null) {
+            ImageView img = loadingView.findViewById(R.id.img_progress);
+            mAnimationDrawable = (AnimationDrawable) img.getDrawable();
+        }
+        if (mAnimationDrawable != null && !mAnimationDrawable.isRunning()) {
             mAnimationDrawable.start();
         }
         if (bindingView.getRoot().getVisibility() != View.GONE) {
@@ -146,6 +150,7 @@ public abstract class BaseActivity<VM extends AndroidViewModel, SV extends ViewD
         // 停止动画
         if (mAnimationDrawable.isRunning()) {
             mAnimationDrawable.stop();
+            mAnimationDrawable = null;
         }
         if (errorView != null) {
             errorView.setVisibility(View.GONE);
@@ -162,6 +167,7 @@ public abstract class BaseActivity<VM extends AndroidViewModel, SV extends ViewD
         // 停止动画
         if (mAnimationDrawable.isRunning()) {
             mAnimationDrawable.stop();
+            mAnimationDrawable = null;
         }
         if (errorView == null) {
             ViewStub viewStub = (ViewStub) findViewById(R.id.vs_error_refresh);
@@ -226,6 +232,11 @@ public abstract class BaseActivity<VM extends AndroidViewModel, SV extends ViewD
         if (this.mCompositeDisposable != null && !mCompositeDisposable.isDisposed()) {
             // clear 和 dispose的区别是：  disposed = true;
             this.mCompositeDisposable.clear();
+        }
+        // 停止动画
+        if (mAnimationDrawable != null && mAnimationDrawable.isRunning()) {
+            mAnimationDrawable.stop();
+            mAnimationDrawable = null;
         }
     }
 

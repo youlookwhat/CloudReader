@@ -53,7 +53,11 @@ public class NeteaseLoadMoreView extends LinearLayout implements BaseLoadMore {
                 llMoreLoading.setVisibility(VISIBLE);
                 tvNoMore.setVisibility(GONE);
                 tvMoreFailed.setVisibility(GONE);
-                if (!mAnimationDrawable.isRunning()) {
+                if (mAnimationDrawable == null) {
+                    ImageView mIvProgress = findViewById(R.id.iv_progress);
+                    mAnimationDrawable = (AnimationDrawable) mIvProgress.getDrawable();
+                }
+                if (mAnimationDrawable != null && !mAnimationDrawable.isRunning()) {
                     mAnimationDrawable.start();
                 }
                 break;
@@ -62,24 +66,27 @@ public class NeteaseLoadMoreView extends LinearLayout implements BaseLoadMore {
                 tvNoMore.setVisibility(GONE);
                 tvMoreFailed.setVisibility(GONE);
                 this.setVisibility(View.GONE);
-                if (mAnimationDrawable.isRunning()) {
+                if (mAnimationDrawable != null && mAnimationDrawable.isRunning()) {
                     mAnimationDrawable.stop();
+                    mAnimationDrawable = null;
                 }
                 break;
             case STATE_NO_MORE:
                 tvNoMore.setVisibility(VISIBLE);
                 llMoreLoading.setVisibility(GONE);
                 tvMoreFailed.setVisibility(GONE);
-                if (mAnimationDrawable.isRunning()) {
+                if (mAnimationDrawable != null && mAnimationDrawable.isRunning()) {
                     mAnimationDrawable.stop();
+                    mAnimationDrawable = null;
                 }
                 break;
             case STATE_FAILURE:
                 tvMoreFailed.setVisibility(VISIBLE);
                 llMoreLoading.setVisibility(GONE);
                 tvNoMore.setVisibility(GONE);
-                if (mAnimationDrawable.isRunning()) {
+                if (mAnimationDrawable != null && mAnimationDrawable.isRunning()) {
                     mAnimationDrawable.stop();
+                    mAnimationDrawable = null;
                 }
                 break;
             default:

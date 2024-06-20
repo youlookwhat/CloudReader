@@ -146,6 +146,10 @@ public abstract class BaseFragment<VM extends AndroidViewModel, SV extends ViewD
             loadingView.setVisibility(View.VISIBLE);
         }
         // 开始动画
+        if (mAnimationDrawable == null && loadingView != null) {
+            ImageView img = loadingView.findViewById(R.id.img_progress);
+            mAnimationDrawable = (AnimationDrawable) img.getDrawable();
+        }
         if (mAnimationDrawable != null && !mAnimationDrawable.isRunning()) {
             mAnimationDrawable.start();
         }
@@ -173,6 +177,7 @@ public abstract class BaseFragment<VM extends AndroidViewModel, SV extends ViewD
         // 停止动画
         if (mAnimationDrawable != null && mAnimationDrawable.isRunning()) {
             mAnimationDrawable.stop();
+            mAnimationDrawable = null;
         }
         if (errorView != null) {
             errorView.setVisibility(View.GONE);
@@ -207,6 +212,7 @@ public abstract class BaseFragment<VM extends AndroidViewModel, SV extends ViewD
         // 停止动画
         if (mAnimationDrawable != null && mAnimationDrawable.isRunning()) {
             mAnimationDrawable.stop();
+            mAnimationDrawable = null;
         }
         if (bindingView.getRoot().getVisibility() != View.GONE) {
             bindingView.getRoot().setVisibility(View.GONE);
@@ -233,6 +239,7 @@ public abstract class BaseFragment<VM extends AndroidViewModel, SV extends ViewD
         // 停止动画
         if (mAnimationDrawable != null && mAnimationDrawable.isRunning()) {
             mAnimationDrawable.stop();
+            mAnimationDrawable = null;
         }
         if (errorView != null) {
             errorView.setVisibility(View.GONE);
@@ -250,10 +257,31 @@ public abstract class BaseFragment<VM extends AndroidViewModel, SV extends ViewD
     }
 
     @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        if (viewModel != null && viewModel instanceof BaseViewModel) {
+            ((BaseViewModel) viewModel).onCleared();
+        }
+        // 停止动画
+        if (mAnimationDrawable != null && mAnimationDrawable.isRunning()) {
+            mAnimationDrawable.stop();
+            mAnimationDrawable = null;
+        }
+    }
+
+    @Override
     public void onDestroy() {
         super.onDestroy();
         if (this.mCompositeDisposable != null && !mCompositeDisposable.isDisposed()) {
             this.mCompositeDisposable.clear();
+        }
+        if (viewModel != null && viewModel instanceof BaseViewModel) {
+            ((BaseViewModel) viewModel).onCleared();
+        }
+        // 停止动画
+        if (mAnimationDrawable != null && mAnimationDrawable.isRunning()) {
+            mAnimationDrawable.stop();
+            mAnimationDrawable = null;
         }
     }
 

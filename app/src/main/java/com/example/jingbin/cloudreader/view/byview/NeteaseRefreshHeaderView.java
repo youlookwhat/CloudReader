@@ -89,8 +89,9 @@ public class NeteaseRefreshHeaderView extends LinearLayout implements BaseRefres
             return;
         }
 
-        if (mAnimationDrawable.isRunning()) {
+        if (mAnimationDrawable != null && mAnimationDrawable.isRunning()) {
             mAnimationDrawable.stop();
+            mAnimationDrawable = null;
         }
         tvRefreshTip.setVisibility(VISIBLE);
         if (state == STATE_REFRESHING) {
@@ -127,7 +128,10 @@ public class NeteaseRefreshHeaderView extends LinearLayout implements BaseRefres
                 break;
             case STATE_REFRESHING:
                 tvRefreshTip.setText(R.string.custom_refreshing);
-                if (!mAnimationDrawable.isRunning()) {
+                if (mAnimationDrawable == null && mProgress != null) {
+                    mAnimationDrawable = (AnimationDrawable) mProgress.getDrawable();
+                }
+                if (mAnimationDrawable != null && !mAnimationDrawable.isRunning()) {
                     mAnimationDrawable.start();
                 }
                 break;
