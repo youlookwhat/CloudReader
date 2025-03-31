@@ -126,7 +126,7 @@ open class MyShareActivity : BaseActivity<WanCenterViewModel, FragmentWanAndroid
             } else {
                 if (viewModel.mPage == 1) {
                     if (it != null) {
-                        val bindingEmpty = DataBindingUtil.inflate<LayoutLoadingEmptyBinding>(layoutInflater, R.layout.layout_loading_empty, bindingView.xrvWan.parent as ViewGroup?, false)
+                        val bindingEmpty = DataBindingUtil.inflate<LayoutLoadingEmptyBinding>(layoutInflater, me.jingbin.bymvvm.R.layout.layout_loading_empty, bindingView.xrvWan.parent as ViewGroup?, false)
                         if (userId != 0) {
                             bindingEmpty.tvTipEmpty.text = "未找到相关内容"
                         } else {

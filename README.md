@@ -53,13 +53,13 @@ If you have any questions, please write to [the issue][21] of making you don't u
 
 
 > 运行环境：
-> 	- targetSdkVersion：31 
-> 	- gradle：7.1.0-alpha11；
-> 	- JDK11；
-> 	- Android Studio Bumblebee | 2021.1.1 Canary 11
-> 	- Runtime version: 11.0.11+0-b60-7590822 aarch64
+> 	- targetSdkVersion: 34
+> 	- gradle: gradle-8.0-bin
+> 	- JDK17
+> 	- Android Studio Ladybug | 2024.2.1
+> 	- Runtime version: 21.0.3+-79915917-b509.11 aarch64
 > 	- VM: OpenJDK 64-Bit Server VM by JetBrains s.r.o.
-> 	- macOS 13.0.1
+> 	- macOS 15.3.1
 
 
 <!--
@@ -80,6 +80,11 @@ If you have any questions, please write to [the issue][21] of making you don't u
 　
 
 ### Version
+#### V3.8.3（2025-03-31）
+ - 1、[新增] 新增了桌面快捷方式
+ - 2、[升级] 升级了gradle、jdk、targetSdkVersion版本
+ - 3、[优化] 代码优化
+
 #### V3.7.0（2021-11-09）
  - 1、[新增] 新增了玩安卓项目分类模块
  - 2、[移除] 移除了干货集中营模块
@@ -307,9 +312,9 @@ If you have any questions, please write to [the issue][21] of making you don't u
 
 ## About me
  - **QQ：** 770413277
- - **简书：**[Jinbeen](https://www.jianshu.com/u/e43c6e979831)
- - **Blog：**[https://youlookwhat.github.io](https://youlookwhat.github.io)
  - **Email：** jingbin127@163.com
+ - **Blog：**[https://youlookwhat.github.io](https://youlookwhat.github.io)
+ - **小红书：**[夜有所梦](https://www.xiaohongshu.com/user/profile/59ba28cf5e87e72d410d84c1?xhsshare=CopyLink&appuid=59ba28cf5e87e72d410d84c1&apptime=1733105575&share_id=78c3ca8970d24a3eb9db04b1e4fcc45b)
  - **QQ交流群：**[![](https://img.shields.io/badge/%E7%BE%A4%E5%8F%B7-727379132-orange.svg?style=flat-square)](https://shang.qq.com/wpa/qunwpa?idkey=5685061359b0a767674cd831d8261d36b347bde04cc23746cb6570e09ee5c8aa)
 
 ## License
@@ -333,7 +338,7 @@ limitations under the License.
 [2]:https://www.apache.org/licenses/LICENSE-2.0.html
 [3]:https://img.shields.io/badge/API-21%2B-red.svg?style=flat
 [4]:https://android-arsenal.com/api?level=21
-[30]:https://img.shields.io/badge/release-3.8.1-red.svg
+[30]:https://img.shields.io/badge/release-3.8.3-red.svg
 [31]:https://github.com/youlookwhat/CloudReader/releases
 [32]:https://img.shields.io/badge/PRs-welcome-brightgreen.svg
 [33]:https://github.com/youlookwhat/CloudReader/pulls

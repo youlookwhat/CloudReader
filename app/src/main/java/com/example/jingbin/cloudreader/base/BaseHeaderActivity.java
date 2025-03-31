@@ -123,7 +123,7 @@ public abstract class BaseHeaderActivity<HV extends ViewDataBinding, SV extends 
         // 设置toolbar
         setToolBar();
 
-        ImageView img = loadingView.findViewById(R.id.img_progress);
+        ImageView img = loadingView.findViewById(me.jingbin.bymvvm.R.id.img_progress);
         // 加载动画
         mAnimationDrawable = (AnimationDrawable) img.getDrawable();
         // 默认进入页面就开启动画
@@ -219,7 +219,7 @@ public abstract class BaseHeaderActivity<HV extends ViewDataBinding, SV extends 
             //去除默认Title显示
             actionBar.setDisplayShowTitleEnabled(false);
             actionBar.setDisplayHomeAsUpEnabled(true);
-            actionBar.setHomeAsUpIndicator(R.drawable.icon_back);
+            actionBar.setHomeAsUpIndicator(me.jingbin.bymvvm.R.drawable.icon_back);
         }
         bindingTitleView.tbBaseTitle.setOverflowIcon(ContextCompat.getDrawable(this, R.drawable.actionbar_more));
         bindingTitleView.tbBaseTitle.setNavigationOnClickListener(v -> {

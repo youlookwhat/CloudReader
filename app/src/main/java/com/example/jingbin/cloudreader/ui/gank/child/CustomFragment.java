@@ -104,7 +104,7 @@ public class CustomFragment extends BaseFragment<GankViewModel, FragmentAndroidB
                 } else {
                     if (viewModel.getPage() == 1) {
                         showContentView();
-                        bindingView.xrvAndroid.setStateView(R.layout.layout_loading_empty);
+                        bindingView.xrvAndroid.setStateView(me.jingbin.bymvvm.R.layout.layout_loading_empty);
                         bindingView.xrvAndroid.setLoadMoreEnabled(false);
                         adapter.setNewData(null);
                     } else {

@@ -97,7 +97,7 @@ public class CategoryArticleFragment extends BaseFragment<WanAndroidListViewMode
         bindingView.recyclerView.setRefreshHeaderView(new NeteaseRefreshHeaderView(activity));
         bindingView.recyclerView.setLoadingMoreView(new NeteaseLoadMoreView(activity));
         bindingView.recyclerView.setAdapter(mAdapter);
-        LayoutLoadingEmptyBinding emptyBinding = DataBindingUtil.inflate(getLayoutInflater(), R.layout.layout_loading_empty, (ViewGroup) bindingView.recyclerView.getParent(), false);
+        LayoutLoadingEmptyBinding emptyBinding = DataBindingUtil.inflate(getLayoutInflater(), me.jingbin.bymvvm.R.layout.layout_loading_empty, (ViewGroup) bindingView.recyclerView.getParent(), false);
         emptyBinding.tvTipEmpty.setText(String.format("未找到与\"%s\"相关的内容", categoryName));
         mAdapter.setPageEmptyView(emptyBinding.getRoot());
 

@@ -7,7 +7,6 @@ import android.os.Build;
 import android.webkit.WebView;
 
 import androidx.multidex.MultiDex;
-import androidx.multidex.MultiDexApplication;
 
 import me.jingbin.bymvvm.http.HttpUtils;
 

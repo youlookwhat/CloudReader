@@ -162,7 +162,7 @@ public class WanFindFragment extends BaseFragment<WanFindViewModel, FragmentWanF
                         bindingView.recyclerView.setLoadMoreEnabled(false);
                         bindingView.recyclerView.setRefreshEnabled(false);
                         if (!isAddFooter) {
-                            bindingView.recyclerView.addFooterView(LayoutInflater.from(activity).inflate(R.layout.layout_loading_empty, (ViewGroup) bindingView.recyclerView, false));
+                            bindingView.recyclerView.addFooterView(LayoutInflater.from(activity).inflate(me.jingbin.bymvvm.R.layout.layout_loading_empty, (ViewGroup) bindingView.recyclerView, false));
                             isAddFooter = true;
                         } else {
                             bindingView.recyclerView.setFootViewEnabled(true);

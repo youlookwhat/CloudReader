@@ -152,7 +152,7 @@ class PublishActivity : BaseActivity<PublishViewModel, ActivityPublishBinding>()
     private fun handleShortcuts() {
         if (!MainActivity.isLaunch) {
             App.isShortcuts = true
-            findViewById<Toolbar>(R.id.tool_bar).setNavigationOnClickListener {
+            findViewById<Toolbar>(me.jingbin.bymvvm.R.id.tool_bar).setNavigationOnClickListener {
                 BaseTools.handleFinish(this)
             }
         }

@@ -97,7 +97,7 @@ public class MyCoinActivity extends BaseActivity<NoViewModel, ActivityMyCollectB
                 finish();
                 return;
             }
-            Toolbar toolbar = findViewById(R.id.tool_bar);
+            Toolbar toolbar = findViewById(me.jingbin.bymvvm.R.id.tool_bar);
             toolbar.setNavigationOnClickListener(v -> BaseTools.handleFinish(this));
         }
     }
