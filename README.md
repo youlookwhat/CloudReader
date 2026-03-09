@@ -305,7 +305,7 @@ If you have any questions, please write to [the issue][21] of making you don't u
  - **QQ：** 770413277
  - **Email：** jingbin127@163.com
  - **Blog：**[https://youlookwhat.github.io](https://youlookwhat.github.io)
- - **小红书：**[所思笔记](https://www.xiaohongshu.com/user/profile/59ba28cf5e87e72d410d84c1?xhsshare=CopyLink&appuid=59ba28cf5e87e72d410d84c1&apptime=1733105575&share_id=78c3ca8970d24a3eb9db04b1e4fcc45b)
+ - **小红书：**[所思所梦](https://www.xiaohongshu.com/user/profile/59ba28cf5e87e72d410d84c1?xhsshare=CopyLink&appuid=59ba28cf5e87e72d410d84c1&apptime=1733105575&share_id=78c3ca8970d24a3eb9db04b1e4fcc45b)
  - **QQ交流群：**[![](https://img.shields.io/badge/%E7%BE%A4%E5%8F%B7-727379132-orange.svg?style=flat-square)](https://shang.qq.com/wpa/qunwpa?idkey=5685061359b0a767674cd831d8261d36b347bde04cc23746cb6570e09ee5c8aa)
 
 ## License
